@@ -19,10 +19,10 @@ $table_width = 1004;
 <!-- 상단 배경 시작 -->
 <table width="<?=$table_width?>" cellspacing="0" cellpadding="0">
 <tr>
-    <td background="<?=$g4[path]?>/img/top_img_bg.gif">
+    <td background="<?=$g4['path']?>/img/top_img_bg.gif">
         <table width="100%" height="52" cellspacing="0" cellpadding="0">
         <tr>
-            <td><img src="<?=$g4[path]?>/img/top_img.gif" width="100%" height="52"></td>
+            <td><img src="<?=$g4['path']?>/img/top_img.gif" width="100%" height="52"></td>
         </tr>
         </table></td>
 </tr>
@@ -34,7 +34,7 @@ $table_width = 1004;
 <tr>
     <td width="43" height="57"></td>
     <!-- 로고 -->
-    <td width="220"><a href="<?=$g4[path]?>/"><img src="<?=$g4[path]?>/img/logo.jpg" width="220" height="57" border="0"></a></td>
+    <td width="220"><a href="<?=$g4['path']?>/"><img src="<?=$g4['path']?>/img/logo.jpg" width="220" height="57" border="0"></a></td>
     <td>
         <table width=100% border=0 cellpadding=0 cellspacing=0>
         <tr>
@@ -46,20 +46,20 @@ $table_width = 1004;
         <table border="0" cellspacing="0" cellpadding="0">
         <tr>
             <!-- 처음으로 버튼 -->
-            <td width="78"><a href="<?=$g4[path]?>/"><img src="<?=$g4[path]?>/img/top_m01.gif" width="78" height="31" border="0"></a></td>
+            <td width="78"><a href="<?=$g4['path']?>/"><img src="<?=$g4['path']?>/img/top_m01.gif" width="78" height="31" border="0"></a></td>
 
-            <? if (!$member[mb_id]) { ?>
+            <? if (!$member['mb_id']) { ?>
             <!-- 로그인 이전 -->
-            <td width="78"><a href="<?=$g4[bbs_path]?>/login.php?url=<?=$urlencode?>"><img src="<?=$g4[path]?>/img/top_m02.gif" width="78" height="31" border="0"></a></td>
-            <td width="78"><a href="<?=$g4[bbs_path]?>/register.php"><img src="<?=$g4[path]?>/img/top_m03.gif" width="78" height="31" border="0"></a></td>
+            <td width="78"><a href="<?=$g4['bbs_path']?>/login.php?url=<?=$urlencode?>"><img src="<?=$g4['path']?>/img/top_m02.gif" width="78" height="31" border="0"></a></td>
+            <td width="78"><a href="<?=$g4['bbs_path']?>/register.php"><img src="<?=$g4['path']?>/img/top_m03.gif" width="78" height="31" border="0"></a></td>
             <? } else { ?>
             <!-- 로그인 이후 -->
-            <td width="78"><a href="<?=$g4[bbs_path]?>/logout.php"><img src="<?=$g4[path]?>/img/top_m04.gif" width="78" height="31" border="0"></a></td>
-            <td width="78"><a href="<?=$g4[bbs_path]?>/member_confirm.php?url=register_form.php"><img src="<?=$g4[path]?>/img/top_m05.gif" width="78" height="31" border="0"></a></td>
+            <td width="78"><a href="<?=$g4['bbs_path']?>/logout.php"><img src="<?=$g4['path']?>/img/top_m04.gif" width="78" height="31" border="0"></a></td>
+            <td width="78"><a href="<?=$g4['bbs_path']?>/member_confirm.php?url=register_form.php"><img src="<?=$g4['path']?>/img/top_m05.gif" width="78" height="31" border="0"></a></td>
             <? } ?>
             
             <!-- 최근게시물 버튼 -->
-            <td width="78"><a href="<?=$g4[bbs_path]?>/new.php"><img src="<?=$g4[path]?>/img/top_m06.gif" width="78" height="31" border="0"></a></td>
+            <td width="78"><a href="<?=$g4['bbs_path']?>/new.php"><img src="<?=$g4['path']?>/img/top_m06.gif" width="78" height="31" border="0"></a></td>
 
         </tr>
         </table></td>
@@ -74,13 +74,13 @@ $table_width = 1004;
     <td width="43" height="11"></td>
     <td width="220"></td>
     <td width=""></td>
-    <td width="234"><img src="<?=$g4[path]?>/img/search_top.gif" width="234" height="11"></td>
+    <td width="234"><img src="<?=$g4['path']?>/img/search_top.gif" width="234" height="11"></td>
     <td width="35"></td>
 </tr>
 <tr>
-    <td height="33"><img src="<?=$g4[path]?>/img/bar_01.gif" width="43" height="33"></td>
-    <td><img src="<?=$g4[path]?>/img/bar_02.gif" width="220" height="33"></td>
-    <td background="<?=$g4[path]?>/img/bar_03.gif" width="472" height="33"><table width=100% cellpadding=0 cellspacing=0><tr><td width=25>&nbsp;</td><td><?//=popular();?></td></tr></table></td>
+    <td height="33"><img src="<?=$g4['path']?>/img/bar_01.gif" width="43" height="33"></td>
+    <td><img src="<?=$g4['path']?>/img/bar_02.gif" width="220" height="33"></td>
+    <td background="<?=$g4['path']?>/img/bar_03.gif" width="472" height="33"><table width=100% cellpadding=0 cellspacing=0><tr><td width=25>&nbsp;</td><td><?//=popular();?></td></tr></table></td>
     <td>
         <table width="100%" height="33" cellspacing="0" cellpadding="0">
         <form name="fsearchbox" method="get" action="javascript:fsearchbox_submit(document.fsearchbox);">
@@ -88,14 +88,14 @@ $table_width = 1004;
         <input type="hidden" name="sfl" value="wr_subject||wr_content">
         <input type="hidden" name="sop" value="and">
         <tr>
-            <td width="25" height="25"><img src="<?=$g4[path]?>/img/search_01.gif" width="25" height="25"></td>
+            <td width="25" height="25"><img src="<?=$g4['path']?>/img/search_01.gif" width="25" height="25"></td>
             <td width="136" valign="middle" bgcolor="#F4F4F4"><INPUT name="stx" maxlengt=20 style="BORDER : 0px solid; width: 125px; HEIGHT: 20px; BACKGROUND-COLOR: #F4F4F4" maxlength="20"></td>
-            <td width="12"><img src="<?=$g4[path]?>/img/search_02.gif" width="12" height="25"></td>
-            <td width="48"><input type="image" src="<?=$g4[path]?>/img/search_button.gif" width="48" height="25" border="0"></td>
-            <td width="13"><img src="<?=$g4[path]?>/img/search_03.gif" width="13" height="25"></td>
+            <td width="12"><img src="<?=$g4['path']?>/img/search_02.gif" width="12" height="25"></td>
+            <td width="48"><input type="image" src="<?=$g4['path']?>/img/search_button.gif" width="48" height="25" border="0"></td>
+            <td width="13"><img src="<?=$g4['path']?>/img/search_03.gif" width="13" height="25"></td>
         </tr>
         <tr>
-            <td width="234" height="8" colspan="5"><img src="<?=$g4[path]?>/img/search_down.gif" width="234" height="8"></td>
+            <td width="234" height="8" colspan="5"><img src="<?=$g4['path']?>/img/search_down.gif" width="234" height="8"></td>
         </tr>
         </form>
         </table></td>
@@ -132,7 +132,7 @@ function fsearchbox_submit(f)
     }
     */
 
-    f.action = "<?=$g4[bbs_path]?>/search.php";
+    f.action = "<?=$g4['bbs_path']?>/search.php";
     f.submit();
 }
 </script>

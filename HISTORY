@@ -1,3 +1,19 @@
+4.06.18 (06.03.07)
+    :   latest() 함수 수정 
+        $skin_dir 인수가 넘어오지 않는 경우 오류나는 부분 수정
+    :   페이징 함수 수정 (책갈피 변수 추가)
+    :   wrest.js 의 trim 부분 코드 수정
+        hammer님께서 알려주셨습니다.
+    :   UTF-8 적용을 위해 cheditor의 html 확장자를 php로 수정하고 charset 설정 가능하도록 수정
+    :   notice error 줄임
+        hammer님께서 알려주셨습니다.
+
+        lib/latest.lib.php
+        lib/common.lib.php
+        js/wrest.js
+        cheditor/* (폴더 전부)
+        adm/admin.head.php
+
 4.06.17 (06.02.17)
     :   메일러 함수 수정
     :   그룹접근회원테이블의 gm_id 필드에 auto_increment 추가

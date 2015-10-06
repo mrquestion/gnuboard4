@@ -18,7 +18,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <tr> 
             <td width="25" height="27"><img src="<?=$outlogin_skin_path?>/img/login_ing_icon.gif" width="25" height="27"></td>
             <td width="139" height="27"><span class='member'><strong><?=$nick?></strong></span>님</td>
-            <td width="46" height="27"><? if ($is_admin == "super" || $is_auth) { ?><a href="<?=$g4[admin_path]?>/"><img src="<?=$outlogin_skin_path?>/img/admin.gif" width="33" height="15" border="0" align="absmiddle"></a><? } ?></td>
+            <td width="46" height="27"><? if ($is_admin == "super" || $is_auth) { ?><a href="<?=$g4['admin_path']?>/"><img src="<?=$outlogin_skin_path?>/img/admin.gif" width="33" height="15" border="0" align="absmiddle"></a><? } ?></td>
         </tr>
       </table></td>
 </tr>
@@ -35,8 +35,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                 <table width="210" height="50" border="0" cellpadding="0" cellspacing="0">
                 <tr> 
                     <td width="25"></td>
-                    <td width="82"><a href="<?=$g4[bbs_path]?>/logout.php"><img src="<?=$outlogin_skin_path?>/img/logout_button.gif" width="78" height="20" border="0"></a></td>
-                    <td width="78"><a href="<?=$g4[bbs_path]?>/member_confirm.php?url=register_form.php"><img src="<?=$outlogin_skin_path?>/img/login_modify.gif" width="78" height="20" border="0"></a></td>
+                    <td width="82"><a href="<?=$g4['bbs_path']?>/logout.php"><img src="<?=$outlogin_skin_path?>/img/logout_button.gif" width="78" height="20" border="0"></a></td>
+                    <td width="78"><a href="<?=$g4['bbs_path']?>/member_confirm.php?url=register_form.php"><img src="<?=$outlogin_skin_path?>/img/login_modify.gif" width="78" height="20" border="0"></a></td>
                     <td width="25"></td>
                 </tr>
                 <tr> 
@@ -59,7 +59,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 function member_leave() 
 {
     if (confirm("정말 회원에서 탈퇴 하시겠습니까?")) 
-            location.href = "<?=$g4[bbs_path]?>/member_confirm.php?url=member_leave.php";
+            location.href = "<?=$g4['bbs_path']?>/member_confirm.php?url=member_leave.php";
 }
 </script>
 <!-- 로그인 후 외부로그인 끝 -->

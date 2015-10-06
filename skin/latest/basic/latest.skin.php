@@ -21,25 +21,25 @@ if (!defined("_GNUBOARD_")) exit; // ∞≥∫∞ ∆‰¿Ã¡ˆ ¡¢±Ÿ ∫“∞°
         <tr>
             <td height=25><img src='<?=$latest_skin_path?>/img/latest_icon.gif' align=absmiddle>&nbsp;&nbsp; 
             <?
-            echo $list[$i][icon_reply] . " ";
-            echo "<a href='{$list[$i][href]}'>";
-            if ($list[$i][is_notice])
-                echo "<font style='font-family:µ∏øÚ; font-size:9pt; color:#2C88B9;'><strong>{$list[$i][subject]}</strong></font>";
+            echo $list[$i]['icon_reply'] . " ";
+            echo "<a href='{$list[$i]['href']}'>";
+            if ($list[$i]['is_notice'])
+                echo "<font style='font-family:µ∏øÚ; font-size:9pt; color:#2C88B9;'><strong>{$list[$i]['subject']}</strong></font>";
             else
-                echo "<font style='font-family:µ∏øÚ; font-size:9pt; color:#6A6A6A;'>{$list[$i][subject]}</font>";
+                echo "<font style='font-family:µ∏øÚ; font-size:9pt; color:#6A6A6A;'>{$list[$i]['subject']}</font>";
             echo "</a>";
 
-            if ($list[$i][comment_cnt]) 
-                echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-family:µ∏øÚ; font-size:8pt; color:#9A9A9A;'>{$list[$i][comment_cnt]}</span></a>";
+            if ($list[$i]['comment_cnt']) 
+                echo " <a href=\"{$list[$i]['comment_href']}\"><span style='font-family:µ∏øÚ; font-size:8pt; color:#9A9A9A;'>{$list[$i]['comment_cnt']}</span></a>";
 
             // if ($list[$i]['link']['count']) { echo "[{$list[$i]['link']['count']}]"; }
             // if ($list[$i]['file']['count']) { echo "<{$list[$i]['file']['count']}>"; }
 
-            echo " " . $list[$i][icon_new];
-            echo " " . $list[$i][icon_file];
-            echo " " . $list[$i][icon_link];
-            echo " " . $list[$i][icon_hot];
-            echo " " . $list[$i][icon_secret];
+            echo " " . $list[$i]['icon_new'];
+            echo " " . $list[$i]['icon_file'];
+            echo " " . $list[$i]['icon_link'];
+            echo " " . $list[$i]['icon_hot'];
+            echo " " . $list[$i]['icon_secret'];
             ?></td></tr>
         <tr><td bgcolor=#EBEBEB height=1></td></tr>
         </table></td>

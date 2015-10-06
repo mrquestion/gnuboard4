@@ -21,9 +21,10 @@ function print_menu2($key, $no)
 {
     global $menu, $auth_menu, $is_admin, $auth, $g4;
 
+    $str = "";
     for($i=1; $i<count($menu[$key]); $i++)
     {
-        if (!strstr($auth[$menu[$key][$i][0]], "r") && $is_admin != "super")
+        if ($is_admin != "super" && (!array_key_exists($menu[$key][$i][0],$auth) || !strstr($auth[$menu[$key][$i][0]], "r")))
             continue;
 
         if ($menu[$key][$i][0] == "-")
@@ -31,7 +32,7 @@ function print_menu2($key, $no)
         else
         {
             $span1 = $span2 = "";
-            if ($menu[$key][$i][3])
+            if (isset($menu[$key][$i][3]))
             {
                 $span1 = "<span style='{$menu[$key][$i][3]}'>";
                 $span2 = "</span>";
@@ -40,9 +41,9 @@ function print_menu2($key, $no)
             if ($no == 2)
                 $str .= "&nbsp;&nbsp;<img src='{$g4[admin_path]}/img/icon.gif' align=absmiddle> ";
             $str .= "<a href='{$menu[$key][$i][2]}' style='color:#555500;'>{$span1}{$menu[$key][$i][1]}{$span2}</a></td></tr>";
-        }
 
-        $auth_menu[$menu[$key][$i][0]] = $menu[$key][$i][1];
+            $auth_menu[$menu[$key][$i][0]] = $menu[$key][$i][1];
+        }
     }
 
     return $str;
@@ -116,8 +117,8 @@ function textarea_size(fld, size)
 }
 </script>
 
-<script language="javascript" src="<?=$g4[path]?>/js/common.js"></script>
-<script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
+<script language="javascript" src="<?=$g4['path']?>/js/common.js"></script>
+<script language="javascript" src="<?=$g4['path']?>/js/sideview.js"></script>
 <script language="JavaScript">
 var save_layer = null;
 function layer_view(link_id, menu_id, opt, x, y)
@@ -154,7 +155,7 @@ function layer_view(link_id, menu_id, opt, x, y)
 }
 </script>
 
-<link rel="stylesheet" href="<?=$g4[admin_path]?>/admin.style.css" type="text/css">
+<link rel="stylesheet" href="<?=$g4['admin_path']?>/admin.style.css" type="text/css">
 <style>
 .bg_menu1 { height:22px; 
             padding-left:15px; 
@@ -163,7 +164,7 @@ function layer_view(link_id, menu_id, opt, x, y)
 
 .bg_menu2 { height:22px; 
             padding-left:25px; } 
-.bg_line2 { background-image:url('<?=$g4[admin_path]?>/img/dot.gif'); height:3px; } 
+.bg_line2 { background-image:url('<?=$g4['admin_path']?>/img/dot.gif'); height:3px; } 
 .dot {color:#D6D0C8;border-style:dotted;}
 
 #csshelp1 { border:0px; background:#FFFFFF; padding:6px; }
@@ -177,7 +178,7 @@ function layer_view(link_id, menu_id, opt, x, y)
 <colgroup width=180>
 <colgroup>
 <tr bgcolor=#E3DCD2 height=70>
-    <td colspan=2 onmouseover="layer_view('','','','','')"><a href='<?=$g4[admin_path]?>/'><img src='<?=$g4[admin_path]?>/img/logo.gif' border=0></a></td>
+    <td colspan=2 onmouseover="layer_view('','','','','')"><a href='<?=$g4['admin_path']?>/'><img src='<?=$g4['admin_path']?>/img/logo.gif' border=0></a></td>
     <td>
         <?
         foreach($amenu as $key=>$value)
@@ -188,7 +189,7 @@ function layer_view(link_id, menu_id, opt, x, y)
                 $href1 = "<a href='".$menu["menu{$key}"][0][2]."'>";
                 $href2 = "</a>";
             }
-            echo "{$href1}<img src='{$g4[admin_path]}/img/menu{$key}.gif' border=0 id='id_menu{$key}' onmouseover=\"layer_view('id_menu{$key}', 'menu_menu{$key}', 'view', -2, 5);\">{$href2}&nbsp; ";
+            echo "{$href1}<img src='$g4[admin_path]/img/menu{$key}.gif' border=0 id='id_menu{$key}' onmouseover=\"layer_view('id_menu{$key}', 'menu_menu{$key}', 'view', -2, 5);\">{$href2}&nbsp; ";
             echo print_menu1("menu{$key}", 1);
         }
         ?>
@@ -197,13 +198,15 @@ function layer_view(link_id, menu_id, opt, x, y)
 <tr><td colspan=3 bgcolor=#C3BBB1 height=1></td></tr>
 <tr><td colspan=3 bgcolor=#E5E5E5 height=2></td></tr>
 <tr onmouseover="layer_view('','','','','')">
-    <td><a href='<?=$g4[path]?>/'><img src='<?=$g4[admin_path]?>/img/home.gif' border=0></a><a href='<?=$g4[bbs_path]?>/logout.php'><img src='<?=$g4[admin_path]?>/img/logout.gif' border=0></a></td>
+    <td><a href='<?=$g4['path']?>/'><img src='<?=$g4['admin_path']?>/img/home.gif' border=0></a><a href='<?=$g4['bbs_path']?>/logout.php'><img src='<?=$g4['admin_path']?>/img/logout.gif' border=0></a></td>
     <td rowspan=2 width=1 bgcolor=#DBDBDB></td>
     <td bgcolor=#F8F8F8 align=right>
-        <img src='<?=$g4[admin_path]?>/img/navi_icon.gif' align=absmiddle> 
-        &nbsp;<a href='<?=$g4[admin_path]?>/'>Admin</a> > 
+        <img src='<?=$g4['admin_path']?>/img/navi_icon.gif' align=absmiddle> 
+        &nbsp;<a href='<?=$g4['admin_path']?>/'>Admin</a> > 
         <? 
-        $tmp_menu = substr($sub_menu, 0, 3);
+        $tmp_menu = "";
+        if (isset($sub_menu))
+            $tmp_menu = substr($sub_menu, 0, 3);
         if (isset($menu["menu{$tmp_menu}"][0][1]))
         {
             if ($menu["menu{$tmp_menu}"][0][2])
@@ -216,13 +219,13 @@ function layer_view(link_id, menu_id, opt, x, y)
                 echo $menu["menu{$tmp_menu}"][0][1]." > ";
         }
         ?>
-        <?=$g4[title]?> <span class=small>: <?=$member[mb_id]?>ดิ</span>&nbsp;&nbsp;</td>
+        <?=$g4['title']?> <span class=small>: <?=$member['mb_id']?>ดิ</span>&nbsp;&nbsp;</td>
 </tr>
 <tr onmouseover="layer_view('','','','','')">
     <td valign=top>
         <table width=180 cellpadding=0 cellspacing=0>
         <?
-        echo "<tr><td><img src='{$g4[admin_path]}/img/title_menu{$tmp_menu}.gif'></td></tr>";
+        echo "<tr><td><img src='$g4[admin_path]/img/title_menu{$tmp_menu}.gif'></td></tr>";
         echo print_menu2("menu{$tmp_menu}", 2);
         ?>
         </table><br>

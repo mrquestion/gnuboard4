@@ -24,8 +24,8 @@ $box_height = (int)$line_mod * (int)$height;
 <colgroup width=14>
 <tr>
     <td><img src='<?=$latest_skin_path?>/img/latest_t01.gif'></td>
-    <td background='<?=$latest_skin_path?>/img/bg_latest.gif'>&nbsp;&nbsp;<strong><a href='<?=$g4[bbs_path]?>/board.php?bo_table=<?=$bo_table?>'><?=$board[bo_subject]?></a></strong></td>
-    <td background='<?=$latest_skin_path?>/img/bg_latest.gif'><a href='<?=$g4[bbs_path]?>/board.php?bo_table=<?=$bo_table?>'><img src='<?=$latest_skin_path?>/img/more.gif' border=0></a></td>
+    <td background='<?=$latest_skin_path?>/img/bg_latest.gif'>&nbsp;&nbsp;<strong><a href='<?=$g4['bbs_path']?>/board.php?bo_table=<?=$bo_table?>'><?=$board['bo_subject']?></a></strong></td>
+    <td background='<?=$latest_skin_path?>/img/bg_latest.gif'><a href='<?=$g4['bbs_path']?>/board.php?bo_table=<?=$bo_table?>'><img src='<?=$latest_skin_path?>/img/more.gif' border=0></a></td>
     <td><img src='<?=$latest_skin_path?>/img/latest_t02.gif'></td>
 </tr>
 <tr><td colspan=4 style='padding-left:20px; padding-right:20px; padding-top:5px; padding-bottom:5px;'>
@@ -114,18 +114,20 @@ $box_height = (int)$line_mod * (int)$height;
     }
 
     <?
-    unset($roll_text);
+    //$roll_text = array();
     for ($i=0; $i<count($list); $i++) {
         $k = (int)($i / $line_mod);
+        if (!isset($roll_text[$k])) 
+            $roll_text[$k] = "";
 
         $roll_text[$k] .= "<div style=\"height:{$height}px; padding-top:0px;\">";
-        $roll_text[$k] .= "<a href=\"{$list[$i][href]}\">";
+        $roll_text[$k] .= "<a href=\"{$list[$i]['href']}\">";
         $roll_text[$k] .= "<img src=\"{$latest_skin_path}/img/latest_icon.gif\" align=absmiddle border=0>&nbsp;&nbsp;";
-        $roll_text[$k] .= $list[$i][subject];
+        $roll_text[$k] .= $list[$i]['subject'];
         $roll_text[$k] .= "</a>";
 
-        if ($list[$i][comment_cnt]) 
-            $roll_text[$k] .= " <a href=\"{$list[$i][comment_href]}\">{$list[$i][comment_cnt]}</a>";
+        if ($list[$i]['comment_cnt']) 
+            $roll_text[$k] .= " <a href=\"{$list[$i]['comment_href']}\">{$list[$i]['comment_cnt']}</a>";
 
         $roll_text[$k] .= "</div>";
     }

@@ -236,7 +236,7 @@ function order_select($fld, $sel="")
 }
 
 // 접근 권한 검사
-if (!$member[mb_id])
+if (!$member['mb_id'])
 {
     //alert("로그인 하십시오.", "$g4[bbs_path]/login.php?url=" . urlencode("$_SERVER[PHP_SELF]?w=$w&mb_id=$mb_id"));
     alert("로그인 하십시오.", "$g4[bbs_path]/login.php?url=" . urlencode("$_SERVER[PHP_SELF]?$_SERVER[QUERY_STRING]"));
@@ -262,7 +262,7 @@ else if ($is_admin != "super")
 unset($auth_menu);
 unset($menu);
 unset($amenu);
-$tmp = dir($g4[admin_path]);
+$tmp = dir($g4['admin_path']);
 while ($entry = $tmp->read()) 
 {
     //if (!preg_match("/^admin.menu([0-9]{3}).php/", $entry, $m)) 
@@ -270,9 +270,15 @@ while ($entry = $tmp->read())
         continue;  // 파일명이 menu 으로 시작하지 않으면 무시한다. 
 
     $amenu[$m[1]] = $entry;
-    include_once($g4[admin_path]."/".$entry);
+    include_once($g4['admin_path']."/".$entry);
 }
 @ksort($amenu);
 
-$qstr = "sst=$sst&sod=$sod&sfl=$sfl&stx=$stx&page=$page";
+$qstr = "";
+if (isset($sst)) $qstr .= "&sst=$sst";
+if (isset($sod)) $qstr .= "&sod=$sod";
+if (isset($sfl)) $qstr .= "&sfl=$sfl";
+if (isset($stx)) $qstr .= "&stx=$stx";
+if (isset($page)) $qstr .= "&page=$page";
+//$qstr = "sst=$sst&sod=$sod&sfl=$sfl&stx=$stx&page=$page";
 ?>

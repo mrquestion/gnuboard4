@@ -346,7 +346,7 @@ if (typeof(WREST_JS) == 'undefined') // 한번만 실행
                         switch (arrAttr[j]) 
                         {
                             case "required"     : wrestRequired(this.elements[i]); break;
-                            case "trim"         : wrestRequired(this.elements[i]); break;
+                            case "trim"         : wrestTrim(this.elements[i]); break;
                             case "minlength"    : wrestMinlength(this.elements[i]); break;
                             case "email"        : wrestEmail(this.elements[i]); break;
                             case "hangul"       : wrestHangul(this.elements[i]); break;

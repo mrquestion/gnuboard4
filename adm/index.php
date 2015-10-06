@@ -1,7 +1,7 @@
 <?
 include_once("./_common.php");
 
-$g4[title] = "관리자메인";
+$g4['title'] = "관리자메인";
 include_once ("./admin.head.php");
 
 $new_member_rows = 5;
@@ -16,7 +16,7 @@ $sql_search = " where (1) ";
 if ($is_admin != 'super') 
     $sql_search .= " and mb_level <= '$member[mb_level]' ";
 
-if (!$sst) {
+if (!isset($sst)) {
     $sst = "mb_datetime";
     $sod = "desc";
 }
@@ -28,7 +28,7 @@ $sql = " select count(*) as cnt
          $sql_search
          $sql_order ";
 $row = sql_fetch($sql);
-$total_count = $row[cnt];
+$total_count = $row['cnt'];
 
 // 탈퇴회원수
 $sql = " select count(*) as cnt
@@ -37,7 +37,7 @@ $sql = " select count(*) as cnt
             and mb_leave_date <> ''
          $sql_order ";
 $row = sql_fetch($sql);
-$leave_count = $row[cnt];
+$leave_count = $row['cnt'];
 
 // 차단회원수
 $sql = " select count(*) as cnt
@@ -46,7 +46,7 @@ $sql = " select count(*) as cnt
             and mb_intercept_date <> ''
          $sql_order ";
 $row = sql_fetch($sql);
-$intercept_count = $row[cnt];
+$intercept_count = $row['cnt'];
 
 $sql = " select *
           $sql_common
@@ -62,7 +62,7 @@ $colspan = 12;
 
 <table width=100%>
 <tr>
-    <td width=50% align=left><?=$listall?> (총회원수 : <?=number_format($total_count)?>, <font color=orange>차단 : <?=number_format($intercept_count)?></font>, <font color=crimson>탈퇴 : <?=number_format($leave_count)?></font>)</td>
+    <td width=50% align=left><?//=$listall?> (총회원수 : <?=number_format($total_count)?>, <font color=orange>차단 : <?=number_format($intercept_count)?></font>, <font color=crimson>탈퇴 : <?=number_format($leave_count)?></font>)</td>
     <td width=50% align=right></td>
 </tr>
 </table>
@@ -98,7 +98,7 @@ $colspan = 12;
     <td title='이메일인증'>인증</td>
     <td>차단</td>
     <td title='접근가능한 그룹수'>그룹</td>
-	<td><a href="./member_form.php"><img src='<?=$g4[admin_path]?>/img/icon_insert.gif' border=0 title='추가'></a></td>
+	<td><a href="./member_form.php"><img src='<?=$g4['admin_path']?>/img/icon_insert.gif' border=0 title='추가'></a></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
@@ -108,7 +108,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $sql2 = " select count(*) as cnt from $g4[group_member_table] where mb_id = '$row[mb_id]' ";
     $row2 = sql_fetch($sql2);
     $group = "";
-    if ($row2[cnt])
+    if ($row2['cnt'])
         $group = "<a href='./boardgroupmember_form.php?mb_id=$row[mb_id]'>$row2[cnt]</a>";
 
     if ($is_admin == 'group') 
@@ -123,15 +123,15 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     }
     $s_grp = "<a href='./boardgroupmember_form.php?mb_id=$row[mb_id]'><img src='img/icon_group.gif' border=0 title='그룹'></a>";
 
-    $leave_date = $row[mb_leave_date] ? $row[mb_leave_date] : date("Ymd", $g4[server_time]);
-    $intercept_date = $row[mb_intercept_date] ? $row[mb_intercept_date] : date("Ymd", $g4[server_time]);
+    $leave_date = $row['mb_leave_date'] ? $row['mb_leave_date'] : date("Ymd", $g4['server_time']);
+    $intercept_date = $row['mb_intercept_date'] ? $row['mb_intercept_date'] : date("Ymd", $g4['server_time']);
 
-    $mb_nick = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
+    $mb_nick = get_sideview($row['mb_id'], $row['mb_nick'], $row['mb_email'], $row['mb_homepage']);
 
-    $mb_id = $row[mb_id];
-    if ($row[mb_leave_date])
+    $mb_id = $row['mb_id'];
+    if ($row['mb_leave_date'])
         $mb_id = "<font color=crimson>$mb_id</font>";
-    else if ($row[mb_intercept_date])
+    else if ($row['mb_intercept_date'])
         $mb_id = "<font color=orange>$mb_id</font>";
 
     $list = $i%2;
@@ -142,12 +142,12 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         <td>$row[mb_name]</td>
         <td>$mb_nick</td>
         <td>$row[mb_level]</td>
-        <td align=right><a href='./point_list.php?sfl=mb_id&stx=$row[mb_id]' class=tt>".number_format($row[mb_point])."</a>&nbsp;</td>
-        <td>".substr($row[mb_today_login],2,8)."</td>
-        <td>".($row[mb_mailling]?'&radic;':'&nbsp;')."</td>
-        <td>".($row[mb_open]?'&radic;':'&nbsp;')."</td>
-        <td title='$row[mb_email_certify]'>".(preg_match('/[1-9]/', $row[mb_email_certify])?'&radic;':'&nbsp;')."</td>
-        <td title='$row[mb_intercept_date]'>".($row[mb_intercept_date]?'&radic;':'&nbsp;')."</td>
+        <td align=right><a href='./point_list.php?sfl=mb_id&stx=$row[mb_id]' class=tt>".number_format($row['mb_point'])."</a>&nbsp;</td>
+        <td>".substr($row['mb_today_login'],2,8)."</td>
+        <td>".($row['mb_mailling']?'&radic;':'&nbsp;')."</td>
+        <td>".($row['mb_open']?'&radic;':'&nbsp;')."</td>
+        <td title='$row[mb_email_certify]'>".(preg_match('/[1-9]/', $row['mb_email_certify'])?'&radic;':'&nbsp;')."</td>
+        <td title='$row[mb_intercept_date]'>".($row['mb_intercept_date']?'&radic;':'&nbsp;')."</td>
         <td>$group</td>               
         <td>$s_mod $s_del $s_grp</td>
     </tr>";
@@ -166,17 +166,19 @@ echo "</table>";
 //$sql_common = " from $g4[board_new_table] a, $g4[board_table] b, $g4[group_table] c where a.bo_table = b.bo_table and b.gr_id = c.gr_id and b.bo_use_search = '1' ";
 $sql_common = " from $g4[board_new_table] a, $g4[board_table] b, $g4[group_table] c where a.bo_table = b.bo_table and b.gr_id = c.gr_id ";
 
-if ($gr_id)
+if (isset($gr_id))
     $sql_common .= " and b.gr_id = '$gr_id' ";
-if ($view == "w")
-    $sql_common .= " and a.wr_id = a.wr_parent ";
-else if ($view == "c")
-    $sql_common .= " and a.wr_id <> a.wr_parent ";
+if (isset($view)) {
+    if ($view == "w")
+        $sql_common .= " and a.wr_id = a.wr_parent ";
+    else if ($view == "c")
+        $sql_common .= " and a.wr_id <> a.wr_parent ";
+}
 $sql_order = " order by a.bn_id desc ";
 
 $sql = " select count(*) as cnt $sql_common ";
 $row = sql_fetch($sql);
-$total_count = $row[cnt];
+$total_count = $row['cnt'];
 
 $colspan = 5;
 ?>
@@ -212,19 +214,19 @@ $sql = " select a.*, b.bo_subject, c.gr_subject, c.gr_id
 $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++) 
 {
-    $tmp_write_table = $g4[write_prefix] . $row[bo_table];
+    $tmp_write_table = $g4['write_prefix'] . $row['bo_table'];
 
-    if ($row[wr_id] == $row[wr_parent]) // 원글
+    if ($row['wr_id'] == $row['wr_parent']) // 원글
     {
         $comment = "";
         $comment_link = "";
         $row2 = sql_fetch(" select * from $tmp_write_table where wr_id = '$row[wr_id]' ");
 
-        $name = get_sideview($row2[mb_id], cut_str($row2[wr_name], $config[cf_cut_name]), $row2[wr_email], $row2[wr_homepage]);
+        $name = get_sideview($row2['mb_id'], cut_str($row2['wr_name'], $config['cf_cut_name']), $row2['wr_email'], $row2['wr_homepage']);
         // 당일인 경우 시간으로 표시함
-        $datetime = substr($row2[wr_datetime],0,10);
-        $datetime2 = $row2[wr_datetime];
-        if ($datetime == $g4[time_ymd])
+        $datetime = substr($row2['wr_datetime'],0,10);
+        $datetime2 = $row2['wr_datetime'];
+        if ($datetime == $g4['time_ymd'])
             $datetime2 = substr($datetime2,11,5);
         else
             $datetime2 = substr($datetime2,5,5);
@@ -237,11 +239,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $row2 = sql_fetch(" select * from $tmp_write_table where wr_id = '$row[wr_parent]' ");
         $row3 = sql_fetch(" select mb_id, wr_name, wr_email, wr_homepage, wr_datetime from $tmp_write_table where wr_id = '$row[wr_id]' ");
 
-        $name = get_sideview($row3[mb_id], cut_str($row3[wr_name], $config[cf_cut_name]), $row3[wr_email], $row3[wr_homepage]);
+        $name = get_sideview($row3['mb_id'], cut_str($row3['wr_name'], $config['cf_cut_name']), $row3['wr_email'], $row3['wr_homepage']);
         // 당일인 경우 시간으로 표시함
-        $datetime = substr($row3[wr_datetime],0,10);
-        $datetime2 = $row3[wr_datetime];
-        if ($datetime == $g4[time_ymd])
+        $datetime = substr($row3['wr_datetime'],0,10);
+        $datetime2 = $row3['wr_datetime'];
+        if ($datetime == $g4['time_ymd'])
             $datetime2 = substr($datetime2,11,5);
         else
             $datetime2 = substr($datetime2,5,5);
@@ -250,9 +252,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $list = $i%2;
     echo "
     <tr class='list$list col1 ht center'>
-        <td class=small><a href='$g4[bbs_path]/new.php?gr_id=$row[gr_id]'>".cut_str($row[gr_subject],10)."</a></td>
-        <td class=small><a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]'>".cut_str($row[bo_subject],20)."</a></td>
-        <td align=left>&nbsp;<a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]&wr_id=$row2[wr_id]{$comment_link}'>{$comment}{$row2[wr_subject]}</a></td>
+        <td class=small><a href='$g4[bbs_path]/new.php?gr_id=$row[gr_id]'>".cut_str($row['gr_subject'],10)."</a></td>
+        <td class=small><a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]'>".cut_str($row['bo_subject'],20)."</a></td>
+        <td align=left>&nbsp;<a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]&wr_id=$row2[wr_id]{$comment_link}'>{$comment}{$row2['wr_subject']}</a></td>
         <td>$name</td>
         <td>$datetime</td>
     </tr> ";  
@@ -277,7 +279,7 @@ $sql = " select count(*) as cnt
          $sql_search 
          $sql_order ";
 $row = sql_fetch($sql);
-$total_count = $row[cnt];
+$total_count = $row['cnt'];
 
 $sql = " select *
           $sql_common
@@ -295,7 +297,7 @@ $colspan = 7;
 <table width=100%>
 <tr>
     <td width=50% align=left>
-        <?=$listall?> (건수 : <?=number_format($total_count)?>)
+        <?//=$listall?> (건수 : <?=number_format($total_count)?>)
         <? 
         //$row2 = sql_fetch(" select sum(po_point) as sum_point from $g4[point_table] ");
         //echo "&nbsp;(전체 포인트 합계 : " . number_format($row2[sum_point]) . "점)";
@@ -331,18 +333,18 @@ $colspan = 7;
 <?
 for ($i=0; $row=sql_fetch_array($result); $i++) 
 {
-    if ($row2[mb_id] != $row[mb_id])
+    if ($row2['mb_id'] != $row['mb_id'])
     {
         $sql2 = " select mb_id, mb_nick, mb_email, mb_homepage, mb_point from $g4[member_table] where mb_id = '$row[mb_id]' ";
         $row2 = sql_fetch($sql2);
     }
 
-    $mb_nick = get_sideview($row[mb_id], $row2[mb_nick], $row2[mb_email], $row2[mb_homepage]);
+    $mb_nick = get_sideview($row['mb_id'], $row2['mb_nick'], $row2['mb_email'], $row2['mb_homepage']);
 
     $link1 = $link2 = "";
-    if (!preg_match("/^\@/", $row[po_rel_table]) && $row[po_rel_table])
+    if (!preg_match("/^\@/", $row['po_rel_table']) && $row['po_rel_table'])
     {
-        $link1 = "<a href='$g4[bbs_path]/board.php?bo_table={$row[po_rel_table]}&wr_id={$row[po_rel_id]}' target=_blank>";
+        $link1 = "<a href='$g4[bbs_path]/board.php?bo_table=$row[po_rel_table]&wr_id=$row[po_rel_id]' target=_blank>";
         $link2 = "</a>";
     }
 
@@ -355,8 +357,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         <td>$mb_nick</td>
         <td>$row[po_datetime]</td>
         <td align=left>&nbsp;{$link1}$row[po_content]{$link2}</td>
-        <td align=right>".number_format($row[po_point])."&nbsp;</td>
-        <td align=right>".number_format($row2[mb_point])."&nbsp;</td>
+        <td align=right>".number_format($row['po_point'])."&nbsp;</td>
+        <td align=right>".number_format($row2['mb_point'])."&nbsp;</td>
     </tr> ";
 } 
 

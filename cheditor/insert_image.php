@@ -75,9 +75,9 @@ if ($_REQUEST['do'] == "submit") {
     }
 }
 ?>
-
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=<?=$g4[charset]?>">
 <title>이미지 넣기</title>
 <STYLE TYPE="text/css">
 body {

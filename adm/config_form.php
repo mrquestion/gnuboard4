@@ -7,7 +7,7 @@ auth_check($auth[$sub_menu], "r");
 if ($is_admin != "super")
     alert("최고관리자만 접근 가능합니다.");
 
-$g4[title] = "기본환경설정";
+$g4['title'] = "기본환경설정";
 include_once ("./admin.head.php");
 ?>
 

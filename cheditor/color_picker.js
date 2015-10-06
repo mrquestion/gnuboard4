@@ -1,3 +1,4 @@
+// 색상 선택
 GLAY_COLOR		= 100;
 RGB_COLOR		= 101;
 ETC_COLOR		= 102;

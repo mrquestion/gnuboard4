@@ -12,7 +12,7 @@ global $is_admin;
     <td width="15" height="88" rowspan="4" bgcolor="#F4F4F4"></td>
     <td width="73" height="22"><img src="<?=$visit_skin_path?>/img/visit_1.gif" width="73" height="22"></td>
     <td width="132" height="22" bgcolor="#F4F4F4"><font color="#4B4B4B"><?=number_format($visit[1])?></font>
-        <? if ($is_admin == "super") { ?><a href="<?=$g4[admin_path]?>/visit_list.php"><img src="<?=$visit_skin_path?>/img/admin.gif" width="33" height="15" border="0" align="absmiddle"></a><?}?></td>
+        <? if ($is_admin == "super") { ?><a href="<?=$g4['admin_path']?>/visit_list.php"><img src="<?=$visit_skin_path?>/img/admin.gif" width="33" height="15" border="0" align="absmiddle"></a><?}?></td>
 </tr>
 <tr> 
     <td width="73" height="22"><img src="<?=$visit_skin_path?>/img/visit_2.gif" width="73" height="22"></td>

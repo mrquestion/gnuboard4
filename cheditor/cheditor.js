@@ -647,17 +647,17 @@ function insert (what)
 
     switch (what) {
     case "forecolor" :
-        tmpl = "gecko_forecolor.html";
+        tmpl = "gecko_forecolor.php";
         h = 240;
         w = 250;
         break;
     case "hilitecolor" :
-        tmpl = "gecko_hilitecolor.html";
+        tmpl = "gecko_hilitecolor.php";
         h = 240;
         w = 250;
         break;
     case"backcolor" :
-        tmpl = "gecko_backcolor.html";
+        tmpl = "gecko_backcolor.php";
         h = 240;
         w = 250;
         break;
@@ -667,28 +667,28 @@ function insert (what)
         w = 430;
         break;
     case "media" :
-        tmpl = "insert_media.html";
+        tmpl = "insert_media.php";
         h = 480;
         w = 430;
         scroll = 1;
         break;
     case "bgimage" :
-        tmpl = "insert_bgimage.html";
+        tmpl = "insert_bgimage.php";
         h = this.IE ? 220 : 240;
         w = 430;
         break;
     case "table" :
-        tmpl = "insert_table.html";
+        tmpl = "insert_table.php";
         h = this.IE ? 480 : 500;
         w = 430;
         break;
     case "hlink" :
-        tmpl = "insert_hlink.html";
+        tmpl = "insert_hlink.php";
         h = this.IE ? 160 : 180;
         w = this.IE ? 450 : 500;
         break;
     case "em" :
-        tmpl = "insert_emicon.html";
+        tmpl = "insert_emicon.php";
         h = this.IE ? 235 : 250;
         w = 400;
         break;
@@ -716,11 +716,11 @@ function insertIE (what)
 
     switch(what) {
     case "schar":
-        tmpl = "insert_schar.html";
+        tmpl = "insert_schar.php";
         attr = "dialogHeight: 240px; dialogWidth: 600px; help:no; status:no";
         break;
 //    case "em":
-//        tmpl = "insert_emicon.html";
+//        tmpl = "insert_emicon.php";
 //        attr = "dialogHeight: 270px; dialogWidth: 400px; help:no; status:no";
 //        break;
     }
@@ -891,7 +891,7 @@ function setBackgroundColor()
     var oname  = chutil.myobj;
     var editor = eval("id"+oname);
     var color  = editor.document.body.style.backgroundColor;
-    var tmpl = this.editorPath + "/insert_colorpicker.html";
+    var tmpl = this.editorPath + "/insert_colorpicker.php";
 
     if (!color)
         editor.document.body.bgcolor;
@@ -1108,7 +1108,7 @@ function run ()
     editor.document.body.style.fontSize   = this.fontsize;
     editor.document.body.style.color      = this.fontcolor;
     editor.document.body.style.fontFamily = this.fontface;
-    editor.document.body.style.lineHeight = this.lineheight;
+    //editor.document.body.style.lineHeight = this.lineheight;
     editor.document.body.style.paddingLeft   = this.padding;
     editor.document.body.style.paddingTop    = this.padding;
     editor.document.body.style.paddingRight  = this.padding;
@@ -1311,7 +1311,7 @@ function cheditor (myobj)
     this.fontsize                 = '9pt';
     this.fontcolor                = '#222222';
     this.fontface                 = '±¼¸²';
-    this.lineheight               = '13pt';
+    //this.lineheight               = '13pt';
     this.padding                  = '10px';
     this.editorBgcolor            = "#ffffff";
     this.editorBorder             = "1px #999 solid";

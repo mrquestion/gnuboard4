@@ -16,11 +16,11 @@ function get_microtime()
 
 
 // 현재페이지, 총페이지수, 한페이지에 보여줄 행, URL
-function get_paging($write_pages, $cur_page, $total_page, $url)
+function get_paging($write_pages, $cur_page, $total_page, $url, $add="")
 {
     $str = "";
     if ($cur_page > 1) {
-        $str .= "<a href='" . $url . "1'>처음</a>";
+        $str .= "<a href='" . $url . "1{$add}'>처음</a>";
         //$str .= "[<a href='" . $url . ($cur_page-1) . "'>이전</a>]";
     }
 
@@ -29,22 +29,22 @@ function get_paging($write_pages, $cur_page, $total_page, $url)
 
     if ($end_page >= $total_page) $end_page = $total_page;
 
-    if ($start_page > 1) $str .= " &nbsp;<a href='" . $url . ($start_page-1) . "'>이전</a>";
+    if ($start_page > 1) $str .= " &nbsp;<a href='" . $url . ($start_page-1) . "{$add}'>이전</a>";
 
     if ($total_page > 1) {
         for ($k=$start_page;$k<=$end_page;$k++) {
             if ($cur_page != $k)
-                $str .= " &nbsp;<a href='$url$k'><span>$k</span></a>";
+                $str .= " &nbsp;<a href='$url$k{$add}'><span>$k</span></a>";
             else
                 $str .= " &nbsp;<b>$k</b> ";
         }
     }
 
-    if ($total_page > $end_page) $str .= " &nbsp;<a href='" . $url . ($end_page+1) . "'>다음</a>";
+    if ($total_page > $end_page) $str .= " &nbsp;<a href='" . $url . ($end_page+1) . "{$add}'>다음</a>";
 
     if ($cur_page < $total_page) {
         //$str .= "[<a href='$url" . ($cur_page+1) . "'>다음</a>]";
-        $str .= " &nbsp;<a href='$url$total_page'>맨끝</a>";
+        $str .= " &nbsp;<a href='$url$total_page{$add}'>맨끝</a>";
     }
     $str .= "";
 
@@ -272,96 +272,96 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     $list = $write_row;
     unset($write_row);
 
-    $list[is_notice] = preg_match("/[^0-9]{0,1}{$list[wr_id]}[\r]{0,1}/",$board[bo_notice]);
+    $list['is_notice'] = preg_match("/[^0-9]{0,1}{$list['wr_id']}[\r]{0,1}/",$board['bo_notice']);
 
     if ($subject_len)
-        $list[subject] = conv_subject($list[wr_subject], $subject_len, "…");
+        $list['subject'] = conv_subject($list['wr_subject'], $subject_len, "…");
     else
-        $list[subject] = conv_subject($list[wr_subject], $board[bo_subject_len], "…");
+        $list['subject'] = conv_subject($list['wr_subject'], $board['bo_subject_len'], "…");
 
     // 목록에서 내용 미리보기 사용한 게시판만 내용을 변환함 (속도 향상) : kkal3(커피)님께서 알려주셨습니다.
-    if ($board[bo_use_list_content])
+    if ($board['bo_use_list_content'])
 	{
 		$html = 0;
-		if (strstr($list[wr_option], "html1"))
+		if (strstr($list['wr_option'], "html1"))
 			$html = 1;
-		else if (strstr($list[wr_option], "html2"))
+		else if (strstr($list['wr_option'], "html2"))
 			$html = 2;
 
-        $list[content] = conv_content($list[wr_content], $html);
+        $list['content'] = conv_content($list['wr_content'], $html);
 	}
 
-    $list[comment_cnt] = "";
-    if ($list[wr_comment])
-        $list[comment_cnt] = "($list[wr_comment])";
+    $list['comment_cnt'] = "";
+    if ($list['wr_comment'])
+        $list['comment_cnt'] = "($list[wr_comment])";
 
     // 당일인 경우 시간으로 표시함
-    $list[datetime] = substr($list[wr_datetime],0,10);
-    $list[datetime2] = $list[wr_datetime];
-    if ($list[datetime] == $g4[time_ymd])
-        $list[datetime2] = substr($list[datetime2],11,5);
+    $list['datetime'] = substr($list['wr_datetime'],0,10);
+    $list['datetime2'] = $list['wr_datetime'];
+    if ($list['datetime'] == $g4['time_ymd'])
+        $list['datetime2'] = substr($list['datetime2'],11,5);
     else
-        $list[datetime2] = substr($list[datetime2],5,5);
+        $list['datetime2'] = substr($list['datetime2'],5,5);
 
-    $list[wr_homepage] = get_text(addslashes($list[wr_homepage]));
+    $list['wr_homepage'] = get_text(addslashes($list['wr_homepage']));
 
-    $tmp_name = get_text(cut_str($list[wr_name], $config[cf_cut_name])); // 설정된 자리수 만큼만 이름 출력
-    if ($board[bo_use_sideview])
-        $list[name] = get_sideview($list[mb_id], $tmp_name, $list[wr_email], $list[wr_homepage]);
+    $tmp_name = get_text(cut_str($list['wr_name'], $config['cf_cut_name'])); // 설정된 자리수 만큼만 이름 출력
+    if ($board['bo_use_sideview'])
+        $list['name'] = get_sideview($list['mb_id'], $tmp_name, $list['wr_email'], $list['wr_homepage']);
     else
-        $list[name] = "<span class='".($list[mb_id]?'member':'guest')."'>$tmp_name</span>";
+        $list['name'] = "<span class='".($list['mb_id']?'member':'guest')."'>$tmp_name</span>";
 
-    $reply = $list[wr_reply];
+    $reply = $list['wr_reply'];
 
-    $list[reply] = "";
+    $list['reply'] = "";
     if (strlen($reply) > 0) 
     {
         for ($k=0; $k<strlen($reply); $k++)
-            $list[reply] .= ' &nbsp;&nbsp; ';
+            $list['reply'] .= ' &nbsp;&nbsp; ';
     }
 
-    $list[icon_reply] = "";
-    if ($list[reply])
-        $list[icon_reply] = "<img src='$skin_path/img/icon_reply.gif' align='absmiddle'>";
+    $list['icon_reply'] = "";
+    if ($list['reply'])
+        $list['icon_reply'] = "<img src='$skin_path/img/icon_reply.gif' align='absmiddle'>";
 
-    $list[icon_link] = "";
-    if ($list[wr_link1] || $list[wr_link2])
-        $list[icon_link] = "<img src='$skin_path/img/icon_link.gif' align='absmiddle'>";
+    $list['icon_link'] = "";
+    if ($list['wr_link1'] || $list['wr_link2'])
+        $list['icon_link'] = "<img src='$skin_path/img/icon_link.gif' align='absmiddle'>";
 
     // 분류명 링크
-    $list[ca_name_href] = "$g4[bbs_path]/board.php?bo_table=$board[bo_table]&sca=".urlencode($list[ca_name]);
+    $list['ca_name_href'] = "$g4[bbs_path]/board.php?bo_table=$board[bo_table]&sca=".urlencode($list['ca_name']);
 
-    $list[href] = "$g4[bbs_path]/board.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]" . $qstr;
-    if ($board[bo_use_comment])
-        $list[comment_href] = "javascript:win_comment('$g4[bbs_path]/board.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]&cwin=1');";
+    $list['href'] = "$g4[bbs_path]/board.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]" . $qstr;
+    if ($board['bo_use_comment'])
+        $list['comment_href'] = "javascript:win_comment('$g4[bbs_path]/board.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]&cwin=1');";
     else
-        $list[comment_href] = $list[href];
+        $list['comment_href'] = $list['href'];
 
-    $list[icon_new] = "";
-    if ($list[wr_datetime] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600)))
-        $list[icon_new] = "<img src='$skin_path/img/icon_new.gif' align='absmiddle'>";
+    $list['icon_new'] = "";
+    if ($list['wr_datetime'] >= date("Y-m-d H:i:s", $g4['server_time'] - ($board['bo_new'] * 3600)))
+        $list['icon_new'] = "<img src='$skin_path/img/icon_new.gif' align='absmiddle'>";
 
-    $list[icon_hot] = "";
-    if ($list[wr_hit] >= $board[bo_hot])
-        $list[icon_hot] = "<img src='$skin_path/img/icon_hot.gif' align='absmiddle'>";
+    $list['icon_hot'] = "";
+    if ($list['wr_hit'] >= $board['bo_hot'])
+        $list['icon_hot'] = "<img src='$skin_path/img/icon_hot.gif' align='absmiddle'>";
 
-    $list[icon_secret] = "";
-    if (strstr($list[wr_option], "secret"))
-        $list[icon_secret] = "<img src='$skin_path/img/icon_secret.gif' align='absmiddle'>";
+    $list['icon_secret'] = "";
+    if (strstr($list['wr_option'], "secret"))
+        $list['icon_secret'] = "<img src='$skin_path/img/icon_secret.gif' align='absmiddle'>";
 
     // 링크
-    for ($i=1; $i<=$g4[link_count]; $i++) 
+    for ($i=1; $i<=$g4['link_count']; $i++) 
     {
-        $list[link][$i] = set_http(get_text($list["wr_link{$i}"]));
-        $list[link_href][$i] = "$g4[bbs_path]/link.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]&no=$i" . $qstr;
-        $list[link_hit][$i] = (int)$list["wr_link{$i}_hit"];
+        $list['link'][$i] = set_http(get_text($list["wr_link{$i}"]));
+        $list['link_href'][$i] = "$g4[bbs_path]/link.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]&no=$i" . $qstr;
+        $list['link_hit'][$i] = (int)$list["wr_link{$i}_hit"];
     }
 
     // 가변 파일
-    $list[file] = get_file($board[bo_table], $list[wr_id]);
+    $list['file'] = get_file($board['bo_table'], $list['wr_id']);
 
-    if ($list[file][count])
-        $list[icon_file] = "<img src='$skin_path/img/icon_file.gif' align='absmiddle'>";
+    if ($list['file']['count'])
+        $list['icon_file'] = "<img src='$skin_path/img/icon_file.gif' align='absmiddle'>";
 
     return $list;
 }
@@ -656,9 +656,9 @@ function is_admin($mb_id)
 
     if (!$mb_id) return;
 
-    if ($config[cf_admin] == $mb_id) return 'super';
-    if ($group[gr_admin] == $mb_id) return 'group';
-    if ($board[bo_admin] == $mb_id) return 'board';
+    if ($config['cf_admin'] == $mb_id) return 'super';
+    if ($group['gr_admin'] == $mb_id) return 'group';
+    if ($board['bo_admin'] == $mb_id) return 'board';
     return '';
 }
 
@@ -823,7 +823,7 @@ function get_sideview($mb_id, $name="", $email="", $homepage="")
     if ($mb_id) {
         $tmp_name = "<span class='member'>$name</span>";
 
-        if ($config[cf_use_member_icon]) {
+        if ($config['cf_use_member_icon']) {
             $mb_dir = substr($mb_id,0,2);
             $icon_file = "$g4[path]/data/member/$mb_dir/$mb_id.gif";
 
@@ -832,11 +832,11 @@ function get_sideview($mb_id, $name="", $email="", $homepage="")
                 //$size = getimagesize($icon_file);
                 //$width = $size[0];
                 //$height = $size[1];
-                $width = $config[cf_member_icon_width];
-                $height = $config[cf_member_icon_height];
+                $width = $config['cf_member_icon_width'];
+                $height = $config['cf_member_icon_height'];
                 $tmp_name = "<img src='$icon_file' width='$width' height='$height' align='absmiddle' border='0'>";
 
-                if ($config[cf_use_member_icon] == 2) // 회원아이콘+이름
+                if ($config['cf_use_member_icon'] == 2) // 회원아이콘+이름
                     $tmp_name = $tmp_name . " <span class='member'>$name</span>";
             }
         }
@@ -924,7 +924,7 @@ function cut_str($str, $len, $suffix="…")
     for ($i=0; $i<strlen($s); $i++)
         if (ord($s[$i]) > 127)
             $cnt++;
-    if (strtoupper($g4[charset]) == 'UTF-8')
+    if (strtoupper($g4['charset']) == 'UTF-8')
         $s = substr($s, 0, $len - ($cnt % 3));
     else
         $s = substr($s, 0, $len - ($cnt % 2));

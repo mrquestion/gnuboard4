@@ -362,7 +362,7 @@ function fregisterform_submit(f)
 
     /*
     // 사용할 수 없는 별명을 사용하고자 하는 경우에는 이 주석을 제거하십시오.
-    if (!prohibit_id_check(f.mb_nick.value))
+    if (prohibit_id_check(f.mb_nick.value))
     {
         alert("'"+f.mb_nick.value + "'은(는) 사용하실 수 없는 별명입니다.");
         f.mb_nick.focus();
@@ -440,7 +440,10 @@ function mb_id_check()
         return;
     }
 
-    win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+document.fregisterform.mb_id.value, "hiddenframe");
+    if (g4_charset.toUpperCase == "UTF-8")
+        win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+encodeURI(document.fregisterform.mb_id.value), "hiddenframe");
+    else
+        win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+document.fregisterform.mb_id.value, "hiddenframe");
 }
 
 // 별명 검사
@@ -480,7 +483,10 @@ function mb_email_check()
         return;
     }
 
-    win_open(g4_path+"/"+g4_bbs+"/member_email_check.php?mb_email="+document.fregisterform.mb_email.value, "hiddenframe");
+    if (g4_charset.toUpperCase == "UTF-8")
+        win_open(g4_path+"/"+g4_bbs+"/member_email_check.php?mb_email="+encodeURI(document.fregisterform.mb_email.value), "hiddenframe");
+    else
+        win_open(g4_path+"/"+g4_bbs+"/member_email_check.php?mb_email="+document.fregisterform.mb_email.value, "hiddenframe");
 }
 
 function mb_id_change()

@@ -6,13 +6,13 @@ function outlogin($skin_dir="basic")
 {
     global $config, $member, $g4, $urlencode, $is_admin;
 
-    $nick  = cut_str($member['mb_nick'], $config[cf_cut_name]);
+    $nick  = cut_str($member['mb_nick'], $config['cf_cut_name']);
     $point = number_format($member['mb_point']);
 
     // 읽지 않은 쪽지가 있다면
     $sql = " select count(*) as cnt 
-               from {$g4[memo_table]}
-              where me_recv_mb_id = '$member[mb_id]'
+               from {$g4['memo_table']}
+              where me_recv_mb_id = '{$member['mb_id']}'
                 and me_read_datetime = '0000-00-00 00:00:00' ";
     $row = sql_fetch($sql);
     $memo_not_read = $row['cnt'];
@@ -22,7 +22,7 @@ function outlogin($skin_dir="basic")
     $is_auth = false;
     $sql = " select count(*) as cnt from $g4[auth_table] where mb_id = '$member[mb_id]' ";
     $row = sql_fetch($sql);
-    if ($row[cnt]) 
+    if ($row['cnt']) 
         $is_auth = true;
 
     ob_start();

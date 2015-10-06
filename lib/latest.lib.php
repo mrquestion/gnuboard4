@@ -4,20 +4,19 @@ if (!defined('_GNUBOARD_')) exit;
 // 최신글 추출
 function latest($skin_dir="", $bo_table, $rows=10, $subject_len=40, $options="")
 {
-    global $config;
     global $g4;
 
     if ($skin_dir)
         $latest_skin_path = "$g4[path]/skin/latest/$skin_dir";
     else
-        $latest_skin_path = "$g4[path]/skin/latest/$config[cf_latest_skin]";
+        $latest_skin_path = "$g4[path]/skin/latest/basic";
 
     $list = array();
 
-    $sql = " select * from {$g4[board_table]} where bo_table = '$bo_table'";
+    $sql = " select * from $g4[board_table] where bo_table = '$bo_table'";
     $board = sql_fetch($sql);
 
-    $tmp_write_table = $g4[write_prefix] . $bo_table; // 게시판 테이블 전체이름
+    $tmp_write_table = $g4['write_prefix'] . $bo_table; // 게시판 테이블 전체이름
     $sql = " select * from $tmp_write_table where wr_is_comment = 0 order by wr_id desc limit 0, $rows ";
     //explain($sql);
     $result = sql_query($sql);

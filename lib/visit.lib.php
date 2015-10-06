@@ -12,7 +12,7 @@ function visit($skin_dir="basic")
     // $visit[3] = 최대
     // $visit[4] = 전체
     // 숫자가 들어감
-    preg_match("/오늘:(.*),어제:(.*),최대:(.*),전체:(.*)/", $config[cf_visit], $visit);
+    preg_match("/오늘:(.*),어제:(.*),최대:(.*),전체:(.*)/", $config['cf_visit'], $visit);
 
     ob_start();
     $visit_skin_path = "$g4[path]/skin/visit/$skin_dir";

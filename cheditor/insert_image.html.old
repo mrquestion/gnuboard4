@@ -1,0 +1,252 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
+<title>이미지 넣기</title>
+<STYLE TYPE="text/css">
+body {
+  background-color: #eeeeee;
+  margin: 5px;
+  border: 0;
+  padding: 5px;
+}
+#button {
+  font-size: 9pt;
+  padding-top: 3px;
+  height: 24px;
+  width: 6em;
+}
+img {
+  border: 0;
+}
+
+font {
+  font-size: 9pt;
+  font-family: 굴림;
+}
+</STYLE>
+<script language=javascript>
+function display_image_url()
+{
+    var file = document.insertImage.linkurl.value;
+    var allowSubmit = false;
+    var extArray = new Array(".gif", ".jpg", ".png");
+
+    extArray.join(" ");
+
+    if (!file) return;
+
+    while (file.indexOf("/") != -1)
+        file = file.slice(file.indexOf("/") + 1);
+
+    var ext = file.slice(file.indexOf(".")).toLowerCase();
+
+    for (var i = 0; i < extArray.length; i++) {
+        if (extArray[i] == ext) {
+            allowSubmit = true;
+            break;
+        }
+    }
+
+    if (allowSubmit) {
+        show_image.innerHTML = '';
+        document.insertImage.tmpImg.src = document.insertImage.linkurl.value;
+    }
+    else {
+        alert("그림 삽입은 GIF, JPG, PNG 파일만 가능합니다. 다시 선택하여 주십시요.");
+    }
+}
+
+function imgComplete (tmpImg)
+{
+    //var img = document.createElement("img");
+    var obj = window.opener.saveobj;
+    var img = document.createElement("img"+id);
+    img.src = tmpImg.src;
+
+    var w = 230;
+    var h = 180;
+    var resizeW;
+    var resizeH;
+
+    if (img.width > w || img.height > h) {
+        if (img.width > img.height) {
+            resizeW = img.width > w ? w : img.width;
+            resizeH = Math.round((img.height * resizeW) / img.width);
+        }
+        else {
+            resizeH = img.height > h ? h : img.height;
+            resizeW = Math.round((img.width * resizeH) / img.height);
+        }
+    }
+    else {
+        resizeW = img.width;
+        resizeH = img.height;
+    }
+
+    if (img.width > 1 && img.height > 1) {
+        document.insertImage.imageHeight.value = img.height;
+        document.insertImage.imageWidth.value = img.width;
+    }
+
+    img.width = resizeW;
+    img.height = resizeH;
+
+    show_image.appendChild(img);
+    img.onload = null;
+    img.onerror = null;
+}
+
+function DoReturn()
+{
+    var inputimg = document.getElementById("linkurl"+id);
+    var imgurl = inputimg.value;
+    var img = document.createElement("img"+id);
+    img.src = imgurl;
+
+    var alt = document.getElementById("description").value;
+    var inputalign = document.getElementById("alignment");
+    var align = inputalign.options[inputalign.selectedIndex].value;
+    var vspace = document.getElementById("v").value;
+    var hspace = document.getElementById("h").value;
+    var border = document.getElementById("b").value;
+
+    img.style.width = document.insertImage.imageWidth.value;
+    img.style.height = document.insertImage.imageHeight.value;
+
+    if (alt)    { img.alt = escape_html(alt); }
+    if (hspace) { img.hspace = hspace; }
+    if (vspace) { img.vspace = vspace; }
+    if (align)  { img.align  = align; }
+    if (border) { img.border = border; }
+
+    //var obj = window.opener.chutil.myobj;
+    var obj = window.opener.saveobj;
+    eval("window.opener."+obj).insertImage(img);
+    window.close();
+}
+
+function escape_html (content)
+{
+    content = content.replace (/&/g, '&amp;');
+    content = content.replace (/\"/g, '&quot;');
+    return content;
+}
+</script>
+</head>
+<body bgcolor="#dedfdf" oncontextmenu="return false" scroll="no">
+<center>
+<form name="insertImage" style="inline">
+<fieldset><legend><font color="blue">미리 보기</font></legend>
+<table border="0" width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+    <td align="center">
+      <table border="0" cellpadding="0" cellspacing="0" width="240">
+        <tr>
+          <td bgcolor="#999999">
+            <table border="0" cellpadding="2" cellspacing="1" width="100%">
+              <tr>
+                <td bgcolor="white" height="180" valign="center" align="center">
+                  <div id="show_image"></div>
+                  <img src="./icons/dot.gif" style="display:none" name="tmpImg" id="tmpImg" onLoad="imgComplete(this)">
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</fieldset>
+<br>
+<fieldset><legend><font color="blue">그림 URL 위치</font></legend>
+<table border="0" width="100%" cellspacing="0" cellpadding="4">
+  <tr>
+    <td>
+      <font>URL 입력 (필수):</font>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="text" name="linkurl" id="linkurl" size="50" value="http://" onChange="display_image_url();">
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <font>그림 설명 (옵션):</font>
+    </td>
+  </tr>
+  <tr>
+    <td><input type="text" name="description" id="description" size="50"></td>
+  </tr>
+</table>
+</fieldset>
+<br>
+<fieldset><legend><font color="blue">옵션</font></legend>
+<table border="0" cellpadding="4" cellspacing="1" width="100%">
+  <tr bgcolor="#c0c0c0">
+    <td>
+      <font><b>레이아웃</b></font>
+    </td>
+    <td>
+      <font><b>간격</b></font>
+    </td>
+  </tr>
+  <tr bgcolor="#dedfdf">
+    <td width="50%">
+      <font>맞춤:
+      <select size="1" name="alignment" id="alignment" style="font-size:9pt">
+      <option value="">없음</option>
+      <option value="Baseline">기준선</option>
+      <option value="Top">위쪽</option>
+      <option value="Middle">가운데</option>
+      <option value="Bottom">아래쪽</option>
+      <option value="Toptext">문자열 위쪽</option>
+      <option value="Absmiddle">선택 영역의 가운데</option>
+      <option value="Absbottom">선택 영역의 아래쪽</option>
+      <option value="Left" selected>왼쪽</option>
+      <option value="Right">오른쪽</option>
+      </select></font>
+    </td>
+    <td width="50%"><font>가로여백:</font>
+      <input type="text" name="h" id="h" size="3" value="0">
+    </td>
+  </tr>
+  <tr bgcolor="#dedfdf">
+    <td>
+      <font>괘선 두께:
+      <input type="text" name="b" id="b" size="3" value="0"></font>
+    </td>
+    <td>
+      <font>세로여백:
+      <input type="text" name="v" id="v" size="3" value="0"></font>
+    </td>
+  </tr>
+  <tr bgcolor="#c0c0c0">
+    <td>
+      <font><b>이미지 가로 폭</b></font>
+    </td>
+    <td>
+      <font><b>이미지 세로 폭</b></font>
+    </td>
+  </tr>
+  <tr bgcolor="#dedfdf">
+    <td>
+      <font>가로 픽셀:
+      <input type="text" name="imageWidth" id="imageWidth" size="5" value="0"></font>
+    </td>
+    <td>
+      <font>세로 픽셀:
+      <input type="text" name="imageHeight" id="imageHeight" size="5" value="0"></font>
+    </td>
+  </tr>
+</table>
+</fieldset>
+<br>
+<input type="button" value="확인" onClick="DoReturn();" id="button">
+<input type="button" value="미리보기" onClick="display_image_url();" id="button">
+<input type="button" value="취소" onClick="window.close();" id="button">
+</form>
+</center>
+</body>
+</html>

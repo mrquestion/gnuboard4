@@ -114,7 +114,7 @@ $g4     = array();
 if (!$g4_path || preg_match("/:\/\//", $g4_path))
     die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script language='JavaScript'> alert('잘못된 방법으로 변수가 정의되었습니다.'); </script>");    
 //if (!$g4_path) $g4_path = ".";
-$g4[path] = $g4_path;
+$g4['path'] = $g4_path;
 
 // 경로의 오류를 없애기 위해 $g4_path 변수는 해제
 unset($g4_path);
@@ -123,21 +123,21 @@ include_once("$g4[path]/config.php");  // 설정 파일
 include_once("$g4[path]/lib/common.lib.php"); // 공통 라이브러리
 
 // config.php 가 있는곳의 웹경로
-if (!$g4[url]) 
+if (!$g4['url']) 
 {
-    $g4[url] = 'http://' . $_SERVER['HTTP_HOST'];
+    $g4['url'] = 'http://' . $_SERVER['HTTP_HOST'];
     $dir = dirname($HTTP_SERVER_VARS["PHP_SELF"]);
     if (!file_exists("config.php"))
         $dir = dirname($dir);
-    $cnt = substr_count($g4[path], "..");
+    $cnt = substr_count($g4['path'], "..");
     for ($i=2; $i<=$cnt; $i++) 
         $dir = dirname($dir);
-    $g4[url] .= $dir;
+    $g4['url'] .= $dir;
 }
 // \ 를 / 롤 변경
-$g4[url] = strtr($g4[url], "\\", "/");
+$g4['url'] = strtr($g4['url'], "\\", "/");
 // url 의 끝에 있는 / 를 삭제한다.
-$g4[url] = preg_replace("/\/$/", "", $g4[url]);
+$g4['url'] = preg_replace("/\/$/", "", $g4['url']);
 
 //==============================================================================
 // 공통
@@ -175,7 +175,7 @@ unset($my); // DB 설정값을 클리어 해줍니다.
 ini_set("session.use_trans_sid", 0);    // PHPSESSID를 자동으로 넘기지 않음
 ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함 (해뜰녘님께서 알려주셨습니다.)
 
-session_save_path("$g4[path]/data/session");
+session_save_path("{$g4['path']}/data/session");
 
 if (isset($SESSION_CACHE_LIMITER)) 
     @session_cache_limiter($SESSION_CACHE_LIMITER);
@@ -193,13 +193,13 @@ ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
 ini_set("session.gc_maxlifetime", 1440); // session data의 gabage collection 존재 기간을 지정 (초)
 
 session_set_cookie_params(0, "/");
-ini_set("session.cookie_domain", $g4[cookie_domain]); 
+ini_set("session.cookie_domain", $g4['cookie_domain']); 
 
 @session_start();
 
 // 4.00.03 : [보안관련] PHPSESSID 가 틀리면 로그아웃한다.
-if ($PHPSESSID && $PHPSESSID != session_id())
-    goto_url("$g4[bbs_path]/logout.php");
+if ($_REQUEST['PHPSESSID'] && $_REQUEST['PHPSESSID'] != session_id())
+    goto_url("{$g4['bbs_path']}/logout.php");
 
 // QUERY_STRING
 $qstr = "";
@@ -217,11 +217,11 @@ if (isset($spt))  $qstr .= '&spt=' . urlencode($spt); // search part (검색 파트[
 if (isset($page)) $qstr .= '&page=' . urlencode($page);
 
 // URL ENCODING
-if ($url) 
+if (isset($url)) 
     $urlencode = urlencode($url);
 else 
     //$urlencode = urlencode($_SERVER[REQUEST_URI]);
-    $urlencode = $_SERVER[REQUEST_URI];
+    $urlencode = $_SERVER['REQUEST_URI'];
 //===================================
 
 // common.php 파일을 수정할 필요가 없도록 확장합니다.
@@ -234,19 +234,19 @@ while ($entry = $tmp->read()) {
 
 
 // 자동로그인 부분에서 첫로그인에 포인트 부여하던것을 로그인중일때로 변경하면서 코드도 대폭 수정하였습니다.
-if ($_SESSION[ss_mb_id]) // 로그인중이라면
+if ($_SESSION['ss_mb_id']) // 로그인중이라면
 {
-    $member = get_member($_SESSION[ss_mb_id]);
+    $member = get_member($_SESSION['ss_mb_id']);
 
     // 오늘 처음 로그인 이라면
-    if (substr($member[mb_today_login], 0, 10) != $g4[time_ymd])
+    if (substr($member['mb_today_login'], 0, 10) != $g4['time_ymd'])
     {
         // 첫 로그인 포인트 지급
-        insert_point($member[mb_id], $config[cf_login_point], "$g4[time_ymd] 첫로그인", "@login", $member[mb_id], $g4[time_ymd]);
+        insert_point($member['mb_id'], $config['cf_login_point'], "{$g4['time_ymd']} 첫로그인", "@login", $member['mb_id'], $g4['time_ymd']);
 
         // 오늘의 로그인이 될 수도 있으며 마지막 로그인일 수도 있음
         // 해당 회원의 접근일시와 IP 를 저장
-        $sql = " update $g4[member_table] set mb_today_login = '$g4[time_ymdhis]', mb_login_ip = '$_SERVER[REMOTE_ADDR]' where mb_id = '$member[mb_id]' ";
+        $sql = " update {$g4['member_table']} set mb_today_login = '{$g4['time_ymdhis']}', mb_login_ip = '{$_SERVER['REMOTE_ADDR']}' where mb_id = '{$member['mb_id']}' ";
         sql_query($sql);
     }
 } 
@@ -257,20 +257,20 @@ else
     if ($tmp_mb_id = get_cookie("ck_mb_id")) 
     {
         // 최고관리자는 자동로그인 금지
-        if ($tmp_mb_id != $config[cf_admin]) 
+        if ($tmp_mb_id != $config['cf_admin']) 
         {
             $sql = " select mb_password, mb_intercept_date, mb_leave_date, mb_email_certify
-                       from $g4[member_table] where mb_id = '$tmp_mb_id' ";
+                       from {$g4['member_table']} where mb_id = '$tmp_mb_id' ";
             $row = sql_fetch($sql);
-            $key = md5($_SERVER[SERVER_ADDR] . $_SERVER[REMOTE_ADDR] . $_SERVER[HTTP_USER_AGENT] . $row[mb_password]);
+            $key = md5($_SERVER['SERVER_ADDR'] . $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . $row['mb_password']);
             // 쿠키에 저장된 키와 같다면
             $tmp_key = get_cookie("ck_auto");
             if ($tmp_key == $key && $tmp_key) 
             {
                 // 차단, 탈퇴가 아니고 메일인증이 사용이면서 인증을 받았다면
-                if ($row[mb_intercept_date] == "" && 
-                    $row[mb_leave_date] == "" && 
-                    (!$config[cf_use_email_certify] || preg_match('/[1-9]/', $row[mb_email_certify])) )
+                if ($row['mb_intercept_date'] == "" && 
+                    $row['mb_leave_date'] == "" && 
+                    (!$config['cf_use_email_certify'] || preg_match('/[1-9]/', $row['mb_email_certify'])) )
                 {
                     // 세션에 회원아이디를 저장하여 로그인으로 간주
                     set_session("ss_mb_id", $tmp_mb_id);
@@ -293,70 +293,71 @@ if (!get_cookie("ck_first_call"))     set_cookie("ck_first_call", $g4[server_tim
 if (!get_cookie("ck_first_referer"))  set_cookie("ck_first_referer", $_SERVER[HTTP_REFERER], 86400 * 365);
 
 // 회원이 아니라면 권한을 방문객 권한으로 함
-if (!($member[mb_id])) 
-    $member[mb_level] = 1;
+if (!($member['mb_id'])) 
+    $member['mb_level'] = 1;
 else
-    $member[mb_dir] = substr($member[mb_id],0,2);
+    $member['mb_dir'] = substr($member['mb_id'],0,2);
 
-//$member[mb_level_title] = $g4[member_level][$member[mb_level]]; // 권한명
+//$member['mb_level_title'] = $g4['member_level'][$member['mb_level']]; // 권한명
 
-if ($bo_table) {
-    $board = sql_fetch(" select * from $g4[board_table] where bo_table = '$bo_table' ");
-    if ($board[bo_table]) {
-        $gr_id = $board[gr_id];
-        $write_table = $g4[write_prefix] . $bo_table; // 게시판 테이블 전체이름
-        //$comment_table = $g4[write_prefix] . $bo_table . $g4[comment_suffix]; // 코멘트 테이블 전체이름
+if (isset($bo_table)) {
+    $board = sql_fetch(" select * from {$g4['board_table']} where bo_table = '$bo_table' ");
+    if ($board['bo_table']) {
+        $gr_id = $board['gr_id'];
+        $write_table = $g4['write_prefix'] . $bo_table; // 게시판 테이블 전체이름
+        //$comment_table = $g4['write_prefix'] . $bo_table . $g4['comment_suffix']; // 코멘트 테이블 전체이름
         if ($wr_id)
             $write = sql_fetch(" select * from $write_table where wr_id = '$wr_id' ");
     }
 }
 
-if ($gr_id)
-    $group = sql_fetch(" select * from $g4[group_table] where gr_id = '$gr_id' ");
+if (isset($gr_id))
+    $group = sql_fetch(" select * from {$g4['group_table']} where gr_id = '$gr_id' ");
 
 
 // 회원, 비회원 구분
 $is_member = $is_guest = false;
-if ($member[mb_id])
+if ($member['mb_id'])
     $is_member = true;
 else
     $is_guest = true;
 
 
-$is_admin = is_admin($member[mb_id]);
+$is_admin = is_admin($member['mb_id']);
 if ($is_admin != "super") {
     // 접근가능 IP
     $is_possible_ip = false;
-    $pattern = explode('\n', trim($config[cf_possible_ip]));
+    $pattern = explode('\n', trim($config['cf_possible_ip']));
     for ($i=0; $i<count($pattern); $i++) {
         $pattern[$i] = trim($pattern[$i]);
         if (empty($pattern[$i])) 
             continue;
 
         $pat = "/({$pattern[$i]})/";
-        $is_possible_ip = preg_match($pat, $_SERVER[REMOTE_ADDR]);
+        $is_possible_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
         if ($is_possible_ip) 
             die ("접근이 가능하지 않습니다.");
     }
 
     // 접근차단 IP
     $is_intercept_ip = false;
-    $pattern = explode("\n", trim($config[cf_intercept_ip]));
+    $pattern = explode("\n", trim($config['cf_intercept_ip']));
     for ($i=0; $i<count($pattern); $i++) {
         $pattern[$i] = trim($pattern[$i]);
         if (empty($pattern[$i])) 
             continue;
 
         $pat = "/({$pattern[$i]})/";
-        $is_intercept_ip = preg_match($pat, $_SERVER[REMOTE_ADDR]);
+        $is_intercept_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
         if ($is_intercept_ip) 
             die ("접근 불가합니다.");
     }
 }
 
 // 스킨경로
-$board_skin_path = "$g4[path]/skin/board/$board[bo_skin]"; // 게시판 스킨 경로
+if (isset($board['bo_skin']))
+    $board_skin_path = "{$g4['path']}/skin/board/{$board['bo_skin']}"; // 게시판 스킨 경로
 
 // 방문자수의 접속을 남김
-include_once("$g4[bbs_path]/visit_insert.inc.php");
+include_once("{$g4['bbs_path']}/visit_insert.inc.php");
 ?>
