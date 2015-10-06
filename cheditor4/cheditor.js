@@ -352,21 +352,21 @@ switchEditorMode : function (which) {
 				this.previewMode();
 			else if (this.currentMode == 'code')
 				this.editMode();
-			document.getElementById('tabEditModeRich').src = this.config.editorPath+'/icons/edit_mode_rich_a.gif';
-			if (this.config.useSource) document.getElementById('tabEditModeCode').src = this.config.editorPath+'/icons/edit_mode_code_b.gif';
-			document.getElementById('tabEditModePreview').src = this.config.editorPath+'/icons/edit_mode_view_b.gif';
+			document.getElementById('tabEditModeRich'+this.oname).src = this.config.editorPath+'/icons/edit_mode_rich_a.gif';
+			if (this.config.useSource) document.getElementById('tabEditModeCode'+this.oname).src = this.config.editorPath+'/icons/edit_mode_code_b.gif';
+			document.getElementById('tabEditModePreview'+this.oname).src = this.config.editorPath+'/icons/edit_mode_view_b.gif';
 			break;
 		case 'code' :
-			document.getElementById('tabEditModeRich').src = this.config.editorPath+'/icons/edit_mode_rich_b.gif';
-			document.getElementById('tabEditModeCode').src = this.config.editorPath+'/icons/edit_mode_code_a.gif';
-			document.getElementById('tabEditModePreview').src = this.config.editorPath+'/icons/edit_mode_view_b.gif';
+			document.getElementById('tabEditModeRich'+this.oname).src = this.config.editorPath+'/icons/edit_mode_rich_b.gif';
+			document.getElementById('tabEditModeCode'+this.oname).src = this.config.editorPath+'/icons/edit_mode_code_a.gif';
+			document.getElementById('tabEditModePreview'+this.oname).src = this.config.editorPath+'/icons/edit_mode_view_b.gif';
 			this.editMode();
 			break;
 		case 'preview' :
 			this.previewMode();
-			document.getElementById('tabEditModeRich').src = this.config.editorPath+'/icons/edit_mode_rich_b.gif';
-			if (this.config.useSource) document.getElementById('tabEditModeCode').src = this.config.editorPath+'/icons/edit_mode_code_b.gif';
-			document.getElementById('tabEditModePreview').src = this.config.editorPath+'/icons/edit_mode_view_a.gif';
+			document.getElementById('tabEditModeRich'+this.oname).src = this.config.editorPath+'/icons/edit_mode_rich_b.gif';
+			if (this.config.useSource) document.getElementById('tabEditModeCode'+this.oname).src = this.config.editorPath+'/icons/edit_mode_code_b.gif';
+			document.getElementById('tabEditModePreview'+this.oname).src = this.config.editorPath+'/icons/edit_mode_view_a.gif';
 			break;
 		default : break;
 	}
@@ -390,10 +390,10 @@ run : function () {
         document.write('</div>');
     }
     document.write('<div style="padding-left:4px;text-align:left;background:url('+this.config.editorPath+'/icons/statusbar_bgline.gif);background-repeat:repeat-x;background-position:top">');
-    document.write('<img width="24" height="20" id="tabEditModeRich" src="'+this.config.editorPath+'/icons/edit_mode_rich_a.gif" onclick="'+this.oname+'.switchEditorMode(\'rich\')" style="cursor:pointer" title="입력모드" />');
+    document.write('<img width="24" height="20" id="tabEditModeRich'+this.oname+'" src="'+this.config.editorPath+'/icons/edit_mode_rich_a.gif" onclick="'+this.oname+'.switchEditorMode(\'rich\')" style="cursor:pointer" title="입력모드" />');
     if (this.config.useSource)
-    	document.write('<img width="24" height="20" id="tabEditModeCode" src="'+this.config.editorPath+'/icons/edit_mode_code_b.gif" onclick="'+this.oname+'.switchEditorMode(\'code\')" style="cursor:pointer" title="편집모드" />');
-    document.write('<img width="24" height="20" id="tabEditModePreview" src="'+this.config.editorPath+'/icons/edit_mode_view_b.gif" onclick="'+this.oname+'.switchEditorMode(\'preview\')" style="cursor:pointer" title="미리보기" />');
+    	document.write('<img width="24" height="20" id="tabEditModeCode'+this.oname+'" src="'+this.config.editorPath+'/icons/edit_mode_code_b.gif" onclick="'+this.oname+'.switchEditorMode(\'code\')" style="cursor:pointer" title="편집모드" />');
+    document.write('<img width="24" height="20" id="tabEditModePreview'+this.oname+'" src="'+this.config.editorPath+'/icons/edit_mode_view_b.gif" onclick="'+this.oname+'.switchEditorMode(\'preview\')" style="cursor:pointer" title="미리보기" />');
     document.write('</div>');
  
     var loadContents = '';

@@ -1,3 +1,12 @@
+4.31.08 (09.06.23)
+    :   세션 가비시 콜렉션 기본값으로 코드 수정
+        ini_set("session.gc_probability", 1); // session.gc_probability는 session.gc_divisor와 연계하여 gc(쓰레기 수거) 루틴의 시작 확률을 관리합니다. 기본값은 1입니다. 자세한 내용은 session.gc_divisor를 참고하십시오.
+        ini_set("session.gc_divisor", 100); // session.gc_divisor는 session.gc_probability와 결합하여 각 세션 초기화 시에 gc(쓰레기 수거) 프로세스를 시작할 확률을 정의합니다. 확률은 gc_probability/gc_divisor를 사용하여 계산합니다. 즉, 1/100은 각 요청시에 GC 프로세스를 시작할 확률이 1%입니다. session.gc_divisor의 기본값은 100입니다.
+    :   한페이지에서 여러개의 CHEDITOR 사용시 하단 탭이 제대로 표시되도록 수정
+
+        common.php
+        cheditor4/cheditor.js
+
 4.31.07 (09.06.16)
     :   회원가입시 주민번호 사용하는 경우 동일 주민번호로 회원가입이 가능한 오류 수정 (letsgolee 님)
     :   게시물 리스트의 정렬 대상 필드가 아닐때 오류나는 부분 수정 (nasca 님)
