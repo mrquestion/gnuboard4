@@ -354,13 +354,26 @@ function fregisterform_submit(f)
         return;
     }
 
-    if (typeof f.mb_icon != "undefined") {
-        if (f.mb_icon.value) {
-            if (!f.mb_icon.value.toLowerCase().match(/.(gif)$/i)) {
+    if (typeof f.mb_icon != "undefined") 
+    {
+        if (f.mb_icon.value) 
+        {
+            if (!f.mb_icon.value.toLowerCase().match(/.(gif)$/i)) 
+            {
                 alert("회원아이콘이 gif 파일이 아닙니다.");
                 f.mb_icon.focus();
                 return;
             }
+        }
+    }
+
+    if (typeof(f.mb_recommend) != 'undefined')
+    {
+        if (f.mb_id.value == f.mb_recommend.value)
+        {
+            alert("본인을 추천할 수 없습니다.");
+            f.mb_recommend.focus();
+            return;
         }
     }
 

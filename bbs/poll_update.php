@@ -33,7 +33,7 @@ if (get_cookie("ck_po_id") == $po_id)
     }
 
     // 없다면 선택한 투표항목을 1증가 시키고 ip, id를 저장
-    if (!($search_mb_id && $search_ip)) 
+    if (!($search_ip || $search_mb_id)) 
     {
         $po_ips = $po[po_ips] . $_SERVER[REMOTE_ADDR] . "\n";
         $mb_ids = $po[mb_ids] . $member[mb_id] . "\n";

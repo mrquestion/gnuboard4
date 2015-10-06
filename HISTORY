@@ -1,3 +1,16 @@
+4.00.19 (05.07)
+    :   중복으로 투표가 가능하던 오류를 수정
+        Gatzz 님께서 알려주셨습니다.
+    :   delete_point() 함수에서 포인트 합을 반영
+        jjuni 님께서 알려주셨습니다.
+    :   회원가입시 본인을 추천할 수 있는 오류 수정
+        아꽈 님께서 알려주셨습니다.
+
+        bbs/poll_update.php
+        bbs/register_form_update.php
+        lib/common.lib.php
+        skin/member/basic/register_form.skin.php
+
 4.00.18 (05.07.04)
     :   설치시 data/cheditor 디렉토리 생성
     :   별명 수정일에서 계산이 틀린 오류를 수정

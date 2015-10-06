@@ -29,6 +29,9 @@ if ($w == "" || $w == "u") {
     if (!$mb_email) alert("E-mail 이 넘어오지 않았습니다.");
 }
 
+if ($w=='')
+    if ($mb_id == $mb_recommend) alert("본인을 추천할 수 없습니다.");
+
 $mb_dir = "$g4[path]/data/member/".substr($mb_id,0,2);
 
 // 아이콘 삭제

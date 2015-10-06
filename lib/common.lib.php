@@ -768,7 +768,17 @@ function delete_point($mb_id, $rel_table, $rel_id, $rel_action)
                        and po_rel_table = '$rel_table'
                        and po_rel_id = '$rel_id'
                        and po_rel_action = '$rel_action' ", false);
+
+        // 포인트 내역의 합을 구하고
+        $sql = " select sum(po_point) as sum_po_point from $g4[point_table] where mb_id = '$mb_id' ";
+        $row = sql_fetch($sql);
+        $sum_point = $row[sum_po_point];
+
+        // 포인트 UPDATE
+        $sql = " update $g4[member_table] set mb_point = '$sum_point' where mb_id = '$mb_id' ";
+        $result = sql_query($sql);
     }
+
     return $result;
 }
 
