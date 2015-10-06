@@ -605,8 +605,10 @@ if (($w != "u" && $wr_trackback) || ($w=="u" && $wr_trackback && $re_trackback))
     $trackback_url = "$g4[url]/$g4[bbs]/tb.php/$bo_table/$wr_id";
     $msg = "";
     $msg = send_trackback($wr_trackback, $trackback_url, $wr_subject, $board[bo_subject], $_POST[wr_content]);
-    if ($msg) 
+    if ($msg) {
+        echo "<meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'>\n";
         echo "<script type='text/javascript'>alert('$msg $wr_trackback');</script>";
+    }
 }
 
 @include_once("$board_skin_path/write_update.tail.skin.php");

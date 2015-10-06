@@ -1,3 +1,15 @@
+4.33.07 (11.03.22)
+    :   트랙백 테이블 누락되어 있던것 추가 (웹스타일 님께서 알려 주셨습니다.)
+        (거의 사용하지 않는 기능이므로 패치하지 않으셔도 무방합니다.)
+    :   트랙백 메세지 출력시 한글 깨지던것 수정
+
+        bbs/write_update.php
+
+        if ($msg) {
+            echo "<meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'>\n";
+            echo "<script type='text/javascript'>alert('$msg $wr_trackback');</script>";
+        }
+
 4.33.06 (11.02.22)
     :   [보안패치] 스팸글 등록으로 인한 자동등록방지 캡챠이미지 관련 코드 보완
 

