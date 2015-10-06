@@ -22,7 +22,7 @@ $sql = " insert into $g4[auth_table]
 $result = sql_query($sql, FALSE);
 if (!$result) {
     $sql = " update $g4[auth_table] 
-                set au_auth = '$_POST[r],$_POST[$w],_POST[$d]'
+                set au_auth = '$_POST[r],$_POST[$w],$_POST[$d]'
               where mb_id   = '$_POST[mb_id]'
                 and au_menu = '$_POST[au_menu]' ";
     sql_query($sql);
