@@ -89,7 +89,7 @@ $table_width = 1004;
         <table width="100%" height="33" cellspacing="0" cellpadding="0">
         <tr>
             <td width="25" height="25"><img src="<?=$g4['path']?>/img/search_01.gif" width="25" height="25"></td>
-            <td width="136" valign="middle" bgcolor="#F4F4F4"><INPUT name="stx" type="text" maxlength=20 style="BORDER : 0px solid; width: 125px; HEIGHT: 20px; BACKGROUND-COLOR: #F4F4F4" maxlength="20"></td>
+            <td width="136" valign="middle" bgcolor="#F4F4F4"><INPUT name="stx" type="text" style="BORDER : 0px solid; width: 125px; HEIGHT: 20px; BACKGROUND-COLOR: #F4F4F4" maxlength="20"></td>
             <td width="12"><img src="<?=$g4['path']?>/img/search_02.gif" width="12" height="25"></td>
             <td width="48"><input type="image" src="<?=$g4['path']?>/img/search_button.gif" width="48" height="25" border="0"></td>
             <td width="13"><img src="<?=$g4['path']?>/img/search_03.gif" width="13" height="25"></td>

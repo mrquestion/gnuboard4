@@ -1,3 +1,17 @@
+4.34.04 (11.05.27)
+    :   글복사, 이동시 코멘트 삭제, 추가가 있었다면 코멘트가 제대로 복사, 이동되지 않는 버그를 수정하였습니다.
+        ( 진서기님께서 이미 2009년에 알려주신 버그인데 패치가 늦었습니다. http://sir.co.kr/bbs/board.php?bo_table=g4_tiptech&wr_id=18926 )
+
+        bbs/move_update.php 에서
+
+        $sql2 = " select * from $write_table where wr_num = '$wr_num' order by wr_parent, wr_comment desc, wr_id ";
+
+        를
+
+        $sql2 = " select * from $write_table where wr_num = '$wr_num' order by wr_parent, wr_is_comment, wr_comment desc, wr_id ";
+
+        이렇게 수정하시면 됩니다.
+
 4.34.03 (11.05.17)
     :   [보안패치] SQL Injection 취약점에 대비한 코드 수정
         (한국인터넷진흥원을 통하여 과천고등학교 권혁님께서 취약점과 해결방안을 자세하게 알려주셨습니다.)

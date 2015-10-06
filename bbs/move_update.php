@@ -36,7 +36,8 @@ while ($row = sql_fetch_array($result))
 
         $next_wr_num = get_next_num($move_write_table);
 
-        $sql2 = " select * from $write_table where wr_num = '$wr_num' order by wr_parent, wr_comment desc, wr_id ";
+        //$sql2 = " select * from $write_table where wr_num = '$wr_num' order by wr_parent, wr_comment desc, wr_id ";
+        $sql2 = " select * from $write_table where wr_num = '$wr_num' order by wr_parent, wr_is_comment, wr_comment desc, wr_id ";
         $result2 = sql_query($sql2);
         while ($row2 = sql_fetch_array($result2)) 
         {

@@ -285,7 +285,7 @@ function setConfig () {
             useFullScreen   : true,
             usePageBreak    : false,
             allowedScript	: false,
-            allowedMaxImgSize : 0
+            allowedMaxImgSize : 1024 * 1024 * 5 // 5MB
     };
     
     if (this.config.editorPath == null) {
