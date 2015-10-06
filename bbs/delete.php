@@ -50,7 +50,9 @@ $row = sql_fetch($sql);
 if ($row[cnt] >= $board[bo_count_delete] && !$is_admin)
     alert("이 글과 관련된 코멘트가 존재하므로 삭제 할 수 없습니다.\\n\\n코멘트가 {$board[bo_count_delete]}건 이상 달린 원글은 삭제할 수 없습니다.");
 
-$sql = " select wr_id, mb_id, wr_comment from $write_table where wr_parent = '$write[wr_id]' order by wr_id ";
+// 나라오름님 수정 : 원글과 코멘트수가 정상적으로 업데이트 되지 않는 오류를 잡아 주셨습니다.
+//$sql = " select wr_id, mb_id, wr_comment from $write_table where wr_parent = '$write[wr_id]' order by wr_id ";
+$sql = " select wr_id, mb_id, wr_is_comment from $write_table where wr_parent = '$write[wr_id]' order by wr_id ";
 $result = sql_query($sql);
 while ($row = sql_fetch_array($result)) 
 {
