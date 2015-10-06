@@ -58,7 +58,7 @@ if ($stx)
     $op1 = "";
 
     // 검색어를 구분자로 나눈다. 여기서는 공백
-    $s = explode(" ", $stx);
+    $s = explode(" ", strip_tags($stx));
 
     // 검색필드를 구분자로 나눈다. 여기서는 +
     $field = explode("||", trim($sfl));
@@ -66,6 +66,7 @@ if ($stx)
     $str = "(";
     for ($i=0; $i<count($s); $i++) 
     {
+        if (trim($s[$i]) == "") continue;
         //$search_str = strtolower($s[$i]);
         $search_str = $s[$i];
         $str .= $op1;

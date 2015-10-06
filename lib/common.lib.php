@@ -529,7 +529,7 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
 
     // 검색어를 구분자로 나눈다. 여기서는 공백
     $s = array();
-    $s = explode(" ", $search_text);
+    $s = explode(" ", strip_tags($search_text));
 
     // 검색필드를 구분자로 나눈다. 여기서는 +
     //$field = array();

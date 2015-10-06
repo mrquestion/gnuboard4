@@ -88,7 +88,13 @@ else
 
 if ($w == "c") // 코멘트 입력
 {
+    /*
     if ($member[mb_point] + $board[bo_comment_point] < 0 && !$is_admin)
+        alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 코멘트쓰기(".number_format($board[bo_comment_point]).")가 불가합니다.\\n\\n포인트를 적립하신 후 다시 코멘트를 써 주십시오.");
+    */
+    // 코멘트쓰기 포인트설정시 회원의 포인트가 음수인 경우 코멘트를 쓰지 못하던 버그를 수정 (곱슬최씨님)
+    $tmp_point = ($member[mb_point] > 0) ? $member[mb_point] : 0;
+    if ($tmp_point + $board[bo_comment_point] < 0 && !$is_admin)
         alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 코멘트쓰기(".number_format($board[bo_comment_point]).")가 불가합니다.\\n\\n포인트를 적립하신 후 다시 코멘트를 써 주십시오.");
 
     // 코멘트 답변
@@ -222,42 +228,34 @@ if ($w == "c") // 코멘트 입력
         $content = ob_get_contents();
         ob_end_clean();
 
-        // 게시판 관리자에게 보내는 메일
-        if ($config[cf_email_wr_board_admin])
-            mailer($wr_name, $wr_email, $board_admin[mb_email], $subject, $content, 1);
-
-        // 그룹 관리자에게 보내는 메일
-        if ($group_admin[mb_email] != $board_admin[mb_email])
-        {
-            if ($config[cf_email_wr_group_admin])
-                mailer($wr_name, $wr_email, $group_admin[mb_email], $subject, $content, 1);
-        }
-        
+        $array_email = array();
+        // 게시판관리자에게 보내는 메일
+        if ($config[cf_email_wr_board_admin]) $array_email[] = $board_admin[mb_email];
+        // 게시판그룹관리자에게 보내는 메일
+        if ($config[cf_email_wr_group_admin]) $array_email[] = $group_admin[mb_email];
         // 최고관리자에게 보내는 메일
-        // 게시판관리자가 존재할 경우 최고관리자에게 메일이 두번씩 발송되는 문제 해결
-        if ($super_admin[mb_email] != $board_admin[mb_email] && $super_admin[mb_email] != $group_admin[mb_email])
-        {
-            if ($config[cf_email_wr_super_admin])
-                mailer($wr_name, $wr_email, $super_admin[mb_email], $subject, $content, 1);
-        }
+        if ($config[cf_email_wr_super_admin]) $array_email[] = $super_admin[mb_email];
 
-        // 답변 메일받기 (원게시자에게 보내는 메일)
-        //if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
-        if (strstr($wr[wr_option], 'mail') && $wr[wr_email] && $wr[wr_email] != $member[mb_email]) 
-        {
-            if ($config[cf_email_wr_write])
-                mailer($wr_name, $wr_email, $wr[wr_email], $subject, $content, 1);
+        // 옵션에 메일받기가 체크되어 있고, 게시자의 메일이 있다면
+        if (strstr($wr[wr_option], "mail") && $wr[wr_email]) {
+            // 원글 메일발송에 체크가 되어 있다면
+            if ($config[cf_email_wr_write]) $array_email[] = $wr[wr_email];
 
-            // 코멘트 쓴 모든이에게 메일 발송
-            if ($config[cf_email_wr_comment_all])
-            {
+            // 코멘트 쓴 모든이에게 메일 발송이 되어 있다면 (자신에게는 발송하지 않는다)
+            if ($config[cf_email_wr_comment_all]) {
                 $sql = " select distinct wr_email from $write_table
                           where wr_email not in ( '$wr[wr_email]', '$member[mb_email]', '' )
                             and wr_parent = '$wr_id' ";
                 $result = sql_query($sql);
                 while ($row=sql_fetch_array($result))
-                    mailer($wr_name, $wr_email, $row[wr_email], $subject, $content, 1);
+                    $array_email[] = $row[wr_email];
             }
+        }
+
+        // 중복된 메일 주소는 제거
+        $unique_email = array_unique($array_email);
+        for ($i=0; $i<count($unique_email); $i++) {
+            mailer($wr_name, $wr_email, $unique_email[$i], $subject, $content, 1);
         }
     }
 } 
