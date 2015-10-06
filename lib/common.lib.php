@@ -465,8 +465,25 @@ function conv_content($content, $html)
         $content = preg_replace("/(dy)(nsrc)/i", "&#100;&#121;$2", $content);
         $content = preg_replace("/(lo)(wsrc)/i", "&#108;&#111;$2", $content);
         $content = preg_replace("/(sc)(ript)/i", "&#115;&#99;$2", $content);
-        $content = preg_replace("/(ex)(pression)/i", "&#101&#120;$2", $content);
+        //$content = preg_replace("/(ex)(pression)/i", "&#101&#120;$2", $content);
         $content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "", $content);
+
+        // 이런 경우를 방지함 <IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
+        $content = preg_replace("#\/\*.*\*\/#iU", "", $content);
+
+        $pattern = "";
+        $pattern .= "(e|&#(x65|101);?)";
+        $pattern .= "(x|&#(x78|120);?)";
+        $pattern .= "(p|&#(x70|112);?)";
+        $pattern .= "(r|&#(x72|114);?)";
+        $pattern .= "(e|&#(x65|101);?)";
+        $pattern .= "(s|&#(x73|115);?)";
+        $pattern .= "(s|&#(x73|115);?)";
+        $pattern .= "(i|&#(x6a|105);?)";
+        $pattern .= "(o|&#(x6f|111);?)";
+        $pattern .= "(n|&#(x6e|110);?)";
+        $content = preg_replace("/".$pattern."/i", "__EXPRESSION__", $content);
+
         /*
         $content = preg_replace("/\#/", "&#35;", $content);
         $content = preg_replace("/\</", "&lt;", $content);
@@ -1411,12 +1428,16 @@ function bad_tag_convert($code)
     global $member, $is_admin;
 
     if ($is_admin && $member[mb_id] != $view[mb_id]) {
-        $code = preg_replace_callback("#(\<(embed|object)[^\>]*)\>(\<\/(embed|object)\>)?#i",
+        //$code = preg_replace_callback("#(\<(embed|object)[^\>]*)\>(\<\/(embed|object)\>)?#i",
+        // embed 또는 object 태그를 막지 않는 경우 필터링이 되도록 수정
+        $code = preg_replace_callback("#(\<(embed|object)[^\>]*)\>?(\<\/(embed|object)\>)?#i",
                     create_function('$matches', 'return "<div class=\"embedx\">보안문제로 인하여 관리자 아이디로는 embed 또는 object 태그를 볼 수 없습니다. 확인하시려면 관리권한이 없는 다른 아이디로 접속하세요.</div>";'),
                     $code);
     }
 
-    return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>/i", "&lt;$1$2$3&gt;", $code);
+    //return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>/i", "&lt;$1$2$3&gt;", $code);
+    // script 나 iframe 태그를 막지 않는 경우 필터링이 되도록 수정
+    return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>?/i", "&lt;$1$2$3&gt;", $code);
 }
 
 
