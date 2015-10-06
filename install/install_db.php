@@ -54,21 +54,22 @@ if (!$select_db) {
 <meta http-equiv="content-type" content="text/html; charset=<?=$g4[charset]?>">
 <title>±×´©º¸µå4 ¼³Ä¡ (3/3) - DB</title>
 <style type="text/css">
-<!--
 .body {
+    font-family: ±¼¸²;
 	font-size: 12px;
 }
 .box {
 	background-color: #FCFCFC;
-    color:#18307B;
+    color:#B19265;
+    font-family:±¼¸²;
 	font-size: 12px;
 }
 .nobox {
 	background-color: #FCFCFC;
     border-style:none;
+    font-family:±¼¸²;
     font-size: 12px;
 }
--->
 </style>
 </head>
 
@@ -251,7 +252,7 @@ $sql = " insert into $g4[config_table]
                 cf_use_copy_log = '1',
                 cf_login_point = '100',
                 cf_memo_send_point = '500',
-                cf_cut_name = '10',
+                cf_cut_name = '15',
                 cf_nick_modify = '60',
                 cf_new_skin = 'basic',
                 cf_new_rows = '15',

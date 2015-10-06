@@ -105,12 +105,8 @@ with (document.fmemoform) {
 
 function fmemoform_submit(f)
 {
-    if (typeof(f.wr_key) != 'undefined') {
-        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
-            alert('자동등록방지용 코드가 맞지 않습니다.');
-            f.wr_key.select();
-            return false;
-        }
+    if (!check_kcaptcha(f.wr_key)) {
+        return false;
     }
 
     document.getElementById("btn_submit").disabled = true;

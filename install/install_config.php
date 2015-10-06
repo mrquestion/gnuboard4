@@ -36,16 +36,15 @@ HEREDOC;
 <meta http-equiv="content-type" content="text/html; charset=<?=$g4[charset]?>">
 <title>그누보드4 설치 (2/3) - 설정</title>
 <style type="text/css">
-<!--
 .body {
+    font-family: 굴림;
 	font-size: 12px;
 }
 .box {
-    font-family:Tahoma;
+    font-family:굴림;
 	background-color: #D6D3CE;
 	font-size: 12px;
 }
--->
 </style>
 </head>
 

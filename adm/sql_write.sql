@@ -1,8 +1,3 @@
-## MySQL dump 10.11
-##
-## Host: localhost    Database: gnuboard4
-## ######################################################
-## Server version	5.0.37-log
 
 
 
@@ -10,9 +5,21 @@
 
 
 
-##
-## Table structure for table `__TABLE_NAME__`
-##
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 CREATE TABLE `__TABLE_NAME__` (
   `wr_id` int(11) NOT NULL auto_increment,
@@ -63,4 +70,8 @@ CREATE TABLE `__TABLE_NAME__` (
 
 
 
-## Dump completed on 2011-02-11 17:59:49
+
+
+
+
+

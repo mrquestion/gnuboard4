@@ -98,10 +98,12 @@ HEREDOC;
 <style type="text/css">
 <!--
 .body {
+    font-family: ±¼¸²;
 	font-size: 12px;
 }
 .box {
 	background-color: #D6D3CE;
+    font-family:±¼¸²;
 	font-size: 12px;
 }
 -->

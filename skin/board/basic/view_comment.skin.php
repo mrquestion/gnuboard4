@@ -230,37 +230,12 @@ function fviewcomment_submit(f)
         }
     }
 
-    if (typeof(f.wr_key) != 'undefined')
-    {
-        if (hex_md5(f.wr_key.value) != md5_norobot_key)
-        {
-            alert('자동등록방지용 글자가 순서대로 입력되지 않았습니다.');
-            f.wr_key.select();
-            f.wr_key.focus();
-            return false;
-        }
+    if (!check_kcaptcha(f.wr_key)) {
+        return false;
     }
 
     return true;
 }
-
-jQuery.fn.extend({
-    kcaptcha_load: function() {
-        $.ajax({
-            type: 'POST',
-            url: g4_path+'/'+g4_bbs+'/kcaptcha_session.php',
-            cache: false,
-            async: false,
-            success: function(text) {
-                $('#kcaptcha_image')
-                    .attr('src', g4_path+'/'+g4_bbs+'/kcaptcha_image.php?t=' + (new Date).getTime())
-                    .css('cursor', '')
-                    .attr('title', '');
-                md5_norobot_key = text;
-            }
-        });
-    }
-});
 
 function comment_box(comment_id, work)
 {
@@ -306,8 +281,6 @@ function comment_box(comment_id, work)
 
     if (typeof(wrestInitialized) != 'undefined')
         wrestInitialized();
-
-    jQuery(this).kcaptcha_load();
 }
 
 function comment_delete(url)

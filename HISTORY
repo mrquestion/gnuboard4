@@ -1,3 +1,58 @@
+4.33.05 (11.02.20)
+    :   [보안패치] 스팸글 등록으로 인한 자동등록방지 캡챠이미지 관련 코드 변경
+        
+        요즈음의 그누보드 스팸등록기는 캡챠이미지 생성시 나오는 md5 값을 유추하여 
+        원 데이터(숫자)값을 알아내는 방법을 사용합니다.
+        쉽게 말씀드리자면 다음과 같습니다. 
+        md5 DB를 아래와 같이 구축해 놓습니다.
+
+        왼쪽은 md5 해시키이며 오른쪽은 원 데이터 입니다.
+        c4ca4238a0b923820dcc509a6f75849b = 1
+        c81e728d9d4c2f636f067f89cc14862c = 2
+        eccbc87e4b5ce2fe28308fd9f2a7baf3 = 3
+        ...
+        52c69e3a57331081823331c4e69d3f2e = 999999
+        
+        가령 js/jquery.kcaptcha.js 의 md5_norobot_key 값이 52c69e3a57331081823331c4e69d3f2e 라면 
+        md5 DB에서 52c69e3a57331081823331c4e69d3f2e 값을 찾아내어 원 데이터 999999 값을 알아낸다는 것이죠.
+        (이것은 복호화가 아닙니다. 편법이죠. 어쨌든 뚫렸기 때문에 패치는 해야겠죠?)
+        그래서 이번 패치는 원 데이터에 추가로 PHPSESSID 값을 넣어서 md5 DB 에서 값을 찾아낼 수 없도록 만들었습니다.
+
+
+        js/jquery.kcaptcha.js
+        bbs/kcaptcha_session.php
+        skin/board/basic/write.skin.php
+        skin/board/basic/view_comment.skin.php
+        skin/member/basic/formmail.skin.php
+        skin/member/basic/memo_form.skin.php
+        skin/member/basic/password_lost.skin.php
+        skin/member/basic/register_form.skin.php
+
+
+        -------------------------------------------------------------------------
+            기타) 기존 스킨에 대한 패치방법
+        -------------------------------------------------------------------------
+            
+            if (typeof(f.wr_key) != 'undefined') {
+                if (hex_md5(f.wr_key.value) != md5_norobot_key) {
+                    alert('자동등록방지용 글자가 제대로 입력되지 않았습니다.');
+                    f.wr_key.select();
+                    f.wr_key.focus();
+                    return false;
+                }
+            }
+
+            위와 같은 코드를
+
+            if (!check_kcaptcha(f.wr_key)) {
+                return false;
+            }
+
+            이렇게 바꾸시면 됩니다.
+
+        -------------------------------------------------------------------------
+
+
 4.33.04 (11.02.12)
     :   4.33.03 에서 common.php 에 보안패치한 코드는 오류가 많아 4.33.02 로 되돌립니다.
     :   4.33.03 의 adm/member_form.php 에 패치한 코드에 오류가 있었습니다.

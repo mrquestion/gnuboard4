@@ -24,5 +24,6 @@ while(true){
 set_session("captcha_keystring", $keystring);
 $captcha = new KCAPTCHA();
 $captcha->setKeyString(get_session("captcha_keystring"));
-echo md5($captcha->getKeyString());
+//echo md5($captcha->getKeyString());
+echo md5($captcha->getKeyString().$_REQUEST['PHPSESSID']);
 ?>

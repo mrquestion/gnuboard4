@@ -58,9 +58,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <script type="text/javascript">
 function fpasswordlost_submit(f)
 {
-    if (hex_md5(f.wr_key.value) != md5_norobot_key) {
-        alert("자동등록방지용 글자가 제대로 입력되지 않았습니다.");
-        f.wr_key.select();
+    if (!check_kcaptcha(f.wr_key)) {
         return false;
     }
 

@@ -1,8 +1,3 @@
-## 마이에스큐엘 dump 10.11
-##
-## Host: localhost    Database: gnuboard4
-## ######################################################
-## Server version	5.0.37-log
 
 
 
@@ -10,11 +5,23 @@
 
 
 
-##
-## Table structure for table `$g4[auth_table]`
-##
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[auth_table]`;
+
+
 CREATE TABLE `$g4[auth_table]` (
   `mb_id` varchar(255) NOT NULL default '',
   `au_menu` varchar(20) NOT NULL default '',
@@ -22,11 +29,14 @@ CREATE TABLE `$g4[auth_table]` (
   PRIMARY KEY  (`mb_id`,`au_menu`)
 );
 
-##
-## Table structure for table `$g4[board_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[board_table]`;
+
+
 CREATE TABLE `$g4[board_table]` (
   `bo_table` varchar(20) NOT NULL default '',
   `gr_id` varchar(255) NOT NULL default '',
@@ -117,12 +127,15 @@ CREATE TABLE `$g4[board_table]` (
   PRIMARY KEY  (`bo_table`)
 );
 
-##
-## Table structure for table `$g4[board_file_table]`
-##
 
-DROP TABLE IF EXISTS `$g4[board_file_table]`;
-CREATE TABLE `$g4[board_file_table]` (
+
+
+
+
+DROP TABLE IF EXISTS `$g4[board_table]_file`;
+
+
+CREATE TABLE `$g4[board_table]_file` (
   `bo_table` varchar(20) NOT NULL default '',
   `wr_id` int(11) NOT NULL default '0',
   `bf_no` int(11) NOT NULL default '0',
@@ -138,12 +151,15 @@ CREATE TABLE `$g4[board_file_table]` (
   PRIMARY KEY  (`bo_table`,`wr_id`,`bf_no`)
 );
 
-##
-## Table structure for table `$g4[board_good_table]`
-##
 
-DROP TABLE IF EXISTS `$g4[board_good_table]`;
-CREATE TABLE `$g4[board_good_table]` (
+
+
+
+
+DROP TABLE IF EXISTS `$g4[board_table]_good`;
+
+
+CREATE TABLE `$g4[board_table]_good` (
   `bg_id` int(11) NOT NULL auto_increment,
   `bo_table` varchar(20) NOT NULL default '',
   `wr_id` int(11) NOT NULL default '0',
@@ -154,12 +170,15 @@ CREATE TABLE `$g4[board_good_table]` (
   UNIQUE KEY `fkey1` (`bo_table`,`wr_id`,`mb_id`)
 );
 
-##
-## Table structure for table `$g4[board_new_table]`
-##
 
-DROP TABLE IF EXISTS `$g4[board_new_table]`;
-CREATE TABLE `$g4[board_new_table]` (
+
+
+
+
+DROP TABLE IF EXISTS `$g4[board_table]_new`;
+
+
+CREATE TABLE `$g4[board_table]_new` (
   `bn_id` int(11) NOT NULL auto_increment,
   `bo_table` varchar(20) NOT NULL default '',
   `wr_id` int(11) NOT NULL default '0',
@@ -170,11 +189,14 @@ CREATE TABLE `$g4[board_new_table]` (
   KEY `mb_id` (`mb_id`)
 );
 
-##
-## Table structure for table `$g4[config_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[config_table]`;
+
+
 CREATE TABLE `$g4[config_table]` (
   `cf_title` varchar(255) NOT NULL default '',
   `cf_admin` varchar(255) NOT NULL default '',
@@ -277,11 +299,14 @@ CREATE TABLE `$g4[config_table]` (
   `cf_10` varchar(255) NOT NULL default ''
 );
 
-##
-## Table structure for table `$g4[group_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[group_table]`;
+
+
 CREATE TABLE `$g4[group_table]` (
   `gr_id` varchar(10) NOT NULL default '',
   `gr_subject` varchar(255) NOT NULL default '',
@@ -310,11 +335,14 @@ CREATE TABLE `$g4[group_table]` (
   PRIMARY KEY  (`gr_id`)
 );
 
-##
-## Table structure for table `$g4[group_member_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[group_member_table]`;
+
+
 CREATE TABLE `$g4[group_member_table]` (
   `gm_id` int(11) NOT NULL auto_increment,
   `gr_id` varchar(255) NOT NULL default '',
@@ -325,11 +353,14 @@ CREATE TABLE `$g4[group_member_table]` (
   KEY `mb_id` (`mb_id`)
 );
 
-##
-## Table structure for table `$g4[login_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[login_table]`;
+
+
 CREATE TABLE `$g4[login_table]` (
   `lo_ip` varchar(255) NOT NULL default '',
   `mb_id` varchar(255) NOT NULL default '',
@@ -339,11 +370,14 @@ CREATE TABLE `$g4[login_table]` (
   PRIMARY KEY  (`lo_ip`)
 );
 
-##
-## Table structure for table `$g4[mail_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[mail_table]`;
+
+
 CREATE TABLE `$g4[mail_table]` (
   `ma_id` int(11) NOT NULL auto_increment,
   `ma_subject` varchar(255) NOT NULL default '',
@@ -354,11 +388,14 @@ CREATE TABLE `$g4[mail_table]` (
   PRIMARY KEY  (`ma_id`)
 );
 
-##
-## Table structure for table `$g4[member_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[member_table]`;
+
+
 CREATE TABLE `$g4[member_table]` (
   `mb_no` int(11) NOT NULL auto_increment,
   `mb_id` varchar(255) NOT NULL default '',
@@ -414,11 +451,14 @@ CREATE TABLE `$g4[member_table]` (
   KEY `mb_datetime` (`mb_datetime`)
 );
 
-##
-## Table structure for table `$g4[memo_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[memo_table]`;
+
+
 CREATE TABLE `$g4[memo_table]` (
   `me_id` int(11) NOT NULL default '0',
   `me_recv_mb_id` varchar(255) NOT NULL default '',
@@ -429,11 +469,14 @@ CREATE TABLE `$g4[memo_table]` (
   PRIMARY KEY  (`me_id`)
 );
 
-##
-## Table structure for table `$g4[point_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[point_table]`;
+
+
 CREATE TABLE `$g4[point_table]` (
   `po_id` int(11) NOT NULL auto_increment,
   `mb_id` varchar(20) NOT NULL default '',
@@ -447,11 +490,14 @@ CREATE TABLE `$g4[point_table]` (
   KEY `index1` (`mb_id`,`po_rel_table`,`po_rel_id`,`po_rel_action`)
 );
 
-##
-## Table structure for table `$g4[poll_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[poll_table]`;
+
+
 CREATE TABLE `$g4[poll_table]` (
   `po_id` int(11) NOT NULL auto_increment,
   `po_subject` varchar(255) NOT NULL default '',
@@ -482,11 +528,14 @@ CREATE TABLE `$g4[poll_table]` (
   PRIMARY KEY  (`po_id`)
 );
 
-##
-## Table structure for table `$g4[poll_etc_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[poll_etc_table]`;
+
+
 CREATE TABLE `$g4[poll_etc_table]` (
   `pc_id` int(11) NOT NULL default '0',
   `po_id` int(11) NOT NULL default '0',
@@ -497,11 +546,14 @@ CREATE TABLE `$g4[poll_etc_table]` (
   PRIMARY KEY  (`pc_id`)
 );
 
-##
-## Table structure for table `$g4[popular_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[popular_table]`;
+
+
 CREATE TABLE `$g4[popular_table]` (
   `pp_id` int(11) NOT NULL auto_increment,
   `pp_word` varchar(50) NOT NULL default '',
@@ -511,11 +563,14 @@ CREATE TABLE `$g4[popular_table]` (
   UNIQUE KEY `index1` (`pp_date`,`pp_word`,`pp_ip`)
 );
 
-##
-## Table structure for table `$g4[scrap_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[scrap_table]`;
+
+
 CREATE TABLE `$g4[scrap_table]` (
   `ms_id` int(11) NOT NULL auto_increment,
   `mb_id` varchar(255) NOT NULL default '',
@@ -526,25 +581,14 @@ CREATE TABLE `$g4[scrap_table]` (
   KEY `mb_id` (`mb_id`)
 );
 
-##
-## Table structure for table `$g4[token_table]`
-##
 
-DROP TABLE IF EXISTS `$g4[token_table]`;
-CREATE TABLE `$g4[token_table]` (
-  `to_token` varchar(32) NOT NULL default '',
-  `to_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
-  `to_ip` varchar(255) NOT NULL default '',
-  PRIMARY KEY  (`to_token`),
-  KEY `to_datetime` (`to_datetime`),
-  KEY `to_ip` (`to_ip`)
-);
 
-##
-## Table structure for table `$g4[visit_table]`
-##
+
+
 
 DROP TABLE IF EXISTS `$g4[visit_table]`;
+
+
 CREATE TABLE `$g4[visit_table]` (
   `vi_id` int(11) NOT NULL default '0',
   `vi_ip` varchar(255) NOT NULL default '',
@@ -557,11 +601,14 @@ CREATE TABLE `$g4[visit_table]` (
   KEY `index2` (`vi_date`)
 );
 
-##
-## Table structure for table `$g4[visit_sum_table]`
-##
+
+
+
+
 
 DROP TABLE IF EXISTS `$g4[visit_sum_table]`;
+
+
 CREATE TABLE `$g4[visit_sum_table]` (
   `vs_date` date NOT NULL default '0000-00-00',
   `vs_count` int(11) NOT NULL default '0',
@@ -575,4 +622,8 @@ CREATE TABLE `$g4[visit_sum_table]` (
 
 
 
-## Dump completed on 2011-02-11 17:59:49
+
+
+
+
+
