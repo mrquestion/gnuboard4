@@ -72,20 +72,21 @@ if ($is_nogood) $colspan++;
         echo $list[$i][icon_reply];
         echo "<a href='{$list[$i][href]}'>";
         if ($list[$i][is_notice])
-            echo "<font color='#AF6BE3'><strong>{$list[$i][subject]}</strong></font>";
+            //echo "<font color='#AF6BE3'><strong>{$list[$i][subject]}</strong></font>";
+            echo "<font color='#333333'><strong>{$list[$i][subject]}</strong></font>";
         else
         {
             $style1 = $style2 = "";
-            if ($list[$i][icon_new]) // 최신글은 검정
-                $style1 = "color:#112222;";
-            if (!$list[$i][comment_cnt]) // 코멘트 없는것만 굵게
-                $style2 = "font-weight:bold;";
+            // 최신글은 검정
+            //if ($list[$i][icon_new]) $style1 = "color:#222222;";
+            // 코멘트 없는것만 굵게
+            //if (!$list[$i][comment_cnt]) $style2 = "text-decoration:underline;";
             echo "<span style='$style1 $style2'>{$list[$i][subject]}</span>";
         }
         echo "</a>";
 
         if ($list[$i][comment_cnt]) 
-            echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-size:7pt;'>{$list[$i][comment_cnt]}</span></a>";
+            echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-size:7pt;color:#ff6600;'>{$list[$i][comment_cnt]}</span></a>";
 
         // if ($list[$i]['link']['count']) { echo "[{$list[$i]['link']['count']}]"; }
         // if ($list[$i]['file']['count']) { echo "<{$list[$i]['file']['count']}>"; }

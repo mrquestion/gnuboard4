@@ -3,6 +3,8 @@ include_once("./_common.php");
 
 //$wr = sql_fetch(" select * from $write_table where wr_id = '$wr_id' ");
 
+@include_once("$board_skin_path/delete.head.skin.php");
+
 if ($is_admin == "super") // 최고관리자 통과
     ;
 else if ($is_admin == "group") { // 그룹관리자
@@ -110,6 +112,8 @@ sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table 
 // 글숫자 감소
 if ($count_write > 0 || $count_comment > 0)
     sql_query(" update $g4[board_table] set bo_count_write = bo_count_write - '$count_write', bo_count_comment = bo_count_comment - '$count_comment' where bo_table = '$bo_table' ");
+
+@include_once("$board_skin_path/delete.tail.skin.php");
 
 goto_url("./board.php?bo_table=$bo_table&page=$page" . $qstr);
 ?>

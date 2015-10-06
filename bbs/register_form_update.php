@@ -52,6 +52,13 @@ if ($w == '' || $w == 'u')
     }
     else
     {
+        // 자바스크립트로 정보변경이 가능한 버그 수정
+        // 별명수정일이 지나지 않았다면
+        if ($member[mb_nick_date] > date("Y-m-d", $g4[server_time] - ($config[cf_nick_modify] * 86400)))
+            $mb_nick = $member[mb_nick];
+        // 회원정보의 메일을 이전 메일로 옮기고 아래에서 비교함
+        $old_email = $member[mb_email];
+
         $sql = " select count(*) as cnt from $g4[member_table] where mb_nick = '$mb_nick' and mb_id <> '$mb_id' ";
         $row = sql_fetch($sql);
         if ($row[cnt])
@@ -231,10 +238,9 @@ else if ($w == "u")
     if ($old_email != $mb_email && $config[cf_use_email_certify])
         $sql_email_certify = " , mb_email_certify = '' ";
 
-
+                // set mb_name         = '$mb_name', 제거
     $sql = " update $g4[member_table]
-                set mb_name         = '$mb_name',
-                    mb_nick         = '$mb_nick',
+                set mb_nick         = '$mb_nick',
                     mb_password_q   = '$mb_password_q',
                     mb_password_a   = '$mb_password_a',
                     mb_mailling     = '$mb_mailling',

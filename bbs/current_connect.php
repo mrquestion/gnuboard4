@@ -16,7 +16,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $list[$i] = $row;
 
     if ($row[mb_id])
-        $list[$i][name] = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
+        //$list[$i][name] = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
+        $list[$i][name] = get_sideview($row[mb_id], cut_str($row[mb_nick], $config[cf_cut_name]), $row[mb_email], $row[mb_homepage]);
     else
     {
         if ($is_admin)

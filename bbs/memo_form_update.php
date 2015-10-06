@@ -21,7 +21,7 @@ for ($i=0; $i<count($tmp_list); $i++) {
     }
 }
 
-if ($msg)
+if ($msg && !$is_admin)
     alert("회원아이디 \'".$msg."\' 은(는) 존재(또는 정보공개)하지 않는 회원아이디 이거나 탈퇴, 접근차단된 회원아이디 입니다.\\n\\n쪽지를 발송하지 않았습니다.");
 
 for ($i=0; $i<count($mb_list); $i++) {

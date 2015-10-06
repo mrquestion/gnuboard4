@@ -124,6 +124,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </TD>
         </TR>
         <? } else { ?>
+        <input type=hidden name="mb_nick_default" value='<?=$member[mb_nick]?>'>
         <input type=hidden name="mb_nick" value="<?=$member[mb_nick]?>">
         <? } ?>
 

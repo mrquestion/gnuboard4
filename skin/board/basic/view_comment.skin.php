@@ -22,7 +22,9 @@ for ($i=0; $i<count($list); $i++) {
     <td width='100%'>
         <table width=100% cellpadding=0 cellspacing=0>
         <tr>
+            <!-- 이름, 아이피 -->
             <td><strong><?=$list[$i][name]?><? if ($is_ip_view) { echo "&nbsp;({$list[$i][ip]})"; } ?></strong></td>
+            <!-- 링크 버튼, 코멘트 작성시간 -->
             <td align=right>
                 <? if ($list[$i][is_reply]) { echo "<a href=\"javascript:comment_box('{$comment_id}', 'c');\"><img src='$board_skin_path/img/btn_comment_reply.gif' border=0 align=absmiddle></a> "; } ?>
                 <? if ($list[$i][is_edit]) { echo "<a href=\"javascript:comment_box('{$comment_id}', 'cu');\"><img src='$board_skin_path/img/btn_comment_update.gif' border=0 align=absmiddle></a> "; } ?>

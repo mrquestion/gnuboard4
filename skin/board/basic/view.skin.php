@@ -40,6 +40,7 @@ $link_buttons = ob_get_contents();
 ob_end_flush();
 ?>
 
+<!-- 제목, 글쓴이, 날짜, 조회, 추천, 비추천 -->
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td height=2 bgcolor=#B0ADF5></td></tr> 
 <tr><td height=30 bgcolor=#F8F8F9 style="padding:5 0 5 0;">&nbsp;&nbsp;<strong><? if ($is_category) { echo ($category_name ? "[$view[ca_name]] " : ""); } ?><?=$view[subject]?></strong></td></tr>
@@ -102,6 +103,7 @@ for ($i=1; $i<=$g4[link_count]; $i++)
         }
         ?>
 
+        <!-- 내용 출력 -->
         <span class="ct lh"><?=$view[content];?></span>
         
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
@@ -112,6 +114,7 @@ for ($i=1; $i<=$g4[link_count]; $i++)
 </table><br>
 
 <?
+// 코멘트 입출력
 include_once("./view_comment.php");
 ?>
 

@@ -71,7 +71,7 @@ include_once ("./admin.head.php");
 <table width=100% cellpadding=0 cellspacing=0 border=0>
 <form name=fboardform method=post action="javascript:fboardform_submit(document.fboardform)" enctype="multipart/form-data">
 <input type=hidden name="w"    value="<?=$w?>">
-<input type=hidden name="Sfl"  value="<?=$sfl?>">
+<input type=hidden name="sfl"  value="<?=$sfl?>">
 <input type=hidden name="stx"  value="<?=$stx?>">
 <input type=hidden name="sst"  value="<?=$sst?>">
 <input type=hidden name="sod"  value="<?=$sod?>">
@@ -256,7 +256,7 @@ include_once ("./admin.head.php");
     <td>분류 </td>
     <td><input type=text class=ed name=bo_category_list style='width:80%;' value='<?=get_text($board[bo_category_list])?>'>
         <input type=checkbox name=bo_use_category value='1' <?=$board[bo_use_category]?'checked':'';?>><b>사용</b>
-        <?=help("분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변) 첫자로 #은 입력하지 마세요. (예: #질문|#답변 [X])")?>
+        <?=help("분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변) 첫자로 #은 입력하지 마세요. (예: #질문|#답변 [X])", -120)?>
     </td>
 </tr>
 

@@ -9,6 +9,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 </script>
 
 <form name="fwrite" method="post" action="javascript:fwrite_check(document.fwrite);" enctype="multipart/form-data" style="margin:0px;">
+<input type=hidden name=null> 
 <input type=hidden name=w        value="<?=$w?>">
 <input type=hidden name=bo_table value="<?=$bo_table?>">
 <input type=hidden name=wr_id    value="<?=$wr_id?>">
@@ -23,6 +24,8 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <table width="<?=$width?>" align=center cellpadding=0 cellspacing=0><tr><td>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
+<colgroup width=100>
+<colgroup width=''>
 <tr><td colspan=2 height=2 bgcolor=#b0adf5></td></tr>
 <tr><td style='padding-left:20px' colspan=2 height=38 bgcolor=#f8f8f9><strong><?=$title_msg?></strong></td></tr>
 
@@ -56,7 +59,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 <? if ($is_notice || $is_html || $is_secret || $is_mail) { ?>
 <tr>
-    <td width=120 style='padding-left:20px; height:30px;'>· 옵션</td>
+    <td style='padding-left:20px; height:30px;'>· 옵션</td>
     <td><? if ($is_notice) { ?><input type=checkbox name=notice value="1" <?=$notice_checked?>>공지&nbsp;<? } ?>
         <? if ($is_html) { ?><input onclick="html_auto_br(this);" type=checkbox value="<?=$html_value?>" name="html" <?=$html_checked?>><span class=w_title>html</span>&nbsp;<? } ?>
         <? if ($is_secret) { ?><input type=checkbox value="secret" name="secret" <?=$secret_checked?>><span class=w_title>비밀글</span>&nbsp;<? } ?>
