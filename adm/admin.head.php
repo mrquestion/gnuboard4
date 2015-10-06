@@ -94,9 +94,47 @@ a:hover { text-decoration:underline; color:<?=$css_color?>; }
 
 .w99 { width:99%; }
 .ht { height:30px; }
+
+#csshelp1 { border:0px; background:#FFFFFF; padding:6px; }
+#csshelp2 { border:2px solid #BDBEC6; padding:0px; }
+#csshelp3 { background:#F9F9F9; padding:6px; width:200px; color:#222222; line-height:120%; text-align:left; }
 </style>
 
 <script language="JavaScript">
+if (!g4_is_ie) document.captureEvents(Event.MOUSEMOVE)
+document.onmousemove = getMouseXY;
+var tempX = 0;
+var tempY = 0;
+var prevdiv = null;
+var timerID = null;
+
+function getMouseXY(e) 
+{
+    if (g4_is_ie) { // grab the x-y pos.s if browser is IE
+        tempX = event.clientX + document.body.scrollLeft;
+        tempY = event.clientY + document.body.scrollTop;
+    } else {  // grab the x-y pos.s if browser is NS
+        tempX = e.pageX;
+        tempY = e.pageY;
+    }  
+
+    if (tempX < 0) {tempX = 0;}
+    if (tempY < 0) {tempY = 0;}  
+
+    return true;
+}
+
+function help(name, left, top)
+{
+    menu(name);
+
+    submenu = eval(name+".style");
+    submenu.posLeft = tempX - 50 + left;
+    submenu.posTop  = tempY + 15 + top;
+
+    //selectBoxHidden(name);
+}
+
 // TEXTAREA 사이즈 변경
 function textarea_size(fld, size)
 {

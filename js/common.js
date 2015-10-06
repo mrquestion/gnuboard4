@@ -412,6 +412,8 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
         }
         // 숫자를 출력
         document.getElementById(target).innerHTML = cnt;
+
+        return cnt;
     }
 
     // 브라우저에서 오브젝트의 왼쪽 좌표

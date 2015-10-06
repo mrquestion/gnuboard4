@@ -212,6 +212,24 @@ function sub_menu2($m, $title, $link="", $target='_parent')
     $smenu2[$m[1]][$m[2]] = TRUE; // 서브메뉴
 }
 
+function help($help="", $left=0, $top=0)
+{
+    global $admin_dir;
+    static $idx = 0;
+
+    $idx++;
+
+    $help = preg_replace("/\n/", "<br>", $help);
+    
+    $str  = "<img src='./img/icon_help.gif' border=0 width=15 height=15 align=absmiddle onclick=\"help('help$idx', $left, $top);\" style='cursor:hand;'>";
+    //$str .= "<div id='help$idx' style='position:absolute; top:0px; left:0px; display:none;'>";
+    $str .= "<div id='help$idx' style='position:absolute; display:none;'>";
+    $str .= "<div id='csshelp1'><div id='csshelp2'><div id='csshelp3'>$help</div></div></div>";
+    $str .= "</div>";
+
+    return $str;
+}
+
 // 접근 권한 검사
 if (!$member[mb_id])
     alert("로그인 하십시오.", "$g4[bbs_path]/login.php?url=" . urlencode("$_SERVER[PHP_SELF]?w=$w&mb_id=$mb_id"));

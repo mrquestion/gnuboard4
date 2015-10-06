@@ -73,7 +73,7 @@ $from_record = ($page - 1) * $rows; // 시작 열을 구함
                     echo <<<HEREDOC
                     <tr height=25 bgcolor="#F6F6F6" align="center"> 
                         <td height="24">$row[po_datetime]</td>
-                        <td align="left" title='$row[po_content]'><nobr style='display:block; overflow:hidden; width:200px;'>&nbsp;$row[po_content]</a></td>
+                        <td align="left" title='$row[po_content]'><nobr style='display:block; overflow:hidden; width:250px;'>&nbsp;$row[po_content]</a></td>
                         <td align=right>{$point1}&nbsp;</td>
                         <td align=right>{$point2}&nbsp;</td>
                     </tr>

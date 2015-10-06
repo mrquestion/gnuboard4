@@ -31,7 +31,6 @@ while ($row=sql_fetch_array($result))
     // 회원자료 삭제
     member_delete($row[mb_id]);
 }
-sql_query(" OPTIMIZE TABLE `$g4[member_table]` ");
 
 
 $g4[title] = "기본환경설정";

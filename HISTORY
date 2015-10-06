@@ -1,3 +1,15 @@
+4.00.14 (05.06.20)
+    :   쪽지 답장하기에서 이전글 보여주기
+    :   게시판복사시 글쓴이 사이드뷰 필드 복사되지 않던것을 수정
+    :   관리자페이지에서 사용할 help() 함수 및 스타일 시트 추가
+    :   js/common.js 의 check_byte() 함수에서 cnt 값 return
+
+        bbs/memo_form.php
+        adm/board_copy_update.php
+        adm/_common.php
+        adm/admin.head.php
+        js/common.js
+
 4.00.13 (05.06.18)
     :   공지사항 제대로 체크되지 않던 오류를 수정
     :   실명 사용일때 코멘트에 별명으로 입력되던 오류를 수정

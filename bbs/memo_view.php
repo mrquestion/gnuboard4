@@ -75,7 +75,7 @@ $mb = get_member($memo["me_{$unkind}_mb_id"]);
         <tr> 
             <td width="540" height="150" align="center" valign="middle" bgcolor="#F6F6F6"><table width="500" height="110" border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td valign="top"><?=conv_content($memo[me_memo], 0)?></td>
+                        <td valign="top" style='padding-top:10px; padding-bottom:10px;'><?=conv_content($memo[me_memo], 0)?></td>
                     </tr>
                 </table></td>
         </tr>
