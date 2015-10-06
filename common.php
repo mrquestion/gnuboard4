@@ -91,9 +91,10 @@ if( !get_magic_quotes_gpc() )
 	}
 }
 
-if ($_GET['g4_path'] || $_POST['g4_path']) {
+if ($_GET['g4_path'] || $_POST['g4_path'] || $_COOKIE['g4_path']) {
     unset($_GET['g4_path']);
     unset($_POST['g4_path']);
+    unset($_COOKIE['g4_path']);
     unset($g4_path);
 }
 
