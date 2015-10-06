@@ -1,3 +1,41 @@
+4.35.01 (2012.06.13)
+    :   4.35.00 에서 cookie_domain 의 설정등이 누락되어 서브도메인간의 세션 공유가 되지 않던 오류를 수정 (cosy님께서 알려주셨습니다.)
+    :   세션 데이터의 유지시간이 기본 1440초(24분)으로 짧아 10800초(3시간) 동안 유지되도록 수정
+    :   세션 테이블 생성시 날짜시간에 인덱스를 추가
+
+        common.php 를 아래와 같이 수정하세요.
+
+            //-------------------------------------------
+            // SESSION 설정
+            //-------------------------------------------
+            include_once("$g4[path]/lib/dbsession.lib.php");
+            $session = new g4_dbsession();
+            session_set_save_handler(array($session, 'open'), 
+                                     array($session, 'close'),
+                                     array($session, 'read'),
+                                     array($session, 'write'),
+                                     array($session, 'destroy'),
+                                     array($session, 'gc'));
+
+            session_set_cookie_params(0, "/");
+            ini_set("session.cookie_domain", $g4['cookie_domain']);
+            ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분) 180분 == 3시간
+            ini_set("session.gc_maxlifetime", 10800); // session data의 garbage collection 존재 기간을 지정 (초) 10800초 == 3시간
+            ini_set("session.use_trans_sid", 0);    // PHPSESSID를 자동으로 넘기지 않음
+            ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함 (해뜰녘님께서 알려주셨습니다.)
+
+            if (isset($SESSION_CACHE_LIMITER))
+                @session_cache_limiter($SESSION_CACHE_LIMITER);
+            else
+                @session_cache_limiter("no-cache, must-revalidate");
+
+            @session_start();
+            //-------------------------------------------
+
+        lib/dbsession.lib.php 를 아래와 같이 수정하세요.
+
+            $sql = " CREATE TABLE `$g4[session_table]` (`ss_id` CHAR(32) NOT NULL, `ss_data` TEXT NOT NULL, `ss_datetime` DATETIME NOT NULL, PRIMARY KEY (`ss_id`), KEY `ss_datetime` (`ss_datetime`)) ENGINE = MYISAM ";
+     
 4.35.00 (2012.06.12)
     :   SESSION Data 가 노출되지 않도록 DB SESSION 사용 (HSEngine 님께서 알려 주셨습니다.)
     :   $_SERVER['PHP_SELF'] 변수를 사용한 XSS 취약점 수정

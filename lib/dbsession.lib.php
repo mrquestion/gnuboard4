@@ -26,7 +26,7 @@ class g4_dbsession {
         // 세션 테이블이 없다면
         if (mysql_errno() == 1146) {
             // 세션 테이블을 생성한다.
-            $sql = " CREATE TABLE `$g4[session_table]` ( `ss_id` CHAR(32) NOT NULL , `ss_data` TEXT NOT NULL , `ss_datetime` DATETIME NOT NULL , PRIMARY KEY (`ss_id`) ) ENGINE = MYISAM ";
+            $sql = " CREATE TABLE `$g4[session_table]` (`ss_id` CHAR(32) NOT NULL, `ss_data` TEXT NOT NULL, `ss_datetime` DATETIME NOT NULL, PRIMARY KEY (`ss_id`), KEY `ss_datetime` (`ss_datetime`)) ENGINE = MYISAM ";
             sql_query($sql, true);
             // 세션 디렉토리와 파일을 모두 삭제한다.
             foreach (glob("$g4[path]/data/session/*") as $filename) {

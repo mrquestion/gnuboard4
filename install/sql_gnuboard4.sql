@@ -593,7 +593,8 @@ CREATE TABLE `$g4[session_table]` (
   `ss_id` char(32) NOT NULL,
   `ss_data` text NOT NULL,
   `ss_datetime` datetime NOT NULL,
-  PRIMARY KEY  (`ss_id`)
+  PRIMARY KEY  (`ss_id`),
+  KEY `ss_datetime` (`ss_datetime`)
 );
 
 

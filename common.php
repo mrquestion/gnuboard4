@@ -287,6 +287,10 @@ session_set_save_handler(array($session, 'open'),
                          array($session, 'destroy'),
                          array($session, 'gc'));
 
+session_set_cookie_params(0, "/");
+ini_set("session.cookie_domain", $g4['cookie_domain']);
+ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분) 180분 == 3시간
+ini_set("session.gc_maxlifetime", 10800); // session data의 garbage collection 존재 기간을 지정 (초) 10800초 == 3시간
 ini_set("session.use_trans_sid", 0);    // PHPSESSID를 자동으로 넘기지 않음
 ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함 (해뜰녘님께서 알려주셨습니다.)
 
