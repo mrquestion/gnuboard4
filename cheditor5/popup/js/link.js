@@ -6,7 +6,6 @@
 // EMail: support@chcode.com
 // Copyright (c) 1997-2010 CHSOFT
 // ================================================================
-// ÇÑ±Û
 var oEditor = null;
 var button = [	{ alt : "", img : 'submit.gif', cmd : returnSelected },              
           		{ alt : "", img : 'cancel.gif', cmd : popupClose } ];

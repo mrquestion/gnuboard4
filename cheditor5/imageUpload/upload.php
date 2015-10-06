@@ -15,11 +15,26 @@ require_once("_config.php");
 $tempfile = $_FILES['file']['tmp_name'];
 $filename = $_FILES['file']['name'];
 
+//if (preg_match("/\.(php|htm|inc)/i", $filename)) die("-ERR: File Format");
+
 // demo.html 파일에서 설정한 SESSID 값입니다.
 $sessid   = $_POST['sessid'];
 
 // 저장 파일 이름
 // $savefile = SAVE_DIR . '/' . $_FILES['file']['name'];
+
+$pos = strrpos($filename, '.');
+$ext = strtolower(substr($filename, $pos, strlen($filename)));
+
+switch ($ext) {
+case '.gif' :
+case '.png' :
+case '.jpg' :
+case '.jpeg' :
+	break;
+default :
+	die("-ERR: File Format!");
+}
 
 $pos = strrpos($filename, '.');
 $ext = substr($filename, $pos, strlen($filename));

@@ -1,12 +1,9 @@
 // ================================================================
-//                       CHEditor 5.0
+//                       CHEditor 5
 // ----------------------------------------------------------------
-// Author: Na Chang Ho
 // Homepage: http://www.chcode.com
-// EMail: support@chcode.com
-// Copyright (c) 1997-2010 CHSOFT
+// Copyright (c) 1997-2011 CHSOFT
 // ================================================================
-// ÇÑ±Û
 var operaBrowser = false;
 if (navigator.userAgent.indexOf('Opera') >= 0)
 	operaBrowser = 1;
@@ -258,6 +255,11 @@ function startUpload(count) {
 
 function uploadComplete(fileData) {
 // ----------------------------------------------------------------------------------
+	if (/^-ERR/.test(fileData)) {
+		alert(fileData);
+		popupClose();
+	}
+
 	if (imageCompleted >= uploadMaxNumber)
 		return;
 	
@@ -620,6 +622,7 @@ function dragDropEnd() {
 		}
 
 		if (chkObj.firstChild.firstChild == null) {
+			reOrder();
 			return;
 		}
 

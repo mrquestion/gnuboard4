@@ -1,3 +1,30 @@
+4.34.05 (11.06.18)
+    :   [보안패치] CHSOFT 대표 나창호님께서 도움 주셨습니다. ( CHEDITOR 제작자 )
+        GIF Exploit 이라고 불리우는 이 공격은 이미지 파일에 PHP 코드를 심어 서버에 업로드 합니다.
+        CHEDITOR5 버전에만 해당됩니다.
+
+        참고) 심각한 사안이므로 되도록 빨리 패치해 주시는 것이 좋습니다.
+
+      
+        아래 2개 파일을 교체해 주시기 바랍니다.
+
+        cheditor5/imageUpload/upload.php
+        cheditor5/popup/js/image.js
+
+
+        추가사항) 
+        data 폴더에서 php 나 html 파일을 실행하지 못하게 하려면 아래의 파일을 data 폴더에 만들어 놓으시기 바랍니다.
+        data 폴더에 하나만 만들어 놓으시면 됩니다.
+
+        파일명 : .htaccess (파일명 앞에 점이 붙습니다. 숨김 기능을 합니다.)
+
+        내용 : 
+
+        <FilesMatch "\.([Pp][Hh][Pp]|[Hh][Tt][Mm][Ll]?|[Ii][Nn][Cc]|[Cc][Gg][Ii]|[Pp][Ll])"> 
+            Order allow,deny 
+            Deny from all
+        </FilesMatch>
+
 4.34.04 (11.05.27)
     :   글복사, 이동시 코멘트 삭제, 추가가 있었다면 코멘트가 제대로 복사, 이동되지 않는 버그를 수정하였습니다.
         ( 진서기님께서 이미 2009년에 알려주신 버그인데 패치가 늦었습니다. http://sir.co.kr/bbs/board.php?bo_table=g4_tiptech&wr_id=18926 )

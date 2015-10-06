@@ -3,7 +3,6 @@
 //                    CHEditor Image Util
 //
 ////////////////////////////////////////////////////////////////////////
-// ÇÑ±Û
 function addCaption (oImgElem) {
   if( oImgElem.parentNode && oImgElem.parentNode.className=="imgblock")
     return;

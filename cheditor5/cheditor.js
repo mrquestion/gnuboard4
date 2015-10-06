@@ -105,7 +105,8 @@ var GB = {
                 	
     selection	: { SELECTION_NONE				: 1,
                 	SELECTION_TEXT				: 2,
-                	SELECTION_ELEMENT			: 3 }
+                	SELECTION_ELEMENT			: 3 },
+    ctrlKey     : false
 };
 
 function URI (uri) {
@@ -235,6 +236,8 @@ function setConfig () {
             imgReSize       : true,
             includeHostname : true,
             ieEnterMode     : 'div', // [css, div, br, default]
+            keyUpCount      : 0,     // 키가 몇번 눌러졌는지를 저장    
+            copyPaste       : false, // 복사 붙여넣기가 있었나?
 
             // 버튼 사용 유무
             useSource       : true,
@@ -1736,7 +1739,10 @@ setEditorEvent : function () {
 	
 	var keyPress = function() { self.doOnKeyPress(); };
 	self.addEvent(self.doc, "keypress", keyPress);
-	
+
+ 	var keyUp = function() { self.doOnKeyUp(); };
+	self.addEvent(self.doc, "keyup", keyUp);
+
     var editorEvent = function() { self.doEditorEvent(); };
     self.addEvent(self.doc, "mouseup", editorEvent);
 
@@ -2501,6 +2507,8 @@ onKeyPressToolbarUpdate : function () {
 
 doOnArrowKeyPress : function (event) {
 	var key = event.keyCode;
+    if (key == 17) GB.ctrlKey = true;
+    if (GB.ctrlKey && key == 86) this.config.copyPaste = true;
 	if (key != 8 && (key < 33 || key > 40)) return;
 	this.onKeyPressToolbarUpdate();
 },
@@ -2526,6 +2534,10 @@ doOnKeyPress : function () {
     }
 
 	this.onKeyPressToolbarUpdate();
+},
+
+doOnKeyUp : function () {
+    this.config.keyUpCount++;
 },
 
 setWinPosition : function (oWin, oWinWidth) {

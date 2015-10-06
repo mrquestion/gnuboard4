@@ -1,4 +1,4 @@
-// ÇÑ±Û
+
 var cheditorPath = "../";
 
 var lightBoxCssPath = cheditorPath + "css/imageUtil.css"; 

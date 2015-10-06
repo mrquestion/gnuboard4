@@ -5,8 +5,8 @@
 // Homepage: http://www.chcode.com
 // Copyright (c) 1997-2009 CHSOFT
 // ================================================================
-// 한글
-// lightbox 디렉토리 경로 설정
+
+ // lightbox 디렉토리 경로 설정
 var lightBoxPath = "./";
 
 var lightBoxCssPath = lightBoxPath + "css/imageUtil.css";

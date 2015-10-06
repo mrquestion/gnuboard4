@@ -5,7 +5,6 @@
 // Homepage: http://www.chcode.com
 // Copyright (c) 1997-2009 CHSOFT
 // ================================================================
-// ÇÑ±Û
 var oEditor = null;
 var button = [ { alt : "", img : 'cancel.gif', cmd : popupClose } ];
 

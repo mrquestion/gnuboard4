@@ -6,7 +6,6 @@
 // EMail: support@chcode.com
 // Copyright (c) 1997-2010 CHSOFT
 // ================================================================
-// ÇÑ±Û
 function Dialog(oEditor) {
 	this.oEditor = oEditor;
 }

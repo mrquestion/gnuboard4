@@ -6,7 +6,6 @@
 // EMail: support@chcode.com
 // Copyright (c) 1997-2010 CHSOFT
 // ================================================================
-// ÇÑ±Û
 var button = [
 	{ alt : "", img : 'play.gif', cmd : play },
 	{ alt : "", img : 'submit.gif', cmd : doSubmit },              

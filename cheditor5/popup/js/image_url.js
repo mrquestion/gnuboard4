@@ -6,7 +6,6 @@
 // EMail: support@chcode.com
 // Copyright (c) 1997-2010 CHSOFT
 // ================================================================
-// ÇÑ±Û
 var AppWidth = "250";
 var AppHeight = "175";
 var AppID = "cheditorPreview";

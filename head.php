@@ -36,7 +36,7 @@ $table_width = 1004;
     <!-- 로고 -->
     <td width="220"><a href="<?=$g4['path']?>/"><img src="<?=$g4['path']?>/img/logo.jpg" width="220" height="57" border="0"></a></td>
     <td>
-        <table width=100% border=0 cellpadding=0 cellspacing=0>
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td>&nbsp;</td>
         </tr>
@@ -57,7 +57,7 @@ $table_width = 1004;
             <td width="78"><a href="<?=$g4['bbs_path']?>/logout.php"><img src="<?=$g4['path']?>/img/top_m04.gif" width="78" height="31" border="0"></a></td>
             <td width="78"><a href="<?=$g4['bbs_path']?>/member_confirm.php?url=register_form.php"><img src="<?=$g4['path']?>/img/top_m05.gif" width="78" height="31" border="0"></a></td>
             <? } ?>
-            
+
             <!-- 최근게시물 버튼 -->
             <td width="78"><a href="<?=$g4['bbs_path']?>/new.php"><img src="<?=$g4['path']?>/img/top_m06.gif" width="78" height="31" border="0"></a></td>
 
