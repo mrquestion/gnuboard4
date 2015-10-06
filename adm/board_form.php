@@ -229,7 +229,7 @@ include_once ("./admin.head.php");
 <tr class='ht'>
     <td style="<?=b_draw('top', '#74A3C8') ?><?=b_draw('left', '#74A3C8') ?> ">그룹 동일 적용</td>
     <td style="<?=b_draw('top', '#74A3C8') ?><?=b_draw('right', '#74A3C8') ?>" colspan=3>
-        <input type=checkbox name=group_same3_1 value='1'>같은 그룹에 속한 게시판을 이 테두리안의 옵션으로 동일하게 적용합니다.</td>
+        <input type=checkbox name=group_same3_2 value='1'>같은 그룹에 속한 게시판을 이 테두리안의 옵션으로 동일하게 적용합니다.</td>
 </tr>
 <tr class='ht'>
     <td style="<?=b_draw('left', '#74A3C8') ?>">사용금지 태그</td>

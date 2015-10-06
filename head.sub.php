@@ -21,7 +21,9 @@ if ($member[mb_memo_call]) {
 sql_query(" delete from $g4[login_table] where lo_datetime < '".date("Y-m-d H:i:s", $g4[server_time] - (60 * $config[cf_login_minutes]))."' ");
 
 //$lo_location = get_text($g4[title]);
-$lo_location = $g4[title];
+//$lo_location = $g4[title];
+// 게시판 제목에 ' 포함되면 오류 발생
+$lo_location = addslashes($g4[title]);
 if (!$lo_location)
     $lo_location = $_SERVER[REQUEST_URI];
 //$lo_url = $g4[url] . $_SERVER[REQUEST_URI];

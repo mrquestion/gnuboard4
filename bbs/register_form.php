@@ -46,6 +46,8 @@ if ($w == "") {
             $birth = "xx" . $birth;
     }
 
+    $member[mb_birth] = $birth;
+    $member[mb_sex] = $sex;
     $member[mb_name] = $mb_name;
 
     $g4[title] = "회원 가입";

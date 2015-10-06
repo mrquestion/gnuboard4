@@ -278,18 +278,6 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
         if(parseInt(navigator.appVersion) >= 4){win.window.focus();} 
     }
 
-    // 달력 창
-    function popup_calendar(fld, dir, year, month, top, left)
-    {
-        if (!top) top = 100;
-        if (!left) left = 200;
-        if (!year) year = '';
-        if (!month) month = '';
-        url = dir+'/calendar.php?yyyy='+year+'&mm='+month+'&fld='+fld;
-        opt = 'scrollbars=no,status=no,resizable=no,width=250,height=225,top='+top+',left='+left;
-        window.open(url, "gbCalendar", opt);
-    }
-
     // a 태그에서 onclick 이벤트를 사용하지 않기 위해
     function win_open(url, name, option)
     {
@@ -342,6 +330,14 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     function win_formmail(mb_id, name, email)
     {
         win_open(g4_path+"/" + g4_bbs + "/formmail.php?mb_id="+mb_id+"&name="+name+"&email="+email, "winFormmail", "left=50, top=50, width=600, height=480, scrollbars=0");
+    }
+
+    // 달력 창
+    function win_calendar(fld, cur_date, delimiter, opt)
+    {
+        if (!opt)
+            opt = "left=50, top=50, width=240, height=230, scrollbars=0,status=0,resizable=0";
+        win_open(g4_path+"/" + g4_bbs + "/calendar.php?fld="+fld+"&cur_date="+cur_date+"&delimiter="+delimiter, "winCalendar", opt);
     }
 
     // 설문조사 창

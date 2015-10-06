@@ -268,7 +268,7 @@ else
                 // 차단, 탈퇴가 아니고 메일인증이 사용이면서 인증을 받았다면
                 if ($row[mb_intercept_date] == "" && 
                     $row[mb_leave_date] == "" && 
-                    ($config[cf_use_email_certify] && preg_match('/[1-9]/', $row[mb_email_certify])) )
+                    (!$config[cf_use_email_certify] || preg_match('/[1-9]/', $row[mb_email_certify])) )
                 {
                     // 세션에 회원아이디를 저장하여 로그인으로 간주
                     set_session("ss_mb_id", $tmp_mb_id);
