@@ -209,6 +209,7 @@ $config = sql_fetch(" select * from $g4[config_table] ");
 
 ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
 ini_set("session.gc_maxlifetime", 10800); // session data의 gabage collection 존재 기간을 지정 (초)
+ini_set("session.gc_probability", 100); // 정해진 시간에 100% 가비지 콜렉션 
 
 session_set_cookie_params(0, "/");
 ini_set("session.cookie_domain", $g4['cookie_domain']); 

@@ -18,7 +18,7 @@ $sql = " select mb_id, mb_nick, mb_password_a, mb_email from $g4[member_table] w
 $mb = sql_fetch($sql);
 if (!$mb[mb_id]) 
     alert("존재하지 않는 회원입니다.");
-else if ($mb_password_a != $mb[mb_password_a]) 
+else if ($mb_password_a !== $mb[mb_password_a]) 
     alert("패스워드 분실 시 답변이 틀립니다.");
 else if (is_admin($mb[mb_id])) 
     alert("관리자 아이디는 접근 불가합니다.");
