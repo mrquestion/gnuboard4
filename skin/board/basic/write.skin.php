@@ -155,7 +155,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
             objRow = objTbl.insertRow(objTbl.rows.length);
             objCell = objRow.insertCell(0);
 
-            objCell.innerHTML = "<input type='file' class=ed size=32 name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
+            objCell.innerHTML = "<input type='file' class=ed name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
             if (delete_code)
                 objCell.innerHTML += delete_code;
             else
@@ -273,15 +273,17 @@ function fwrite_check(f) {
         return;
     }
 
-    if (char_min > 0 || char_max > 0) {
-        var cnt = parseInt(document.getElementById('char_count').innerHTML);
-        if (char_min > 0 && char_min > cnt) {
-            alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
-            return;
-        } 
-        else if (char_max > 0 && char_max < cnt) {
-            alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
-            return;
+    if (document.getElementById('char_count')) {
+        if (char_min > 0 || char_max > 0) {
+            var cnt = parseInt(document.getElementById('char_count').innerHTML);
+            if (char_min > 0 && char_min > cnt) {
+                alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
+                return;
+            } 
+            else if (char_max > 0 && char_max < cnt) {
+                alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
+                return;
+            }
         }
     }
 

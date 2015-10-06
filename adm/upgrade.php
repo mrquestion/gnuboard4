@@ -10,6 +10,16 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 4.11.00
+// 트랙백 토큰
+sql_query("CREATE TABLE `$g4[token_table]` (
+  `to_token` varchar(32) NOT NULL default '',
+  `to_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  `to_ip` varchar(255) NOT NULL default '',
+  PRIMARY KEY  (`to_token`),
+  KEY `to_datetime` (`to_datetime`),
+  KEY `to_ip` (`to_ip`)
+) TYPE=MyISAM", FALSE);
 
 // 4.09.00
 // 기본환경설정 테이블 필드 추가
@@ -93,9 +103,8 @@ for ($i=0; $row=sql_fetch_array($res); $i++)
     $row2 = sql_fetch($sql2);
 
     $sql3 = " update $g4[board_new_table] set mb_id = '$row2[mb_id]' where bn_id = '$row[bn_id]' ";
-    sql_query($sql3);
+    sql_query($sql3, false);
 }
-
 
 /*
 // 그룹접근회원테이블에 auto_increment 추가

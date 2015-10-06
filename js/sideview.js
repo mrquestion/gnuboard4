@@ -94,6 +94,8 @@ if (typeof(SIDEVIEW_JS) == 'undefined') // 한번만 실행
             else // 비회원일 경우 이름으로 검색
                 this.insertTail("name", "<a href='"+g4_path+"/" + g4_bbs + "/board.php?bo_table="+g4_bo_table+"&sca="+g4_sca+"&sfl=wr_name,1&stx="+name+"'>이름으로 검색</a>");
         }
+        if (mb_id)
+            this.insertTail("new", "<a href='"+g4_path+"/" + g4_bbs + "/new.php?mb_id="+mb_id+"'>전체게시물</a>");
 
         // 최고관리자일 경우
         if (g4_is_admin == "super") {

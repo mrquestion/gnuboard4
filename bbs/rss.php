@@ -41,7 +41,7 @@ $subj1 = specialchars_replace($row[gr_subject], 255);
 echo "<?xml version=\"1.0\" encoding=\"$g4[charset]\"?>\n";
 echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 echo "<channel>\n";
-echo "<title>".specialchars_replace("$subj1 > $subj2")."</title>\n";
+echo "<title>".specialchars_replace("$config[cf_title] > $subj1 > $subj2")."</title>\n";
 echo "<link>".specialchars_replace("$g4[url]/$g4[bbs]/board.php?bo_table=$bo_table")."</link>\n";
 echo "<description>테스트 버전 0.2 (2004-04-26)</description>\n";
 echo "<language>ko</language>\n";

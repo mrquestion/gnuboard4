@@ -1,3 +1,32 @@
+4.11.00 (06.12.29)
+    :   게시판 검색에서 공란이 두개 연속될 경우 오류 발생하는 현상을 수정
+        lib/common.lib.php 의 get_sql_search(), search_font() 함수 수정
+        bob님께서 도움 주셨습니다.
+    :   회원 사이드 레이어 메뉴에 "회원게시물" 검색 추가
+    :   download.tail.skin.php 가 실행되지 않아 bbs/download.php 에서 코드 위치 변경
+    :   쪽지발송시 포인트 차감 기능 추가
+    :   스팸트랙백을 막기 위해 기능 수정
+        config.php 에 $g4['token_time'] = 3; 추가
+    :   head.sub.php 에 아래와 같이 한줄 추가하십시오.
+        <script language="javascript" src="<?=$g4['path']?>/js/ajax.js"></script> 
+
+        테이블이 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        config.php
+        head.sub.php
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/upgrade.php
+        bbs/download.php
+        bbs/memo_form_update.php
+        bbs/tb.php
+        bbs/tb_token.php
+        bbs/view.php
+        lib/common.lib.php
+        js/ajax.js
+        js/sideview.js
+        skin/board/basic/view.skin.php
+
 4.10.00 (06.11.27)
     :   cheditor 에서 입력이 없이 엔터만 치는 경우 <DIV>&nbsp;</DIV> 나오는 현상을 수정
     :   게시판관리에서 비밀글 사용에 '무조건' 비밀글 옵션 추가

@@ -246,6 +246,7 @@ $sql = " insert into $g4[config_table]
                 cf_use_norobot = '1',
                 cf_use_copy_log = '1',
                 cf_login_point = '100',
+                cf_memo_send_point = '500',
                 cf_cut_name = '10',
                 cf_nick_modify = '60',
                 cf_new_skin = 'basic',

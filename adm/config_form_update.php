@@ -88,6 +88,7 @@ $sql = " update $g4[config_table]
                 cf_stipulation          = '$cf_stipulation',
                 cf_privacy              = '$cf_privacy',
                 cf_open_modify          = '$cf_open_modify',
+                cf_memo_send_point      = '$cf_memo_send_point',
                 cf_1_subj               = '$cf_1_subj',
                 cf_2_subj               = '$cf_2_subj',
                 cf_3_subj               = '$cf_3_subj',

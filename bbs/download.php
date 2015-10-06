@@ -61,6 +61,8 @@ if (preg_match("/^utf/i", $g4[charset]))
 else
     $original = $file[bf_source];
 
+@include_once("$board_skin_path/download.tail.skin.php");
+
 if (file_exists($filepath)) {
     if(eregi("msie", $_SERVER[HTTP_USER_AGENT]) && eregi("5\.5", $_SERVER[HTTP_USER_AGENT])) {
         header("content-type: doesn/matter");
@@ -99,6 +101,4 @@ if (file_exists($filepath)) {
 } else {
     alert("파일을 찾을 수 없습니다.");
 }
-
-@include_once("$board_skin_path/download.tail.skin.php");
 ?>

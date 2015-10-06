@@ -44,7 +44,7 @@ function send_trackback($tb_url, $url, $title, $blog_name, $excerpt)
 				"Content-length: ".strlen($tmp_data)."\r\n".
 				"Connection: close\r\n\r\n".
 				$tmp_data;
-    $fp = fsockopen($uinfo[host],$uinfo[port]);
+    $fp = @fsockopen($uinfo[host],$uinfo[port]);
 	if(!$fp) 
         return "트랙백 URL이 존재하지 않습니다.";
 

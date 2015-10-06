@@ -2,7 +2,7 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 
 // 선택옵션으로 인해 셀합치기가 가변적으로 변함
-$colspan = 6;
+$colspan = 5;
 //if ($is_category) $colspan++;
 if ($is_checkbox) $colspan++;
 if ($is_good) $colspan++;
@@ -45,7 +45,7 @@ if ($is_nogood) $colspan++;
     <td width=110>글쓴이</td>
     <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
     <td width=40><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
-    <td width=40 title='마지막 코멘트 쓴 시간'><?=subject_sort_link('wr_last', $qstr2, 1)?>최근</a></td>
+    <?/*?><td width=40 title='마지막 코멘트 쓴 시간'><?=subject_sort_link('wr_last', $qstr2, 1)?>최근</a></td><?*/?>
     <? if ($is_good) { ?><td width=40><?=subject_sort_link('wr_good', $qstr2, 1)?>추천</a></td><?}?>
     <? if ($is_nogood) { ?><td width=40><?=subject_sort_link('wr_nogood', $qstr2, 1)?>비추천</a></td><?}?>
 </tr>
@@ -70,7 +70,7 @@ if ($is_nogood) $colspan++;
         echo $nobr_begin;
         echo $list[$i][reply];
         echo $list[$i][icon_reply];
-        if ($list[$i][ca_name]) { 
+        if ($is_category && $list[$i][ca_name]) { 
             echo "<span class=small><font color=gray>[<a href='{$list[$i][ca_name_href]}'>{$list[$i][ca_name]}</a>]</font></span> ";
         }
         $style = "";
@@ -96,7 +96,7 @@ if ($is_nogood) $colspan++;
     <td><nobr style='display:block; overflow:hidden; width:105px;'><?=$list[$i][name]?></nobr></td>
     <td><span style='color:#888888;'><?=$list[$i][datetime2]?></span></td>
     <td><span style='color:#888888;'><?=$list[$i][wr_hit]?></span></td>
-    <td><span style='color:#888888;'><?=$list[$i][last2]?></span></td>
+    <?/*?><td><span style='color:#888888;'><?=$list[$i][last2]?></span></td><?*/?>
     <? if ($is_good) { ?><td align="center"><span style='color:#888888;'><?=$list[$i][wr_good]?></span></td><? } ?>
     <? if ($is_nogood) { ?><td align="center"><span style='color:#888888;'><?=$list[$i][wr_nogood]?></span></td><? } ?>
 </tr>

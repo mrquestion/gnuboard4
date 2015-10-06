@@ -400,6 +400,7 @@ function search_font($stx, $str)
     $pattern = "";
     $bar = "";
     for ($m=0; $m<count($s); $m++) {
+        if (trim($s[$m]) == "") continue;
         // 태그는 포함하지 않아야 하는데 잘 안되는군. ㅡㅡa
         //$pattern .= $bar . '([^<])(' . quotemeta($s[$m]) . ')';
         //$pattern .= $bar . quotemeta($s[$m]);
@@ -504,7 +505,7 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
 
     // 검색어를 구분자로 나눈다. 여기서는 공백
     $s = array();
-    $s = explode(" ", trim($search_text));
+    $s = explode(" ", $search_text);
 
     // 검색필드를 구분자로 나눈다. 여기서는 +
     //$field = array();
@@ -515,10 +516,10 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
     $not_comment = $tmp[1];
 
     $str .= "(";
-    for ($i=0; $i<count($s); $i++) 
-    {
+    for ($i=0; $i<count($s); $i++) {
         // 검색어
-        $search_str = $s[$i];
+        $search_str = trim($s[$i]);
+        if ($search_str == "") continue;
 
         // 인기검색어
         $sql = " insert into $g4[popular_table]

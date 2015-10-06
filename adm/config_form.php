@@ -7,6 +7,9 @@ auth_check($auth[$sub_menu], "r");
 if ($is_admin != "super")
     alert("최고관리자만 접근 가능합니다.");
 
+// 쪽지보낼시 차감 포인트 필드 추가 : 061218
+sql_query(" ALTER TABLE `$g4[config_table]` ADD `cf_memo_send_point` INT NOT NULL AFTER `cf_login_point` ", FALSE);
+
 // 개인정보보호정책 필드 추가 : 061121
 $sql = " ALTER TABLE `$g4[config_table]` ADD `cf_privacy` TEXT NOT NULL AFTER `cf_stipulation` ";
 sql_query($sql, FALSE);
@@ -38,10 +41,15 @@ include_once ("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>포인트 사용</td>
-    <td><input type='checkbox' name='cf_use_point' value='1' <?=$config[cf_use_point]?'checked':'';?>> 사용</td>
+    <td colspan=3><input type='checkbox' name='cf_use_point' value='1' <?=$config[cf_use_point]?'checked':'';?>> 사용</td>
+</tr>
+<tr class='ht'>
     <td>로그인시 포인트</td>
     <td><input type=text class=ed name='cf_login_point' size='5' required itemname='로그인시 포인트' value='<?=$config[cf_login_point]?>'> 점
         <?=help("회원에게 하루에 한번만 부여")?></td>
+    <td>쪽지보낼시 차감 포인트</td>
+    <td><input type=text class=ed name='cf_memo_send_point' size='5' required itemname='쪽지전송시 차감 포인트' value='<?=$config[cf_memo_send_point]?>'> 점
+        <?=help("양수로 입력하십시오.<br>0으로 입력하시면 쪽지보낼시 포인트를 차감하지 않습니다.")?></td>
 </tr>
 <tr class='ht'>
     <td>이름(별명) 표시</td>

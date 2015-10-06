@@ -56,9 +56,22 @@ ob_end_flush();
     <font color=#7A8FDB>조회</font> : <?=$view[wr_hit]?>&nbsp;&nbsp;&nbsp;&nbsp;
     <? if ($is_good) { ?><font color=#7A8FDB>추천</font> : <?=$view[wr_good]?>&nbsp;&nbsp;&nbsp;&nbsp;<?}?>
     <? if ($is_nogood) { ?><font color=#7A8FDB>비추천</font> : <?=$view[wr_nogood]?>&nbsp;&nbsp;&nbsp;&nbsp;<?}?>
-    <? if ($trackback_url) { ?><a href="javascript:trackback_send_server('<?=$trackback_url?>');" style="letter-spacing:0;" title='주소 복사'>트랙백 주소</a><?}?>
     </td></tr>
 <tr><td height=1 bgcolor=#E7E7E7></td></tr>
+
+<? if ($trackback_url) { ?>
+<tr><td height=30>&nbsp;&nbsp;트랙백 주소 : <a href="javascript:clipboard_trackback('<?=$trackback_url?>');" style="letter-spacing:0;" title='이 글을 소개할 때는 이 주소를 사용하세요'><?=$trackback_url?></a>
+<script language="JavaScript">
+function clipboard_trackback(str) {
+    if (g4_is_gecko) {
+        prompt("이 글의 고유주소입니다. Ctrl+C를 눌러 복사하세요.", str);
+    } else if (g4_is_ie) {
+        window.clipboardData.setData("Text", str);
+        alert("트랙백 주소가 복사되었습니다.\n\n<?=$trackback_url?>");
+    }
+}
+</script></td></tr>
+<?}?>
 
 <?
 // 가변 파일

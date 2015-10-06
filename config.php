@@ -50,6 +50,7 @@ $g4['popular_table']       = $g4['table_prefix'] . "popular";       // 인기검색�
 $g4['scrap_table']         = $g4['table_prefix'] . "scrap";         // 게시글 스크랩 테이블
 $g4['visit_table']         = $g4['table_prefix'] . "visit";         // 방문자 테이블
 $g4['visit_sum_table']     = $g4['table_prefix'] . "visit_sum";     // 방문자 합계 테이블
+$g4['token_table']         = $g4['table_prefix'] . "token";         // 토큰 테이블
 //$g4['zip_table']           = $g4['table_prefix'] . "zip";           // 우편번호 테이블
 
 //
@@ -67,6 +68,8 @@ $g4['link_count'] = 2;
 $g4['charset'] = "euc-kr";
 
 $g4['phpmyadmin_dir'] = $g4['admin'] . "/phpMyAdmin/";
+
+$g4['token_time'] = 3; // 토큰 유효시간
 
 // config.php 가 있는곳의 웹경로. 뒤에 / 를 붙이지 마세요.
 // 예) http://g4.sir.co.kr

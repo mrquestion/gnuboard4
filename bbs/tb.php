@@ -19,6 +19,7 @@ include_once("$g4[path]/lib/etc.lib.php");
 $arr = explode("/", $_SERVER[PATH_INFO]);
 $bo_table = $arr[1];
 $wr_id = $arr[2];
+$to_token = $arr[3];
 
 $write_table   = $g4[write_prefix] . $bo_table; // 게시판 테이블 전체이름
 
@@ -47,6 +48,24 @@ if ($_POST[title]) {
     $board = sql_fetch(" select bo_subject, bo_use_trackback from $g4[board_table] where bo_table = '$bo_table' ");
     if (!$board[bo_use_trackback]) 
         $msg = "트랙백 사용이 금지된 게시판입니다.";
+
+    // 토큰검사
+    if (isset($g4['token_time']) == false)
+        $g4['token_time'] = 3; 
+
+    $sql = " delete from $g4[token_table] 
+              where to_datetime < '".date("Y-m-d", $g4[server_time] - 86400 * $g4['token_time'])."' ";
+    sql_query($sql);
+
+    $sql = " select to_token from $g4[token_table]
+              where to_token = '$to_token' ";
+    $row = sql_fetch($sql);
+    if ($row[to_token] && $to_token) {
+        // 두번 이상 트랙백을 보내지 못하도록 하기 위하여 토큰을 삭제한다
+        sql_query(" delete from $g4[token_table] where to_token = '$to_token' ");
+    } else {
+        $msg = "트랙백 주소가 올바르지 않습니다. (토큰 유효시간 경과 등)";
+    }
 
     if (!$msg) {
         $next_num = get_next_num($write_table);

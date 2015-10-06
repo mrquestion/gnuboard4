@@ -208,7 +208,7 @@ else
 <tr class='ht center'>
     <td><input type=text class=ed name=mb_id required itemname='회원아이디' value='<?=$mb_id?>'></td>
     <td><input type=text class=ed name=po_content required itemname='내용' style='width:99%;'></td>
-    <td><input type=text class=ed name=po_point required itemname='포인트' size=10 maxlength=6></td>
+    <td><input type=text class=ed name=po_point required itemname='포인트' size=10></td>
     <td><input type=submit class=btn1 value='  확  인  '></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>

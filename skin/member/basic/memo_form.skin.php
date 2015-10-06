@@ -43,7 +43,13 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <td height="300" align="center" valign="top">
         <table width="540" border="0" cellspacing="0" cellpadding="0">
         <tr> 
-            <td height="20"></td>
+            <td height="30" align="right" style="padding-right:0px;">
+            <?
+            if ($config[cf_memo_send_point]) {
+                echo "쪽지 보낼때 회원당 ".number_format($config[cf_memo_send_point])."점의 포인트를 차감합니다.";
+            }
+            ?>
+            </td>
         </tr>
         <tr> 
             <td height="2" bgcolor="#808080"></td>
