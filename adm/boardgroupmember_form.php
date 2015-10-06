@@ -38,9 +38,9 @@ $sql = " select *
                 $g4[group_table] b
           where a.mb_id = '$mb[mb_id]' 
             and a.gr_id = b.gr_id ";
-if ($is_admin == 'group') {
+//if ($is_admin == 'group') {
+if ($is_admin != 'super') 
     $sql .= " and b.gr_admin = '$member[mb_id]' ";
-}
 $sql .= " order by a.gr_id desc ";
 $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++) {
@@ -79,9 +79,9 @@ if ($i == 0) {
         $sql = " select * 
                    from $g4[group_table]
                   where gr_use_access = 1 ";
-        if ($is_admin == 'group') {
+        //if ($is_admin == 'group') {
+        if ($is_admin != 'super') 
             $sql .= " and gr_admin = '$member[mb_id]' ";
-        }
         $sql .= " order by gr_id ";
         $result = sql_query($sql);
         for ($i=0; $row=sql_fetch_array($result); $i++) {
@@ -90,23 +90,23 @@ if ($i == 0) {
         ?>
         </select>
         &nbsp;
-        <input type=submit class=btn1 accesskey='s' value='  확  인  '>
+        <input type=submit class=btn1 value='  확  인  ' accesskey='s'>
     </td>
 </tr>
 </table>
 </form>
 
-<script>
-    function boardgroupmember_form_check(f) 
-    {
-        if (f.gr_id.value == '') {
-            alert('접근가능 그룹을 선택하세요.');
-            return false;
-        }
-
-        return true;
+<script language="JavaScript">
+function boardgroupmember_form_check(f) 
+{
+    if (f.gr_id.value == '') {
+        alert('접근가능 그룹을 선택하세요.');
+        return false;
     }
-</script>     
+
+    return true;
+}
+</script>
 
 <?
 include_once("./admin.tail.php");

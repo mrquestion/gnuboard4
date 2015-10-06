@@ -7,7 +7,7 @@ if ($w == 'r') $content = '';
 ?>
 
 <script src="<?=$g4[editor_path]?>/cheditor.js"></script>
-<?=cheditor1('wr_content', $write[wr_content]);?>
+<?=cheditor1('wr_content', $content);?>
 
 <script language="javascript">
 // 글자수 제한

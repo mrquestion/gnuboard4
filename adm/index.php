@@ -12,8 +12,9 @@ $sql_common = " from $g4[member_table] ";
 
 $sql_search = " where (1) ";
 
-if ($is_admin == 'group') 
-    $sql_search .= " and mb_level = '$member[mb_level]' ";
+//if ($is_admin == 'group') $sql_search .= " and mb_level = '$member[mb_level]' ";
+if ($is_admin != 'super') 
+    $sql_search .= " and mb_level <= '$member[mb_level]' ";
 
 if (!$sst) {
     $sst = "mb_datetime";

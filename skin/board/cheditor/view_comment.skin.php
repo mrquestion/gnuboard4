@@ -35,15 +35,12 @@ for ($i=0; $i<count($list); $i++) {
                 <!-- 코멘트 출력 -->
                 <span class="ct lh"><?=$list[$i][content]?></span>
                 <? if ($list[$i][trackback]) { echo "<p>".$list[$i][trackback]."</p>"; } ?>
-
-                <textarea id='save_comment_<?=$comment_id?>' style='display:none; width:100%'><?=get_text($list[$i][wr_content], 0)?></textarea>
-                
                 <span id='edit_<?=$comment_id?>' style='display:none;'></span><!-- 수정 -->
                 <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- 답변 -->
             </td>
         </tr>
         <tr><td colspan=2 height=20></td></tr>
-        </table></td>
+        </table><textarea id='save_comment_<?=$comment_id?>' style='display:none; width:100%'><?=get_text($list[$i][wr_content], 0)?></textarea></td>
 </tr>
 </table>
 <? } ?>

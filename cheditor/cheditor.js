@@ -995,12 +995,12 @@ function run ()
     document.write("<span title='가운데 정렬' style='cursor:pointer;'>" + obj.setIcon("justifycenter.gif", 26, 26, myobj + ".exec('JustifyCenter',false)") + "</span>");
     document.write("<span title='오른쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyright.gif", 26, 26, myobj + ".exec('JustifyRight',false)") + "</span>");
     document.write("<span title='양쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyfull.gif", 26, 26, myobj + ".exec('JustifyFull',false)") + "</span>");
-    /*
+
     document.write("<span title='숫자 목록' style='cursor:pointer;'>" + obj.setIcon("orderedlist.gif", 26, 26, myobj + ".exec('InsertOrderedList',false)") + "</span>");
     document.write("<span title='점 목록' style='cursor:pointer;'>" + obj.setIcon("unorderedlist.gif", 26, 26, myobj + ".exec('InsertUnorderedList',false)") + "</span>");
     document.write("<span title='들여쓰기' style='cursor:pointer;'>" + obj.setIcon("indent.gif", 26, 26, myobj + ".exec('Indent',false)") + "</span>");
     document.write("<span title='내어쓰기' style='cursor:pointer;'>" + obj.setIcon("outdent.gif", 26, 26, myobj + ".exec('Outdent',false)") + "</span>");
-    */
+
     document.write("<span title='링크넣기' style='cursor:pointer;'>" + obj.setIcon("link.gif", 26, 26, myobj + ".insert('hlink')") + "</span>");
     document.write("<span title='링크삭제' style='cursor:pointer;'>" + obj.setIcon("unlink.gif", 26, 26, myobj + ".exec('UnLink',false)") + "</span>");
     document.write("<span title='미디어' style='cursor:pointer;'>" + obj.setIcon("media.gif", 26, 26, myobj + ".insert('media')") + "</span>");

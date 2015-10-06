@@ -86,7 +86,7 @@ var list_delete_php = "./boardgroup_list_delete.php";
 <input type=hidden name=page value='<?=$page?>'>
 <colgroup width=30>
 <colgroup width=120>
-<colgroup width=200>
+<colgroup width=180>
 <colgroup width=''>
 <colgroup width=80>
 <colgroup width=80>

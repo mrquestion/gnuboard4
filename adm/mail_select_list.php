@@ -38,6 +38,22 @@ if ($mb_mailling != "")
 // 권한
 $sql_where .= " and mb_level between '$mb_level_from' and '$mb_level_to' ";
 
+// 게시판그룹회원
+if ($gr_id)
+{
+    $group_member = "";
+    $comma = "";
+    $sql2 = " select mb_id from $g4[group_member_table] where gr_id = '$gr_id' order by mb_id ";
+    $result2 = sql_query($sql2);
+    for ($k=0; $row2=sql_fetch_array($result2); $k++)
+    {
+        $group_member .= "{$comma}'$row2[mb_id]'"; 
+        $comma = ",";
+    }
+
+    $sql_where .= " and mb_id in ($group_member) ";
+}
+
 $sql = " select COUNT(*) as cnt $sql_common $sql_where ";
 $row = sql_fetch($sql);
 $cnt = $row[cnt];
@@ -56,6 +72,7 @@ $ma_last_option .= "||mb_area=$mb_area";
 $ma_last_option .= "||mb_mailling=$mb_mailling";
 $ma_last_option .= "||mb_level_from=$mb_level_from";
 $ma_last_option .= "||mb_level_to=$mb_level_to";
+$ma_last_option .= "||gr_id=$gr_id";
 
 sql_query(" update $g4[mail_table] set ma_last_option = '$ma_last_option' where ma_id = '$ma_id' ");
 
@@ -95,7 +112,8 @@ include_once("./admin.head.php");
 </table>
 
 <p align=center>
-    <input type=submit class=btn1 value='  메일 보내기  '>
+    <input type=submit class=btn1 value='  메일 보내기  '>&nbsp;
+    <input type=button class=btn1 value='  뒤  로  ' onclick="history.go(-1);">
 </form>
 
 </td></tr></table>

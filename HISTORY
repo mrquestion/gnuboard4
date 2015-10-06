@@ -1,3 +1,25 @@
+4.06.01 (05.09)
+    :   그룹관리자의 접근 권한 수정
+    :   [보안] 게시판 목록보기 권한이 없을 경우에도 임의의 글(wr_id) 값을 넘기면 목록 보기가 가능한 오류 수정 (bbs/board.php)
+        고냉이님, zzzz님께서 알려주셨습니다.
+    :   부관리자의 경우 자신보다 회원관리에서 자신보다 권한을 높게 수정 할 수 없도록 수정
+        라이너스님께서 알려주셨습니다.
+    :   ca_id -> ca_name (bbs/write.php)
+        보람찬님께서 알려주셨습니다.
+    :   메일 발송에서 게시판그룹 회원을 선택할 수 있도록 수정
+    :   업로드 하는 파일, 글내용의 크기가 서버에서 설정한 값을 넘었을 경우 오류메세지 출력
+        php.ini 의 post_max_size, upload_max_filesize 와 관련이 있습니다.
+        
+        adm/admin.menu300.php
+        adm/index.php
+        adm/member_list.php
+        adm/boardgroupmember_form.php
+        adm/mail_select_form.php
+        adm/mail_select_list.php
+        adm/mail_preview.php
+        bbs/board.php
+        bbs/write_update.php
+
 4.06.00 (05.09.21)
     :   분류가 수정되는 경우 해당되는 코멘트의 분류명도 모두 수정함
     :   수정시 분류명을 넘김

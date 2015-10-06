@@ -176,7 +176,7 @@ if (!$member[mb_id] || ($is_admin && $w == 'u' && $member[mb_id] != $write[mb_id
 
 $is_category = false;
 if ($board[bo_use_category]) {
-    $ca_id = $write[ca_id];
+    $ca_name = $write[ca_name];
     $category_option = get_category_option($bo_table);
     $is_category = true;
 }

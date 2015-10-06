@@ -23,8 +23,9 @@ if ($stx) {
     $sql_search .= " ) ";
 }
 
-if ($is_admin == 'group') 
-    $sql_search .= " and mb_level = '$member[mb_level]' ";
+//if ($is_admin == 'group') $sql_search .= " and mb_level = '$member[mb_level]' ";
+if ($is_admin != 'super') 
+    $sql_search .= " and mb_level <= '$member[mb_level]' ";
 
 if (!$sst) {
     $sst = "mb_datetime";
@@ -188,8 +189,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         <td title='$row[mb_id]'><nobr style='display:block; overflow:hidden; width:100px;'>&nbsp;$mb_id</nobr></td>
         <td>$row[mb_name]</td>
         <td><u>$mb_nick</u></td>
-        <td>".get_member_level_select("mb_level[$i]", 1, 10, $row[mb_level])."</td>
-        <td align=right><a href='point_list.php?sfl=a.mb_id&stx=$row[mb_id]' class=tt>".number_format($row[mb_point])."</a>&nbsp;</td>
+        <td>".get_member_level_select("mb_level[$i]", 1, $member[mb_level], $row[mb_level])."</td>
+        <td align=right><a href='point_list.php?sfl=mb_id&stx=$row[mb_id]' class=tt>".number_format($row[mb_point])."</a>&nbsp;</td>
         <td>".substr($row[mb_today_login],2,8)."</td>
         <td>".($row[mb_mailling]?'&radic;':'&nbsp;')."</td>
         <td>".($row[mb_open]?'&radic;':'&nbsp;')."</td>

@@ -156,10 +156,29 @@ include_once("./admin.head.php");
                 <script language="JavaScript"> document.getElementById('mb_level_to').value = "<?=$mb_level_to?>"; </script>
             </td>
         </tr>
+        <tr class='ht'>
+            <td>게시판그룹회원</td>
+            <td>
+                <select id=gr_id name=gr_id>
+                <option value=''>전체
+                <?
+                $sql = " select gr_id, gr_subject from $g4[group_table] order by gr_subject ";
+                $result = sql_query($sql);
+                for ($i=0; $row=sql_fetch_array($result); $i++)
+                {
+                    echo "<option value='$row[gr_id]'>$row[gr_subject]";
+                }
+                ?>
+                </select>
+                <script language="JavaScript"> document.getElementById('gr_id').value = "<?=$gr_id?>"; </script>
+            </td>
+        </tr>
         <tr><td colspan='2' class='line2'></td></tr>
         </table>
 
-        <p align=center><input type=submit class=btn1 value='  확  인  '>
+        <p align=center>
+            <input type=submit class=btn1 value='  확  인  '>&nbsp;
+            <input type=button class=btn1 value='  목  록  ' onclick="document.location.href='./mail_list.php';">
         </form>
     </td>
 </tr></table>
