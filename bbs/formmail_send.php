@@ -53,7 +53,8 @@ if ($type)
 else 
     $mail_content = $content;
 
-mailer($fnick, $fmail, $to, $subject, $mail_content, $type, $file, $cfg[charset]);
+//mailer($fnick, $fmail, $to, $subject, $mail_content, $type, $file, $cfg[charset]);
+mailer($fnick, $fmail, $to, $subject, $mail_content, $type, $file);
 
 //$html_title = $tmp_to . "님께 메일발송";
 $html_title = "메일 발송중";

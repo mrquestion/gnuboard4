@@ -490,8 +490,12 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
     $s = explode(" ", trim($search_text));
 
     // 검색필드를 구분자로 나눈다. 여기서는 +
-    $field = array();
-    $field = explode("||", trim($search_field));
+    //$field = array();
+    //$field = explode("||", trim($search_field));
+    $tmp = array();
+    $tmp = explode(",", trim($search_field));
+    $field = explode("||", $tmp[0]);
+    $not_comment = $tmp[1];
 
     $str .= "(";
     for ($i=0; $i<count($s); $i++) 
@@ -541,7 +545,9 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
         //$op1 = ($search_operator) ? ' and ' : ' or ';
         $op1 = " $search_operator ";
     }
-    $str .= ")";
+    $str .= " ) ";
+    if ($not_comment)
+        $str .= " and wr_is_comment = '0' ";
 
     return $str;
 }

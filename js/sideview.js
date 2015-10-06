@@ -90,9 +90,9 @@ if (typeof(SIDEVIEW_JS) == 'undefined') // 한번만 실행
         // 게시판테이블 아이디가 넘어왔을 경우
         if (g4_bo_table) {
             if (mb_id) // 회원일 경우 아이디로 검색
-                this.insertTail("mb_id", "<a href='"+g4_path+"/" + g4_bbs + "/board.php?bo_table="+g4_bo_table+"&sca="+g4_sca+"&sfl=mb_id&stx="+mb_id+"'>아이디로 검색</a>");
+                this.insertTail("mb_id", "<a href='"+g4_path+"/" + g4_bbs + "/board.php?bo_table="+g4_bo_table+"&sca="+g4_sca+"&sfl=mb_id,1&stx="+mb_id+"'>아이디로 검색</a>");
             else // 비회원일 경우 이름으로 검색
-                this.insertTail("name", "<a href='"+g4_path+"/" + g4_bbs + "/board.php?bo_table="+g4_bo_table+"&sca="+g4_sca+"&sfl=wr_name&stx="+name+"'>이름으로 검색</a>");
+                this.insertTail("name", "<a href='"+g4_path+"/" + g4_bbs + "/board.php?bo_table="+g4_bo_table+"&sca="+g4_sca+"&sfl=wr_name,1&stx="+name+"'>이름으로 검색</a>");
         }
 
         // 최고관리자일 경우

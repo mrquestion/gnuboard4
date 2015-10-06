@@ -3,7 +3,7 @@ if (!defined("_GNUBOARD_")) exit;
 
 // 메일 보내기 (파일 여러개 첨부 가능)
 // type : text=0, html=1, text+html=2
-function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $charset="EUC-KR", $cc="", $bcc="") 
+function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $cc="", $bcc="") 
 {
     global $config;
     global $g4;
@@ -11,9 +11,9 @@ function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $cha
     // 메일발송 사용을 하지 않는다면
     if (!$config[cf_email_use]) return;
 
-    $fname   = "=?$charset?B?" . base64_encode($fname) . "?=";
-    $subject = "=?$charset?B?" . base64_encode($subject) . "?=";
-    $charset = ($charset != "") ? "charset=$charset" : "";
+    $fname   = "=?$g4[charset]?B?" . base64_encode($fname) . "?=";
+    $subject = "=?$g4[charset]?B?" . base64_encode($subject) . "?=";
+    //$g4[charset] = ($g4[charset] != "") ? "charset=$g4[charset]" : "";
 
     $header  = "Return-Path: <$fmail>\n";
     $header .= "From: $fname <$fmail>\n";
@@ -31,11 +31,11 @@ function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $cha
     }
 
     if ($type) {
-        $header .= "Content-Type: TEXT/HTML; $charset\n";
+        $header .= "Content-Type: TEXT/HTML; $g4[charset]\n";
         if ($type == 2)
             $content = nl2br($content);
     } else {
-        $header .= "Content-Type: TEXT/PLAIN; $charset\n";
+        $header .= "Content-Type: TEXT/PLAIN; $g4[charset]\n";
         $content = stripslashes($content);
     }
     $header .= "Content-Transfer-Encoding: BASE64\n\n";

@@ -1,4 +1,4 @@
-## MySQL dump 9.10
+## 마이에스큐엘 dump 9.10
 ##
 ## Host: localhost    Database: gnuboard4
 ## ######################################################
@@ -256,7 +256,7 @@ CREATE TABLE $g4[group_table] (
 
 DROP TABLE IF EXISTS $g4[group_table]_member;
 CREATE TABLE $g4[group_table]_member (
-  gm_id int(11) NOT NULL default '0',
+  gm_id int(11) NOT NULL auto_increment,
   gr_id varchar(255) NOT NULL default '',
   mb_id varchar(255) NOT NULL default '',
   gm_datetime datetime NOT NULL default '0000-00-00 00:00:00',

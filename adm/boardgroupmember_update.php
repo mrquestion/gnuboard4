@@ -2,6 +2,8 @@
 $sub_menu = "300200";
 include_once("./_common.php");
 
+sql_query(" ALTER TABLE $g4[group_member_table] CHANGE `gm_id` `gm_id` INT( 11 ) DEFAULT '0' NOT NULL AUTO_INCREMENT ", false);
+
 if ($w == "") 
 {
     auth_check($auth[$sub_menu], "w");
@@ -26,12 +28,19 @@ if ($w == "")
     } 
     else 
     {
+        /*
         $tmp_row = sql_fetch(" select max(gm_id) as max_gm_id from $g4[group_member_table] ");
         $gm_id = $tmp_row[max_gm_id] + 1;
 
         $sql = " insert into $g4[group_member_table]
                         ( gm_id, gr_id, mb_id, gm_datetime )
                  values ( '$gm_id', '$gr_id', '$mb_id','$g4[time_ymdhis]' ) ";
+        sql_query($sql);
+        */
+        $sql = " insert into $g4[group_member_table]
+                    set gr_id = '$gr_id',
+                        mb_id = '$mb_id',
+                        gm_datetime = '$g4[time_ymdhis]' ";
         sql_query($sql);
     }
 } 

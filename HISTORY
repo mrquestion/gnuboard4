@@ -1,3 +1,23 @@
+4.06.17 (06.02.17)
+    :   메일러 함수 수정
+    :   그룹접근회원테이블의 gm_id 필드에 auto_increment 추가
+    :   calendar/2006.txt 추가
+        진정한승리님께서 제작해 주셨습니다.
+    :   get_sql_search() 함수 수정 - 코멘트를 제외한 원글에서만 검색이 가능하도록 수정
+    :   UTF-8 에서 한글 별명 오류 수정
+        심플로그님께서 알려주셨습니다.
+        
+        필드가 추가, 변경 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/upgrade.php
+        adm/boardgroupmember_update.php
+        bbs/formmail_send.php
+        bbs/calendar/2006.txt
+        lib/common.lib.php
+        lib/mailer.lib.php
+        js/sideview.js
+        skin/member/basic/register_form.skin.php
+
 4.06.16 (06.01.31)
     :   검색된 게시판 리스트에 숫자가 제대로 표시되지 않던 스킨 수정
         나스카님께서 알려주셨습니다.

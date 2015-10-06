@@ -466,7 +466,10 @@ function mb_nick_check()
         return;
     }
 
-    win_open(g4_path+"/"+g4_bbs+"/member_nick_check.php?mb_nick="+document.fregisterform.mb_nick.value, "hiddenframe");
+    if (g4_charset.toUpperCase == "UTF-8")
+        win_open(g4_path+"/"+g4_bbs+"/member_nick_check.php?mb_nick="+encodeURI(document.fregisterform.mb_nick.value), "hiddenframe");
+    else
+        win_open(g4_path+"/"+g4_bbs+"/member_nick_check.php?mb_nick="+document.fregisterform.mb_nick.value, "hiddenframe");
 }
 
 // E-mail °Ë»ç

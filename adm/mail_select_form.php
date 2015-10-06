@@ -33,6 +33,9 @@ for ($i=0; $i<count($last_option); $i++) {
 if (!isset($mb_id1)) $mb_id1 = 1;
 if (!isset($mb_level_from)) $mb_level_from = 1;
 if (!isset($mb_level_to)) $mb_level_to = 10;
+if (!isset($mb_mailling)) $mb_mailling = 1;
+if (!isset($mb_sex)) $mb_sex = 1;
+if (!isset($mb_area)) $mb_area = 1;
 
 $g4[title] = "회원메일발송";
 include_once("./admin.head.php");
