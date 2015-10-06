@@ -58,7 +58,7 @@ $po = sql_fetch(" select * from $g4[poll_table] where po_id = '$po_id' ");
                 <? for ($i=1; $i<=9 && $po["po_poll{$i}"]; $i++) { ?>
                 <tr>
                     <td width="25" align="center"><? if ($i == 1) { echo "<img src='$poll_skin_path/img/a.gif' width='12' height='13'>"; } else { echo "&nbsp;"; } ?></td>
-                    <td width="30" height="25" align="center"><input type="radio" name="gb_poll" value="<?=$i?>" id='gb_poll_<?=$i?>'></td>
+                    <td width="30" height="25" align="center"><input type="radio" name="gb_poll" value="\\" id='gb_poll_<?=$i?>'></td>
                     <td width=""><font color="#848484"><label for='gb_poll_<?=$i?>'><?=$po['po_poll'.$i]?></label></font></td>
                 </tr>
                 <? } ?>
