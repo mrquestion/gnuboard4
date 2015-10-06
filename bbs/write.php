@@ -55,7 +55,7 @@ else if ($w == "u")
                 and wr_is_comment = 1 ";
     $row = sql_fetch($sql);
     if ($row[cnt] >= $board[bo_count_modify] && !$is_admin)
-        alert("이 글과 관련된 코멘트가 존재하므로 수정 할 수 없습니다.\\n\\n코멘트가 {$board[bo_count_delete]}건 이상 달린 원글은 수정할 수 없습니다.");
+        alert("이 글과 관련된 코멘트가 존재하므로 수정 할 수 없습니다.\\n\\n코멘트가 {$board[bo_count_modify]}건 이상 달린 원글은 수정할 수 없습니다.");
 
     $title_msg = "글수정";
 } 
@@ -178,9 +178,15 @@ $is_html = false;
 if ($member[mb_level] >= $board[bo_html_level]) 
     $is_html = true;
 
+/*
+// 에서 무조건 비밀글 사용으로 인한 코드 수정 : 061021
 $is_secret = false;
 if ($board[bo_use_secret]) 
     $is_secret = true;
+*/
+$is_secret = $board[bo_use_secret];
+// DHTML 에디터 사용 선택 가능하게 수정 : 061021
+$is_dhtml_editor = $board[bo_use_dhtml_editor];
 
 $is_mail = false;
 if ($config[cf_email_use] && $board[bo_use_email])

@@ -2,8 +2,7 @@
 include_once("./_common.php");
 
 // 특수문자 변환
-function specialchars_replace($str, $len=0)
-{
+function specialchars_replace($str, $len=0) {
     if ($len) {
         $str = substr($str, 0, $len);
     }
@@ -14,7 +13,7 @@ function specialchars_replace($str, $len=0)
     return $str;
 }
 
-$sql = " select gr_id, bo_subject, bo_page_rows, bo_read_level from $g4[board_table] where bo_table = '$bo_table' ";
+$sql = " select gr_id, bo_subject, bo_page_rows, bo_read_level, bo_use_rss_view from $g4[board_table] where bo_table = '$bo_table' ";
 $row = sql_fetch($sql);
 $subj2 = specialchars_replace($row[bo_subject], 255);
 $lines = $row[bo_page_rows];
@@ -22,6 +21,12 @@ $lines = $row[bo_page_rows];
 // 비회원 읽기가 가능한 게시판만 RSS 지원
 if ($row[bo_read_level] >= 2) {
     echo "비회원 읽기가 가능한 게시판만 RSS 지원합니다.";
+    exit;
+}
+
+// RSS 사용 체크
+if (!$row[bo_use_rss_view]) {
+    echo "RSS 보기가 금지되어 있습니다.";
     exit;
 }
 

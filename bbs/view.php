@@ -1,6 +1,8 @@
 <?
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 
+@include_once("$board_skin_path/view.head.skin.php");
+
 $sql_search = "";
 // 검색이면
 if ($sca || $stx) {
@@ -75,8 +77,8 @@ else if (!$write[mb_id]) { // 회원이 쓴 글이 아니라면
 // 최고, 그룹관리자라면 글 복사, 이동 가능
 $copy_href = $move_href = "";
 if ($write[wr_reply] == "" && ($is_admin == "super" || $is_admin == "group")) {
-    $copy_href = "javascript:win_open('./move.php?sw=copy&bo_table=$bo_table&wr_id=$wr_id&page=$page".$qstr."', 'boardcopy', 'left=50, top=50, width=396, height=550, scrollbars=1');";
-    $move_href = "javascript:win_open('./move.php?sw=move&bo_table=$bo_table&wr_id=$wr_id&page=$page".$qstr."', 'boardmove', 'left=50, top=50, width=396, height=550, scrollbars=1');";
+    $copy_href = "javascript:win_open('./move.php?sw=copy&bo_table=$bo_table&wr_id=$wr_id&page=$page".$qstr."', 'boardcopy', 'left=50, top=50, width=500, height=550, scrollbars=1');";
+    $move_href = "javascript:win_open('./move.php?sw=move&bo_table=$bo_table&wr_id=$wr_id&page=$page".$qstr."', 'boardmove', 'left=50, top=50, width=500, height=550, scrollbars=1');";
 }
 
 $scrap_href = "";
@@ -95,7 +97,7 @@ if ($member[mb_id]) {
         $nogood_href = "./good.php?bo_table=$bo_table&wr_id=$wr_id&good=nogood";
 }
 
-$view = get_view($write, $board, $board_skin_path);
+$view = get_view($write, $board, $board_skin_path, $board[bo_subject_len]);
 
 if (strstr($sfl, "subject"))
     $view[subject] = search_font($stx, $view[subject]);
@@ -129,4 +131,6 @@ if ($board[bo_use_signature] && $view[mb_id])
 }
 
 include_once("$board_skin_path/view.skin.php");
+
+@include_once("$board_skin_path/view.tail.skin.php");
 ?>

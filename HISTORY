@@ -1,3 +1,56 @@
+4.10.00 (06.11.27)
+    :   cheditor 에서 입력이 없이 엔터만 치는 경우 <DIV>&nbsp;</DIV> 나오는 현상을 수정
+    :   게시판관리에서 비밀글 사용에 '무조건' 비밀글 옵션 추가
+    :   RSS 보기 사용 필드 추가 
+        비회원 글읽기가 가능하고 RSS 보기 사용에 체크가 되어야만 RSS(XML) 보기 가능
+    :   게시판관리에서 DHTML 에디터 사용 선택 옵션 추가
+        basic, cheditor 스킨을 통합함
+        필드가 추가되었으니 adm/board_list.php 를 반드시 한번은 실행하여 주십시오.
+    :   회원삭제시 회원의 정보만 삭제하고 회원아이디는 영구 보관함
+    :   bbs/view.php , bbs/view_comment.php 에 스킨 상, 하단 파일을 include 할 수 있도록 수정
+    :   회원정보 수정시 생년월일 입력을 매번 요구하는 에러 수정
+    :   회원관리 리스트에서 차단, 탈퇴 링크 추가
+    :   파일 설명에 ' 있으면 게시물 복사, 이동시 에러나는 현상을 수정
+    :   set_cookie() 자바스크립트 함수에 cookie domain 오류 수정
+    :   회원가입시 개인정보보호정책 동의 추가
+        필드 추가로 인해 adm/config_form.php 를 반드시 한번 이상 실행하여 주십시오.
+    :   접근가능 IP 기능 수정
+    :   UTF-8 보완 : common.lib.php : check_string(), cut_hangul_last()
+        0sama님께서 도움 주셨습니다.
+        귀때기님께서 도움 주셨습니다.
+    :   게시판스킨에 글자크기변경 기능 추가
+        js/board.js 필수 추가
+        head.sub.php 에 아래 코드 필수 추가
+            var g4_cookie_domain = "<?=$g4['cookie_domain']?>"; 
+    :   접속자의 레벨이 설정된 읽기권한보다 작다면 경고창이 계속뜨는 오류를 수정
+        나스카님께서 도움 주셨습니다.
+
+        adm/admin.lib.php
+        adm/board_copy_update.php
+        adm/board_form.php
+        adm/board_form_update.php
+        adm/board_list.php
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/member_delete.php
+        adm/member_list.php
+        bbs/board.php
+        bbs/list.php
+        bbs/move_update.php
+        bbs/register_form.php
+        bbs/rss.php
+        bbs/view.php
+        bbs/view_comment.php
+        bbs/write.php
+        cheditor/cheditor.js
+        common.php
+        head.sub.php
+        js/board.js
+        js/common.js
+        skin/board/basic/*
+        skin/member/basic/register.skin.php
+        skin/member/basic/register_form.skin.php
+
 4.09.02 (06.10.10)
     :   첨부파일설명에서 ' 또는 " 입력되면 오류나는 부분 수정
     :   코멘트 수정의 경우에는 동일한 내용을 등록할 수 없는 오류 수정
@@ -22,7 +75,6 @@
         bbs/formmail_send.php
         bbs/tb.php
         bbs/view_comment.php
-        bbs/write.php
         bbs/write.php
         bbs/write_comment_update.php
         lib/common.lib.php

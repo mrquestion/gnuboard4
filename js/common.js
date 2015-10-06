@@ -135,7 +135,10 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     {
         var today = new Date();
         today.setTime(today.getTime() + (60*60*1000*expirehours));
-        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + today.toGMTString() + "; domain=" + domain + ";";
+        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + today.toGMTString() + ";";
+        if (domain) {
+            document.cookie += "domain=" + domain + ";";
+        }
     }
 
     // 쿠키 얻음

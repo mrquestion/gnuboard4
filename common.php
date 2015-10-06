@@ -5,15 +5,13 @@
 error_reporting(E_ALL ^ E_NOTICE);
 
 // 보안설정이나 프레임이 달라도 쿠키가 통하도록 설정
-//header('P3P: CP="ALL CURa ADMa DEVa TAIa OUR BUS IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC OTC"');
+header('P3P: CP="ALL CURa ADMa DEVa TAIa OUR BUS IND PHY ONL UNI PUR FIN COM NAV INT DEM CNT STA POL HEA PRE LOC OTC"');
 
 if (!isset($set_time_limit)) $set_time_limit = 0;
 @set_time_limit($set_time_limit);
-//@set_time_limit(30);
 
 // 짧은 환경변수를 지원하지 않는다면
-if (isset($HTTP_POST_VARS) && !isset($_POST)) 
-{
+if (isset($HTTP_POST_VARS) && !isset($_POST)) {
 	$_POST   = &$HTTP_POST_VARS;
 	$_GET    = &$HTTP_GET_VARS;
 	$_SERVER = &$HTTP_SERVER_VARS;
@@ -329,16 +327,21 @@ else
 $is_admin = is_admin($member['mb_id']);
 if ($is_admin != "super") {
     // 접근가능 IP
-    $is_possible_ip = false;
-    $pattern = explode('\n', trim($config['cf_possible_ip']));
-    for ($i=0; $i<count($pattern); $i++) {
-        $pattern[$i] = trim($pattern[$i]);
-        if (empty($pattern[$i])) 
-            continue;
+    $cf_possible_ip = trim($config['cf_possible_ip']);
+    if ($cf_possible_ip) {
+        $is_possible_ip = false;
+        $pattern = explode("\n", $cf_possible_ip);
+        for ($i=0; $i<count($pattern); $i++) {
+            $pattern[$i] = trim($pattern[$i]);
+            if (empty($pattern[$i])) 
+                continue;
 
-        $pat = "/({$pattern[$i]})/";
-        $is_possible_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
-        if ($is_possible_ip) 
+            $pat = "/({$pattern[$i]})/";
+            $is_possible_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
+            if ($is_possible_ip) 
+                break;
+        }
+        if (!$is_possible_ip)
             die ("접근이 가능하지 않습니다.");
     }
 

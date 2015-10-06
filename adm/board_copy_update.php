@@ -46,6 +46,7 @@ $sql = " insert into $g4[board_table]
                 bo_category_list    = '$board[bo_category_list]',
                 bo_disable_tags     = '$board[bo_disable_tags]',
                 bo_use_secret       = '$board[bo_use_secret]',
+                bo_use_dhtml_editor = '$board[bo_use_dhtml_editor]',
                 bo_use_sideview     = '$board[bo_use_sideview]',
                 bo_use_comment      = '$board[bo_use_comment]',
                 bo_use_good         = '$board[bo_use_good]',

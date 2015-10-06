@@ -43,22 +43,29 @@ ob_end_flush();
 <!-- 제목, 글쓴이, 날짜, 조회, 추천, 비추천 -->
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr><td height=2 bgcolor=#B0ADF5></td></tr> 
-<tr><td height=30 bgcolor=#F8F8F9 style="padding:5 0 5 0;">&nbsp;&nbsp;<strong><? if ($is_category) { echo ($category_name ? "[$view[ca_name]] " : ""); } ?><?=cut_hangul_last($view[wr_subject])?></strong></td></tr>
+<tr><td height=30 bgcolor=#F8F8F9 style="padding:5px 0 5px 0;">
+    <table width=100% cellpadding=0 cellspacing=0>
+    <tr>
+    	<td style='word-break:break-all;'>&nbsp;&nbsp;<strong><span id="writeSubject"><? if ($is_category) { echo ($category_name ? "[$view[ca_name]] " : ""); } ?><?=cut_hangul_last(get_text($view[wr_subject]))?></span></strong></td>
+    	<td width=50><a href="javascript:scaleFont(+1);"><img src='<?=$board_skin_path?>/img/icon_zoomin.gif' border=0 title='글자 확대'></a> 
+            <a href="javascript:scaleFont(-1);"><img src='<?=$board_skin_path?>/img/icon_zoomout.gif' border=0 title='글자 축소'></a></td>
+    </tr>
+    </table></td></tr>
 <tr><td height=30>&nbsp;&nbsp;<font color=#7A8FDB>글쓴이</font> : <?=$view[name]?><? if ($is_ip_view) { echo "&nbsp;($ip)"; } ?>&nbsp;&nbsp;&nbsp;&nbsp;
-       <font color=#7A8FDB>날짜</font> : <?=substr($view[wr_datetime],2,14)?>&nbsp;&nbsp;&nbsp;&nbsp;
-       <font color=#7A8FDB>조회</font> : <?=$view[wr_hit]?>&nbsp;&nbsp;&nbsp;&nbsp;
-       <? if ($is_good) { ?><font color=#7A8FDB>추천</font> : <?=$view[wr_good]?>&nbsp;&nbsp;&nbsp;&nbsp;<?}?>
-       <? if ($is_nogood) { ?><font color=#7A8FDB>비추천</font> : <?=$view[wr_nogood]?>&nbsp;&nbsp;&nbsp;&nbsp;<?}?></td></tr>
+    <font color=#7A8FDB>날짜</font> : <?=substr($view[wr_datetime],2,14)?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <font color=#7A8FDB>조회</font> : <?=$view[wr_hit]?>&nbsp;&nbsp;&nbsp;&nbsp;
+    <? if ($is_good) { ?><font color=#7A8FDB>추천</font> : <?=$view[wr_good]?>&nbsp;&nbsp;&nbsp;&nbsp;<?}?>
+    <? if ($is_nogood) { ?><font color=#7A8FDB>비추천</font> : <?=$view[wr_nogood]?>&nbsp;&nbsp;&nbsp;&nbsp;<?}?>
+    </td></tr>
 <tr><td height=1 bgcolor=#E7E7E7></td></tr>
 
 <? if ($trackback_url) { ?>
 <tr><td height=30>&nbsp;&nbsp;트랙백 주소 : <a href="javascript:clipboard_trackback('<?=$trackback_url?>');" style="letter-spacing:0;" title='이 글을 소개할 때는 이 주소를 사용하세요'><?=$trackback_url?></a>
 <script language="JavaScript">
-function clipboard_trackback(str) 
-{
-    if (g4_is_gecko)
+function clipboard_trackback(str) {
+    if (g4_is_gecko) {
         prompt("이 글의 고유주소입니다. Ctrl+C를 눌러 복사하세요.", str);
-    else if (g4_is_ie) {
+    } else if (g4_is_ie) {
         window.clipboardData.setData("Text", str);
         alert("트랙백 주소가 복사되었습니다.\n\n<?=$trackback_url?>");
     }
@@ -69,10 +76,8 @@ function clipboard_trackback(str)
 <?
 // 가변 파일
 $cnt = 0;
-for ($i=0; $i<count($view[file]); $i++) 
-{
-    if ($view[file][$i][source] && !$view[file][$i][view]) 
-    {
+for ($i=0; $i<count($view[file]); $i++) {
+    if ($view[file][$i][source] && !$view[file][$i][view]) {
         $cnt++;
         //echo "<tr><td height=22>&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_file.gif' align=absmiddle> <a href='{$view[file][$i][href]}' title='{$view[file][$i][content]}'><strong>{$view[file][$i][source]}</strong> ({$view[file][$i][size]}), Down : {$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td></tr>";
         echo "<tr><td height=22>&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_file.gif' align=absmiddle> <a href=\"javascript:file_download('{$view[file][$i][href]}', '{$view[file][$i][source]}');\" title='{$view[file][$i][content]}'><strong>{$view[file][$i][source]}</strong> ({$view[file][$i][size]}), Down : {$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td></tr>";
@@ -81,10 +86,8 @@ for ($i=0; $i<count($view[file]); $i++)
 
 // 링크
 $cnt = 0;
-for ($i=1; $i<=$g4[link_count]; $i++) 
-{
-    if ($view[link][$i]) 
-    {
+for ($i=1; $i<=$g4[link_count]; $i++) {
+    if ($view[link][$i]) {
         $cnt++;
         $link = cut_str($view[link][$i], 70);
         echo "<tr><td height=22>&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_link.gif' align=absmiddle> <a href='{$view[link_href][$i]}' target=_blank><strong>{$link}</strong> ({$view[link_hit][$i]})</a></td></tr>";
@@ -94,7 +97,9 @@ for ($i=1; $i<=$g4[link_count]; $i++)
 
 <tr><td height=1 bgcolor=#E7E7E7></td></tr>
 <tr> 
-    <td height="150" style='word-break:break-all; padding:10px; border:1px solid #BBBBBB;' bgcolor=#F8F8F9>
+    <td height="150" 
+        style='word-break:break-all;padding:5px;border:1px solid #BBBBBB;background:#F8F8F9;'>
+        <span id="writeContents" class="ct lh">
         <? 
         // 파일 출력
         for ($i=0; $i<=count($view[file]); $i++) {
@@ -104,7 +109,7 @@ for ($i=1; $i<=$g4[link_count]; $i++)
         ?>
 
         <!-- 내용 출력 -->
-        <span class="ct lh"><?=$view[content];?></span>
+        <?=$view[content];?></span>
         
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a>
@@ -123,41 +128,17 @@ include_once("./view_comment.php");
 </td></tr></table><br>
 
 <script language="JavaScript">
-// HTML 로 넘어온 <img ... > 태그의 폭이 테이블폭보다 크다면 테이블폭을 적용한다.
-function resize_image()
-{
-    var target = document.getElementsByName('target_resize_image[]');
-    var image_width = parseInt('<?=$board[bo_image_width]?>');
-    var image_height = 0;
-
-    for(i=0; i<target.length; i++) 
-    { 
-        // 원래 사이즈를 저장해 놓는다
-        target[i].tmp_width  = target[i].width;
-        target[i].tmp_height = target[i].height;
-        // 이미지 폭이 테이블 폭보다 크다면 테이블폭에 맞춘다
-        if(target[i].width > image_width) 
-        {
-            image_height = parseFloat(target[i].width / target[i].height)
-            target[i].width = image_width;
-            target[i].height = parseInt(image_width / image_height);
-
-            // 스타일에 적용된 이미지의 폭과 높이를 삭제한다
-            target[i].style.width = '';
-            target[i].style.height = '';
-        }
-        target[i].style.borderWidth = '1px';
-        target[i].style.borderStyle = 'solid';
-        target[i].style.borderColor = '#000000';
-    }
+function file_download(link, file) {
+    <? if ($board[bo_download_point] < 0) { ?>if (confirm("'"+file+"' 파일을 다운로드 하시면 포인트가 차감(<?=number_format($board[bo_download_point])?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?"))<?}?>
+    document.location.href=link;
 }
+</script>
 
-window.onload = resize_image;
-
-function file_download(link, file)
-{
-<? if ($board[bo_download_point] < 0) { ?>if (confirm("'"+file+"' 파일을 다운로드 하시면 포인트가 차감(<?=number_format($board[bo_download_point])?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?"))<?}?>
-document.location.href = link;
+<script language="JavaScript" src="<?="$g4[path]/js/board.js"?>"></script>
+<script language="JavaScript">
+window.onload=function() {
+    resizeBoardImage(<?=(int)$board[bo_image_width]?>);
+    drawFont();
 }
 </script>
 <!-- 게시글 보기 끝 -->

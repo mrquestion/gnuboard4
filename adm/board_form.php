@@ -4,8 +4,7 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "w");
 
-function b_draw($pos, $color='red')
-{
+function b_draw($pos, $color='red') {
     return "border-{$pos}-width:1px; border-{$pos}-color:{$color}; border-{$pos}-style:solid; ";
 }
 
@@ -15,8 +14,7 @@ if (!$row[cnt])
     alert("게시판그룹이 한개 이상 생성되어야 합니다.", "./boardgroup_form.php");
 
 $html_title = "게시판";
-if ($w == "") 
-{
+if ($w == "") {
     $html_title .= " 생성";
 
     $bo_table_attr = "required alphanumericunderline";
@@ -36,15 +34,14 @@ if ($w == "")
     $board[bo_hot] = '100';
     $board[bo_image_width] = '600';
     $board[bo_upload_count] = '2';
-    $board[bo_upload_size] = '1024768';
+    $board[bo_upload_size] = '1048576';
     $board[bo_reply_order] = '1';
     $board[bo_use_search] = '1';
     $board[bo_skin] = 'basic';
     $board[gr_id] = $gr_id;
     $board[bo_disable_tags] = "script|iframe";
-} 
-else if ($w == "u") 
-{
+    $board[bo_use_secret] = 0;
+} else if ($w == "u") {
     $html_title .= " 수정";
 
     if (!$board[bo_table])
@@ -58,8 +55,7 @@ else if ($w == "u")
     $bo_table_attr = "readonly style='background-color:#dddddd'";
 }
 
-if ($is_admin != "super")
-{
+if ($is_admin != "super") {
     $group = get_group($board[gr_id]);
     $is_admin = is_admin($member[mb_id]);
 }
@@ -279,7 +275,31 @@ include_once ("./admin.head.php");
 <tr class='ht'>
     <td><input type=checkbox name=chk_use_secret value=1></td>
     <td>비밀글 사용</td>
-    <td><input type=checkbox name=bo_use_secret value='1' <?=$board[bo_use_secret]?'checked':'';?>>사용</td>
+    <td>
+        <select name=bo_use_secret id='bo_use_secret'>
+        <option value='0'>사용하지 않음
+        <option value='1'>체크박스
+        <option value='2'>무조건
+        </select>
+        &nbsp;<?=help("'체크박스'는 글작성시 비밀글 체크가 가능합니다.\n\n'무조건'은 작성되는 모든글을 비밀글로 작성합니다. (관리자는 체크박스로 출력합니다.)\n\n스킨에 따라 적용되지 않을 수 있습니다.")?>
+        <script language='javascript'>document.getElementById('bo_use_secret').value='<?=$board[bo_use_secret]?>';</script>
+    </td>
+</tr>
+<tr class='ht'>
+    <td><input type=checkbox name=chk_use_dhtml_editor value=1></td>
+    <td>DHTML 에디터 사용</td>
+    <td>
+        <input type=checkbox name=bo_use_dhtml_editor value='1' <?=$board[bo_use_dhtml_editor]?'checked':'';?>>사용
+        &nbsp;<?=help("글작성시 내용을 DHTML 에디터 기능으로 사용할 것인지 설정합니다.\n\n스킨에 따라 적용되지 않을 수 있습니다.")?>
+    </td>
+</tr>
+<tr class='ht'>
+    <td><input type=checkbox name=chk_use_rss_view value=1></td>
+    <td>RSS 보이기 사용</td>
+    <td>
+        <input type=checkbox name=bo_use_rss_view value='1' <?=$board[bo_use_rss_view]?'checked':'';?>>사용
+        &nbsp;<?=help("비회원 글읽기가 가능하고 RSS 보이기 사용에 체크가 되어야만 RSS 지원을 합니다.")?>
+    </td>
 </tr>
 <tr class='ht'>
     <td><input type=checkbox name=chk_use_good value=1></td>
@@ -459,7 +479,7 @@ include_once ("./admin.head.php");
 <?
 $upload_max_filesize = ini_get("upload_max_filesize");
 if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
-    $upload_max_filesize = (int)($upload_max_filesize / 1024768);
+    $upload_max_filesize = (int)($upload_max_filesize / 1048576);
 }
 ?>
 <tr class='ht'>
@@ -530,13 +550,11 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
 </form>
 
 <script language="JavaScript">
-function board_copy(bo_table)
-{
+function board_copy(bo_table) {
     window.open("./board_copy.php?bo_table="+bo_table, "BoardCopy", "left=10,top=10,width=500,height=200");
 }
 
-function set_point(f)
-{
+function set_point(f) {
     if (f.chk_point.checked) {
         f.bo_read_point.value     = "<?=$config[cf_read_point]?>";
         f.bo_write_point.value    = "<?=$config[cf_write_point]?>";
@@ -550,8 +568,7 @@ function set_point(f)
     }
 }
 
-function fboardform_submit(f)
-{
+function fboardform_submit(f) {
     var tmp_title;
     var tmp_image;
 

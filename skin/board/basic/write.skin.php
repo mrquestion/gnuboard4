@@ -1,5 +1,11 @@
 <?
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
+
+if ($is_dhtml_editor) {
+    include_once("$g4[path]/lib/cheditor.lib.php");
+    echo "<script src='$g4[editor_path]/cheditor.js'></script>";
+    echo cheditor1('wr_content', $content);
+}
 ?>
 
 <script language="javascript">
@@ -61,8 +67,20 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <tr>
     <td style='padding-left:20px; height:30px;'>· 옵션</td>
     <td><? if ($is_notice) { ?><input type=checkbox name=notice value="1" <?=$notice_checked?>>공지&nbsp;<? } ?>
-        <? if ($is_html) { ?><input onclick="html_auto_br(this);" type=checkbox value="<?=$html_value?>" name="html" <?=$html_checked?>><span class=w_title>html</span>&nbsp;<? } ?>
-        <? if ($is_secret) { ?><input type=checkbox value="secret" name="secret" <?=$secret_checked?>><span class=w_title>비밀글</span>&nbsp;<? } ?>
+        <? if ($is_html) { ?>
+            <? if ($is_dhtml_editor) { ?>
+            <input type=hidden value="html1" name="html">
+            <? } else { ?>
+            <input onclick="html_auto_br(this);" type=checkbox value="<?=$html_value?>" name="html" <?=$html_checked?>><span class=w_title>html</span>&nbsp;
+            <? } ?>
+        <? } ?>
+        <? if ($is_secret) { ?>
+            <? if ($is_admin || $is_secret==1) { ?>
+            <input type=checkbox value="secret" name="secret" <?=$secret_checked?>><span class=w_title>비밀글</span>&nbsp;
+            <? } else { ?>
+            <input type=hidden value="secret" name="secret">
+            <? } ?>
+        <? } ?>
         <? if ($is_mail) { ?><input type=checkbox value="mail" name="mail" <?=$recv_email_checked?>>답변메일받기&nbsp;<? } ?></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
@@ -76,11 +94,14 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 <tr>
     <td style='padding-left:20px; height:30px;'>· 제목</td>
-    <td><input class=ed style="width:100%;" name=wr_subject itemname="제목" required value="<?=$subject?>"></td></tr>
+    <td><input class=ed style="width:100%;" name=wr_subject id="wr_subject" itemname="제목" required value="<?=$subject?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <tr>
     <td style='padding-left:20px;'>· 내용</td>
     <td style='padding:5 0 5 0;'>
+        <? if ($is_dhtml_editor) { ?>
+            <?=cheditor2('fwrite', 'wr_content', '100%', '350');?>
+        <? } else { ?>
         <table width=100% cellpadding=0 cellspacing=0>
         <tr>
             <td width=50% align=left valign=bottom>
@@ -90,9 +111,11 @@ var char_max = parseInt(<?=$write_max?>); // 최대
             <td width=50% align=right><? if ($write_min || $write_max) { ?><span id=char_count></span>글자<?}?></td>
         </tr>
         </table>
-        <textarea id=wr_content name=wr_content class=tx style='width:100%; word-break:break-all;' rows=10 itemname="내용" required 
+        <textarea id="wr_content" name="wr_content" class=tx style='width:100%; word-break:break-all;' rows=10 itemname="내용" required 
         <? if ($write_min || $write_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?}?>><?=$content?></textarea>
-        <? if ($write_min || $write_max) { ?><script language="javascript"> check_byte('wr_content', 'char_count'); </script><?}?></td>
+        <? if ($write_min || $write_max) { ?><script language="javascript"> check_byte('wr_content', 'char_count'); </script><?}?>
+        <? } ?>
+        </td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 
@@ -198,7 +221,6 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 </td></tr></table>
 </form>
 
-
 <script language="javascript">
 <?
 // 관리자라면 분류 선택에 '공지' 옵션을 추가함
@@ -214,8 +236,7 @@ if ($is_admin)
 } 
 ?>
 
-with (document.fwrite) 
-{
+with (document.fwrite) {
     if (typeof(wr_name) != "undefined")
         wr_name.focus();
     else if (typeof(wr_subject) != "undefined")
@@ -228,10 +249,8 @@ with (document.fwrite)
             ca_name.value = "<?=$write[ca_name]?>";
 }
 
-function html_auto_br(obj)
-{
-    if (obj.checked) 
-    {
+function html_auto_br(obj) {
+    if (obj.checked) {
         result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
         if (result)
             obj.value = "html2";
@@ -242,50 +261,56 @@ function html_auto_br(obj)
         obj.value = "";
 }
 
-function fwrite_check(f)
-{
+function fwrite_check(f) {
     var s = "";
-    if (s = word_filter_check(f.wr_subject.value)) 
-    {
+    if (s = word_filter_check(f.wr_subject.value)) {
         alert("제목에 금지단어('"+s+"')가 포함되어있습니다");
         return;
     }
 
-    if (s = word_filter_check(f.wr_content.value)) 
-    {
+    if (s = word_filter_check(f.wr_content.value)) {
         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
         return;
     }
 
-    if (char_min > 0 || char_max > 0)
-    {
+    if (char_min > 0 || char_max > 0) {
         var cnt = parseInt(document.getElementById('char_count').innerHTML);
-        if (char_min > 0 && char_min > cnt)
-        {
+        if (char_min > 0 && char_min > cnt) {
             alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
             return;
         } 
-        else if (char_max > 0 && char_max < cnt)
-        {
+        else if (char_max > 0 && char_max < cnt) {
             alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
             return;
         }
     }
 
-    if (typeof(f.wr_key) != "undefined") 
-    {
-        if (hex_md5(f.wr_key.value) != md5_norobot_key) 
-        {
+    if (typeof(f.wr_key) != "undefined") {
+        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
             alert("자동등록방지용 빨간글자가 순서대로 입력되지 않았습니다.");
             f.wr_key.focus();
             return;
         }
     }
 
+    <?
+    if ($is_dhtml_editor) {
+        echo cheditor3('wr_content');
+        echo "if (!document.getElementById('wr_content').value) { alert('내용을 입력하십시오.'); return; } ";
+    }
+    ?>
+
     document.getElementById('btn_submit').disabled = true;
     document.getElementById('btn_list').disabled = true;
 
     f.action = "./write_update.php";
     f.submit();
+}
+</script>
+
+<script language="JavaScript" src="<?="$g4[path]/js/board.js"?>"></script>
+<script language="JavaScript">
+window.onload=function() {
+    drawFont();
 }
 </script>

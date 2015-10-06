@@ -1,13 +1,15 @@
 body, td, p, input, button, textarea, select, .c1 { font-family:Tahoma,±¼¸²; font-size:9pt; color:#222222; }
 
+img {border:0px;}
+
 a:link, a:visited, a:active { text-decoration:none; color:#466C8A; }
 a:hover { text-decoration:underline; }
 
 a.menu:link, a.menu:visited, a.menu:active { text-decoration:none; color:#454545; }
 a.menu:hover { text-decoration:none; }
 
-.member { font-weight:bold; }
-.guest  { font-weight:normal; }
+.member {font-weight:bold;color:#888888;}
+.guest  {font-weight:normal;color:#888888;}
 
 .lh { line-height: 150%; }
 .jt { text-align:justify; }
@@ -22,3 +24,4 @@ a.menu:hover { text-decoration:none; }
 .tx { border:1px solid #CCCCCC; } 
 
 .small { font-size:8pt; font-family:µ¸¿ò; }
+.cloudy, a.cloudy {color:#888888;} /* Èå¸² */

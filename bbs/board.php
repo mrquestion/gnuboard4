@@ -72,7 +72,8 @@ if ($wr_id)
     if ($member[mb_level] < $board[bo_read_level]) 
     {
         if ($member[mb_id]) 
-            alert("글을 읽을 권한이 없습니다.");
+            //alert("글을 읽을 권한이 없습니다.");
+            alert("글을 읽을 권한이 없습니다.", $g4[path]);
         else 
             alert("글을 읽을 권한이 없습니다.\\n\\n회원이시라면 로그인 후 이용해 보십시오.", "./login.php?wr_id=$wr_id{$qstr}&url=".urlencode("board.php?bo_table=$bo_table&wr_id=$wr_id"));
     }

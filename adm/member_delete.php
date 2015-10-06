@@ -20,7 +20,7 @@ else if ($mb[mb_level] >= $member[mb_level])
 member_delete($mb[mb_id]);
 
 if ($url)
-    goto_url("{$url}?$qstr");
+    goto_url("{$url}?$qstr&w=u&mb_id=$mb_id");
 else
     goto_url("./member_list.php?$qstr");
 ?>

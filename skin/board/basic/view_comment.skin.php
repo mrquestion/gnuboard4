@@ -11,6 +11,7 @@ var char_max = parseInt(<?=$comment_max?>); // 최대
 <? if ($cwin==1) { ?><table width=100% cellpadding=10 align=center><tr><td><?}?>
 
 <!-- 코멘트 리스트 -->
+<div id="commentContents">
 <?
 for ($i=0; $i<count($list); $i++) {
     $comment_id = $list[$i][wr_id];
@@ -33,12 +34,11 @@ for ($i=0; $i<count($list); $i++) {
         </tr>
         </table>
 
-        <table width=100% cellpadding=0 cellspacing=0 style='border:1px solid #BBBBBB;'>
-        <tr><td bgcolor=#F8F8F9 colspan=2><img src='<?=$board_skin_path?>/img/co_point.gif'></td></tr>
+        <table width=100% cellpadding=0 cellspacing=0 style='border:1px solid #BBBBBB;background:#F8F8F9;'>
         <tr>                            
-            <td bgcolor=#F8F8F9 colspan=2 style='line-height:150%; padding:7px; word-break:break-all;'>
+            <td colspan=2 style='line-height:150%; padding:7px; word-break:break-all;'>
                 <!-- 코멘트 출력 -->
-                <span class="ct lh"><?=$list[$i][content]?></span>
+                <div><span class="ct lh"><?=$list[$i][content]?></span></div>
                 <? if ($list[$i][trackback]) { echo "<p>".$list[$i][trackback]."</p>"; } ?>
                 <span id='edit_<?=$comment_id?>' style='display:none;'></span><!-- 수정 -->
                 <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- 답변 -->
@@ -52,12 +52,13 @@ for ($i=0; $i<count($list); $i++) {
 </tr>
 </table>
 <? } ?>
+</div>
 <!-- 코멘트 리스트 -->
 
 
 <? if ($is_comment_write) { ?>
 <!-- 코멘트 입력 -->
-<table width=100% cellpadding=3 cellspacing=0 bgcolor=#FFFFFF><tr><td align=right><a href="javascript:comment_box('', 'c');"><img src='<?=$board_skin_path?>/img/btn_comment_insert.gif' border=0 align=absmiddle></a></td></tr></table>
+<table width=100% cellpadding=3 cellspacing=0 bgcolor=#FFFFFF><tr><td align=right><a href="javascript:comment_box('', 'c');"><span class='small' style='color:#888888;'>코멘트입력</span></a></td></tr></table>
 
 <span id=comment_write style='display:none;'>
 <form name="fviewcomment" method="post" action="./write_comment_update.php" onsubmit="return fviewcomment_submit(this);" autocomplete="off" style="margin:0px;">

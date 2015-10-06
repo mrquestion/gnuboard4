@@ -192,8 +192,8 @@ function set_http($url)
 function get_filesize($size)
 {
     //$size = @filesize(addslashes($file));
-    if ($size >= 1024768) {
-        $size = number_format($size/1024768, 1) . "M";
+    if ($size >= 1048576) {
+        $size = number_format($size/1048576, 1) . "M";
     } else if ($size >= 1024) {
         $size = number_format($size/1024, 1) . "K";
     } else {
@@ -1279,6 +1279,8 @@ function check_demo()
 // 문자열이 한글, 영문, 숫자, 특수문자로 구성되어 있는지 검사
 function check_string($str, $options) 
 {
+    global $g4;
+
     $s = '';
     for($i=0;$i<strlen($str);$i++) {
         $c = $str[$i];
@@ -1286,10 +1288,17 @@ function check_string($str, $options)
 
         // 한글
         if ($oc >= 0xA0 && $oc <= 0xFF) {
-            // 한글은 2바이트 이므로 문자하나를 건너뜀
-            $i++;
-            if ($options & _G4_HANGUL_) {
-                $s .= $c . $str[$i];
+            if (strtoupper($g4['charset']) == 'UTF-8') {
+                if ($options & _G4_HANGUL_) {
+                    $s .= $c . $str[$i+1] . $str[$i+2];
+                }
+                $i+=2;
+            } else {
+                // 한글은 2바이트 이므로 문자하나를 건너뜀
+                $i++;
+                if ($options & _G4_HANGUL_) {
+                    $s .= $c . $str[$i];
+                }
             }
         } 
         // 숫자
@@ -1332,6 +1341,8 @@ function check_string($str, $options)
 // 출력시 깨지는 현상이 발생하므로 마지막 완전하지 않은 글자(1byte)를 하나 없앰
 function cut_hangul_last($hangul)
 {
+    global $g4;
+
     // 한글이 반쪽나면 ?로 표시되는 현상을 막음
     $cnt = 0;
     for($i=0;$i<strlen($hangul);$i++) {
@@ -1342,8 +1353,11 @@ function cut_hangul_last($hangul)
     }
 
     // 홀수라면 한글이 반쪽난 상태이므로
-    if ($cnt%2)
-        $hangul = substr($hangul, 0, $cnt-1);
+    if (strtoupper($g4['charset']) != 'UTF-8') {
+        if ($cnt%2) {
+            $hangul = substr($hangul, 0, $cnt-1);
+        }
+    }
 
     return $hangul;
 }

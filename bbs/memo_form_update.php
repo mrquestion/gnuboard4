@@ -11,7 +11,7 @@ $comma1 = $comma2 = "";
 $mb_list = array();
 for ($i=0; $i<count($tmp_list); $i++) {
     $row = get_member($tmp_list[$i]);
-    if (!$row[mb_id] || !$row[mb_open] || $row[mb_leave_date] || $row[mb_intercept_date]) {
+    if ((!$row[mb_id] || !$row[mb_open] || $row[mb_leave_date] || $row[mb_intercept_date]) && !$is_admin) {
         $msg .= "$comma1$tmp_list[$i]";
         $comma1 = ",";
     } else {

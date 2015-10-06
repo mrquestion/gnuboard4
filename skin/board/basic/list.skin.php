@@ -3,7 +3,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 // 선택옵션으로 인해 셀합치기가 가변적으로 변함
 $colspan = 6;
-if ($is_category) $colspan++;
+//if ($is_category) $colspan++;
 if ($is_checkbox) $colspan++;
 if ($is_good) $colspan++;
 if ($is_nogood) $colspan++;
@@ -39,7 +39,7 @@ if ($is_nogood) $colspan++;
 <tr><td colspan=<?=$colspan?> height=2 bgcolor=#B0ADF5></td></tr>
 <tr bgcolor=#F8F8F9 height=30 align=center>
     <td width=50>번호</td>
-    <? if ($is_category) { ?><td width=70>분류</td><?}?>
+    <?/* if ($is_category) { ?><td width=70>분류</td><?}*/?>
     <? if ($is_checkbox) { ?><td width=40><INPUT onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><?}?>
     <td>제목</td>
     <td width=110>글쓴이</td>
@@ -59,34 +59,29 @@ if ($is_nogood) $colspan++;
         if ($list[$i][is_notice]) // 공지사항 
             echo "<img src=\"$board_skin_path/img/notice_icon.gif\" width=30 height=16>";
         else if ($wr_id == $list[$i][wr_id]) // 현재위치
-            echo "<font color='#2C8CB9'><strong>{$list[$i][num]}</strong>";
+            echo "<span style='color:#ff6600;font-weight:bold;'>{$list[$i][num]}</span>";
         else
-            echo "{$list[$i][num]}";
+            echo "<span style='color:#888888;'>{$list[$i][num]}</span>";
         ?></td>
-    <? if ($is_category) { ?><td><a href="<?=$list[$i][ca_name_href]?>"><font color=gray><span class=small><?=$list[$i][ca_name]?></span></font></a></td><? } ?>
+    <?/* if ($is_category) { ?><td><a href="<?=$list[$i][ca_name_href]?>"><span class=small style='color:#888888;'><?=$list[$i][ca_name]?></span></a></td><? } */?>
     <? if ($is_checkbox) { ?><td><input type=checkbox name=chk_wr_id[] value="<?=$list[$i][wr_id]?>"></td><? } ?>
     <td align=left style='word-break:break-all;'>
         <? 
         echo $nobr_begin;
         echo $list[$i][reply];
         echo $list[$i][icon_reply];
-        echo "<a href='{$list[$i][href]}'>";
-        if ($list[$i][is_notice])
-            //echo "<font color='#AF6BE3'><strong>{$list[$i][subject]}</strong></font>";
-            echo "<font color='#333333'><strong>{$list[$i][subject]}</strong></font>";
-        else
-        {
-            $style1 = $style2 = "";
-            // 최신글은 검정
-            //if ($list[$i][icon_new]) $style1 = "color:#222222;";
-            // 코멘트 없는것만 굵게
-            //if (!$list[$i][comment_cnt]) $style2 = "color:#268800;";
-            echo "<span style='$style1 $style2'>{$list[$i][subject]}</span>";
+        if ($list[$i][ca_name]) { 
+            echo "<span class=small><font color=gray>[<a href='{$list[$i][ca_name_href]}'>{$list[$i][ca_name]}</a>]</font></span> ";
         }
+        $style = "";
+        if ($list[$i][is_notice]) $style = " style='font-weight:bold;'";
+
+        echo "<a href='{$list[$i][href]}' $style>";
+        echo $list[$i][subject];
         echo "</a>";
 
         if ($list[$i][comment_cnt]) 
-            echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-size:7pt;color:#ff6600;'>{$list[$i][comment_cnt]}</span></a>";
+            echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-family:Tahoma;font-size:7pt;color:#ff6600;'>{$list[$i][comment_cnt]}</span></a>";
 
         // if ($list[$i]['link']['count']) { echo "[{$list[$i]['link']['count']}]"; }
         // if ($list[$i]['file']['count']) { echo "<{$list[$i]['file']['count']}>"; }
@@ -98,12 +93,12 @@ if ($is_nogood) $colspan++;
         echo " " . $list[$i][icon_secret];
         echo $nobr_end;
         ?></td>
-    <td><?=$list[$i][name]?></td>
-    <td><?=$list[$i][datetime2]?></td>
-    <td><?=$list[$i][wr_hit]?></td>
-    <td><?=$list[$i][last2]?></td>
-    <? if ($is_good) { ?><td align="center"><?=$list[$i][wr_good]?></td><? } ?>
-    <? if ($is_nogood) { ?><td align="center"><?=$list[$i][wr_nogood]?></td><? } ?>
+    <td><nobr style='display:block; overflow:hidden; width:105px;'><?=$list[$i][name]?></nobr></td>
+    <td><span style='color:#888888;'><?=$list[$i][datetime2]?></span></td>
+    <td><span style='color:#888888;'><?=$list[$i][wr_hit]?></span></td>
+    <td><span style='color:#888888;'><?=$list[$i][last2]?></span></td>
+    <? if ($is_good) { ?><td align="center"><span style='color:#888888;'><?=$list[$i][wr_good]?></span></td><? } ?>
+    <? if ($is_nogood) { ?><td align="center"><span style='color:#888888;'><?=$list[$i][wr_nogood]?></span></td><? } ?>
 </tr>
 <tr><td colspan=<?=$colspan?> height=1 bgcolor=#E7E7E7></td></tr>
 <?}?>
@@ -151,9 +146,9 @@ if ($is_nogood) $colspan++;
     </td>
     <td width="50%" align="right">
         <select name=sfl>
-            <option value='wr_subject||wr_content'>제목+내용</option>
             <option value='wr_subject'>제목</option>
             <option value='wr_content'>내용</option>
+            <option value='wr_subject||wr_content'>제목+내용</option>
             <option value='mb_id,1'>회원아이디</option>
             <option value='mb_id,0'>회원아이디(코)</option>
             <option value='wr_name,1'>이름</option>
@@ -179,8 +174,7 @@ if ('<?=$stx?>') {
 
 <? if ($is_checkbox) { ?>
 <script language="JavaScript">
-function all_checked(sw)
-{
+function all_checked(sw) {
     var f = document.fboardlist;
 
     for (var i=0; i<f.length; i++) {
@@ -189,8 +183,7 @@ function all_checked(sw)
     }
 }
 
-function check_confirm(str)
-{
+function check_confirm(str) {
     var f = document.fboardlist;
     var chk_count = 0;
 
@@ -207,8 +200,7 @@ function check_confirm(str)
 }
 
 // 선택한 게시물 삭제
-function select_delete()
-{
+function select_delete() {
     var f = document.fboardlist;
 
     str = "삭제";
@@ -223,8 +215,7 @@ function select_delete()
 }
 
 // 선택한 게시물 복사 및 이동
-function select_copy(sw)
-{
+function select_copy(sw) {
     var f = document.fboardlist;
 
     if (sw == "copy")
@@ -235,7 +226,7 @@ function select_copy(sw)
     if (!check_confirm(str))
         return;
 
-    var sub_win = window.open("", "move", "left=50, top=50, width=396, height=550, scrollbars=1");
+    var sub_win = window.open("", "move", "left=50, top=50, width=500, height=550, scrollbars=1");
 
     f.sw.value = sw;
     f.target = "move";

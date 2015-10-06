@@ -28,15 +28,40 @@ function member_delete($mb_id)
     global $config;
     global $g4;
 
-    $sql = " select mb_name, mb_nick, mb_ip, mb_recommend from $g4[member_table] where mb_id= '$mb_id' ";
+    $sql = " select mb_name, mb_nick, mb_ip, mb_recommend, mb_memo, mb_level from $g4[member_table] where mb_id= '$mb_id' ";
     $mb = sql_fetch($sql);
-    if ($mb[mb_recommend]) 
-    {
+    if ($mb[mb_recommend]) {
         $row = sql_fetch(" select count(*) as cnt from $g4[member_table] where mb_id = '$mb[mb_recommend]' ");
         if ($row[cnt])
             insert_point($mb[mb_recommend], $config[cf_recommend_point] * (-1), "{$mb_id}님의 회원자료 삭제로 인한 추천인 포인트 반환", '@member', $mb[mb_recommend], "{$mb_id} 추천인 삭제");
     }
+
+    // 회원자료는 정보만 없앤 후 아이디는 보관하여 다른 사람이 사용하지 못하도록 함 : 061025
+    if ($mb[mb_level] > 1) {
+        $sql = " update $g4[member_table] 
+                    set mb_password = '',
+                        mb_level = '1',
+                        mb_email = '',
+                        mb_homepage = '',
+                        mb_password_q = '',
+                        mb_password_a = '',
+                        mb_tel = '',
+                        mb_hp = '',
+                        mb_zip1 = '',
+                        mb_zip2 = '',
+                        mb_addr1 = '',
+                        mb_addr2 = '',
+                        mb_birth = '',
+                        mb_sex = '',
+                        mb_signature = '',
+                        mb_memo = '".date("Ymd",$g4['server_time'])." 삭제함\n\n$mb[mb_memo]',
+                        mb_leave_date = '".date("Ymd",$g4['server_time'])."' 
+                  where mb_id = '$mb_id' ";
+        //echo $sql; exit;
+        sql_query($sql);
+    }
     
+    /*
     // 회원 자료 삭제
     sql_query(" delete from $g4[member_table] where mb_id = '$mb_id' ");
 
@@ -71,6 +96,7 @@ function member_delete($mb_id)
 
     // 아이콘 삭제
     @unlink("$g4[path]/data/member/".substr($mb_id,0,2)."/$mb_id.gif");
+    */
 }
 
 

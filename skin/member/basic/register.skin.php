@@ -2,64 +2,82 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 ?>
 
-<table width=600 cellspacing=0 cellspacing=0 align=center><tr><td>
-
-<table width="100%" cellspacing="0" cellpadding="0">
 <form name="fregister" method="POST" action="javascript:fregister_submit(document.fregister);" autocomplete="off">
-<tr> 
-    <td align=center><img src="<?=$member_skin_path?>/img/join_title.gif" width="624" height="72"></td>
-</tr>
-</table>
+<table width=600 cellspacing=0 cellspacing=0 align=center><tr><td align=center>
 
-<? if ($config[cf_use_jumin]) { // 주민등록번호를 사용한다면 ?>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr>
-    <td height=25></td>
-</tr>
-<tr>
-    <td bgcolor="#CCCCCC">
-        <TABLE cellSpacing=1 cellPadding=0 width=100% border=0>
-        <TR bgcolor="#FFFFFF"> 
-            <TD width="140" height=30>&nbsp;&nbsp;&nbsp;<b>이름</b></TD>
-            <TD width="">&nbsp;&nbsp;&nbsp;<INPUT name=mb_name itemname="이름" required minlength="2" nospace hangul></TD>
-        </TR>
-        <TR bgcolor="#FFFFFF"> 
-            <TD height=30>&nbsp;&nbsp;&nbsp;<b>주민등록번호</b></TD>
-            <TD>&nbsp;&nbsp;&nbsp;<INPUT name=mb_jumin itemname="주민등록번호" required jumin minlength="13" maxLength=13><font style="font-family:돋움; font-size:9pt; color:#66A2C8">&nbsp;&nbsp;※ 숫자 13자리 중간에 - 없이 입력하세요.</font></TD>
-        </TR>
-        </TABLE></td>
-</tr>
-</table>
-<? } ?>
+    <table width="100%" cellspacing="0" cellpadding="0">
+    <tr> 
+        <td align=center><img src="<?=$member_skin_path?>/img/join_title.gif" width="624" height="72"></td>
+    </tr>
+    </table>
 
-<table width="100%" cellspacing="0" cellpadding="0">
-<tr>
-    <td height="20"></td>
-</tr>
-<tr> 
-    <td height="48" background="<?=$member_skin_path?>/img/login_table_bg_top.gif"><b>회원가입약관</b></td>
-</tr>
-<tr> 
-    <td height="223" align="center" valign="top" background="<?=$member_skin_path?>/img/login_table_bg.gif"><TEXTAREA style="WIDTH: 100%" rows=15 readOnly><?=get_text($config[cf_stipulation])?></TEXTAREA></td>
-</tr>
-<tr> 
-    <td><INPUT type=checkbox value=1 name=agree id=agree>&nbsp;<label for=agree>약관의 내용에 동의합니다.</label></td>
-</tr>
-<tr> 
-    <td height="35" background="<?=$member_skin_path?>/img/line.gif"></td>
-</tr>
-<tr> 
-    <td align="center"><INPUT type=image width="66" height="20" src="<?=$member_skin_path?>/img/join_ok_btn.gif" border=0></td>
-</tr>
+    <? if ($config[cf_use_jumin]) { // 주민등록번호를 사용한다면 ?>
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <td height=25></td>
+        </tr>
+        <tr>
+            <td bgcolor="#cccccc">
+                <table cellspacing=1 cellpadding=0 width=100% border=0>
+                <tr bgcolor="#ffffff"> 
+                    <td width="140" height=30>&nbsp;&nbsp;&nbsp;<b>이름</b></td>
+                    <td width="">&nbsp;&nbsp;&nbsp;<input name=mb_name itemname="이름" required minlength="2" nospace hangul class=ed></td>
+                </tr>
+                <tr bgcolor="#ffffff"> 
+                    <td height=30>&nbsp;&nbsp;&nbsp;<b>주민등록번호</b></td>
+                    <td>&nbsp;&nbsp;&nbsp;<input name=mb_jumin itemname="주민등록번호" required jumin minlength="13" maxlength=13 class=ed><font style="font-family:돋움; font-size:9pt; color:#66a2c8">&nbsp;&nbsp;※ 숫자 13자리 중간에 - 없이 입력하세요.</font></td>
+                </tr>
+                </table></td>
+        </tr>
+    </table>
+    <? } ?>
+
+    <br>
+    <table width="100%" cellpadding="4" cellspacing="0" bgcolor=#EEEEEE>
+        <tr> 
+            <td height=40>&nbsp; <b>회원가입약관</b></td>
+        </tr>
+        <tr> 
+            <td align="center" valign="top"><textarea style="width: 98%" rows=5 readonly class=ed><?=get_text($config[cf_stipulation])?></textarea></td>
+        </tr>
+        <tr> 
+            <td height=40>&nbsp; <input type=checkbox value=1 name=agree id=agree>&nbsp;<label for=agree>회원가입약관을 읽었으며 내용에 동의합니다.</label></td>
+        </tr>
+    </table>
+
+    <br>
+    <table width="100%" cellpadding="4" cellspacing="0" bgcolor=#EEEEEE>
+        <tr> 
+            <td height=40>&nbsp; <b>개인정보보호정책</b></td>
+        </tr>
+        <tr> 
+            <td align="center" valign="top"><textarea style="width: 98%" rows=5 readonly class=ed><?=get_text($config[cf_privacy])?></textarea></td>
+        </tr>
+        <tr> 
+            <td height=40>&nbsp; <input type=checkbox value=1 name=agree2 id=agree2>&nbsp;<label for=agree2>개인정보보호정책을 읽었으며 내용에 동의합니다.</label></td>
+        </tr>
+    </table>
+
+</td></tr></table>
+
+<br>
+<div align=center>
+<input type=image width="66" height="20" src="<?=$member_skin_path?>/img/join_ok_btn.gif" border=0>
+</div>
 </form>
-</table>
+
 
 <script language="javascript">
-function fregister_submit(f)
-{
+function fregister_submit(f) {
     if (!f.agree.checked) {
-        alert("약관의 내용에 동의해야 회원가입 하실 수 있습니다.");
+        alert("회원가입약관의 내용에 동의해야 회원가입 하실 수 있습니다.");
         f.agree.focus();
+        return;
+    }
+
+    if (!f.agree2.checked) {
+        alert("개인정보보호정책의 내용에 동의해야 회원가입 하실 수 있습니다.");
+        f.agree2.focus();
         return;
     }
 
@@ -70,5 +88,3 @@ function fregister_submit(f)
 if (typeof(document.fregister.mb_name) != "undefined")
     document.fregister.mb_name.focus();
 </script>
-
-</td></tr></table>

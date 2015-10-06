@@ -141,14 +141,12 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </TD>
         </TR>
 
-        <? if ($w=="u") { ?>
+        <? if ($w=="") { ?>
             <TR bgcolor="#FFFFFF">
                 <TD class=m_title>생년월일</TD>
                 <TD class=m_padding><input class=m_text type=text id=mb_birth name='mb_birth' size=8 maxlength=8 minlength=8 required numeric itemname='생년월일' value='<?=$member[mb_birth]?>' readonly title='옆의 달력 아이콘을 클릭하여 날짜를 입력하세요.'>
                     <a href="javascript:win_calendar('mb_birth', document.getElementById('mb_birth').value, '');"><img src='<?=$member_skin_path?>/img/calendar.gif' border=0 align=absmiddle title='달력 - 날짜를 선택하세요'></a></TD>
             </TR>
-        <? } else { ?>
-            <input type=hidden name=mb_birth value='<?=$member[mb_birth]?>'>
         <? } ?>
 
         <? if ($member[mb_sex]) { ?>

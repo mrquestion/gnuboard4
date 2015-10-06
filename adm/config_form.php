@@ -7,10 +7,16 @@ auth_check($auth[$sub_menu], "r");
 if ($is_admin != "super")
     alert("최고관리자만 접근 가능합니다.");
 
+// 개인정보보호정책 필드 추가 : 061121
+$sql = " ALTER TABLE `$g4[config_table]` ADD `cf_privacy` TEXT NOT NULL AFTER `cf_stipulation` ";
+sql_query($sql, FALSE);
+if (!trim($config[cf_privacy])) {
+    $config[cf_privacy] = "해당 홈페이지에 맞는 개인정보보호정책을 입력합니다.";
+}
+
 $g4['title'] = "기본환경설정";
 include_once ("./admin.head.php");
 ?>
-
 
 <table width=100% cellpadding=0 cellspacing=0 border=0>
 <form name=fconfigform method=post action='javascript:fconfigform_submit(document.fconfigform);'>
@@ -290,6 +296,10 @@ include_once ("./admin.head.php");
 <tr class='ht'>
     <td>회원가입약관</td>
     <td valign=top colspan=3><textarea class=ed name='cf_stipulation' rows='10' style='width:99%;'><?=$config[cf_stipulation]?></textarea></td>
+</tr>
+<tr class='ht'>
+    <td>개인정보보호정책</td>
+    <td valign=top colspan=3><textarea class=ed name='cf_privacy' rows='10' style='width:99%;'><?=$config[cf_privacy]?></textarea></td>
 </tr>
 <tr><td colspan=4 class=line2></td></tr>
 <tr><td colspan=4 class=ht></td></tr>

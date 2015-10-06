@@ -88,7 +88,11 @@ var list_delete_php = "member_list_delete.php";
 <table width=100%>
 <form name=fsearch method=get>
 <tr>
-    <td width=50% align=left><?=$listall?> (총회원수 : <?=number_format($total_count)?>, <font color=orange>차단 : <?=number_format($intercept_count)?></font>, <font color=crimson>탈퇴 : <?=number_format($leave_count)?></font>)</td>
+    <td width=50% align=left><?=$listall?> 
+        (총회원수 : <?=number_format($total_count)?>, 
+        <a href='?sst=mb_intercept_date&sod=desc&sfl=<?=$sfl?>&stx=<?=$stx?>' title='차단된 회원부터 출력'><font color=orange>차단 : <?=number_format($intercept_count)?></font></a>, 
+        <a href='?sst=mb_leave_date&sod=desc&sfl=<?=$sfl?>&stx=<?=$stx?>' title='탈퇴한 회원부터 출력'><font color=crimson>탈퇴 : <?=number_format($leave_count)?></font></a>)
+    </td>
     <td width=50% align=right>
         <select name=sfl class=cssfl>
             <option value='mb_id'>회원아이디</option>
@@ -218,6 +222,8 @@ if ($stx)
     echo "<script language='javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
 ?>
 </form>
+
+* 회원자료 삭제시 다른 회원이 기존 회원아이디를 사용하지 못하도록 회원아이디, 이름, 별명은 삭제하지 않고 영구 보관합니다.
 
 <?
 include_once ("./admin.tail.php");

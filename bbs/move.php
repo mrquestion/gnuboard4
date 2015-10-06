@@ -90,7 +90,19 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         <tr> 
             <td width="39" height="25" align="center"><input type=checkbox id='chk<?=$i?>' name='chk_bo_table[]' value="<?=$list[$i][bo_table]?>"></td>
             <td width="10" valign="bottom"><img src="<?=$g4[bbs_img_path]?>/l.gif" width="1" height="8"></td>
-            <td width="490"><span style="cursor:pointer;" onclick="document.getElementById('chk<?=$i?>').checked=document.getElementById('chk<?=$i?>').checked?'':'checked';"><?=$list[$i][gr_subject]?> > <?=$list[$i][bo_subject]?> (<?=$list[$i][bo_table]?>)</span></td>
+            <td width="490">
+                <span style="cursor:pointer;" onclick="document.getElementById('chk<?=$i?>').checked=document.getElementById('chk<?=$i?>').checked?'':'checked';">
+                    <?
+                    if ($save_gr_subject==$list[$i][gr_subject])
+                        echo "<span style='color:#cccccc;'>";
+                    else
+                        echo "<span>";
+                    echo $list[$i][gr_subject] . " > ";
+                    echo "</span>";
+                    $save_gr_subject = $list[$i][gr_subject];
+                    ?>
+                    <?=$list[$i][bo_subject]?> (<?=$list[$i][bo_table]?>)</span>
+            </td>
         </tr>
         <tr> 
             <td height="1" colspan="3" bgcolor="#E9E9E9"></td>

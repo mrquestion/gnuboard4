@@ -55,6 +55,7 @@ var g4_is_admin  = "<?=$is_admin?>";
 var g4_bo_table  = "<?=isset($bo_table)?$bo_table:'';?>";
 var g4_sca       = "<?=isset($sca)?$sca:'';?>";
 var g4_charset   = "<?=$g4['charset']?>";
+var g4_cookie_domain = "<?=$g4['cookie_domain']?>";
 var g4_is_gecko  = navigator.userAgent.toLowerCase().indexOf("gecko") != -1;
 var g4_is_ie     = navigator.userAgent.toLowerCase().indexOf("msie") != -1;
 <? if ($is_admin) { echo "var g4_admin = '{$g4['admin']}';"; } ?>

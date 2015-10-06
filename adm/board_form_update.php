@@ -55,6 +55,8 @@ $sql_common = " gr_id               = '$_POST[gr_id]',
                 bo_use_sideview     = '$bo_use_sideview',
                 bo_use_file_content = '$bo_use_file_content',
                 bo_use_secret       = '$bo_use_secret',
+                bo_use_dhtml_editor = '$bo_use_dhtml_editor',
+                bo_use_rss_view     = '$bo_use_rss_view',
                 bo_use_comment      = '$bo_use_comment',
                 bo_use_good         = '$bo_use_good',
                 bo_use_nogood       = '$bo_use_nogood',
@@ -152,9 +154,7 @@ if ($w == "") {
     $target = array($create_table, "");
     $sql = preg_replace($source, $target, $sql);
     sql_query($sql, FALSE);
-} 
-else if ($w == "u") 
-{
+} else if ($w == "u") {
     // 게시판의 글 수
     $sql = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_is_comment = 0 ";
     $row = sql_fetch($sql);
@@ -166,13 +166,11 @@ else if ($w == "u")
     $bo_count_comment = $row[cnt];
 
     // 글수 조정
-    if ($proc_count) 
-    {
+    if ($proc_count) {
         // 원글을 얻습니다.
         $sql = " select wr_id from $g4[write_prefix]$bo_table where wr_is_comment = 0 ";
         $result = sql_query($sql);
-        for ($i=0; $row=sql_fetch_array($result); $i++) 
-        {
+        for ($i=0; $row=sql_fetch_array($result); $i++) {
             // 코멘트수를 얻습니다.
             $sql2 = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_parent = '$row[wr_id]' and wr_is_comment = 1 ";
             $row2 = sql_fetch($sql2);
@@ -184,11 +182,9 @@ else if ($w == "u")
     // 공지사항에는 등록되어 있지만 실제 존재하지 않는 글 아이디는 삭제합니다.
     $bo_notice = "";
     $lf = "";
-    if ($board[bo_notice]) 
-    {
+    if ($board[bo_notice]) {
         $tmp_array = explode("\n", $board[bo_notice]);
-        for ($i=0; $i<count($tmp_array); $i++) 
-        {
+        for ($i=0; $i<count($tmp_array); $i++) {
             $tmp_wr_id = trim($tmp_array[$i]);
             $row = sql_fetch(" select count(*) as cnt from $g4[write_prefix]$bo_table where wr_id = '$tmp_wr_id' ");
             if ($row[cnt]) 
@@ -228,8 +224,7 @@ if ($chk_read_point) $s .= " , bo_read_point = '$bo_read_point' ";
 if ($chk_write_point) $s .= " , bo_write_point = '$bo_write_point' ";
 if ($chk_comment_point) $s .= " , bo_comment_point = '$bo_comment_point' ";
 if ($chk_download_point) $s .= " , bo_download_point = '$bo_download_point' ";
-if ($chk_category_list) 
-{
+if ($chk_category_list) {
     $s .= " , bo_category_list = '$bo_category_list' ";
     $s .= " , bo_use_category = '$bo_use_category' ";
 }
@@ -237,6 +232,8 @@ if ($chk_use_sideview) $s .= " , bo_use_sideview = '$bo_use_sideview' ";
 if ($chk_use_file_content) $s .= " , bo_use_file_content = '$bo_use_file_content' ";
 if ($chk_use_comment) $s .= " , bo_use_comment = '$bo_use_comment' ";
 if ($chk_use_secret) $s .= " , bo_use_secret = '$bo_use_secret' ";
+if ($chk_use_dhtml_editor) $s .= " , bo_use_dhtml_editor = '$bo_use_dhtml_editor' ";
+if ($chk_use_rss_view) $s .= " , bo_use_rss_view = '$bo_use_rss_view' ";
 if ($chk_use_good) $s .= " , bo_use_good = '$bo_use_good' ";
 if ($chk_use_nogood) $s .= " , bo_use_nogood = '$bo_use_nogood' ";
 if ($chk_use_name) $s .= " , bo_use_name = '$bo_use_name' ";
@@ -270,17 +267,14 @@ if ($chk_content_tail) $s .= " , bo_content_tail = '$bo_content_tail' ";
 if ($chk_insert_content) $s .= " , bo_insert_content = '$bo_insert_content' ";
 if ($chk_use_search) $s .= " , bo_use_search = '$bo_use_search' ";
 if ($chk_order_search) $s .= " , bo_order_search = '$bo_order_search' ";
-for ($i=1; $i<=10; $i++) 
-{
-    if ($_POST["chk_{$i}"]) 
-    {
+for ($i=1; $i<=10; $i++) {
+    if ($_POST["chk_{$i}"]) {
         $s .= " , bo_{$i}_subj = '".$_POST["bo_{$i}_subj"]."' ";
         $s .= " , bo_{$i} = '".$_POST["bo_{$i}"]."' ";
     }
 }
 
-if ($s)
-{
+if ($s) {
         $sql = " update $g4[board_table]
                     set bo_table = bo_table
                         {$s}

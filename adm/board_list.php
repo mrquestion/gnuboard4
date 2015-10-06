@@ -4,11 +4,15 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+// DHTML 에디터 사용 필드 추가 : 061021
+sql_query(" ALTER TABLE `$g4[board_table]` ADD `bo_use_dhtml_editor` TINYINT NOT NULL AFTER `bo_use_secret` ", false);
+// RSS 보이기 사용 필드 추가 : 061106
+sql_query(" ALTER TABLE `$g4[board_table]` ADD `bo_use_rss_view` TINYINT NOT NULL AFTER `bo_use_dhtml_editor` ", false);
+
 $sql_common = " from $g4[board_table] a ";
 $sql_search = " where (1) ";
 
-if ($is_admin != "super") 
-{
+if ($is_admin != "super") {
     $sql_common .= " , $g4[group_table] b ";
     $sql_search .= " and (a.gr_id = b.gr_id and b.gr_admin = '$member[mb_id]') ";
 }
@@ -132,8 +136,7 @@ for ($k=0; $k<count($arr); $k++)
     $skin_options .= "<option value='$arr[$k]'>$option</option>";
 }
 
-for ($i=0; $row=sql_fetch_array($result); $i++)
-{
+for ($i=0; $row=sql_fetch_array($result); $i++) {
     $s_upd = "<a href='./board_form.php?w=u&bo_table=$row[bo_table]&$qstr'><img src='img/icon_modify.gif' border=0 title='수정'></a>";
     $s_del = "";
     if ($is_admin == "super") 
@@ -206,8 +209,7 @@ if ($stx)
 </form>
 
 <script language="JavaScript">
-function board_copy(bo_table)
-{
+function board_copy(bo_table) {
     window.open("./board_copy.php?bo_table="+bo_table, "BoardCopy", "left=10,top=10,width=500,height=200");
 }
 </script>
