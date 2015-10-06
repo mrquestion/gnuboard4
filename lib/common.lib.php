@@ -919,9 +919,15 @@ function view_file_link($file, $width, $height, $content="")
     else if (preg_match("/\.($config[cf_flash_extension])$/i", $file))
         //return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
         return "<script>doc_write(flash_movie('$g4[path]/data/file/$board[bo_table]/$file', '_g4_{$ids}', '$width', '$height', 'transparent'));</script>";
+    //=============================================================================================
+    // 동영상 파일에 악성코드를 심는 경우를 방지하기 위해 경로를 노출하지 않음
+    //---------------------------------------------------------------------------------------------
+    /*
     else if (preg_match("/\.($config[cf_movie_extension])$/i", $file))
         //return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
         return "<script>doc_write(obj_movie('$g4[path]/data/file/$board[bo_table]/$file', '_g4_{$ids}', '$width', '$height'));</script>";
+    */
+    //=============================================================================================
 }
 
 

@@ -139,10 +139,19 @@ if (is_uploaded_file($_FILES[mb_icon][tmp_name]))
             chmod($dest_path, 0606);
             if (file_exists($dest_path)) 
             {
+                //=================================================================\
+                // 090714
+                // gif 파일에 악성코드를 심어 업로드 하는 경우를 방지
+                // 에러메세지는 출력하지 않는다.
+                //-----------------------------------------------------------------
                 $size = getimagesize($dest_path);
+                if ($size[2] != 1) // gif 파일이 아니면 올라간 이미지를 삭제한다.
+                    @unlink($dest_path);
+                else
                 // 아이콘의 폭 또는 높이가 설정값 보다 크다면 이미 업로드 된 아이콘 삭제
                 if ($size[0] > $config[cf_member_icon_width] || $size[1] > $config[cf_member_icon_height])
                     @unlink($dest_path);
+                //=================================================================\
             }
         }
     }

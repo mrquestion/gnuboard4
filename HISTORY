@@ -1,3 +1,10 @@
+4.31.11 (09.07.14)
+    :   파일을 변조후 업로드된 파일을 이용한 보안취약점을 보완 (반드시 패치해 주십시오.)
+
+        lib/common.lib.php : view_file_link() 함수
+        bbs/write_update.php : 파일 업로드 부분
+        bbs/register_form_update.php : 회원아이콘 업로드 부분
+
 4.31.10 (09.07.13)
     :   write.php 에서 존재하는 게시판($bo_table)인지 검사하는 코드 추가 (nasca님께서 알려주셨습니다.)
     :   HTML 쓰기 권한이 있는 경우에만 DHTML 사용 가능하도록 수정 (TopSchooL님께서 알려주셨습니다.)

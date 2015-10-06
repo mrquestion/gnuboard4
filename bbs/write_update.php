@@ -187,6 +187,26 @@ for ($i=0; $i<count($_FILES[bf_file][name]); $i++)
             continue;
         }
 
+        //=================================================================\
+        // 090714
+        // 이미지나 플래시 파일에 악성코드를 심어 업로드 하는 경우를 방지
+        // 에러메세지는 출력하지 않는다.
+        //-----------------------------------------------------------------
+        $timg = @getimagesize($tmp_file);
+        // image type
+        if ( preg_match("/\.($config[cf_image_extension])$/i", $filename) ||
+             preg_match("/\.($config[cf_flash_extension])$/i", $filename) ) 
+        {
+            if ($timg[2] < 1 || $timg[2] > 16)
+            {
+                //$file_upload_msg .= "\'{$filename}\' 파일이 이미지나 플래시 파일이 아닙니다.\\n";
+                continue;
+            }
+        }
+        //=================================================================
+
+        $upload[$i][image] = $timg;
+
         // 4.00.11 - 글답변에서 파일 업로드시 원글의 파일이 삭제되는 오류를 수정
         if ($w == 'u')
         {
@@ -218,7 +238,7 @@ for ($i=0; $i<count($_FILES[bf_file][name]); $i++)
         // 올라간 파일의 퍼미션을 변경합니다.
         chmod($dest_file, 0606);
 
-        $upload[$i][image] = @getimagesize($dest_file);
+        //$upload[$i][image] = @getimagesize($dest_file);
 
     }
 }
