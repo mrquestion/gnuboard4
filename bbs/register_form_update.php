@@ -366,12 +366,11 @@ $https_url = "$g4[url]/$g4[bbs]";
 if ($w == "") {
     goto_url("{$https_url}/register_result.php");
 } else if ($w == "u") {
+    // 패스워드를 암호화하여 넘김
     if ($mb_password)
-        $tmp_password = $mb_password;
+        $tmp_password = sql_password($mb_password);
     else
-        //$tmp_password = get_session("ss_tmp_password");
-        // 복호화를 한 후 회원가입일시를 없애주면 원래 패스워드가 나옴
-        $tmp_password = preg_replace("/^".$member[mb_datetime]."/", "", base64_decode(get_session("ss_tmp_password")));
+        $tmp_password = get_session("ss_tmp_password");
 
     if ($old_email != $mb_email && $config[cf_use_email_certify]) {
         set_session("ss_mb_id", "");
@@ -383,6 +382,7 @@ if ($w == "") {
         <input type='hidden' name='w' value='u'>
         <input type='hidden' name='mb_id' value='{$mb_id}'>
         <input type='hidden' name='mb_password' value='{$tmp_password}'>
+        <input type='hidden' name='is_update' value='1'>
         </form>
         <script type='text/javascript'>
         alert('회원 정보가 수정 되었습니다.');

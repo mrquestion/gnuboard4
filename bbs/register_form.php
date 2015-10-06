@@ -70,13 +70,27 @@ else if ($w == "u")
     if ($member[mb_id] != $mb_id)
         alert("로그인된 회원과 넘어온 정보가 서로 다릅니다.");
 
+    /*
     if (!($member[mb_password] == sql_password($_POST[mb_password]) && $_POST[mb_password]))
         alert("패스워드가 틀립니다.");
 
     // 수정 후 다시 이 폼으로 돌아오기 위해 임시로 저장해 놓음
-    //set_session("ss_tmp_password", $_POST[mb_password]);
-    // 패스워드를 알아볼 수 없도록 회원가입일시를 넣어서 암호화 함
-    set_session("ss_tmp_password", base64_encode($member[mb_datetime].$_POST[mb_password]));
+    set_session("ss_tmp_password", $_POST[mb_password]);
+    */
+
+    if ($_POST['mb_password']) {
+        // 수정된 정보를 업데이트후 되돌아 온것이라면 패스워드가 암호화 된채로 넘어온것임
+        if ($_POST['is_update'])
+            $tmp_password = $_POST['mb_password'];
+        else
+            $tmp_password = sql_password($_POST['mb_password']);
+
+        if ($member['mb_password'] != $tmp_password)
+            alert("패스워드가 틀립니다.");
+    }
+
+    // 수정 후 다시 이 폼으로 돌아오기 위해 임시로 저장해 놓음
+    set_session("ss_tmp_password", $tmp_password);
 
     $g4[title] = "회원 정보 수정";
 } else
