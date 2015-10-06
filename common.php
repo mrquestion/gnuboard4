@@ -273,18 +273,30 @@ unset($my); // DB 설정값을 클리어 해줍니다.
 
 //print_r2($GLOBALS);
 
+$_SERVER['PHP_SELF'] = htmlentities($_SERVER['PHP_SELF']);
+
 //-------------------------------------------
 // SESSION 설정
 //-------------------------------------------
+include_once("$g4[path]/lib/dbsession.lib.php");
+$session = new g4_dbsession();
+session_set_save_handler(array($session, 'open'), 
+                         array($session, 'close'),
+                         array($session, 'read'),
+                         array($session, 'write'),
+                         array($session, 'destroy'),
+                         array($session, 'gc'));
+
 ini_set("session.use_trans_sid", 0);    // PHPSESSID를 자동으로 넘기지 않음
 ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함 (해뜰녘님께서 알려주셨습니다.)
-
-session_save_path("{$g4['path']}/data/session");
 
 if (isset($SESSION_CACHE_LIMITER))
     @session_cache_limiter($SESSION_CACHE_LIMITER);
 else
     @session_cache_limiter("no-cache, must-revalidate");
+
+@session_start();
+//-------------------------------------------
 
 //==============================================================================
 // 공용 변수
@@ -292,16 +304,6 @@ else
 // 기본환경설정
 // 기본적으로 사용하는 필드만 얻은 후 상황에 따라 필드를 추가로 얻음
 $config = sql_fetch(" select * from $g4[config_table] ");
-
-ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
-ini_set("session.gc_maxlifetime", 10800); // session data의 garbage collection 존재 기간을 지정 (초)
-ini_set("session.gc_probability", 1); // session.gc_probability는 session.gc_divisor와 연계하여 gc(쓰레기 수거) 루틴의 시작 확률을 관리합니다. 기본값은 1입니다. 자세한 내용은 session.gc_divisor를 참고하십시오.
-ini_set("session.gc_divisor", 100); // session.gc_divisor는 session.gc_probability와 결합하여 각 세션 초기화 시에 gc(쓰레기 수거) 프로세스를 시작할 확률을 정의합니다. 확률은 gc_probability/gc_divisor를 사용하여 계산합니다. 즉, 1/100은 각 요청시에 GC 프로세스를 시작할 확률이 1%입니다. session.gc_divisor의 기본값은 100입니다.
-
-session_set_cookie_params(0, "/");
-ini_set("session.cookie_domain", $g4['cookie_domain']);
-
-@session_start();
 
 /*
 // 081022 : CSRF 방지를 위해 코드를 작성했으나 효과가 없어 주석처리 함
