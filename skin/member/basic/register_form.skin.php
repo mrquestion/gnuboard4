@@ -493,9 +493,18 @@ function prohibit_id_check(id)
 
     var prohibit_id = "<?=trim(strtolower($config[cf_prohibit_id]))?>";
     var s = prohibit_id.split(",");
+    var tmp_id;
 
-    for (i=0; i<s.length; i++) {
-        if (s[i] == id)
+    for (i=0; i<s.length; i++) 
+    {
+        /* 부관리자, 관리자2 와 같은 아이디와 별명도 사용하지 못하게 할 경우에 주석을 제거하세요.
+        tmp_id = s[i].toLowerCase();
+        if (id.indexOf(tmp_id, 0) > -1)
+        {
+            return id;
+        }
+        */
+        if (s[i] == id) 
             return id;
     }
     return "";

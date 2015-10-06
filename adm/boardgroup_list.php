@@ -58,7 +58,6 @@ $colspan = 8;
 
 <script language="JavaScript">
 var list_update_php = "./boardgroup_list_update.php";
-var list_delete_php = "./boardgroup_list_delete.php";
 </script>
 
 <table width=100% cellpadding=3 cellspacing=1>

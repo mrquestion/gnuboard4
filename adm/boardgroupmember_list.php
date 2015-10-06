@@ -13,7 +13,6 @@ $sql_common = " from $g4[group_member_table] a
                 left outer join $g4[member_table] b on (a.mb_id = b.mb_id) ";
 
 $sql_search = " where gr_id = '$gr_id' ";
-// 3.34
 // 회원아이디로 검색되지 않던 오류를 수정
 if ($stx) {
     $sql_search .= " and ( ";
@@ -94,7 +93,8 @@ $colspan = 7;
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 
 <?
-for ($i=0; $row=sql_fetch_array($result); $i++) {
+for ($i=0; $row=sql_fetch_array($result); $i++) 
+{
     // 접근가능한 그룹수
     $sql2 = " select count(*) as cnt from $g4[group_member_table] where mb_id = '$row[mb_id]' ";
     $row2 = sql_fetch($sql2);

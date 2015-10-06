@@ -2,6 +2,8 @@
 $sub_menu = "100600";
 include_once("./_common.php");
 
+check_demo();
+
 if ($is_admin != "super")
     alert("최고관리자만 접근 가능합니다.", $g4[path]);
 

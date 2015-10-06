@@ -73,14 +73,20 @@ function getMouseXY(e)
     return true;
 }
 
-function imageview(name, w, h)
+function imageview(id, w, h)
 {
 
-    menu(name);
+    menu(id);
 
-    submenu = eval(name+".style");
-    submenu.posLeft = tempX - ( w + 11 );
-    submenu.posTop  = tempY - ( h / 2 );
+    //submenu = eval(name+".style");
+    submenu = document.getElementById(id).style;
+    submenu.left = tempX - ( w + 11 );
+    submenu.top  = tempY - ( h / 2 );
+
+    selectBoxVisible();
+
+    if (id.style != 'none')
+        selectBoxHidden(id);
 }
 
 function help(id, left, top)
@@ -89,8 +95,8 @@ function help(id, left, top)
 
     //submenu = eval(name+".style");
     submenu = document.getElementById(id).style;
-    submenu.posLeft = tempX - 50 + left;
-    submenu.posTop  = tempY + 15 + top;
+    submenu.left = tempX - 50 + left;
+    submenu.top  = tempY + 15 + top;
 
     selectBoxVisible();
 

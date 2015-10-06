@@ -84,7 +84,7 @@ $good_href = "";
 $nogood_href = "";
 if ($member[mb_id]) {
     // 스크랩 링크
-    $scrap_href = "./board_scrap_update.php?bo_table=$bo_table&wr_id=$wr_id";
+    $scrap_href = "./scrap_popin.php?bo_table=$bo_table&wr_id=$wr_id";
 
     // 추천 링크
     if ($board[bo_use_good]) 

@@ -12,16 +12,6 @@ if (empty($_POST))
 referer_check();
 
 $w = $_POST["w"];
-$wr_name  = strip_tags($_POST["wr_name"]);
-$wr_email = strip_tags($_POST["wr_email"]);
-
-// 비회원의 경우 이름이 누락되는 경우가 있음
-if (!$is_member)
-{
-    if (!trim($wr_name))
-        alert("이름은 필히 입력하셔야 합니다.");
-}
-    
 
 $notice_array = explode("\n", trim($board[bo_notice]));
 
@@ -37,7 +27,6 @@ if ($w == "" || $w == "u") {
 } 
 else if ($w == "r") 
 {
-    //if (preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice]))
     if (in_array((int)$wr_id, $notice_array))
         alert("공지에는 답변 할 수 없습니다.");
 
@@ -109,7 +98,6 @@ if (!isset($_POST[wr_subject]))
 // 가변 파일 업로드
 $file_upload_msg = "";
 $upload = array();
-//print_r2($_FILES);
 for ($i=0; $i<count($_FILES[bf_file][name]); $i++) 
 {
     // 삭제에 체크가 되어있다면 파일을 삭제합니다.
@@ -128,7 +116,6 @@ for ($i=0; $i<count($_FILES[bf_file][name]); $i++)
     $filesize  = $_FILES[bf_file][size][$i];
 
     // 서버에 설정된 값보다 큰파일을 업로드 한다면
-    //if ($filesize > get_filesize($upload_max_filesize))
     if ($filename)
     {
         if ($_FILES[bf_file][error][$i] == 1)
@@ -198,6 +185,9 @@ if ($w == "" || $w == "r")
     else 
     {
         $mb_id = "";
+        // 비회원의 경우 이름이 누락되는 경우가 있음
+        if (!trim($wr_name))
+            alert("이름은 필히 입력하셔야 합니다.");
         $wr_password = sql_password($wr_password);
     }
 
@@ -213,8 +203,6 @@ if ($w == "" || $w == "r")
     } 
     else 
     {
-        // 가장 작은 wr_id를 얻음
-        //$wr_id = get_next_wr_id($write_table);
         $wr_num = get_next_num($write_table);
         $wr_reply = "";
     }
@@ -278,7 +266,6 @@ if ($w == "" || $w == "r")
     }
     else 
     {
-        //insert_point($member[mb_id], $board[bo_write_point], "$board[bo_subject] $wr_id 글답변");
         // 답변은 코멘트 포인트를 부여함
         // 답변 포인트가 많은 경우 코멘트 대신 답변을 하는 경우가 많음
         insert_point($member[mb_id], $board[bo_comment_point], "$board[bo_subject] $wr_id 글답변", $bo_table, $wr_id, '쓰기');
@@ -298,11 +285,18 @@ else if ($w == "u")
             $wr_email = $member[mb_email];
             $wr_homepage = $member[mb_homepage];
         } 
-        else 
+        else
+        {
             $mb_id = $wr[mb_id];
+        }
     } 
     else 
+    {
         $mb_id = "";
+        // 비회원의 경우 이름이 누락되는 경우가 있음
+        if (!trim($wr_name))
+            alert("이름은 필히 입력하셔야 합니다.");
+    }
 
     $sql_password = $wr_password ? " , wr_password = '".sql_password($wr_password)."' " : "";
 
@@ -442,7 +436,6 @@ if (!($w == "u" || $w == "cu") && $config[cf_email_use] && $board[bo_use_email])
     $board_admin = get_admin("board");
 
     $wr_subject = get_text(stripslashes($wr_subject));
-    //$wr_content = nl2br(get_text(stripslashes($wr_content)));
 
     $tmp_html = 0;
     if (strstr($html, "html1"))
@@ -515,10 +508,8 @@ if (($w != "u" && $wr_trackback) || ($w=="u" && $wr_trackback && $re_trackback))
         echo "<script language='JavaScript'>alert('$msg $wr_trackback');</script>";
 }
 
-//goto_url("./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
 if ($file_upload_msg)
     alert($file_upload_msg, "./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
 else
     goto_url("./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
-//header("Location:./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
 ?>

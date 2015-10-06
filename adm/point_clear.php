@@ -2,6 +2,8 @@
 $sub_menu = "200200";
 include_once("./_common.php");
 
+check_demo();
+
 if (!$ok)
     alert();
 

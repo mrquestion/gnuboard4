@@ -2,6 +2,9 @@
 $sub_menu = "200100";
 include_once("./_common.php");
 
+if ($w == 'u')
+    check_demo();
+
 auth_check($auth[$sub_menu], "w");
 
 $sql_common = " mb_name         = '$mb_name',
@@ -109,8 +112,6 @@ else if ($w == "u")
 } 
 else
     alert("제대로 된 값이 넘어오지 않았습니다.");
-
-//sql_query(" OPTIMIZE TABLE `$g4[member_table]`, `$g4[login_table]` ");
 
 goto_url("./member_form.php?$qstr&w=u&mb_id=$mb_id");
 ?>

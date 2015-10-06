@@ -68,16 +68,19 @@ function print_r2($var)
 // header("location:URL") ¿ª ¥Î√º
 function goto_url($url)
 {
+    /*
     if (preg_match("/MSIE/", $_SERVER[HTTP_USER_AGENT]))
         echo "<meta http-equiv='Refresh' content='0;url=$url'>";
     else
         echo "<script language='JavaScript'> document.location.href = '$url'; </script>";
+    */
     //header("Location:$url");
     //flush();
     //if (!headers_sent())
     //    header("Location:$url");
     //else
     //echo "<script language='JavaScript'> document.location.href = '$url'; </script>";
+    echo "<script language='JavaScript'> location.replace('$url'); </script>";
     exit;
 }
 

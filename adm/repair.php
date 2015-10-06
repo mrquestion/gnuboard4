@@ -7,6 +7,7 @@ if ($is_admin != "super")
 
 $g4[title] = "테이블 복구 및 최적화";
 include_once("./admin.head.php");
+echo "'완료' 메세지가 나오기 전에 프로그램의 실행을 중지하지 마십시오.<br>";
 echo "<span id='ct'></span>";
 include_once("./admin.tail.php");
 flush();
@@ -79,5 +80,5 @@ while($row = sql_fetch_array($result))
         echo $row['Data_free']." OPTIMIZED\n";
     */
 }
-echo "<script>document.getElementById('ct').innerHTML += '테이블 복구 및 최적화 완료.';</script>\n";
+echo "<script>document.getElementById('ct').innerHTML += '<br><br>테이블 복구 및 최적화 완료.<br><br>프로그램의 실행을 끝마치셔도 좋습니다.';</script>\n";
 ?>

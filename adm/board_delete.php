@@ -2,6 +2,8 @@
 $sub_menu = "300100";
 include_once("./_common.php");
 
+check_demo();
+
 if ($is_admin != "super")
     alert("게시판 삭제는 최고관리자만 가능합니다.");
 

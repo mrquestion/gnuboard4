@@ -22,9 +22,7 @@ if ($member[mb_level] < $board[bo_download_level]) {
         alert($alert_msg . "\\n\\n회원이시라면 로그인 후 이용해 보십시오.", "./login.php?wr_id=$wr_id&$qstr&url=".urlencode("board.php?bo_table=$bo_table&wr_id=$wr_id"));
 }
 
-// 이미 다운로드 받은 파일인지를 검사
-//$ss_name = "ss_down_{$bo_table}_{$wr_id}_{$no}";
-// 게시물당 한번만 차감하도록 수정
+// 이미 다운로드 받은 파일인지를 검사한 후 게시물당 한번만 포인트를 차감하도록 수정
 $ss_name = "ss_down_{$bo_table}_{$wr_id}";
 if (!get_session($ss_name)) 
 {
@@ -34,13 +32,10 @@ if (!get_session($ss_name))
     else if ($board[bo_download_level] > 1) // 회원이상 다운로드가 가능하다면
     {
         // 다운로드 포인트가 음수이고 회원의 포인트가 0 이거나 작다면
-        //if ($board[bo_download_point] < 0 && $member[mb_point] <= 0)
         if ($member[mb_point] + $board[bo_download_point] < 0)
             alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 다운로드(".number_format($board[bo_download_point]).")가 불가합니다.\\n\\n포인트를 적립하신 후 다시 다운로드 해 주십시오.");
 
-        //insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id {$no}번 파일 다운로드", $bo_table, $wr_id, "다운로드 $no");
         // 게시물당 한번만 차감하도록 수정
-        //insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id {$no}번 파일 다운로드", $bo_table, $wr_id, "다운로드");
         insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id 파일 다운로드", $bo_table, $wr_id, "다운로드");
     }
 

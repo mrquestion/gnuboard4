@@ -2,6 +2,8 @@
 $sub_menu = "200100";
 include_once("./_common.php");
 
+check_demo();
+
 auth_check($auth[$sub_menu], "d");
 
 $mb = get_member($mb_id);

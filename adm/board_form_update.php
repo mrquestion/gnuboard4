@@ -2,6 +2,9 @@
 $sub_menu = "300100";
 include_once("./_common.php");
 
+if ($w == 'u')
+    check_demo();
+
 auth_check($auth[$sub_menu], "w");
 
 if (!$_POST[gr_id]) { alert("그룹 ID는 반드시 선택하세요."); }

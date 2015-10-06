@@ -2,6 +2,8 @@
 $sub_menu = "300200";
 include_once("./_common.php");
 
+check_demo();
+
 auth_check($auth[$sub_menu], "d");
 
 $row = sql_fetch(" select count(*) as cnt from $g4[board_table] where gr_id = '$gr_id' ");

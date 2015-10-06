@@ -2,6 +2,8 @@
 $sub_menu = "100100";
 include_once("./_common.php");
 
+check_demo();
+
 auth_check($auth[$sub_menu], "w");
 
 if ($is_admin != "super")

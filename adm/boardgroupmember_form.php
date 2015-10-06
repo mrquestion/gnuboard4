@@ -38,7 +38,6 @@ $sql = " select *
                 $g4[group_table] b
           where a.mb_id = '$mb[mb_id]' 
             and a.gr_id = b.gr_id ";
-//if ($is_admin == 'group') {
 if ($is_admin != 'super') 
     $sql .= " and b.gr_admin = '$member[mb_id]' ";
 $sql .= " order by a.gr_id desc ";

@@ -1,3 +1,22 @@
+4.06.06 (05.11.01)
+    :   글읽기시 포인트 차감 부분 수정
+    :   view.php 의 $scrap_href 변수에 올바르지 않은 링크 수정
+        pardner님께서 알려주셨습니다.
+    :   필요없는 bbs/visit.inc.php 삭제
+        pardner님께서 알려주셨습니다.
+    :   비회원의 글쓰기,수정시 이름이 누락되는 경우가 있음. 약간의 코드 수정
+    :   admin.head.php 수정
+    :   페이지 이동 방법 변경 goto_url() 함수
+        달빛온도님께서 알려주셨습니다.
+    :   우편번호 2005년 10월 18일자 추가 (postman.pe.kr dbf 활용)
+
+        adm/admin.head.php
+        bbs/board.php
+        bbs/view.php
+        bbs/write_update.php
+        bbs/zip.db
+        lib/common.lib.php
+
 4.06.05 (05.10.20)
     :   메뉴번호가 바뀌는 경우에 현재 없는 저장된 메뉴는 삭제함 (관리권한설정)
     :   lib/common.lib.php 의 url_auto_link() 함수에서 &nbsp; 로 인해

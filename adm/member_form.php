@@ -186,24 +186,24 @@ include_once("./admin.head.php");
 </form>
 
 <script language='Javascript'>
-    if (document.fmember.w.value == "")
-        document.fmember.mb_id.focus();
-    else if (document.fmember.w.value == "u")
-        document.fmember.mb_password.focus();
+if (document.fmember.w.value == "")
+    document.fmember.mb_id.focus();
+else if (document.fmember.w.value == "u")
+    document.fmember.mb_password.focus();
 
-    if (typeof(document.fmember.mb_level) != "undefined") 
-        document.fmember.mb_level.value   = "<?=$mb[mb_level]?>"; 
+if (typeof(document.fmember.mb_level) != "undefined") 
+    document.fmember.mb_level.value   = "<?=$mb[mb_level]?>"; 
 
-    function fmember_submit(f)
-    {
-        if (!f.mb_icon.value.match(/\.(gif|jp[e]g|png)$/i) && f.mb_icon.value) {
-            alert('아이콘이 이미지 파일이 아닙니다. (bmp 제외)');
-            return;
-        }
-
-        f.action = './member_form_update.php';
-        f.submit();
+function fmember_submit(f)
+{
+    if (!f.mb_icon.value.match(/\.(gif|jp[e]g|png)$/i) && f.mb_icon.value) {
+        alert('아이콘이 이미지 파일이 아닙니다. (bmp 제외)');
+        return;
     }
+
+    f.action = './member_form_update.php';
+    f.submit();
+}
 </script>
 
 <?
