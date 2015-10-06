@@ -1,3 +1,36 @@
+4.37.36 (2015.09.03)
+    : LFI(Local File Inclusion) 취약점 보완 (한국인터넷진흥원에서 알려 주셨습니다.)
+      상단 파일 경로와 하단 파일 경로에는 URL을 사용할수 없도록 하였습니다.
+
+        adm/board_form_update.php 가 아래와 같이 수정 되었습니다.
+
+            $_POST[bo_include_head] = substr($_POST[bo_include_head], 0, 255);
+            $_POST[bo_include_tail] = substr($_POST[bo_include_tail], 0, 255);
+
+            if ($file = $_POST[bo_include_head]) {
+                $purl = parse_url($file);
+                $file = $purl['path'];
+                if (!preg_match("/\.(php|htm[l]?)$/i", $file)) {
+                    alert("상단 파일 경로가 php, html 파일이 아닙니다.");
+                }
+                $_POST[bo_include_head] = $file;
+            }
+
+            if ($file = $_POST[bo_include_tail]) {
+                $purl = parse_url($file);
+                $file = $purl['path'];
+                if (!preg_match("/\.(php|htm[l]?)$/i", $file)) {
+                    alert("하단 파일 경로가 php, html 파일이 아닙니다.");
+                }
+                $_POST[bo_include_tail] = $file;
+            }
+
+        adm/board_form.php 에 아래의 코드가 추가 되었습니다.
+
+            <?=help("http://도메인/head.php 와 같은 경로는 사용할수 없습니다.<br>_head.php 또는 /home/user/www/head.php 와 같은 경로만 사용할수 있습니다.");?>
+            ...
+            <?=help("http://도메인/tail.php 와 같은 경로는 사용할수 없습니다.<br>_tail.php 또는 /home/user/www/tail.php 와 같은 경로만 사용할수 있습니다.");?>
+
 4.37.35 (2015.09.01)
     : LFI(Local File Inclusion) 취약점 해결 (한국인터넷진흥원을 통하여 익명의 제보자께서 알려 주셨습니다.)
 
