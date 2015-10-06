@@ -256,7 +256,8 @@ $subject = preg_replace("/\"/", "&#034;", get_text(cut_str($write[wr_subject], 2
 if ($w == "") 
     $content = $board[bo_insert_content];
 else if ($w == "r") {
-    if (!$write[wr_html]) {
+    //if (!$write[wr_html]) {
+    if (!strstr($write[wr_option], "html")) {
         $content = "\n\n\n>"
                  //. "\n> $write[wr_datetime], \"$write[wr_name]\"님이 쓰신 글입니다. ↓"
                  . "\n>"

@@ -155,6 +155,7 @@ function fsearchbox_submit(f)
 <table width='<?=$table_width?>' cellpadding=0 cellspacing=0>
 <tr>
     <td width=43></td>
+    <!-- 왼쪽 메뉴 -->
     <td width=220 valign=top>
         <?=outlogin("basic"); // 외부 로그인 ?>
 
@@ -170,4 +171,5 @@ function fsearchbox_submit(f)
 
         <?=connect(); // 현재 접속자수 ?>
     </td>
+    <!-- 중간 -->
     <td width=683 valign=top>

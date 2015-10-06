@@ -29,6 +29,9 @@ for ($i=0; $i<count($list); $i++) {
                 <? if ($list[$i][is_del])  { echo "<a href=\"javascript:comment_delete('{$list[$i][del_link]}');\"><img src='$board_skin_path/img/btn_comment_delete.gif' border=0 align=absmiddle></a> "; } ?>
                 &nbsp;&nbsp;<?=$list[$i][datetime]?></td>
         </tr>
+        </table>
+
+        <table width=100% cellpadding=0 cellspacing=0 style='border:1px solid #BBBBBB;'>
         <tr><td bgcolor=#F8F8F9 colspan=2><img src='<?=$board_skin_path?>/img/co_point.gif'></td></tr>
         <tr>                            
             <td bgcolor=#F8F8F9 colspan=2 style='line-height:150%; padding:7px; word-break:break-all;'>
@@ -39,8 +42,11 @@ for ($i=0; $i<count($list); $i++) {
                 <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- ´äº¯ -->
             </td>
         </tr>
+        </table>
+
+        <table width=100% cellpadding=0 cellspacing=0>
         <tr><td colspan=2 height=20></td></tr>
-        </table><textarea id='save_comment_<?=$comment_id?>' style='display:none; width:100%'><?=get_text($list[$i][wr_content], 0)?></textarea></td>
+        </table><textarea id='save_comment_<?=$comment_id?>' style='display:none;'><?=get_text($list[$i][wr_content], 0)?></textarea></td>
 </tr>
 </table>
 <? } ?>

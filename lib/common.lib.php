@@ -274,7 +274,15 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
 
     // 목록에서 내용 미리보기 사용한 게시판만 내용을 변환함 (속도 향상) : kkal3(커피)님께서 알려주셨습니다.
     if ($board[bo_use_list_content])
-        $list[content] = conv_content($list[wr_content], $list[wr_html]);
+	{
+		$html = 0;
+		if (strstr($list[wr_option], "html1"))
+			$html = 1;
+		else if (strstr($list[wr_option], "html2"))
+			$html = 2;
+
+        $list[content] = conv_content($list[wr_content], $html);
+	}
 
     $list[comment_cnt] = "";
     if ($list[wr_comment])

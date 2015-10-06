@@ -29,6 +29,9 @@ for ($i=0; $i<count($list); $i++) {
                 <? if ($list[$i][is_del])  { echo "<a href=\"javascript:comment_delete('{$list[$i][del_link]}');\"><img src='$board_skin_path/img/btn_comment_delete.gif' border=0 align=absmiddle></a> "; } ?>
                 &nbsp;&nbsp;<?=$list[$i][datetime]?></td>
         </tr>
+        </table>
+
+        <table width=100% cellpadding=0 cellspacing=0 style='border:1px solid #BBBBBB;'>
         <tr><td bgcolor=#F8F8F9 colspan=2><img src='<?=$board_skin_path?>/img/co_point.gif'></td></tr>
         <tr>                            
             <td bgcolor=#F8F8F9 colspan=2 style='line-height:150%; padding:7px; word-break:break-all;'>
@@ -39,6 +42,9 @@ for ($i=0; $i<count($list); $i++) {
                 <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- 답변 -->
             </td>
         </tr>
+        </table>
+
+        <table width=100% cellpadding=0 cellspacing=0>
         <tr><td colspan=2 height=20></td></tr>
         </table><textarea id='save_comment_<?=$comment_id?>' style='display:none;'><?=get_text($list[$i][wr_content], 0)?></textarea></td>
 </tr>
@@ -71,7 +77,7 @@ for ($i=0; $i<count($list); $i++) {
         패스워드 <INPUT type=password maxLength=20 size=15 name="wr_password" itemname="패스워드" required class=ed>
             <? if ($is_norobot) { ?>
                 <?=$norobot_str?>
-                <INPUT title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" itemname="자동등록방지" required class=ed>
+                <INPUT title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" itemname="자동등록방지" required class=ed size=10>
             <?}?>
     <?}?>
 

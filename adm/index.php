@@ -297,8 +297,8 @@ $colspan = 7;
     <td width=50% align=left>
         <?=$listall?> (건수 : <?=number_format($total_count)?>)
         <? 
-        $row2 = sql_fetch(" select sum(po_point) as sum_point from $g4[point_table] ");
-        echo "&nbsp;(전체 포인트 합계 : " . number_format($row2[sum_point]) . "점)";
+        //$row2 = sql_fetch(" select sum(po_point) as sum_point from $g4[point_table] ");
+        //echo "&nbsp;(전체 포인트 합계 : " . number_format($row2[sum_point]) . "점)";
         ?>
         
     </td>

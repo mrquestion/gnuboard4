@@ -43,7 +43,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     // 게시물 제목
     $tmp_write_table = $g4[write_prefix] . $row[bo_table];
     $sql3 = " select wr_subject from $tmp_write_table where wr_id = '$row[wr_id]' ";
-    $row3 = sql_fetch($sql3);
+    $row3 = sql_fetch($sql3, FALSE);
     $subject = get_text(cut_str($row3[wr_subject], 100));
     if (!$row3[wr_subject]) 
         $row3[wr_subject] = "[글 없음]";

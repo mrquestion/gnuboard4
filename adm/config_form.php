@@ -19,7 +19,7 @@ include_once ("./admin.head.php");
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=30% class='col2 pad2'>
 <tr class='ht'>
-    <td colspan=4 align=left><?=subtitle("기본권한 및 사용여부")?></td>
+    <td colspan=4 align=left><?=subtitle("기본 설정")?></td>
 </tr>
 <tr><td colspan=4 class=line1></td></tr>
 <tr class='ht'>

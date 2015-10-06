@@ -93,7 +93,7 @@ for ($i=1; $i<=$g4[link_count]; $i++)
 
 <tr><td height=1 bgcolor=#E7E7E7></td></tr>
 <tr> 
-    <td height="150" style='word-break:break-all; padding:10px;' bgcolor=#F8F8F9>
+    <td height="150" style='word-break:break-all; padding:10px; border:1px solid #BBBBBB;' bgcolor=#F8F8F9>
         <? 
         // 파일 출력
         for ($i=0; $i<=count($view[file]); $i++) {
