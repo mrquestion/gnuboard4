@@ -310,7 +310,7 @@ var member_skin_path = "<?=$member_skin_path?>";
                 <?
                 // 이미지 생성이 가능한 경우 자동등록체크코드를 이미지로 만든다.
                 if (function_exists("imagecreate")) {
-                    echo "<img src='$g4[bbs_path]/norobot_image.php' border='0'>";
+                    echo "<img src='$g4[bbs_path]/norobot_image.php?{$g4['server_time']}' border='0'>";
                     $norobot_msg = "* 왼쪽의 자동등록방지 코드를 입력하세요.";
                 }
                 else {

@@ -332,7 +332,10 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     // 폼메일 창
     function win_formmail(mb_id, name, email)
     {
-        win_open(g4_path+"/" + g4_bbs + "/formmail.php?mb_id="+mb_id+"&name="+name+"&email="+email, "winFormmail", "left=50, top=50, width=600, height=480, scrollbars=0");
+		if (g4_charset.toLowerCase() == 'euc-kr')
+	        win_open(g4_path+"/" + g4_bbs + "/formmail.php?mb_id="+mb_id+"&name="+name+"&email="+email, "winFormmail", "left=50, top=50, width=600, height=480, scrollbars=0");
+		else
+	        win_open(g4_path+"/" + g4_bbs + "/formmail.php?mb_id="+mb_id+"&name="+encodeURIComponent(name)+"&email="+email, "winFormmail", "left=50, top=50, width=600, height=480, scrollbars=0");
     }
 
     // 달력 창

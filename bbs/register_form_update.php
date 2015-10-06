@@ -6,7 +6,7 @@ include_once("$g4[path]/lib/mailer.lib.php");
 if ($_POST["token"] && get_session("ss_token") == $_POST["token"]) 
 {
     // 이전 폼 전송 바로전에 만들어진 쿠키가 없다면 에러
-    if (!get_cookie($_POST["token"])) alert_close("쿠키 에러");
+    //if (!get_cookie($_POST["token"])) alert_close("쿠키 에러");
 
     // 맞으면 세션과 쿠키를 지워 다시 입력폼을 통해서 들어오도록 한다.
     set_session("ss_token", "");
@@ -324,10 +324,15 @@ else if ($w == "u")
 if ($msg) 
     echo "<script language='JavaScript'>alert('{$msg}');</script>";
 
+/*
+// 결과페이지는 https 에서 http 로 변경이 되어야 함
 if ($g4[https_url])
     $https_url = "$g4[https_url]/$g4[bbs]";
 else
     $https_url = ".";
+*/
+
+$https_url = "$g4[url]/$g4[bbs]";
 
 if ($w == "") {
     goto_url("{$https_url}/register_result.php");

@@ -398,6 +398,7 @@ if ($is_admin != "super") {
 }
 
 // 스킨경로
+$board_skin_path = '';
 if (isset($board['bo_skin']))
     $board_skin_path = "{$g4['path']}/skin/board/{$board['bo_skin']}"; // 게시판 스킨 경로
 

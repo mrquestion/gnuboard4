@@ -1,9 +1,17 @@
 <?
 include_once("./_common.php");
 
-ini_set('memory_limit', '20M');
+// 메모리를 많이 잡아먹어서 아래의 코드로 대체
+//ini_set('memory_limit', '20M');
+//$zipfile = file("./zip.db");
 
-$zipfile = file("./zip.db");
+$zipfile = array();
+$fp = fopen("./zip.db", "r");
+while(!feof($fp)) {
+    $zipfile[] = fgets($fp, 4096);
+}
+fclose($fp);
+
 $search_count = 0;
 
 if ($addr1) 

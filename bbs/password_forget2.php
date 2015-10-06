@@ -1,6 +1,12 @@
 <?
 include_once("./_common.php");
 
+// 토큰 생성
+$token = md5(uniqid(rand(), true));
+set_session("ss_token", $token);
+$norobot_key = substr($token, 0, rand(4,6));
+set_session("ss_norobot_key", $norobot_key);
+
 if ($_POST[pass_mb_id])
     $sql = " select mb_id, mb_password_q from $g4[member_table] where mb_id = '$_POST[pass_mb_id]' ";
 else if ($_POST[mb_name] && $_POST[mb_jumin])

@@ -1,3 +1,34 @@
+4.22.04 (08.06.11)
+    :   [필수패치] 웜 취약점 수정 ★★★★★★★★★★
+
+        common.php 를 아래와 같이 반드시 반드시 반드시 수정하시기 바랍니다.
+        // 스킨경로
+        $board_skin_path = ''; // <!-- 이 코드 한줄이 반드시 들어가야 합니다. 
+        if (isset($board['bo_skin']))
+            $board_skin_path = "{$g4['path']}/skin/board/{$board['bo_skin']}"; // 게시판 스킨 경로
+
+4.22.03 (08.03.31)
+    :   아이디/패스워드 찾기 페이지 로봇에 의한 접근 차단 (GD LIB 사용자만 가능)
+
+        skin/member/basic/password_forget2.skin.php
+        bbs/password_forget2.php
+        bbs/password_forget3.php
+
+4.22.02 (08.03.28)
+    :   UTF-8 사용시 폼메일 창에서 이름이 깨지던 오류 수정
+    :   우편번호 파일을 zzzz님이 올리신 파일로 교체
+    :   자동등록방지 이미지에 캐시를 방지하기 위한 코드 추가
+
+        js/common.js
+        bbs/zip.db
+        skin/board/basic/write.skin.php
+        skin/member/basic/register_form.skin.php
+
+4.22.01 (08.02.29)
+    :   메모리 부족시 우편번호를 제대로 불러오지 못하던 오류 수정
+
+        bbs/zip.php
+
 4.22.00 (08.02.18) [자동등록방지 필수 패치]
     :   상대경로 지정시 자동으로 절대경로로 바뀌던 오류 수정
         

@@ -1015,6 +1015,9 @@ function html_symbol($str)
 // DB 연결
 function sql_connect($host, $user, $pass)
 {
+    global $g4;
+
+    if (strtolower($g4['charset']) == 'utf-8') @mysql_query(" set names utf8 ");
     return @mysql_connect($host, $user, $pass);
 }
 
@@ -1022,6 +1025,9 @@ function sql_connect($host, $user, $pass)
 // DB 선택
 function sql_select_db($db, $connect)
 {
+    global $g4;
+
+    if (strtolower($g4['charset']) == 'utf-8') @mysql_query(" set names utf8 ");
     return @mysql_select_db($db, $connect);
 }
 

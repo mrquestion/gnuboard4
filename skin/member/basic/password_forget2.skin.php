@@ -19,7 +19,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <input type=hidden name=bo_table   value='<?=$bo_table?>'>
 <input type=hidden name=pass_mb_id value='<?=$mb[mb_id]?>'>
     <tr> 
-        <td width="600" height="300" align="center" valign="middle" background="<?=$member_skin_path?>/img/dot_bg_img_01.gif"><table width="400" border="0" cellspacing="0" cellpadding="0">
+        <td width="600" height="300" align="center" valign="middle" background="<?=$member_skin_path?>/img/dot_bg_img_01.gif">
+            <table width="400" border="0" cellspacing="0" cellpadding="0">
                 <tr> 
                     <td width="5%" height="40" align="center"><img src="<?=$member_skin_path?>/img/icon_02.gif" width="6" height="6"></td>
                     <td width="20%"><b>회원아이디</b></td>
@@ -30,7 +31,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                     <td colspan="2"><b>패스워드 분실시 질문</b></td>
                 </tr>
                 <tr> 
-                    <td height="40" align="center"></td>
+                    <td height="30" align="center"></td>
                     <td colspan="2" valign="top"><?=$mb[mb_password_q]?></td>
                 </tr>
                 <tr> 
@@ -38,8 +39,17 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                     <td colspan="2"><b>패스워드 분실시 답변</b></td>
                 </tr>
                 <tr> 
-                    <td height="40"></td>
-                    <td colspan="2" valign="top"><input type=text name='mb_password_a' size=55 required itemname='패스워드 분실시 답변' value=''></td>
+                    <td height="30"></td>
+                    <td colspan="2" valign="top">
+                        <input type=text name='mb_password_a' size=55 required itemname='패스워드 분실시 답변' value=''>
+                    </td>
+                </tr>
+                <tr> 
+                    <td height="40" align="center"><img src="<?=$member_skin_path?>/img/icon_02.gif" width="6" height="6"></td>
+                    <td colspan="2">
+                        <?="<img src='$g4[bbs_path]/norobot_image.php?".time()."' border='0' align='absmiddle'>";?>
+                        <input type=text name='wr_key' size=10 required itemname='자동등록방지 코드'> 자동등록방지 코드를 입력하세요.
+                    </td>
                 </tr>
             </table></td>
     </tr>
@@ -55,9 +65,17 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </form>
 </table>
 
+<script language="javascript" src="<?=$g4['path']?>/js/md5.js"></script>
+<script language='javascript'> var md5_norobot_key = '<?=md5($norobot_key)?>'; </script>
 <script language='JavaScript'>
 function fpasswordforget2_submit(f)
 {
+    if (hex_md5(f.wr_key.value) != md5_norobot_key) {
+        alert('자동등록방지용 코드가 순서대로 입력되지 않았습니다.');
+        f.wr_key.focus();
+        return;
+    }
+
     f.action = "./password_forget3.php";
     f.submit();
 }
