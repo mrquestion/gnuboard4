@@ -445,6 +445,7 @@ else
 
 //$member['mb_level_title'] = $g4['member_level'][$member['mb_level']]; // ±ÇÇÑ¸í
 
+$write_table = "";
 if (isset($bo_table)) {
     $board = sql_fetch(" select * from {$g4['board_table']} where bo_table = '$bo_table' ");
     if ($board['bo_table']) {
