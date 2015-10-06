@@ -2,6 +2,12 @@
 $g4[title] = $wr_subject . "글입력";
 include_once("./_common.php");
 
+// 090710
+if (substr_count($wr_content, "&#") > 50) {
+    alert("내용에 올바르지 않은 코드가 다수 포함되어 있습니다.");
+    exit;
+}
+
 @include_once("$board_skin_path/write_update.head.skin.php");
 
 include_once("$g4[path]/lib/trackback.lib.php");
