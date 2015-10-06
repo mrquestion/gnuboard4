@@ -1,3 +1,18 @@
+4.36.13 (2013.01.29)
+    :   iframe 등의 tag 에 주석 처리가 되어 있는 경우의 (/**/) XSS 취약점 해결
+        장원용 님께서 한국인터넷진흥원(KISA)을 통하여 알려 주셨습니다.
+
+        lib/common.lib.php 를 다음과 같이 수정 하였습니다.
+
+            // tag 내의 주석문 무효화 하기
+            function bad130128($matches)
+            {
+                $str = $matches[2];
+                return '<'.$matches[1].preg_replace('#(\/\*|\*\/)#', '', $str).'>';
+            }
+            ...
+            $content = preg_replace_callback("/<([^>]+)>/s", 'bad130128', $content); 
+
 4.36.12 (2013.01.09)
     :   XSS 취약점 해결, 패치된 내역 수정 보완
         UN Security팀에서 한국인터넷진흥원을 통하여 알려 주셨습니다.

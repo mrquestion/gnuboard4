@@ -433,6 +433,13 @@ function bad120422($matches)
     return $matches[0];
 }
 
+// tag 내의 주석문 무효화 하기
+function bad130128($matches)
+{
+    $str = $matches[2];
+    return '<'.$matches[1].preg_replace('#(\/\*|\*\/)#', '', $str).'>';
+}
+
 // 내용을 변환
 function conv_content($content, $html)
 {
@@ -458,6 +465,8 @@ function conv_content($content, $html)
         {
             $content .= "</table>";
         }
+
+        $content = preg_replace_callback("/<([^>]+)>/s", 'bad130128', $content); 
 
         $content = preg_replace($source, $target, $content);
         $content = bad_tag_convert($content);
