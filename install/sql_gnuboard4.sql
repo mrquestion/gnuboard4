@@ -120,6 +120,22 @@ CREATE TABLE $g4[board_table]_file (
 ) TYPE=MyISAM;
 
 ##
+## Table structure for table `$g4[board_table]_good`
+##
+
+DROP TABLE IF EXISTS $g4[board_table]_good;
+CREATE TABLE $g4[board_table]_good (
+  bg_id int(11) NOT NULL auto_increment,
+  bo_table varchar(20) NOT NULL default '',
+  wr_id int(11) NOT NULL default '0',
+  mb_id varchar(20) NOT NULL default '',
+  bg_flag varchar(255) NOT NULL default '',
+  bg_datetime datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (bg_id),
+  UNIQUE KEY fkey1 (bo_table,wr_id,mb_id)
+) TYPE=MyISAM;
+
+##
 ## Table structure for table `$g4[board_table]_new`
 ##
 
@@ -217,6 +233,7 @@ CREATE TABLE $g4[config_table] (
   cf_visit varchar(255) NOT NULL default '',
   cf_max_po_id int(11) NOT NULL default '0',
   cf_stipulation text NOT NULL,
+  cf_open_modify int(11) NOT NULL default '0',
   cf_1 varchar(255) NOT NULL default '',
   cf_2 varchar(255) NOT NULL default '',
   cf_3 varchar(255) NOT NULL default '',
@@ -335,6 +352,7 @@ CREATE TABLE $g4[member_table] (
   mb_mailling tinyint(4) NOT NULL default '0',
   mb_sms tinyint(4) NOT NULL default '0',
   mb_open tinyint(4) NOT NULL default '0',
+  mb_open_date date NOT NULL default '0000-00-00',
   mb_profile text NOT NULL,
   mb_memo_call varchar(255) NOT NULL default '',
   mb_1 varchar(255) NOT NULL default '',

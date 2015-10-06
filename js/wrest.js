@@ -12,7 +12,7 @@ if (typeof(WREST_JS) == 'undefined') // ÇÑ¹ø¸¸ ½ÇÇà
     var wrestFldBackColor = '#FFE4E1'; 
     var arrAttr  = new Array ('required', 'trim', 'minlength', 'email', 'hangul', 'hangul2', 
                               'memberid', 'nospace', 'numeric', 'alpha', 'alphanumeric', 
-                              'jumin', 'saupja', 'alphanumericunderline', 'telnumber');
+                              'jumin', 'saupja', 'alphanumericunderline', 'telnumber', 'hangulalphanumeric');
 
     // subject ¼Ó¼º°ªÀ» ¾ò¾î return, ¾øÀ¸¸é tagÀÇ nameÀ» ³Ñ±è
     function wrestItemname(fld)
@@ -138,6 +138,23 @@ if (typeof(WREST_JS) == 'undefined') // ÇÑ¹ø¸¸ ½ÇÇà
             if (wrestFld == null) 
             { 
                 wrestMsg = wrestItemname(fld) + ' : ÇÑ±ÛÀÌ ¾Æ´Õ´Ï´Ù.\n'; 
+                wrestFld = fld; 
+            } 
+        } 
+    }
+
+    // ÇÑ±Û,¿µ¹®,¼ýÀÚÀÎÁö °Ë»ç3
+    function wrestHangulAlphaNumeric(fld) 
+    { 
+        if (!wrestTrim(fld)) return;
+
+        var pattern = /([^°¡-ÆR\x20^a-z^A-Z^0-9])/i; 
+
+        if (pattern.test(fld.value)) 
+        {
+            if (wrestFld == null) 
+            { 
+                wrestMsg = wrestItemname(fld) + ' : ÇÑ±Û, ¿µ¹®, ¼ýÀÚ°¡ ¾Æ´Õ´Ï´Ù.\n'; 
                 wrestFld = fld; 
             } 
         } 
@@ -366,6 +383,8 @@ if (typeof(WREST_JS) == 'undefined') // ÇÑ¹ø¸¸ ½ÇÇà
                             case "email"        : wrestEmail(this.elements[i]); break;
                             case "hangul"       : wrestHangul(this.elements[i]); break;
                             case "hangul2"      : wrestHangul2(this.elements[i]); break;
+                            case "hangulalphanumeric"      
+                                                : wrestHangulAlphaNumeric(this.elements[i]); break;
                             case "memberid"     : wrestMemberId(this.elements[i]); break;
                             case "nospace"      : wrestNospace(this.elements[i]); break;
                             case "numeric"      : wrestNumeric(this.elements[i]); break; 

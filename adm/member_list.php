@@ -117,9 +117,9 @@ var list_delete_php = "member_list_delete.php";
 <input type=hidden name=stx  value='<?=$stx?>'>
 <input type=hidden name=page value='<?=$page?>'>
 <colgroup width=30>
-<colgroup width=100>
-<colgroup width=100>
-<colgroup width=100>
+<colgroup width=90>
+<colgroup width=90>
+<colgroup width=90>
 <colgroup width=''>
 <colgroup width=70>
 <colgroup width=80>
@@ -184,9 +184,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     <input type=hidden name=mb_id[$i] value='$row[mb_id]'>
     <tr class='list$list col1 ht center'>
         <td><input type=checkbox name=chk[] value='$i'></td>
-        <td title='$row[mb_id]'><nobr style='display:block; overflow:hidden; width:100px;'>&nbsp;$mb_id</nobr></td>
-        <td>$row[mb_name]</td>
-        <td><u>$mb_nick</u></td>
+        <td title='$row[mb_id]'><nobr style='display:block; overflow:hidden; width:90;'>&nbsp;$mb_id</nobr></td>
+        <td><nobr style='display:block; overflow:hidden; width:90px;'>$row[mb_name]</nobr></td>
+        <td><nobr style='display:block; overflow:hidden; width:90px;'><u>$mb_nick</u></nobr></td>
         <td>".get_member_level_select("mb_level[$i]", 1, $member[mb_level], $row[mb_level])."</td>
         <td align=right><a href='point_list.php?sfl=mb_id&stx=$row[mb_id]' class=tt>".number_format($row[mb_point])."</a>&nbsp;</td>
         <td>".substr($row[mb_today_login],2,8)."</td>

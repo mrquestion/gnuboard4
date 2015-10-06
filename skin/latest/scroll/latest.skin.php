@@ -127,7 +127,7 @@ $box_height = (int)$line_mod * (int)$height;
         $roll_text[$k] .= "</a>";
 
         if ($list[$i]['comment_cnt']) 
-            $roll_text[$k] .= " <a href=\"{$list[$i]['comment_href']}\">{$list[$i]['comment_cnt']}</a>";
+            $roll_text[$k] .= " <a href=".addslashes($list[$i]['comment_href']).">{$list[$i]['comment_cnt']}</a>";
 
         $roll_text[$k] .= "</div>";
     }

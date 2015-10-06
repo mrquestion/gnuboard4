@@ -26,7 +26,6 @@ for ($i=0; $i<count($chk); $i++)
                 set gr_id               = '$gr_id[$k]',
                     bo_subject          = '$bo_subject[$k]',
                     bo_skin             = '$bo_skin[$k]',
-                    bo_admin            = '$bo_admin[$k]',
                     bo_read_point       = '$bo_read_point[$k]',
                     bo_write_point      = '$bo_write_point[$k]',
                     bo_comment_point    = '$bo_comment_point[$k]',

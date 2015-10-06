@@ -4,6 +4,8 @@ include_once("./_common.php");
 $g4[title] = "E-mail 중복확인";
 include_once("$g4[path]/head.sub.php");
 
+$mb_email = trim($mb_email);
+
 if ($member[mb_id]) // 수정중 중복확인이면
     $sql = " select mb_email from $g4[member_table] where mb_email = '$mb_email' and mb_id <> '$member[mb_id]' ";
 else

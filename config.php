@@ -37,6 +37,7 @@ $g4['group_table']         = $g4['table_prefix'] . "group";         // 게시판 그
 $g4['group_member_table']  = $g4['table_prefix'] . "group_member";  // 게시판 그룹+회원 테이블
 $g4['board_table']         = $g4['table_prefix'] . "board";         // 게시판 설정 테이블
 $g4['board_file_table']    = $g4['table_prefix'] . "board_file";    // 게시판 첨부파일 테이블
+$g4['board_good_table']    = $g4['table_prefix'] . "board_good";    // 게시물 추천,비추천 테이블
 $g4['board_new_table']     = $g4['table_prefix'] . "board_new";     // 게시판 새글 테이블
 $g4['login_table']         = $g4['table_prefix'] . "login";         // 로그인 테이블 (접속자수)
 $g4['mail_table']          = $g4['table_prefix'] . "mail";          // 회원메일 테이블

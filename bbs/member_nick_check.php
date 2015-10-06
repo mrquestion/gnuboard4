@@ -4,6 +4,8 @@ include_once("./_common.php");
 $g4[title] = "별명 중복확인";
 include_once("$g4[path]/head.sub.php");
 
+$mb_nick = trim($mb_nick);
+
 $mb = sql_fetch(" select mb_nick from $g4[member_table] where mb_nick = '$mb_nick' ");
 if ($mb[mb_nick]) 
 {

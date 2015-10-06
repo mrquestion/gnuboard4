@@ -365,6 +365,8 @@ for ($i=0; $i<count($dir_arr); $i++)
     @fclose($f);
     @chmod($file, 0606);
 }
+
+@rename("../install", "../install.bak");
 //-------------------------------------------------------------------------------------------------
 
 echo "<script language='JavaScript'>document.frminstall2.status_bar.value += 'бс';</script>\n";

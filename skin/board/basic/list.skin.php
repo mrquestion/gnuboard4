@@ -18,7 +18,7 @@ if ($is_nogood) $colspan++;
 <!-- 분류 셀렉트 박스, 게시물 몇건, 관리자화면 링크 -->
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr height="25">
-    <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+this.value;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
+    <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+<?=($g4[charset]=='UTF-8'?'encodeURI(this.value)':'this.value');?>;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
     <td align="right">
         게시물 <?=number_format($total_count)?>건 
         <? if ($rss_href) { ?><a href='<?=$rss_href?>'><img src='<?=$board_skin_path?>/img/btn_rss.gif' border=0 align=absmiddle></a><?}?>
@@ -42,11 +42,11 @@ if ($is_nogood) $colspan++;
     <? if ($is_category) { ?><td width=70>분류</td><?}?>
     <? if ($is_checkbox) { ?><td width=40><INPUT onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><?}?>
     <td>제목</td>
+    <td width=110>글쓴이</td>
     <td width=40><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
     <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
     <? if ($is_good) { ?><td width=40><?=subject_sort_link('wr_good', $qstr2, 1)?>추천</a></td><?}?>
     <? if ($is_nogood) { ?><td width=40><?=subject_sort_link('wr_nogood', $qstr2, 1)?>비추천</a></td><?}?>
-    <td width=110>글쓴이</td>
 </tr>
 <tr><td colspan=<?=$colspan?> height=1 bgcolor=#B0ADF5></td></tr>
 
@@ -96,11 +96,11 @@ if ($is_nogood) $colspan++;
         echo " " . $list[$i][icon_secret];
         echo $nobr_end;
         ?></td>
+    <td><nobr style='display:block; overflow:hidden; width:95px;'><?=$list[$i][name]?></nobr></td>
     <td><?=$list[$i][wr_hit]?></td>
     <td><?=$list[$i][datetime2]?></td>
     <? if ($is_good) { ?><td align="center"><?=$list[$i][wr_good]?></td><? } ?>
     <? if ($is_nogood) { ?><td align="center"><?=$list[$i][wr_nogood]?></td><? } ?>
-    <td><?=$list[$i][name]?></td>
 </tr>
 <tr><td colspan=<?=$colspan?> height=1 bgcolor=#E7E7E7></td></tr>
 <?}?>

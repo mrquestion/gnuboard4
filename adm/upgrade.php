@@ -11,6 +11,23 @@ $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
 
+// 4.08.00
+// 정보공개를 바꾸면 일정기간 동안 변경할 수 없음
+sql_query(" ALTER TABLE `{$g4[member_table]}` ADD `mb_open_date` DATE NOT NULL AFTER `mb_open` ", false);
+sql_query(" ALTER TABLE `{$g4[config_table]}` ADD `cf_open_modify` INT NOT NULL AFTER `cf_stipulation` ", false);
+// 게시물 추천테이블 생성
+sql_query(" CREATE TABLE `{$g4[board_good_table]}` (
+  `bg_id` int(11) NOT NULL auto_increment,
+  `bo_table` varchar(20) NOT NULL default '',
+  `wr_id` int(11) NOT NULL default '0',
+  `mb_id` varchar(20) NOT NULL default '',
+  `bg_flag` varchar(255) NOT NULL default '',
+  `bg_datetime` datetime NOT NULL default '0000-00-00 00:00:00',
+  PRIMARY KEY  (`bg_id`),
+  UNIQUE KEY `fkey1` (`bo_table`,`wr_id`,`mb_id`)
+) TYPE=MyISAM AUTO_INCREMENT=1 ", false);
+
+
 // 4.07.00
 // 최근게시물에 회원아이디 필드 및 인덱스 추가
 sql_query(" ALTER TABLE `{$g4['board_new_table']}` ADD `mb_id` VARCHAR( 20 ) NOT NULL ", false);

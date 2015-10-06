@@ -110,6 +110,7 @@ if ($w == "")
                     mb_mailling = '$mb_mailling',
                     mb_sms = '$mb_sms',
                     mb_open = '$mb_open',
+                    mb_open_date = '$g4[time_ymd]',
                     mb_1 = '$mb_1',
                     mb_2 = '$mb_2',
                     mb_3 = '$mb_3',
@@ -187,6 +188,14 @@ else if ($w == "u")
     if ($mb_nick_default != $mb_nick)
         $sql_nick_date =  " , mb_nick_date = '$g4[time_ymd]' ";
 
+    $sql_open_date = "";
+    if ($mb_open_default != $mb_open)
+        $sql_open_date =  " , mb_open_date = '$g4[time_ymd]' ";
+
+    $sql_sex = "";
+    if (isset($mb_sex))
+        $sql_sex = " , mb_sex = '$mb_sex' ";
+
     // 이전 메일주소와 수정한 메일주소가 틀리다면 인증을 다시 해야하므로 값을 삭제
     $sql_email_certify = "";
     if ($old_email != $mb_email && $config[cf_use_email_certify])
@@ -224,6 +233,8 @@ else if ($w == "u")
                     $sql_password 
                     $sql_icon 
                     $sql_nick_date
+                    $sql_open_date
+                    $sql_sex
                     $sql_email_certify
               where mb_id = '$_POST[mb_id]' ";
     sql_query($sql);

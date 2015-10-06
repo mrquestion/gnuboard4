@@ -3,7 +3,7 @@ include_once("./_common.php");
 
 if ($_REQUEST['do'] == "submit") {
 
-    if (!preg_match("/\.(gif|png|jp[e]?g)/i", $_FILES['AttachFile']['name']))
+    if (!preg_match("/\.(gif|png|jp[e]?g)$/i", $_FILES['AttachFile']['name']))
         alert("그림 삽입은 GIF, JPG, PNG 파일만 가능합니다.");
 
     require_once "./imageupload-class.php";
@@ -102,7 +102,7 @@ font {
 }
 </STYLE>
 </head>
-<body bgcolor="#dedfdf" oncontextmenu="return false" scroll="no">
+<body bgcolor="#dedfdf" oncontextmenu="return false">
 <center>
 <form action="insert_image.php?do=submit" name="insertImage" method=post style="inline" enctype="multipart/form-data">
 

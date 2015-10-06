@@ -56,7 +56,7 @@ if ($stx)
         $g4_search[read_level][] = $row[bo_read_level];
     }
 
-    $search_query = "sfl=" . urlencode($sfl) . "&stx=$stx&sop=$sop";
+    $search_query = "sfl=".urlencode($sfl)."&stx=".urlencode($stx)."&sop=$sop";
 
 
     $text_stx = get_text(stripslashes($stx));
@@ -123,7 +123,7 @@ if ($stx)
         $tmp_write_table   = $g4[write_prefix] . $g4_search[tables][$i];
         
         $sql = " select wr_id from $tmp_write_table where $sql_search ";
-        $result = sql_query($sql);
+        $result = sql_query($sql, false);
         $row[cnt] = @mysql_num_rows($result);
 
         //$sql = " select count(*) as cnt from $tmp_write_table where $sql_search ";

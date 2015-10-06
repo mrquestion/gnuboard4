@@ -39,10 +39,14 @@ include_once ("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>이름(별명) 표시</td>
-    <td><input type=text class=ed name='cf_cut_name' value='<?=$config[cf_cut_name]?>' size=2> 자리만 표시
+    <td colspan=3><input type=text class=ed name='cf_cut_name' value='<?=$config[cf_cut_name]?>' size=2> 자리만 표시
         <?=help("영숫자 2글자 = 한글 1글자")?></td>
+</tr>
+<tr class='ht'>
     <td>별명 수정</td>
     <td>수정한 후 <input type=text class=ed name='cf_nick_modify' value='<?=$config[cf_nick_modify]?>' size=2> 일 동안 바꿀 수 없음</td>
+    <td>정보공개 수정</td>
+    <td>수정한 후 <input type=text class=ed name='cf_open_modify' value='<?=$config[cf_open_modify]?>' size=2> 일 동안 바꿀 수 없음</td>
 </tr>
 <tr class='ht'>
     <td>최근게시물 삭제</td>

@@ -4,6 +4,8 @@ include_once("./_common.php");
 $g4[title] = "회원아이디 중복확인";
 include_once("$g4[path]/head.sub.php");
 
+$mb_id = trim($mb_id);
+
 $mb = get_member($mb_id);
 if ($mb[mb_id]) {
     echo <<<HEREDOC

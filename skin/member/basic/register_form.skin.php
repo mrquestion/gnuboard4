@@ -67,7 +67,6 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                     <option value="유년시절 가장 생각나는 친구 이름은?">유년시절 가장 생각나는 친구 이름은?</option>
                     <option value="가장 기억에 남는 선생님 성함은?">가장 기억에 남는 선생님 성함은?</option>
                     <option value="친구들에게 공개하지 않은 어릴 적 별명이 있다면?">친구들에게 공개하지 않은 어릴 적 별명이 있다면?</option>
-                    <option value="추억하고 싶은 날짜가 있다면?(예:1994/04/20)">추억하고 싶은 날짜가 있다면?(예:1994/04/20)</option>
                     <option value="다시 태어나면 되고 싶은 것은?">다시 태어나면 되고 싶은 것은?</option>
                     <option value="가장 감명깊게 본 영화는?">가장 감명깊게 본 영화는?</option>
                     <option value="읽은 책 중에서 좋아하는 구절이 있다면?">읽은 책 중에서 좋아하는 구절이 있다면?</option>
@@ -78,7 +77,6 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                     <option value="자신이 두번째로 존경하는 인물은?">자신이 두번째로 존경하는 인물은?</option>
                     <option value="아버지의 성함은?">아버지의 성함은?</option>
                     <option value="어머니의 성함은?">어머니의 성함은?</option>
-                    <option value="가장 여행하고 싶은 나라는?">가장 여행하고 싶은 나라는?</option>
                 </select>
 
                 <table width="350" border="0" cellspacing="0" cellpadding="0">
@@ -120,8 +118,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>별명</TD>
             <TD class='m_padding lh'>
-                <input class=m_text type=text name='mb_nick' maxlength=20 minlength="2" required itemname="별명" value='<?=$member[mb_nick]?>' onchange="fregisterform.mb_nick_enabled.value='';">
-                &nbsp;<a href="javascript:mb_nick_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a>
+                <input class=m_text type=text name='mb_nick' maxlength=20 minlength="2" required hangulalphanumeric itemname="별명" value='<?=$member[mb_nick]?>' onchange="fregisterform.mb_nick_enabled.value='';">
+                &nbsp;<a href="javascript:mb_nick_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a> (한글, 영문, 숫자만 가능)
                 <br>별명을 바꾸시면 앞으로 <?=(int)$config[cf_nick_modify]?>일 이내에는 변경이 안됩니다.
             </TD>
         </TR>
@@ -265,10 +263,17 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <TD width="160" class=m_title>SMS 수신여부</TD>
             <TD class=m_padding><input type=checkbox name=mb_sms value='1' <?=($w=='' || $member[mb_sms])?'checked':'';?>>핸드폰 문자메세지를 받겠습니다.</TD>
         </TR>
+
+        <? if ($member[mb_open_date] <= date("Y-m-d", $g4[server_time] - ($config[cf_open_modify] * 86400))) { // 정보공개 수정일이 지났다면 수정가능 ?>
+        <input type=hidden name=mb_open_default value='<?=$member[mb_open]?>'>
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>정보공개</TD>
-            <TD class=m_padding><input type=checkbox name=mb_open value='1' <?=($w=='' || $member[mb_open])?'checked':'';?>>다른분들이 나의 정보를 볼 수 있도록 합니다.</td>
+            <TD class=m_padding><input type=checkbox name=mb_open value='1' <?=($w=='' || $member[mb_open])?'checked':'';?>>다른분들이 나의 정보를 볼 수 있도록 합니다.
+                <br>&nbsp;&nbsp;&nbsp;&nbsp; 정보공개를 바꾸시면 앞으로 <?=(int)$config[cf_open_modify]?>일 이내에는 변경이 안됩니다.</td>
         </TR>
+        <? } else { ?>
+        <input type=hidden name="mb_open" value="<?=$member[mb_open]?>">
+        <? } ?>
 
         <? if ($w == "" && $config[cf_use_recommend]) { ?>
         <TR bgcolor="#FFFFFF">

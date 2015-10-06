@@ -703,7 +703,7 @@ function insert (what)
 
     window.open(tmpl, "new_window",
                 "toolbar=no,menubar=no,personalbar=no,height="+h+",width="+w+"," +
-                "left="+left+",top="+top+",scroolbars=yes,resizable=no");
+                "left="+left+",top="+top+",scrollbars=yes,resizable=no");
 }
 
 function insertIE (what)
@@ -983,56 +983,56 @@ function run ()
     document.write("<table width=100% cellpadding=1 cellspacing=0>");
     document.write("<tr>");
     /*
-    document.write("<span title='실행 취소' style='cursor:pointer;'>" + obj.setIcon("undo.gif", 26, 26, myobj + ".exec('Undo',false)") + "</span>");
-    document.write("<span title='되살리기' style='cursor:pointer;'>" + obj.setIcon("redo.gif", 26, 26, myobj + ".exec('Redo',false)") + "</span>");
-    document.write("<span title='자르기' style='cursor:pointer;'>" + obj.setIcon("cut.gif", 26, 26, myobj + ".exec('Cut',false)") + "</span>");
-    document.write("<span title='복사' style='cursor:pointer;'>" + obj.setIcon("copy.gif", 26, 26, myobj + ".exec('Copy',false)") + "</span>");
-    document.write("<span title='붙이기' style='cursor:pointer;'>" + obj.setIcon("paste.gif", 26, 26, myobj + ".exec('Paste',false)") + "</span>");
-    document.write("<span title='전체 선택' style='cursor:pointer;'>" + obj.setIcon("selectall.gif", 26, 26, myobj + ".exec('SelectAll',false)") + "</span>");
+    document.write("<span title='실행 취소' style='cursor:pointer;'>" + obj.setIcon("undo.gif", 20, 20, myobj + ".exec('Undo',false)") + "</span>");
+    document.write("<span title='되살리기' style='cursor:pointer;'>" + obj.setIcon("redo.gif", 20, 20, myobj + ".exec('Redo',false)") + "</span>");
+    document.write("<span title='자르기' style='cursor:pointer;'>" + obj.setIcon("cut.gif", 20, 20, myobj + ".exec('Cut',false)") + "</span>");
+    document.write("<span title='복사' style='cursor:pointer;'>" + obj.setIcon("copy.gif", 20, 20, myobj + ".exec('Copy',false)") + "</span>");
+    document.write("<span title='붙이기' style='cursor:pointer;'>" + obj.setIcon("paste.gif", 20, 20, myobj + ".exec('Paste',false)") + "</span>");
+    document.write("<span title='전체 선택' style='cursor:pointer;'>" + obj.setIcon("selectall.gif", 20, 20, myobj + ".exec('SelectAll',false)") + "</span>");
     */
-    document.write("<span title='속성 제거' style='cursor:pointer;'>" + obj.setIcon("removeformat.gif", 26, 26, myobj + ".exec('RemoveFormat',false)") + "</span>");
-    document.write("<span title='굵게' style='cursor:pointer;'>" + obj.setIcon("bold.gif", 26, 26, myobj + ".exec('Bold',false)") + "</span>");
-    document.write("<span title='기울기' style='cursor:pointer;'>" + obj.setIcon("italic.gif", 26, 26, myobj + ".exec('Italic',false)") + "</span>");
-    document.write("<span title='밑줄' style='cursor:pointer;'>" + obj.setIcon("underline.gif", 26, 26, myobj + ".exec('Underline',false)") + "</span>");
-    document.write("<span title='가운데줄' style='cursor:pointer;'>" + obj.setIcon("strike.gif", 26, 26, myobj + ".exec('Strikethrough',false)") + "</span>");
+    document.write("<span title='속성 제거' style='cursor:pointer;'>" + obj.setIcon("removeformat.gif", 20, 20, myobj + ".exec('RemoveFormat',false)") + "</span>");
+    document.write("<span title='굵게' style='cursor:pointer;'>" + obj.setIcon("bold.gif", 20, 20, myobj + ".exec('Bold',false)") + "</span>");
+    document.write("<span title='기울기' style='cursor:pointer;'>" + obj.setIcon("italic.gif", 20, 20, myobj + ".exec('Italic',false)") + "</span>");
+    document.write("<span title='밑줄' style='cursor:pointer;'>" + obj.setIcon("underline.gif", 20, 20, myobj + ".exec('Underline',false)") + "</span>");
+    document.write("<span title='가운데줄' style='cursor:pointer;'>" + obj.setIcon("strike.gif", 20, 20, myobj + ".exec('Strikethrough',false)") + "</span>");
     /*
-    document.write("<span title='위첨자' style='cursor:pointer;'>" + obj.setIcon("superscript.gif", 26, 26, myobj + ".exec('Superscript',false)") + "</span>");
-    document.write("<span title='아래첨자' style='cursor:pointer;'>" + obj.setIcon("subscript.gif", 26, 26, myobj + ".exec('Subscript',false)") + "</span>");
+    document.write("<span title='위첨자' style='cursor:pointer;'>" + obj.setIcon("superscript.gif", 20, 20, myobj + ".exec('Superscript',false)") + "</span>");
+    document.write("<span title='아래첨자' style='cursor:pointer;'>" + obj.setIcon("subscript.gif", 20, 20, myobj + ".exec('Subscript',false)") + "</span>");
     */
-    document.write("<span title='왼쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyleft.gif", 26, 26, myobj + ".exec('JustifyLeft',false)") + "</span>");
-    document.write("<span title='가운데 정렬' style='cursor:pointer;'>" + obj.setIcon("justifycenter.gif", 26, 26, myobj + ".exec('JustifyCenter',false)") + "</span>");
-    document.write("<span title='오른쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyright.gif", 26, 26, myobj + ".exec('JustifyRight',false)") + "</span>");
-    document.write("<span title='양쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyfull.gif", 26, 26, myobj + ".exec('JustifyFull',false)") + "</span>");
+    document.write("<span title='왼쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyleft.gif", 20, 20, myobj + ".exec('JustifyLeft',false)") + "</span>");
+    document.write("<span title='가운데 정렬' style='cursor:pointer;'>" + obj.setIcon("justifycenter.gif", 20, 20, myobj + ".exec('JustifyCenter',false)") + "</span>");
+    document.write("<span title='오른쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyright.gif", 20, 20, myobj + ".exec('JustifyRight',false)") + "</span>");
+    document.write("<span title='양쪽 정렬' style='cursor:pointer;'>" + obj.setIcon("justifyfull.gif", 20, 20, myobj + ".exec('JustifyFull',false)") + "</span>");
 
-    document.write("<span title='숫자 목록' style='cursor:pointer;'>" + obj.setIcon("orderedlist.gif", 26, 26, myobj + ".exec('InsertOrderedList',false)") + "</span>");
-    document.write("<span title='점 목록' style='cursor:pointer;'>" + obj.setIcon("unorderedlist.gif", 26, 26, myobj + ".exec('InsertUnorderedList',false)") + "</span>");
-    document.write("<span title='들여쓰기' style='cursor:pointer;'>" + obj.setIcon("indent.gif", 26, 26, myobj + ".exec('Indent',false)") + "</span>");
-    document.write("<span title='내어쓰기' style='cursor:pointer;'>" + obj.setIcon("outdent.gif", 26, 26, myobj + ".exec('Outdent',false)") + "</span>");
+    document.write("<span title='숫자 목록' style='cursor:pointer;'>" + obj.setIcon("orderedlist.gif", 20, 20, myobj + ".exec('InsertOrderedList',false)") + "</span>");
+    document.write("<span title='점 목록' style='cursor:pointer;'>" + obj.setIcon("unorderedlist.gif", 20, 20, myobj + ".exec('InsertUnorderedList',false)") + "</span>");
+    document.write("<span title='들여쓰기' style='cursor:pointer;'>" + obj.setIcon("indent.gif", 20, 20, myobj + ".exec('Indent',false)") + "</span>");
+    document.write("<span title='내어쓰기' style='cursor:pointer;'>" + obj.setIcon("outdent.gif", 20, 20, myobj + ".exec('Outdent',false)") + "</span>");
 
-    document.write("<span title='링크넣기' style='cursor:pointer;'>" + obj.setIcon("link.gif", 26, 26, myobj + ".insert('hlink')") + "</span>");
-    document.write("<span title='링크삭제' style='cursor:pointer;'>" + obj.setIcon("unlink.gif", 26, 26, myobj + ".exec('UnLink',false)") + "</span>");
-    document.write("<span title='미디어' style='cursor:pointer;'>" + obj.setIcon("media.gif", 26, 26, myobj + ".insert('media')") + "</span>");
-    document.write("<span title='그림넣기' style='cursor:pointer;'>" + obj.setIcon("image.gif", 26, 26, myobj + ".insert('image')") + "</span>");
-    document.write("<span title='테이블 만들기' style='cursor:pointer;'>" + obj.setIcon("table.gif", 26, 26, myobj + ".insert('table')") + "</span>");
-    document.write("<span title='표정 아이콘' style='cursor:pointer;'>" + obj.setIcon("em.gif", 26, 26, myobj + ".insert('em')") + "</span>");
+    document.write("<span title='링크넣기' style='cursor:pointer;'>" + obj.setIcon("link.gif", 20, 20, myobj + ".insert('hlink')") + "</span>");
+    document.write("<span title='링크삭제' style='cursor:pointer;'>" + obj.setIcon("unlink.gif", 20, 20, myobj + ".exec('UnLink',false)") + "</span>");
+    document.write("<span title='미디어' style='cursor:pointer;'>" + obj.setIcon("media.gif", 20, 20, myobj + ".insert('media')") + "</span>");
+    document.write("<span title='그림넣기' style='cursor:pointer;'>" + obj.setIcon("image.gif", 20, 20, myobj + ".insert('image')") + "</span>");
+    document.write("<span title='테이블 만들기' style='cursor:pointer;'>" + obj.setIcon("table.gif", 20, 20, myobj + ".insert('table')") + "</span>");
+    document.write("<span title='표정 아이콘' style='cursor:pointer;'>" + obj.setIcon("em.gif", 20, 20, myobj + ".insert('em')") + "</span>");
 
-    //document.write("<span title='가로선' style='cursor:pointer;'>" + obj.setIcon("hr.gif", 26, 26, myobj + ".exec('InsertHorizontalRule',false)") + "</span>");
-    document.write("<span title='글자색' style='cursor:pointer;'>" + obj.setIcon("forecolor.gif", 26, 26, myobj + ".insert('forecolor')") + "</span>");
+    //document.write("<span title='가로선' style='cursor:pointer;'>" + obj.setIcon("hr.gif", 20, 20, myobj + ".exec('InsertHorizontalRule',false)") + "</span>");
+    document.write("<span title='글자색' style='cursor:pointer;'>" + obj.setIcon("forecolor.gif", 20, 20, myobj + ".insert('forecolor')") + "</span>");
 
     if (this.IE) {
         /*
-        document.write("<span title='특수 문자' style='cursor:pointer;'>" + obj.setIcon("schar.gif", 26, 26, myobj + ".insertIE('schar')") + "</span>");
-        document.write("<span title='가로선' style='cursor:pointer;' id='hr'>" + obj.setIcon("hr.gif", 26, 26, myobj + ".displayWindow('horizontalRule');windowPos2('hr','horizontalRule',-100)",false) + "</span>");
-        document.write("<span title='글자색' style='cursor:pointer;' id='forecolor'>" + obj.setIcon("forecolor.gif", 26, 26, myobj + ".displayWindow('forecolor');windowPos2('forecolor','forecolor',-100)",false) + "</span>");
-        document.write("<span title='배경색' style='cursor:pointer;' id='backcolor'>" + obj.setIcon("backcolor.gif", 26, 26, myobj + ".displayWindow('backcolor');windowPos('backcolor','backcolor',-100)",false) + "</span>");
+        document.write("<span title='특수 문자' style='cursor:pointer;'>" + obj.setIcon("schar.gif", 20, 20, myobj + ".insertIE('schar')") + "</span>");
+        document.write("<span title='가로선' style='cursor:pointer;' id='hr'>" + obj.setIcon("hr.gif", 20, 20, myobj + ".displayWindow('horizontalRule');windowPos2('hr','horizontalRule',-100)",false) + "</span>");
+        document.write("<span title='글자색' style='cursor:pointer;' id='forecolor'>" + obj.setIcon("forecolor.gif", 20, 20, myobj + ".displayWindow('forecolor');windowPos2('forecolor','forecolor',-100)",false) + "</span>");
+        document.write("<span title='배경색' style='cursor:pointer;' id='backcolor'>" + obj.setIcon("backcolor.gif", 20, 20, myobj + ".displayWindow('backcolor');windowPos('backcolor','backcolor',-100)",false) + "</span>");
         document.write("<span title='제목 유형' style='cursor:pointer;'>" + obj.setIcon("paragraph.gif", 53, 26, myobj + ".displayWindow('paragraph');windowPos(this,'paragraph')",false) + "</span>");
         document.write("<span title='글꼴 유형' style='cursor:pointer;'>" + obj.setIcon("fonttype.gif", 53, 26, myobj + ".displayWindow('fontType');windowPos(this,'fontType')",false) + "</span>");
         document.write("<span title='글자 크기' style='cursor:pointer;'>" + obj.setIcon("fontsize.gif", 53, 26, myobj + ".displayWindow('fontSize');windowPos(this,'fontSize')",false) + "</span>");
         */
-        document.write("<span title='배경색' style='cursor:pointer;'>" + obj.setIcon("backcolor.gif", 26, 26, myobj + ".insert('backcolor')") + "</span>");
+        document.write("<span title='배경색' style='cursor:pointer;'>" + obj.setIcon("backcolor.gif", 20, 20, myobj + ".insert('backcolor')") + "</span>");
     }
     else {
-        document.write("<span title='배경색' style='cursor:pointer;'>" + obj.setIcon("backcolor.gif", 26, 26, myobj + ".insert('hilitecolor')") + "</span>");
+        document.write("<span title='배경색' style='cursor:pointer;'>" + obj.setIcon("backcolor.gif", 20, 20, myobj + ".insert('hilitecolor')") + "</span>");
 
         /*
         document.write("<span title='제목 유형' style='cursor:pointer;'><select style='font-size:9pt' id='formatblock' onchange='"+myobj+".exec(\"FormatBlock\", this.options[selectedIndex].value)'>" +
@@ -1072,7 +1072,7 @@ function run ()
                  "<option value='7'>크기 7</option>" +
                 "</select>");
 
-    //document.write("<span title='인쇄' style='cursor:pointer;'>" + obj.setIcon("print.gif", 26, 26, myobj + ".exec('Print',false)") + "</span>");
+    //document.write("<span title='인쇄' style='cursor:pointer;'>" + obj.setIcon("print.gif", 20, 20, myobj + ".exec('Print',false)") + "</span>");
     document.write("</tr></table></td></tr></table></td></tr></table></td></tr><tr><td height='100%'>");
     // 메뉴 버튼 출력: 끝 *****/
 

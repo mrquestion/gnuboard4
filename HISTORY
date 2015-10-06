@@ -1,3 +1,37 @@
+4.08.00 (06.05.13) [필수패치]
+    :   파이어폭스(불여우)에서 게시판 파일이 제대로 다운로드 되지 않던 오류 수정
+        zzzz님께서 알려주셨습니다.
+    :   회원가입시 회원아이디, 별명, 이메일 검사에서 검사할 변수값을 trim() 함수로 좌우공백을 없앰
+    :   회원가입시 별명에 특수문자 입력시 동일한 별명을 만들 수 있는 오류 수정
+        유아원님께서 알려주셨습니다.
+    :   게시판리스트 수정시 게시판관리자가 사라지던 오류 수정
+    :   정보공개 수정후 설정일 동안 변경할 수 없도록 수정
+    :   추천, 비추천을 테이블로 관리하여 중복 추천하지 못하도록 수정
+        config.php 에 아래와 같이 한줄 추가하십시오.
+        $g4['board_good_table']    = $g4['table_prefix'] . "board_good";
+    :   UTF-8 관련 수정
+
+        필드가 추가, 변경 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        config.php
+        adm/board_list_update.php
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/upgrade.php
+        cheditor/insert_image.php
+        bbs/download.php
+        bbs/member_id_check.php
+        bbs/member_nick_check.php
+        bbs/member_email_check.php
+        bbs/register_form_update.php
+        bbs/search.php
+        bbs/good.php
+        js/wrest.js
+        lib/mailer.lib.php
+        skin/member/basic/register.skin.php
+        skin/member/basic/register_form.skin.php
+        skin/board/basic/list.skin.php
+
 4.07.00 (06.04.28)
     :   cheditor에서 수정시 글제대로 보이지 않던 오류 수정
     :   cheditor에서 글자의 크기를 크게할 경우 겹치던 오류 수정

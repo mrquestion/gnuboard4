@@ -43,7 +43,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <td height="223" align="center" valign="top" background="<?=$member_skin_path?>/img/login_table_bg.gif"><TEXTAREA style="WIDTH: 100%" rows=15 readOnly><?=get_text($config[cf_stipulation])?></TEXTAREA></td>
 </tr>
 <tr> 
-    <td><INPUT type=checkbox value=1 name=agree>&nbsp;약관의 내용에 동의합니다.</td>
+    <td><INPUT type=checkbox value=1 name=agree id=agree>&nbsp;<label for=agree>약관의 내용에 동의합니다.</label></td>
 </tr>
 <tr> 
     <td height="35" background="<?=$member_skin_path?>/img/line.gif"></td>

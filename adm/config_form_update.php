@@ -86,6 +86,7 @@ $sql = " update $g4[config_table]
                 cf_formmail_is_member   = '$cf_formmail_is_member',
                 cf_page_rows            = '$cf_page_rows',
                 cf_stipulation          = '$cf_stipulation',
+                cf_open_modify          = '$cf_open_modify',
                 cf_1                    = '$cf_1',
                 cf_2                    = '$cf_2',
                 cf_3                    = '$cf_3',
