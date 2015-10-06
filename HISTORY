@@ -1,3 +1,20 @@
+4.34.29 (2012.05.27)
+    :   4.34.28 패치에서 embed 태그중 allowscriptaccess 코드를 script 로 인식하여 동영상 작동이 안되는것을 수정
+
+        lib/common.lib.php 의 bad120422() 함수가 수정 되었습니다.
+
+            function bad120422($matches)
+            {
+                $tag  = $matches[1];
+                $code = $matches[2];
+                if (preg_match("#\bscript\b#i", $code)) {
+                    return "$tag 태그에 스크립트는 사용 불가합니다.";
+                } else if (preg_match("#\bbase64\b#i", $code)) {
+                    return "$tag 태그에 BASE64는 사용 불가합니다.";
+                }
+                return $matches[0];
+            }
+
 4.34.28 (2012.05.24)
     :   게시판 검색시 검색어에 태그가 들어가는 경우 쿼리 에러가 나는것을 수정 (곱슬최씨님께서 알려 주셨습니다.)
         get_sql_search() 함수 수정
