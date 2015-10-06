@@ -439,17 +439,17 @@ include_once ("./admin.head.php");
         <option value='wr_last asc'>wr_last asc : 최근글 이전것 부터
         <option value='wr_last desc'>wr_last desc : 최근글 최근것 부터
         <option value='wr_comment asc, wr_num, wr_reply'>wr_comment asc : 코멘트수 낮은것 부터
-        <option value='wr_comment desc, wr_num, wr_reply'>wr_comment asc : 코멘트수 높은것 부터
+        <option value='wr_comment desc, wr_num, wr_reply'>wr_comment desc : 코멘트수 높은것 부터
         <option value='wr_good asc, wr_num, wr_reply'>wr_good asc : 추천수 낮은것 부터
-        <option value='wr_good desc, wr_num, wr_reply'>wr_good asc : 추천수 높은것 부터
+        <option value='wr_good desc, wr_num, wr_reply'>wr_good desc : 추천수 높은것 부터
         <option value='wr_nogood asc, wr_num, wr_reply'>wr_nogood asc : 비추천수 낮은것 부터
-        <option value='wr_nogood desc, wr_num, wr_reply'>wr_nogood asc : 비추천수 높은것 부터
-        <option value='wr_subject asc, wr_num, wr_reply'>wr_subject : 제목 내림차순
-        <option value='wr_subject desc, wr_num, wr_reply'>wr_subject : 제목 오름차순
-        <option value='wr_name asc, wr_num, wr_reply'>wr_name : 글쓴이 내림차순
-        <option value='wr_name desc, wr_num, wr_reply'>wr_name : 글쓴이 오름차순
-        <option value='ca_name asc, wr_num, wr_reply'>ca_name : 분류명 내림차순
-        <option value='ca_name desc, wr_num, wr_reply'>ca_name : 분류명 오름차순
+        <option value='wr_nogood desc, wr_num, wr_reply'>wr_nogood desc : 비추천수 높은것 부터
+        <option value='wr_subject asc, wr_num, wr_reply'>wr_subject asc : 제목 내림차순
+        <option value='wr_subject desc, wr_num, wr_reply'>wr_subject desc : 제목 오름차순
+        <option value='wr_name asc, wr_num, wr_reply'>wr_name asc : 글쓴이 내림차순
+        <option value='wr_name desc, wr_num, wr_reply'>wr_name desc : 글쓴이 오름차순
+        <option value='ca_name asc, wr_num, wr_reply'>ca_name asc : 분류명 내림차순
+        <option value='ca_name desc, wr_num, wr_reply'>ca_name desc : 분류명 오름차순
         </select>
         <script type='text/javascript'> document.fboardform.bo_sort_field.value = '<?=$board[bo_sort_field]?>'; </script>
         <?=help("리스트에서 기본으로 정렬에 사용할 필드를 선택합니다.\n\n'기본'으로 사용하지 않으시는 경우 속도가 느려질 수 있습니다.", -50)?>
