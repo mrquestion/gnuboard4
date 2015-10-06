@@ -22,12 +22,16 @@ if ($member[mb_level] < $board[bo_download_level]) {
         alert($alert_msg . "\\n\\n회원이시라면 로그인 후 이용해 보십시오.", "./login.php?wr_id=$wr_id&$qstr&url=".urlencode("board.php?bo_table=$bo_table&wr_id=$wr_id"));
 }
 
+// 사용자 코드 실행
+@include_once("$board_skin_path/download.skin.php");
+
 // 이미 다운로드 받은 파일인지를 검사한 후 게시물당 한번만 포인트를 차감하도록 수정
 $ss_name = "ss_down_{$bo_table}_{$wr_id}";
 if (!get_session($ss_name)) 
 {
     // 자신의 글이라면 통과
-    if ($write[mb_id] && $write[mb_id] == $member[mb_id])
+    // 관리자인 경우 통과
+    if (($write[mb_id] && $write[mb_id] == $member[mb_id]) || $is_admin)
         ;
     else if ($board[bo_download_level] > 1) // 회원이상 다운로드가 가능하다면
     {

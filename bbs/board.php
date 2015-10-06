@@ -64,7 +64,7 @@ if ($wr_id)
                       where gr_id = '$board[gr_id]' and mb_id = '$member[mb_id]' ";
             $row = sql_fetch($sql);
             if (!$row[cnt]) 
-                alert("접근 권한이 없으므로 글읽기가 불가합니다.\\n\\n궁금하신 사항은 관리자에게 문의 바랍니다.");
+                alert("접근 권한이 없으므로 글읽기가 불가합니다.\\n\\n궁금하신 사항은 관리자에게 문의 바랍니다.", $g4[path]);
         }
     }
 

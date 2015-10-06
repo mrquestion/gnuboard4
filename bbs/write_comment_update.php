@@ -258,10 +258,13 @@ else if ($w == "cu") // 코멘트 수정
     if ($row[cnt] && !$is_admin)
         alert("이 코멘트와 관련된 답변코멘트가 존재하므로 수정 할 수 없습니다.");
 
+    $sql_ip = "";
+    if (!$is_admin)
+        $sql_ip = " , wr_ip = '$_SERVER[REMOTE_ADDR]' ";
+
     $sql = " update $write_table
                 set wr_subject = '$wr_subject',
                     wr_content = '$wr_content',
-                    wr_ip = '$_SERVER[REMOTE_ADDR]',
                     wr_1 = '$wr_1',
                     wr_2 = '$wr_2',
                     wr_3 = '$wr_3',
@@ -272,6 +275,7 @@ else if ($w == "cu") // 코멘트 수정
                     wr_8 = '$wr_8',
                     wr_9 = '$wr_9',
                     wr_10 = '$wr_10'
+                    $sql_ip
               where wr_id = '$comment_id' ";
     sql_query($sql);
 }

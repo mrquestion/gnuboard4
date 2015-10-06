@@ -286,17 +286,23 @@ else if ($w == "u")
         else
         {
             $mb_id = $wr[mb_id];
+            $wr_name = $wr[wr_name];
+            $wr_email = $wr[wr_email];
+            $wr_homepage = $wr[wr_homepage];
         }
     } 
     else 
     {
         $mb_id = "";
         // 비회원의 경우 이름이 누락되는 경우가 있음
-        if (!trim($wr_name))
-            alert("이름은 필히 입력하셔야 합니다.");
+        //if (!trim($wr_name)) alert("이름은 필히 입력하셔야 합니다.");
     }
 
     $sql_password = $wr_password ? " , wr_password = '".sql_password($wr_password)."' " : "";
+
+    $sql_ip = "";
+    if (!$is_admin)
+        $sql_ip = " , wr_ip = '$_SERVER[REMOTE_ADDR]' ";
 
     $sql = " update $write_table
                 set ca_name = '$ca_name',
@@ -309,7 +315,6 @@ else if ($w == "u")
                     wr_name = '$wr_name',
                     wr_email = '$wr_email',
                     wr_homepage = '$wr_homepage',
-                    wr_ip = '$_SERVER[REMOTE_ADDR]',
                     wr_1 = '$wr_1',
                     wr_2 = '$wr_2',
                     wr_3 = '$wr_3',
@@ -320,6 +325,7 @@ else if ($w == "u")
                     wr_8 = '$wr_8',
                     wr_9 = '$wr_9',
                     wr_10= '$wr_10'
+                    $sql_ip
                     $sql_password
               where wr_id = '$wr[wr_id]' ";
     sql_query($sql);

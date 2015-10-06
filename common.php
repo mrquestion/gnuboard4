@@ -172,6 +172,7 @@ unset($my); // DB 설정값을 클리어 해줍니다.
 // SESSION 설정
 //-------------------------------------------
 ini_set("session.use_trans_sid", 0);    // PHPSESSID를 자동으로 넘기지 않음
+ini_set("url_rewriter.tags",""); // 링크에 PHPSESSID가 따라다니는것을 무력화함 (해뜰녘님께서 알려주셨습니다.)
 
 session_save_path("$g4[path]/data/session");
 

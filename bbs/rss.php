@@ -65,7 +65,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     echo "<description><![CDATA[".$file . conv_content($row[wr_content], $html)."]]></description>\n";
     echo "<dc:creator>".specialchars_replace($row[wr_name])."</dc:creator>\n";
     $date = $row[wr_datetime];
-    $date = substr($date,0,10) . "T" . substr($date,11,8) . "+09:00";
+    // rss 리더 스킨으로 호출하면 날짜가 제대로 표시되지 않음
+    //$date = substr($date,0,10) . "T" . substr($date,11,8) . "+09:00";
+    $date = date('r', strtotime($date));
     echo "<dc:date>$date</dc:date>\n";
     echo "</item>\n";
 }
