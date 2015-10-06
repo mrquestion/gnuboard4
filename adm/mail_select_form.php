@@ -60,8 +60,8 @@ include_once("./admin.head.php");
                 <input type=radio name='mb_id1' value='1' onclick="mb_id1_click(1);" <?=$mb_id1?"checked":"";?>> 전체
                 <input type=radio name='mb_id1' value='0' onclick="mb_id1_click(0);" <?=!$mb_id1?"checked":"";?>> 구간
                 <br>
-                <input type=text class=edit id=mb_id1_from name=mb_id1_from value="<?=$mb_id1_from?>"> 에서 
-                <input type=text class=edit id=mb_id1_to name=mb_id1_to value="<?=$mb_id1_to?>"> 까지
+                <input type=text class=ed id=mb_id1_from name=mb_id1_from value="<?=$mb_id1_from?>"> 에서 
+                <input type=text class=ed id=mb_id1_to name=mb_id1_to value="<?=$mb_id1_to?>"> 까지
 
                 <script language="JavaScript">
                 function mb_id1_click(num)
@@ -85,12 +85,12 @@ include_once("./admin.head.php");
         <tr class='ht'>
             <td>생일</td>
             <td>
-                <input type=text name='mb_birth_from' size=4 maxlength=4 class=edit value="<?=$mb_birth_from?>"> 부터 
-                <input type=text name='mb_birth_to' size=4 maxlength=4 class=edit value="<?=$mb_birth_to?>"> 까지 (예 : 5월5일 인 경우, 0505 와 같이 입력 , 둘다 입력해야함)</td>
+                <input type=text name='mb_birth_from' size=4 maxlength=4 class=ed value="<?=$mb_birth_from?>"> 부터 
+                <input type=text name='mb_birth_to' size=4 maxlength=4 class=ed value="<?=$mb_birth_to?>"> 까지 (예 : 5월5일 인 경우, 0505 와 같이 입력 , 둘다 입력해야함)</td>
         </tr>
         <tr class='ht'>
             <td>E-mail에</td>
-            <td><input type=text name='mb_email' class=edit value="<?=$mb_email?>"> 단어 포함 (예 : @sir.co.kr)</td>
+            <td><input type=text name='mb_email' class=ed value="<?=$mb_email?>"> 단어 포함 (예 : @sir.co.kr)</td>
         </tr>
         <tr class='ht'>
             <td>성별</td>
@@ -158,7 +158,7 @@ include_once("./admin.head.php");
         <tr><td colspan='2' class='line2'></td></tr>
         </table>
 
-        <p align=center><input type=image src='./img/btn_confirm.gif'>
+        <p align=center><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'>
         </form>
     </td>
 </tr></table>

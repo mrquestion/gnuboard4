@@ -106,7 +106,8 @@ else if ($w == "r")
 
 
 // 그룹접근 가능
-if ($group[gr_use_access]) {
+if ($group[gr_use_access]) 
+{
     if (!$member[mb_id]) 
         alert("접근 권한이 없습니다.\\n\\n회원이시라면 로그인 후 이용해 보십시오.", "login.php?$qstr&url=".urlencode("$_SERVER[PHP_SELF]?bo_table=$bo_table"));
 
@@ -117,7 +118,7 @@ if ($group[gr_use_access]) {
         $sql = " select gr_id from $g4[group_member_table] where gr_id = '$board[gr_id]' and mb_id = '$member[mb_id]' ";
         $row = sql_fetch($sql);
         if (!$row[gr_id])
-            alert("접근 권한이 없습니다.\\n\\n궁금하신 사항은 관리자에게 문의바랍니다.");
+            alert("접근 권한이 없으므로 글쓰기가 불가합니다.\\n\\n궁금하신 사항은 관리자에게 문의 바랍니다.");
     }
 }
 

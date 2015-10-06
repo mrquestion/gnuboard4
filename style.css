@@ -12,7 +12,6 @@ a.menu:hover { text-decoration:none; }
 .lh { line-height: 150%; }
 .jt { text-align:justify; }
 
-/*.li { font-weight:bold; font-size:18px; vertical-align:-4px; color:#66AEAD; padding-right:4px; }*/
 .li { font-weight:bold; font-size:18px; vertical-align:-4px; color:#66AEAD; }
 
 .ul { list-style-type:square; color:#66AEAD; }

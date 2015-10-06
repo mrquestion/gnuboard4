@@ -59,7 +59,7 @@ $colspan = 6;
             <option value='po_subject'>제목</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
-        <input type=image src='./img/btn_search.gif' align=absmiddle></td>
+        <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
@@ -78,7 +78,7 @@ $colspan = 6;
 	<td>투표권한</td>
 	<td>투표수</td>
 	<td>기타의견</td>
-	<td><a href="./poll_form.php"><img src='./img/icon_insert.gif' border=0 title='생성'></a></td>
+	<td><a href="./poll_form.php"><img src='<?=$g4[admin_path]?>/img/icon_insert.gif' border=0 title='생성'></a></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?

@@ -68,7 +68,7 @@ $colspan = 7;
             <option value='a.mb_id'>회원아이디</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<? echo $stx ?>'>
-        <input type=image src='./img/btn_search.gif' align=absmiddle></td>
+        <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>

@@ -1,3 +1,23 @@
+4.03.01 (05.08.01)
+    :   우편번호를 파일DB로 변경
+        우편번호 변경시 파일만 교체하면 됨
+    :   게시판관리에서 그룹관리자가 그룹 클릭시 오류나던 부분을 수정
+    :   접근 권한 체크시 회원은 글목록이 보이도록 수정
+    :   관리자 프로그램, 메뉴 대폭 수정
+    :   common.js 의 menu() 함수 변경
+    :   공지글 삭제시 삭제 반영되지 않던 오류 수정
+    :   투표 수정
+
+        adm/*
+        adm/menu/*
+        js/common.js
+        bbs/board.php
+        bbs/delete.php
+        bbs/delete_all.php
+        bbs/poll_update.php
+        bbs/zip.php
+        bbs/zip.db
+
 4.03.00 (05.07.23)
     :   추후 확장을 위하여 SMS 수신여부 필드를 회원테이블에 추가
     :   그룹, 게시판관리자가 있어도 최고관리자에게 메일을 발송
@@ -10,6 +30,7 @@
 
         필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
 
+        adm/sql_write.sql
         adm/board_form.php
         adm/board_form_update.php
         adm/board_list.php

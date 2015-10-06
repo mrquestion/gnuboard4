@@ -196,6 +196,7 @@ echo "<script>document.frminstall2.job1.value='전체 테이블 생성중';</script>";
 flush(); usleep(50000); 
 
 // 우편번호 INSERT
+/*
 $zipfile = fopen("../$g4[admin]/sql_zip.sql", "r");
 $i = 0;
 while (!feof($zipfile)) {
@@ -216,6 +217,14 @@ while (!feof($zipfile)) {
     }
 }
 fclose($zipfile);
+*/
+
+for ($i=0; $i<45; $i++)
+{
+    echo "<script language='JavaScript'>document.frminstall2.status_bar.value += '■';</script>\n";
+    flush();
+    usleep(500); 
+}
 
 echo "<script>document.frminstall2.job1.value='전체 테이블 생성 완료';</script>";
 flush(); usleep(50000); 

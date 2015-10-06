@@ -2,8 +2,6 @@
 $sub_menu = "100200";
 include_once("./_common.php");
 
-auth_check($auth[$sub_menu], "r");
-
 if ($is_admin != "super")
     alert("최고관리자만 접근 가능합니다.");
 
@@ -71,7 +69,7 @@ var list_delete_php = "auth_list_delete.php";
             <option value='a.mb_id'>회원아이디</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
-        <input type=image src='./img/btn_search.gif' align=absmiddle></td>
+        <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
@@ -161,7 +159,7 @@ else
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <tr class='ht center'>
-    <td><input type=text class='edit' name=mb_id required itemname='회원아이디' value='<?=$mb_id?>'></td>
+    <td><input type=text class=ed name=mb_id required itemname='회원아이디' value='<?=$mb_id?>'></td>
     <td>
         <select name=au_menu required itemname='접근가능메뉴'>
         <option value=''>-- 선택하세요
@@ -184,7 +182,7 @@ else
         	<td>d<br>(삭제)</td>
         </tr>
         </table></td>
-    <td><input type=image src='./img/btn_confirm.gif'></td>
+    <td><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 </form>

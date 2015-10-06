@@ -39,17 +39,17 @@ include_once("./admin.head.php");
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=30% class='col2 pad2'>
 <tr class='ht'>
-    <td colspan=4 class=title align=left><img src='./img/icon_title.gif'> <?=$html_title?></td>
+    <td colspan=4 class=title align=left><img src='<?=$g4[admin_path]?>/img/icon_title.gif'> <?=$html_title?></td>
 </tr>
 <tr><td colspan=4 class='line1'></td></tr>
 <tr class='ht'>
     <td>그룹 ID</td>
-    <td colspan=3><input type='text' class='edit' name=gr_id size=11 maxlength=10 <?=$gr_id_attr?> alphanumericunderline itemname='그룹 아이디' value='<?=$group[gr_id]?>'> 영문자, 숫자, _ 만 가능 (공백없이)</td>
+    <td colspan=3><input type='text' class=ed name=gr_id size=11 maxlength=10 <?=$gr_id_attr?> alphanumericunderline itemname='그룹 아이디' value='<?=$group[gr_id]?>'> 영문자, 숫자, _ 만 가능 (공백없이)</td>
 </tr>
 <tr class='ht'>
     <td>그룹 제목</td>
     <td colspan=3>
-        <input type='text' class='edit' name=gr_subject size=40 required itemname='그룹 제목' value='<?=$group[gr_subject]?>'>
+        <input type='text' class=ed name=gr_subject size=40 required itemname='그룹 제목' value='<?=$group[gr_subject]?>'>
         <? 
         if ($w == 'u')
             echo "<input type=button class='btn1' value='게시판생성' onclick=\"location.href='./board_form.php?gr_id=$gr_id';\">";
@@ -62,7 +62,7 @@ include_once("./admin.head.php");
         <?
         if ($is_admin == "super")
             //echo get_member_id_select("gr_admin", 9, $row[gr_admin]);
-            echo "<input type='text' class='edit' name=gr_admin value='$gr[gr_admin]'>";
+            echo "<input type='text' class=ed name=gr_admin value='$gr[gr_admin]'>";
         else
             echo "<input type=hidden name='gr_admin' value='$gr[gr_admin]'>$gr[gr_admin]";
         ?></td>
@@ -73,9 +73,9 @@ include_once("./admin.head.php");
 <? for ($i=1; $i<=10; $i=$i+2) { $k=$i+1; ?>
 <tr class='ht'>
     <td>여분 필드<?=$i?></td>
-    <td><input type='text' class='edit' style='width:99%;' name=gr_<?=$i?> value='<?=$gr["gr_$i"]?>'></td>
+    <td><input type='text' class=ed style='width:99%;' name=gr_<?=$i?> value='<?=$gr["gr_$i"]?>'></td>
     <td>여분 필드<?=$k?></td>
-    <td><input type='text' class='edit' style='width:99%;' name=gr_<?=$k?> value='<?=$gr["gr_$k"]?>'></td>
+    <td><input type='text' class=ed style='width:99%;' name=gr_<?=$k?> value='<?=$gr["gr_$k"]?>'></td>
 </tr>
 <? } ?>
 
@@ -83,8 +83,8 @@ include_once("./admin.head.php");
 </table>
 
 <p align=center>
-    <input type=image src='./img/btn_confirm.gif' accesskey='s'>&nbsp;
-    <a href='./boardgroup_list.php?<?=$qstr?>'><img src='./img/btn_list.gif' border=0></a>
+    <input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif' accesskey='s'>&nbsp;
+    <a href='./boardgroup_list.php?<?=$qstr?>'><img src='<?=$g4[admin_path]?>/img/btn_list.gif' border=0></a>
 </form>
 
 <script language='JavaScript'>

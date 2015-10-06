@@ -17,6 +17,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 <!-- 김선용 2005.4 - ff(불여우) 에서는 innerhtml 사용시 폼이 <table> 아래에 있으면 인식하지 못합니다. -->
 <form name="fwrite" method="post" action="javascript:fwrite_check(document.fwrite);" enctype="multipart/form-data" style="margin:0px;">
+<input type=hidden name=null><!-- 삭제하지 마십시오. -->
 <input type=hidden name=w        value="<?=$w?>">
 <input type=hidden name=bo_table value="<?=$bo_table?>">
 <input type=hidden name=wr_id    value="<?=$wr_id?>">
@@ -178,6 +179,20 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 
 <script language="javascript">
+<?
+// 관리자라면 분류 선택에 '공지' 옵션을 추가함
+if ($is_admin) 
+{
+    echo "
+    if (typeof(document.fwrite.ca_name) != 'undefined')
+    {
+        document.fwrite.ca_name.options.length += 1;
+        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].value = '공지';
+        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].text = '공지';
+    }";
+} 
+?>
+
 with (document.fwrite) {
     if (typeof(wr_name) != "undefined")
         wr_name.focus();
@@ -244,18 +259,4 @@ function fwrite_check(f)
     f.action = "./write_update.php";
     f.submit();
 }
-
-<?
-// 관리자라면 분류 선택에 '공지' 옵션을 추가함
-if ($is_admin) 
-{
-    echo "
-    if (typeof(document.fwrite.ca_name) != 'undefined')
-    {
-        document.fwrite.ca_name.options.length += 1;
-        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].value = '공지';
-        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].text = '공지';
-    }";
-} 
-?>
 </script>

@@ -26,34 +26,12 @@ if (!$bo_table)
         alert($msg);
 }
 
-// 그룹접근 사용
-if ($group[gr_use_access]) {
-    if (!$member[mb_id]) {
-        $msg = "비회원은 이 게시판에 접근할 권한이 없습니다.\\n\\n회원이시라면 로그인 후 이용해 보십시오.";
-        if ($cwin)
-            alert_close($msg);
-        else 
-            alert($msg, "./login.php?wr_id=$wr_id{$qstr}&url=".urlencode("./board.php?bo_table=$bo_table&wr_id=$wr_id"));
-    }
-
-    // 그룹관리자 이상이라면 통과 
-    if ($is_admin == "super" || $is_admin == "group") 
-        ; 
-    else {
-        // 그룹접근
-        $sql = " select count(*) as cnt 
-                   from $g4[group_member_table] 
-                  where gr_id = '$board[gr_id]' and mb_id = '$member[mb_id]' ";
-        $row = sql_fetch($sql);
-        if (!$row[cnt]) 
-            alert("접근 권한이 없습니다.\\n\\n궁금하신 사항은 관리자에게 문의바랍니다.");
-    }
-}
-
 // wr_id 값이 있으면 글읽기 
-if ($wr_id) {
+if ($wr_id) 
+{
     // 글이 없을 경우 해당 게시판 목록으로 이동
-    if (!$write[wr_id]) {
+    if (!$write[wr_id]) 
+    {
         $msg = "글이 존재하지 않습니다.\\n\\n글이 삭제되었거나 이동된 경우입니다.";
         if ($cwin)
             alert_close($msg);
@@ -61,8 +39,35 @@ if ($wr_id) {
             alert($msg, "./board.php?bo_table=$bo_table");
     }
 
+    // 그룹접근 사용
+    if ($group[gr_use_access]) 
+    {
+        if (!$member[mb_id]) {
+            $msg = "비회원은 이 게시판에 접근할 권한이 없습니다.\\n\\n회원이시라면 로그인 후 이용해 보십시오.";
+            if ($cwin)
+                alert_close($msg);
+            else 
+                alert($msg, "./login.php?wr_id=$wr_id{$qstr}&url=".urlencode("./board.php?bo_table=$bo_table&wr_id=$wr_id"));
+        }
+
+        // 그룹관리자 이상이라면 통과 
+        if ($is_admin == "super" || $is_admin == "group") 
+            ; 
+        else 
+        {
+            // 그룹접근
+            $sql = " select count(*) as cnt 
+                       from $g4[group_member_table] 
+                      where gr_id = '$board[gr_id]' and mb_id = '$member[mb_id]' ";
+            $row = sql_fetch($sql);
+            if (!$row[cnt]) 
+                alert("접근 권한이 없으므로 글읽기가 불가합니다.\\n\\n궁금하신 사항은 관리자에게 문의 바랍니다.");
+        }
+    }
+
     // 로그인된 회원의 권한이 설정된 읽기 권한보다 작다면
-    if ($member[mb_level] < $board[bo_read_level]) {
+    if ($member[mb_level] < $board[bo_read_level]) 
+    {
         if ($member[mb_id]) 
             alert("글을 읽을 권한이 없습니다.");
         else 
@@ -72,7 +77,8 @@ if ($wr_id) {
     // 자신의 글이거나 관리자라면 통과
     if (($write[mb_id] && $write[mb_id] == $member[mb_id]) || $is_admin)
         ;
-    else {
+    else 
+    {
         // 비밀글이라면
         if (strstr($write[wr_option], "secret")) {
             $ss_name = "ss_secret_{$bo_table}_$write[wr_num]";
@@ -113,8 +119,11 @@ if ($wr_id) {
     }
 
     $g4[title] = "$group[gr_subject] > $board[bo_subject] > " . strip_tags(conv_subject($write[wr_subject], 255));
-} else {
-    if ($member[mb_level] < $board[bo_list_level]) {
+} 
+else 
+{
+    if ($member[mb_level] < $board[bo_list_level]) 
+    {
         if ($member[mb_id]) 
             alert("목록을 볼 권한이 없습니다.");
         else 

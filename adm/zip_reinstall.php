@@ -9,7 +9,7 @@ $g4[title] = $html_title;
 include_once("./admin.head.php");
 ?>
 
-<p><img src='./img/icon_title.gif'> <span class=title><?=$html_title?></span>
+<p><img src='<?=$g4[admin_path]?>/img/icon_title.gif'> <span class=title><?=$html_title?></span>
 
 <p><span id=content></span>
 

@@ -29,7 +29,7 @@ include_once("./admin.head.php");
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=80% class='col2 pad2'>
 <tr>
-    <td colspan=2 class=title align=left><img src='./img/icon_title.gif'> <?=$html_title?></td>
+    <td colspan=2 class=title align=left><img src='<?=$g4[admin_path]?>/img/icon_title.gif'> <?=$html_title?></td>
 </tr>
 <tr><td colspan=2 class='line1'></td></tr>
 <tr class='ht'>
@@ -40,7 +40,7 @@ include_once("./admin.head.php");
     <td>메일 내용</td>
     <td class=lh>
         <?=textarea_size("ma_content")?>
-        <textarea id=ma_content name=ma_content rows=20 class='edit' style='width:655px;' required itemname='메일 내용'><?=$ma[ma_content]?></textarea>
+        <textarea id=ma_content name=ma_content rows=20 class=ed style='width:655px;' required itemname='메일 내용'><?=$ma[ma_content]?></textarea>
         <br>{이름} , {별명} , {회원아이디} , {이메일} , {생일}
         <br>위와 같이 HTML 코드에 삽입하면 해당 내용에 맞게 변환하여 메일 발송합니다. 
     </td>
@@ -48,7 +48,7 @@ include_once("./admin.head.php");
 <tr><td colspan=2 class='line1'></td></tr>
 </table>
 
-<p align=center><input type=image src='./img/btn_confirm.gif'></div></form>
+<p align=center><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'></div></form>
 
 
 

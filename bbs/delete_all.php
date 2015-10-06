@@ -109,6 +109,16 @@ for ($i=count($tmp_array)-1; $i>=0; $i--)
 
     // 스크랩 삭제
     sql_query(" delete from $g4[scrap_table] where bo_table = '$bo_table' and wr_id = '$write[wr_id]' ");
+
+    // 공지사항 삭제
+    $notice_array = explode("\n", trim($board[bo_notice]));
+    $bo_notice = "";
+    for ($k=0; $k<count($notice_array); $k++)
+        if ((int)$write[wr_id] != (int)$notice_array[$k])
+            $bo_notice .= $notice_array[$k] . "\n";
+    $bo_notice = trim($bo_notice);
+    sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table = '$bo_table' ");
+    $board[bo_notice] = $bo_notice;
 }
 
 // 글숫자 감소

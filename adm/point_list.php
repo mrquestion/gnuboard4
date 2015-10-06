@@ -83,7 +83,7 @@ var list_delete_php = "point_list_delete.php";
             <option value='a.po_content'>내용</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
-        <input type=image src='./img/btn_search.gif' align=absmiddle></td>
+        <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
@@ -179,10 +179,10 @@ else
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <tr class='ht center'>
-    <td><input type=text class='edit' name=mb_id required itemname='회원아이디' value='<?=$mb_id?>'></td>
-    <td><input type=text class='edit' name=po_content required itemname='내용' style='width:99%;'></td>
-    <td><input type=text class='edit' name=po_point required itemname='포인트' size=10 maxlength=6></td>
-    <td><input type=image src='./img/btn_confirm.gif'></td>
+    <td><input type=text class=ed name=mb_id required itemname='회원아이디' value='<?=$mb_id?>'></td>
+    <td><input type=text class=ed name=po_content required itemname='내용' style='width:99%;'></td>
+    <td><input type=text class=ed name=po_point required itemname='포인트' size=10 maxlength=6></td>
+    <td><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 </form>

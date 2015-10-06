@@ -480,19 +480,3 @@ CREATE TABLE $g4[visit_sum_table] (
   KEY index1 (vs_count)
 ) TYPE=MyISAM;
 
-##
-## Table structure for table `$g4[zip_table]`
-##
-
-DROP TABLE IF EXISTS $g4[zip_table];
-CREATE TABLE $g4[zip_table] (
-  zp_id int(11) NOT NULL default '0',
-  zp_code varchar(6) NOT NULL default '',
-  zp_sido varchar(4) NOT NULL default '',
-  zp_gugun varchar(20) NOT NULL default '',
-  zp_dong varchar(50) NOT NULL default '',
-  zp_bunji varchar(20) NOT NULL default '',
-  PRIMARY KEY  (zp_id),
-  KEY zp_code (zp_code)
-) TYPE=MyISAM;
-

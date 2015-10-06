@@ -78,7 +78,7 @@ var list_delete_php = 'board_list_delete.php';
             <option value='a.gr_id'>그룹ID</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
-        <input type=image src='./img/btn_search.gif' align=absmiddle></td>
+        <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
@@ -112,10 +112,10 @@ var list_delete_php = 'board_list_delete.php';
     <td rowspan=2 title="다운로드 포인트"><?=subject_sort_link("bo_download_point")?>다운<br>포인트</a></td>
     <td rowspan=2 title="검색사용"><?=subject_sort_link("bo_use_search")?>검색<br>사용</a></td>
     <td rowspan=2 title="검색순서"><?=subject_sort_link("bo_order_search")?>검색<br>순서</a></td>
-	<td rowspan=2><a href="./board_form.php"><img src='./img/icon_insert.gif' border=0 title='생성'></a></td>
+	<td rowspan=2><a href="./board_form.php"><img src='<?=$g4[admin_path]?>/img/icon_insert.gif' border=0 title='생성'></a></td>
 </tr>
 <tr class='bgcol1 bold col1 ht center'>
-    <td><?=subject_sort_link("gr_id")?>그룹</a></td>
+    <td><?=subject_sort_link("a.gr_id")?>그룹</a></td>
     <td><?=subject_sort_link("bo_skin", "", "desc")?>스킨</a></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
@@ -162,13 +162,13 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     echo "<tr class='list$list col1 ht center'>";
     echo "<td rowspan=2 height=25><input type=checkbox name=chk[] value='$i'></td>";
     echo "<td rowspan=2><a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]'><b>$row[bo_table]</b></a></td>";
-    echo "<td colspan=2 align=left height=25><input type=text class=edit name=bo_subject[$i] value='$row[bo_subject]' style='width:99%'></td>";
-    echo "<td rowspan=2 title='읽기 포인트'><input type=text class=edit name=bo_read_point[$i] value='$row[bo_read_point]' style='width:33px;'></td>";
-    echo "<td rowspan=2 title='쓰기 포인트'><input type=text class=edit name=bo_write_point[$i] value='$row[bo_write_point]' style='width:33px;'></td>";
-    echo "<td rowspan=2 title='속글쓰기 포인트'><input type=text class=edit name=bo_comment_point[$i] value='$row[bo_comment_point]' style='width:33px;'></td>";
-    echo "<td rowspan=2 title='다운로드 포인트'><input type=text class=edit name=bo_download_point[$i] value='$row[bo_download_point]' style='width:33px;'></td>";
+    echo "<td colspan=2 align=left height=25><input type=text class=ed name=bo_subject[$i] value='$row[bo_subject]' style='width:99%'></td>";
+    echo "<td rowspan=2 title='읽기 포인트'><input type=text class=ed name=bo_read_point[$i] value='$row[bo_read_point]' style='width:33px;'></td>";
+    echo "<td rowspan=2 title='쓰기 포인트'><input type=text class=ed name=bo_write_point[$i] value='$row[bo_write_point]' style='width:33px;'></td>";
+    echo "<td rowspan=2 title='속글쓰기 포인트'><input type=text class=ed name=bo_comment_point[$i] value='$row[bo_comment_point]' style='width:33px;'></td>";
+    echo "<td rowspan=2 title='다운로드 포인트'><input type=text class=ed name=bo_download_point[$i] value='$row[bo_download_point]' style='width:33px;'></td>";
     echo "<td rowspan=2 title='검색사용'><input type=checkbox name=bo_use_search[$i] ".($row[bo_use_search]?'checked':'')." value='1'></td>";
-    echo "<td rowspan=2 title='검색순서'><input type=text class=edit name=bo_order_search[$i] value='$row[bo_order_search]' size=2></td>";
+    echo "<td rowspan=2 title='검색순서'><input type=text class=ed name=bo_order_search[$i] value='$row[bo_order_search]' size=2></td>";
     echo "<td rowspan=2>$s_upd $s_del $s_copy</td>";
     echo "</tr>";
     echo "<tr class='list$list col1 ht center'>";

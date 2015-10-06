@@ -1,6 +1,36 @@
 <?
 include_once("./_common.php");
 
+$zipfile = file("./zip.db");
+$search_count = 0;
+
+if ($addr1) 
+{
+    while ($zipcode = each($zipfile)) 
+    {
+        if(strstr(substr($zipcode[1],9,512), $addr1))
+        {
+            $list[$search_count][zip1] = substr($zipcode[1],0,3);
+            $list[$search_count][zip2] = substr($zipcode[1],4,3);    
+            $addr = explode(" ", substr($zipcode[1],8));
+
+            if ($addr[sizeof($addr)-1]) 
+            {
+                $list[$search_count][addr] = str_replace($addr[sizeof($addr)-1], "", substr($zipcode[1],8));
+                $list[$search_count][bunji] = $addr[sizeof($addr)-1];
+            }
+            else
+                $list[$search_count][addr] = substr($zipcode[1],8);
+
+            $list[$search_count][encode_addr] = urlencode($list[$search_count][addr]);
+            $search_count++;
+        }    
+    }
+
+    if (!$search_count) alert("찾으시는 주소가 없습니다.");
+}
+
+/* 기존의 DB에서 불러오는 방식
 if ($addr1) 
 {
     //$sql = " select * from $g4[zip_table] where zp_dong like '%$addr1%' order by zp_id ";
@@ -20,6 +50,7 @@ if ($addr1)
     if (!$search_count) 
         alert("찾으시는 주소가 없습니다.");
 }
+*/
 
 $g4[title] = "우편번호 검색";
 include_once("$g4[path]/head.sub.php");

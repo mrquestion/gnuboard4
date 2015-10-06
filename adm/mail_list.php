@@ -39,7 +39,7 @@ $colspan = 6;
     <td width=120>작성일시</td>
     <td width=50>테스트</td>
     <td width=50>보내기</td>
-    <td width=80><a href='./mail_form.php'><img src='./img/icon_insert.gif' border=0></a></td>
+    <td width=80><a href='./mail_form.php'><img src='<?=$g4[admin_path]?>/img/icon_insert.gif' border=0></a></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 

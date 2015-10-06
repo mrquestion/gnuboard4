@@ -8,17 +8,18 @@ include_once ("./admin.head.php");
 echo "<script language='javascript' src='$g4[path]/js/sideview.js'></script>";
 
 // 회원관리
-if ($is_admin == "super" || strstr($auth["2010"], "r")) {
+if ($is_admin == "super" || strstr($auth["2010"], "r")) 
+{
     $count = 5;
     $colspan = 9;
     echo "
     <table width=100% cellpadding=0 cellspacing=0>
     <tr>
-        <td colspan='".($colspan-2)."' class='ht title'><img src='./img/icon_title.gif'> 최근에 가입한 회원 내역 {$count}건</td>
-        <td colspan='".($colspan - ($colspan-2))."' class='right'><a href='./member_list.php'>more</a>&nbsp;</td>
+        <td colspan='".($colspan-2)."' class='ht title'><img src='$g4[admin_path]/img/icon_title.gif'> 최근에 가입한 회원 내역 {$count}건</td>
+        <td colspan='".($colspan - ($colspan-2))."' align=right><a href='./member_list.php'>more</a>&nbsp;</td>
     </td>
     <tr><td colspan='$colspan' class='line1'></td></tr>
-    <tr class='bgcol1 bold col1 ht center'>
+    <tr class='bgcol1 col1 ht bold center'>
         <td width='100'>회원아이디</td>
         <td width='100'>이름</td>
         <td width=''>별명</td>
@@ -62,17 +63,18 @@ echo "
 
 
 // 포인트관리
-if ($is_admin == "super" || strstr($auth["2020"], "r")) {
+if ($is_admin == "super" || strstr($auth["2020"], "r")) 
+{
     $count = 5;
     $colspan = 6;
     echo "
     <table width=100% cellpadding=0 cellspacing=0>
     <tr>
-        <td colspan='".($colspan-2)."' class='ht title'><img src='./img/icon_title.gif'> 최근에 부여한 포인트 내역 {$count}건</td>
-        <td colspan='".($colspan - ($colspan-2))."' class='right'><a href='./point_list.php'>more</a>&nbsp;</td>
+        <td colspan='".($colspan-2)."' class='ht title'><img src='$g4[admin_path]/img/icon_title.gif'> 최근에 부여한 포인트 내역 {$count}건</td>
+        <td colspan='".($colspan - ($colspan-2))."' align=right><a href='./point_list.php'>more</a>&nbsp;</td>
     </td>
     <tr><td colspan='$colspan' class='line1'></td></tr>
-    <tr class='bgcol1 bold col1 ht center'>
+    <tr class='bgcol1 col1 ht bold center'>
         <td width='100'>회원아이디</td>
         <td width='100'>별명</td>
         <td width='140'>일시</td>
@@ -110,7 +112,8 @@ echo "
 
 
 // 접속자현황
-if ($is_admin == "super" || strstr($auth["2080"], "r")) {
+if ($is_admin == "super" || strstr($auth["2080"], "r")) 
+{
     include_once("$g4[path]/lib/visit.lib.php");
 
     $count = 5;
@@ -118,11 +121,11 @@ if ($is_admin == "super" || strstr($auth["2080"], "r")) {
     echo "
     <table width=100% cellpadding=0 cellspacing=0>
     <tr>
-        <td colspan='".($colspan-2)."' class='ht title'><img src='./img/icon_title.gif'> 최근 접속 내역 {$count}건</td>
-        <td colspan='".($colspan - ($colspan-2))."' class='right'><a href='./visit_list.php'>more</a>&nbsp;</td>
+        <td colspan='".($colspan-2)."' class='ht title'><img src='$g4[admin_path]/img/icon_title.gif'> 최근 접속 내역 {$count}건</td>
+        <td colspan='".($colspan - ($colspan-2))."' align=right><a href='./visit_list.php'>more</a>&nbsp;</td>
     </td>
     <tr><td colspan='$colspan' class='line1'></td></tr>
-    <tr class='bgcol1 bold col1 ht center'>
+    <tr class='bgcol1 col1 ht bold center'>
         <td width=100>IP</td>
         <td width=350>접속 경로</td>
         <td width=100>브라우저</td>

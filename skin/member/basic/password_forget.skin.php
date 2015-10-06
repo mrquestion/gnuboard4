@@ -46,7 +46,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                     <tr> 
                         <td width="15" height="28"></td>
                         <td width="100" height="14"><b>이름</b></td>
-                        <td width="200" height="14"><INPUT name=mb_name itemname="이름" size=18 nospace hangul></td>
+                        <td width="200" height="14"><INPUT name=mb_name itemname="이름" size=18></td>
                     </tr>
 
                     <? if ($config[cf_use_jumin]) { // 주민등록번호를 사용한다면(입력 받았다면) ?>

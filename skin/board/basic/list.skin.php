@@ -45,8 +45,8 @@ if ($is_nogood) $colspan++;
     <td width=110>글쓴이</td>
     <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
     <td width=40><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
-    <? if ($is_good) { ?><td width=40>추천</td><?}?>
-    <? if ($is_nogood) { ?><td width=40>비추천</td><?}?>
+    <? if ($is_good) { ?><td width=40><?=subject_sort_link('wr_good', $qstr2, 1)?>추천</a></td><?}?>
+    <? if ($is_nogood) { ?><td width=40><?=subject_sort_link('wr_nogood', $qstr2, 1)?>비추천</a></td><?}?>
 </tr>
 <tr><td colspan=<?=$colspan?> height=1 bgcolor=#B0ADF5></td></tr>
 
@@ -115,8 +115,8 @@ if ($is_nogood) $colspan++;
         $write_pages = str_replace("이전", "<img src='$board_skin_path/img/prev.gif' border='0' align='absmiddle' title='이전'>", $write_pages);
         $write_pages = str_replace("다음", "<img src='$board_skin_path/img/next.gif' border='0' align='absmiddle' title='다음'>", $write_pages);
         $write_pages = str_replace("맨끝", "<img src='$board_skin_path/img/end.gif' border='0' align='absmiddle' title='맨끝'>", $write_pages);
-        $write_pages = preg_replace("/<span>([0-9]*)<\/span>/", "<font style=\"font-family:돋움; font-size:9pt; color:#797979\">$1</font>", $write_pages);
-        $write_pages = preg_replace("/<b>([0-9]*)<\/b>/", "<font style=\"font-family:돋움; font-size:9pt; color:orange;\">$1</font>", $write_pages);
+        $write_pages = preg_replace("/<span>([0-9]*)<\/span>/", "<b><font style=\"font-family:돋움; font-size:9pt; color:#797979\">$1</font></b>", $write_pages);
+        $write_pages = preg_replace("/<b>([0-9]*)<\/b>/", "<b><font style=\"font-family:돋움; font-size:9pt; color:orange;\">$1</font></b>", $write_pages);
         ?>
         <?=$write_pages?>
         <? if ($next_part_href) { echo "<a href='$next_part_href'><img src='$board_skin_path/img/btn_search_next.gif' width=50 height=20 border=0 align=absmiddle title='다음검색'></a>"; } ?>
@@ -141,6 +141,7 @@ if ($is_nogood) $colspan++;
     </td>
     <td width="50%" align="right">
         <select name=sfl>
+            <option value='wr_subject||wr_content'>제목+내용</option>
             <option value='wr_subject'>제목</option>
             <option value='wr_content'>내용</option>
             <option value='mb_id'>회원아이디</option>

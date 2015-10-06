@@ -102,6 +102,29 @@ for ($i=1; $i<=$g4[link_count]; $i++)
         ?>
 
         <span class="ct lh"><?=$view[content];?></span>
+
+        
+<!-- ↓ 이 코드는 삭제하셔도 좋습니다. -->
+<br><br><br>
+<script type="text/javascript"><!--
+google_ad_client = "pub-2822305545668489";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+google_ad_channel ="";
+google_color_border = "000000";
+google_color_bg = "F0F0F0";
+google_color_link = "0000FF";
+google_color_url = "008000";
+google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><br><br><span style='font-size:8pt; font-family:돋움; color:silver;'>광고 수입은 그누보드의 호스팅 비용으로 사용합니다. (새창 : Shift + 링크 클릭)</span><br>
+<!-- ↑ 이 코드는 삭제하셔도 좋습니다. -->
+        
+        
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a>
         

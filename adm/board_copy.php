@@ -49,7 +49,7 @@ a:hover { text-decoration:underline; color:#EBC95F; }
 <colgroup width=70% class='col2 pad2'>
 <tr><td colspan=2 height=5></td></tr>
 <tr>
-    <td colspan=2 class=title align=left><img src='./img/icon_title.gif'> <?=$g4[title]?></td>
+    <td colspan=2 class=title align=left><img src='<?=$g4[admin_path]?>/img/icon_title.gif'> <?=$g4[title]?></td>
 </tr>
 <tr><td colspan=2 class='line1'></td></tr>
 <tr class='ht'>
@@ -58,11 +58,11 @@ a:hover { text-decoration:underline; color:#EBC95F; }
 </tr>
 <tr class='ht'>
 	<td>복사할 TABLE</td>
-	<td><input type=text class=edit name="target_table" size="20" maxlength="20" required alphanumericunderline itemname="TABLE"> 영문자, 숫자, _ 만 가능 (공백없이)</td>
+	<td><input type=text class=ed name="target_table" size="20" maxlength="20" required alphanumericunderline itemname="TABLE"> 영문자, 숫자, _ 만 가능 (공백없이)</td>
 </tr>
 <tr class='ht'>
 	<td>게시판 제목</td>
-	<td><input type=text class='edit' name='target_subject' size=60 maxlength=120 required itemname='게시판 제목' value='[복사본] <?=$board[bo_subject]?>'></td>
+	<td><input type=text class=ed name='target_subject' size=60 maxlength=120 required itemname='게시판 제목' value='[복사본] <?=$board[bo_subject]?>'></td>
 </tr>
 <tr class='ht'>
 	<td>복사 유형</td>

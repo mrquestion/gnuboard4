@@ -14,9 +14,9 @@ $qstr = "fr_date=$fr_date&to_date=$to_date";
 <tr>
     <td>
         기간 : 
-        <input type='text' name='fr_date' size=11 maxlength=10 value='<?=$fr_date?>' class=input>
+        <input type='text' name='fr_date' size=11 maxlength=10 value='<?=$fr_date?>' class=ed>
         -
-        <input type='text' name='to_date' size=11 maxlength=10 value='<?=$to_date?>' class=input>
+        <input type='text' name='to_date' size=11 maxlength=10 value='<?=$to_date?>' class=ed>
         &nbsp;
         <input type=button value=' 접속자 '   onclick="fvisit_submit('visit_list.php');">
         <input type=button value=' 도메인 '   onclick="fvisit_submit('visit_domain.php');">

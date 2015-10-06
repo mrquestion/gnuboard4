@@ -42,7 +42,9 @@ if (get_cookie("ck_po_id") != $po[po_id])
     if (!($search_ip || $search_mb_id)) 
     {
         $po_ips = $po[po_ips] . $_SERVER[REMOTE_ADDR] . "\n";
-        $mb_ids = $po[mb_ids] . $member[mb_id] . "\n";
+        $mb_ids = $po[mb_ids];
+        if ($member[mb_id])
+            $mb_ids .= $member[mb_id] . "\n";
         sql_query(" update $g4[poll_table] set po_cnt{$gb_poll} = po_cnt{$gb_poll} + 1, po_ips = '$po_ips', mb_ids = '$mb_ids' where po_id = '$po_id' ");
     }
 

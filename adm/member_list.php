@@ -103,7 +103,7 @@ var list_delete_php = "member_list_delete.php";
             <option value='mb_recommend'>추천인</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<? echo $stx ?>'>
-        <input type=image src='./img/btn_search.gif' align=absmiddle></td>
+        <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
@@ -145,7 +145,7 @@ var list_delete_php = "member_list_delete.php";
     <td><?=subject_sort_link('mb_email_certify', '', 'desc')?>인증</a></td>
     <td><?=subject_sort_link('mb_intercept_date', '', 'desc')?>차단</a></td>
     <td title='접근가능한 그룹수'>그룹</td>
-	<td><a href="./member_form.php"><img src='./img/icon_insert.gif' border=0 title='추가'></a></td>
+	<td><a href="./member_form.php"><img src='<?=$g4[admin_path]?>/img/icon_insert.gif' border=0 title='추가'></a></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?

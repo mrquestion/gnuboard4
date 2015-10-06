@@ -72,7 +72,7 @@ var list_delete_php = "./boardgroup_list_delete.php";
             <option value="gr_admin">그룹관리자</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
-        <input type=image src='./img/btn_search.gif' align=absmiddle></td>
+        <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
@@ -101,7 +101,7 @@ var list_delete_php = "./boardgroup_list_delete.php";
     <td>게시판</td>
     <td>접근사용</td>
     <td>접근회원수</td>
-    <td><? if ($is_admin == "super") { echo "<a href='./boardgroup_form.php'><img src='./img/icon_insert.gif' border=0 title='생성'></a>"; } ?></td>
+    <td><? if ($is_admin == "super") { echo "<a href='./boardgroup_form.php'><img src='$g4[admin_path]/img/icon_insert.gif' border=0 title='생성'></a>"; } ?></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
@@ -123,11 +123,11 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     echo "<tr class='list$list' onmouseover=\"this.className='mouseover';\" onmouseout=\"this.className='list$list';\" height=27 align=center>";
     echo "<td><input type=checkbox name=chk[] value='$i'></td>";
     echo "<td><a href='$g4[bbs_path]/group.php?gr_id=$row[gr_id]'><b>$row[gr_id]</b></a></td>";
-    echo "<td><input type=text class=edit name=gr_subject[$i] value='$row[gr_subject]' size=30></td>";
+    echo "<td><input type=text class=ed name=gr_subject[$i] value='$row[gr_subject]' size=30></td>";
 
     if ($is_admin == "super")
         //echo "<td>".get_member_id_select("gr_admin[$i]", 9, $row[gr_admin])."</td>";
-        echo "<td><input type=text class=edit name=gr_admin[$i] value='$row[gr_admin]' maxlength=20></td>";
+        echo "<td><input type=text class=ed name=gr_admin[$i] value='$row[gr_admin]' maxlength=20></td>";
     else
         echo "<input type=hidden name='gr_admin[$i]' value='$row[gr_admin]'><td>$row[gr_admin]</td>";
 
