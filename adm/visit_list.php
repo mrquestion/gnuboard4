@@ -62,10 +62,23 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $referer = "";
     $title = "";
     if ($row[vi_referer]) {
+
         $referer = get_text(cut_str($row[vi_referer], 255, ""));
-        $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), urldecode($row[vi_referer]));
+        $referer = urldecode($referer);
+
+        if (strtolower($g4['charset']) == 'utf-8') {
+            if (!is_utf8($referer)) {
+                $referer = iconv('euc-kr', 'utf-8', $referer);
+            }
+        }
+        else {
+            if (is_utf8($referer)) {
+                $referer = iconv('utf-8', 'euc-kr', $referer);
+            }
+        }
+
+        $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), $referer);
         $link = "<a href='$row[vi_referer]' target=_blank title='$title '>";
-        //$link = "<a href='$row[vi_referer]' target=_blank>";
     }
 
     if ($is_admin == 'super')

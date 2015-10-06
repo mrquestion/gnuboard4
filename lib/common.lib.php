@@ -1473,4 +1473,30 @@ function check_token()
     set_session('ss_token', '');
     return true;
 }
+
+
+// 문자열에 utf8 문자가 들어 있는지 검사하는 함수
+// 코드 : http://in2.php.net/manual/en/function.mb-check-encoding.php#95289
+function is_utf8($str) 
+{ 
+    $len = strlen($str); 
+    for($i = 0; $i < $len; $i++) {
+        $c = ord($str[$i]); 
+        if ($c > 128) { 
+            if (($c > 247)) return false; 
+            elseif ($c > 239) $bytes = 4; 
+            elseif ($c > 223) $bytes = 3; 
+            elseif ($c > 191) $bytes = 2; 
+            else return false; 
+            if (($i + $bytes) > $len) return false; 
+            while ($bytes > 1) { 
+                $i++; 
+                $b = ord($str[$i]); 
+                if ($b < 128 || $b > 191) return false; 
+                $bytes--; 
+            } 
+        } 
+    } 
+    return true; 
+}
 ?>
