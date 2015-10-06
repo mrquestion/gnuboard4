@@ -338,14 +338,15 @@ $dir_arr = array ("../extend",
                   "../data/member",
                   "../data/session",
                   "../data/$g4[editor]");
-for ($i=0; $i<count($dir_arr); $i++) {
+for ($i=0; $i<count($dir_arr); $i++) 
+{
     @mkdir($dir_arr[$i], 0707);
     @chmod($dir_arr[$i], 0707);
 
     // 디렉토리에 있는 파일의 목록을 보이지 않게 한다.
     $file = $dir_arr[$i] . "/index.php";
     $f = @fopen($file, "w");
-    //@fwrite($f, "");
+    @fwrite($f, "");
     @fclose($f);
     @chmod($file, 0606);
 }

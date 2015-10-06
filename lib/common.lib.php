@@ -172,9 +172,10 @@ function set_http($url)
 
 
 // 파일의 용량을 구한다.
-function get_filesize($file)
+//function get_filesize($file)
+function get_filesize($size)
 {
-    $size = @filesize(addslashes($file));
+    //$size = @filesize(addslashes($file));
     if ($size >= 1024768) {
         $size = number_format($size/1024768, 1) . "M";
     } else if ($size >= 1024) {
@@ -201,15 +202,21 @@ function get_file($bo_table, $wr_id)
         $file[$no][download] = $row[bf_download];
         // 4.00.11 - 파일 path 추가
         $file[$no][path] = "$g4[path]/data/file/$bo_table";
-        $file[$no][size] = get_filesize("{$file[$no][path]}/$row[bf_file]");
-        $file[$no][datetime] = date("Y-m-d H:i:s", @filemtime("$g4[path]/data/file/$bo_table/$row[bf_file]"));
+        //$file[$no][size] = get_filesize("{$file[$no][path]}/$row[bf_file]");
+        $file[$no][size] = get_filesize($row[bf_filesize]);
+        //$file[$no][datetime] = date("Y-m-d H:i:s", @filemtime("$g4[path]/data/file/$bo_table/$row[bf_file]"));
+        $file[$no][datetime] = $row[bf_datetime];
         $file[$no][source] = $row[bf_source];
         $file[$no][bf_content] = $row[bf_content];
         $file[$no][content] = get_text($row[bf_content]);
-        $file[$no][view] = view_file_link($row[bf_file], $file[$no][content]);
+        //$file[$no][view] = view_file_link($row[bf_file], $file[$no][content]);
+        $file[$no][view] = view_file_link($row[bf_file], $row[bf_width], $row[bf_height], $file[$no][content]);
         $file[$no][file] = $row[bf_file];
         // prosper 님 제안
-        $file[$no][imgsize] = @getimagesize("{$file[$no][path]}/$row[bf_file]");
+        //$file[$no][imgsize] = @getimagesize("{$file[$no][path]}/$row[bf_file]");
+        $file[$no][image_width] = $row[bf_width] ? $row[bf_width] : 640;
+        $file[$no][image_height] = $row[bf_height] ? $row[bf_height] : 480;
+        $file[$no][image_type] = $row[bf_type];
         $file["count"]++;
     }
 
@@ -269,8 +276,8 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     {
         $list[comment_cnt] = "($list[wr_comment])";
 
-        if ($list[wr_last_comment] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600)))
-            $list[comment_cnt] = '<b>' . $list[comment_cnt] . '</b>';
+        // wr_last_comment 필드 없음
+        //if ($list[wr_last_comment] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600))) $list[comment_cnt] = '<b>' . $list[comment_cnt] . '</b>';
     }
 
     $list[datetime] = substr($list[wr_datetime],0,10);
@@ -369,7 +376,8 @@ function search_font($stx, $str)
         // 태그는 포함하지 않아야 하는데 잘 안되는군. ㅡㅡa
         //$pattern .= $bar . '([^<])(' . quotemeta($s[$m]) . ')';
         //$pattern .= $bar . quotemeta($s[$m]);
-        $pattern .= $bar . str_replace("/", "\/", quotemeta($s[$m]));
+        //$pattern .= $bar . str_replace("/", "\/", quotemeta($s[$m]));
+        $pattern .= $bar . str_replace("/", "\/", quotemeta($s[$m])) . "(?![^<]*>)";
         $bar = "|";
     }
 
@@ -827,17 +835,17 @@ function get_sideview($mb_id, $name="", $email="", $homepage="")
 
 
 // 파일을 보이게 하는 링크 (이미지, 플래쉬, 동영상)
-function view_file_link($file, $content='')
+function view_file_link($file, $width, $height, $content='')
 {
     global $config, $board;
     global $g4;
 
     if (!$file) return;
 
-    $size = @getimagesize("$g4[path]/data/file/$board[bo_table]/$file");
+    //$size = @getimagesize("$g4[path]/data/file/$board[bo_table]/$file");
 
-    $width  = $size[0] ? $size[0] : 640;
-    $height = $size[1] ? $size[1] : 480;
+    //$width  = $size[0] ? $size[0] : 640;
+    //$height = $size[1] ? $size[1] : 480;
 
     if (preg_match("/\.($config[cf_image_extension])$/i", $file))
         return "<img src='$g4[path]/data/file/$board[bo_table]/".urlencode($file)."' name='target_resize_image[]' onclick='image_window(this);' style='cursor:pointer;' title='$content'>";

@@ -1,3 +1,43 @@
+4.02.00 (05.07.13)
+    :   회원이 투표할 경우 포인트 제대로 부여되지 않던 오류 수정
+    :   파일테이블에 이미지 속정 필드 추가
+        getimagesize() 함수보다 속도가 빠름
+        g4man 님께서 제안하셨습니다.
+    :   help(), menu() 자바스크립트 함수 수정
+    :   검색시 버그 수정 (lib/common.lib.php)
+        수정전 : $pattern .= $bar . str_replace("/", "\/", quotemeta($s[$m]));
+        수정후 : $pattern .= $bar . str_replace("/", "\/", quotemeta($s[$m])) . "(?![^<]*>)";
+        yesmoa 님께서 알려주시고 g6man 님께서 해결해 주셨습니다. ^^
+    :   설치시 data 디렉토리 밑에 index.php 생성
+        root 님께서 알려주셨습니다.
+    :   cheditor 부분 수정
+    :   게시판생성에서 게시판그룹없을 경우 게시판그룹 생성하라는 메세지 출력
+    :   게시판생성시 게시판 디렉토리 밑에 index.php 생성
+    :   bbs/good.php 에서 SQL Injection 에 대비한 코드 수정
+        root 님께서 알려주셨습니다.
+    :   회원로그인검사에서 메일인증코드 위치 변경
+    :   트랙백 부분 수정
+        수정전 : $msg = send_trackback($wr_trackback, $trackback_url, $wr_subject, $board[bo_subject], $wr_content);
+        수정후 : $msg = send_trackback($wr_trackback, $trackback_url, $wr_subject, $board[bo_subject], $_POST[wr_content]);
+    :   환경설정의 E-mail 인증사용 위치 수정
+
+        필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/admin.head.php
+        adm/board_copy_update.php
+        adm/board_form.php
+        adm/board_form_update.php 
+        adm/config_form.php
+        bbs/good.php
+        bbs/login_check.php
+        bbs/move_update.php
+        bbs/poll_update.php
+        bbs/write_update.php
+        cheditor/cheditor.js
+        install/install_db.php
+        js/common.js
+        lib/common.lib.php
+
 4.01.00 (05.07.11)
     :   방문자수 전체구하는 코드 오류 수정
         todayis 님께서 알려주셨습니다.

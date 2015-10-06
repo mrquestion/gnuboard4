@@ -44,7 +44,7 @@ body, th, td, form, input, select, text, textarea, caption { font-size: 12px; fo
                 <p>
 
                 <table width="500" border="0" align="center" cellpadding="4" cellspacing="0">
-                <tr><td height="150"><?=$wr_content?></td></tr>
+                <tr><td height="150" style="word-break:break-all;"><?=$wr_content?></td></tr>
                 </table>
                 <p>
 

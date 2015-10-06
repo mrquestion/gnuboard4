@@ -15,6 +15,13 @@ $board_path = "$g4[path]/data/file/$bo_table";
 @mkdir($board_path, 0707);
 @chmod($board_path, 0707);
 
+// 디렉토리에 있는 파일의 목록을 보이지 않게 한다.
+$file = $board_path . "/index.php";
+$f = @fopen($file, "w");
+@fwrite($f, "");
+@fclose($f);
+@chmod($file, 0606);
+
 $sql_common = " gr_id               = '$_POST[gr_id]',
                 bo_subject          = '$bo_subject',
                 bo_admin            = '$bo_admin',

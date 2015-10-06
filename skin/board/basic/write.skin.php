@@ -152,7 +152,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <? if ($is_file) { ?>
 <tr height="30">
     <td></td>
-    <td align="center" valign="top"><table cellpadding=0 cellspacing=0><tr><td style=" PADDING-TOP: 10px;">파일 <span onclick="add_file();" style='cursor:pointer;'>+</span> <span onclick="del_file();" style='cursor:pointer;'>-</span></td></tr></table></td>
+    <td align="center" valign="top"><table cellpadding=0 cellspacing=0><tr><td style=" PADDING-TOP: 10px;">파일 <span onclick="add_file();" style='cursor:pointer; font-family:굴림; font-size:10pt;'>+</span> <span onclick="del_file();" style='cursor:pointer; font-family:굴림; font-size:10pt;'>-</span></td></tr></table></td>
     <td colspan=2></td>
     <td style='padding-left:5px;'><table id="variableFiles" cellpadding=0 cellspacing=0></table><?// print_r2($file); ?>
         <script language="JavaScript">

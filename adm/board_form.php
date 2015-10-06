@@ -9,6 +9,11 @@ function b_draw($pos, $color='red')
     return "border-{$pos}-width:1px; border-{$pos}-color:{$color}; border-{$pos}-style:solid; ";
 }
 
+$sql = " select count(*) as cnt from $g4[group_table] ";
+$row = sql_fetch($sql);
+if (!$row[cnt])
+    alert("게시판그룹이 한개 이상 생성되어야 합니다.", "./boardgroup_form.php");
+
 $html_title = "게시판";
 if ($w == "") 
 {

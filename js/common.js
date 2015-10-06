@@ -358,23 +358,21 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
         win_open(g4_path+"/" + g4_bbs + "/profile.php?mb_id="+mb_id, 'winProfile', 'left=50,top=50,width=616,height=500,scrollbars=1');
     }
 
-    var old='';
-    function menu(name){
-
-        submenu=eval(name+".style");
-
-        if (old!=submenu)
+    var last_style = null;
+    function menu(id)
+    {
+        sub_style = document.getElementById(id).style;
+        if (last_style != sub_style)
         {
-            if(old!='')
-                old.display='none';
-
-            submenu.display='block';
-            old=submenu;
+            if (last_style != null)
+                last_style = "none";
+            sub_style.display = "block";
+            last_style = sub_style;
         }
         else
         {
-            submenu.display='none';
-            old='';
+            sub_style.display = "none";
+            last_style = null;
         }
     }
 

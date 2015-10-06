@@ -6,16 +6,6 @@ include_once("$g4[path]/lib/trackback.lib.php");
 // 리퍼러 체크
 referer_check();
 
-//print_r2($GLOBALS); exit;
-//print_r2($_POST); exit;
-//print_r2($_FILES); exit;
-
-// $_SERVER[SERVER_NAME] 과 parse_url 의 host 가 서로 같으면 업데이트하면 외부에서 접근하는것을 막을 수 있다.
-//print_r2(parse_url($_SERVER[HTTP_REFERER])); exit;
-
-//print_r2($_POST); exit;
-//print_r2($member); exit;
-
 $w = $_POST["w"];
 $wr_name  = strip_tags($_POST["wr_name"]);
 $wr_email = strip_tags($_POST["wr_email"]);
@@ -135,16 +125,12 @@ for ($i=0; $i<count($_FILES[bf_file][name]); $i++)
 
         // 프로그램 원래 파일명
         $upload[$i][source] = $filename;
+        $upload[$i][filesize] = $filesize;
 
         // 아래의 문자열이 들어간 파일은 -x 를 붙여서 웹경로를 알더라도 실행을 하지 못하도록 함
-        // phtml 확장자 추가
         $filename = preg_replace("/\.(php|phtm|htm|cgi|pl|exe|jsp|asp|inc)/i", "$0-x", $filename);
 
         // 접미사를 붙인 파일명
-        //$upload[$i][file] = substr(md5(uniqid($g4[server_time])),0,8) . '_' . $filename;
-        //$upload[$i][file] = date("ymdHis",$g4[server_time]).'_'.abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.sprintf("%03d",$i).'_'.substr(md5(uniqid($g4[server_time])),0,4).'_'.urlencode($filename);
-        //$upload[$i][file] = date("ymd",$g4[server_time]).'_'.sprintf("%04d",$i).'_'.substr(md5(uniqid($g4[server_time])),0,4).'_'.urlencode($filename);
-        //$upload[$i][file] = date("ymd",$g4[server_time]).'_'.substr(md5(uniqid($g4[server_time])),0,6).'_'.urlencode($filename);
         $upload[$i][file] = abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.substr(md5(uniqid($g4[server_time])),0,8).'_'.urlencode($filename);
 
         $dest_file = "$g4[path]/data/file/$bo_table/" . $upload[$i][file];
@@ -156,6 +142,8 @@ for ($i=0; $i<count($_FILES[bf_file][name]); $i++)
         move_uploaded_file($tmp_file, $dest_file) or die($_FILES[bf_file][error][$i]);
         // 올라간 파일의 퍼미션을 변경합니다.
         chmod($dest_file, 0606);
+
+        $upload[$i][image] = @getimagesize($dest_file);
     }
 }
 
@@ -341,7 +329,12 @@ for ($i=0; $i<count($upload); $i++)
             $sql = " update $g4[board_file_table]
                         set bf_source = '{$upload[$i][source]}',
                             bf_file = '{$upload[$i][file]}',
-                            bf_content = '{$bf_content[$i]}' 
+                            bf_content = '{$bf_content[$i]}',
+                            bf_filesize = '{$upload[$i][filesize]}',
+                            bf_width = '{$upload[$i][image][0]}',
+                            bf_height = '{$upload[$i][image][1]}',
+                            bf_type = '{$upload[$i][image][2]}',
+                            bf_datetime = '$g4[time_ymdhis]'
                       where bo_table = '$bo_table'
                         and wr_id = '$wr_id'
                         and bf_no = '$i' ";
@@ -366,7 +359,12 @@ for ($i=0; $i<count($upload); $i++)
                         bf_source = '{$upload[$i][source]}',
                         bf_file = '{$upload[$i][file]}',
                         bf_content = '{$bf_content[$i]}',
-                        bf_download = 0 ";
+                        bf_download = 0,
+                        bf_filesize = '{$upload[$i][filesize]}',
+                        bf_width = '{$upload[$i][image][0]}',
+                        bf_height = '{$upload[$i][image][1]}',
+                        bf_type = '{$upload[$i][image][2]}',
+                        bf_datetime = '$g4[time_ymdhis]' ";
         sql_query($sql);
     }
 }
@@ -397,7 +395,15 @@ if (!($w == "u" || $w == "cu"))
     $admin = get_admin("board");
 
     $wr_subject = get_text(stripslashes($wr_subject));
-    $wr_content = nl2br(get_text(stripslashes($wr_content)));
+    //$wr_content = nl2br(get_text(stripslashes($wr_content)));
+
+    $tmp_html = 0;
+    if (strstr($html, "html1"))
+        $tmp_html = 1;
+    else if (strstr($html, "html2"))
+        $tmp_html = 2;
+
+    $wr_content = conv_content(stripslashes($wr_content), $tmp_html);
 
     $warr = array( ""=>"입력", "u"=>"수정", "r"=>"답변", "c"=>"코멘트", "cu"=>"코멘트 수정" );
     $str = $warr[$w];
@@ -444,15 +450,9 @@ if (($w != "u" && $wr_trackback) || ($w=="u" && $wr_trackback && $re_trackback))
 {
     $trackback_url = "$g4[url]/$g4[bbs]/tb.php/$bo_table/$wr_id";
     $msg = "";
-    $msg = send_trackback($wr_trackback, $trackback_url, $wr_subject, $board[bo_subject], $wr_content);
+    $msg = send_trackback($wr_trackback, $trackback_url, $wr_subject, $board[bo_subject], $_POST[wr_content]);
     if ($msg) 
-    {
-        echo <<<HEREDOC
-        <script language="JavaScript">
-        alert("$msg $wr_trackback");
-        </script>
-HEREDOC;
-    }
+        echo "<script language='JavaScript'>alert('$msg $wr_trackback');</script>";
 }
 
 goto_url("./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);

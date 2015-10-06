@@ -128,11 +128,12 @@ function getMouseXY(e)
     return true;
 }
 
-function help(name, left, top)
+function help(id, left, top)
 {
-    menu(name);
+    menu(id);
 
-    submenu = eval(name+".style");
+    //submenu = eval(name+".style");
+    submenu = document.getElementById(id).style;
     submenu.posLeft = tempX - 50 + left;
     submenu.posTop  = tempY + 15 + top;
 

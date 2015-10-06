@@ -8,6 +8,10 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 파일테이블에 이미지 폭, 높이, 타입, 일시 넣기
+// getimagesize() 함수보다 속도가 빠름
+sql_query(" ALTER TABLE `$g4[board_file_table]` ADD `bf_filesize` INT NOT NULL , ADD `bf_width` INT NOT NULL , ADD `bf_height` SMALLINT NOT NULL , ADD `bf_type` TINYINT NOT NULL , ADD `bf_datetime` DATETIME NOT NULL ", FALSE);
+
 // 이메일 인증사용
 sql_query(" ALTER TABLE `$g4[member_table]` ADD `mb_email_certify` DATETIME NOT NULL AFTER `mb_intercept_date` ", FALSE);
 sql_query(" ALTER TABLE `$g4[config_table]` ADD `cf_use_email_certify` TINYINT NOT NULL AFTER `cf_use_copy_log` ", FALSE);

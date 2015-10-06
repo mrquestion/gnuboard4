@@ -86,14 +86,29 @@ while ($row = sql_fetch_array($result)) {
 
                 $sql3 = " select * from $g4[board_file_table] where bo_table = '$bo_table' and wr_id = '$row2[wr_id]' order by bf_no ";
                 $result3 = sql_query($sql3);
-                for ($k=0; $row3 = sql_fetch_array($result3); $k++) {
-                    if ($row3[bf_file]) {
+                for ($k=0; $row3 = sql_fetch_array($result3); $k++) 
+                {
+                    if ($row3[bf_file]) 
+                    {
                         // 원본파일을 복사하고 퍼미션을 변경
                         @copy("$src_dir/$row3[bf_file]", "$dst_dir/$row3[bf_file]");
                         @chmod("$dst_dir/$row3[bf_file]", 0606);
                     }
 
-                    sql_query(" insert into $g4[board_file_table] values ('$move_bo_table', '$insert_id', '$row3[bf_no]', '$row3[bf_source]', '$row3[bf_file]', '$row3[bf_download]', '$row3[bf_content]') ");
+                    $sql = " insert into $g4[board_file_table] 
+                                set bo_table = '$move_bo_table', 
+                                    wr_id = '$insert_id', 
+                                    bf_no = '$row3[bf_no]', 
+                                    bf_source = '$row3[bf_source]', 
+                                    bf_file = '$row3[bf_file]', 
+                                    bf_download = '$row3[bf_download]', 
+                                    bf_content = '$row3[bf_content]',
+                                    bf_filesize = '$row3[bf_filesize]',
+                                    bf_width = '$row3[bf_width]',
+                                    bf_height = '$row3[bf_height]',
+                                    bf_type = '$row3[bf_type]',
+                                    bf_datetime = '$row3[bf_datetime]' ";
+                    sql_query($sql);
 
                     if ($sw == "move" && $row3[bf_file])
                         $save[$cnt][bf_file][$k] = "$src_dir/$row3[bf_file]";

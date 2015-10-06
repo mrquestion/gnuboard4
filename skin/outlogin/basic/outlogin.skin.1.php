@@ -69,6 +69,20 @@ function chkReset(f)
 <script language="JavaScript">
 function fhead_submit(f)
 {
+    if (!f.mb_id.value)
+    {
+        alert("회원아이디를 입력하십시오.");
+        f.mb_id.focus();
+        return;
+    }
+
+    if (document.getElementById('pw2').style.display!='none' && !f.mb_password.value)
+    {
+        alert("패스워드를 입력하십시오.");
+        f.mb_password.focus();
+        return;
+    }
+
     f.action = "<?=$g4[bbs_path]?>/login_check.php";
     f.submit();
 }

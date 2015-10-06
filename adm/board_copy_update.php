@@ -138,7 +138,12 @@ if (count($file_copy))
                         bf_source = '{$file_copy[$i][bf_source]}',
                         bf_file = '{$file_copy[$i][bf_file]}',
                         bf_download = '{$file_copy[$i][bf_download]}',
-                        bf_content = '{$file_copy[$i][bf_content]}' ";
+                        bf_content = '{$file_copy[$i][bf_content]}',
+                        bf_filesize = '{$file_copy[$i][bf_filesize]}',
+                        bf_width = '{$file_copy[$i][bf_width]}',
+                        bf_height = '{$file_copy[$i][bf_height]}',
+                        bf_type = '{$file_copy[$i][bf_type]}',
+                        bf_datetime = '{$file_copy[$i][bf_datetime]}' ";
         sql_query($sql, FALSE);
     }
 }
