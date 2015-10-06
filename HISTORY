@@ -1,3 +1,11 @@
+4.37.35 (2015.09.01)
+    : LFI(Local File Inclusion) 취약점 해결 (한국인터넷진흥원을 통하여 익명의 제보자께서 알려 주셨습니다.)
+
+        adm/board_form_update.php 에 아래의 코드가 추가 되었습니다.
+
+            $_POST[bo_include_head] = substr($_POST[bo_include_head], 0, 255);
+            $_POST[bo_include_tail] = substr($_POST[bo_include_tail], 0, 255);
+
 4.37.34 (2015.08.13)
     : 4.37.33 버전에서 버그가 있어 수정 
       일부 서버에서 HTMLPurifier.standalone.php 파일 실행시 오류가 있어 htmlpurifier의 사용여부를 선택하게 하였습니다.
