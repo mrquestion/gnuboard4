@@ -262,14 +262,15 @@ else if ($is_admin != "super")
 unset($auth_menu);
 unset($menu);
 unset($amenu);
-$tmp = dir("$g4[admin_path]");
-while ($entry = $tmp->read()) {
+$tmp = dir($g4[admin_path]);
+while ($entry = $tmp->read()) 
+{
     //if (!preg_match("/^admin.menu([0-9]{3}).php/", $entry, $m)) 
     if (!preg_match("/^admin.menu([0-9]{3}).*\.php/", $entry, $m)) 
         continue;  // 파일명이 menu 으로 시작하지 않으면 무시한다. 
 
     $amenu[$m[1]] = $entry;
-    include_once($entry);
+    include_once($g4[admin_path]."/".$entry);
 }
 @ksort($amenu);
 

@@ -109,7 +109,8 @@ while ($row = sql_fetch_array($result))
     if (strstr($sfl, "subject"))
         $list[$i][subject] = search_font($stx, $list[$i][subject]);
     $list[$i][is_notice] = false;
-    $list[$i][num] = number_format($total_count - ($page - 1) * $board[bo_page_rows] - $k);
+    //$list[$i][num] = number_format($total_count - ($page - 1) * $board[bo_page_rows] - $k);
+    $list[$i][num] = $total_count - ($page - 1) * $board[bo_page_rows] - $k;
 
     $i++;
     $k++;

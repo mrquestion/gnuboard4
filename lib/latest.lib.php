@@ -2,7 +2,7 @@
 if (!defined('_GNUBOARD_')) exit;
 
 // 최신글 추출
-function latest($skin_dir="", $bo_table, $rows=10, $subject_len=40)
+function latest($skin_dir="", $bo_table, $rows=10, $subject_len=40, $options="")
 {
     global $config;
     global $g4;

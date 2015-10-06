@@ -1,3 +1,14 @@
+4.06.12 (05.12.15)
+	:	경로가 명확하지 않아 제대로 include 되지 않던 오류 수정 (일부 서버에서 발생)
+	:   alert(), alert_close() 함수에 charset 메타태그 추가
+    :   latest() 함수에 $options 인자 추가 (스크롤 스킨때문에 추가)
+    :   스크롤되는 최신글 추가
+
+		adm/admin.lib.php
+		lib/common.lib.php
+        lib/latest.lib.php
+        skin/latest/scroll/latest.lib.php
+
 4.06.11 (05.12.6)
     :   wr_html 을 wr_option 으로 수정
         김도깡님께서 알려주셨습니다.

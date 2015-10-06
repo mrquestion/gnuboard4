@@ -1,4 +1,4 @@
-body, td, p, input, button, textarea, select, .c1 { font-family:Tahoma,±¼¸²; font-size:9pt; color:#565656; }
+body, td, p, input, button, textarea, select, .c1 { font-family:Tahoma,±¼¸²; font-size:9pt; color:#222222; }
 
 a:link, a:visited, a:active { text-decoration:none; color:#466C8A; }
 a:hover { text-decoration:underline; }
@@ -16,7 +16,7 @@ a.menu:hover { text-decoration:none; }
 
 .ul { list-style-type:square; color:#66AEAD; }
 
-.ct { font-family: Verdana, ±¼¸²; color:#000000; } 
+.ct { font-family: Verdana, ±¼¸²; color:#222222; } 
 
 .ed { border:1px solid #CCCCCC; } 
 .tx { border:1px solid #CCCCCC; } 
