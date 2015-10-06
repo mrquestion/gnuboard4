@@ -48,6 +48,7 @@ include_once("$g4[path]/head.sub.php");
 <table cellpadding=0 cellspacing=1 border=0>
 <tr>
 <?
+ob_start();
 @ksort($amenu); // 키 순서대로 정렬한다
 foreach ($amenu as $key=>$value) {
     include_once ("./menu/" . $value);
@@ -55,6 +56,9 @@ foreach ($amenu as $key=>$value) {
 
 foreach($tmenu as $key=>$value) 
     echo "<td height=43 width=80 align=center>$tmenu[$key]</td>";
+$head_contents = ob_get_contents();
+ob_end_clean();
+echo $head_contents;
 
 $tmp_menu = substr($sub_menu,0,3);
 $css_color = $tcolor[$tmp_menu];

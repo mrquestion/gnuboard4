@@ -136,8 +136,12 @@ include_once("./admin.head.php");
 <tr class='ht'>
     <td>회원가입일</td>
     <td><?=$mb[mb_datetime]?></td>
+    <td>최근접속일</td>
+    <td><?=$mb[mb_today_login]?></td>
+</tr>
+<tr class='ht'>
     <td>IP</td>
-    <td><?=$mb[mb_ip]?></td>
+    <td colspan=3><?=$mb[mb_ip]?></td>
 </tr>
 <? } ?>
 

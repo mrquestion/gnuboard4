@@ -3,7 +3,7 @@ include_once("./_common.php");
 include_once("$g4[path]/lib/latest.lib.php");
 
 $g4[title] = "";
-include_once("$g4[path]/_head.php");
+include_once("./_head.php");
 ?>
 
 <!-- 메인화면 최신글 시작 -->
@@ -26,5 +26,5 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 <!-- 메인화면 최신글 끝 -->
 
 <?
-include_once("$g4[path]/_tail.php");
+include_once("./_tail.php");
 ?>

@@ -1,3 +1,19 @@
+4.00.15 (05.06.21)
+    :   코멘트 수정시 연속 게시물 등록 메시지로 인한 오류 수정
+    :   회원메일 발송시 생일부분의 코드 오류 수정
+    :   포인트 관리 목록에 내용 검색 추가
+    :   메일로 보내는 코멘트의 바로가기 링크 수정
+    :   코멘트 입력, 수정 후 코멘트로 이동
+    :   admin.tail.php 하단에 있던 자바스크립트를 admin.js 로 분리
+    :   [보안관련] 다른 회원의 쪽지를 읽을 수 있는 오류 수정
+        
+        bbs/write_comment_update.php
+        adm/mail_select_list.php
+        adm/point_list.php
+        adm/admin.tail.php
+        adm/admin.js
+        bbs/memo_form.php
+
 4.00.14 (05.06.20)
     :   쪽지 답장하기에서 이전글 보여주기
     :   게시판복사시 글쓴이 사이드뷰 필드 복사되지 않던것을 수정

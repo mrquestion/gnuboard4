@@ -80,6 +80,7 @@ var list_delete_php = "point_list_delete.php";
         <select name=sfl class=cssfl>
             <option value='a.mb_id'>회원아이디</option>
             <option value='b.mb_nick'>별명</option>
+            <option value='a.po_content'>내용</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
         <input type=image src='./img/btn_search.gif' align=absmiddle></td>

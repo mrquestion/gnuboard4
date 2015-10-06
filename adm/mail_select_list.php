@@ -25,7 +25,7 @@ if ($mb_sex != "")
 
 // 생일
 if ($mb_birth_from && $mb_birth_to)
-    $sql_where .= " and substring(mb_birth,5,2) between '$mb_birth_from' and '$mb_birth_to' ";
+    $sql_where .= " and substring(mb_birth,5,4) between '$mb_birth_from' and '$mb_birth_to' ";
 
 // 지역
 if ($mb_area != "")

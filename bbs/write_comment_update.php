@@ -17,7 +17,8 @@ else
     alert("w 값이 제대로 넘어오지 않았습니다."); 
 
 // 세션의 시간 검사
-if ($_SESSION["ss_datetime"] >= ($g4[server_time] - $config[cf_delay_sec]) && !$is_admin) 
+// 4.00.15 - 코멘트 수정시 연속 게시물 등록 메시지로 인한 오류 수정
+if ($w == "c" && $_SESSION["ss_datetime"] >= ($g4[server_time] - $config[cf_delay_sec]) && !$is_admin) 
     alert("너무 빠른 시간내에 게시물을 연속해서 올릴 수 없습니다.");
 
 set_session("ss_datetime", $g4[server_time]);
@@ -173,7 +174,8 @@ if ($w == "c") // 코멘트 입력
         $str = $warr[$w];
 
         $subject = "'{$board[bo_subject]}' 게시판에 {$str}글이 올라왔습니다.";
-        $link_url = "$g4[url]/$g4[bbs]/board.php?bo_table=$bo_table&wr_id=$wr_id&$qstr";
+        // 4.00.15 - 메일로 보내는 코멘트의 바로가기 링크 수정
+        $link_url = "$g4[url]/$g4[bbs]/board.php?bo_table=$bo_table&wr_id=$wr_id&$qstr#c_{$comment_id}";
 
         include_once("$g4[path]/lib/mailer.lib.php");
 
@@ -245,5 +247,5 @@ else if ($w == "cu") // 코멘트 수정
 // 사용자 코드 실행
 @include_once("$board_skin_path/write_comment_update.skin.php");
 
-goto_url("./board.php?bo_table=$bo_table&wr_id=$wr[wr_parent]&page=$page" . $qstr . "&cwin=$cwin");
+goto_url("./board.php?bo_table=$bo_table&wr_id=$wr[wr_parent]&page=$page" . $qstr . "&cwin=$cwin#c_{$comment_id}");
 ?>
