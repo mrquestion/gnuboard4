@@ -88,4 +88,6 @@ $g4['https_url'] = "";
 // ÀÔ·Â¿¹
 //$g4['url'] = "http://www.sir.co.kr";
 //$g4['https_url'] = "https://www.sir.co.kr";
+
+define('G4_HTML_PURIFIER', false);
 ?>

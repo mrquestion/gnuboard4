@@ -6,6 +6,10 @@
 // Open  : HTML Purifier is open-source and highly customizable
 function html_purifier($html)
 {
+    // 상수 선언이 되어 있지 않거나 상수의 값이 거짓이면 필터링 없이 반환
+    if (!defined('G4_HTML_PURIFIER') || !G4_HTML_PURIFIER) 
+        return $html;
+
     global $g4;
     $f = file($g4['path'].'/htmlpurifier/safeiframe.txt');
     $domains = array();
