@@ -310,7 +310,7 @@ include_once ("./admin.head.php");
     <td colspan=3><input type=checkbox name=cf_email_wr_comment_all value='1' <?=$config[cf_email_wr_comment_all]?'checked':'';?>> 사용 (원글에 코멘트가 올라오는 경우 코멘트 쓴 모든 분들께 메일을 발송합니다.)</td>
 </tr>
 <tr class='ht'>
-    <td><span class=title>회원 가입시</title></td>
+    <td><span class=title>회원 가입시</span></td>
 </tr>
 <tr class='ht'>
     <td>최고관리자 메일발송</td>
@@ -321,7 +321,7 @@ include_once ("./admin.head.php");
     <td colspan=3><input type=checkbox name=cf_email_mb_member value='1' <?=$config[cf_email_mb_member]?'checked':'';?>> 사용 (회원가입한 회원님께 메일을 발송합니다.)</td>
 </tr>
 <tr class='ht'>
-    <td><span class=title>투표 기타의견 작성시</title></td>
+    <td><span class=title>투표 기타의견 작성시</span></td>
 </tr>
 <tr class='ht'>
     <td>최고관리자 메일발송</td>

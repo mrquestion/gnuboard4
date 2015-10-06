@@ -1,3 +1,25 @@
+4.05.00 (05.09.01)
+    :   검색사용 게시판만 최근게시물에 출력
+    :   게시판 설정에서 필드별로 그룹적용이 가능하도록 수정
+    :   게시판 설정에 메일발송 사용 필드 추가
+    :   검색어 없이 검색페이지로 이동할 수 있게 수정 
+    :   비회원에게 폼메일 보낼 경우 이름대신 메일 주소를 표시하도록 수정
+        하나Yun님께서 알려주셨습니다.
+
+        필드가 추가, 변경 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+    
+        adm/upgrade.php
+        adm/board_form.php
+        adm/board_form_update.php
+        bbs/new.php
+        bbs/write.php
+        bbs/write_update.php
+        bbs/write_comment_update.php
+        bbs/tb.php
+        bbs/search.php
+        bbs/formmail.php
+        skin/search/basic/search.skin.php
+
 4.04.00 (05.08.17)
     :   메일발송 설정 필드 추가
     :   수정시 공지사항 수정되지 않던 오류 수정

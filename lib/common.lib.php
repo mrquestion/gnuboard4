@@ -115,7 +115,7 @@ function get_cookie($cookie_name)
 
 
 // 경고메세지를 경고창으로
-function alert($msg, $url='')
+function alert($msg='', $url='')
 {
     if (!$msg) $msg = '올바른 방법으로 이용해 주십시오.';
 

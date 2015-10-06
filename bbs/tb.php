@@ -90,7 +90,7 @@ if ($_POST[title]) {
     else // 정상
     { 
         // 메일발송 사용
-        if ($config[cf_email_use])
+        if ($config[cf_email_use] && $board[bo_use_email])
         {
             include_once("$g4[path]/lib/mailer.lib.php");
 

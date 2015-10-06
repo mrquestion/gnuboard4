@@ -157,7 +157,7 @@ if ($board[bo_use_secret])
     $is_secret = true;
 
 $is_mail = false;
-if ($config[cf_email_use])
+if ($config[cf_email_use] && $board[bo_use_email])
     $is_mail = true;
 
 $recv_email_checked = "";

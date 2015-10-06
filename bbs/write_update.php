@@ -300,27 +300,24 @@ else if ($w == "u")
               where wr_id = '$wr[wr_id]' ";
     sql_query($sql);
 
-    //if (isset($notice))
+    if ($notice) 
     {
-        if ($notice) 
+        //if (!preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice])) 
+        if (!in_array((int)$wr_id, $notice_array))
         {
-            //if (!preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice])) 
-            if (!in_array((int)$wr_id, $notice_array))
-            {
-                $bo_notice = $wr_id . '\n' . $board[bo_notice];
-                sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table = '$bo_table' ");
-            }
-        } 
-        else 
-        {
-            $bo_notice = '';
-            for ($i=0; $i<count($notice_array); $i++)
-                if ((int)$wr_id != (int)$notice_array[$i])
-                    $bo_notice .= $notice_array[$i] . '\n';
-            $bo_notice = trim($bo_notice);
-            //$bo_notice = preg_replace("/^".$wr_id."[\n]?$/m", "", $board[bo_notice]);
+            $bo_notice = $wr_id . '\n' . $board[bo_notice];
             sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table = '$bo_table' ");
         }
+    } 
+    else 
+    {
+        $bo_notice = '';
+        for ($i=0; $i<count($notice_array); $i++)
+            if ((int)$wr_id != (int)$notice_array[$i])
+                $bo_notice .= $notice_array[$i] . '\n';
+        $bo_notice = trim($bo_notice);
+        //$bo_notice = preg_replace("/^".$wr_id."[\n]?$/m", "", $board[bo_notice]);
+        sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table = '$bo_table' ");
     }
 }
 
@@ -400,7 +397,7 @@ if ($secret)
     set_session("ss_secret_{$bo_table}_{$wr_num}", TRUE);
 
 // 메일발송 사용 (수정글은 발송하지 않음)
-if (!($w == "u" || $w == "cu") && $config[cf_email_use]) 
+if (!($w == "u" || $w == "cu") && $config[cf_email_use] && $board[bo_use_email]) 
 {
     // 관리자의 정보를 얻고
     $super_admin = get_admin("super");

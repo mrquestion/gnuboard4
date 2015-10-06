@@ -131,7 +131,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     else
         echo "<input type=hidden name='gr_admin[$i]' value='$row[gr_admin]'><td>$row[gr_admin]</td>";
 
-    echo "<td><a href='./board_list.php?sfl=gr_id&stx=$row[gr_id]'>$row2[cnt]</a></td>";
+    echo "<td><a href='./board_list.php?sfl=a.gr_id&stx=$row[gr_id]'>$row2[cnt]</a></td>";
     echo "<td><input type=checkbox name=gr_use_access[$i] ".($row[gr_use_access]?'checked':'')." value='1'></td>";
     echo "<td><a href='./boardgroupmember_list.php?gr_id=$row[gr_id]'>$row1[cnt]</a></td>";
     echo "<td>$s_upd $s_del</td>";

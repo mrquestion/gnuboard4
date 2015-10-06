@@ -8,6 +8,12 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+sql_query(" ALTER TABLE `$g4[board_table]` 
+    ADD `bo_upload_count` TINYINT NOT NULL AFTER `bo_notice` ,
+    ADD `bo_use_email` TINYINT NOT NULL AFTER `bo_upload_count` ", FALSE);
+
+/*
+// 050831 막음
 // 환경설정 테이블에 메일발송 설정 추가
 sql_query(" ALTER TABLE `$g4[config_table]` 
     ADD `cf_email_use` TINYINT NOT NULL AFTER `cf_search_part` , 
@@ -163,6 +169,7 @@ $sql = " CREATE TABLE $g4[auth_table] (
   PRIMARY KEY  (mb_id,au_menu)
 ) TYPE=MyISAM ";
 sql_query($sql, FALSE);
+*/
 
 
 echo "UPGRADE 완료.";

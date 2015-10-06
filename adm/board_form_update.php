@@ -56,6 +56,7 @@ $sql_common = " gr_id               = '$_POST[gr_id]',
                 bo_use_trackback    = '$bo_use_trackback',
                 bo_use_list_view    = '$bo_use_list_view',
                 bo_use_list_content = '$bo_use_list_content',
+                bo_use_email        = '$bo_use_email',
                 bo_table_width      = '$bo_table_width',
                 bo_subject_len      = '$bo_subject_len',
                 bo_page_rows        = '$bo_page_rows',
@@ -69,6 +70,7 @@ $sql_common = " gr_id               = '$_POST[gr_id]',
                 bo_content_tail     = '$bo_content_tail',
                 bo_insert_content   = '$bo_insert_content',
                 bo_gallery_cols     = '$bo_gallery_cols',
+                bo_upload_count     = '$bo_upload_count',
                 bo_upload_size      = '$bo_upload_size',
                 bo_reply_order      = '$bo_reply_order',
                 bo_use_search       = '$bo_use_search',
@@ -187,129 +189,78 @@ else if ($w == "u")
     sql_query($sql);
 }
 
+
 // 같은 그룹내 게시판 동일 옵션 적용
-$sql = " select bo_table from $g4[board_table] where gr_id = '$gr_id' and bo_table <> '$bo_table' ";
-$result = sql_query($sql);
-while ($row = sql_fetch_array($result)) {
-    if ($group_same1) {
-        $sql = " update $g4[board_table]
-                    set bo_admin = '$bo_admin'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same2) {
-        $sql = " update $g4[board_table]
-                    set bo_list_level       = '$bo_list_level',
-                        bo_read_level       = '$bo_read_level',
-                        bo_write_level      = '$bo_write_level',
-                        bo_reply_level      = '$bo_reply_level',
-                        bo_comment_level    = '$bo_comment_level',
-                        bo_html_level       = '$bo_html_level',
-                        bo_link_level       = '$bo_link_level',
-                        bo_trackback_level  = '$bo_trackback_level',
-                        bo_upload_level     = '$bo_upload_level',
-                        bo_download_level   = '$bo_download_level',
-                        bo_read_point       = '$bo_read_point',
-                        bo_write_point      = '$bo_write_point',
-                        bo_comment_point    = '$bo_comment_point',
-                        bo_download_point   = '$bo_download_point'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }        
-
-    if ($group_same3_1) {
-        $sql = " update $g4[board_table]
-                    set bo_use_category     = '$bo_use_category',
-                        bo_category_list    = '$bo_category_list'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same3_2) {
-        $sql = " update $g4[board_table]
-                    set bo_disable_tags     = '$bo_disable_tags',
-                        bo_use_sideview     = '$bo_use_sideview',
-                        bo_use_secret       = '$bo_use_secret',
-                        bo_use_comment      = '$bo_use_comment',
-                        bo_use_good         = '$bo_use_good',
-                        bo_use_nogood          = '$bo_use_nogood',
-                        bo_use_name         = '$bo_use_name',
-                        bo_use_signature    = '$bo_use_signature',
-                        bo_use_ip_view      = '$bo_use_ip_view',
-                        bo_use_list_view    = '$bo_use_list_view',
-                        bo_use_list_content = '$bo_use_list_content'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same4) {
-        $sql = " update $g4[board_table]
-                    set bo_skin             = '$bo_skin',
-                        bo_gallery_cols     = '$bo_gallery_cols',
-                        bo_table_width      = '$bo_table_width',
-                        bo_subject_len      = '$bo_subject_len',
-                        bo_page_rows        = '$bo_page_rows',
-                        bo_new              = '$bo_new',
-                        bo_hot              = '$bo_hot',
-                        bo_write_min        = '$bo_write_min',
-                        bo_write_max        = '$bo_write_max',
-                        bo_comment_min      = '$bo_comment_min',
-                        bo_comment_max      = '$bo_comment_max',
-                        bo_image_width      = '$bo_image_width',
-                        bo_upload_size      = '$bo_upload_size',
-                        bo_reply_order      = '$bo_reply_order'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same5) {
-        $sql = " update $g4[board_table]
-                    set bo_include_head     = '$bo_include_head',
-                        bo_include_tail     = '$bo_include_tail'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same6) {
-        $sql = " update $g4[board_table]
-                    set bo_content_head     = '$bo_content_head',
-                        bo_content_tail     = '$bo_content_tail'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same7) {
-        $sql = " update $g4[board_table]
-                    set bo_insert_content   = '$bo_insert_content'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same8) {
-        $sql = " update $g4[board_table]
-                    set bo_use_search   = '$bo_use_search',
-                        bo_order_search = '$bo_order_search'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
-
-    if ($group_same9) {
-        $sql = " update $g4[board_table]
-                    set bo_1  = '$bo_1',
-                        bo_2  = '$bo_2',
-                        bo_3  = '$bo_3',
-                        bo_4  = '$bo_4',
-                        bo_5  = '$bo_5',
-                        bo_6  = '$bo_6',
-                        bo_7  = '$bo_7',
-                        bo_8  = '$bo_8',
-                        bo_9  = '$bo_9',
-                        bo_10 = '$bo_10'
-                  where bo_table = '$row[bo_table]'";
-        sql_query($sql);
-    }
+$s = "";
+if ($chk_admin) $s .= " , bo_admin = '$bo_admin' ";
+if ($chk_list_level) $s .= " , bo_list_level = '$bo_list_level' ";
+if ($chk_read_level) $s .= " , bo_read_level = '$bo_read_level' ";
+if ($chk_write_level) $s .= " , bo_write_level = '$bo_write_level' ";
+if ($chk_reply_level) $s .= " , bo_reply_level = '$bo_reply_level' ";
+if ($chk_comment_level) $s .= " , bo_comment_level = '$bo_comment_level' ";
+if ($chk_link_level) $s .= " , bo_link_level = '$bo_link_level' ";
+if ($chk_upload_level) $s .= " , bo_upload_level = '$bo_upload_level' ";
+if ($chk_download_level) $s .= " , bo_download_level = '$bo_download_level' ";
+if ($chk_html_level) $s .= " , bo_html_level = '$bo_html_level' ";
+if ($chk_trackback_level) $s .= " , bo_trackback_level = '$bo_trackback_level' ";
+if ($chk_count_modify) $s .= " , bo_count_modify = '$bo_count_modify' ";
+if ($chk_count_delete) $s .= " , bo_count_delete = '$bo_count_delete' ";
+if ($chk_read_point) $s .= " , bo_read_point = '$bo_read_point' ";
+if ($chk_write_point) $s .= " , bo_write_point = '$bo_write_point' ";
+if ($chk_comment_point) $s .= " , bo_comment_point = '$bo_comment_point' ";
+if ($chk_download_point) $s .= " , bo_download_point = '$bo_download_point' ";
+if ($chk_category_list) $s .= " , bo_category_list = '$bo_category_list' ";
+if ($chk_use_sideview) $s .= " , bo_use_sideview = '$bo_use_sideview' ";
+if ($chk_use_file_content) $s .= " , bo_use_file_content = '$bo_use_file_content' ";
+if ($chk_use_comment) $s .= " , bo_use_comment = '$bo_use_comment' ";
+if ($chk_use_secret) $s .= " , bo_use_secret = '$bo_use_secret' ";
+if ($chk_use_good) $s .= " , bo_use_good = '$bo_use_good' ";
+if ($chk_use_nogood) $s .= " , bo_use_nogood = '$bo_use_nogood' ";
+if ($chk_use_name) $s .= " , bo_use_name = '$bo_use_name' ";
+if ($chk_use_signature) $s .= " , bo_use_signature = '$bo_use_signature' ";
+if ($chk_use_ip_view) $s .= " , bo_use_ip_view = '$bo_use_ip_view' ";
+if ($chk_use_trackback) $s .= " , bo_use_trackback = '$bo_use_trackback' ";
+if ($chk_use_list_view) $s .= " , bo_use_list_view = '$bo_use_list_view' ";
+if ($chk_use_list_content) $s .= " , bo_use_list_content = '$bo_use_list_content' ";
+if ($chk_use_email) $s .= " , bo_use_email = '$bo_use_email' ";
+if ($chk_skin) $s .= " , bo_skin = '$bo_skin' ";
+if ($chk_gallery_cols) $s .= " , bo_gallery_cols = '$bo_gallery_cols' ";
+if ($chk_table_width) $s .= " , bo_table_width = '$bo_table_width' ";
+if ($chk_page_rows) $s .= " , bo_page_rows = '$bo_page_rows' ";
+if ($chk_subject_len) $s .= " , bo_subject_len = '$bo_subject_len' ";
+if ($chk_new) $s .= " , bo_new = '$bo_new' ";
+if ($chk_hot) $s .= " , bo_hot = '$bo_hot' ";
+if ($chk_image_width) $s .= " , bo_image_width = '$bo_image_width' ";
+if ($chk_reply_order) $s .= " , bo_reply_order = '$bo_reply_order' ";
+if ($chk_disable_tags) $s .= " , bo_disable_tags = '$bo_disable_tags' ";
+if ($chk_write_min) $s .= " , bo_write_min = '$bo_write_min' ";
+if ($chk_write_max) $s .= " , bo_write_max = '$bo_write_max' ";
+if ($chk_comment_min) $s .= " , bo_comment_min = '$bo_comment_min' ";
+if ($chk_comment_max) $s .= " , bo_comment_max = '$bo_comment_max' ";
+if ($chk_upload_count) $s .= " , bo_upload_count = '$bo_upload_count' ";
+if ($chk_upload_size) $s .= " , bo_upload_size = '$bo_upload_size' ";
+if ($chk_include_head) $s .= " , bo_include_head = '$bo_include_head' ";
+if ($chk_include_tail) $s .= " , bo_include_tail = '$bo_include_tail' ";
+if ($chk_content_head) $s .= " , bo_content_head = '$bo_content_head' ";
+if ($chk_content_tail) $s .= " , bo_content_tail = '$bo_content_tail' ";
+if ($chk_insert_content) $s .= " , bo_insert_content = '$bo_insert_content' ";
+if ($chk_use_search) $s .= " , bo_use_search = '$bo_use_search' ";
+if ($chk_order_search) $s .= " , bo_order_search = '$bo_order_search' ";
+for ($i=1; $i<=10; $i++) 
+{
+    if ($_POST["chk_{$i}"]) 
+        $s .= " , bo_{$i} = '".$_POST["bo_{$i}"]."' ";
 }
+
+if ($s)
+{
+        $sql = " update $g4[board_table]
+                    set bo_table = bo_table
+                        {$s}
+                  where gr_id = '$gr_id' ";
+        sql_query($sql);
+}
+
 
 if ($_FILES[bo_image_head][name]) { 
     $bo_image_head_path = "$board_path/$bo_image_head_urlencode";
@@ -322,8 +273,6 @@ if ($_FILES[bo_image_tail][name]) {
     move_uploaded_file($_FILES[bo_image_tail][tmp_name], $bo_image_tail_path);
     chmod($bo_image_tail_path, 0606);
 }
-
-//sql_query(" OPTIMIZE TABLE `$g4[board_table]`, `$g4[board_file_table]`, `$g4[board_new_table]`, `$g4[write_prefix]$bo_table` ");
 
 goto_url("./board_form.php?w=u&bo_table=$bo_table&$qstr");
 ?>

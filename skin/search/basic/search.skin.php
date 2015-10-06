@@ -65,22 +65,25 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 <table align=center width=95% cellpadding=2 cellspacing=0>
 <tr>
-    <td>
+    <td style='word-break:break-all;'>
 
-        <ul type=circle><li><b>검색된 게시판 리스트</b> (<b><?=$board_count?></b>개의 게시판, <b><?=number_format($total_count)?></b>개의 게시글, <?=number_format($page)?>/<b><?=number_format($total_page)?></b> 페이지)</ul>
         <? 
-        if ($board_count)
-        {
-            echo "<ul><ul type=square style='line-height:130%;'>";
-            if ($onetable)
-                echo "<li><a href='?$search_query&gr_id=$gr_id'>전체게시판 검색</a>";
-            echo $str_board_list;
-            echo "</ul></ul>";
+        if ($stx) 
+        { 
+            echo "<ul type=circle><li><b>검색된 게시판 리스트</b> (<b>{$board_count}</b>개의 게시판, <b><?=number_format($total_count)?></b>개의 게시글, <?=number_format($page)?>/<b>".number_format($total_page)."</b> 페이지)</ul>";
+            if ($board_count)
+            {
+                echo "<ul><ul type=square style='line-height:130%;'>";
+                if ($onetable)
+                    echo "<li><a href='?$search_query&gr_id=$gr_id'>전체게시판 검색</a>";
+                echo $str_board_list;
+                echo "</ul></ul>";
+            }
+            else
+            {
+                echo "<ul style='line-height:130%;'><li>검색된 자료가 하나도 없습니다.</ul>";
+            }
         }
-        else
-        {
-            echo "<ul style='line-height:130%;'><li>검색된 자료가 하나도 없습니다.</ul>";
-        } 
         ?>
 
 

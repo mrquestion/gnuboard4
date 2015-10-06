@@ -83,6 +83,8 @@ CREATE TABLE $g4[board_table] (
   bo_comment_min int(11) NOT NULL default '0',
   bo_comment_max int(11) NOT NULL default '0',
   bo_notice text NOT NULL,
+  bo_upload_count tinyint(4) NOT NULL default '0',
+  bo_use_email tinyint(4) NOT NULL default '0',
   bo_1 varchar(255) NOT NULL default '',
   bo_2 varchar(255) NOT NULL default '',
   bo_3 varchar(255) NOT NULL default '',

@@ -104,11 +104,19 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 <? if ($is_file) { ?>
 <tr>
-    <td style='padding-left:20px; height:30px;'><table cellpadding=0 cellspacing=0><tr><td style=" padding-top: 10px;">· 파일 <span onclick="add_file();" style='cursor:pointer; font-family:굴림; font-size:10pt;'>+</span> <span onclick="del_file();" style='cursor:pointer; font-family:굴림; font-size:10pt;'>-</span></td></tr></table></td>
+    <td style='padding-left:20px; height:30px;'><table cellpadding=0 cellspacing=0><tr><td style=" padding-top: 10px;">· 파일 <span onclick="add_file();" style='cursor:pointer; font-family:tahoma; font-size:12pt;'>+</span> <span onclick="del_file();" style='cursor:pointer; font-family:tahoma; font-size:12pt;'>-</span></td></tr></table></td>
     <td style='padding:5 0 5 0;'><table id="variableFiles" cellpadding=0 cellspacing=0></table><?// print_r2($file); ?>
         <script language="JavaScript">
+        var flen = 0;
         function add_file(delete_code)
         {
+            var upload_count = <?=(int)$board[bo_upload_count]?>;
+            if (upload_count && flen >= upload_count)
+            {
+                alert("이 게시판은 "+upload_count+"개 까지만 파일 업로드가 가능합니다.");
+                return;
+            }
+
             var objTbl;
             var objRow;
             var objCell;
@@ -130,6 +138,8 @@ var char_max = parseInt(<?=$write_max?>); // 최대
                 <? } ?>
                 ;
             }
+
+            flen++;
         }
 
         <?=$file_script; //수정시에 필요한 스크립트?>
@@ -238,7 +248,7 @@ function fwrite_check(f)
 
     if (char_min > 0 || char_max > 0)
     {
-        var cnt = parseInt(document.getElementById('char_count').innerhtml);
+        var cnt = parseInt(document.getElementById('char_count').innerHTML);
         if (char_min > 0 && char_min > cnt)
         {
             alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");

@@ -62,7 +62,7 @@ if ($is_nogood) $colspan++;
         else
             echo "{$list[$i][num]}";
         ?></td>
-    <? if ($is_category) { ?><td><a href="<?=$list[$i][ca_name_href]?>"><font color=gray><?=$list[$i][ca_name]?></font></a></td><? } ?>
+    <? if ($is_category) { ?><td><a href="<?=$list[$i][ca_name_href]?>"><font color=gray><span class=small><?=$list[$i][ca_name]?></span></font></a></td><? } ?>
     <? if ($is_checkbox) { ?><td><input type=checkbox name=chk_wr_id[] value="<?=$list[$i][wr_id]?>"></td><? } ?>
     <td align=left style='word-break:break-all;'>
         <? 
@@ -71,9 +71,14 @@ if ($is_nogood) $colspan++;
         echo $list[$i][icon_reply];
         echo "<a href='{$list[$i][href]}'>";
         if ($list[$i][is_notice])
-            echo "<font color='#2C8CB9'><strong>{$list[$i][subject]}</strong></font>";
+            echo "<font color='#FB9606'><strong>{$list[$i][subject]}</strong></font>";
         else
-            echo "{$list[$i][subject]}";
+        {
+            $style = "";
+            if ($list[$i][icon_new])
+                $style = " style='font-weight:bold;' ";
+            echo "<span $style>{$list[$i][subject]}</span>";
+        }
         echo "</a>";
 
         if ($list[$i][comment_cnt]) 
@@ -82,7 +87,7 @@ if ($is_nogood) $colspan++;
         // if ($list[$i]['link']['count']) { echo "[{$list[$i]['link']['count']}]"; }
         // if ($list[$i]['file']['count']) { echo "<{$list[$i]['file']['count']}>"; }
 
-        echo " " . $list[$i][icon_new];
+        //echo " " . $list[$i][icon_new];
         echo " " . $list[$i][icon_file];
         echo " " . $list[$i][icon_link];
         echo " " . $list[$i][icon_hot];

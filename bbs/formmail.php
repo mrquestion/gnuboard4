@@ -27,6 +27,9 @@ if ($sendmail_count > 3)
 $g4[title] = "메일 쓰기";
 include_once("$g4[path]/head.sub.php");
 
+if (!$name)
+    $name = base64_decode($email);
+
 if (!isset($type)) 
     $type = 0;
 

@@ -6,6 +6,7 @@ if (!defined("_GNUBOARD_")) exit;
 function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $charset="EUC-KR", $cc="", $bcc="") 
 {
     global $config;
+    global $g4;
 
     // 메일발송 사용을 하지 않는다면
     if (!$config[cf_email_use]) return;
@@ -20,7 +21,7 @@ function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $cha
     if ($cc)  $header .= "Cc: $cc\n";
     if ($bcc) $header .= "Bcc: $bcc\n";
     $header .= "MIME-Version: 1.0\n";
-    $header .= "X-Mailer: sir mailer 0.9 (sir.co.kr)\n";
+    $header .= "X-Mailer: SIR Mailer 0.91 (sir.co.kr) : $_SERVER[SERVER_ADDR] : $_SERVER[REMOTE_ADDR] : $g4[url] : $_SERVER[PHP_SELF] : $_SERVER[HTTP_REFERER] \n";
 
     if ($file != "") {
         $boundary = uniqid("http://sir.co.kr/");

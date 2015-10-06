@@ -176,7 +176,7 @@ if ($w == "c") // 코멘트 입력
     insert_point($member[mb_id], $board[bo_comment_point], "$board[bo_subject] {$wr_id}-{$comment_id} 코멘트쓰기", $bo_table, $comment_id, '코멘트');
 
     // 메일발송 사용
-    if ($config[cf_email_use])
+    if ($config[cf_email_use] && $board[bo_use_email])
     {
         // 관리자의 정보를 얻고
         $super_admin = get_admin("super");
