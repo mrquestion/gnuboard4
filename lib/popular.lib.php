@@ -19,7 +19,11 @@ function popular($skin_dir='basic', $pop_cnt=7, $date_cnt=3)
               limit 0, $pop_cnt ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++) 
+    {
         $list[$i] = $row;
+        // 스크립트등의 실행금지
+        $list[$i][pp_word] = get_text($list[$i][pp_word]);
+    }
 
     ob_start();
     $popular_skin_path = "$g4[path]/skin/popular/$skin_dir";

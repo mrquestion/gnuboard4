@@ -49,12 +49,12 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                 <tr> 
                     <td width="80" height="27" align="center"><b>이름</b></td>
                     <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type=text style='width:90%;' name='fname' required minlength=2 itemname='이름'></td>
+                    <td width="450"><input type=text style='width:90%;' name='fnick' required minlength=2 itemname='이름'></td>
                 </tr>
                 <tr> 
                     <td width="80" height="27" align="center"><b>E-mail</b></td>
                     <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type=text style='width:90%;' name='femail' required email itemname='E-mail'></td>
+                    <td width="450"><input type=text style='width:90%;' name='fmail' required email itemname='E-mail'></td>
                 </tr>
                 <? } ?>
 

@@ -2,17 +2,26 @@
 include_once("./_common.php");
 include_once("$g4[path]/lib/mailer.lib.php");
 
-if (!$member[mb_id] && $config[cf_formmail_is_member])
+if (!$is_member && $config[cf_formmail_is_member])
     alert_close("회원만 이용하실 수 있습니다.");
 
-for ($i=1; $i<=$attach; $i++) {
-    if ($_FILES["file".$i][name]) {
+if (!$is_admin)
+{
+    $sendmail_count = (int)get_session('ss_sendmail_count') + 1;
+    if ($sendmail_count > 3)
+        alert_close('한번 접속후 일정수의 메일만 발송할 수 있습니다.\n\n계속해서 메일을 보내시려면 다시 로그인 또는 접속하여 주십시오.');
+    set_session('ss_sendmail_count', $sendmail_count);
+}
+
+for ($i=1; $i<=$attach; $i++) 
+{
+    if ($_FILES["file".$i][name])
         $file[] = attach_file($_FILES["file".$i][name], $_FILES["file".$i][tmp_name]);
-    }
 }
 
 $content = stripslashes($content);
-if ($type == 2) {
+if ($type == 2) 
+{
     $type = 1;
     $content = preg_replace("/\n/", "<br>", $content);
 } 
@@ -27,7 +36,6 @@ else
     $mail_content = $content;
 
 $to = base64_decode($to);
-//$tmp_to = "***" . substr($to, 3, strlen($to)-3);
 
 mailer($fnick, $fmail, $to, $subject, $mail_content, $type, $file, $cfg[charset]);
 

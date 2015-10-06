@@ -25,6 +25,75 @@ if (isset($HTTP_POST_VARS) && !isset($_POST))
 		$_SESSION = &$HTTP_SESSION_VARS;
 }
 
+//
+// phpBB2 참고
+// php.ini 의 magic_quotes_gpc 값이 FALSE 인 경우 addslashes() 적용
+// SQL Injection 등으로 부터 보호
+//
+if( !get_magic_quotes_gpc() )
+{
+	if( is_array($_GET) )
+	{
+		while( list($k, $v) = each($_GET) )
+		{
+			if( is_array($_GET[$k]) )
+			{
+				while( list($k2, $v2) = each($_GET[$k]) )
+				{
+					$_GET[$k][$k2] = addslashes($v2);
+				}
+				@reset($_GET[$k]);
+			}
+			else
+			{
+				$_GET[$k] = addslashes($v);
+			}
+		}
+		@reset($_GET);
+	}
+
+	if( is_array($_POST) )
+	{
+		while( list($k, $v) = each($_POST) )
+		{
+			if( is_array($_POST[$k]) )
+			{
+				while( list($k2, $v2) = each($_POST[$k]) )
+				{
+					$_POST[$k][$k2] = addslashes($v2);
+				}
+				@reset($_POST[$k]);
+			}
+			else
+			{
+				$_POST[$k] = addslashes($v);
+			}
+		}
+		@reset($_POST);
+	}
+
+	if( is_array($_COOKIE) )
+	{
+		while( list($k, $v) = each($_COOKIE) )
+		{
+			if( is_array($_COOKIE[$k]) )
+			{
+				while( list($k2, $v2) = each($_COOKIE[$k]) )
+				{
+					$_COOKIE[$k][$k2] = addslashes($v2);
+				}
+				@reset($_COOKIE[$k]);
+			}
+			else
+			{
+				$_COOKIE[$k] = addslashes($v);
+			}
+		}
+		@reset($_COOKIE);
+	}
+}
+
+
 // PHP 4.1.0 부터 지원됨
 // php.ini 의 register_globals=off 일 경우
 @extract($_GET);

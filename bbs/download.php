@@ -77,7 +77,6 @@ if (file_exists($filepath)) {
         //    fclose($fp);
         //}
 
-        $fp = fopen($filepath, "rb"); 
         while(!feof($fp)) { 
             echo fread($fp, 100*1024); 
             flush(); 

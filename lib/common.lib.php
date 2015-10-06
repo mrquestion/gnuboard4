@@ -493,12 +493,6 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
         for ($k=0; $k<count($field); $k++) { // 필드의 수만큼 다중 필드 검색 가능 (필드1+필드2...)
             $str .= " $op2 ";
             switch ($field[$k]) {
-                case "a.mb_id" :
-                case "b.mb_id" :
-                case "a.wr_name" :
-                case "b.wc_name" :
-                    $str .= " $field[$k] = '$s[$i]' ";
-                    break;
                 case "wr_hit" :
                 case "wr_good" :
                 case "wr_nogood" :
@@ -1095,6 +1089,112 @@ function referer_check($url="")
 
     if (!preg_match("/^http[s]?:\/\/".$_SERVER[HTTP_HOST]."/", $_SERVER[HTTP_REFERER]))
         alert("제대로 된 접근이 아닌것 같습니다.", $url);
+}
+
+
+// 한글 요일
+function get_yoil($date, $full=0) 
+{
+    $arr_yoil = array ("일", "월", "화", "수", "목", "금", "토");
+
+    $yoil = date("w", strtotime($date));
+    $str = $arr_yoil[$yoil];
+    if ($full) {
+        $str .= "요일";
+    }
+    return $str;
+}
+
+
+// 날짜를 select 박스 형식으로 얻는다
+function date_select($date, $name="")
+{
+    global $g4;
+
+    $s = "";
+    if (substr($date, 0, 4) == "0000") {
+        $date = $g4[time_ymdhis];
+    }
+    preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/", $date, $m);
+    
+    // 년
+    $s .= "<select name='{$name}_y'>";
+    for ($i=$m[0]-3; $i<=$m[0]+3; $i++) {
+        $s .= "<option value='$i'";
+        if ($i == $m[0]) {
+            $s .= " selected";
+        }
+        $s .= ">$i";
+    }
+    $s .= "</select>년 \n";
+
+    // 월
+    $s .= "<select name='{$name}_m'>";
+    for ($i=1; $i<=12; $i++) {
+        $s .= "<option value='$i'";
+        if ($i == $m[2]) {
+            $s .= " selected";
+        }
+        $s .= ">$i";
+    }
+    $s .= "</select>월 \n";
+
+    // 일
+    $s .= "<select name='{$name}_d'>";
+    for ($i=1; $i<=31; $i++) {
+        $s .= "<option value='$i'";
+        if ($i == $m[3]) {
+            $s .= " selected";
+        }
+        $s .= ">$i";
+    }
+    $s .= "</select>일 \n";
+
+    return $s;
+}
+
+
+// 시간을 select 박스 형식으로 얻는다
+// 1.04.00
+// 경매에 시간 설정이 가능하게 되면서 추가함
+function time_select($time, $name="")
+{
+    preg_match("/([0-9]{2}):([0-9]{2}):([0-9]{2})/", $time, $m);
+    
+    // 시
+    $s .= "<select name='{$name}_h'>";
+    for ($i=0; $i<=23; $i++) {
+        $s .= "<option value='$i'";
+        if ($i == $m[0]) {
+            $s .= " selected";
+        }
+        $s .= ">$i";
+    }
+    $s .= "</select>시 \n";
+
+    // 분
+    $s .= "<select name='{$name}_i'>";
+    for ($i=0; $i<=59; $i++) {
+        $s .= "<option value='$i'";
+        if ($i == $m[2]) {
+            $s .= " selected";
+        }
+        $s .= ">$i";
+    }
+    $s .= "</select>분 \n";
+
+    // 초
+    $s .= "<select name='{$name}_s'>";
+    for ($i=0; $i<=59; $i++) {
+        $s .= "<option value='$i'";
+        if ($i == $m[3]) {
+            $s .= " selected";
+        }
+        $s .= ">$i";
+    }
+    $s .= "</select>초 \n";
+
+    return $s;
 }
 
 

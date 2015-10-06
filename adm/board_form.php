@@ -35,6 +35,7 @@ if ($w == "")
     $board[bo_use_search] = '1';
     $board[bo_skin] = 'basic';
     $board[gr_id] = $gr_id;
+    $board[bo_disable_tags] = "script|iframe";
 } 
 else if ($w == "u") 
 {
@@ -223,7 +224,7 @@ include_once ("./admin.head.php");
     <td style="<?=b_draw('left', '#74A3C8') ?>">사용금지 태그</td>
     <td colspan=3 style="<?=b_draw('right', '#74A3C8') ?>">
         <input type=text class='edit' name=bo_disable_tags style='width:99%;' value='<?=$board[bo_disable_tags]?>'>
-        <br> 태그와 태그 사이는 | 로 구분하세요. (예: javascript|div) HTML 사용시 금지할 태그를 입력하세요.
+        <br> 태그와 태그 사이는 | 로 구분하세요. (예: <b>script</b>|<b>iframe</b>) HTML 사용시 금지할 태그를 입력하세요.
     </td>
 </tr>
 <tr class='ht'>

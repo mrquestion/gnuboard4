@@ -1,4 +1,24 @@
-4.00.19 (05.07)
+4.00.20 (05.07.06)
+    :   lib/common.lib.php 에 get_yoil() 함수등 추가
+    :   bbs/download.php 에서 중복되 코드 삭제
+        prosper 님께서 알려주셨습니다.
+
+    :   한국소프트웨어진흥원 공개SW지원센터에서 보내온 문서를 토대로 PHP, SQL Injection 에 대처하기 위해 코드 수정
+        한국소프트웨어진흥원 신민석님, 정현철연구원님, 서강대학교 김우현님, 
+        ㈜A3 Security consulting 구본근님, 김동우님, 한남대학교 컴퓨터공학과 최민성님,
+        함지만님, INetCop Security 유동훈님 께 감사드립니다.
+
+        common.php
+        adm/board_form.php
+        bbs/download.php
+        bbs/link.php
+        bbs/formmail.php
+        bbs/formmail_send.php
+        bbs/write_update.php
+        lib/popular.lib.php
+        lib/common.lib.php
+
+4.00.19 (05.07.05)
     :   중복으로 투표가 가능하던 오류를 수정
         Gatzz 님께서 알려주셨습니다.
     :   delete_point() 함수에서 포인트 합을 반영

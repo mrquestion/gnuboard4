@@ -1,13 +1,14 @@
 <?
 include_once("./_common.php");
 
-if (!$member[mb_id] && $config[cf_formmail_is_member])  
+if (!$is_member && $config[cf_formmail_is_member])  
     alert_close("회원만 이용하실 수 있습니다.");
 
-if (!$member[mb_open] && $is_admin != "super" && $member[mb_id] != $mb_id) 
+if ($is_member && !$member[mb_open] && $is_admin != "super" && $member[mb_id] != $mb_id) 
     alert_close("자신의 정보를 공개하지 않으면 다른분에게 메일을 보낼 수 없습니다.\\n\\n정보공개 설정은 회원정보수정에서 하실 수 있습니다.");
 
-if ($mb_id) {
+if ($mb_id) 
+{
     $mb = get_member($mb_id);
     if (!$mb[mb_id]) 
         alert_close("회원정보가 존재하지 않습니다.\\n\\n탈퇴하였을 수 있습니다.");
@@ -15,6 +16,10 @@ if ($mb_id) {
     if (!$mb[mb_open] && $is_admin != "super")
         alert_close("정보공개를 하지 않았습니다.");
 }
+
+$sendmail_count = (int)get_session('ss_sendmail_count') + 1;
+if ($sendmail_count > 3)
+    alert_close('한번 접속후 일정수의 메일만 발송할 수 있습니다.\n\n계속해서 메일을 보내시려면 다시 로그인 또는 접속하여 주십시오.');
 
 $g4[title] = "메일 쓰기";
 include_once("$g4[path]/head.sub.php");
