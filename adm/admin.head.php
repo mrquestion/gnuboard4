@@ -79,14 +79,16 @@ function imageview(id, w, h)
 
     menu(id);
 
+    var el_id = document.getElementById(id);
+
     //submenu = eval(name+".style");
-    submenu = document.getElementById(id).style;
+    submenu = el_id.style;
     submenu.left = tempX - ( w + 11 );
     submenu.top  = tempY - ( h / 2 );
 
     selectBoxVisible();
 
-    if (id.style != 'none')
+    if (el_id.style.display != 'none')
         selectBoxHidden(id);
 }
 
@@ -94,14 +96,16 @@ function help(id, left, top)
 {
     menu(id);
 
+    var el_id = document.getElementById(id);
+
     //submenu = eval(name+".style");
-    submenu = document.getElementById(id).style;
+    submenu = el_id.style;
     submenu.left = tempX - 50 + left;
     submenu.top  = tempY + 15 + top;
 
     selectBoxVisible();
 
-    if (id.style != 'none')
+    if (el_id.style.display != 'none')
         selectBoxHidden(id);
 }
 

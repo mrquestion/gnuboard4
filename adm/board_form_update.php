@@ -212,7 +212,11 @@ if ($chk_read_point) $s .= " , bo_read_point = '$bo_read_point' ";
 if ($chk_write_point) $s .= " , bo_write_point = '$bo_write_point' ";
 if ($chk_comment_point) $s .= " , bo_comment_point = '$bo_comment_point' ";
 if ($chk_download_point) $s .= " , bo_download_point = '$bo_download_point' ";
-if ($chk_category_list) $s .= " , bo_category_list = '$bo_category_list' ";
+if ($chk_category_list) 
+{
+    $s .= " , bo_category_list = '$bo_category_list' ";
+    $s .= " , bo_use_category = '$bo_use_category' ";
+}
 if ($chk_use_sideview) $s .= " , bo_use_sideview = '$bo_use_sideview' ";
 if ($chk_use_file_content) $s .= " , bo_use_file_content = '$bo_use_file_content' ";
 if ($chk_use_comment) $s .= " , bo_use_comment = '$bo_use_comment' ";

@@ -868,8 +868,13 @@ function getImages()
 function insertEl (c)
 {
     var editor = eval("id"+this.oname);
-    var sel = editor.document.selection.createRange();
-    sel.pasteHTML(c);
+    if (this.IE) {
+        var sel = editor.document.selection.createRange();
+        sel.pasteHTML(c);
+    } else {
+        var sel = document.getElementById("id"+this.oname).contentWindow.getSelection();
+        document.getElementById("id"+this.oname).contentDocument.execCommand("insertHTML", false, c);        
+    }
 }
 
 function insertBgImage (img)

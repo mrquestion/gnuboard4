@@ -440,7 +440,7 @@ function mb_id_check()
         return;
     }
 
-    if (g4_charset.toUpperCase == "UTF-8")
+    if (g4_charset.toUpperCase() == "UTF-8")
         win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+encodeURI(document.fregisterform.mb_id.value), "hiddenframe");
     else
         win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+document.fregisterform.mb_id.value, "hiddenframe");
@@ -469,7 +469,7 @@ function mb_nick_check()
         return;
     }
 
-    if (g4_charset.toUpperCase == "UTF-8")
+    if (g4_charset.toUpperCase() == "UTF-8")
         win_open(g4_path+"/"+g4_bbs+"/member_nick_check.php?mb_nick="+encodeURI(document.fregisterform.mb_nick.value), "hiddenframe");
     else
         win_open(g4_path+"/"+g4_bbs+"/member_nick_check.php?mb_nick="+document.fregisterform.mb_nick.value, "hiddenframe");
@@ -483,7 +483,7 @@ function mb_email_check()
         return;
     }
 
-    if (g4_charset.toUpperCase == "UTF-8")
+    if (g4_charset.toUpperCase() == "UTF-8")
         win_open(g4_path+"/"+g4_bbs+"/member_email_check.php?mb_email="+encodeURI(document.fregisterform.mb_email.value), "hiddenframe");
     else
         win_open(g4_path+"/"+g4_bbs+"/member_email_check.php?mb_email="+document.fregisterform.mb_email.value, "hiddenframe");

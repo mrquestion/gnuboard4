@@ -6,7 +6,7 @@ include_once("./_head.php");
 
 $list = array();
 
-$sql = " select a.mb_id, b.mb_nick, b.mb_name, b.mb_email, b.mb_homepage, b.mb_open, a.lo_ip, a.lo_location, a.lo_url
+$sql = " select a.mb_id, b.mb_nick, b.mb_name, b.mb_email, b.mb_homepage, b.mb_open, b.mb_point, a.lo_ip, a.lo_location, a.lo_url
            from $g4[login_table] a left join $g4[member_table] b on (a.mb_id = b.mb_id)
           where a.mb_id <> '$config[cf_admin]'
           order by a.lo_datetime desc ";

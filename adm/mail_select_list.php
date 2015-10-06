@@ -96,15 +96,16 @@ include_once("./admin.head.php");
         <select size=25 name='list' style='width:500px;'>
         <option>번호 . 회원아이디 / 이름 / 별명 / 생일 / E-mail
         <?
-            $sql = " select mb_id, mb_name, mb_nick, mb_email, mb_birth $sql_common $sql_where order by mb_id ";
+            $sql = " select mb_id, mb_name, mb_nick, mb_email, mb_birth, mb_datetime $sql_common $sql_where order by mb_id ";
             $result = sql_query($sql);
             $i=0;
             $ma_list = "";
             $cr = "";
-            while ($row=sql_fetch_array($result)) {
+            while ($row=sql_fetch_array($result)) 
+            {
                 $i++;
                 echo "<option>$i . $row[mb_id] / $row[mb_name] / $row[mb_nick] / $row[mb_birth] / $row[mb_email]";
-                $ma_list .= $cr . $row[mb_email] . "||" . $row[mb_id] . "||" . $row[mb_name] . "||" . $row[mb_nick] . "||" . $row[mb_birth];
+                $ma_list .= $cr . $row[mb_email] . "||" . $row[mb_id] . "||" . $row[mb_name] . "||" . $row[mb_nick] . "||" . $row[mb_birth] . "||" . $row[mb_datetime];
                 $cr = "\n";
             }
         ?>

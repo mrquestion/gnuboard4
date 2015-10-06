@@ -173,6 +173,7 @@ $msg = "해당 게시물을 선택한 게시판으로 $act 하였습니다.";
 $opener_href = "./board.php?bo_table=$bo_table&page=$page&$qstr";
 
 echo <<<HEREDOC
+<meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'> 
 <script language="javascript">
 alert("{$msg}");
 opener.document.location.href = "{$opener_href}";

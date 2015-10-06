@@ -378,6 +378,10 @@ function search_font($stx, $str)
 {
     global $config;
 
+    // 문자앞에 \ 를 붙입니다.
+    $src = array("/", "|");
+    $dst = array("\/", "\|");
+
     if (!trim($stx)) return $str;
 
     // 검색어 전체를 공란으로 나눈다
@@ -391,7 +395,9 @@ function search_font($stx, $str)
         //$pattern .= $bar . '([^<])(' . quotemeta($s[$m]) . ')';
         //$pattern .= $bar . quotemeta($s[$m]);
         //$pattern .= $bar . str_replace("/", "\/", quotemeta($s[$m]));
-        $pattern .= $bar . str_replace("/", "\/", quotemeta($s[$m])) . "(?![^<]*>)";
+        $tmp_str = quotemeta($s[$m]);
+        $tmp_str = str_replace($src, $dst, $tmp_str);
+        $pattern .= $bar . $tmp_str . "(?![^<]*>)";
         $bar = "|";
     }
 
@@ -855,8 +861,11 @@ function view_file_link($file, $width, $height, $content="")
 {
     global $config, $board;
     global $g4;
+    static $ids;
 
     if (!$file) return;
+
+    $ids++;
 
     // 파일의 폭이 게시판설정의 이미지폭 보다 크다면 게시판설정 폭으로 맞추고 비율에 따라 높이를 계산
     if ($width > $board[bo_image_width] && $board[bo_image_width])
@@ -877,9 +886,11 @@ function view_file_link($file, $width, $height, $content="")
         // 게시판설정 이미지보다 크다면 스킨의 자바스크립트에서 이미지를 줄여준다
         return "<img src='$g4[path]/data/file/$board[bo_table]/".urlencode($file)."' name='target_resize_image[]' onclick='image_window(this);' style='cursor:pointer;' title='$content'>";
     else if (preg_match("/\.($config[cf_flash_extension])$/i", $file))
-        return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
+        //return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
+        return "<script>doc_write(flash_movie('$g4[path]/data/file/$board[bo_table]/$file', '_g4_{$ids}', '$width', '$height', 'transparent'));</script>";
     else if (preg_match("/\.($config[cf_movie_extension])$/i", $file))
-        return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
+        //return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
+        return "<script>doc_write(obj_movie('$g4[path]/data/file/$board[bo_table]/$file', '_g4_{$ids}', '$width', '$height'));</script>";
 }
 
 

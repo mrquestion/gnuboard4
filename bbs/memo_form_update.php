@@ -5,6 +5,7 @@ if (!$member[mb_id])
     alert("회원만 이용하실 수 있습니다.");
 
 $tmp_list = explode(",", $me_recv_mb_id);
+$me_recv_mb_id_list = "";
 $msg = "";
 $comma = "";
 $mb_list = array();
@@ -12,10 +13,11 @@ for ($i=0; $i<count($tmp_list); $i++) {
     $row = get_member($tmp_list[$i]);
     if (!$row[mb_id] || $row[mb_leave_date] || $row[mb_intercept_date]) {
         $msg .= "$comma$tmp_list[$i]";
-        $comma = ",";
     } else {
+        $me_recv_mb_id_list .= "$comma$row[mb_nick]";
         $mb_list[] = $tmp_list[$i];
     }
+    $comma = ", ";
 }
 
 if ($msg)
@@ -40,5 +42,5 @@ for ($i=0; $i<count($mb_list); $i++) {
     }
 }
 
-alert("$me_recv_mb_id 님께 쪽지를 전달하였습니다.", "./memo.php?kind=send");
+alert("$me_recv_mb_id_list 님께 쪽지를 전달하였습니다.", "./memo.php?kind=send");
 ?>

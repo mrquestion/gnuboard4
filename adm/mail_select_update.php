@@ -43,15 +43,17 @@ $ma = sql_fetch($sql);
 $subject = $ma[ma_subject];
 
 $cnt = 0;
-for ($i=0; $i<count($member_list); $i++) {
-    list($email, $mb_id, $name, $nick, $birth) = explode("||", trim($member_list[$i]));
+for ($i=0; $i<count($member_list); $i++) 
+{
+    list($email, $mb_id, $name, $nick, $birth, $datetime) = explode("||", trim($member_list[$i]));
 
     $sw = ereg("[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]+)*@[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]+)*", $email);
     // 올바른 메일 주소만
-    if ($sw == true) {
+    if ($sw == true) 
+    {
         $cnt++;
 
-        $mb_md5 = md5($mb_id.$mb_email);
+        $mb_md5 = md5($mb_id.$email.$datetime);
 
         $content = $ma[ma_content];
         $content = preg_replace("/{이름}/", $name, $content);
@@ -78,7 +80,8 @@ for ($i=0; $i<count($member_list); $i++) {
         ob_flush();
         ob_end_flush();
         usleep($sleepsec);
-        if ($cnt % $countgap == 0) {
+        if ($cnt % $countgap == 0) 
+        {
             echo "<script> document.all.cont.innerHTML += '<br>'; document.body.scrollTop += 1000; </script>\n";
         }
 

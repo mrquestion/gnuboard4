@@ -8,8 +8,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <table width="590" height="40" border="0" cellspacing="0" cellpadding="0">
         <tr> 
             <td width="25" align="center" bgcolor="#FFFFFF" ><img src="<?=$member_skin_path?>/img/icon_01.gif" width="5" height="5"></td>
-            <td width="65" align="left" bgcolor="#FFFFFF" ><font color="#666666"><b><?=$g4[title]?></b></font></td>
-            <td width="500" bgcolor="#FFFFFF" ></td>
+            <td width="500" align="left" bgcolor="#FFFFFF" ><font color="#666666"><b><?=$g4[title]?></b></font></td>
+            <td width="65" bgcolor="#FFFFFF" ></td>
         </tr>
         </table></td>
 </tr>
@@ -23,7 +23,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <td width="30" height="24"></td>
     <td width="530" align="right" bgcolor="#EFEFEF">
         <?
-        $nick = cut_str($mb[mb_nick], $config[cf_cut_name]);
+        //$nick = cut_str($mb[mb_nick], $config[cf_cut_name]);
+        $nick = get_sideview($mb[mb_id], $mb[mb_nick], $mb[mb_email], $mb[mb_homepage]);
         if ($kind == "recv")
             echo "<b>$nick</b> 님께서 {$memo[me_send_datetime]}에 보내온 쪽지의 내용입니다.";
 
@@ -41,7 +42,12 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <td height="200" align="center" valign="top">
         <table width="540" border="0" cellspacing="0" cellpadding="0">
         <tr> 
-            <td height="20"></td>
+            <td height="40" align=right>
+                <?
+                echo "<a href=\"$prev_link\"><img src='$member_skin_path/img/btn_memo_prev.gif' border='0'></a>&nbsp;&nbsp;";
+                echo "<a href=\"$next_link\"><img src='$member_skin_path/img/btn_memo_next.gif' border='0'></a>"; 
+                ?>
+            </td>
         </tr>
         <tr> 
             <td height="2" bgcolor="#808080"></td>

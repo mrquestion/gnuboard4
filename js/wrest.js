@@ -12,7 +12,7 @@ if (typeof(WREST_JS) == 'undefined') // 한번만 실행
     var wrestFldBackColor = '#FFE4E1'; 
     var arrAttr  = new Array ('required', 'trim', 'minlength', 'email', 'hangul', 'hangul2', 
                               'memberid', 'nospace', 'numeric', 'alpha', 'alphanumeric', 
-                              'jumin', 'saupja', 'alphanumericunderline');
+                              'jumin', 'saupja', 'alphanumericunderline', 'telnumber');
 
     // subject 속성값을 얻어 return, 없으면 tag의 name을 넘김
     function wrestItemname(fld)
@@ -60,6 +60,21 @@ if (typeof(WREST_JS) == 'undefined') // 한번만 실행
             }
         }
     }
+
+    // 김선용 2006.3 - 전화번호(휴대폰) 형식 검사 : 123-123(4)-5678
+	function wrestTelnumber(fld){
+
+		if (!wrestTrim(fld)) return;
+
+		var pattern = /^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$/;
+		if(!pattern.test(fld.value)){ 
+            if(wrestFld == null){
+				wrestMsg = wrestItemname(fld)+" : 전화번호 형식이 올바르지 않습니다.\n\n하이픈(-)을 포함하여 입력해 주십시오.\n";
+                wrestFld = fld;
+				fld.select();
+            }
+		}
+	}
 
     // 이메일주소 형식 검사
     function wrestEmail(fld) 
@@ -360,6 +375,9 @@ if (typeof(WREST_JS) == 'undefined') // 한번만 실행
                                                   wrestAlphaNumericUnderLine(this.elements[i]); break; 
                             case "jumin"        : wrestJumin(this.elements[i]); break; 
                             case "saupja"       : wrestSaupja(this.elements[i]); break; 
+							
+							// 김선용 2006.3 - 전화번호 형식 검사
+							case "telnumber"	: wrestTelnumber(this.elements[i]); break;
                             default : break;
                         }
                     }

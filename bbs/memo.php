@@ -58,7 +58,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     else
         $mb_nick = "<font color=silver>정보없음</font>";
 
-    $name = get_sideview($row[mb_id], $row[mb_nick], $row[wr_email], $row[wr_homepage]);
+    $name = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
 
     if (substr($row[me_read_datetime],0,1) == '0')
         $read_datetime = '아직 읽지 않음';
