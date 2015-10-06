@@ -1,3 +1,16 @@
+4.37.30 (2015.07.06)
+    : 접속자현황 및 접속자검색에서 XSS 취약점이 발견되어 수정 (한국인터넷진흥원 인터넷침해대응본부 김유홍 주임연구원께서 알려 주셨습니다.)
+
+        adm/visit_list.php 에 아래 한줄이 추가 되었습니다.
+
+            $row['vi_agent'] = get_text($row['vi_agent']);
+        
+        adm/visit_search.php 가 아래와 같이 추가 및 수정 되었습니다.
+
+            $row['vi_agent'] = get_text($row['vi_agent']);
+            ...
+            $link = "<a href='".htmlspecialchars($row['vi_referer'])."' target=_blank title='$title '>";
+
 4.37.29 (2015.06.05)
     : 투표 항목 저장시 SQL Injection 이 발견되어 수정 (한국인터넷진흥원 인터넷침해대응본부 취약점 담당자 손기종 선임연구원께서 알려 주셨습니다.)
 

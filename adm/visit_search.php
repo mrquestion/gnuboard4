@@ -129,6 +129,7 @@ $sql = " select *
 $result = sql_query($sql);
 
 for ($i=0; $row=sql_fetch_array($result); $i++) {
+    $row['vi_agent'] = get_text($row['vi_agent']);
     $brow = get_brow($row['vi_agent']);
     $os   = get_os($row['vi_agent']);
 
@@ -156,7 +157,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         }
 
         $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), $referer);
-        $link = "<a href='$row[vi_referer]' target=_blank title='$title '>";
+        //$link = "<a href='$row[vi_referer]' target=_blank title='$title '>";
+        $link = "<a href='".htmlspecialchars($row['vi_referer'])."' target=_blank title='$title '>";
     }
 
     if ($is_admin == 'super')
