@@ -1,3 +1,17 @@
+4.36.08 (2012.11.01)
+    :   SQL Injection 취약점 보완 (Stealth in BlackFalcon 김동현님께서 한국인터넷진흥원을 통하여 알려 주셨습니다.)
+        단, register_globals = On, magic_quotes_gpc = Off 설정을 만족하는 경우에만 해당됩니다.
+    :   태그에 포함되지 않은 expression 속성이 변환되는 것을 방지
+
+        bbs/memo_form.php 의
+            
+            $me_id = mysql_real_escape_string($me_id);
+
+        lib/common.lib.php 의
+
+            //$content = preg_replace("/".$pattern."/i", "__EXPRESSION__", $content);
+            $content = preg_replace("/<[^>]*".$pattern."/i", "__EXPRESSION__", $content); 
+
 4.36.07 (2012.10.23)
     :   일부 브라우저에서 template.xml 로딩 오류 발생으로 인하여 template.xml 코드를 cheditor.js 에 포함시켜서 해결함.
         (CHSOFT 나창호님께서 도움 주셨습니다.)
