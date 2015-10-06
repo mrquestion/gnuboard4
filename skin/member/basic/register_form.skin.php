@@ -485,6 +485,10 @@ function fregisterform_submit(f)
     else
         echo "f.action = './register_form_update.php';";
     ?>
+
+    // 보안인증관련 코드로 반드시 포함되어야 합니다.
+    set_cookie("<?=md5($token)?>", "<?=base64_encode($token)?>", 1, "<?=$g4['cookie_domain']?>");
+
     f.submit();
 }
 

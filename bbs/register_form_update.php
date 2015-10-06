@@ -3,10 +3,17 @@ include_once("./_common.php");
 include_once("$g4[path]/lib/mailer.lib.php");
 
 // 세션에 저장된 토큰과 폼값으로 넘어온 토큰을 비교하여 틀리면 에러
-if ($_POST["token"] && get_session("ss_token") == $_POST["token"]) {
-    // 맞으면 세션을 지워 다시 입력폼을 통해서 들어오도록 한다.
+if ($_POST["token"] && get_session("ss_token") == $_POST["token"]) 
+{
+    // 이전 폼 전송 바로전에 만들어진 쿠키가 없다면 에러
+    if (!get_cookie($_POST["token"])) alert_close("쿠키 에러");
+
+    // 맞으면 세션과 쿠키를 지워 다시 입력폼을 통해서 들어오도록 한다.
     set_session("ss_token", "");
-} else {
+    set_cookie($_POST["token"], 0, 0);
+} 
+else 
+{
     alert_close("토큰 에러");
     exit;
 }

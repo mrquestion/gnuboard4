@@ -87,3 +87,23 @@ function return_reg_mb_email_check(req) {
     }
     $('mb_email_enabled').value = result;
 }
+
+// 세션에 저장된 토큰을 얻는다.
+function get_token() {
+    var url = member_skin_path + "/ajax_get_token.php";
+    var para = "reg_mb_id="+encodeURIComponent($F('reg_mb_id'));
+        para += "&reg_mb_email="+encodeURIComponent($F('reg_mb_email'));
+    var myAjax = new Ajax.Request(
+        url, 
+        {
+            method: 'post', 
+            asynchronous: false,
+            parameters: para, 
+            onComplete: return_get_token
+        });
+}
+
+function return_get_token(req) {
+    var result = req.responseText;
+    $('mb_token').value = result;
+}

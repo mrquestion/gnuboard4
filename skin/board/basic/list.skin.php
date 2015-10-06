@@ -13,23 +13,36 @@ if ($is_nogood) $colspan++;
 // <nobr style='display:block; overflow:hidden; width:000px;'>제목</nobr>
 ?>
 
+<div style="height:12px; line-height:1px; font-size:1px;">&nbsp;</div>
+
 <!-- 게시판 목록 시작 -->
 <table width="<?=$width?>" align=center cellpadding=0 cellspacing=0><tr><td>
 
 <!-- 분류 셀렉트 박스, 게시물 몇건, 관리자화면 링크 -->
-<table width="100%" cellspacing="0" cellpadding="0">
+<table border=0 width="100%" cellspacing="0" cellpadding="0">
 <tr height="25">
-    <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+this.value;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
-    <td align="right" style="font:normal 11px tahoma; color:#BABABA;">
-        Total <?=number_format($total_count)?> 
+    <td width="50%">
+        <form name="fcategory" method="get" style="margin:0; padding:0;">
+        <? if ($is_category) { ?>
+        <select name=sca onchange="location='<?=$category_location?>'+this.value;">
+        <option value=''>전체</option>
+        <?=$category_option?>
+        </select>
+        <? } ?>
+        </form>
+    </td>
+    <td align="right">
+        <img src="<?=$board_skin_path?>/img/icon_total.gif" align=absmiddle>
+        <span style="color:#888888; font-weight:bold;">Total <?=number_format($total_count)?></span>
         <? if ($rss_href) { ?><a href='<?=$rss_href?>'><img src='<?=$board_skin_path?>/img/btn_rss.gif' border=0 align=absmiddle></a><?}?>
-        <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/btn_admin.gif" title="관리자" width="63" height="22" border="0" align="absmiddle"></a><?}?></td>
+        <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/btn_admin.gif" title="관리자" align="absmiddle"></a><?}?>
+    </td>
 </tr>
 <tr><td height=5></td></tr>
 </table>
 
 <!-- 제목 -->
-<form name="fboardlist" method="post" style="margin:0px;">
+<form name="fboardlist" method="post" style="margin:0;">
 <input type='hidden' name='bo_table' value='<?=$bo_table?>'>
 <input type='hidden' name='sfl'  value='<?=$sfl?>'>
 <input type='hidden' name='stx'  value='<?=$stx?>'>
@@ -37,45 +50,40 @@ if ($is_nogood) $colspan++;
 <input type='hidden' name='page' value='<?=$page?>'>
 <input type='hidden' name='sw'   value=''>
 
-<table width=100% border="0" cellpadding=0 cellspacing="2">
-<tr>
-    <td height=2 bgcolor="#0A7299"></td>
-    <? if ($is_checkbox) { ?><td bgcolor="#0A7299"></td><?}?>
-    <td bgcolor="#0A7299"></td>
-    <td bgcolor="#A4B510"></td>
-    <td bgcolor="#A4B510"></td>
-    <td bgcolor="#A4B510"></td>
-    <? if ($is_good) { ?><td bgcolor="#A4B510"></td><?}?>
-    <? if ($is_good) { ?><td bgcolor="#A4B510"></td><?}?>
-</tr>
-<tr height=28 align=center>
+<div style="border:1px solid #ddd; height:34px; background:url(<?=$board_skin_path?>/img/title_bg.gif) repeat-x;">
+<table width=100% border=0 cellpadding=0 cellspacing=0 style="font-weight:bold; color:#505050;">
+<tr height=34 align=center>
     <td width=50>번호</td>
-    <?/* if ($is_category) { ?><td width=70>분류</td><?}*/?>
-    <? if ($is_checkbox) { ?><td width=40><INPUT onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><?}?>
-    <td>제목</td>
+    <? if ($is_checkbox) { ?><td width=40><input onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><?}?>
+    <td>제&nbsp;&nbsp;&nbsp;목</td>
     <td width=110>글쓴이</td>
-    <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
-    <td width=50><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
+    <?/**/?><td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
+    <td width=50><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td><?/**/?>
+    <!--<td width=40>날짜</td>
+    <td width=50>조회</td>-->
     <?/*?><td width=40 title='마지막 코멘트 쓴 시간'><?=subject_sort_link('wr_last', $qstr2, 1)?>최근</a></td><?*/?>
     <? if ($is_good) { ?><td width=40><?=subject_sort_link('wr_good', $qstr2, 1)?>추천</a></td><?}?>
     <? if ($is_nogood) { ?><td width=40><?=subject_sort_link('wr_nogood', $qstr2, 1)?>비추천</a></td><?}?>
 </tr>
-<tr><td colspan=<?=$colspan?> height=3 style="background:url(<?=$board_skin_path?>/img/title_bg.gif) repeat-x;"></td></tr>
+</table>
+</div>
+<div style="height:3px; background:url(<?=$board_skin_path?>/img/title_shadow.gif) repeat-x; line-height:1px; font-size:1px;"></div>
 
+<table width=100% border=0 cellpadding=0 cellspacing=0>
 <!-- 목록 -->
 <? for ($i=0; $i<count($list); $i++) { ?>
-<tr height=28 align=center> 
-    <td>
+<tr height=29 align=center> 
+    <td width=50>
         <? 
         if ($list[$i][is_notice]) // 공지사항 
             echo "<img src=\"$board_skin_path/img/icon_notice.gif\">";
         else if ($wr_id == $list[$i][wr_id]) // 현재위치
             echo "<span style='font:bold 11px tahoma; color:#E15916;'>{$list[$i][num]}</span>";
         else
-            echo "<span style='font:normal 11px tahoma; color:#BABABA;'>{$list[$i][num]}</span>";
-        ?></td>
-    <?/* if ($is_category) { ?><td><a href="<?=$list[$i][ca_name_href]?>"><span class=small style='color:#BABABA;'><?=$list[$i][ca_name]?></span></a></td><? } */?>
-    <? if ($is_checkbox) { ?><td><input type=checkbox name=chk_wr_id[] value="<?=$list[$i][wr_id]?>"></td><? } ?>
+            echo "<span style='font:normal 11px tahoma; color:#B3B3B3;'>{$list[$i][num]}</span>";
+        ?>
+    </td>
+    <? if ($is_checkbox) { ?><td width=40><input type=checkbox name=chk_wr_id[] value="<?=$list[$i][wr_id]?>"></td><? } ?>
     <td align=left style='word-break:break-all;'>
         <? 
         echo $nobr_begin;
@@ -103,75 +111,82 @@ if ($is_nogood) $colspan++;
         echo " " . $list[$i][icon_hot];
         echo " " . $list[$i][icon_secret];
         echo $nobr_end;
-        ?></td>
-    <td><nobr style='display:block; overflow:hidden; width:105px;'><?=$list[$i][name]?></nobr></td>
-    <td><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][datetime2]?></span></td>
-    <td><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_hit]?></span></td>
-    <?/*?><td><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][last2]?></span></td><?*/?>
-    <? if ($is_good) { ?><td align="center"><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_good]?></span></td><? } ?>
-    <? if ($is_nogood) { ?><td align="center"><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_nogood]?></span></td><? } ?>
+        ?>
+    </td>
+    <td align=left width=110><nobr style='display:block; overflow:hidden; width:105px;'><?=$list[$i][name]?></nobr></td>
+    <td width=40><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][datetime2]?></span></td>
+    <td width=50><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_hit]?></span></td>
+    <?/*?><td width=40><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][last2]?></span></td><?*/?>
+    <? if ($is_good) { ?><td align="center" width=40><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_good]?></span></td><? } ?>
+    <? if ($is_nogood) { ?><td align="center" width=40><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_nogood]?></span></td><? } ?>
 </tr>
-<tr><td colspan=<?=$colspan?> height=1 bgcolor=#E7E7E7></td></tr>
+<tr><td colspan=<?=$colspan?> height=1 bgcolor=#eeeeee></td></tr>
 <?}?>
-
 <? if (count($list) == 0) { echo "<tr><td colspan='$colspan' height=100 align=center>게시물이 없습니다.</td></tr>"; } ?>
-<tr><td colspan=<?=$colspan?> bgcolor="#0A7299" height="2"></td></tr>
 </table>
 </form>
 
+
+<div style="clear:both; margin-top:7px; height:31px;">
+    <div style="float:left;">
+    <? if ($list_href) { ?>
+    <a href="<?=$list_href?>"><img src="<?=$board_skin_path?>/img/btn_list.gif" align=absmiddle></a>
+    <? } ?>
+    <? if ($is_checkbox) { ?>
+    <a href="javascript:select_delete();"><img src="<?=$board_skin_path?>/img/btn_select_delete.gif" align=absmiddle></a>
+    <a href="javascript:select_copy('copy');"><img src="<?=$board_skin_path?>/img/btn_select_copy.gif" align=absmiddle></a>
+    <a href="javascript:select_copy('move');"><img src="<?=$board_skin_path?>/img/btn_select_move.gif" align=absmiddle></a>
+    <? } ?>
+    </div>
+
+    <div style="float:right;">
+    <? if ($write_href) { ?><a href="<?=$write_href?>"><img src="<?=$board_skin_path?>/img/btn_write.gif" border="0"></a><? } ?>
+    </div>
+</div>
+
+<div style="height:1px; line-height:1px; font-size:1px; background-color:#eee; clear:both;">&nbsp;</div>
+<div style="height:1px; line-height:1px; font-size:1px; background-color:#ddd; clear:both;">&nbsp;</div>
+
 <!-- 페이지 -->
-<table width="100%" cellspacing="0" cellpadding="0">
-<tr> 
-    <td width="100%" align="center" height=30 valign=bottom>
-        <? if ($prev_part_href) { echo "<a href='$prev_part_href'><img src='$board_skin_path/img/btn_search_prev.gif' border=0 align=absmiddle title='이전검색'></a>"; } ?>
-        <?
-        // 기본으로 넘어오는 페이지를 아래와 같이 변환하여 이미지로도 출력할 수 있습니다.
-        //echo $write_pages;
-        $write_pages = str_replace("처음", "<img src='$board_skin_path/img/begin.gif' border='0' align='absmiddle' title='처음'>", $write_pages);
-        $write_pages = str_replace("이전", "<img src='$board_skin_path/img/prev.gif' border='0' align='absmiddle' title='이전'>", $write_pages);
-        $write_pages = str_replace("다음", "<img src='$board_skin_path/img/next.gif' border='0' align='absmiddle' title='다음'>", $write_pages);
-        $write_pages = str_replace("맨끝", "<img src='$board_skin_path/img/end.gif' border='0' align='absmiddle' title='맨끝'>", $write_pages);
-        $write_pages = preg_replace("/<span>([0-9]*)<\/span>/", "<b><font style=\"font-family:tahoma; font-size:11px; color:#000000\">$1</font></b>", $write_pages);
-        $write_pages = preg_replace("/<b>([0-9]*)<\/b>/", "<b><font style=\"font-family:tahoma; font-size:11px; color:#E15916;\">$1</font></b>", $write_pages);
-        ?>
-        <?=$write_pages?>
-        <? if ($next_part_href) { echo "<a href='$next_part_href'><img src='$board_skin_path/img/btn_search_next.gif' border=0 align=absmiddle title='다음검색'></a>"; } ?>
-    </td>
-</tr>
-</table>
+<div style="text-align:center; line-height:30px; clear:both; margin:5px 0 10px 0; padding:5px 0; font-family:gulim;">
+
+    <? if ($prev_part_href) { echo "<a href='$prev_part_href'><img src='$board_skin_path/img/page_search_prev.gif' border=0 align=absmiddle title='이전검색'></a>"; } ?>
+    <?
+    // 기본으로 넘어오는 페이지를 아래와 같이 변환하여 이미지로도 출력할 수 있습니다.
+    //echo $write_pages;
+    $write_pages = str_replace("처음", "<img src='$board_skin_path/img/page_begin.gif' border='0' align='absmiddle' title='처음'>", $write_pages);
+    $write_pages = str_replace("이전", "<img src='$board_skin_path/img/page_prev.gif' border='0' align='absmiddle' title='이전'>", $write_pages);
+    $write_pages = str_replace("다음", "<img src='$board_skin_path/img/page_next.gif' border='0' align='absmiddle' title='다음'>", $write_pages);
+    $write_pages = str_replace("맨끝", "<img src='$board_skin_path/img/page_end.gif' border='0' align='absmiddle' title='맨끝'>", $write_pages);
+    $write_pages = preg_replace("/<span>([0-9]*)<\/span>/", "<b><span style=\"color:#B3B3B3; font-size:12px;\">$1</span></b>", $write_pages);
+    $write_pages = preg_replace("/<b>([0-9]*)<\/b>/", "<b><span style=\"color:#4D6185; font-size:12px; text-decoration:underline;\">$1</span></b>", $write_pages);
+    ?>
+    <?=$write_pages?>
+    <? if ($next_part_href) { echo "<a href='$next_part_href'><img src='$board_skin_path/img/page_search_next.gif' border=0 align=absmiddle title='다음검색'></a>"; } ?>
+
+</div>
 
 <!-- 링크 버튼, 검색 -->
+<div style="text-align:center;">
 <form name=fsearch method=get style="margin:0px;">
 <input type=hidden name=bo_table value="<?=$bo_table?>">
 <input type=hidden name=sca      value="<?=$sca?>">
-<table width=100% cellpadding=0 cellspacing=0>
-<tr> 
-    <td width="50%" height="40">
-        <? if ($list_href) { ?><a href="<?=$list_href?>"><img src="<?=$board_skin_path?>/img/btn_list.gif" border="0"></a><? } ?>
-        <? if ($write_href) { ?><a href="<?=$write_href?>"><img src="<?=$board_skin_path?>/img/btn_write.gif" border="0"></a><? } ?>
-        <? if ($is_checkbox) { ?>
-            <a href="javascript:select_delete();"><img src="<?=$board_skin_path?>/img/btn_select_delete.gif" border="0"></a>
-            <a href="javascript:select_copy('copy');"><img src="<?=$board_skin_path?>/img/btn_select_copy.gif" border="0"></a>
-            <a href="javascript:select_copy('move');"><img src="<?=$board_skin_path?>/img/btn_select_move.gif" border="0"></a>
-        <? } ?>
-    </td>
-    <td width="50%" align="right">
-        <select name=sfl>
-            <option value='wr_subject'>제목</option>
-            <option value='wr_content'>내용</option>
-            <option value='wr_subject||wr_content'>제목+내용</option>
-            <option value='mb_id,1'>회원아이디</option>
-            <option value='mb_id,0'>회원아이디(코)</option>
-            <option value='wr_name,1'>이름</option>
-            <option value='wr_name,0'>이름(코)</option>
-        </select><input name=stx maxlength=15 size=10 itemname="검색어" required value='<?=$stx?>'><select name=sop>
-            <option value=and>and</option>
-            <option value=or>or</option>
-        </select>
-        <input type=image src="<?=$board_skin_path?>/img/search_btn.gif" border=0 align=absmiddle></td>
-</tr>
-</table>
+<select name=sfl style="background-color:#f6f6f6; border:1px solid #7f9db9; height:21px;">
+    <option value='wr_subject'>제목</option>
+    <option value='wr_content'>내용</option>
+    <option value='wr_subject||wr_content'>제목+내용</option>
+    <option value='mb_id,1'>회원아이디</option>
+    <option value='mb_id,0'>회원아이디(코)</option>
+    <option value='wr_name,1'>글쓴이</option>
+    <option value='wr_name,0'>글쓴이(코)</option>
+</select>
+<input name=stx maxlength=15 itemname="검색어" required value='<?=$stx?>' style="width:204px; background-color:#f6f6f6; border:1px solid #7f9db9; height:21px;">
+<input type=image src="<?=$board_skin_path?>/img/btn_search.gif" border=0 align=absmiddle>
+<input type=radio name=sop value=and>and
+<input type=radio name=sop value=or>or
+
 </form>
+</div>
 
 </td></tr></table>
 
@@ -179,7 +194,14 @@ if ($is_nogood) $colspan++;
 if ('<?=$sca?>') document.fcategory.sca.value = '<?=$sca?>';
 if ('<?=$stx?>') {
     document.fsearch.sfl.value = '<?=$sfl?>';
-    document.fsearch.sop.value = '<?=$sop?>';
+
+    if ('<?=$sop?>' == 'and') 
+        document.fsearch.sop[0].checked = true;
+
+    if ('<?=$sop?>' == 'or')
+        document.fsearch.sop[1].checked = true;
+} else {
+    document.fsearch.sop[0].checked = true;
 }
 </script>
 

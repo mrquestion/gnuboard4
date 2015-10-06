@@ -1,3 +1,20 @@
+4.21.04 (07.12.04) [보안관련 필수 패치]
+    :   외부에서 회원정보를 수정할 수 있는 오류를 수정
+        회원정보 입력폼에서 f.submit() 전에 이 코드가 반드시 추가 되어야 합니다.
+        set_cookie("<?=md5($token)?>", "<?=base64_encode($token)?>", 1, "<?=$g4['cookie_domain']?>");
+        morssola 님께서 도움 주셨습니다.
+    :   기본 게시판 스킨 변경 (GEditor 포함)
+        config.php 에 두 줄 추가 되었습니다.
+        $g4['geditor']        = "geditor";
+        $g4['geditor_path']   = $g4['path'] . "/" . $g4['geditor'];
+
+
+        skin/member/basic/register_form.skin.php
+        bbs/register_form_update.php
+        geditor/*
+        skin/board/basic/*
+        config.php
+
 4.21.03 (07.11.30) [보안관련 필수 패치]
     :   외부에서 회원정보를 수정할 수 있는 오류를 수정
     :   폼메일에도 토큰 적용

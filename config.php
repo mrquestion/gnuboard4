@@ -14,6 +14,9 @@ $g4['admin_path']     = $g4['path'] . "/" . $g4['admin'];
 $g4['editor']         = "cheditor";
 $g4['editor_path']    = $g4['path'] . "/" . $g4['editor'];
 
+$g4['geditor']        = "geditor";
+$g4['geditor_path']   = $g4['path'] . "/" . $g4['geditor'];
+
 // 자주 사용하는 값
 // 서버의 시간과 실제 사용하는 시간이 틀린 경우 수정하세요.
 // 하루는 86400 초입니다. 1시간은 3600초
