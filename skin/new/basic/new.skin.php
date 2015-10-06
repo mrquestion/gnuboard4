@@ -20,6 +20,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <option value='w'>원글만
             <option value='c'>코멘트만
         </select>
+        &nbsp;<b>회원아이디 : </b>
+        <input type=text id='mb_id' name='mb_id' value='<?=$mb_id?>'>
+        <input type=submit value='검색'>
         <script language="JavaScript">
         function select_change()
         {
@@ -61,6 +64,7 @@ for ($i=0; $i<count($list); $i++)
     <td width="">&nbsp;<a href='{$list[$i][href]}'>{$list[$i][comment]}{$wr_subject}</a></td>
     <td align="center">{$list[$i][name]}</td>
     <td align="center" colspan=2>{$list[$i][datetime2]}</td>
+    <!-- <a href="javascript:;" onclick="document.getElementById('mb_id').value='{$list[$i][mb_id]}';">&middot;</a> -->
 </tr>
 <tr>
     <td colspan="9" height="1" background="{$new_skin_path}/img/dot_bg.gif"></td>

@@ -10,6 +10,25 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+
+// 4.07.00
+// 최근게시물에 회원아이디 필드 및 인덱스 추가
+sql_query(" ALTER TABLE `{$g4['board_new_table']}` ADD `mb_id` VARCHAR( 20 ) NOT NULL ", false);
+sql_query(" ALTER TABLE `{$g4['board_new_table']}` ADD INDEX `mb_id` ( `mb_id` ) ", false);
+
+$sql = " select * from $g4[board_new_table] ";
+$res = sql_query($sql);
+for ($i=0; $row=sql_fetch_array($res); $i++)
+{
+    $ttmp = $g4[write_prefix].$row[bo_table];
+    $sql2 = " select mb_id from $ttmp where wr_id = '$row[wr_id]' ";
+    $row2 = sql_fetch($sql2);
+
+    $sql3 = " update $g4[board_new_table] set mb_id = '$row2[mb_id]' where bn_id = '$row[bn_id]' ";
+    sql_query($sql3);
+}
+
+
 /*
 // 그룹접근회원테이블에 auto_increment 추가
 sql_query(" ALTER TABLE $g4[group_member_table] CHANGE `gm_id` `gm_id` INT( 11 ) DEFAULT '0' NOT NULL AUTO_INCREMENT ", false);

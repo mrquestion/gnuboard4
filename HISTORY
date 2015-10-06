@@ -1,3 +1,18 @@
+4.07.00 (06.04.28)
+    :   cheditor에서 수정시 글제대로 보이지 않던 오류 수정
+    :   cheditor에서 글자의 크기를 크게할 경우 겹치던 오류 수정
+    :   board_new_table 에 회원아이디 필드를 추가하여 자신이 쓴 모든 글을 확인할 수 있는 기능을 추가함
+
+        필드가 추가, 변경 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        cheditor/cheditor.js
+        adm/upgrade.php
+        bbs/new.php
+        bbs/scrap_popin_update.php
+        bbs/write_comment_update.php
+        bbs/write_update.php
+        skin/new/basic/new.skin.php
+
 4.06.19 (06.04.14)
     :   ie 패치에 따른 코드 수정
     :   현재접속자 select 구문에 mb_point 필드 추가

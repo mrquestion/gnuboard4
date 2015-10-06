@@ -12,6 +12,8 @@ if ($view == "w")
     $sql_common .= " and a.wr_id = a.wr_parent ";
 else if ($view == "c")
     $sql_common .= " and a.wr_id <> a.wr_parent ";
+if ($mb_id)
+    $sql_common .= " and a.mb_id = '$mb_id' ";
 $sql_order = " order by a.bn_id desc ";
 
 $sql = " select count(*) as cnt $sql_common ";
@@ -95,7 +97,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $list[$i][wr_subject] = $row2[wr_subject];
 }
 
-$write_pages = get_paging($config[cf_write_pages], $page, $total_page, "?gr_id=$gr_id&view=$view&page=");
+$write_pages = get_paging($config[cf_write_pages], $page, $total_page, "?gr_id=$gr_id&view=$view&mb_id=$mb_id&page=");
 
 $new_skin_path = "$g4[path]/skin/new/$config[cf_new_skin]";
 

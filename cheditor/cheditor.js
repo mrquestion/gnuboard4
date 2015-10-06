@@ -1113,11 +1113,11 @@ function run ()
     editor.document.body.style.fontSize   = this.fontsize;
     editor.document.body.style.color      = this.fontcolor;
     editor.document.body.style.fontFamily = this.fontface;
-    //editor.document.body.style.lineHeight = this.lineheight;
+    editor.document.body.style.lineHeight = this.lineheight;
     editor.document.body.style.paddingLeft   = this.padding;
     editor.document.body.style.paddingTop    = this.padding;
     editor.document.body.style.paddingRight  = this.padding;
-    editor.document.body.style.paddingBottom = this.padding;
+    //editor.document.body.style.paddingBottom = this.padding; // 주석을 제거하면 수정시 글자가 보이지 않는 현상이 발생함
 
     if (this.IE) {
         editor.document.execCommand("2D-Position", true, true);
@@ -1132,7 +1132,9 @@ function run ()
         //var formValue = eval("document."+theForm+"."+this.pasteContentForm+".value");
         var formValue = document.getElementById(this.pasteContentForm).innerHTML;
 //        editor.document.body.innerHTML = formValue;
-        editor.document.body.innerHTML = this.unescape_html(formValue);
+        // formValue 값이 없을때 &nbsp; 로 변환되는것을 막음
+        if (formValue)
+            editor.document.body.innerHTML = this.unescape_html(formValue);
     }
 
     if (this.IE) {
@@ -1316,7 +1318,7 @@ function cheditor (myobj)
     this.fontsize                 = '9pt';
     this.fontcolor                = '#222222';
     this.fontface                 = '굴림';
-    //this.lineheight               = '13pt';
+    this.lineheight               = '1.1';
     this.padding                  = '10px';
     this.editorBgcolor            = "#ffffff";
     this.editorBorder             = "1px #999 solid";

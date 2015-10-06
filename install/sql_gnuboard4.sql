@@ -130,7 +130,9 @@ CREATE TABLE $g4[board_table]_new (
   wr_id int(11) NOT NULL default '0',
   wr_parent int(11) NOT NULL default '0',
   bn_datetime datetime NOT NULL default '0000-00-00 00:00:00',
-  PRIMARY KEY  (bn_id)
+  mb_id varchar(20) NOT NULL default '',
+  PRIMARY KEY  (bn_id),
+  KEY mb_id (mb_id)
 ) TYPE=MyISAM;
 
 ##

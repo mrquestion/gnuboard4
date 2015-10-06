@@ -102,7 +102,7 @@ for ($i=1; $i<=$g4[link_count]; $i++)
         }
         ?>
 
-        <span class="ct lh"><?=$view[content];?></span>
+        <span class="ct"><?=$view[content];?></span>
         
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a>
