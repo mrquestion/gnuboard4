@@ -26,12 +26,14 @@ for ($i=0; $i<count($list); $i++)
         <td colspan=2 align='center'>{$list[$i][name]}</td>
 HEREDOC;
 
+    $location = conv_content($list[$i][lo_location], 0);
+
     // 최고관리자에게만 허용
     // 이 조건문은 가능한 변경하지 마십시오.
     if ($list[$i][lo_url] && $is_admin == "super")
-        echo "<td colspan=2>&nbsp;<a href='{$list[$i][lo_url]}'>{$list[$i][lo_location]}</a></td>";
+        echo "<td colspan=2>&nbsp;<a href='{$list[$i][lo_url]}'>{$location}</a></td>";
     else
-        echo "<td colspan=2>&nbsp;{$list[$i][lo_location]}</td>";
+        echo "<td colspan=2>&nbsp;{$location}</td>";
 
     echo <<<HEREDOC
     </tr>

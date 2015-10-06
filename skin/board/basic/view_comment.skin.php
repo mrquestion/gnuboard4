@@ -75,6 +75,7 @@ for ($i=0; $i<count($list); $i++) {
     <td>
         <span id=comment_write style='display:none;'>
         <form name="fviewcomment" method="post" action="./write_comment_update.php" onsubmit="return fviewcomment_submit(this);" autocomplete="off">
+        <input type=hidden name=null><!-- 삭제하지 마십시오. -->
         <input type=hidden name=w           id=w value='c'>
         <input type=hidden name=bo_table    value='<?=$bo_table?>'>
         <input type=hidden name=wr_id       value='<?=$wr_id?>'>
@@ -100,7 +101,7 @@ for ($i=0; $i<count($list); $i++) {
                         <SPAN style="CURSOR: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/start.gif" width="16" height="16"></SPAN>
                         <SPAN style="CURSOR: pointer;" onclick="textarea_increase('wr_content', 10);"><img src="<?=$board_skin_path?>/img/down.gif" width="16" height="16"></SPAN>
                     </td>
-                    <td width=50% align=right><span id=char_count></span>글자</td>
+                    <td width=50% align=right><? if ($comment_min || $comment_max) { ?><span id=char_count></span>글자<?}?></td>
                 </tr>
                 </table></td>
             <td width="10" background="<?=$board_skin_path?>/img/right_bg.gif" >&nbsp;</td>
@@ -108,8 +109,9 @@ for ($i=0; $i<count($list); $i++) {
         <tr>
             <td bordercolor="#CCCCCC" background="<?=$board_skin_path?>/img/left_bg.gif"></td>
             <td bgcolor="#f7f7f7">
-                <TEXTAREA id='wr_content' name='wr_content' rows="10" itemname="내용" required ONKEYUP="check_byte('wr_content', 'char_count');" style='width:100%' class=tx></TEXTAREA>
-                <script language="JavaScript"> check_byte('wr_content', 'char_count'); </script>
+                <TEXTAREA id='wr_content' name='wr_content' rows="5" itemname="내용" required 
+                <? if ($comment_min || $comment_max) { ?>ONKEYUP="check_byte('wr_content', 'char_count');"<?}?> style='width:100%; word-break:break-all;' class=tx></TEXTAREA>
+                <? if ($comment_min || $comment_max) { ?><script language="JavaScript"> check_byte('wr_content', 'char_count'); </script><?}?>
             </td>
             <td bordercolor="#CCCCCC" background="<?=$board_skin_path?>/img/right_bg.gif"></td>
         </tr>
@@ -169,9 +171,9 @@ function fviewcomment_submit(f)
     // 양쪽 공백 없애기
     var pattern = /(^\s*)|(\s*$)/g; // \s 공백 문자
     document.getElementById('wr_content').value = document.getElementById('wr_content').value.replace(pattern, "");
-    check_byte('wr_content', 'char_count');
     if (char_min > 0 || char_max > 0)
     {
+        check_byte('wr_content', 'char_count');
         var cnt = parseInt(document.getElementById('char_count').innerHTML);
         if (char_min > 0 && char_min > cnt)
         {

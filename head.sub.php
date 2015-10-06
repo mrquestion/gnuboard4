@@ -20,7 +20,8 @@ if ($member[mb_memo_call]) {
 // 시간이 지난 접속은 삭제한다
 sql_query(" delete from $g4[login_table] where lo_datetime < '".date("Y-m-d H:i:s", $g4[server_time] - (60 * $config[cf_login_minutes]))."' ");
 
-$lo_location = get_text($g4[title]);
+//$lo_location = get_text($g4[title]);
+$lo_location = $g4[title];
 if (!$lo_location)
     $lo_location = $_SERVER[REQUEST_URI];
 //$lo_url = $g4[url] . $_SERVER[REQUEST_URI];

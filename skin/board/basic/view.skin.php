@@ -83,7 +83,7 @@ ob_end_flush();
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 
 <? if ($trackback_url) { ?>
-<tr height=25>
+<tr height=30>
     <td align="right">
         트랙백 주소 : <a href="javascript:clipboard_trackback('<?=$trackback_url?>');" style="letter-spacing:0;" title='이 글을 소개할 때는 이 주소를 사용하세요'><?=$trackback_url?></a>&nbsp;
         <script language="JavaScript">
@@ -108,10 +108,7 @@ for ($i=0; $i<count($view[file]); $i++) {
     if ($view[file][$i][source] && !$view[file][$i][view]) {
         $cnt++;
         echo <<<HEREDOC
-        <tr height=25><td>
-            <img src="{$board_skin_path}/img/file_icon.gif" width="13" height="13" align=absmiddle>&nbsp;#{$cnt}
-            <a href='{$view[file][$i][href]}' title='{$view[file][$i][content]}'><b>{$view[file][$i][source]}</b> ({$view[file][$i][size]}), Down:{$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td>
-        </tr>
+        <tr height=30><td>FILE #{$cnt} : <a href='{$view[file][$i][href]}' title='{$view[file][$i][content]}'><b>{$view[file][$i][source]}</b> ({$view[file][$i][size]}), Down:{$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td></tr>
         <tr><td height="1" background="{$board_skin_path}/img/dot_bg.gif"></td></tr>
 HEREDOC;
     }
@@ -124,10 +121,7 @@ for ($i=1; $i<=$g4[link_count]; $i++) {
         $cnt++;
         $link = cut_str($view[link][$i], 70);
         echo <<<HEREDOC
-        <tr height=25><td>
-            <img src="{$board_skin_path}/img/link_icon.gif" width="13" height="13" align=absmiddle>&nbsp;#{$cnt}
-            <a href="{$view[link_href][$i]}" target="_blank"><b>{$link}</b></a> ({$view[link_hit][$i]})</td>
-        </tr>
+        <tr height=30><td>LINK #{$cnt} : <a href="{$view[link_href][$i]}" target="_blank"><b>{$link}</b></a> ({$view[link_hit][$i]})</td></tr>
         <tr><td height="1" background="{$board_skin_path}/img/dot_bg.gif"></td></tr>
 HEREDOC;
     }

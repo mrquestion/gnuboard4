@@ -19,7 +19,10 @@ if ($is_nogood) $colspan++;
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr height="25">
     <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+this.value;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
-    <td align="right">게시물 <?=number_format($total_count)?>건 <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/admin_button.gif" title="관리자" width="63" height="22" border="0" align="absmiddle"></a><? } ?></td>
+    <td align="right">
+        게시물 <?=number_format($total_count)?>건 
+        <a href='<?=$rss_href?>'><img src='<?=$board_skin_path?>/img/btn_rss.gif' border=0 align=absmiddle></a> 
+        <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/admin_button.gif" title="관리자" width="63" height="22" border="0" align="absmiddle"></a><? } ?></td>
 </tr>
 <tr><td height=5></td></tr>
 </table>
@@ -51,7 +54,8 @@ if ($is_nogood) $colspan++;
 
 <!-- 목록 -->
 <? for ($i=0; $i<count($list); $i++) { ?>
-<tr height="33" <? if ($list[$i][is_notice]) { echo "bgcolor='#F9FBFB'"; } else { echo " onmouseover=\"this.style.backgroundColor='#FFFFAA';return true;\" onMouseOut=\"this.style.backgroundColor='';return true;\""; }?>> 
+<!-- <tr height="33" <? if ($list[$i][is_notice]) { echo "bgcolor='#F9FBFB'"; } else { echo " onmouseover=\"this.style.backgroundColor='#EEEEEE';return true;\" onMouseOut=\"this.style.backgroundColor='';return true;\""; }?>>  -->
+<tr height="33"> 
     <td></td>
     <td align="center">
         <? 

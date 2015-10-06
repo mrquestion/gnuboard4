@@ -143,5 +143,8 @@ if (preg_match("/gecko|firefox/i", $_SERVER['HTTP_USER_AGENT'])) {
     $nobr_end   = "</nobr>";
 }
 
+// 4.00.12
+$rss_href = "./rss.php?bo_table=$bo_table";
+
 include_once("$board_skin_path/list.skin.php");
 ?>
