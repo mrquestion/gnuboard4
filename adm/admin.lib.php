@@ -5,11 +5,14 @@ function disp_top_menu($title, $link, $color, $target="_parent")
 {
     global $g4;
 
+    /*
     $s = "";
     $s .= "<table width='100%' height='100%' cellpadding=0 cellspacing=0>";
     $s .= "<tr><td align='center' background='$g4[admin_path]/img/top_back.gif' bgcolor='$color'>";
     $s .= "<a href='$link' target='$target' style='text-decoration:none;'>";
     $s .= "<font style='color:white;'><b>$title</b></font></a></td></tr></table>";
+    */
+    $s = "<a href='$link' target='$target' style='text-decoration:none; color:#000000;'>$title</a>";
 
     return $s;
 }
@@ -19,16 +22,20 @@ function disp_sub_menu($title, $link, $target="_parent")
     global $g4;
 
     if ($link)
-        $href = "<a href='$link' target='$target' style='text-decoration:none;'>";
+        $href = "<a href='$link' target='$target' style='text-decoration:none; color:#000000;'>";
     else
         $href = "";
 
+    /*
     $s = "";
     $s .= "<table width='100%' cellpadding='0' cellspacing='0'>";
     $s .= "<tr><td width='20' height='26' align='center' background='$g4[admin_path]/img/menu_dot_bg.gif'>";
     $s .= "<img src='$g4[admin_path]/img/icon_1.gif' width='9' height='9'></td>";
     $s .= "<td background='$g4[admin_path]/img/menu_dot_bg.gif'>$href";
     $s .= "<font style='font-size:9pt; color:#868686;'>$title</font></a></td></tr></table>";
+    */
+
+    $s = "$href$title</a>";
 
     return $s;
 }
@@ -37,12 +44,16 @@ function disp_sub_menu2($title, $link, $target="_parent")
 {
     global $g4;
 
+    /*
     $s = "";
     $s .= "<table width='100%' cellpadding='0' cellspacing='0'>";
     $s .= "<tr><td height='25' background='$g4[admin_path]/img/s_menu_dot_bg.gif'>&nbsp;&nbsp;&nbsp;";
     $s .= "<font style='font-family:±¼¸²; font-size:9pt; color:#868686;'>+</font>";
     $s .= "&nbsp;&nbsp;<a href='$link' target='$target' style='text-decoration:none;'>";
     $s .= "<font style='font-family:±¼¸²; font-size:9pt; color:#868686;'>$title</font></td></tr></table>";
+    */
+
+    $s = "<a href='$link' target='$target' style='text-decoration:none; color:#000000;'>$title</a>";
 
     return $s;
 }

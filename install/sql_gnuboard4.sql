@@ -336,7 +336,8 @@ CREATE TABLE $g4[member_table] (
   mb_8 varchar(255) NOT NULL default '',
   mb_9 varchar(255) NOT NULL default '',
   mb_10 varchar(255) NOT NULL default '',
-  PRIMARY KEY  (mb_id)
+  PRIMARY KEY  (mb_id),
+  KEY mb_today_login (mb_today_login)
 ) TYPE=MyISAM;
 
 ##

@@ -315,7 +315,7 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     // 포인트 창
     function win_point(url)
     {
-        win_open(g4_path + "/" + g4_bbs + "/point.php", "winPoint", "left=20, top=20, width=600, height=635, scrollbars=0");
+        win_open(g4_path + "/" + g4_bbs + "/point.php", "winPoint", "left=20, top=20, width=616, height=635, scrollbars=1");
     }
 
     // 스크랩 창

@@ -15,14 +15,14 @@ foreach($ttitle as $key=>$value) {
     echo "<td valign=top width='$width%' align=center>";
     echo "<table width=100% cellpadding=0 cellspacing=0>";
     echo "<tr>";
-    echo "<td style='background-color:$tcolor[$key]' class='ht'>&nbsp;";
+    echo "<td style='background-color:$tcolor[$key]' class='ht'>&nbsp;<span style='color:white;'><strong>&nbsp;&middot; </strong></span>";
     if ($tlink[$key]) {
         echo "<a href='$tlink[$key]' style='text-decoration:none;'";
         if ($ttarget[$key])
             echo " target='$ttarget[$key]'";
         echo ">";
     }
-    echo "<span style='color:white;'><strong>&middot; $ttitle[$key]</strong></span>";
+    echo "<span style='color:white;'><strong>$ttitle[$key]</strong></span>";
     echo "</a>";
     echo "</td>";
     echo "</tr>";
@@ -33,7 +33,7 @@ foreach($ttitle as $key=>$value) {
 
         if ($smenu2[$key][$k]) continue;
 
-        echo "<tr><td valign=top>";
+        echo "<tr><td height=20>&nbsp; &middot; ";
         echo disp_sub_menu($stitle[$key][$k], $slink[$key][$k], $starget[$key][$k]);
         echo "</td></tr>";
     }

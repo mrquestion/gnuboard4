@@ -105,6 +105,7 @@ for ($i=1; $i<=$g4[link_count]; $i++)
 
         
 <!-- ↓ 이 코드는 삭제하셔도 좋습니다. -->
+<?/*?>
 <br><br><br>
 <script type="text/javascript"><!--
 google_ad_client = "pub-2822305545668489";
@@ -122,6 +123,7 @@ google_color_text = "000000";
 <script type="text/javascript"
   src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
 </script><br><br><span style='font-size:8pt; font-family:돋움; color:silver;'>광고 수입은 그누보드의 호스팅 비용으로 사용합니다. (새창 : Shift + 링크 클릭)</span><br>
+<?*/?>
 <!-- ↑ 이 코드는 삭제하셔도 좋습니다. -->
         
         

@@ -23,7 +23,8 @@ if ($_POST[proc]) {
         sql_query(" delete from $target_etc ");
     }
 
-    sql_query(" insert into $target select vo_id, vo_subject, vo_vote1, vo_vote2, vo_vote3, vo_vote4, vo_vote5, vo_vote6, vo_vote7, vo_vote8, vo_vote9, vo_cnt1, vo_cnt2, vo_cnt3, vo_cnt4, vo_cnt5, vo_cnt6, vo_cnt7, vo_cnt8, vo_cnt9, vo_etc, 0, 0, vo_date, '' from $source ");
+    //sql_query(" insert into $target select vo_id, vo_subject, vo_vote1, vo_vote2, vo_vote3, vo_vote4, vo_vote5, vo_vote6, vo_vote7, vo_vote8, vo_vote9, vo_cnt1, vo_cnt2, vo_cnt3, vo_cnt4, vo_cnt5, vo_cnt6, vo_cnt7, vo_cnt8, vo_cnt9, vo_etc, 0, 0, vo_date, '' from $source ");
+    sql_query(" insert into $target select vo_id, vo_subject, vo_vote1, vo_vote2, vo_vote3, vo_vote4, vo_vote5, vo_vote6, vo_vote7, vo_vote8, vo_vote9, vo_cnt1, vo_cnt2, vo_cnt3, vo_cnt4, vo_cnt5, vo_cnt6, vo_cnt7, vo_cnt8, vo_cnt9, vo_etc, 1, 0, vo_date, '', '' from $source ");
     sql_query(" insert into $target_etc select * from $source_etc ");
 
     echo <<<HEREDOC

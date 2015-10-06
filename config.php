@@ -49,7 +49,7 @@ $g4[popular_table]       = $g4[table_prefix] . "popular";       // 인기검색어 테
 $g4[scrap_table]         = $g4[table_prefix] . "scrap";         // 게시글 스크랩 테이블
 $g4[visit_table]         = $g4[table_prefix] . "visit";         // 방문자 테이블
 $g4[visit_sum_table]     = $g4[table_prefix] . "visit_sum";     // 방문자 합계 테이블
-$g4[zip_table]           = $g4[table_prefix] . "zip";           // 우편번호 테이블
+//$g4[zip_table]           = $g4[table_prefix] . "zip";           // 우편번호 테이블
 
 //
 // 기타

@@ -21,8 +21,8 @@ if ($w == "")
 
     $bo_table_attr = "required alphanumericunderline";
 
-    $board[bo_count_delete] = '3';
-    $board[bo_count_modify] = '3';
+    $board[bo_count_delete] = '1';
+    $board[bo_count_modify] = '1';
     $board[bo_read_point] = $config[cf_read_point];
     $board[bo_write_point] = $config[cf_write_point];
     $board[bo_comment_point] = $config[cf_comment_point];

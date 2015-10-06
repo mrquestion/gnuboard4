@@ -3,43 +3,104 @@ if (!defined("_GNUBOARD_")) exit;
 
 $begin_time = get_microtime();
 
-$title = "그누보드 포에버 관리자";
+$title = "Admin";
 if ($g4[title]) 
     $g4[title] = $title . " > " . $g4[title];
 else
     $g4[title] = $title;
 
+$g4[body_script] = "background='$g4[admin_path]/img/bg_body.jpg' style='background-repeat:repeat-x'";
 include_once("$g4[path]/head.sub.php");
 ?>
 
-<table width=1000 cellpadding=5 cellspacing=0><tr><td>
+<table width=1004 align=center><tr><td align=center>
 
-<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td align=right>
-<a href="<?=$g4[path]?>/">Home</a>&nbsp;
-<a href="<?=$g4[bbs_path]?>/logout.php">Logout</a>&nbsp;
-<a href="<?=$g4[admin_path]?>/">Admin</a>
-</td></tr></table>
-
-<table cellpadding=0 cellspacing=1 border=0>
+<table width=98% cellpadding=0 cellspacing=0>
 <tr>
-<?
-ob_start();
-@ksort($amenu); // 키 순서대로 정렬한다
-foreach ($amenu as $key=>$value) {
-    include_once("$g4[admin_path]/menu/" . $value);
-}
-
-foreach($tmenu as $key=>$value) 
-    echo "<td height=43 width=80 align=center>$tmenu[$key]</td>";
-$head_contents = ob_get_contents();
-ob_end_clean();
-echo $head_contents;
-
-$tmp_menu = substr($sub_menu,0,3);
-$css_color = $tcolor[$tmp_menu];
-?>
+    <td><img src='<?=$g4[admin_path]?>/img/navi_icon.gif' width=11 height=11 align=absmiddle> <font color=#FFFFFF><?=$g4[title]?></font></td>
+    <td align=right>
+        <a href="<?=$g4[path]?>/"><img src='<?=$g4[admin_path]?>/img/home.gif' width=45 height=15 border=0></a> 
+        <a href="<?=$g4[bbs_path]?>/logout.php"><img src='<?=$g4[admin_path]?>/img/logout.gif' width=56 height=15 border=0></a> 
+        <a href="<?=$g4[admin_path]?>/"><img src='<?=$g4[admin_path]?>/img/admin.gif' width=47 height=15 border=0></a>&nbsp;&nbsp;</td>
 </tr>
 </table><br>
+
+<table width=98% cellpadding=0 cellspacing=0 border=0>
+<colgroup width=9>
+<colgroup>
+<colgroup width=9>
+<tr><td><img src='<?=$g4[admin_path]?>/img/box_co01.gif' width=9 height=10></td><td bgcolor=#FFFFFF></td><td><img src='<?=$g4[admin_path]?>/img/box_co02.gif' width=9 height=10></td></tr>
+<tr bgcolor=#FFFFFF>
+    <td></td>
+    <td background='<?=$g4[admin_path]?>/img/m_split.gif'>
+        <table cellpadding=0 cellspacing=0>
+        <tr>
+            <?
+            ob_start();
+            @ksort($amenu); // 키 순서대로 정렬한다
+            foreach ($amenu as $key=>$value) 
+                include_once("$g4[admin_path]/menu/" . $value);
+
+            foreach($tmenu as $key=>$value) 
+            {
+                if ($key == substr($sub_menu,0,3))
+                    echo "<td><img src='$g4[admin_path]/img/m_on_co01.gif' width=7 height=27></td><td style='padding:7 10 0 10;' background='$g4[admin_path]/img/m_on_bg.gif' align=center>$tmenu[$key]</td><td><img src='$g4[admin_path]/img/m_on_co02.gif' width=7 height=27></td>";
+                else
+                    echo "<td><img src='$g4[admin_path]/img/m_off_co01.gif' width=7 height=27></td><td style='padding:7 10 0 10;' background='$g4[admin_path]/img/m_off_bg.gif' align=center>$tmenu[$key]</td><td><img src='$g4[admin_path]/img/m_off_co02.gif' width=7 height=27></td>";
+            }
+
+            $head_contents = ob_get_contents();
+            ob_end_clean();
+            echo $head_contents;
+
+            $tmp_menu = substr($sub_menu,0,3);
+            $css_color = $tcolor[$tmp_menu];
+            ?>
+        </tr>
+        </table>
+    </td>
+    <td></td>
+</tr>
+<tr bgcolor=#FFFFFF>
+    <td></td>
+    <td>
+        <table width=100% cellpadding=0 cellspacing=0 align=center>
+        <tr><td bgcolor=#E1E1E1 style='padding-left:1px; padding-right:1px; padding-bottom:1px'>
+            <table cellpadding=0 cellspacing=0 width=100% bgcolor=#FFFFFF>
+            <tr><td style='padding:10 0 10 0; line-height:200%;'>&nbsp;&nbsp;
+                <img src='<?=$g4[admin_path]?>/img/sub_icon.gif' width=4 height=5 align=absmiddle> 
+                    <?
+                    if (count($smenu[$menu])) 
+                    {
+                        $bar = "";
+                        foreach($smenu[$menu] as $key=>$value) 
+                        {
+                            if ($is_admin != "super")
+                                if (!strstr($auth[$menu.$key], "r")) continue;
+                            echo $bar;
+                            echo $smenu[$menu][$key];
+                            $bar = " <font color=silver>|</font> ";
+                        }
+                    } 
+                    else 
+                    {
+                        //echo disp_sub_menu2("매뉴얼", "http://sir.co.kr/manual/gnuboard4/", "_blank");
+                        echo disp_sub_menu2("자주하시는 질문", "http://sir.co.kr/bbs/board.php?bo_table=g4_faq", "_blank");
+                        echo " | ";
+                        echo disp_sub_menu2("묻고답하기", "http://sir.co.kr/bbs/board.php?bo_table=g4_qa", "_blank");
+                        echo " | ";
+                        echo disp_sub_menu2("팁앤테크", "http://sir.co.kr/bbs/board.php?bo_table=g4_tiptech", "_blank");
+                        echo " | ";
+                        echo disp_sub_menu2("스킨", "http://sir.co.kr/bbs/board.php?bo_table=g4_skin", "_blank");
+                    }
+                    ?>
+                </td></tr>
+            <tr>
+            <td>
+                <table width=98% cellpadding=1 cellspacing=0 bgcolor="<?=$css_color?>" align=center>
+                <tr><td>
+                    <table width=100% cellpadding=8 bgcolor=#FFFFFF>
+                    <tr><td>
 
 <style>
 a:link, a:visited, a:active { text-decoration:underline; color:#616161; }
@@ -123,26 +184,3 @@ function textarea_size(fld, size)
 	}
 }
 </script>
-
-<table width="100%" cellpadding=0 cellspacing=0 border=0>
-<tr>
-    <td width=130 valign=top>
-        <?
-        if (count($smenu[$menu])) {
-            foreach($smenu[$menu] as $key=>$value) {
-                if ($is_admin != "super")
-                    if (!strstr($auth[$menu.$key], "r")) continue;
-                echo $smenu[$menu][$key];
-            }
-        } else {
-            echo disp_sub_menu("그누보드 포에버", "", "");
-            //echo disp_sub_menu2("매뉴얼", "http://sir.co.kr/manual/gnuboard4/", "_blank");
-            echo disp_sub_menu2("자주하시는 질문", "http://sir.co.kr/bbs/board.php?bo_table=g4_faq", "_blank");
-            echo disp_sub_menu2("묻고답하기", "http://sir.co.kr/bbs/board.php?bo_table=g4_qa", "_blank");
-            echo disp_sub_menu2("팁앤테크", "http://sir.co.kr/bbs/board.php?bo_table=g4_tiptech", "_blank");
-            echo disp_sub_menu2("스킨", "http://sir.co.kr/bbs/board.php?bo_table=g4_skin", "_blank");
-        }
-        ?>
-    </td>
-    <td width="" valign=top>
-        <table width=97% align=center><tr><td>

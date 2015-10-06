@@ -1,3 +1,15 @@
+4.03.02 (05.08.4)
+    :   관리자화면 디자인 변경
+        adm/menu/m100900_etc.php 를 삭제하세요.
+    :   포인트정리 추가
+
+        adm/admin.head.php
+        adm/admin.lib.php
+        adm/admin.tail.php
+        adm/index.php
+        adm/point_clear.php
+        adm/m200210_point_clear.php
+
 4.03.01 (05.08.01)
     :   우편번호를 파일DB로 변경
         우편번호 변경시 파일만 교체하면 됨
