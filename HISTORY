@@ -1,3 +1,15 @@
+4.37.32 (2015.08.11)
+    : 글쓰기에서 XSS 취약점이 발견되어 수정 (장진석님께서 알려 주셨습니다.)
+
+        htmlpurifier/* 폴더 추가
+        lib/html_purifier.lib.php 파일 추가
+
+        bbs/write_update.php 가 아래와 같이 수정 되었습니다.
+
+            include_once($g4['path'] . '/lib/html_purifier.lib.php');
+            ...
+            $wr_content = html_purifier($wr_content);
+
 4.37.31 (2015.07.29)
     : 우편번호 개편으로 인한 코드 수정 (우편번호가 2015년 8월 1일 부터 6자리에서 5자리로 개편됩니다)
       http://www.epost.go.kr/search/zipcode/cmzcd003k01.jsp
