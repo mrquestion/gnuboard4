@@ -326,16 +326,23 @@ var member_skin_path = "<?=$member_skin_path?>";
             <TD class=m_padding><input type=checkbox name=mb_sms value='1' <?=($w=='' || $member[mb_sms])?'checked':'';?>>핸드폰 문자메세지를 받겠습니다.</TD>
         </TR>
 
-        <? if ($member[mb_open_date] <= date("Y-m-d", $g4[server_time] - ($config[cf_open_modify] * 86400))) { // 정보공개 수정일이 지났다면 수정가능 ?>
-        <input type=hidden name=mb_open_default value='<?=$member[mb_open]?>'>
-        <TR bgcolor="#FFFFFF">
-            <TD width="160" class=m_title>정보공개</TD>
-            <TD class=m_padding><input type=checkbox name=mb_open value='1' <?=($w=='' || $member[mb_open])?'checked':'';?>>다른분들이 나의 정보를 볼 수 있도록 합니다.
-                <br>&nbsp;&nbsp;&nbsp;&nbsp; 정보공개를 바꾸시면 앞으로 <?=(int)$config[cf_open_modify]?>일 이내에는 변경이 안됩니다.</td>
-        </TR>
-        <? } else { ?>
-        <input type=hidden name="mb_open" value="<?=$member[mb_open]?>">
-        <? } ?>
+        <? if ($member[mb_open_date] <= date("Y-m-d", $g4[server_time] - ($config[cf_open_modify] * 86400))) { // 정보공개 수정일이 지났다면 수정가능 ?> 
+        <input type=hidden name=mb_open_default value='<?=$member[mb_open]?>'> 
+        <TR bgcolor="#FFFFFF"> 
+            <TD width="160" class=m_title>정보공개</TD> 
+            <TD class=m_padding><input type=checkbox name=mb_open value='1' <?=($w=='' || $member[mb_open])?'checked':'';?>>다른분들이 나의 정보를 볼 수 있도록 합니다. 
+                <br>&nbsp;&nbsp;&nbsp;&nbsp; 정보공개를 바꾸시면 앞으로 <?=(int)$config[cf_open_modify]?>일 이내에는 변경이 안됩니다.</td> 
+        </TR> 
+        <? } else { ?> 
+        <input type=hidden name="mb_open" value="<?=$member[mb_open]?>"> 
+        <TR bgcolor="#FFFFFF"> 
+            <TD width="160" class=m_title>정보공개</TD> 
+            <TD class=m_padding> 
+                정보공개는 수정후 <?=(int)$config[cf_open_modify]?>일 이내, <?=date("Y년 m월 j일", strtotime("$member[mb_open_date] 00:00:00") + ($config[cf_open_modify] * 86400))?> 까지는 변경이 안됩니다.<br> 
+                이렇게 하는 이유는 잦은 정보공개 수정으로 인하여 쪽지를 보낸 후 받지 않는 경우를 막기 위해서 입니다. 
+            </td> 
+        </tr> 
+        <? } ?> 
 
         <? if ($w == "" && $config[cf_use_recommend]) { ?>
         <TR bgcolor="#FFFFFF">

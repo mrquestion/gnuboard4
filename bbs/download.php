@@ -86,7 +86,7 @@ $fp = fopen("$filepath", "rb");
 //    fclose($fp);
 //}
 
-$download_rate = 20.5;
+$download_rate = 10;
 
 while(!feof($fp)) {
     //echo fread($fp, 100*1024);
@@ -97,7 +97,7 @@ while(!feof($fp)) {
 
     print fread($fp, round($download_rate * 1024));
     flush();
-    sleep(1);
+    usleep(1000);
 }
 fclose ($fp);
 flush();

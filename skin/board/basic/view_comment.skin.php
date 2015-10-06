@@ -65,7 +65,6 @@ for ($i=0; $i<count($list); $i++) {
                 </div>
                 <input type=hidden id='secret_comment_<?=$comment_id?>' value="<?=strstr($list[$i][wr_option],"secret")?>">
                 <textarea id='save_comment_<?=$comment_id?>' style='display:none;'><?=get_text($list[$i][content1], 0)?></textarea></td>
-            </td>
         </tr>
         <tr>
             <td height=5 colspan=3></td>

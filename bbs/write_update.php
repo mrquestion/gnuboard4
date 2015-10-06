@@ -49,6 +49,11 @@ if ($w == "u" || $w == "r") {
 if (!$is_admin && !$board[bo_use_secret] && $secret)
 	alert("비밀글 미사용 게시판 이므로 비밀글로 등록할 수 없습니다.");
 
+// 외부에서 글을 등록할 수 있는 버그가 존재하므로 비밀글 무조건 사용일때는 관리자를 제외(공지)하고 무조건 비밀글로 등록
+if (!$is_admin && $board[bo_use_secret] == 2) {
+    $secret = "secret";
+}
+
 if ($w == "" || $w == "u") {
     // 김선용 1.00 : 글쓰기 권한과 수정은 별도로 처리되어야 함
     if($w =="u" && $member['mb_id'] && $wr['mb_id'] == $member['mb_id'])
@@ -349,6 +354,28 @@ if ($w == "" || $w == "r")
 } 
 else if ($w == "u") 
 {
+    if ($is_admin == "super") // 최고관리자 통과
+        ;
+    else if ($is_admin == "group") { // 그룹관리자
+        $mb = get_member($write[mb_id]);
+        if ($member[mb_id] != $group[gr_admin]) // 자신이 관리하는 그룹인가?
+            alert("자신이 관리하는 그룹의 게시판이 아니므로 수정할 수 없습니다.");
+        else if ($member[mb_level] < $mb[mb_level]) // 자신의 레벨이 크거나 같다면 통과
+            alert("자신의 권한보다 높은 권한의 회원이 작성한 글은 수정할 수 없습니다.");
+    } else if ($is_admin == "board") { // 게시판관리자이면
+        $mb = get_member($write[mb_id]);
+        if ($member[mb_id] != $board[bo_admin]) // 자신이 관리하는 게시판인가?
+            alert("자신이 관리하는 게시판이 아니므로 수정할 수 없습니다.");
+        else if ($member[mb_level] < $mb[mb_level]) // 자신의 레벨이 크거나 같다면 통과
+            alert("자신의 권한보다 높은 권한의 회원이 작성한 글은 수정할 수 없습니다.");
+    } else if ($member[mb_id]) {
+        if ($member[mb_id] != $write[mb_id])
+            alert("자신의 글이 아니므로 수정할 수 없습니다.");
+    } else {
+        if ($write[mb_id])
+            alert("로그인 후 수정하세요.", "./login.php?url=".urlencode("./board.php?bo_table=$bo_table&wr_id=$wr_id"));
+    }
+
     if ($member[mb_id]) 
     {
         // 자신의 글이라면
