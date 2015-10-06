@@ -1,6 +1,15 @@
 <?
 include_once("./_common.php");
 
+// 090713
+if (!$board[bo_table])
+{
+    if ($cwin) // 코멘트 보기
+       alert_close("존재하지 않는 게시판입니다.", $g4[path]);
+    else
+       alert("존재하지 않는 게시판입니다.", $g4[path]);
+}
+
 if (!$bo_table) 
     alert("bo_table 값이 넘어오지 않았습니다.\\n\\nwrite.php?bo_table=code 와 같은 방식으로 넘겨 주세요.", $g4[path]);
 
@@ -191,7 +200,12 @@ if ($board[bo_use_secret])
 */
 $is_secret = $board[bo_use_secret];
 // DHTML 에디터 사용 선택 가능하게 수정 : 061021
-$is_dhtml_editor = $board[bo_use_dhtml_editor];
+//$is_dhtml_editor = $board[bo_use_dhtml_editor];
+// 090713
+if ($board[bo_use_dhtml_editor] && $member[mb_level] >= $board[bo_html_level]) 
+    $is_dhtml_editor = true; 
+else 
+    $is_dhtml_editor = false; 
 
 $is_mail = false;
 if ($config[cf_email_use] && $board[bo_use_email])
