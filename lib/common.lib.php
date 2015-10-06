@@ -429,7 +429,7 @@ function conv_content($content, $html)
 
         if ($board[bo_disable_tags])
         {
-            $source[] = "/(\<)([\/]?)($board[bo_disable_tags])/";
+            $source[] = "/(\<)([\/]?)($board[bo_disable_tags])/i";
             $target[] = "$1$2$3-x";
             //$source[] = "/^/";
             //$target[] = "<b>이 페이지는 사용금지 태그 사용으로 인하여 정상 출력되지 않을 수 있습니다.</b><p>";

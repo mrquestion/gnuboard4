@@ -33,6 +33,7 @@ function get_brow($agent)
     if (preg_match("/msie 5.0[0-9]*/", $agent))     { $s = "MSIE 5.0"; }
     else if(preg_match("/msie 5.5[0-9]*/", $agent)) { $s = "MSIE 5.5"; }
     else if(preg_match("/msie 6.0[0-9]*/", $agent)) { $s = "MSIE 6.0"; }
+    else if(preg_match("/msie 7.0[0-9]*/", $agent)) { $s = "MSIE 7.0"; }
     else if(preg_match("/msie 4.[0-9]*/", $agent))  { $s = "MSIE 4.x"; }
     else if(preg_match("/firefox/", $agent))        { $s = "FireFox"; }
     else if(preg_match("/x11/", $agent))            { $s = "Netscape"; }

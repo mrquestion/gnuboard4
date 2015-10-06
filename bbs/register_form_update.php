@@ -271,7 +271,7 @@ else if ($w == "u")
     else
     {
         echo "
-        <html><title></title></html><body>
+        <html><title>회원정보수정</title><meta http-equiv='Content-Type' content='text/html; charset=$g4[charset]'></html><body> 
         <form name='fregisterupdate' method='post' action='./register_form.php'>
         <input type='hidden' name='w' value='u'>
         <input type='hidden' name='mb_id' value='{$mb_id}'>

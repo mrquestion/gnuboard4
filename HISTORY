@@ -1,3 +1,26 @@
+4.06.16 (06.01.31)
+    :   검색된 게시판 리스트에 숫자가 제대로 표시되지 않던 스킨 수정
+        나스카님께서 알려주셨습니다.
+    :   화면 표시할 때 가끔씩 멈추는 현상을 부분 해결
+        현재 접속자의 처리 코드를 head.sub.php 에서 tail.sub.php 로 옮김
+    :   회원정보수정시 경고창에 charset 설정
+        세아토님께서 알려주셨습니다.
+    :   게시판관리자가 존재할 경우 최고관리자에게 메일이 두번씩 발송되는 문제 해결
+    :   get_brow() 함수에 MSIE 7.0 추가
+    :   사용금지태그에 대소문자 구분하지 않도록 수정
+        달빛온도님께서 알려주셨습니다.
+    :   우편번호 파일 변경
+        네잎클로버님께서 제작해 주셨습니다.
+        
+        head.sub.php
+        tail.sub.php
+        bbs/register_form_update.php
+        bbs/write_update.php
+        bbs/zip.db
+        lib/common.lib.php
+        lib/visit.lib.php
+        skin/search/basic/search.skin.php
+
 4.06.15 (06.01.13)
     :   폼메일에서 스팸 발송이 힘들도록 수정
         한번에 한사람에게만 메일을 발송할 수 있도록 함

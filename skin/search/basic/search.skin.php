@@ -70,7 +70,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <? 
         if ($stx) 
         { 
-            echo "<ul type=circle><li><b>검색된 게시판 리스트</b> (<b>{$board_count}</b>개의 게시판, <b><?=number_format($total_count)?></b>개의 게시글, <?=number_format($page)?>/<b>".number_format($total_page)."</b> 페이지)</ul>";
+            echo "<ul type=circle><li><b>검색된 게시판 리스트</b> (<b>{$board_count}</b>개의 게시판, <b>".number_format($total_count)."</b>개의 게시글, <b>".number_format($page)."/".number_format($total_page)."</b> 페이지)</ul>";
             if ($board_count)
             {
                 echo "<ul><ul type=square style='line-height:130%;'>";

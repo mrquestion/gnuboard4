@@ -212,7 +212,9 @@ if ($w == "c") // 코멘트 입력
         }
         
         // 최고관리자에게 보내는 메일
-        if ($super_admin[mb_email] != $board_admin[mb_email])
+        // 게시판관리자가 존재할 경우 최고관리자에게 메일이 두번씩 발송되는 문제 해결
+        //if ($super_admin[mb_email] != $board_admin[mb_email])
+        if ($super_admin[mb_email] != $board_admin[mb_email] && $super_admin[mb_email] != $group_admin[mb_email])
         {
             if ($config[cf_email_wr_super_admin])
                 mailer($wr_name, $wr_email, $super_admin[mb_email], $subject, $content, 1);
