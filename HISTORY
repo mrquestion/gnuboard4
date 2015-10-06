@@ -1,3 +1,9 @@
+4.37.06 (2014.03.20)
+    : 4.37.07 버전의 코드에 문제가 있어 4.37.06 버전으로 되돌립니다.
+
+       common.php
+       lib/common.lib.php
+
 4.37.07 (2014.03.19)
     : Blind SQL Injection 취약점 문제 해결 (Suninatas팀 2theT0P님께서 알려 주셨습니다.)
 

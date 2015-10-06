@@ -197,13 +197,11 @@ for ($i=0; $i<$ext_cnt; $i++) {
 }
 //==========================================================================================================================
 
-/*
 // PHP 4.1.0 부터 지원됨
 // php.ini 의 register_globals=off 일 경우
 @extract($_GET);
 @extract($_POST);
 @extract($_SERVER);
-*/
 
 // 완두콩님이 알려주신 보안관련 오류 수정
 // $member 에 값을 직접 넘길 수 있음
@@ -261,18 +259,6 @@ if (file_exists("$g4[path]/$dbconfig_file"))
     $select_db = sql_select_db($mysql_db, $connect_db);
     if (!$select_db)
         die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script type='text/javascript'> alert('DB 접속 오류'); </script>");
-
-    // sql_escape_string 적용
-    $_POST    = array_map_deep('sql_escape_string', $_POST);
-    $_GET     = array_map_deep('sql_escape_string', $_GET);
-    $_COOKIE  = array_map_deep('sql_escape_string', $_COOKIE);
-    $_REQUEST = array_map_deep('sql_escape_string', $_REQUEST);
-
-    // PHP 4.1.0 부터 지원됨
-    // php.ini 의 register_globals=off 일 경우
-    @extract($_GET);
-    @extract($_POST);
-    @extract($_SERVER);
 }
 else
 {
