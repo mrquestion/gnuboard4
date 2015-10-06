@@ -466,7 +466,10 @@ function conv_content($content, $html)
         // 완벽한 XSS 방지는 없다.
         
         // 이런 경우를 방지함 <IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
-        $content = preg_replace("#\/\*.*\*\/#iU", "", $content);
+        //$content = preg_replace("#\/\*.*\*\/#iU", "", $content);
+        // 위의 정규식이 아래와 같은 내용을 통과시키므로 not greedy(비탐욕수량자?) 옵션을 제거함. ignore case 옵션도 필요 없으므로 제거
+        // <IMG STYLE="xss:ex//*XSS*/**/pression(alert('XSS'))"></IMG>
+        $content = preg_replace("#\/\*.*\*\/#", "", $content);
 
         // object, embed 태그에서 javascript 코드 막기
         $content = preg_replace_callback("#<(object|embed)([^>]+)>#i", "bad120422", $content);
