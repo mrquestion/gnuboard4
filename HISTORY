@@ -1,3 +1,11 @@
+4.34.19 (2012.01.17)
+    :   특정 서버에 따라 캡챠이미지의 결과를 인식하지 못하는 오류를 수정
+        (해외 서버에서 euc-kr 을 사용하는 경우에 오류가 보고된바 있습니다.)
+
+        bbs/kcaptcha_result.php 에 아래 코드가 한줄 추가 되었습니다.
+
+            header("Content-Type: text/html; charset=$g4[charset]");
+
 4.34.18 (2012.01.03)
     :   PHP 버전에 따른 basic 회원 스킨 사용시 euc-kr 버전에서 ajax 가 제대로 작동되도록 수정 (konahn님)
 
