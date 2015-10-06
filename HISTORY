@@ -1,3 +1,11 @@
+4.20.01 (07.04.23 16:25)
+    :   1:1 게시판 기능 수정
+
+        bbs/one.php
+        bbs/oneanswer.php
+        skin/oneboard/one/oneanswermail.skin.php
+        skin/oneboard/one/oneview.skin.php
+    
 4.20.00 (07.04.23)
     :   접근가능 IP, 접근차단 IP 코드 수정
         sjsjin님께서 알려 주셨습니다.

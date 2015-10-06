@@ -2,7 +2,7 @@
 include_once("_common.php");
 
 if (!$is_member)
-    goto_url("login.php?url=".urlencode("one.php"));
+    goto_url("login.php?url=".urlencode("one.php?ob_table=$ob_table"));
 
 $oneboard = sql_fetch(" select * from $g4[oneboard_table] where ob_table = '$ob_table' ");
 if (!$oneboard[ob_table])
@@ -19,7 +19,7 @@ $g4[title] = $oneboard[ob_subject];
 $width = $oneboard[ob_table_width];
 if ($width <= 100) $width .= '%';
 
-$is_dhtml_editor = $oneboard[ob_use_dhtml_editor];
+$is_dhtml_editor = ($oneboard[ob_use_dhtml_editor]?2:0);
 
 $oneboard_skin_path = "$g4[path]/skin/oneboard/$oneboard[ob_skin]";
 
@@ -63,6 +63,7 @@ if ($oneboard[ob_content_head])
     echo stripslashes($oneboard[ob_content_head]); 
 
 
+echo "<script language=\"javascript\" src=\"$g4[path]/js/sideview.js\"></script>\n";
 
 if (isset($w)) {
     if ($board[ob_write_level] > $member[mb_level]) 

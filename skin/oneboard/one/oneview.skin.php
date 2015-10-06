@@ -108,13 +108,21 @@ if ($is_dhtml_editor) {
                 첨부파일 : <input type=file name='on_afile' size=40>
                 <?
                 if ($one[on_afile]) {
-                    echo "<br>";
                     echo "<input type='checkbox' name='on_afile_del' id='on_afile_del' value='1'>";
                     echo "<label for='on_afile_del'>$one[on_asource] 삭제</label>";
                 }
                 ?>
             </td>
         </tr>
+
+        <? if ($oneboard[ob_use_email]) { ?>
+        <tr>
+            <td>
+                <input type='checkbox' name='chk_send_mail' value='1'> 메일보내기
+            </td>
+        </tr>
+        <? } ?>
+
         <tr>
             <td>
                 <input type='submit' name='submit' value='답변확인'>

@@ -5,13 +5,13 @@ include_once("$g4[path]/lib/one.lib.php");
 if ($w=='u') {
     if ($on_qfile_del) {
         $row = sql_fetch(" select on_qfile from $g4[one_prefix]$ob_table where on_id = '$on_id' ");
-        @unlink("$g4[path]/data/one/zzz/$row[on_qfile]");
+        @unlink("$g4[path]/data/one/$ob_table/$row[on_qfile]");
     }
 
     if ($_FILES[on_qfile][name]) {
         // 존재하는 파일이 있다면 삭제합니다. (수정에서만 해당)
         $row = sql_fetch(" select on_qfile from $g4[one_prefix]$ob_table where on_id = '$on_id' ");
-        @unlink("$g4[path]/data/one/zzz/$row[on_qfile]");
+        @unlink("$g4[path]/data/one/$ob_table/$row[on_qfile]");
     }
 }
 
