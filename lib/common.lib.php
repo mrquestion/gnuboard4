@@ -88,7 +88,7 @@ function goto_url($url)
 // 세션변수 생성
 function set_session($session_name, $value)
 {
-    if (PHP_VERSION < '5.3.0') 
+    if (PHP_VERSION < '5.3.0')
         session_register($session_name);
     // PHP 버전별 차이를 없애기 위한 방법
     $$session_name = $_SESSION["$session_name"] = $value;
@@ -221,7 +221,7 @@ function get_file($bo_table, $wr_id)
         $file[$no][size] = get_filesize($row[bf_filesize]);
         //$file[$no][datetime] = date("Y-m-d H:i:s", @filemtime("$g4[path]/data/file/$bo_table/$row[bf_file]"));
         $file[$no][datetime] = $row[bf_datetime];
-        $file[$no][source] = $row[bf_source];
+        $file[$no][source] = addslashes($row[bf_source]);
         $file[$no][bf_content] = $row[bf_content];
         $file[$no][content] = get_text($row[bf_content]);
         //$file[$no][view] = view_file_link($row[bf_file], $file[$no][content]);
@@ -322,7 +322,7 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     $reply = $list['wr_reply'];
 
     $list['reply'] = "";
-    if (strlen($reply) > 0) 
+    if (strlen($reply) > 0)
     {
         for ($k=0; $k<strlen($reply); $k++)
             $list['reply'] .= ' &nbsp;&nbsp; ';
@@ -359,7 +359,7 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
         $list['icon_secret'] = "<img src='$skin_path/img/icon_secret.gif' align='absmiddle'>";
 
     // 링크
-    for ($i=1; $i<=$g4['link_count']; $i++) 
+    for ($i=1; $i<=$g4['link_count']; $i++)
     {
         $list['link'][$i] = set_http(get_text($list["wr_link{$i}"]));
         $list['link_href'][$i] = "$g4[bbs_path]/link.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]&no=$i" . $qstr;
@@ -1198,7 +1198,7 @@ function referer_check($url="")
 
 
 // 한글 요일
-function get_yoil($date, $full=0) 
+function get_yoil($date, $full=0)
 {
     $arr_yoil = array ("일", "월", "화", "수", "목", "금", "토");
 
@@ -1221,7 +1221,7 @@ function date_select($date, $name="")
         $date = $g4[time_ymdhis];
     }
     preg_match("/([0-9]{4})-([0-9]{2})-([0-9]{2})/", $date, $m);
-    
+
     // 년
     $s .= "<select name='{$name}_y'>";
     for ($i=$m[0]-3; $i<=$m[0]+3; $i++) {
@@ -1265,7 +1265,7 @@ function date_select($date, $name="")
 function time_select($time, $name="")
 {
     preg_match("/([0-9]{2}):([0-9]{2}):([0-9]{2})/", $time, $m);
-    
+
     // 시
     $s .= "<select name='{$name}_h'>";
     for ($i=0; $i<=23; $i++) {
@@ -1313,7 +1313,7 @@ function check_demo()
 
 
 // 문자열이 한글, 영문, 숫자, 특수문자로 구성되어 있는지 검사
-function check_string($str, $options) 
+function check_string($str, $options)
 {
     global $g4;
 
@@ -1336,7 +1336,7 @@ function check_string($str, $options)
                     $s .= $c . $str[$i];
                 }
             }
-        } 
+        }
         // 숫자
         else if ($oc >= 0x30 && $oc <= 0x39) {
             if ($options & _G4_NUMERIC_) {
@@ -1413,7 +1413,7 @@ function explain($sql)
 
 
 // 악성태그 변환
-function bad_tag_convert($code) 
+function bad_tag_convert($code)
 {
     return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>/i", "&lt;$1$2$3&gt;", $code);
 }

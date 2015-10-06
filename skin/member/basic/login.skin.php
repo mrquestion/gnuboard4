@@ -1,21 +1,34 @@
 <?
-if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
+if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
-$url = '';
 if ($g4['https_url']) {
-    if (preg_match("/^\./", $urlencode))
-        $url = $g4[url];
-    else
-        $url = $g4[url].$urlencode;
-} else {
-    $url = $urlencode;
+    $login_url = $_GET['url'];
+    if ($login_url) {
+        if (preg_match("/^\.\.\//", $url)) {
+            $login_url = urlencode($g4[url]."/".preg_replace("/^\.\.\//", "", $login_url));
+        }
+        else {
+            $purl = parse_url($g4[url]);
+            if ($purl[path]) {
+                $path = urlencode($purl[path]);
+                $urlencode = preg_replace("/".$path."/", "", $urlencode);
+            }
+            $login_url = $g4[url].$urlencode;
+        }
+    }
+    else {
+        $login_url = $g4[url];
+    }
+}
+else {
+    $login_url = $urlencode;
 }
 ?>
 
 <script type="text/javascript" src="<?=$g4[path]?>/js/capslock.js"></script>
 
 <form name="flogin" method="post" onsubmit="return flogin_submit(this);" autocomplete="off">
-<input type="hidden" name="url" value='<?=$url?>'>
+<input type="hidden" name="url" value='<?=$login_url?>'>
 
 <table width="668" border="0" cellspacing="0" cellpadding="0">
 <tr>

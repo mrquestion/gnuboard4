@@ -1,5 +1,10 @@
 <?
-if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
+if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
+
+// 게시판에서 두단어 이상 검색 후 검색된 게시물에 코멘트를 남기면 나오던 오류 수정
+$sop = strtolower($sop);
+if ($sop != "and" && $sop != "or")
+    $sop = "and";
 
 @include_once("$board_skin_path/view.head.skin.php");
 
@@ -54,12 +59,12 @@ if ($next[wr_id]) {
 
 // 쓰기 링크
 $write_href = "";
-if ($member[mb_level] >= $board[bo_write_level]) 
+if ($member[mb_level] >= $board[bo_write_level])
     $write_href = "./write.php?bo_table=$bo_table";
 
 // 답변 링크
 $reply_href = "";
-if ($member[mb_level] >= $board[bo_reply_level]) 
+if ($member[mb_level] >= $board[bo_reply_level])
     $reply_href = "./write.php?w=r&bo_table=$bo_table&wr_id=$wr_id" . $qstr;
 
 // 수정, 삭제 링크
@@ -68,7 +73,7 @@ $update_href = $delete_href = "";
 if (($member[mb_id] && ($member[mb_id] == $write[mb_id])) || $is_admin) {
     $update_href = "./write.php?w=u&bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr;
     $delete_href = "javascript:del('./delete.php?bo_table=$bo_table&wr_id=$wr_id&page=$page".urldecode($qstr)."');";
-} 
+}
 else if (!$write[mb_id]) { // 회원이 쓴 글이 아니라면
     $update_href = "./password.php?w=u&bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr;
     $delete_href = "./password.php?w=d&bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr;
@@ -89,11 +94,11 @@ if ($member[mb_id]) {
     $scrap_href = "./scrap_popin.php?bo_table=$bo_table&wr_id=$wr_id";
 
     // 추천 링크
-    if ($board[bo_use_good]) 
+    if ($board[bo_use_good])
         $good_href = "./good.php?bo_table=$bo_table&wr_id=$wr_id&good=good";
 
     // 비추천 링크
-    if ($board[bo_use_nogood]) 
+    if ($board[bo_use_nogood])
         $nogood_href = "./good.php?bo_table=$bo_table&wr_id=$wr_id&good=nogood";
 }
 
@@ -120,7 +125,7 @@ $view[rich_content] = preg_replace("/{이미지\:([0-9]+)[:]?([^}]*)}/ie", "view_im
 $trackback_url = "";
 if ($member[mb_level] >= $board[bo_trackback_level]) {
     if (isset($g4['token_time']) == false)
-        $g4['token_time'] = 3; 
+        $g4['token_time'] = 3;
     $trackback_url = "$g4[url]/$g4[bbs]/tb.php/$bo_table/$wr_id";
 }
 

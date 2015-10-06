@@ -1,14 +1,27 @@
 <?
-if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
+if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
-$url = '';
 if ($g4['https_url']) {
-    if (preg_match("/^\./", $urlencode))
-        $url = $g4[url];
-    else
-        $url = $g4[url].$urlencode;
-} else {
-    $url = $urlencode;
+    $outlogin_url = $_GET['url'];
+    if ($outlogin_url) {
+        if (preg_match("/^\.\.\//", $outlogin_url)) {
+            $outlogin_url = urlencode($g4[url]."/".preg_replace("/^\.\.\//", "", $outlogin_url));
+        }
+        else {
+            $purl = parse_url($g4[url]);
+            if ($purl[path]) {
+                $path = urlencode($purl[path]);
+                $urlencode = preg_replace("/".$path."/", "", $urlencode);
+            }
+            $outlogin_url = $g4[url].$urlencode;
+        }
+    }
+    else {
+        $outlogin_url = $g4[url];
+    }
+}
+else {
+    $outlogin_url = $urlencode;
 }
 ?>
 
@@ -16,7 +29,7 @@ if ($g4['https_url']) {
 <script type="text/javascript">
 // 엠파스 로긴 참고
 var bReset = true;
-function chkReset(f) 
+function chkReset(f)
 {
     if (bReset) { if ( f.mb_id.value == '아이디' ) f.mb_id.value = ''; bReset = false; }
     document.getElementById("pw1").style.display = "none";
@@ -27,20 +40,20 @@ function chkReset(f)
 
 <!-- 로그인 전 외부로그인 시작 -->
 <form name="fhead" method="post" onsubmit="return fhead_submit(this);" autocomplete="off" style="margin:0px;">
-<input type="hidden" name="url" value="<?=$url?>">
+<input type="hidden" name="url" value="<?=$outlogin_url?>">
 <div style="width:220px;">
     <div style="clear:both;"><img src="<?=$outlogin_skin_path?>/img/login_top.gif" width="220" height="42"></div>
     <div style="clear:both; float:left; width:5px; height:115px; background:#F8F8F8;"></div>
     <div style="width:210px; float:left; margin-top:10px;">
         <table width="210" border="0" cellpadding="0" cellspacing="0">
-        <tr> 
+        <tr>
             <td width="141">
                 <table width="141" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td width="35" height="23"><img src="<?=$outlogin_skin_path?>/img/login_id.gif" width="35" height="23"></td>
                     <td width="106" height="23" colspan="2" align="center"><input name="mb_id" type="text" class=ed size="12" maxlength="20" required itemname="아이디" value='아이디' onMouseOver='chkReset(this.form);' onFocus='chkReset(this.form);'></td>
                 </tr>
-                <tr> 
+                <tr>
                     <td width="35" height="23"><img src="<?=$outlogin_skin_path?>/img/login_pw.gif" width="35" height="23"></td>
                     <td id=pw1 width="106" height="23" colspan="2" align="center"><input type="text" class=ed size="12" maxlength="20" required itemname="패스워드" value='패스워드' onMouseOver='chkReset(this.form);' onfocus='chkReset(this.form);'></td>
                     <td id=pw2 style='display:none;' width="106" height="23" colspan="2" align="center"><input name="mb_password" id="outlogin_mb_password" type="password" class=ed size="12" maxlength="20" itemname="패스워드" onMouseOver='chkReset(this.form);' onfocus='chkReset(this.form);' onKeyPress="check_capslock(event, 'outlogin_mb_password');"></td>
@@ -85,7 +98,7 @@ function fhead_submit(f)
     else
         echo "f.action = '$g4[bbs_path]/login_check.php';";
     ?>
-    
+
     return true;
 }
 </script>

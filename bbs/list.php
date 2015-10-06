@@ -1,9 +1,9 @@
 <?
-if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
+if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 // 분류 사용 여부
 $is_category = false;
-if ($board[bo_use_category]) 
+if ($board[bo_use_category])
 {
     $is_category = true;
     $category_location = "./board.php?bo_table=$bo_table&sca=";
@@ -15,7 +15,8 @@ if ($sop != "and" && $sop != "or")
     $sop = "and";
 
 // 분류 선택 또는 검색어가 있다면
-if ($sca || $stx) 
+$stx = trim($stx);
+if ($sca || $stx)
 {
     $sql_search = get_sql_search($sca, $sfl, $stx, $sop);
 
@@ -32,8 +33,8 @@ if ($sca || $stx)
     $sql = " select distinct wr_parent from $write_table where $sql_search ";
     $result = sql_query($sql);
     $total_count = mysql_num_rows($result);
-} 
-else 
+}
+else
 {
     $sql_search = "";
 
@@ -46,19 +47,19 @@ $from_record = ($page - 1) * $board[bo_page_rows]; // 시작 열을 구함
 
 // 관리자라면 CheckBox 보임
 $is_checkbox = false;
-if ($member[mb_id] && ($is_admin == "super" || $group[gr_admin] == $member[mb_id] || $board[bo_admin] == $member[mb_id])) 
+if ($member[mb_id] && ($is_admin == "super" || $group[gr_admin] == $member[mb_id] || $board[bo_admin] == $member[mb_id]))
     $is_checkbox = true;
 
 // 정렬에 사용하는 QUERY_STRING
 $qstr2 = "bo_table=$bo_table&sop=$sop";
 
-if ($board[bo_gallery_cols]) 
+if ($board[bo_gallery_cols])
     $td_width = (int)(100 / $board[bo_gallery_cols]);
 
 // 정렬
 // 인덱스 필드가 아니면 정렬에 사용하지 않음
 //if (!$sst || ($sst && !(strstr($sst, 'wr_id') || strstr($sst, "wr_datetime")))) {
-if (!$sst) 
+if (!$sst)
 {
     if ($board[bo_sort_field])
         $sst = $board[bo_sort_field];
@@ -68,7 +69,7 @@ if (!$sst)
 }
 else {
     // 게시물 리스트의 정렬 대상 필드가 아니라면 공백으로 (nasca 님 09.06.16)
-    // 리스트에서 다른 필드로 정렬을 하려면 아래의 코드에 해당 필드를 추가하세요. 
+    // 리스트에서 다른 필드로 정렬을 하려면 아래의 코드에 해당 필드를 추가하세요.
     // $sst = preg_match("/^(wr_subject|wr_datetime|wr_hit|wr_good|wr_nogood)$/i", $sst) ? $sst : "";
     $sst = preg_match("/^(wr_datetime|wr_hit|wr_good|wr_nogood)$/i", $sst) ? $sst : "";
 }
@@ -76,10 +77,10 @@ else {
 if ($sst)
     $sql_order = " order by $sst $sod ";
 
-if ($sca || $stx) 
+if ($sca || $stx)
 {
     $sql = " select distinct wr_parent from $write_table where $sql_search $sql_order limit $from_record, $board[bo_page_rows] ";
-} 
+}
 else
 {
     $sql = " select * from $write_table where wr_is_comment = 0 $sql_order limit $from_record, $board[bo_page_rows] ";
@@ -92,10 +93,10 @@ $today2 = $g4[time_ymd];
 $list = array();
 $i = 0;
 
-if (!$sca && !$stx) 
+if (!$sca && !$stx)
 {
     $arr_notice = explode("\n", trim($board[bo_notice]));
-    for ($k=0; $k<count($arr_notice); $k++) 
+    for ($k=0; $k<count($arr_notice); $k++)
     {
         if (trim($arr_notice[$k])=='') continue;
 
@@ -112,7 +113,7 @@ if (!$sca && !$stx)
 
 $k = 0;
 
-while ($row = sql_fetch_array($result)) 
+while ($row = sql_fetch_array($result))
 {
     // 검색일 경우 wr_id만 얻었으므로 다시 한행을 얻는다
     if ($sca || $stx)
@@ -134,22 +135,22 @@ $write_pages = get_paging($config[cf_write_pages], $page, $total_page, "./board.
 $list_href = '';
 $prev_part_href = '';
 $next_part_href = '';
-if ($sca || $stx)  
+if ($sca || $stx)
 {
     $list_href = "./board.php?bo_table=$bo_table";
 
-    //if ($prev_spt >= $min_spt) 
+    //if ($prev_spt >= $min_spt)
     $prev_spt = $spt - $config[cf_search_part];
     if (isset($min_spt) && $prev_spt >= $min_spt)
-        $prev_part_href = "./board.php?bo_table=$bo_table".$qstr."&spt=$prev_spt";
+        $prev_part_href = "./board.php?bo_table=$bo_table".$qstr."&spt=$prev_spt&page=1";
 
     $next_spt = $spt + $config[cf_search_part];
-    if ($next_spt < 0) 
-        $next_part_href = "./board.php?bo_table=$bo_table".$qstr."&spt=$next_spt";
+    if ($next_spt < 0)
+        $next_part_href = "./board.php?bo_table=$bo_table".$qstr."&spt=$next_spt&page=1";
 }
 
 $write_href = "";
-if ($member[mb_level] >= $board[bo_write_level]) 
+if ($member[mb_level] >= $board[bo_write_level])
     $write_href = "./write.php?bo_table=$bo_table";
 
 $nobr_begin = $nobr_end = "";

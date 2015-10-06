@@ -5,15 +5,15 @@ include_once("./_common.php");
 
 // 쿠키에 저장된 ID값과 넘어온 ID값을 비교하여 같지 않을 경우 오류 발생
 // 다른곳에서 링크 거는것을 방지하기 위한 코드
-if (!get_session("ss_view_{$bo_table}_{$wr_id}")) 
-    alert("잘못된 접근입니다.");  
+if (!get_session("ss_view_{$bo_table}_{$wr_id}"))
+    alert("잘못된 접근입니다.");
 
 $sql = " select bf_source, bf_file from $g4[board_file_table] where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$no' ";
 $file = sql_fetch($sql);
 if (!$file[bf_file])
     alert_close("파일 정보가 존재하지 않습니다.");
 
-if ($member[mb_level] < $board[bo_download_level]) { 
+if ($member[mb_level] < $board[bo_download_level]) {
     $alert_msg = "다운로드 권한이 없습니다.";
     if ($member[mb_id])
         alert($alert_msg);
@@ -31,7 +31,7 @@ if (!is_file($filepath) || !file_exists($filepath))
 
 // 이미 다운로드 받은 파일인지를 검사한 후 게시물당 한번만 포인트를 차감하도록 수정
 $ss_name = "ss_down_{$bo_table}_{$wr_id}";
-if (!get_session($ss_name)) 
+if (!get_session($ss_name))
 {
     // 자신의 글이라면 통과
     // 관리자인 경우 통과
@@ -86,10 +86,19 @@ $fp = fopen("$filepath", "rb");
 //    fclose($fp);
 //}
 
-while(!feof($fp)) { 
-    echo fread($fp, 100*1024); 
-    flush(); 
-} 
-fclose ($fp); 
+$download_rate = 20.5;
+
+while(!feof($fp)) {
+    //echo fread($fp, 100*1024);
+    /*
+    echo fread($fp, 100*1024);
+    flush();
+    */
+
+    print fread($fp, round($download_rate * 1024));
+    flush();
+    sleep(1);
+}
+fclose ($fp);
 flush();
 ?>

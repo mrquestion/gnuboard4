@@ -65,13 +65,13 @@ $g4['token_table']         = $g4['table_prefix'] . "token";         // 토큰 테이
 // 기타
 //
 
-// www.sir.co.kr 과 sir.co.kr 도메인은 서로 다른 도메인으로 인식합니다. 쿠키를 공유하려면 .sir.co.kr 과 같이 입력하세요. 
+// www.sir.co.kr 과 sir.co.kr 도메인은 서로 다른 도메인으로 인식합니다. 쿠키를 공유하려면 .sir.co.kr 과 같이 입력하세요.
 // 이곳에 입력이 없다면 www 붙은 도메인과 그렇지 않은 도메인은 쿠키를 공유하지 않으므로 로그인이 풀릴 수 있습니다.
 $g4['cookie_domain'] = "";
 
 // 게시판에서 링크의 기본갯수를 말합니다.
 // 필드를 추가하면 이 숫자를 필드수에 맞게 늘려주십시오.
-$g4['link_count'] = 2; 
+$g4['link_count'] = 2;
 
 $g4['charset'] = "euc-kr";
 
