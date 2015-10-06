@@ -1,3 +1,15 @@
+4.34.09 (11.07.26)
+    :   우편번호 파일 업데이트 2011.07.21 조정내역
+        http://zipfinder.co.kr/zipcode/modi_list.htm
+    :   admin.menu300.php.bak 파일은 메뉴로 불러 들이지 않기
+        ( pogusm 님께서 도움 주셨습니다. )
+
+        bbs/zip.db
+
+        adm/admin.lib.php
+
+            if (!preg_match("/^admin.menu([0-9]{3}).*\.php$/", $entry, $m)) 
+
 4.34.08 (11.07.22)
     :   접속자현황에서 한글 깨지는 오류 수정
     :   관리자 > 게시판관리 > 인기검색어 관리, 인기검색어 순위 추가
