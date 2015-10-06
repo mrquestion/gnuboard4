@@ -1,3 +1,38 @@
+4.37.31 (2015.07.29)
+    : 우편번호 개편으로 인한 코드 수정 (우편번호가 2015년 8월 1일 부터 6자리에서 5자리로 개편됩니다)
+      http://www.epost.go.kr/search/zipcode/cmzcd003k01.jsp
+
+      bbs/zip5.php , js/zip5.js 파일이 추가 되었습니다.
+
+      js/common.js 에 아래와 같이 코드가 추가 되었습니다.
+
+        // 5자리 우편번호 도로명 우편번호 창
+        function win_zip5(frm_name, frm_zip, frm_addr1, frm_addr2, frm_addr3, frm_jibeon)
+        {
+            url = g4_path + "/" + g4_bbs + "/zip5.php?frm_name="+frm_name+"&frm_zip="+frm_zip+"&frm_addr1="+frm_addr1+"&frm_addr2="+frm_addr2+"&frm_addr3="+frm_addr3+"&frm_jibeon="+frm_jibeon;
+            win_open(url, "winZip", "left=50,top=50,width=483,height=600,scrollbars=1");
+        }
+
+      skin/member/basic/register_form.skin.php 가 아래와 같이 수정 되었습니다.
+
+        <!-- ... 기존 코드 주석 처리 ... -->
+        <input class=ed type=text name='mb_zip' size=6 maxlength=5 <?=$config[cf_req_addr]?'required':'';?> itemname='우편번호' value='<?=$member[mb_zip1].$member[mb_zip2]?>' style="vertical-align:middle">
+        <input class=ed type=hidden name='mb_zip1' value='<?=$member[mb_zip1]?>'>
+        <input class=ed type=hidden name='mb_zip2' value='<?=$member[mb_zip2]?>'>
+        &nbsp;<a href="javascript:;" onclick="win_zip5('fregisterform', 'mb_zip', 'mb_addr1', 'mb_addr2', 'mb_addr3', 'mb_addr_jibeon');" align=absmiddle><img width="74" height="20" src="<?=$member_skin_path?>/img/post_search_btn.gif" border=0 align=absmiddle></a>
+
+      adm/member_form.php 가 아래와 같이 수정 되었습니다.
+      
+        <!-- ... 기존 코드 주석 처리 ... -->
+        <input type=text class=ed name='mb_zip' size=6 maxlength=5 itemname='우편번호' value='<? echo $mb[mb_zip1].$mb[mb_zip2] ?>'>
+        <input type=hidden class=ed name='mb_zip1' value='<? echo $mb[mb_zip1] ?>'>
+        <input type=hidden class=ed name='mb_zip2' value='<? echo $mb[mb_zip2] ?>'>
+        <a href="javascript:;" onclick="win_zip5('fmember', 'mb_zip', 'mb_addr1', 'mb_addr2', 'mb_addr3', 'mb_addr_jibeon');"><img src='<?=$g4[bbs_img_path]?>/btn_zip.gif' align=absmiddle border=0></a>
+
+      *** 참고) 기존의 zip1, zip2 필드를 그대로 사용하므로 DB 는 변경되지 않습니다.
+                우편번호 수정시 기존에 저장되어 있던 6자리 우편번호를 덮어씁니다.
+                그러므로 5자리와 6자리가 같이 저장되지 않습니다.
+
 4.37.30 (2015.07.06)
     : 접속자현황 및 접속자검색에서 XSS 취약점이 발견되어 수정 (한국인터넷진흥원 인터넷침해대응본부 김유홍 주임연구원께서 알려 주셨습니다.)
 

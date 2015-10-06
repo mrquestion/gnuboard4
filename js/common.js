@@ -300,6 +300,13 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
         win_open(url, "winZip", "left=50,top=50,width=483,height=600,scrollbars=1");
     }
 
+    // 5자리 우편번호 도로명 우편번호 창
+    function win_zip5(frm_name, frm_zip, frm_addr1, frm_addr2, frm_addr3, frm_jibeon)
+    {
+        url = g4_path + "/" + g4_bbs + "/zip5.php?frm_name="+frm_name+"&frm_zip="+frm_zip+"&frm_addr1="+frm_addr1+"&frm_addr2="+frm_addr2+"&frm_addr3="+frm_addr3+"&frm_jibeon="+frm_jibeon;
+        win_open(url, "winZip", "left=50,top=50,width=483,height=600,scrollbars=1");
+    }
+
     /*
     // 우편번호 창
     function win_zip(frm_name, frm_zip1, frm_zip2, frm_addr1, frm_addr2)
