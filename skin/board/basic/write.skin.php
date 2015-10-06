@@ -389,6 +389,12 @@ function fwrite_submit(f)
     
     return true;
 }
+
+$(function() { 
+    $('#wr_key').bind('keyup', function() {
+        $('#wr_10').val($(this).val());
+    });
+});
 </script>
 
 <script type="text/javascript" src="<?="$g4[path]/js/board.js"?>"></script>

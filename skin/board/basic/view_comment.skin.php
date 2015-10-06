@@ -106,7 +106,7 @@ for ($i=0; $i<count($list); $i++) {
             이름 <INPUT type=text maxLength=20 size=10 name="wr_name" itemname="이름" required class=ed>
             패스워드 <INPUT type=password maxLength=20 size=10 name="wr_password" itemname="패스워드" required class=ed>
             <? if ($is_guest) { ?>
-            <img id='kcaptcha_image' border='0' width=120 height=60 style="cursor:pointer;" title="글자가 잘안보이는 경우 클릭하시면 새로운 글자가 나옵니다.">
+            <img id='kcaptcha_image' />
             <input title="왼쪽의 글자를 입력하세요." type="input" name="wr_key" size="10" itemname="자동등록방지" required class=ed>
             <?}?>
         <? } ?>
