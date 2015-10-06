@@ -170,7 +170,7 @@ for ($i=0; $i<count($list); $i++) {
 </tr>
 </table>
 
-<? if($cwin==1) { ?><p align=center><a href="javascript:window.close();"><img src="<?=$board_skin_path?>/img/btn_close.gif" width="48" height="20" border="0"></a><? } ?>
+<? if($cwin==1) { ?><p align=center><a href="javascript:window.close();"><img src="<?=$board_skin_path?>/img/btn_close.gif" border="0"></a><? } ?>
 
 <script language='JavaScript'>
 var save_before = '';
@@ -288,5 +288,7 @@ function comment_delete(url)
 {
     if (confirm("이 코멘트를 삭제하시겠습니까?")) location.href = url;
 }
+
+comment_box('', 'c'); // 코멘트 입력폼이 보이도록 처리하기위해서 추가 (root님)
 </script>
 <? } ?>

@@ -1,3 +1,15 @@
+4.00.10 (05.06.14)
+    :   서명 출력 되도록 수정
+    :   첫로그인 부분 코드 수정
+    :   글읽기 포인트 부여방법 수정
+    :   코멘트에 답변하는 동안 원 코멘트 삭제되는 경우의 오류 수정
+
+        bbs/board.php
+        bbs/view.php
+        bbs/write_comment_update.php
+        skin/board/basic/view.skin.php
+        common.php
+
 4.00.09 (05.06.13)
     :   글입력시 공지사항에 나오지 않던 오류를 수정
     :   끌쓰기, 코멘트쓰기, 글읽기에서 관리자도 포인트 가감

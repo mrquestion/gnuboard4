@@ -119,5 +119,14 @@ $trackback_url = "";
 if ($member[mb_level] >= $board[bo_trackback_level]) 
     $trackback_url = "$g4[url]/$g4[bbs]/tb.php/$bo_table/$wr_id";
 
+$is_signature = false;
+$signature = "";
+if ($board[bo_use_signature] && $view[mb_id])
+{
+    $is_signature = true;
+    $mb = get_member($view[mb_id]);
+    $signature = $mb[mb_signature];
+}
+
 include_once("$board_skin_path/view.skin.php");
 ?>

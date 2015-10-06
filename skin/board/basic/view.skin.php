@@ -172,6 +172,7 @@ HEREDOC;
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a></td>
 </tr>
+<? if ($is_signature) { echo "<tr><td>$signature<br><br></td></tr>"; } // 서명 출력 ?>
 </table>
 
 <?

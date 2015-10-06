@@ -163,19 +163,24 @@ while ($entry = $tmp->read()) {
 
 
 // 자동로그인 부분에서 첫로그인에 포인트 부여하던것을 로그인중일때로 변경하면서 코드도 대폭 수정하였습니다.
-if ($_SESSION[ss_mb_id]) { // 로그인중이라면
+if ($_SESSION[ss_mb_id]) // 로그인중이라면
+{
     $member = get_member($_SESSION[ss_mb_id]);
 
     // 오늘 처음 로그인 이라면
     if (substr($member[mb_today_login], 0, 10) != $g4[time_ymd])
+    {
         // 첫 로그인 포인트 지급
         insert_point($member[mb_id], $config[cf_login_point], "$g4[time_ymd] 첫로그인");
 
-    // 오늘의 로그인이 될 수도 있으며 마지막 로그인일 수도 있음
-    // 해당 회원의 접근일시와 IP 를 저장
-    $sql = " update $g4[member_table] set mb_today_login = '$g4[time_ymdhis]', mb_login_ip = '$_SERVER[REMOTE_ADDR]' where mb_id = '$member[mb_id]' ";
-    sql_query($sql);
-} else {
+        // 오늘의 로그인이 될 수도 있으며 마지막 로그인일 수도 있음
+        // 해당 회원의 접근일시와 IP 를 저장
+        $sql = " update $g4[member_table] set mb_today_login = '$g4[time_ymdhis]', mb_login_ip = '$_SERVER[REMOTE_ADDR]' where mb_id = '$member[mb_id]' ";
+        sql_query($sql);
+    }
+} 
+else 
+{
     // 자동로그인 ---------------------------------------
     // 회원아이디가 쿠키에 저장되어 있다면 (3.27)
     if ($tmp_mb_id = get_cookie("ck_mb_id")) {
