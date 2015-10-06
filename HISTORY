@@ -1,3 +1,35 @@
+4.33.04 (11.02.12)
+    :   4.33.03 에서 common.php 에 보안패치한 코드는 오류가 많아 4.33.02 로 되돌립니다.
+    :   4.33.03 의 adm/member_form.php 에 패치한 코드에 오류가 있었습니다.
+
+        common.php
+
+            if (isset($sca))  {
+                $sca = mysql_real_escape_string($sca);
+                $qstr .= '&sca=' . urlencode($sca);
+            }
+
+            if (isset($sfl))  {
+                $sfl = mysql_real_escape_string($sfl);
+                $qstr .= '&sfl=' . urlencode($sfl); // search field (검색 필드)
+            }
+
+            if (isset($stx))  { // search text (검색어)
+                $stx = mysql_real_escape_string($stx);
+                $qstr .= '&stx=' . urlencode($stx);
+            }
+
+            if (isset($sst))  {
+                $sst = mysql_real_escape_string($sst);
+                $qstr .= '&sst=' . urlencode($sst); // search sort (검색 정렬 필드)
+            }
+
+
+        adm/member_form.php
+
+            <?=get_member_level_select("mb_level", 1, $member[mb_level], $mb[mb_level])?>
+
+
 4.33.03 (11.02.10)
     :   회원권한 코드 수정 (코타군님)
     :   글읽기 포인트가 설정되어 있을때 글읽기 레벨이 1로 설정되어 있으면 포인트 차감이 제대로 되지 않던 오류 수정 (forever님, 진서기님)
