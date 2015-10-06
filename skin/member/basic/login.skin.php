@@ -99,7 +99,14 @@ document.flogin.mb_id.focus();
 
 function flogin_submit(f)
 {
-    f.action = "./login_check.php";
+    <?
+    if ($g4[https_url])
+        echo "f.action = '$g4[https_url]/$g4[bbs]/login_check.php';";
+    else
+        echo "f.action = '$g4[bbs_path]/login_check.php';";
+    ?>
+
+    //f.action = "./login_check.php";
     f.submit();
 }
 </script>

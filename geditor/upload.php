@@ -32,8 +32,11 @@ $mime = array('image/png', 'image/jpeg', 'image/gif');
 if (!is_uploaded_file($file[tmp_name]))
     alert_only("첨부파일이 업로드되지 않았습니다.\\n\\n$file[error]");
 
-if (!in_array($size['mime'], $mime))
+if (!preg_match("/\.(gif|png|jp[e]?g)$/i", $file[name]))
     alert_only("PNG, GIF, JPG 형식의 이미지 파일만 업로드 가능합니다.");
+
+if (!in_array($size['mime'], $mime))
+    alert_only("PNG, GIF, JPG 형식의 이미지 파일만 업로드 가능합니다..");
 
 if (!is_dir($path))
     alert_only("$path 디렉토리가 존재하지 않습니다.");
@@ -83,7 +86,7 @@ function delete_image($token, $path) {
 }
 
 function alert_only($msg='', $url='') {
-    echo "<script language='javascript'>alert_only('$msg'); </script>";
+    echo "<script language='javascript'>alert('$msg'); </script>";
     exit;
 }
 
