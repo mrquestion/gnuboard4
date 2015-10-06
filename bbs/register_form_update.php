@@ -37,7 +37,7 @@ if ($w == "u" && $is_admin == "super") {
 
 $key = get_session("captcha_keystring");
 if (!($key && $key == $_POST[wr_key])) {
-    session_unregister("captcha_keystring");
+    unset($_SESSION['captcha_keystring']);
     alert("정상적인 접근이 아닌것 같습니다.");
 }
 

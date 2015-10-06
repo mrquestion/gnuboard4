@@ -21,6 +21,10 @@
 
 
 
+
+
+
+
 CREATE TABLE `__TABLE_NAME__` (
   `wr_id` int(11) NOT NULL auto_increment,
   `wr_num` int(11) NOT NULL default '0',

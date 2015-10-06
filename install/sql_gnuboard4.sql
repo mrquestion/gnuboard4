@@ -19,6 +19,10 @@
 
 
 
+
+
+
+
 DROP TABLE IF EXISTS `$g4[auth_table]`;
 
 

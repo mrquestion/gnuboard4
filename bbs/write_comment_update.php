@@ -59,7 +59,7 @@ if (!$wr[wr_id])
 if (!$is_member) {
     if ($w=='' || $w=='c') {
         $key = get_session("captcha_keystring");
-        session_unregister("captcha_keystring");
+        unset($_SESSION['captcha_keystring']);
         if (!($key && $key == $_POST[wr_key])) {
             alert("정상적인 접근이 아닌것 같습니다.");
         }
