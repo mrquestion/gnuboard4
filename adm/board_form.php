@@ -76,7 +76,7 @@ include_once ("./admin.head.php");
 <input type=hidden name="sst"  value="<?=$sst?>">
 <input type=hidden name="sod"  value="<?=$sod?>">
 <input type=hidden name="page" value="<?=$page?>">
-<colgroup width=5% class='center'>
+<colgroup width=5% class='left'>
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=75% class='col2 pad2'>
 <tr>
@@ -146,7 +146,10 @@ include_once ("./admin.head.php");
 
 <tr><td colspan=3 class='line2'></td></tr>
 <tr class='ht'>
-    <td><input type=checkbox name=chk_admin value=1></td>
+    <td>
+        <input type=checkbox name=chk_admin value=1>
+        <?=help("같은 그룹에 속한 게시판의 설정을 동일하게 변경할 경우에 체크합니다.");?>
+    </td>
     <td>게시판 관리자</td>
     <td><input type=text class=ed name=bo_admin maxlength=20 value='<?=$board[bo_admin]?>'></td>
 </tr>
@@ -493,9 +496,9 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
 </table>
 
 <p align=center>
-    <input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif' accesskey='s'>&nbsp;
-    <a href='./board_list.php?<?=$qstr?>'><img src='<?=$g4[admin_path]?>/img/btn_list.gif' border=0></a>&nbsp;
-    <? if ($w == 'u') { ?><a href="javascript:board_copy('<?=$bo_table?>');"><img src='<?=$g4[admin_path]?>/img/btn_copy.gif' border=0></a><?}?>
+    <input type=submit class=btn1 accesskey='s' value='  확  인  '>&nbsp;
+    <input type=button class=btn1 value='  목  록  ' onclick="document.location.href='./board_list.php?<?=$qstr?>';">&nbsp;
+    <? if ($w == 'u') { ?><input type=button class=btn1 value='  복  사  ' onclick="board_copy('<?=$bo_table?>');"><?}?>
 </form>
 
 <script language="JavaScript">

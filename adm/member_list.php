@@ -63,17 +63,17 @@ $sql = " select count(*) as cnt
 $row = sql_fetch($sql);
 $intercept_count = $row[cnt];
 
+$listall = "<a href='$_SERVER[PHP_SELF]' class=tt>처음</a>";
+
+$g4[title] = "회원관리";
+include_once("./admin.head.php");
+
 $sql = " select *
           $sql_common
           $sql_search
           $sql_order
           limit $from_record, $rows ";
 $result = sql_query($sql);
-
-$listall = "<a href='$_SERVER[PHP_SELF]' class=tt>처음</a>";
-
-$g4[title] = "회원관리";
-include_once("./admin.head.php");
 
 $colspan = 15;
 ?>
@@ -210,8 +210,8 @@ echo "</table>";
 $pagelist = get_paging($config[cf_write_pages], $page, $total_page, "?$qstr&page=");
 echo "<table width=100% cellpadding=3 cellspacing=1>";
 echo "<tr><td width=50%>";
-echo "<input type=button class='btn1' value='선택수정' onclick=\"btn_check(this.form, 'update')\">";
-echo " <input type=button class='btn1' value='선택삭제' onclick=\"btn_check(this.form, 'delete')\">";
+echo "<input type=button class='btn1' value='선택수정' onclick=\"btn_check(this.form, 'update')\">&nbsp;";
+echo "<input type=button class='btn1' value='선택삭제' onclick=\"btn_check(this.form, 'delete')\">";
 echo "<td>";
 echo "<td width=50% align=right>$pagelist</td></tr></table>\n";
 

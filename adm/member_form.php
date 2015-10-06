@@ -71,7 +71,7 @@ include_once("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>회원 권한</td>
-    <td><?=get_member_level_select("mb_level", 1, 10, $row[bo_list_level])?></td>
+    <td><?=get_member_level_select("mb_level", 1, $member[mb_level], $row[bo_list_level])?></td>
     <td>포인트</td>
     <td><a href='point_list.php?sfl=a.mb_id&stx=<?=$mb[mb_id]?>' class='bold'><?=number_format($mb[mb_point])?></a> 점</td>
 </tr>
@@ -180,8 +180,9 @@ include_once("./admin.head.php");
 </table>
 
 <p align=center>
-    <input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif' accesskey='s'>&nbsp;
-    <a href='./member_list.php?<?=$qstr?>'><img src='<?=$g4[admin_path]?>/img/btn_list.gif' border=0></a>
+    <input type=submit class=btn1 accesskey='s' value='  확    인  '>&nbsp;
+    <input type=button class=btn1 value='  목  록  ' onclick="document.location.href='./member_list.php?<?=$qstr?>';">&nbsp;
+    <input type=button class=btn1 value='  삭  제  ' onclick="del('./member_delete.php?<?=$qstr?>&w=d&mb_id=<?=$mb[mb_id]?>&url=<?=$_SERVER[PHP_SELF]?>');">&nbsp;
 </form>
 
 <script language='Javascript'>

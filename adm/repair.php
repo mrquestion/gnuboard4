@@ -1,5 +1,5 @@
 <?
-$sub_menu = "100991";
+$sub_menu = "100700";
 include_once("./_common.php");
 
 if ($is_admin != "super")

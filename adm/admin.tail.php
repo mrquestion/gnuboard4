@@ -2,21 +2,10 @@
 if (!defined("_GNUBOARD_")) exit;
 ?>
 
-                    </td></tr></table>
-                </td></tr></table><br>
-            </td></tr></table>
-        </td></tr></table><br>
-    </td>
-    <td></td>
+</td>
 </tr>
-<tr>
-    <td></td>
-    <td align=right height=35><a href='#g4_head'><img src='<?=$g4[admin_path]?>/img/btn_top.gif' width=21 height=12 border=0></a>&nbsp;</td>
-    <td></td>
-</tr>
-</table>
-
-</td></tr></table>
+<tr><td colspan=3 height=22 bgcolor=#F2F2F2 align=right><a href='#gnuboard4_admin_head'><img src='./img/top.gif' border=0></a>&nbsp;</td></tr>
+</table><br><br>
 <!-- <p>실행시간 : <?=get_microtime() - $begin_time;?> -->
 
 <script language='javascript' src='<?=$g4[admin_path]?>/admin.js'></script>

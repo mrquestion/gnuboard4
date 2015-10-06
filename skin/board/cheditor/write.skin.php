@@ -146,7 +146,10 @@ var char_max = parseInt(<?=$write_max?>); // √÷¥Î
             var file_length = <?=(int)$file_length?>;
             var objTbl = document.getElementById("variableFiles");
             if (objTbl.rows.length - 1 > file_length)
+            {
                 objTbl.deleteRow(objTbl.rows.length - 1);
+                flen--;
+            }
         }
         </script></td>
 </tr>

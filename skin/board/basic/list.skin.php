@@ -71,13 +71,15 @@ if ($is_nogood) $colspan++;
         echo $list[$i][icon_reply];
         echo "<a href='{$list[$i][href]}'>";
         if ($list[$i][is_notice])
-            echo "<font color='#FB9606'><strong>{$list[$i][subject]}</strong></font>";
+            echo "<font color='#AF6BE3'><strong>{$list[$i][subject]}</strong></font>";
         else
         {
-            $style = "";
-            if ($list[$i][icon_new])
-                $style = " style='font-weight:bold;' ";
-            echo "<span $style>{$list[$i][subject]}</span>";
+            $style1 = $style2 = "";
+            if ($list[$i][icon_new]) // 최신글은 검정
+                $style1 = "color:#112222;";
+            if (!$list[$i][comment_cnt]) // 코멘트 없는것만 굵게
+                $style2 = "font-weight:bold;";
+            echo "<span style='$style1 $style2'>{$list[$i][subject]}</span>";
         }
         echo "</a>";
 

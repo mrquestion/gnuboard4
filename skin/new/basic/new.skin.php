@@ -56,7 +56,7 @@ for ($i=0; $i<count($list); $i++)
 
     echo <<<HEREDOC
 <tr> 
-    <td align="center" height="30" colspan=3><a href='./group.php?gr_id={$list[$i][gr_id]}'>{$gr_subject}</a></td>
+    <td align="center" height="30" colspan=3><a href='./new.php?gr_id={$list[$i][gr_id]}'>{$gr_subject}</a></td>
     <td align="center" colspan=2><a href='./board.php?bo_table={$list[$i][bo_table]}'>{$bo_subject}</a></td>
     <td width="">&nbsp;<a href='{$list[$i][href]}'>{$list[$i][comment]}{$wr_subject}</a></td>
     <td align="center">{$list[$i][name]}</td>

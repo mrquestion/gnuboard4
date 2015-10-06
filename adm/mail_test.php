@@ -1,5 +1,5 @@
 <?
-$sub_menu = "200500";
+$sub_menu = "200300";
 include_once("./_common.php");
 
 if (!$config[cf_email_use])

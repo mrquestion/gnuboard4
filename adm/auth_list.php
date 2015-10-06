@@ -45,7 +45,6 @@ $result = sql_query($sql);
 
 $listall = "<a href='$_SERVER[PHP_SELF]' class=tt>처음</a>";
 
-//$menu = 10;
 $g4[title] = "관리권한설정";
 include_once("./admin.head.php");
 
@@ -96,7 +95,8 @@ var list_delete_php = "auth_list_delete.php";
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
-for ($i=0; $row=sql_fetch_array($result); $i++) {
+for ($i=0; $row=sql_fetch_array($result); $i++) 
+{
     $mb_nick = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
 
     $list = $i%2;
@@ -165,7 +165,10 @@ else
         <option value=''>-- 선택하세요
         <?
         foreach($auth_menu as $key=>$value)
-            echo "<option value='$key'>[$key] $value";
+        {
+            if (!(substr($key, -3) == "000" || $key == "-" || !$key))
+                echo "<option value='$key'>[$key] $value";
+        }
         ?>
         </select>
     </td>
@@ -182,7 +185,7 @@ else
         	<td>d<br>(삭제)</td>
         </tr>
         </table></td>
-    <td><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'></td>
+    <td><input type=submit class=btn1 value='  확  인  '></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 </form>

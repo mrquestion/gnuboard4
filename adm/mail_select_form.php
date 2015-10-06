@@ -1,5 +1,5 @@
 <?
-$sub_menu = "200500";
+$sub_menu = "200300";
 include_once("./_common.php");
 
 if (!$config[cf_email_use])
@@ -159,7 +159,7 @@ include_once("./admin.head.php");
         <tr><td colspan='2' class='line2'></td></tr>
         </table>
 
-        <p align=center><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'>
+        <p align=center><input type=submit class=btn1 value='  È®  ÀÎ  '>
         </form>
     </td>
 </tr></table>

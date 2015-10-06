@@ -1,5 +1,5 @@
 <?
-$sub_menu = "200500";
+$sub_menu = "200300";
 include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
@@ -94,7 +94,8 @@ include_once("./admin.head.php");
 </tr>
 </table>
 
-<p align=center><input type=submit class=btn1 value='  메일 보내기  '>
+<p align=center>
+    <input type=submit class=btn1 value='  메일 보내기  '>
 </form>
 
 </td></tr></table>

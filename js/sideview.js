@@ -102,7 +102,7 @@ if (typeof(SIDEVIEW_JS) == 'undefined') // 한번만 실행
                 this.insertTail("modify", "<a href='"+g4_path+"/" + g4_admin + "/member_form.php?w=u&mb_id="+mb_id+"' target='_blank'>회원정보변경</a>");
             // 포인트내역
             if (mb_id)
-                this.insertTail("point", "<a href='"+g4_path+"/" + g4_admin + "/point_list.php?sfl=a.mb_id&stx="+mb_id+"' target='_blank'>포인트내역</a>");
+                this.insertTail("point", "<a href='"+g4_path+"/" + g4_admin + "/point_list.php?sfl=mb_id&stx="+mb_id+"' target='_blank'>포인트내역</a>");
         }
     }
 

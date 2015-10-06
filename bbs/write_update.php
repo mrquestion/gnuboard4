@@ -256,6 +256,8 @@ if ($w == "" || $w == "r")
 } 
 else if ($w == "u") 
 {
+    $qstr .= "&sca=$ca_name";
+
     if ($member[mb_id]) 
     {
         // 자신의 글이라면
@@ -298,6 +300,11 @@ else if ($w == "u")
                     wr_10= '$wr_10'
                     $sql_password
               where wr_id = '$wr[wr_id]' ";
+    sql_query($sql);
+
+    // 분류가 수정되는 경우 해당되는 코멘트의 분류명도 모두 수정함
+    // 코멘트의 분류를 수정하지 않으면 검색이 제대로 되지 않음
+    $sql = " update $write_table set ca_name = '$ca_name' where wr_parent = '$wr[wr_id]' ";
     sql_query($sql);
 
     if ($notice) 

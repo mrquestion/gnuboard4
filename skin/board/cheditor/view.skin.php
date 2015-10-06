@@ -73,7 +73,8 @@ for ($i=0; $i<count($view[file]); $i++)
     if ($view[file][$i][source] && !$view[file][$i][view]) 
     {
         $cnt++;
-        echo "<tr><td height=22>&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_file.gif' align=absmiddle> <a href='{$view[file][$i][href]}' title='{$view[file][$i][content]}'><strong>{$view[file][$i][source]}</strong> ({$view[file][$i][size]}), Down : {$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td></tr>";
+        //echo "<tr><td height=22>&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_file.gif' align=absmiddle> <a href='{$view[file][$i][href]}' title='{$view[file][$i][content]}'><strong>{$view[file][$i][source]}</strong> ({$view[file][$i][size]}), Down : {$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td></tr>";
+        echo "<tr><td height=22>&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_file.gif' align=absmiddle> <a href=\"javascript:file_download('{$view[file][$i][href]}', '{$view[file][$i][source]}');\" title='{$view[file][$i][content]}'><strong>{$view[file][$i][source]}</strong> ({$view[file][$i][size]}), Down : {$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td></tr>";
     }
 }
 
@@ -102,30 +103,6 @@ for ($i=1; $i<=$g4[link_count]; $i++)
         ?>
 
         <span class="ct lh"><?=$view[content];?></span>
-
-        
-<!-- ↓ 이 코드는 삭제하셔도 좋습니다. -->
-<?/*?>
-<br><br><br>
-<script type="text/javascript"><!--
-google_ad_client = "pub-2822305545668489";
-google_ad_width = 468;
-google_ad_height = 60;
-google_ad_format = "468x60_as";
-google_ad_type = "text";
-google_ad_channel ="";
-google_color_border = "000000";
-google_color_bg = "F0F0F0";
-google_color_link = "0000FF";
-google_color_url = "008000";
-google_color_text = "000000";
-//--></script>
-<script type="text/javascript"
-  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-</script><br><br><span style='font-size:8pt; font-family:돋움; color:silver;'>광고 수입은 그누보드의 호스팅 비용으로 사용합니다. (새창 : Shift + 링크 클릭)</span><br>
-<?*/?>
-<!-- ↑ 이 코드는 삭제하셔도 좋습니다. -->
-        
         
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a>
@@ -164,5 +141,11 @@ function resize_image()
 }
 
 window.onload = resize_image;
+
+function file_download(link, file)
+{
+<? if ($board[bo_download_point] < 0) { ?>if (confirm("'"+file+"' 파일을 다운로드 하시면 포인트가 차감(<?=number_format($board[bo_download_point])?>점)됩니다.\n\n포인트는 게시물당 한번만 차감되며 다음에 다시 다운로드 하셔도 중복하여 차감하지 않습니다.\n\n그래도 다운로드 하시겠습니까?"))<?}?>
+document.location.href = link;
+}
 </script>
 <!-- 게시글 보기 끝 -->

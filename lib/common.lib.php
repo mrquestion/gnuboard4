@@ -734,7 +734,7 @@ function insert_point($mb_id, $point, $content='', $rel_table='', $rel_id='', $r
     $sql = " insert into $g4[point_table]
                 set mb_id = '$mb_id',
                     po_datetime = '$g4[time_ymdhis]',
-                    po_content = '$content',
+                    po_content = '".addslashes($content)."',
                     po_point = '$point',
                     po_rel_table = '$rel_table',
                     po_rel_id = '$rel_id',

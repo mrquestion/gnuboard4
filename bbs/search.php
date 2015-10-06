@@ -25,7 +25,7 @@ if ($stx)
         $sql .= " and gr_id = '$gr_id' ";
     if ($onetable) // 하나의 게시판만 검색한다면
         $sql .= " and bo_table = '$onetable' ";
-    $sql .= " order by bo_order_search ";
+    $sql .= " order by bo_order_search, gr_id, bo_table ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++) 
     {

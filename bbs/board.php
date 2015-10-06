@@ -11,10 +11,13 @@ if (!$board[bo_table])
 
 if ($write[wr_is_comment]) 
 {
+    /*
     if ($cwin) // 코멘트 보기
         alert_close("코멘트는 상세보기 하실 수 없습니다.");
     else
         alert("코멘트는 상세보기 하실 수 없습니다.");
+    */
+    goto_url("./board.php?bo_table=$bo_table&wr_id=$write[wr_parent]#c_{$wr_id}");
 }
 
 if (!$bo_table) 

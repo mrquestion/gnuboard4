@@ -1,64 +1,6 @@
 <?
 if (!defined("_GNUBOARD_")) exit;
 
-function disp_top_menu($title, $link, $color, $target="_parent")
-{
-    global $g4;
-
-    /*
-    $s = "";
-    $s .= "<table width='100%' height='100%' cellpadding=0 cellspacing=0>";
-    $s .= "<tr><td align='center' background='$g4[admin_path]/img/top_back.gif' bgcolor='$color'>";
-    $s .= "<a href='$link' target='$target' style='text-decoration:none;'>";
-    $s .= "<font style='color:white;'><b>$title</b></font></a></td></tr></table>";
-    */
-    $s = "<a href='$link' target='$target' style='text-decoration:none; color:#000000;'>$title</a>";
-
-    return $s;
-}
-
-function disp_sub_menu($title, $link, $target="_parent")
-{
-    global $g4;
-
-    if ($link)
-        $href = "<a href='$link' target='$target' style='text-decoration:none; color:#000000;'>";
-    else
-        $href = "";
-
-    /*
-    $s = "";
-    $s .= "<table width='100%' cellpadding='0' cellspacing='0'>";
-    $s .= "<tr><td width='20' height='26' align='center' background='$g4[admin_path]/img/menu_dot_bg.gif'>";
-    $s .= "<img src='$g4[admin_path]/img/icon_1.gif' width='9' height='9'></td>";
-    $s .= "<td background='$g4[admin_path]/img/menu_dot_bg.gif'>$href";
-    $s .= "<font style='font-size:9pt; color:#868686;'>$title</font></a></td></tr></table>";
-    */
-
-    $s = "$href$title</a>";
-
-    return $s;
-}
-
-function disp_sub_menu2($title, $link, $target="_parent")
-{
-    global $g4;
-
-    /*
-    $s = "";
-    $s .= "<table width='100%' cellpadding='0' cellspacing='0'>";
-    $s .= "<tr><td height='25' background='$g4[admin_path]/img/s_menu_dot_bg.gif'>&nbsp;&nbsp;&nbsp;";
-    $s .= "<font style='font-family:굴림; font-size:9pt; color:#868686;'>+</font>";
-    $s .= "&nbsp;&nbsp;<a href='$link' target='$target' style='text-decoration:none;'>";
-    $s .= "<font style='font-family:굴림; font-size:9pt; color:#868686;'>$title</font></td></tr></table>";
-    */
-
-    $s = "<a href='$link' target='$target' style='text-decoration:none; color:#000000;'>$title</a>";
-
-    return $s;
-}
-
-
 // 스킨경로를 얻는다
 function get_skin_dir($skin, $len='')
 {
@@ -243,37 +185,6 @@ function rm_rf($file)
     }
 }
 
-function top_menu($m, $title, $link, $color)
-{
-    global $ttitle, $tlink, $tcolor, $tmenu;
-
-    $ttitle[$m[1]] = $title;
-    $tlink[$m[1]]  = $link;
-    $tcolor[$m[1]] = $color;
-    $tmenu[$m[1]]  = disp_top_menu($title, $link, $color);
-}
-
-function sub_menu($m, $title, $link="", $target='_parent')
-{
-    global $stitle, $slink, $smenu, $auth_menu;
-
-    $stitle[$m[1]][$m[2]] = $title;
-    $slink[$m[1]][$m[2]]  = $link;
-    $smenu[$m[1]][$m[2]]  = disp_sub_menu($title, $link, $target);
-    $auth_menu[$m[1].$m[2]] = $title;
-}
-
-function sub_menu2($m, $title, $link="", $target='_parent')
-{
-    global $stitle, $slink, $smenu, $auth_menu, $smenu2;
-
-    $stitle[$m[1]][$m[2]] = $title;
-    $slink[$m[1]][$m[2]]  = $link;
-    $smenu[$m[1]][$m[2]]  = disp_sub_menu2($title, $link, $target);
-    $auth_menu[$m[1].$m[2]] = $title;
-    $smenu2[$m[1]][$m[2]] = TRUE; // 서브메뉴
-}
-
 function help($help="", $left=0, $top=0)
 {
     global $g4;
@@ -292,35 +203,53 @@ function help($help="", $left=0, $top=0)
     return $str;
 }
 
+function subtitle($title, $more="") 
+{
+    global $g4;
+
+    $s = "<table width=100% cellpadding=0 cellspacing=0><tr><td width=80% align=left><table border='0' cellpadding='0' cellspacing='1'><tr><td height='24'><img src='$g4[admin_path]/img/icon_title.gif' width=20 height=9> <font color='#525252'><b>$title</b></font> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr></table><table width=100% cellpadding=0 cellspacing=0><tr><td height=1></td></tr></table></td><td width=20% align=right>";
+    if ($more)
+        $s .= "<a href='$more'><img src='$g4[admin_path]/img/icon_more.gif' width='43' height='11' border=0 align=absmiddle></a>";
+    $s .= "</td></tr></table>\n";
+    
+    return $s;
+}
+
 // 접근 권한 검사
 if (!$member[mb_id])
+{
     alert("로그인 하십시오.", "$g4[bbs_path]/login.php?url=" . urlencode("$_SERVER[PHP_SELF]?w=$w&mb_id=$mb_id"));
-else if ($is_admin != "super") {
+}
+else if ($is_admin != "super") 
+{
     $auth = array();
     $sql = " select au_menu, au_auth from $g4[auth_table] where mb_id = '$member[mb_id]' ";
     $result = sql_query($sql);
-    for($i=0; $row=sql_fetch_array($result); $i++) {
+    for($i=0; $row=sql_fetch_array($result); $i++) 
+    {
         $auth[$row[au_menu]] = $row[au_auth];
     }
 
     if (!$i)
+    {
         alert("최고관리자 또는 관리권한이 있는 회원만 접근 가능합니다.", $g4[path]);
+    }
 }
-
 @ksort($auth);
-$menu = substr($sub_menu, 0, 3);
 
 // 가변 메뉴
-$amenu = array();
-$tmp = dir("$g4[admin_path]/menu");
+unset($auth_menu);
+unset($menu);
+unset($amenu);
+$tmp = dir("$g4[admin_path]");
 while ($entry = $tmp->read()) {
-    if (!preg_match("/^m([0-9]{3,6})(.*).php/", $entry, $m)) 
-        continue;  // 파일명이 m 으로 시작하지 않으면 무시한다. 
+    if (!preg_match("/^admin.menu([0-9]{3}).php/", $entry, $m)) 
+        continue;  // 파일명이 menu 으로 시작하지 않으면 무시한다. 
 
     $amenu[$m[1]] = $entry;
+    include_once($entry);
 }
-
-@ksort($auth_menu);
+@ksort($amenu);
 
 $qstr = "sst=$sst&sod=$sod&sfl=$sfl&stx=$stx&page=$page";
 ?>

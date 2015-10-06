@@ -23,7 +23,9 @@ if ($member[mb_level] < $board[bo_download_level]) {
 }
 
 // 이미 다운로드 받은 파일인지를 검사
-$ss_name = "ss_down_{$bo_table}_{$wr_id}_{$no}";
+//$ss_name = "ss_down_{$bo_table}_{$wr_id}_{$no}";
+// 게시물당 한번만 차감하도록 수정
+$ss_name = "ss_down_{$bo_table}_{$wr_id}";
 if (!get_session($ss_name)) 
 {
     // 자신의 글이라면 통과
@@ -36,7 +38,10 @@ if (!get_session($ss_name))
         if ($member[mb_point] + $board[bo_download_point] < 0)
             alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 다운로드(".number_format($board[bo_download_point]).")가 불가합니다.\\n\\n포인트를 적립하신 후 다시 다운로드 해 주십시오.");
 
-        insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id {$no}번 파일 다운로드", $bo_table, $wr_id, "다운로드 $no");
+        //insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id {$no}번 파일 다운로드", $bo_table, $wr_id, "다운로드 $no");
+        // 게시물당 한번만 차감하도록 수정
+        //insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id {$no}번 파일 다운로드", $bo_table, $wr_id, "다운로드");
+        insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id 파일 다운로드", $bo_table, $wr_id, "다운로드");
     }
 
     // 다운로드 카운트 증가

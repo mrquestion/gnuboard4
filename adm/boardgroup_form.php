@@ -83,8 +83,8 @@ include_once("./admin.head.php");
 </table>
 
 <p align=center>
-    <input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif' accesskey='s'>&nbsp;
-    <a href='./boardgroup_list.php?<?=$qstr?>'><img src='<?=$g4[admin_path]?>/img/btn_list.gif' border=0></a>
+    <input type=submit class=btn1 accesskey='s' value='  확  인  '>&nbsp;
+    <input type=button class=btn1 value='  목  록  ' onclick="document.location.href='./boardgroup_list.php?<?=$qstr?>';">
 </form>
 
 <script language='JavaScript'>

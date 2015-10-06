@@ -1,5 +1,5 @@
 <?
-$sub_menu = "200500";
+$sub_menu = "200300";
 include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
@@ -48,7 +48,9 @@ include_once("./admin.head.php");
 <tr><td colspan=2 class='line1'></td></tr>
 </table>
 
-<p align=center><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'></div></form>
+<p align=center>
+    <input type=submit class=btn1 accesskey='s' value='  È®  ÀÎ  '>
+</form>
 
 
 

@@ -8,7 +8,6 @@ $mb = get_member($mb_id);
 if (!$mb[mb_id])
     alert("존재하지 않는 회원입니다."); 
 
-$menu = 30;
 $g4[title] = "접근가능그룹선택";
 include_once("./admin.head.php");
 
@@ -66,7 +65,7 @@ if ($i == 0) {
 
 <p>
 <table width=100% align=center cellpadding=3 cellspacing=1 class=tablebg>
-<form name=fboardgroupmember_form method=post action='boardgroupmember_update.php' onsubmit="return boardgroupmember_form_check(this)">
+<form name=fboardgroupmember_form method=post action='./boardgroupmember_update.php' onsubmit="return boardgroupmember_form_check(this)">
 <input type=hidden name=mb_id value='<?=$mb[mb_id]?>'>
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=80% class='col2 pad2'>
@@ -91,7 +90,7 @@ if ($i == 0) {
         ?>
         </select>
         &nbsp;
-        <input type=image src='img/btn_confirm.gif' align=absmiddle border=0>
+        <input type=submit class=btn1 accesskey='s' value='  확  인  '>
     </td>
 </tr>
 </table>

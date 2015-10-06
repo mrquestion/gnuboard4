@@ -1,8 +1,12 @@
 <?
-$sub_menu = "200210";
+$sub_menu = "200200";
 include_once("./_common.php");
 
-auth_check($auth[$sub_menu], "w");
+if (!$ok)
+    alert();
+
+if ($is_admin != "super")
+    alert("포인트 정리는 최고관리자만 가능합니다.");
 
 $g4[title] = "포인트 정리";
 include_once("./admin.head.php");

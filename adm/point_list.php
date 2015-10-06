@@ -4,13 +4,13 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
-$sql_common = " from $g4[point_table] a left join $g4[member_table] b on (a.mb_id=b.mb_id) ";
+$sql_common = " from $g4[point_table] ";
 
 $sql_search = " where (1) ";
 if ($stx) {
     $sql_search .= " and ( ";
     switch ($sfl) {
-        case "a.mb_id" :
+        case "mb_id" :
             $sql_search .= " ($sfl = '$stx') ";
             break;
         default : 
@@ -38,7 +38,7 @@ $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
 if ($page == "") $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
-$sql = " select *, b.mb_nick, b.mb_email, b.mb_homepage, b.mb_point
+$sql = " select *
           $sql_common
           $sql_search
           $sql_order
@@ -47,7 +47,7 @@ $result = sql_query($sql);
 
 $listall = "<a href='$_SERVER[PHP_SELF]'>처음</a>";
 
-if ($sfl == "a.mb_id" && $stx)
+if ($sfl == "mb_id" && $stx)
     $mb = get_member($stx);
 
 $g4[title] = "포인트관리";
@@ -60,6 +60,16 @@ $colspan = 7;
 <script language="JavaScript">
 var list_update_php = "";
 var list_delete_php = "point_list_delete.php";
+</script>
+
+<script language="JavaScript">
+function point_clear()
+{
+    if (confirm("포인트 정리를 하시면 최근 50건 이전의 포인트 부여 내역을 삭제하므로\n\n포인트 부여 내역을 필요로 할때 찾지 못할 수도 있습니다.\n\n\n그래도 진행하시겠습니까?"))
+    {
+        document.location.href = "./point_clear.php?ok=1";
+    }
+}
 </script>
 
 <table width=100%>
@@ -75,12 +85,12 @@ var list_delete_php = "point_list_delete.php";
             echo "&nbsp;(전체 포인트 합계 : " . number_format($row2[sum_point]) . "점)";
         }
         ?>
+        <? if ($is_admin == "super") { ?><a href="javascript:point_clear();">포인트정리</a><? } ?>
     </td>
     <td width=50% align=right>
         <select name=sfl class=cssfl>
-            <option value='a.mb_id'>회원아이디</option>
-            <option value='b.mb_nick'>별명</option>
-            <option value='a.po_content'>내용</option>
+            <option value='mb_id'>회원아이디</option>
+            <option value='po_content'>내용</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
         <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
@@ -100,13 +110,13 @@ var list_delete_php = "point_list_delete.php";
 <colgroup width=100>
 <colgroup width=140>
 <colgroup width=''>
-<colgroup width=80>
+<colgroup width=50>
 <colgroup width=80>
 <tr><td colspan='<?=$colspan?>' class='line1'></td></tr>
 <tr class='bgcol1 bold col1 ht center'>
     <td><input type=checkbox name=chkall value='1' onclick='check_all(this.form)'></td>
-    <td><?=subject_sort_link('a.mb_id')?>회원아이디</a></td>
-    <td><?=subject_sort_link('mb_nick')?>별명</a></td>
+    <td><?=subject_sort_link('mb_id')?>회원아이디</a></td>
+    <td>별명</td>
     <td><?=subject_sort_link('po_datetime')?>일시</a></td>
     <td><?=subject_sort_link('po_content')?>포인트 내용</a></td>
     <td><?=subject_sort_link('po_point')?>포인트</a></td>
@@ -114,8 +124,22 @@ var list_delete_php = "point_list_delete.php";
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
-for ($i=0; $row=sql_fetch_array($result); $i++) {
-    $mb_nick = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
+for ($i=0; $row=sql_fetch_array($result); $i++) 
+{
+    if ($row2[mb_id] != $row[mb_id])
+    {
+        $sql2 = " select mb_id, mb_nick, mb_email, mb_homepage, mb_point from $g4[member_table] where mb_id = '$row[mb_id]' ";
+        $row2 = sql_fetch($sql2);
+    }
+
+    $mb_nick = get_sideview($row[mb_id], $row2[mb_nick], $row2[mb_email], $row2[mb_homepage]);
+
+    $link1 = $link2 = "";
+    if (!preg_match("/^\@/", $row[po_rel_table]) && $row[po_rel_table])
+    {
+        $link1 = "<a href='$g4[bbs_path]/board.php?bo_table={$row[po_rel_table]}&wr_id={$row[po_rel_id]}' target=_blank>";
+        $link2 = "</a>";
+    }
 
     $list = $i%2;
     echo "
@@ -123,12 +147,12 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     <input type=hidden name=mb_id[$i] value='$row[mb_id]'>
     <tr class='list$list col1 ht center'>
         <td><input type=checkbox name=chk[] value='$i'></td>
-        <td><a href='?sfl=a.mb_id&stx=$row[mb_id]'>$row[mb_id]</a></td>
+        <td><a href='?sfl=mb_id&stx=$row[mb_id]'>$row[mb_id]</a></td>
         <td>$mb_nick</td>
         <td>$row[po_datetime]</td>
-        <td align=left>&nbsp;$row[po_content]</td>
+        <td align=left>&nbsp;{$link1}$row[po_content]{$link2}</td>
         <td align=right>".number_format($row[po_point])."&nbsp;</td>
-        <td align=right>".number_format($row[mb_point])."&nbsp;</td>
+        <td align=right>".number_format($row2[mb_point])."&nbsp;</td>
     </tr> ";
 } 
 
@@ -182,7 +206,7 @@ else
     <td><input type=text class=ed name=mb_id required itemname='회원아이디' value='<?=$mb_id?>'></td>
     <td><input type=text class=ed name=po_content required itemname='내용' style='width:99%;'></td>
     <td><input type=text class=ed name=po_point required itemname='포인트' size=10 maxlength=6></td>
-    <td><input type=image src='<?=$g4[admin_path]?>/img/btn_confirm.gif'></td>
+    <td><input type=submit class=btn1 value='  확  인  '></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 </form>

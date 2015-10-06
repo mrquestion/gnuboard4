@@ -18,15 +18,15 @@ $qstr = "fr_date=$fr_date&to_date=$to_date";
         -
         <input type='text' name='to_date' size=11 maxlength=10 value='<?=$to_date?>' class=ed>
         &nbsp;
-        <input type=button value=' 접속자 '   onclick="fvisit_submit('visit_list.php');">
-        <input type=button value=' 도메인 '   onclick="fvisit_submit('visit_domain.php');">
-        <input type=button value=' 브라우저 ' onclick="fvisit_submit('visit_browser.php');">
-        <input type=button value=' OS '       onclick="fvisit_submit('visit_os.php');">
-        <input type=button value=' 시간 '     onclick="fvisit_submit('visit_hour.php');">
-        <input type=button value=' 요일 '     onclick="fvisit_submit('visit_week.php');">
-        <input type=button value=' 일 '       onclick="fvisit_submit('visit_date.php');">
-        <input type=button value=' 월 '       onclick="fvisit_submit('visit_month.php');">
-        <input type=button value=' 년 '       onclick="fvisit_submit('visit_year.php');">
+        <input type=button class=btn1 value=' 접속자 '   onclick="fvisit_submit('visit_list.php');">
+        <input type=button class=btn1 value=' 도메인 '   onclick="fvisit_submit('visit_domain.php');">
+        <input type=button class=btn1 value=' 브라우저 ' onclick="fvisit_submit('visit_browser.php');">
+        <input type=button class=btn1 value=' OS '       onclick="fvisit_submit('visit_os.php');">
+        <input type=button class=btn1 value=' 시간 '     onclick="fvisit_submit('visit_hour.php');">
+        <input type=button class=btn1 value=' 요일 '     onclick="fvisit_submit('visit_week.php');">
+        <input type=button class=btn1 value=' 일 '       onclick="fvisit_submit('visit_date.php');">
+        <input type=button class=btn1 value=' 월 '       onclick="fvisit_submit('visit_month.php');">
+        <input type=button class=btn1 value=' 년 '       onclick="fvisit_submit('visit_year.php');">
     </td>
 </tr>
 </form>

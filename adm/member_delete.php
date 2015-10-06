@@ -17,5 +17,8 @@ else if ($mb[mb_level] >= $member[mb_level])
 // 회원자료 삭제
 member_delete($mb[mb_id]);
 
-goto_url("./member_list.php?$qstr");
+if ($url)
+    goto_url("{$url}?$qstr");
+else
+    goto_url("./member_list.php?$qstr");
 ?>
