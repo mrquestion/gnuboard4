@@ -66,7 +66,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                     <td height=35 width=150 align="center">
                         <? if ($member[mb_id]) { ?>
                             <input type=hidden name=pc_name value="<?=cut_str($member[mb_nick],255)?>">
-                            <b><?=$member[mb_name]?></b> &nbsp;
+                            <b><?=$member[mb_nick]?></b> &nbsp;
                         <? } else { ?>
                             이름 <input type='text' name='pc_name' size=10 class=input required itemname='이름'> &nbsp;
                         <? } ?>

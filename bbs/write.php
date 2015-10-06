@@ -73,6 +73,26 @@ else if ($w == "r")
     if (in_array((int)$wr_id, $notice_array))
         alert("공지에는 답변 할 수 없습니다.");
 
+    //----------
+    // 4.06.13 : 비밀글을 타인이 열람할 수 있는 오류 수정 (헐랭이, 플록님께서 알려주셨습니다.)
+    // 코멘트에는 원글의 답변이 불가하므로
+    if ($write[wr_is_comment])
+        alert("정상적인 접근이 아닙니다."); 
+
+    // 비밀글인지를 검사
+    if (strstr($write[wr_option], "secret")) {
+        if ($write[mb_id]) {
+            // 회원의 경우는 해당 글쓴 회원 및 관리자
+            if (!($write[mb_id] == $member[mb_id] || $is_admin))
+                alert("비밀글에는 자신 또는 관리자만 답변이 가능합니다.");
+        } else { 
+            // 비회원의 경우는 비밀글에 답변이 불가함
+            if (!$is_admin)
+                alert("비회원의 비밀글에는 답변이 불가합니다.");
+        }
+    }
+    //----------
+
     // 게시글 배열 참조
     $reply_array = &$write;
 

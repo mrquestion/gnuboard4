@@ -1,11 +1,17 @@
+4.06.13 (05.12.25)
+    :   [필수패치] 비밀글을 타인이 열람할 수 있는 오류 수정
+        헐랭이, 플록님께서 알려주셨습니다.
+
+        bbs/write.php
+
 4.06.12 (05.12.15)
-	:	경로가 명확하지 않아 제대로 include 되지 않던 오류 수정 (일부 서버에서 발생)
-	:   alert(), alert_close() 함수에 charset 메타태그 추가
+    :   경로가 명확하지 않아 제대로 include 되지 않던 오류 수정 (일부 서버에서 발생)
+    :   alert(), alert_close() 함수에 charset 메타태그 추가
     :   latest() 함수에 $options 인자 추가 (스크롤 스킨때문에 추가)
     :   스크롤되는 최신글 추가
 
-		adm/admin.lib.php
-		lib/common.lib.php
+        adm/admin.lib.php
+        lib/common.lib.php
         lib/latest.lib.php
         skin/latest/scroll/latest.lib.php
 
@@ -13,15 +19,15 @@
     :   wr_html 을 wr_option 으로 수정
         김도깡님께서 알려주셨습니다.
     :   로그인테이블에서 인덱스 삭제
-	:   외부에서 글을 등록할 수 있는 버그가 존재하므로 비밀글은 사용일 경우에만 가능해야 함
-		외부에서 글을 등록할 수 있는 버그가 존재하므로 공지는 관리자만 등록이 가능해야 함
-		꼬마후니님께서 알려주셨습니다.
+    :   외부에서 글을 등록할 수 있는 버그가 존재하므로 비밀글은 사용일 경우에만 가능해야 함
+        외부에서 글을 등록할 수 있는 버그가 존재하므로 공지는 관리자만 등록이 가능해야 함
+        꼬마후니님께서 알려주셨습니다.
 
         필드가 추가, 변경 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
 
         lib/common.lib.php
         bbs/write.php
-		bbs/write_update.php
+        bbs/write_update.php
         adm/upgrade.php
 
 4.06.10 (05.11.30)

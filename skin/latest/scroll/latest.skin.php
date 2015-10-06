@@ -116,8 +116,6 @@ $box_height = (int)$line_mod * (int)$height;
     <?
     unset($roll_text);
     for ($i=0; $i<count($list); $i++) {
-        $href = "<a href='./?doc=$cart_dir/item.php&it_id=$row[it_id]' class=item>";
-
         $k = (int)($i / $line_mod);
 
         $roll_text[$k] .= "<div style=\"height:{$height}px; padding-top:5px;\">";
