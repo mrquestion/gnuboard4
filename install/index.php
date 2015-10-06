@@ -163,7 +163,7 @@ HEREDOC;
         <table width="551" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr> 
             <td align="right"> 
-                <form name=frm method=post action="javascript:frm_submit(document.frm);">
+                <form name=frm method=post onsubmit="return frm_submit(document.frm);">
                 <input type="hidden" name="agree" value="동의함">
                 <input type="submit" name="btn_submit" value="예, 동의합니다 ">
                 </form>

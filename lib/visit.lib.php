@@ -13,6 +13,10 @@ function visit($skin_dir="basic")
     // $visit[4] = 전체
     // 숫자가 들어감
     preg_match("/오늘:(.*),어제:(.*),최대:(.*),전체:(.*)/", $config['cf_visit'], $visit);
+    settype($visit[0], "integer");
+    settype($visit[1], "integer");
+    settype($visit[2], "integer");
+    settype($visit[3], "integer");
 
     ob_start();
     $visit_skin_path = "$g4[path]/skin/visit/$skin_dir";
@@ -62,6 +66,7 @@ function get_os($agent)
     else if(preg_match("/windows nt 5\.1/", $agent))        { $s = "XP"; }
     else if(preg_match("/windows nt 5\.2/", $agent))        { $s = "2003"; }
     else if(preg_match("/windows nt 6\.0/", $agent))        { $s = "Vista"; }
+    else if(preg_match("/windows nt 6\.1/", $agent))        { $s = "Windows7"; }
     else if(preg_match("/windows 9x/", $agent))             { $s = "ME"; }
     else if(preg_match("/windows ce/", $agent))             { $s = "CE"; }
     else if(preg_match("/mac/", $agent))                    { $s = "MAC"; }

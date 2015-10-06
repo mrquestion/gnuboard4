@@ -175,11 +175,12 @@ if (count($file_copy))
     }
 }
 
+echo "<meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'>";
 echo "<script language='javascript'>";
-echo "alert('게시판 복사 : {$bo_table} -> {$target_table}";
+echo "alert(\"게시판 복사 : {$bo_table} -> {$target_table}";
 if ($copy_file)
     echo "\\n\\n복사한 파일 : 총 {$copy_file}개";
-echo "');";
+echo "\");";
 echo "opener.document.location.reload();";
 echo "</script>";
 

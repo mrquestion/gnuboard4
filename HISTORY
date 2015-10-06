@@ -1,5 +1,32 @@
+4.31.15 (10.02.08)
+    :   회원삭제시 주민등록번호도 공란으로 수정
+        function member_delete($mb_id) { ... mb_jumin = '', ...
+    :   접속자현황 OS에 Windows7 추가 (Justin님께서 알려주셨습니다.)
+    :   POSIX Regex 함수 제거 ( ereg_replace, ereg, eregi_replace, eregi, split, spliti, sql_regcase )
+        이 기능은 PHP 5.3.0 부터 배제되고 PHP 6.0.0 부터 제거됩니다. 이 기능에 의존하지 않기를 권합니다.
+    :   기본시간대를 설정 PHP 5.1 부터 가능 date_default_timezone_set()
+    :   2009년 제4차 우편번호 변경내역 (2009.12.16.자 : 50,742건) http://www.zipfinder.co.kr
+    :   password_check.php 의 $qstr 에 $sop 추가 
+    :   js/common.js 의 del() 함수에 charset 별로 처리되도록 수정
+
+        adm/admin.lib.php
+        adm/board_copy_update.php
+        adm/board_form_update.php
+        adm/boardgroup_form_update.php
+        adm/mail_select_update.php
+        bbs/download.php
+        bbs/list.php
+        bbs/password_check.php
+        bbs/zip.db
+        cheditor4/imageupload-class.php
+        config.php
+        js/common.js
+        lib/common.lib.php
+        lib/mailer.lib.php
+        lib/visit.lib.php
+
 4.31.14 (09.10.15)
-    :   관리자 게시판 등록시 상,하단 이미지, 상, 하단 파일 경로를 통한 보안 취약점 수정 (김성대 님 091015)
+    :   관리자 게시판 등록시 상,하단 이미지, 상, 하단 파일 경로를 통한 보안 취약점 수정 (로빈아빠 님 091015)
 
         adm/board_form_update.php        
 
@@ -357,8 +384,8 @@
     :   referer_check() 주석 처리 사용하지 않음
         같은 URL 에서 온 값인지 체크하지 않음
     :   보안 로그인 코드 수정
-    :	게시판관리의 상,하단 이미지 코드 수정
-	    김선용님(sucjin)께서 코드를 알려주셨습니다.
+    :   게시판관리의 상,하단 이미지 코드 수정
+        김선용님(sucjin)께서 코드를 알려주셨습니다.
     :   트랙백 핑 받는 페이지 코드 수정
     :   금지단어에 공백이 있는 경우 trim 처리 word_filter_check()
     :   링크 클릭시 링크될 대상이 없으면 파이어폭스에서 계속 로딩되던 오류를 수정

@@ -63,7 +63,7 @@ else
 
 @include_once("$board_skin_path/download.tail.skin.php");
 
-if(eregi("msie", $_SERVER[HTTP_USER_AGENT]) && eregi("5\.5", $_SERVER[HTTP_USER_AGENT])) {
+if(preg_match("/msie/i", $_SERVER[HTTP_USER_AGENT]) && preg_match("/5\.5/", $_SERVER[HTTP_USER_AGENT])) {
     header("content-type: doesn/matter");
     header("content-length: ".filesize("$filepath"));
     header("content-disposition: attachment; filename=\"$original\"");

@@ -47,7 +47,8 @@ function member_delete($mb_id)
     // 회원자료는 정보만 없앤 후 아이디는 보관하여 다른 사람이 사용하지 못하도록 함 : 061025
     if ($mb[mb_level] > 1) {
         $sql = " update $g4[member_table] 
-                    set mb_password = '',
+                    set mb_jumin = '',
+                        mb_password = '',
                         mb_level = '1',
                         mb_email = '',
                         mb_homepage = '',

@@ -88,7 +88,8 @@ function goto_url($url)
 // 세션변수 생성
 function set_session($session_name, $value)
 {
-    session_register($session_name);
+    if (PHP_VERSION < '5.3.0') 
+        session_register($session_name);
     // PHP 버전별 차이를 없애기 위한 방법
     $$session_name = $_SESSION["$session_name"] = $value;
 }
@@ -178,9 +179,7 @@ function set_http($url)
 {
     if (!trim($url)) return;
 
-    // 3.32
-    //if (!eregi("^(http|https)://", $url))
-    if (!eregi("^(http|https|ftp|telnet|news|mms)://", $url))
+    if (!preg_match("/^(http|https|ftp|telnet|news|mms)\:\/\//i", $url))
         $url = "http://" . $url;
 
     return $url;
@@ -1135,7 +1134,7 @@ function get_table_define($table, $crlf="\n")
     } // end while
     sql_free_result($result);
 
-    $schema_create = ereg_replace(',' . $crlf . '$', '', $schema_create);
+    $schema_create = preg_replace('/,' . $crlf . '$/', '', $schema_create);
 
     $sql = 'SHOW KEYS FROM ' . $table;
     $result = sql_query($sql);

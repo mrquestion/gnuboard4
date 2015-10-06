@@ -126,8 +126,12 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     // 삭제 검사 확인
     function del(href) 
     {
-        if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) 
-            document.location.href = href;
+        if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
+            if (g4_charset.toUpperCase() == 'EUC-KR') 
+                document.location.href = href;
+            else
+                document.location.href = encodeURI(href);
+        }
     }
 
     // 쿠키 입력

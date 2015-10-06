@@ -94,7 +94,7 @@ $i = 0;
 
 if (!$sca && !$stx) 
 {
-    $arr_notice = split("\n", trim($board[bo_notice]));
+    $arr_notice = explode("\n", trim($board[bo_notice]));
     for ($k=0; $k<count($arr_notice); $k++) 
     {
         if (trim($arr_notice[$k])=='') continue;

@@ -88,7 +88,7 @@ function verify_email($address, &$error)
 
     $WAIT_SECOND = 3; // ?초 기다림
 
-    list($user, $domain) = split("@", $address);
+    list($user, $domain) = explode("@", $address);
 
     // 도메인에 메일 교환기가 존재하는지 검사
     if (checkdnsrr($domain, "MX")) {

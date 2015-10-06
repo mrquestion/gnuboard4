@@ -49,7 +49,7 @@ for ($i=0; $i<count($member_list); $i++)
 {
     list($email, $mb_id, $name, $nick, $birth, $datetime) = explode("||", trim($member_list[$i]));
 
-    $sw = ereg("[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]+)*@[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]+)*", $email);
+    $sw = preg_match("/[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]+)*@[0-9a-zA-Z_]+(\.[0-9a-zA-Z_]+)*/", $email);
     // 올바른 메일 주소만
     if ($sw == true) 
     {

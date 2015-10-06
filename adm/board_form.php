@@ -492,7 +492,7 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
 <tr class='ht'>
     <td><input type=checkbox name=chk_upload_size value=1></td>
     <td>파일 업로드 용량</td>
-    <td>업로드 파일 한개당 <input type=text class=ed name=bo_upload_size size=10 required itemname='파일 업로드 용량' value='<?=$board[bo_upload_size]?>'> bytes 이하 (최대 <?=ini_get("upload_max_filesize")?> 이하) <?=help("1 MB = 1,024,768 bytes")?></td>
+    <td>업로드 파일 한개당 <input type=text class=ed name=bo_upload_size size=10 required itemname='파일 업로드 용량' value='<?=$board[bo_upload_size]?>'> bytes 이하 (최대 <?=ini_get("upload_max_filesize")?> 이하) <?=help("1 MB = 1,048,576 bytes")?></td>
 </tr>
 
 <tr><td colspan=3 class='line2'></td></tr>

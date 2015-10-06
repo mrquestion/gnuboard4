@@ -42,7 +42,7 @@ class uploader {
             }
         }
 
-        if (ereg("image", $this->file["type"])) {
+        if (preg_match("/image/", $this->file["type"])) {
             $image = getimagesize($this->file["tmp_name"]);
 
             if ($this->max_image_width || $this->max_image_height) {
@@ -82,12 +82,12 @@ class uploader {
         }
 
         if ($accept_type) {
-            if (ereg(strtolower($accept_type), strtolower($this->file["type"]))) {
+            if (preg_match("/".strtolower($accept_type)."/", strtolower($this->file["type"]))) {
                 $this->accepted = TRUE;
             }
             else {
                 $this->accepted = FALSE;
-                $this->errors[3] = ereg_replace("\|", " 또는 ", $accept_type) . " 파일만 업로드 할 수 있습니다.";
+                $this->errors[3] = preg_replace("/\|/", " 또는 ", $accept_type) . " 파일만 업로드 할 수 있습니다.";
             }
         }
         else {
@@ -102,7 +102,7 @@ class uploader {
         if ($this->accepted) {
             $this->file["name"] = $this->random_generator();
 
-            if (ereg("(\.)([a-z0-9]{2,5})$", $this->file["name"])) {
+            if (preg_match("/(\.)([a-z0-9]{2,5})$/", $this->file["name"])) {
                 $pos = strrpos($this->file["name"], ".");
 
                 if (!$this->file["extention"]) {
@@ -156,7 +156,7 @@ class uploader {
             return $aok;
         }
         else {
-            $this->errors[3] = ereg_replace("\|", " 또는 ", $accept_type) . " 파일만 업로드 할 수 있습니다.";
+            $this->errors[3] = preg_replace("/\|/", " 또는 ", $accept_type) . " 파일만 업로드 할 수 있습니다.";
             return FALSE;
         }
     }

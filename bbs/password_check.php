@@ -2,7 +2,7 @@
 include_once("./_common.php");
 
 if ($w == "s") {
-    $qstr = "bo_table=$bo_table&sfl=$sfl&stx=$stx&wr_id=$wr_id&page=$page";
+    $qstr = "bo_table=$bo_table&sfl=$sfl&stx=$stx&sop=$sop&wr_id=$wr_id&page=$page";
 
     $wr = get_write($write_table, $wr_id);
 
