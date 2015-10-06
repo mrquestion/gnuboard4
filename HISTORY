@@ -1,3 +1,27 @@
+4.21.02 (07.08.22)
+    :   referer_check() 주석 처리 사용하지 않음
+        같은 URL 에서 온 값인지 체크하지 않음
+    :   보안 로그인 코드 수정
+    :	게시판관리의 상,하단 이미지 코드 수정
+	    김선용님(sucjin)께서 코드를 알려주셨습니다.
+    :   트랙백 핑 받는 페이지 코드 수정
+    :   금지단어에 공백이 있는 경우 trim 처리 word_filter_check()
+    :   링크 클릭시 링크될 대상이 없으면 파이어폭스에서 계속 로딩되던 오류를 수정
+    :   글쓰기 레벨에 관계없이 자신의 글은 수정이 가능하도록 코드 수정
+        김선용님(sucjin)께서 코드를 알려주셨습니다.
+
+        bbs/link.php
+        bbs/norobot_check.inc.php
+        bbs/tb.php
+        bbs/write.php
+        bbs/write_update.php
+        lib/common.lib.php
+        skin/member/basic/login.skin.php
+        skin/outlogin/basic/outlogin.skin.1.php
+	    adm/board_form.php
+	    adm/board_form_update.php
+        js/filter.js
+
 4.21.01 (07.06.05)
     :   비밀글 버그 패치
         나스카님께서 알려 주셨습니다.

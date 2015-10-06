@@ -1,5 +1,15 @@
 <?
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
+
+$url = '';
+if ($g4['https_url']) {
+    if (preg_match("/^\./", $urlencode))
+        $url = $g4[url];
+    else
+        $url = $g4[url].$urlencode;
+} else {
+    $url = $urlencode;
+}
 ?>
 <script type="text/javascript" language=JavaScript>
 // 엠파스 로긴 참고
@@ -15,7 +25,7 @@ function chkReset(f)
 <!-- 로그인 전 외부로그인 시작 -->
 <table width="220" border="0" cellpadding="0" cellspacing="0">
 <form name="fhead" method="post" action="javascript:fhead_submit(document.fhead);" autocomplete="off">
-<input type="hidden" name="url" value="<?=$g4['https_url']?$g4['url'].$urlencode:$urlencode;?>">
+<input type="hidden" name="url" value="<?=$url?>">
 <tr> 
     <td width="220" height="42" colspan="6" valign="top"><img src="<?=$outlogin_skin_path?>/img/login_top.gif" width="220" height="42"></td>
 </tr>

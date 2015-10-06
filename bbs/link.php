@@ -11,6 +11,9 @@ $row = sql_fetch(" select count(*) as cnt from {$g4[write_prefix]}{$bo_table} ",
 if (!$row[cnt])
     alert_close("존재하는 게시판이 아닙니다.");
 
+if (!$write["wr_link{$no}"])
+    alert_close("링크가 없습니다.");
+
 $ss_name = "ss_link_{$bo_table}_{$wr_id}_{$no}";
 if (empty($_SESSION[$ss_name])) 
 {

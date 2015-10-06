@@ -341,6 +341,7 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     $list['ca_name_href'] = "$g4[bbs_path]/board.php?bo_table=$board[bo_table]&sca=".urlencode($list['ca_name']);
 
     $list['href'] = "$g4[bbs_path]/board.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]" . $qstr;
+    //$list['href'] = "$g4[bbs_path]/board.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]";
     if ($board['bo_use_comment'])
         $list['comment_href'] = "javascript:win_comment('$g4[bbs_path]/board.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]&cwin=1');";
     else
@@ -1149,6 +1150,8 @@ function get_table_define($table, $crlf="\n")
 // 리퍼러 체크
 function referer_check($url="")
 {
+    /*
+    // 제대로 체크를 하지 못하여 주석 처리함
     global $g4;
 
     if (!$url)
@@ -1156,6 +1159,7 @@ function referer_check($url="")
 
     if (!preg_match("/^http[s]?:\/\/".$_SERVER[HTTP_HOST]."/", $_SERVER[HTTP_REFERER]))
         alert("제대로 된 접근이 아닌것 같습니다.", $url);
+    */
 }
 
 

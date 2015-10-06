@@ -5,16 +5,23 @@
 define("_GNUBOARD_", TRUE);
 
 include_once("./_common.php");
-
-// 오류는 write_log() 로 잡는다.
+// 오류는 write_log() 함수로 남긴다.
 include_once("$g4[path]/lib/etc.lib.php");
-//write_log("$g4[path]/lib/log/aaa", 1);
 
-//phpinfo(); exit;
+function tb_xml_msg($error, $msg="")
+{
+    global $g4;
 
-//preg_match("/tb\.php\/([^\/]+)\/([^\/]+)$/", $_SERVER[PHP_SELF], $matches);
-//$bo_table = $matches[1];
-//$wr_id = $matches[2];
+    $s = "";
+    $s .= "<?xml version=\"1.0\" encoding=\"$g4[charset]\"?>\n";
+    $s .= "<response>\n";
+    $s .= "<error>$error</error>\n";
+    $s .= "<message>$msg</message>\n";
+    $s .= "</response>\n";
+
+    return $s;
+}
+
 
 $arr = explode("/", $_SERVER[PATH_INFO]);
 $bo_table = $arr[1];
@@ -23,16 +30,44 @@ $to_token = $arr[3];
 
 $write_table   = $g4[write_prefix] . $bo_table; // 게시판 테이블 전체이름
 
-$sql = " select wr_id,
-                ca_name, 
-                wr_email
-           from $write_table where wr_id = '$wr_id' ";
+$sql = " select wr_id, ca_name, wr_email from $write_table where wr_id = '$wr_id' ";
 $wr = sql_fetch($sql, FALSE);
 
 // wr_id가 없거나 트랙백으로 넘어온게 아니라면
-if (!$wr[wr_id] || !($_POST[title] && $_POST[excerpt] && $_POST[url] && $_POST[blog_name])) {
+if (!$wr[wr_id] || !($_POST[title] && $_POST[excerpt] && $_POST[url] && $_POST[blog_name])) 
+{
     $tmp_dir = str_replace("/tb.php", "", $_SERVER[SCRIPT_NAME]);
     header("location:$tmp_dir/board.php?bo_table=$bo_table&wr_id=$wr_id");
+    exit;
+}
+
+
+if (!$to_token)
+{
+    if (isset($_POST)) 
+        write_log("$g4[path]/data/log/tb.log", $_POST);
+
+    echo tb_xml_msg(1, "토큰값이 넘어오지 않았습니다.");
+    exit;
+}
+
+$sql = " select to_token from $g4[token_table] where to_token = '$to_token' ";
+$row = sql_fetch($sql);
+if ($row[to_token] && $to_token) 
+{
+    // 두번 이상 트랙백을 보내지 못하도록 하기 위하여 토큰을 삭제한다
+    sql_query(" delete from $g4[token_table] where to_token = '$to_token' ");
+
+    // 토큰검사 (3시간 이상 지난 토큰은 삭제)
+    if (isset($g4['token_time']) == false)
+        $g4['token_time'] = 3; 
+
+    $sql = " delete from $g4[token_table] where to_datetime < '".date("Y-m-d", $g4[server_time] - 3600 * $g4['token_time'])."' ";
+    sql_query($sql);
+}
+else
+{
+    echo tb_xml_msg(1, "트랙백 주소가 올바르지 않습니다. (토큰 유효시간 경과 등)");
     exit;
 }
 
@@ -44,34 +79,17 @@ if (strlen($excerpt) > 255) $excerpt = cut_str($excerpt, 255);
 
 $msg = "";
 // 두번씩 INSERT 되는것을 막기 위해
-if ($_POST[title]) {
+if ($_POST[title]) 
+{
     $board = sql_fetch(" select bo_subject, bo_use_trackback from $g4[board_table] where bo_table = '$bo_table' ");
     if (!$board[bo_use_trackback]) 
         $msg = "트랙백 사용이 금지된 게시판입니다.";
 
-    // 토큰검사
-    if (isset($g4['token_time']) == false)
-        $g4['token_time'] = 3; 
-
-    $sql = " delete from $g4[token_table] 
-              where to_datetime < '".date("Y-m-d", $g4[server_time] - 86400 * $g4['token_time'])."' ";
-    sql_query($sql);
-
-    $sql = " select to_token from $g4[token_table]
-              where to_token = '$to_token' ";
-    $row = sql_fetch($sql);
-    if ($row[to_token] && $to_token) {
-        // 두번 이상 트랙백을 보내지 못하도록 하기 위하여 토큰을 삭제한다
-        sql_query(" delete from $g4[token_table] where to_token = '$to_token' ");
-    } else {
-        $msg = "트랙백 주소가 올바르지 않습니다. (토큰 유효시간 경과 등)";
-    }
-
-    if (!$msg) {
+    if (!$msg) 
+    {
         $next_num = get_next_num($write_table);
 
-        $sql = " select max(wr_comment) as max_comment from $write_table 
-                  where wr_parent = '$wr_id' and wr_is_comment = 1 ";
+        $sql = " select max(wr_comment) as max_comment from $write_table where wr_parent = '$wr_id' and wr_is_comment = 1 ";
         $row = sql_fetch($sql);
         $row[max_comment] += 1;
 
@@ -87,7 +105,8 @@ if ($_POST[title]) {
                         wr_datetime = '$g4[time_ymdhis]', 
                         wr_ip = '$_SERVER[REMOTE_ADDR]' ";
         $result = sql_query($sql, FALSE);
-        if ($result) {
+        if ($result) 
+        {
             $comment_id = mysql_insert_id();
             sql_query(" update $write_table set wr_comment = wr_comment + 1 where wr_id = '$wr_id' ", FALSE);
             sql_query(" insert into $g4[board_new_table] ( bo_table, wr_id, wr_parent, bn_datetime ) values ( '$bo_table', '$comment_id', '$wr_id', '$g4[time_ymdhis]' ) ");
@@ -100,11 +119,7 @@ if ($_POST[title]) {
 
     if ($msg) // 비정상(오류)
     { 
-        echo "<?xml version=\"1.0\" encoding=\"$g4[charset]\"?>\n";
-        echo "<response>\n";
-        echo "<error>1</error>\n";
-        echo "<message>$msg</message>\n";
-        echo "</response>\n";
+        echo tb_xml_msg(1, $msg);
         exit;
     } 
     else // 정상
@@ -173,8 +188,6 @@ if ($_POST[title]) {
         }
     }
 }
-echo "<?xml version=\"1.0\" encoding=\"$g4[charset]\"?>\n";
-echo "<response>\n";
-echo "<error>0</error>\n";
-echo "</response>\n";
+
+echo tb_xml_msg(0, "");
 ?>

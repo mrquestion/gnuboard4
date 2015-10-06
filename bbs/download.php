@@ -18,7 +18,7 @@ if ($member[mb_level] < $board[bo_download_level]) {
     if ($member[mb_id])
         alert($alert_msg);
     else
-        alert($alert_msg . "\\n\\n회원이시라면 로그인 후 이용해 보십시오.", "./login.php?wr_id=$wr_id&$qstr&url=".urlencode("board.php?bo_table=$bo_table&wr_id=$wr_id"));
+        alert($alert_msg . "\\n\\n회원이시라면 로그인 후 이용해 보십시오.", "./login.php?wr_id=$wr_id&$qstr&url=".urlencode("$g4[bbs_path]/board.php?bo_table=$bo_table&wr_id=$wr_id"));
 }
 
 // 사용자 코드 실행

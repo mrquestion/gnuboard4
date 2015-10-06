@@ -112,7 +112,7 @@ include_once ("./admin.head.php");
         <input type=file name=bo_image_head class=ed size=60>
         <?
         if ($board[bo_image_head])
-            echo "<br><a href='$g4[path]/data/file/$board[bo_image_head]' target='_blank'>$board[bo_image_head]</a> <input type=checkbox name='bo_image_head_del' value='$board[bo_image_head]'> 昏力";
+            echo "<br><a href='$g4[path]/data/file/{$board['bo_table']}/$board[bo_image_head]' target='_blank'>$board[bo_image_head]</a> <input type=checkbox name='bo_image_head_del' value='$board[bo_image_head]'> 昏力";
         ?>
     </td>
 </tr>
@@ -123,7 +123,7 @@ include_once ("./admin.head.php");
         <input type=file name=bo_image_tail class=ed size=60>
         <? 
         if ($board[bo_image_tail]) 
-            echo "<br><a href='$g4[path]/data/file/$board[bo_image_tail]' target='_blank'>$board[bo_image_tail]</a> <input type=checkbox name='bo_image_tail_del' value='$board[bo_image_tail]'> 昏力";
+            echo "<br><a href='$g4[path]/data/file/{$board['bo_table']}/$board[bo_image_tail]' target='_blank'>$board[bo_image_tail]</a> <input type=checkbox name='bo_image_tail_del' value='$board[bo_image_tail]'> 昏力";
         ?>
     </td>
 </tr>

@@ -122,12 +122,14 @@ if ($bo_image_tail_del) {
 }
 
 if ($_FILES[bo_image_head][name]) {
-    $bo_image_head_urlencode = urlencode($_FILES[bo_image_head][name]);
+    //$bo_image_head_urlencode = urlencode($_FILES[bo_image_head][name]);
+    $bo_image_head_urlencode = $bo_table."_head_".time();
     $sql_common .= " , bo_image_head = '$bo_image_head_urlencode' ";
 }
 
 if ($_FILES[bo_image_tail][name]) {
-    $bo_image_tail_urlencode = urlencode($_FILES[bo_image_tail][name]);
+    //$bo_image_tail_urlencode = urlencode($_FILES[bo_image_tail][name]);
+    $bo_image_tail_urlencode = $bo_table."_tail_".time();
     $sql_common .= " , bo_image_tail = '$bo_image_tail_urlencode' ";
 }
 

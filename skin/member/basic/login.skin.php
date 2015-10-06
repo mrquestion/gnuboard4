@@ -1,10 +1,20 @@
 <?
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
+
+$url = '';
+if ($g4['https_url']) {
+    if (preg_match("/^\./", $urlencode))
+        $url = $g4[url];
+    else
+        $url = $g4[url].$urlencode;
+} else {
+    $url = $urlencode;
+}
 ?>
 
 <table width="668" border="0" cellspacing="0" cellpadding="0">
 <form name="flogin" method="post" action="javascript:flogin_submit(document.flogin);" autocomplete="off">
-<input type="hidden" name="url" value='<?=$urlencode?>'>
+<input type="hidden" name="url" value='<?=$url?>'>
 <!-- <tr align="center"> 
     <td colspan="3"><img src="<?=$member_skin_path?>/img/login_title.gif" width="624" height="72"></td>
 </tr> -->

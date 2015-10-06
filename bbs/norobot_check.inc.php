@@ -5,6 +5,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 // 자동등록방지 검사
 if ($config[cf_use_norobot]) {
+    /*
     // 우선 이 URL 로 부터 온것인지 검사
     $parse = parse_url($_SERVER[HTTP_REFERER]);
     // 3.35
@@ -14,6 +15,7 @@ if ($config[cf_use_norobot]) {
     //if ($parse[host] != $_SERVER[HTTP_HOST]) {
         alert("올바른 접근이 아닌것 같습니다.", "./");
     }
+    */
 
     $key = $_SESSION[ss_norobot_key];
     if (($w=='' || $w=='c') && !$member[mb_id]) {

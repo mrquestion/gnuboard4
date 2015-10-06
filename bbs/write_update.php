@@ -29,7 +29,10 @@ if (!$is_admin && !$board[bo_use_secret] && $secret)
 	alert("비밀글 미사용 게시판 이므로 비밀글로 등록할 수 없습니다.");
 
 if ($w == "" || $w == "u") {
-    if ($member[mb_level] < $board[bo_write_level]) 
+    // 김선용 1.00 : 글쓰기 권한과 수정은 별도로 처리되어야 함
+    if($w =="u" && $member['mb_id'] && $wr['mb_id'] == $member['mb_id'])
+        ;
+    else if ($member[mb_level] < $board[bo_write_level]) 
         alert("글을 쓸 권한이 없습니다.");
 
 	// 외부에서 글을 등록할 수 있는 버그가 존재하므로 공지는 관리자만 등록이 가능해야 함
