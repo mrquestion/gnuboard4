@@ -83,15 +83,15 @@ if (!$select_db) {
     <form name=frminstall2>
     <tr> 
                 <td colspan="3"><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,29,0" width="587" height="22">
-                        <param name="movie" value="img/top.swf">
+                        <param name="movie" value="../install/img/top.swf">
                         <param name="quality" value="high">
-                        <embed src="img/top.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="587" height="22"></embed></object></td>
+                        <embed src="../install/img/top.swf" quality="high" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" width="587" height="22"></embed></object></td>
     </tr>
     <tr> 
-      <td width="3"><img src="img/box_left.gif" width="3" height="340"></td>
+      <td width="3"><img src="../install/img/box_left.gif" width="3" height="340"></td>
       <td width="581" valign="top" bgcolor="#FCFCFC"><table width="581" border="0" cellspacing="0" cellpadding="0">
           <tr> 
-            <td><img src="img/box_title.gif" width="581" height="56"></td>
+            <td><img src="../install/img/box_title.gif" width="581" height="56"></td>
           </tr>
         </table>
         <br>
@@ -140,7 +140,7 @@ if (!$select_db) {
         </table>
         <table width="562" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
-            <td height=20><img src="img/box_line.gif" width="562" height="2"></td>
+            <td height=20><img src="../install/img/box_line.gif" width="562" height="2"></td>
           </tr>
         </table>
         <table width="551" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -150,44 +150,16 @@ if (!$select_db) {
             </td>
           </tr>
         </table></td>
-      <td width="3"><img src="img/box_right.gif" width="3" height="340"></td>
+      <td width="3"><img src="../install/img/box_right.gif" width="3" height="340"></td>
     </tr>
     <tr> 
-      <td colspan="3"><img src="img/box_bottom.gif" width="587" height="3"></td>
+      <td colspan="3"><img src="../install/img/box_bottom.gif" width="587" height="3"></td>
     </tr>
     </form>
   </table>
 </div>
 <?
 flush(); usleep(50000); 
-
-/*
-// 그누보드 테이블 생성 --------------------------------
-$sql = " desc $cfg[table_default] ";
-$result = @mysql_query($sql);
-// 그누보드 재설치에 체크하셨거나 그누보드가 설치되어 있지 않다면
-if ($del_gnuboard || !$result) {
-    $file = implode("", file("./sql_schema.sql"));
-    eval("\$file = \"$file\";");
-
-    $f = explode(";", $file);
-    for ($i=0; $i<count($f); $i++) {
-        if (trim($f[$i]) == "") continue;
-        mysql_query($f[$i]) or die(mysql_error());
-    }
-}
-// 그누보드 테이블 생성 end --------------------------------
-*/
-
-/*
-$str = implode("", file("../common.php"));
-$filename = "db" . substr(md5(uniqid("")),0,8) . ".php";
-$str = str_replace("dbconfig.php", $filename, $str);
-$f = fopen("../common.php", "w");
-fputs($f, $str);
-fclose($f);
-*/
-
 
 // 테이블 생성 ------------------------------------
 $file = implode("", file("./sql_gnuboard4.sql"));
@@ -202,30 +174,6 @@ for ($i=0; $i<count($f); $i++) {
 
 echo "<script>document.frminstall2.job1.value='전체 테이블 생성중';</script>";
 flush(); usleep(50000); 
-
-// 우편번호 INSERT
-/*
-$zipfile = fopen("../$g4[admin]/sql_zip.sql", "r");
-$i = 0;
-while (!feof($zipfile)) {
-    $zipline = fgetss($zipfile, 1024);
-    if (!preg_match("/^INSERT/i", $zipline)) {
-        continue;
-    }
-
-    $zipline = preg_replace("/_TABLE_ZIP_/", $g4[zip_table], $zipline);
-    $zipline = preg_replace("/;/", "", $zipline);
-    //@mysql_query($zipline) or die(mysql_error() . "<p>" . $zipline);
-    @mysql_query($zipline);
-
-    if ($i++%1000==0) {
-        echo "<script language='JavaScript'>document.frminstall2.status_bar.value += '■';</script>\n";
-        flush();
-        usleep(500); 
-    }
-}
-fclose($zipfile);
-*/
 
 for ($i=0; $i<45; $i++)
 {

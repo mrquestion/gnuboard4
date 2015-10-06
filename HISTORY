@@ -1,3 +1,13 @@
+4.34.18 (2012.01.03)
+    :   PHP 버전에 따른 basic 회원 스킨 사용시 euc-kr 버전에서 ajax 가 제대로 작동되도록 수정 (konahn님)
+
+        skin/member/basic/_common.php 를 아래와 같이 수정하십시오.
+
+        $g4_path = "../../.."; // common.php 의 상대 경로
+        include_once("$g4_path/common.php");
+        header("Content-Type: text/html; charset=$g4[charset]"); // 추가된 코드
+
+
 4.34.17 (11.12.09)
     :   [보안패치] 게시물 검색시 $sfl 변수를 이용하여 패스워드 유추가 가능한 부분을 수정 (i2Sec-김세연[kaist]님)
 
