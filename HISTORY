@@ -1,3 +1,69 @@
+4.37.01 (2013.12.24)
+    :   applet 태그를 이용한 취약점 해결 (i2sec 김동현님께서 알려 주셨습니다.)
+
+        lib/common.lib.php
+
+            return preg_replace("/\<([\/]?)(script|iframe|form|applet)([^\>]*)\>?/i", "&lt;$1$2$3&gt;", $code);
+
+    :   도로명주소 기능 추가
+
+        회원테이블에 지번주소 필드(mb_addr_jibeon) 추가를 위해 관리자 > 회원관리 > 수정을 한번 이상 실행해 주십시오.
+
+        adm/member_form.php
+        adm/member_form_update.php
+        skin/member/basic/register_form.skin.php
+        skin/member/basic/zip.skin.php
+        bbs/register_form_update.php
+        bbs/zip.php
+        js/common.js
+        js/zip.js
+
+        === 수정사항 ===
+
+        adm/member_form.php
+
+            // 지번주소 필드추가
+            if(!isset($mb['mb_addr_jibeon'])) {
+                sql_query(" ALTER TABLE {$g4['member_table']} ADD `mb_addr_jibeon` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
+            }
+            ...
+            <a href="javascript:;" onclick="win_zip('fmember', 'mb_zip1', 'mb_zip2', 'mb_addr1', 'mb_addr2', 'mb_addr_jibeon');"><img src='<?=$g4[bbs_img_path]?>/btn_zip.gif' align=absmiddle border=0></a>
+            ...
+            <br><input type="hidden" name="mb_addr_jibeon" value="<?=$mb['mb_addr_jibeon']; ?>">
+                <span id="mb_addr_jibeon"><?=($mb['mb_addr_jibeon'] ? '지번주소 : '.$mb['mb_addr_jibeon'] : ''); ?></span>
+
+        adm/member_form_update.php
+
+            mb_addr_jibeon  = '$_POST[mb_addr_jibeon]',
+
+        skin/member/basic/register_form.skin.php
+
+            &nbsp;<a href="javascript:;" onclick="win_zip('fregisterform', 'mb_zip1', 'mb_zip2', 'mb_addr1', 'mb_addr2', 'mb_addr_jibeon');" align=absmiddle><img width="74" height="20" src="<?=$member_skin_path?>/img/post_search_btn.gif" border=0 align=absmiddle></a></td>
+            ...
+            <tr>
+                <td height="25" colspan="2">
+                    <input type="hidden" name="mb_addr_jibeon" value="<?=$member['mb_addr_jibeon']; ?>">
+                    <span id="mb_addr_jibeon"><?=($member['mb_addr_jibeon'] ? '지번주소 : '.$member['mb_addr_jibeon'] : ''); ?></span>
+                </td>
+            </tr>
+
+        skin/member/basic/zip.skin.php // 전체가 수정되었으니 교체하세요.
+
+        bbs/register_form_update.php
+
+            mb_addr_jibeon = '$mb_addr_jibeon', // 두군데
+
+        js/common.js
+
+            // 도로명 우편번호 창
+            function win_zip(frm_name, frm_zip1, frm_zip2, frm_addr1, frm_addr2, frm_jibeon)
+            {
+                url = g4_path + "/" + g4_bbs + "/zip.php?frm_name="+frm_name+"&frm_zip1="+frm_zip1+"&frm_zip2="+frm_zip2+"&frm_addr1="+frm_addr1+"&frm_addr2="+frm_addr2+"&frm_jibeon="+frm_jibeon;
+                win_open(url, "winZip", "left=50,top=50,width=616,height=460,scrollbars=1");
+            }
+
+        js/zip.js // 추가 되었습니다.
+
 4.36.28 (2013.11.14)
     :   회원아이콘 업로드 취약점 해결 (testtest2 님께서 알려주셨습니다.)
     :   XSS 취약점을 이용하여 관리자 이외의 패스워드를 변경할수 있는 오류를 수정 (testtest2 님께서 알려주셨습니다.)
