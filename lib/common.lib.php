@@ -475,6 +475,7 @@ function conv_content($content, $html)
         $content = preg_replace("/(dy)(nsrc)/i", "&#100;&#121;$2", $content);
         $content = preg_replace("/(lo)(wsrc)/i", "&#108;&#111;$2", $content);
         $content = preg_replace("/(sc)(ript)/i", "&#115;&#99;$2", $content);
+        $content = preg_replace_callback("#<([^>]+)#", create_function('$m', 'return "<".htmlspecialchars($m[1], ENT_NOQUOTES);'), $content);
         $content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "", $content);
 
         // 이미지 태그의 src 속성에 삭제등의 링크가 있는 경우 게시물을 확인하는 것만으로도 데이터의 위변조가 가능하므로 이것을 막음

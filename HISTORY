@@ -1,3 +1,11 @@
+4.36.01 (2012.06.26)
+    :   XSS 취약점 수정 보완 (i2sec 강우석님께서 원인과 해결책을 모두 알려 주셨습니다.)
+        기존코드에 헛점이 있어 코드를 수정 보완 하였습니다.
+            
+        lib/common.lib.php 의 conv_content() 함수에 아래와 같이 한줄 추가 하였습니다.
+
+            $content = preg_replace_callback("#<([^>]+)#", create_function('$m', 'return "<".htmlspecialchars($m[1], ENT_NOQUOTES);'), $content);
+
 4.36.00 (2012.06.21)
     :   DB SESSION 의 MySQL 과부하로 인하여 기존의 FILE SESSION 으로 되돌림
 
@@ -9,7 +17,7 @@
         data/session 디렉토리에 deny from all 과 같은 내용으로 .htaccess 파일을 생성하십시오.
 
 
-        common.php 을 아래와 같이 수정하십시오.
+        common.php 를 아래와 같이 수정하십시오.
 
             //-------------------------------------------
             // SESSION 설정
