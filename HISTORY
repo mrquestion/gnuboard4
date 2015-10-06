@@ -1,3 +1,17 @@
+4.36.15 (2013.02.06)
+    :   SQL Injection 취약점 해결
+        김동현(Stealth) 님께서 한국인터넷진흥원(KISA)을 통하여 알려 주셨습니다.
+
+        ※ php.ini 또는 .htaccess 에서 register_globals = On, magic_quotes_gpc = Off 으로 설정하였을 경우에만 해당됩니다.
+
+        bbs/memo_view.php 의 SQL 코드 위에 아래와 같이 한줄 추가해 넣으시면 됩니다.
+
+            $me_id = (int)$me_id;
+
+        bbs/memo_delete.php 의 SQL 코드 위에 아래와 같이 한줄 추가해 넣으시면 됩니다.
+            
+            $me_id = (int)$me_id;
+
 4.36.14 (2013.02.02)
     :   오타로 인한 XSS 취약점 해결
         ㈜윈스테크넷 침해사고대응센터에서 한국인터넷진흥원(KISA)을 통하여 알려 주셨습니다.
