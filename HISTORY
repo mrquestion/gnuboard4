@@ -1,3 +1,10 @@
+4.36.07 (2012.10.23)
+    :   일부 브라우저에서 template.xml 로딩 오류 발생으로 인하여 template.xml 코드를 cheditor.js 에 포함시켜서 해결함.
+        (CHSOFT 나창호님께서 도움 주셨습니다.)
+
+        cheditor5/cheditor.js 수정
+        cheditor5/template.xml 삭제 (그냥 둬도 상관 없음)
+
 4.36.06 (2012.10.12)
     :   [보안] XSS 취약점 보완 (unsecurity 김강섭님께서 한국인터넷진흥원을 통하여 알려 주셨습니다.)
 
