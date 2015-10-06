@@ -1,3 +1,61 @@
+4.34.02 (11.05.13)
+    :   [보안패치] 이미지 태그의 src 속성에 삭제등의 링크가 있는 경우 게시물을 확인하는 것만으로도 데이터의 위변조가 가능하므로 이것을 막음
+        (국제정보보안센터[i2Sec]의 최종훈님께서 알려주셨습니다.)
+    :   캡챠 코드 변경 (비회원이 코멘트 댓글을 다른 경우 캡챠이미지를 변경할 수 있도록 수정)
+        (letsgolee 님께서 알려주셨습니다.)
+
+        [보안패치]
+
+        lib/common.lib.php 의 conv_content() 함수에 아래 코드를 추가합니다.
+
+            $content = preg_replace("/<(img[^>]+delete\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
+            $content = preg_replace("/<(img[^>]+delete_comment\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
+            $content = preg_replace("/<(img[^>]+logout\.php[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
+
+        bbs/delete.php 와 bbs/delete_comment.php 에 아래 코드를 추가합니다.
+
+        if ($is_admin)
+        {
+            if (!($token && get_session("ss_delete_token") == $token)) 
+                alert("토큰 에러로 삭제 불가합니다.");
+        }
+            
+        bbs/view.php 에 아래 코드를 추가합니다.
+
+            if ($is_admin) 
+            {
+                set_session("ss_delete_token", $token = uniqid(time()));
+                $delete_href = "javascript:del('./delete.php?bo_table=$bo_table&wr_id=$wr_id&token=$token&page=$page".urldecode($qstr)."');";
+            }
+
+        bbs/view_comment.php 에 추가 또는 수정합니다.
+
+            추가 
+            
+            // 코멘트를 새창으로 여는 경우 세션값이 없으므로 생성한다.
+            if ($is_admin && !$token) 
+            {
+                set_session("ss_delete_token", $token = uniqid(time()));
+            }
+
+            ...
+
+            수정
+
+            $list[$i][del_link]  = "./delete_comment.php?bo_table=$bo_table&comment_id=$row[wr_id]&token=$token&cwin=$cwin&page=$page".$qstr;
+
+        [캡챠코드변경]
+
+        js/jquery.kcaptcha.js 전체
+
+        skin/board/basic/view_comment.skin.php 를 아래와 같이 변경합니다.
+
+            jQuery.fn.extend({...}); 를 삭제하시고
+
+            //jQuery(this).kcaptcha_load(); 이 코드를 아래 코드로 수정합니다.
+            if (comment_id && work == 'c')
+                $.kcaptcha_run();
+
 4.34.01 (11.05.11)
     :   비회원의 답변 코멘트 쓰기에서 캡챠가 뜨지 않는 오류를 수정 (휴온님이 알려주셨습니다.)
         4.33.00 에 있던 코드를 적용하였습니다.

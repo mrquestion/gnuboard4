@@ -6,6 +6,12 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 // 자동등록방지
 include_once ("./norobot.inc.php");
 
+// 코멘트를 새창으로 여는 경우 세션값이 없으므로 생성한다.
+if ($is_admin && !$token) 
+{
+    set_session("ss_delete_token", $token = uniqid(time()));
+}
+
 $list = array();
 
 $is_comment_write = false;
@@ -60,7 +66,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         {
             if ($row[mb_id] == $member[mb_id] || $is_admin) 
             {
-                $list[$i][del_link]  = "./delete_comment.php?bo_table=$bo_table&comment_id=$row[wr_id]&cwin=$cwin&page=$page".$qstr;
+                $list[$i][del_link]  = "./delete_comment.php?bo_table=$bo_table&comment_id=$row[wr_id]&token=$token&cwin=$cwin&page=$page".$qstr;
                 $list[$i][is_edit]   = true;
                 $list[$i][is_del]    = true;
             }

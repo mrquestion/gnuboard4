@@ -237,6 +237,7 @@ function fviewcomment_submit(f)
     return true;
 }
 
+/*
 jQuery.fn.extend({
     kcaptcha_load: function() {
         $.ajax({
@@ -254,6 +255,7 @@ jQuery.fn.extend({
         });
     }
 });
+*/
 
 function comment_box(comment_id, work)
 {
@@ -300,7 +302,9 @@ function comment_box(comment_id, work)
     if (typeof(wrestInitialized) != 'undefined')
         wrestInitialized();
 
-    jQuery(this).kcaptcha_load();
+    //jQuery(this).kcaptcha_load();
+    if (comment_id && work == 'c')
+        $.kcaptcha_run();
 }
 
 function comment_delete(url)

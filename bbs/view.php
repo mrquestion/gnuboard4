@@ -73,6 +73,11 @@ $update_href = $delete_href = "";
 if (($member[mb_id] && ($member[mb_id] == $write[mb_id])) || $is_admin) {
     $update_href = "./write.php?w=u&bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr;
     $delete_href = "javascript:del('./delete.php?bo_table=$bo_table&wr_id=$wr_id&page=$page".urldecode($qstr)."');";
+    if ($is_admin) 
+    {
+        set_session("ss_delete_token", $token = uniqid(time()));
+        $delete_href = "javascript:del('./delete.php?bo_table=$bo_table&wr_id=$wr_id&token=$token&page=$page".urldecode($qstr)."');";
+    }
 }
 else if (!$write[mb_id]) { // 회원이 쓴 글이 아니라면
     $update_href = "./password.php?w=u&bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr;

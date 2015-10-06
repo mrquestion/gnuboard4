@@ -468,6 +468,11 @@ function conv_content($content, $html)
         //$content = preg_replace("/(ex)(pression)/i", "&#101&#120;$2", $content);
         $content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "", $content);
 
+        // 이미지 태그의 src 속성에 삭제등의 링크가 있는 경우 게시물을 확인하는 것만으로도 데이터의 위변조가 가능하므로 이것을 막음
+        $content = preg_replace("/<(img[^>]+delete\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
+        $content = preg_replace("/<(img[^>]+delete_comment\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
+        $content = preg_replace("/<(img[^>]+logout\.php[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
+
         // 이런 경우를 방지함 <IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
         $content = preg_replace("#\/\*.*\*\/#iU", "", $content);
 

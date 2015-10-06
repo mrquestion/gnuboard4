@@ -5,6 +5,12 @@ include_once("./_common.php");
 // 4.1
 @include_once("$board_skin_path/delete_comment.head.skin.php");
 
+if ($is_admin)
+{
+    if (!($token && get_session("ss_delete_token") == $token)) 
+        alert("토큰 에러로 삭제 불가합니다.");
+}
+
 $write = sql_fetch(" select * from $write_table where wr_id = '$comment_id' ");
 
 if (!$write[wr_id] || !$write[wr_is_comment])

@@ -5,6 +5,12 @@ include_once("./_common.php");
 
 @include_once("$board_skin_path/delete.head.skin.php");
 
+if ($is_admin)
+{
+    if (!($token && get_session("ss_delete_token") == $token)) 
+        alert("토큰 에러로 삭제 불가합니다.");
+}
+
 if ($is_admin == "super") // 최고관리자 통과
     ;
 else if ($is_admin == "group") { // 그룹관리자
