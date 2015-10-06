@@ -1,6 +1,8 @@
 <?
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
+include_once($g4['path'] . '/lib/html_purifier.lib.php');
+
 // 게시판에서 두단어 이상 검색 후 검색된 게시물에 코멘트를 남기면 나오던 오류 수정
 $sop = strtolower($sop);
 if ($sop != "and" && $sop != "or")
@@ -119,6 +121,7 @@ else if (strstr($view[wr_option], "html2"))
     $html = 2;
 
 $view[content] = conv_content($view[wr_content], $html);
+$view[content] = html_purifier($view[content]);
 if (strstr($sfl, "content"))
     $view[content] = search_font($stx, $view[content]);
 $view[content] = preg_replace("/(\<img )([^\>]*)(\>)/i", "\\1 name='target_resize_image[]' onclick='image_window(this)' style='cursor:pointer;' \\2 \\3", $view[content]);

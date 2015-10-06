@@ -1,3 +1,26 @@
+4.37.33 (2015.08.12)
+    : 4.37.32 버전에서 버그가 있어 수정 
+      글저장시 htmlpurifier 를 작동하지 않고 글읽기에서 htmlpurifier 를 작동하게 하였습니다.
+
+        bbs/write_update.php 가 아래와 같이 수정 되었습니다.
+        아래 코드를 삭제하시거나 주석 처리 하십시오.
+
+            //include_once($g4['path'] . '/lib/html_purifier.lib.php');
+            ...
+            //$wr_content = html_purifier($wr_content);
+
+        bbs/view.php 가 아래와 같이 수정 되었습니다.
+
+            include_once($g4['path'] . '/lib/html_purifier.lib.php');
+            ...
+            $view[content] = html_purifier($view[content]);
+
+        lib/common.lib.php 가 아래와 같이 수정 되었습니다.
+        iframe 태그를 사용하여 유튜브의 동영상을 재생하려는 경우에는 필히 수정해 주십시오
+            
+            //return preg_replace("/\<([\/]?)(script|iframe|form|applet)([^\>]*)\>?/i", "&lt;$1$2$3&gt;", $code);
+            return preg_replace("/\<([\/]?)(script|form|applet)([^\>]*)\>?/i", "&lt;$1$2$3&gt;", $code);
+
 4.37.32 (2015.08.11)
     : 글쓰기에서 XSS 취약점이 발견되어 수정 (장진석님께서 알려 주셨습니다.)
 
