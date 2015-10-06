@@ -121,7 +121,6 @@ function textarea_size(fld, size)
 }
 </script>
 
-<script type="text/javascript" src="<?=$g4['path']?>/js/common.js"></script>
 <script type="text/javascript" src="<?=$g4['path']?>/js/sideview.js"></script>
 <script type="text/javascript">
 var save_layer = null;
