@@ -1,3 +1,17 @@
+4.34.03 (11.05.17)
+    :   [보안패치] SQL Injection 취약점에 대비한 코드 수정
+        (한국인터넷진흥원을 통하여 과천고등학교 권혁님께서 취약점과 해결방안을 자세하게 알려주셨습니다.)
+    :   [보안패치] 이미지 태그의 src 속성에 download.php 링크가 있는 경우 게시물을 확인하는 것만으로도 파일의 다운로드가 가능한 취약점 수정
+        (국제정보보안센터[i2Sec]의 최종훈님께서 알려주셨습니다.)
+
+        lib/common.lib.php 의 get_sql_search() 함수에 추가
+
+            $field[$k] = preg_match("/^[\w\,\|]+$/", $field[$k]) ? $field[$k] : "wr_subject";
+
+        lib/common.lib.php 의 conv_content() 함수 추가
+            
+            $content = preg_replace("/<(img[^>]+download\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
+
 4.34.02 (11.05.13)
     :   [보안패치] 이미지 태그의 src 속성에 삭제등의 링크가 있는 경우 게시물을 확인하는 것만으로도 데이터의 위변조가 가능하므로 이것을 막음
         (국제정보보안센터[i2Sec]의 최종훈님께서 알려주셨습니다.)

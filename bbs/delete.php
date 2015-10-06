@@ -1,15 +1,15 @@
 <?
 include_once("./_common.php");
 
-//$wr = sql_fetch(" select * from $write_table where wr_id = '$wr_id' ");
-
-@include_once("$board_skin_path/delete.head.skin.php");
-
 if ($is_admin)
 {
     if (!($token && get_session("ss_delete_token") == $token)) 
         alert("토큰 에러로 삭제 불가합니다.");
 }
+
+//$wr = sql_fetch(" select * from $write_table where wr_id = '$wr_id' ");
+
+@include_once("$board_skin_path/delete.head.skin.php");
 
 if ($is_admin == "super") // 최고관리자 통과
     ;

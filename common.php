@@ -326,6 +326,7 @@ if (isset($sca))  {
 
 if (isset($sfl))  {
     $sfl = mysql_real_escape_string($sfl);
+    //$sfl = preg_replace("/[^\w\,\|]+/", "", $sfl);
     $qstr .= '&sfl=' . urlencode($sfl); // search field (검색 필드)
 }
 
