@@ -590,6 +590,10 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
                 case "wr_num" :
                     $str .= "$field[$k] = ".((-1)*$s[$i]);
                     break;
+                case "wr_ip" :
+                case "wr_password" :
+                    $str .= "1=0"; // 항상 거짓
+                    break;
                 // LIKE 보다 INSTR 속도가 빠름
                 default :
                     if (preg_match("/[a-zA-Z]/", $search_str))

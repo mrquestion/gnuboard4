@@ -1,3 +1,101 @@
+4.34.17 (11.12.09)
+    :   [보안패치] 게시물 검색시 $sfl 변수를 이용하여 패스워드 유추가 가능한 부분을 수정 (i2Sec-김세연[kaist]님)
+
+        bbs/search.php 의
+
+            switch ($field[$k]) 
+            {
+                case "mb_id" :
+                case "mb_name" :
+                    $str .= "$field[$k] = '$s[$i]'";
+                    break;
+                default :
+                    if (preg_match("/[a-zA-Z]/", $search_str))
+                        $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
+                    else
+                        $str .= "INSTR($field[$k], '$search_str')";
+                    break;
+            }
+
+            위 코드를 
+
+            switch ($field[$k]) 
+            {
+                case "mb_id" :
+                case "wr_name" :
+                    $str .= "$field[$k] = '$s[$i]'";
+                    break;
+                case "wr_subject" :
+                case "wr_content" :
+                    if (preg_match("/[a-zA-Z]/", $search_str))
+                        $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
+                    else
+                        $str .= "INSTR($field[$k], '$search_str')";
+                    break;
+                default :
+                    $str .= "1=0"; // 항상 거짓
+                    break;
+            }
+
+            위와 같이 수정하여 주십시오.
+
+
+        lib/common.lib.php 의
+
+            switch ($field[$k]) {
+                case "mb_id" :
+                case "wr_name" :
+                    $str .= " $field[$k] = '$s[$i]' ";
+                    break;
+                case "wr_hit" :
+                case "wr_good" :
+                case "wr_nogood" :
+                    $str .= " $field[$k] >= '$s[$i]' ";
+                    break;
+                // 번호는 해당 검색어에 -1 을 곱함
+                case "wr_num" :
+                    $str .= "$field[$k] = ".((-1)*$s[$i]);
+                    break;
+                // LIKE 보다 INSTR 속도가 빠름
+                default :
+                    if (preg_match("/[a-zA-Z]/", $search_str))
+                        $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
+                    else
+                        $str .= "INSTR($field[$k], '$search_str')";
+                    break;
+            }
+
+            위 코드를
+
+            switch ($field[$k]) {
+                case "mb_id" :
+                case "wr_name" :
+                    $str .= " $field[$k] = '$s[$i]' ";
+                    break;
+                case "wr_hit" :
+                case "wr_good" :
+                case "wr_nogood" :
+                    $str .= " $field[$k] >= '$s[$i]' ";
+                    break;
+                // 번호는 해당 검색어에 -1 을 곱함
+                case "wr_num" :
+                    $str .= "$field[$k] = ".((-1)*$s[$i]);
+                    break;
+                case "wr_ip" :
+                case "wr_password" :
+                    $str .= "1=0"; // 항상 거짓
+                    break;
+                // LIKE 보다 INSTR 속도가 빠름
+                default :
+                    if (preg_match("/[a-zA-Z]/", $search_str))
+                        $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
+                    else
+                        $str .= "INSTR($field[$k], '$search_str')";
+                    break;
+            }
+
+            위와 같이 수정하여 주십시오.
+
 4.34.16 (11.11.15)
     :   [보안패치] XSS 취약점 권고에 대한 수정 (i2Sec-김태형님)
 

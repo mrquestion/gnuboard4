@@ -79,14 +79,18 @@ if ($stx)
             switch ($field[$k]) 
             {
                 case "mb_id" :
-                case "mb_name" :
+                case "wr_name" :
                     $str .= "$field[$k] = '$s[$i]'";
                     break;
-                default :
+                case "wr_subject" :
+                case "wr_content" :
                     if (preg_match("/[a-zA-Z]/", $search_str))
                         $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
                     else
                         $str .= "INSTR($field[$k], '$search_str')";
+                    break;
+                default :
+                    $str .= "1=0"; // Ç×»ó °ÅÁþ
                     break;
             }
             $op2 = " or ";
