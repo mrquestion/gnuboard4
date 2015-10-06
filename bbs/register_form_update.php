@@ -366,11 +366,8 @@ $https_url = "$g4[url]/$g4[bbs]";
 if ($w == "") {
     goto_url("{$https_url}/register_result.php");
 } else if ($w == "u") {
-    // 패스워드를 암호화하여 넘김
-    if ($mb_password)
-        $tmp_password = sql_password($mb_password);
-    else
-        $tmp_password = get_session("ss_tmp_password");
+    $row  = sql_fetch(" select mb_password from $g4[member_table] where mb_id = '$member[mb_id]' ");
+    $tmp_password = $row['mb_password'];
 
     if ($old_email != $mb_email && $config[cf_use_email_certify]) {
         set_session("ss_mb_id", "");

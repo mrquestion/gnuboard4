@@ -89,9 +89,6 @@ else if ($w == "u")
             alert("패스워드가 틀립니다.");
     }
 
-    // 수정 후 다시 이 폼으로 돌아오기 위해 임시로 저장해 놓음
-    set_session("ss_tmp_password", $tmp_password);
-
     $g4[title] = "회원 정보 수정";
 } else
     alert("w 값이 제대로 넘어오지 않았습니다.");

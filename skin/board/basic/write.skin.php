@@ -126,8 +126,7 @@ if ($option) {
     <td><input class='ed' style="width:100%;" name=wr_subject id="wr_subject" itemname="제목" required value="<?=$subject?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <tr>
-    <td class=write_head style='padding-left:20px;'>내용</td>
-    <td style='padding:5 0 5 0;'>
+    <td class='write_head' style='padding:5 0 5 10;' colspan='2'>
         <? if ($is_dhtml_editor) { ?>
             <?=cheditor2('wr_content', $content);?>
         <? } else { ?>
@@ -328,10 +327,6 @@ function fwrite_submit(f)
         }
     }
 
-    <?
-    if ($is_dhtml_editor) echo cheditor3('wr_content');
-    ?>
-
     if (document.getElementById('tx_wr_content')) {
         if (!ed_wr_content.outputBodyText()) { 
             alert('내용을 입력하십시오.'); 
@@ -339,6 +334,10 @@ function fwrite_submit(f)
             return false;
         }
     }
+
+    <?
+    if ($is_dhtml_editor) echo cheditor3('wr_content');
+    ?>
 
     var subject = "";
     var content = "";
