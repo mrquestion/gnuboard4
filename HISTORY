@@ -1,3 +1,26 @@
+4.37.19 (2014.08.19)
+    : juso.sir.co.kr 도로명주소에서 다음 주소 서비스로 변경 되었습니다.
+      SIR의 도로명주소 서비스는 2014.10.31 까지만 지원할 예정입니다.
+      http://sir.co.kr/bbs/board.php?bo_table=co_notice&wr_id=1160
+
+        bbs/zip.db - 삭제 되었습니다.
+        js/zip.js - 삭제 되었습니다.
+
+        bbs/zip.php - 아래의 코드가 추가 되었습니다.
+            if(isset($_SERVER['HTTPS']) && $_SERVER['HTTPS']=='on') {   //https 통신
+                $g4['daum_juso_js'] = "<script src=\"https://spi.maps.daum.net/imap/map_js_init/postcode.js\"></script>";
+            } else {  //http 통신 
+                $g4['daum_juso_js'] = "<script src=\"http://dmaps.daum.net/map_js_init/postcode.js\"></script>";
+            }
+
+        js/common.js - 아래의 코드가 수정 되었습니다.
+            //win_open(url, "winZip", "left=50,top=50,width=616,height=460,scrollbars=1");
+            win_open(url, "winZip", "left=50,top=50,width=483,height=600,scrollbars=1");
+
+        adm/member_form.php - 이전 코드는 주석 처리되어 있으므로 참고하세요.
+        skin/member/basic/register_form.skin.php - 이전 코드는 주석 처리되어 있으므로 참고하세요.
+        skin/member/basic/zip.skin.php - 대부분의 코드가 변경 되었으므로 새로 교체하세요.
+
 4.37.18 (2014.08.11)
     : SQL Injection 취약점이 발견되어 수정 (한국인터넷진흥원을 통하여 laughfool님이 알려주셨습니다.)
 
