@@ -97,7 +97,7 @@ if ($member[mb_id]) {
         $nogood_href = "./good.php?bo_table=$bo_table&wr_id=$wr_id&good=nogood";
 }
 
-$view = get_view($write, $board, $board_skin_path, $board[bo_subject_len]);
+$view = get_view($write, $board, $board_skin_path, 255);
 
 if (strstr($sfl, "subject"))
     $view[subject] = search_font($stx, $view[subject]);

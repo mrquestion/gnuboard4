@@ -30,7 +30,6 @@ $g4['time_ymdhis'] = date("Y-m-d H:i:s", $g4['server_time']);
 //
 $g4['table_prefix']        = "g4_"; // 테이블명 접두사
 $g4['write_prefix']        = $g4['table_prefix'] . "write_"; // 게시판 테이블명 접두사
-$g4['one_prefix']          = $g4['table_prefix'] . "one_";   // 1:1 게시판 테이블명 접두사
 
 $g4['auth_table']          = $g4['table_prefix'] . "auth";          // 관리권한 설정 테이블
 $g4['config_table']        = $g4['table_prefix'] . "config";        // 기본환경 설정 테이블
@@ -52,8 +51,6 @@ $g4['scrap_table']         = $g4['table_prefix'] . "scrap";         // 게시글 스
 $g4['visit_table']         = $g4['table_prefix'] . "visit";         // 방문자 테이블
 $g4['visit_sum_table']     = $g4['table_prefix'] . "visit_sum";     // 방문자 합계 테이블
 $g4['token_table']         = $g4['table_prefix'] . "token";         // 토큰 테이블
-//$g4['zip_table']           = $g4['table_prefix'] . "zip";           // 우편번호 테이블
-$g4['oneboard_table']      = $g4['table_prefix'] . "oneboard";      // 1:1게시판 설정 테이블
 
 //
 // 기타
@@ -76,4 +73,8 @@ $g4['token_time'] = 3; // 토큰 유효시간
 // config.php 가 있는곳의 웹경로. 뒤에 / 를 붙이지 마세요.
 // 예) http://g4.sir.co.kr
 $g4['url'] = "";
+$g4['https_url'] = "";
+// 입력예
+//$g4['url'] = "http://www.sir.co.kr";
+//$g4['https_url'] = "https://www.sir.co.kr";
 ?>

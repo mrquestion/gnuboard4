@@ -32,34 +32,34 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <colgroup width=100>
 <colgroup width=''>
-<tr><td colspan=2 height=2 bgcolor=#b0adf5></td></tr>
-<tr><td style='padding-left:20px' colspan=2 height=38 bgcolor=#f8f8f9><strong><?=$title_msg?></strong></td></tr>
-
+<tr><td colspan=2 height=2 bgcolor="#0A7299"></td></tr>
+<tr><td style='padding-left:20px' colspan=2 height=38 bgcolor="#FBFBFB"><strong><?=$title_msg?></strong></td></tr>
+<tr><td colspan="2" style="background:url(<?=$board_skin_path?>/img/title_bg.gif) repeat-x; height:3px;"></td></tr>
 <? if ($is_name) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 이름</td>
-    <td><input class=ed maxlength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></td></tr>
+    <td><input class='field_pub_01' maxlength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_password) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 패스워드</td>
-    <td><input class=ed type=password maxlength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></td></tr>
+    <td><input class='field_pub_01' type=password maxlength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_email) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 이메일</td>
-    <td><input class=ed maxlength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></td></tr>
+    <td><input class='field_pub_01' maxlength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_homepage) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 홈페이지</td>
-    <td><input class=ed size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></td></tr>
+    <td><input class='field_pub_01' size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
@@ -94,7 +94,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 <tr>
     <td style='padding-left:20px; height:30px;'>· 제목</td>
-    <td><input class=ed style="width:100%;" name=wr_subject id="wr_subject" itemname="제목" required value="<?=$subject?>"></td></tr>
+    <td><input class="field_pub_01" style="width:100%; height:18px;" name=wr_subject id="wr_subject" itemname="제목" required value="<?=$subject?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <tr>
     <td style='padding-left:20px;'>· 내용</td>
@@ -123,7 +123,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <? for ($i=1; $i<=$g4[link_count]; $i++) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 링크 #<?=$i?></td>
-    <td><input type='text' class=ed size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
+    <td><input type='text' class='field_pub_01' size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
@@ -155,13 +155,13 @@ var char_max = parseInt(<?=$write_max?>); // 최대
             objRow = objTbl.insertRow(objTbl.rows.length);
             objCell = objRow.insertCell(0);
 
-            objCell.innerHTML = "<input type='file' class=ed name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
+            objCell.innerHTML = "<input type='file' class='field_pub_01' name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
             if (delete_code)
                 objCell.innerHTML += delete_code;
             else
             {
                 <? if ($is_file_content) { ?>
-                objCell.innerHTML += "<br><input type='text' class=ed size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
+                objCell.innerHTML += "<br><input type='text' class='field_pub_01' size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
                 <? } ?>
                 ;
             }
@@ -190,7 +190,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <? if ($is_trackback) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 트랙백주소</td>
-    <td><input class=ed size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
+    <td><input class='field_pub_01' size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
         <? if ($w=="u") { ?><input type=checkbox name="re_trackback" value="1">핑 보냄<? } ?></td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
@@ -199,20 +199,17 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <? if ($is_norobot) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· <?=$norobot_str?></td>
-    <td><input class=ed type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;* 왼쪽의 글자중 <font color="red">빨간글자만</font> 순서대로 입력하세요.</td>
+    <td><input class='field_pub_01' type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;* 왼쪽의 글자중 <font color="red">빨간글자만</font> 순서대로 입력하세요.</td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
-<tr><td colspan=2 height=1 bgcolor=#000000></td></tr>
+<tr><td colspan=2 height=2 bgcolor="#0A7299"></td></tr>
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
-    <td width="100%" height="30" background="<?=$board_skin_path?>/img/write_down_bg.gif"></td>
-</tr>
-<tr>
-    <td width="100%" align="center" valign="top">
+    <td width="100%" align="center" valign="top" style="padding-top:30px;">
         <input type=image id="btn_submit" src="<?=$board_skin_path?>/img/btn_write.gif" border=0 accesskey='s'>&nbsp;
         <a href="./board.php?bo_table=<?=$bo_table?>"><img id="btn_list" src="<?=$board_skin_path?>/img/btn_list.gif" border=0></a></td>
 </tr>
@@ -305,7 +302,12 @@ function fwrite_check(f) {
     document.getElementById('btn_submit').disabled = true;
     document.getElementById('btn_list').disabled = true;
 
-    f.action = "./write_update.php";
+    <?
+    if ($g4[https_url])
+        echo "f.action = '$g4[https_url]/$g4[bbs]/write_update.php';";
+    else
+        echo "f.action = './write_update.php';";
+    ?>
     f.submit();
 }
 </script>

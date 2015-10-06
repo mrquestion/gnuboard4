@@ -136,7 +136,7 @@ if ($w == "c") // 코멘트 입력
 
     $sql = " insert into $write_table
                 set ca_name = '$wr[ca_name]',
-                    wr_option = '',
+                    wr_option = '$wr_secret',
                     wr_num = '$wr[wr_num]',
                     wr_reply = '',
                     wr_parent = '$wr_id',
@@ -295,6 +295,10 @@ else if ($w == "cu") // 코멘트 수정
     if (!$is_admin)
         $sql_ip = " , wr_ip = '$_SERVER[REMOTE_ADDR]' ";
 
+    $sql_secret = "";
+    if ($wr_secret)
+        $sql_secret = " , wr_option = '$wr_secret' ";
+
     $sql = " update $write_table
                 set wr_subject = '$wr_subject',
                     wr_content = '$wr_content',
@@ -307,8 +311,10 @@ else if ($w == "cu") // 코멘트 수정
                     wr_7 = '$wr_7',
                     wr_8 = '$wr_8',
                     wr_9 = '$wr_9',
-                    wr_10 = '$wr_10'
+                    wr_10 = '$wr_10',
+                    wr_option = '$wr_option'
                     $sql_ip
+                    $sql_secret
               where wr_id = '$comment_id' ";
     sql_query($sql);
 }

@@ -3,6 +3,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 // 선택옵션으로 인해 셀합치기가 가변적으로 변함
 $colspan = 5;
+
 //if ($is_category) $colspan++;
 if ($is_checkbox) $colspan++;
 if ($is_good) $colspan++;
@@ -19,10 +20,10 @@ if ($is_nogood) $colspan++;
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr height="25">
     <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+this.value;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
-    <td align="right">
-        게시물 <?=number_format($total_count)?>건 
+    <td align="right" style="font:normal 11px tahoma; color:#BABABA;">
+        Total <?=number_format($total_count)?> 
         <? if ($rss_href) { ?><a href='<?=$rss_href?>'><img src='<?=$board_skin_path?>/img/btn_rss.gif' border=0 align=absmiddle></a><?}?>
-        <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/admin_button.gif" title="관리자" width="63" height="22" border="0" align="absmiddle"></a><?}?></td>
+        <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/btn_admin.gif" title="관리자" width="63" height="22" border="0" align="absmiddle"></a><?}?></td>
 </tr>
 <tr><td height=5></td></tr>
 </table>
@@ -35,21 +36,31 @@ if ($is_nogood) $colspan++;
 <input type='hidden' name='spt'  value='<?=$spt?>'>
 <input type='hidden' name='page' value='<?=$page?>'>
 <input type='hidden' name='sw'   value=''>
-<table width=100% cellpadding=0 cellspacing=0>
-<tr><td colspan=<?=$colspan?> height=2 bgcolor=#B0ADF5></td></tr>
-<tr bgcolor=#F8F8F9 height=30 align=center>
+
+<table width=100% border="0" cellpadding=0 cellspacing="2">
+<tr>
+    <td height=2 bgcolor="#0A7299"></td>
+    <? if ($is_checkbox) { ?><td bgcolor="#0A7299"></td><?}?>
+    <td bgcolor="#0A7299"></td>
+    <td bgcolor="#A4B510"></td>
+    <td bgcolor="#A4B510"></td>
+    <td bgcolor="#A4B510"></td>
+    <? if ($is_good) { ?><td bgcolor="#A4B510"></td><?}?>
+    <? if ($is_good) { ?><td bgcolor="#A4B510"></td><?}?>
+</tr>
+<tr height=28 align=center>
     <td width=50>번호</td>
     <?/* if ($is_category) { ?><td width=70>분류</td><?}*/?>
     <? if ($is_checkbox) { ?><td width=40><INPUT onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><?}?>
     <td>제목</td>
     <td width=110>글쓴이</td>
     <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
-    <td width=40><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
+    <td width=50><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
     <?/*?><td width=40 title='마지막 코멘트 쓴 시간'><?=subject_sort_link('wr_last', $qstr2, 1)?>최근</a></td><?*/?>
     <? if ($is_good) { ?><td width=40><?=subject_sort_link('wr_good', $qstr2, 1)?>추천</a></td><?}?>
     <? if ($is_nogood) { ?><td width=40><?=subject_sort_link('wr_nogood', $qstr2, 1)?>비추천</a></td><?}?>
 </tr>
-<tr><td colspan=<?=$colspan?> height=1 bgcolor=#B0ADF5></td></tr>
+<tr><td colspan=<?=$colspan?> height=3 style="background:url(<?=$board_skin_path?>/img/title_bg.gif) repeat-x;"></td></tr>
 
 <!-- 목록 -->
 <? for ($i=0; $i<count($list); $i++) { ?>
@@ -57,13 +68,13 @@ if ($is_nogood) $colspan++;
     <td>
         <? 
         if ($list[$i][is_notice]) // 공지사항 
-            echo "<img src=\"$board_skin_path/img/notice_icon.gif\" width=30 height=16>";
+            echo "<img src=\"$board_skin_path/img/icon_notice.gif\">";
         else if ($wr_id == $list[$i][wr_id]) // 현재위치
-            echo "<span style='color:#ff6600;font-weight:bold;'>{$list[$i][num]}</span>";
+            echo "<span style='font:bold 11px tahoma; color:#E15916;'>{$list[$i][num]}</span>";
         else
-            echo "<span style='color:#888888;'>{$list[$i][num]}</span>";
+            echo "<span style='font:normal 11px tahoma; color:#BABABA;'>{$list[$i][num]}</span>";
         ?></td>
-    <?/* if ($is_category) { ?><td><a href="<?=$list[$i][ca_name_href]?>"><span class=small style='color:#888888;'><?=$list[$i][ca_name]?></span></a></td><? } */?>
+    <?/* if ($is_category) { ?><td><a href="<?=$list[$i][ca_name_href]?>"><span class=small style='color:#BABABA;'><?=$list[$i][ca_name]?></span></a></td><? } */?>
     <? if ($is_checkbox) { ?><td><input type=checkbox name=chk_wr_id[] value="<?=$list[$i][wr_id]?>"></td><? } ?>
     <td align=left style='word-break:break-all;'>
         <? 
@@ -81,12 +92,12 @@ if ($is_nogood) $colspan++;
         echo "</a>";
 
         if ($list[$i][comment_cnt]) 
-            echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-family:Tahoma;font-size:7pt;color:#ff6600;'>{$list[$i][comment_cnt]}</span></a>";
+            echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-family:Tahoma;font-size:10px;color:#EE5A00;'>{$list[$i][comment_cnt]}</span></a>";
 
         // if ($list[$i]['link']['count']) { echo "[{$list[$i]['link']['count']}]"; }
         // if ($list[$i]['file']['count']) { echo "<{$list[$i]['file']['count']}>"; }
 
-        //echo " " . $list[$i][icon_new];
+        echo " " . $list[$i][icon_new];
         echo " " . $list[$i][icon_file];
         echo " " . $list[$i][icon_link];
         echo " " . $list[$i][icon_hot];
@@ -94,17 +105,17 @@ if ($is_nogood) $colspan++;
         echo $nobr_end;
         ?></td>
     <td><nobr style='display:block; overflow:hidden; width:105px;'><?=$list[$i][name]?></nobr></td>
-    <td><span style='color:#888888;'><?=$list[$i][datetime2]?></span></td>
-    <td><span style='color:#888888;'><?=$list[$i][wr_hit]?></span></td>
-    <?/*?><td><span style='color:#888888;'><?=$list[$i][last2]?></span></td><?*/?>
-    <? if ($is_good) { ?><td align="center"><span style='color:#888888;'><?=$list[$i][wr_good]?></span></td><? } ?>
-    <? if ($is_nogood) { ?><td align="center"><span style='color:#888888;'><?=$list[$i][wr_nogood]?></span></td><? } ?>
+    <td><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][datetime2]?></span></td>
+    <td><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_hit]?></span></td>
+    <?/*?><td><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][last2]?></span></td><?*/?>
+    <? if ($is_good) { ?><td align="center"><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_good]?></span></td><? } ?>
+    <? if ($is_nogood) { ?><td align="center"><span style='font:normal 11px tahoma; color:#BABABA;'><?=$list[$i][wr_nogood]?></span></td><? } ?>
 </tr>
 <tr><td colspan=<?=$colspan?> height=1 bgcolor=#E7E7E7></td></tr>
 <?}?>
 
 <? if (count($list) == 0) { echo "<tr><td colspan='$colspan' height=100 align=center>게시물이 없습니다.</td></tr>"; } ?>
-<tr><td colspan=<?=$colspan?> bgcolor=#5C86AD height=1></td></tr>
+<tr><td colspan=<?=$colspan?> bgcolor="#0A7299" height="2"></td></tr>
 </table>
 </form>
 
@@ -120,8 +131,8 @@ if ($is_nogood) $colspan++;
         $write_pages = str_replace("이전", "<img src='$board_skin_path/img/prev.gif' border='0' align='absmiddle' title='이전'>", $write_pages);
         $write_pages = str_replace("다음", "<img src='$board_skin_path/img/next.gif' border='0' align='absmiddle' title='다음'>", $write_pages);
         $write_pages = str_replace("맨끝", "<img src='$board_skin_path/img/end.gif' border='0' align='absmiddle' title='맨끝'>", $write_pages);
-        $write_pages = preg_replace("/<span>([0-9]*)<\/span>/", "<b><font style=\"font-family:돋움; font-size:9pt; color:#797979\">$1</font></b>", $write_pages);
-        $write_pages = preg_replace("/<b>([0-9]*)<\/b>/", "<b><font style=\"font-family:돋움; font-size:9pt; color:orange;\">$1</font></b>", $write_pages);
+        $write_pages = preg_replace("/<span>([0-9]*)<\/span>/", "<b><font style=\"font-family:tahoma; font-size:11px; color:#000000\">$1</font></b>", $write_pages);
+        $write_pages = preg_replace("/<b>([0-9]*)<\/b>/", "<b><font style=\"font-family:tahoma; font-size:11px; color:#E15916;\">$1</font></b>", $write_pages);
         ?>
         <?=$write_pages?>
         <? if ($next_part_href) { echo "<a href='$next_part_href'><img src='$board_skin_path/img/btn_search_next.gif' border=0 align=absmiddle title='다음검색'></a>"; } ?>

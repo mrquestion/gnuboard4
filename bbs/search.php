@@ -16,10 +16,7 @@ if ($stx)
 
     unset($g4_search[tables]);
     unset($g4_search[read_level]);
-    $sql = " select gr_id, bo_table, bo_read_level
-               from $g4[board_table]
-              where bo_use_search = '1'
-                and bo_list_level <= '$member[mb_level]' ";
+    $sql = " select gr_id, bo_table, bo_read_level from $g4[board_table] where bo_use_search = '1' and bo_list_level <= '$member[mb_level]' ";
     //            and bo_read_level <= '$member[mb_level]' ";
     if ($gr_id)
         $sql .= " and gr_id = '$gr_id' ";
@@ -42,10 +39,7 @@ if ($stx)
                     ;
                 else 
                 {
-                    $sql3 = " select count(*) as cnt from $g4[group_member_table]
-                               where gr_id = '$row[gr_id]'
-                                 and mb_id = '$member[mb_id]' 
-                                 and mb_id <> '' ";
+                    $sql3 = " select count(*) as cnt from $g4[group_member_table] where gr_id = '$row[gr_id]' and mb_id = '$member[mb_id]' and mb_id <> '' ";
                     $row3 = sql_fetch($sql3);
                     if (!$row3[cnt])
                         continue;
@@ -101,10 +95,7 @@ if ($stx)
         $op1 = " $sop ";
 
         // 인기검색어
-        $sql = " insert into $g4[popular_table]
-                    set pp_word = '$search_str',
-                        pp_date = '$g4[time_ymd]',
-                        pp_ip = '$_SERVER[REMOTE_ADDR]' ";
+        $sql = " insert into $g4[popular_table] set pp_word = '$search_str', pp_date = '$g4[time_ymd]', pp_ip = '$_SERVER[REMOTE_ADDR]' ";
         sql_query($sql, FALSE);
     }
     $str .= ")";

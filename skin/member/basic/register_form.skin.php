@@ -17,6 +17,11 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
 -->
 </style>
 
+<script>
+var member_skin_path = "<?=$member_skin_path?>";
+</script>
+<script language="javascript" src="<?=$g4['path']?>/js/prototype.js"></script>
+<script language="javascript" src="<?=$member_skin_path?>/ajax_register_form.js"></script>
 <script language="javascript" src="<?=$g4[path]?>/js/md5.js"></script>
 <script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
 
@@ -40,10 +45,11 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>¾ÆÀÌµğ</TD>
             <TD class=m_padding>
-                <INPUT class=m_text maxLength=20 size=20 name="mb_id" minlength="3" alphanumericunderline itemname="¾ÆÀÌµğ" required value="<?=$member[mb_id]?>" <?= ($w == '') ? 'required' : "readonly style='background-color:#dddddd;'";?> onchange="fregisterform.mb_id_enabled.value='';">
-                &nbsp;<? if ($w == "") { ?><a href="javascript:mb_id_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a><? } ?>
+                <input class=m_text maxlength=20 size=20 id='reg_mb_id' name="mb_id" value="<?=$member[mb_id]?>" <? if ($w=='u') { echo "readonly style='background-color:#dddddd;'"; } ?>
+                    <? if ($w=='') { echo "onkeyup='reg_mb_id_check();'"; } ?>>
+                <span id='msg_mb_id'></span>
                 <table height=25 cellspacing=0 cellpadding=0 border=0>
-                <tr><td><font color="#66A2C8">¡Ø ¿µ¹®ÀÚ, ¼ıÀÚ, _ ¸¸ ÀÔ·Â °¡´É. ÃÖ¼Ò 3ÀÚÀÌ»ó ÀÔ·ÂÇÏ¼¼¿ä.</font></td></tr>
+                <tr><td><font color="#66a2c8">¡Ø ¿µ¹®ÀÚ, ¼ıÀÚ, _ ¸¸ ÀÔ·Â °¡´É. ÃÖ¼Ò 3ÀÚÀÌ»ó ÀÔ·ÂÇÏ¼¼¿ä.</font></td></tr>
                 </table>
             </TD>
         </TR>
@@ -108,8 +114,8 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>ÀÌ¸§</TD>
             <TD class=m_padding>
-                <!-- ÇÑ±Û¸¸ ÀÔ·Â¹ŞÀ» °æ¿ì <INPUT name=mb_name itemname="ÀÌ¸§" required minlength="2" nospace hangul value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=m_text2":"class=m_text";?>> -->
-                <INPUT name=mb_name itemname="ÀÌ¸§" required minlength="2" nospace hangul value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=m_text2":"class=m_text";?>> (°ø¹é¾øÀÌ ÇÑ±Û¸¸ ÀÔ·Â °¡´É)
+                <input name=mb_name itemname="ÀÌ¸§" value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=m_text2":"class=m_text";?>> 
+                <? if ($w=='') { echo "(°ø¹é¾øÀÌ ÇÑ±Û¸¸ ÀÔ·Â °¡´É)"; } ?>
             </TD>
         </TR>
 
@@ -118,9 +124,11 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>º°¸í</TD>
             <TD class='m_padding lh'>
-                <input class=m_text type=text name='mb_nick' maxlength=20 minlength="2" required nospace hangulalphanumeric itemname="º°¸í" value='<?=$member[mb_nick]?>' onchange="fregisterform.mb_nick_enabled.value='';">
-                &nbsp;<a href="javascript:mb_nick_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a> (°ø¹é¾øÀÌ ÇÑ±Û,¿µ¹®,¼ıÀÚ¸¸ ÀÔ·Â °¡´É)
-                <br>º°¸íÀ» ¹Ù²Ù½Ã¸é ¾ÕÀ¸·Î <?=(int)$config[cf_nick_modify]?>ÀÏ ÀÌ³»¿¡´Â º¯°æÀÌ ¾ÈµË´Ï´Ù.
+                <input class=m_text type=text id='reg_mb_nick' name='mb_nick' maxlength=20 value='<?=$member[mb_nick]?>'
+                    onkeyup="reg_mb_nick_check();">
+                <span id='msg_mb_nick'></span>
+                <br>°ø¹é¾øÀÌ ÇÑ±Û,¿µ¹®,¼ıÀÚ¸¸ ÀÔ·Â °¡´É (ÇÑ±Û2ÀÚ, ¿µ¹®4ÀÚ ÀÌ»ó)
+                <br>º°¸íÀ» ¹Ù²Ù½Ã¸é ¾ÕÀ¸·Î <?=(int)$config[cf_nick_modify]?>ÀÏ ÀÌ³»¿¡´Â º¯°æ ÇÒ ¼ö ¾ø½À´Ï´Ù.
             </TD>
         </TR>
         <? } else { ?>
@@ -132,11 +140,12 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>E-mail</TD>
             <TD class='m_padding lh'>
-                <INPUT class=m_text type=text name='mb_email' size=38 maxlength=100 email required itemname='E-mail' value='<?=$member[mb_email]?>'>
-                &nbsp;<a href="javascript:mb_email_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a>
+                <input class=m_text type=text id='reg_mb_email' name='mb_email' size=38 maxlength=100 value='<?=$member[mb_email]?>'
+                    onkeyup="reg_mb_email_check()">
+                <span id='msg_mb_email'></span>
                 <? if ($config[cf_use_email_certify]) { ?>
-                    <? if ($w=='') { echo "<br>E-mail ·Î ¹ß¼ÛµÈ ³»¿ëÀ» È®ÀÎÇÑ ÈÄ ÀÎÁõÇÏ¼Å¾ß È¸¿ø°¡ÀÔÀÌ ¿Ï·áµË´Ï´Ù."; } ?>
-                    <? if ($w=='u') { echo "<br>E-mail ÁÖ¼Ò¸¦ º¯°æÇÏ½Ã¸é ´Ù½Ã ÀÎÁõÇÏ¼Å¾ß ÇÕ´Ï´Ù."; } ?>
+                    <? if ($w=='') { echo "<br>e-mail ·Î ¹ß¼ÛµÈ ³»¿ëÀ» È®ÀÎÇÑ ÈÄ ÀÎÁõÇÏ¼Å¾ß È¸¿ø°¡ÀÔÀÌ ¿Ï·áµË´Ï´Ù."; } ?>
+                    <? if ($w=='u') { echo "<br>e-mail ÁÖ¼Ò¸¦ º¯°æÇÏ½Ã¸é ´Ù½Ã ÀÎÁõÇÏ¼Å¾ß ÇÕ´Ï´Ù."; } ?>
                 <? } ?>
             </TD>
         </TR>
@@ -316,94 +325,117 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
 </table>
 
 <script language="Javascript">
-with (document.fregisterform) {
-    if (w.value == "")
-        mb_id.focus();
-    else {
-        mb_password.focus();
-        mb_nick_enabled.value = 1;
-    }
-}
+
+Form.focusFirstElement('fregisterform');
 
 // submit ÃÖÁ¾ ÆûÃ¼Å©
-function fregisterform_submit(f)
+function fregisterform_submit(f) 
 {
+    // È¸¿ø¾ÆÀÌµğ °Ë»ç
     if (f.w.value == "") {
-        if (f.mb_id_enabled.value == "") {
-            alert("È¸¿ø¾ÆÀÌµğ Áßº¹È®ÀÎÀ» ÇØÁÖ½Ê½Ã¿À.");
-            f.mb_id.focus();
-            return;
-        } else if (f.mb_id_enabled.value == -1) {
-            alert("'"+f.mb_id.value+"'Àº(´Â) ÀÌ¹Ì °¡ÀÔµÈ È¸¿ø¾ÆÀÌµğÀÌ¹Ç·Î »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.");
-            f.mb_id.focus();
-            return;
-        } else if (f.mb_id_enabled.value == -2) {
-            alert("'"+f.mb_id.value+"'Àº(´Â) ¿¹¾à¾î·Î »ç¿ëÇÏ½Ç ¼ö ¾ø´Â È¸¿ø¾ÆÀÌµğÀÔ´Ï´Ù.");
-            f.mb_id.focus();
+
+        reg_mb_id_check();
+
+        if ($F('mb_id_enabled')!='000') {
+            alert('È¸¿ø¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
+            $('reg_mb_id').activate();
             return;
         }
     }
 
-    if ((f.w.value == "" && f.mb_nick_enabled.value == "") || 
-        (f.w.value == "u" && f.mb_nick_enabled.value == "" && f.mb_nick.defaultValue != f.mb_nick.value)) {
-        alert("º°¸í Áßº¹È®ÀÎÀ» ÇØÁÖ½Ê½Ã¿À.");
-        f.mb_nick.focus();
-        return;
-    } else if (f.mb_nick_enabled.value == -1) {
-        alert("'"+f.mb_nick.value+"'Àº(´Â) ÀÌ¹Ì µî·ÏµÈ º°¸íÀÌ¹Ç·Î »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.");
-        f.mb_nick.focus();
-        return;
-    } else if (f.mb_nick_enabled.value == -2) {
-        alert("'"+f.mb_nick.value+"'Àº(´Â) ¿¹¾à¾î·Î »ç¿ëÇÏ½Ç ¼ö ¾ø´Â È¸¿ø¾ÆÀÌµğÀÔ´Ï´Ù.");
-        f.mb_nick.focus();
-        return;
+    if (f.w.value == '') {
+        if (f.mb_password.value.strip().length < 3) {
+            alert('ÆĞ½º¿öµå¸¦ 3±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ê½Ã¿À.');
+            f.mb_password.activate();
+            return;
+        }
     }
-
-    /*
-    var id = prohibit_id_check(f.mb_id.value);
-    if (id) {
-        alert("'"+id+"'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â È¸¿ø¾ÆÀÌµğÀÔ´Ï´Ù.");
-        f.mb_id.focus();
-        return;
-    }
-    */
 
     if (f.mb_password.value != f.mb_password_re.value) {
-        alert("ÆĞ½º¿öµå°¡ °°Áö ¾Ê½À´Ï´Ù.");
-        f.mb_password_re.focus();
+        alert('ÆĞ½º¿öµå°¡ °°Áö ¾Ê½À´Ï´Ù.');
+        f.mb_password_re.activate();
         return;
     }
 
-    /*
-    // »ç¿ëÇÒ ¼ö ¾ø´Â º°¸íÀ» »ç¿ëÇÏ°íÀÚ ÇÏ´Â °æ¿ì¿¡´Â ÀÌ ÁÖ¼®À» Á¦°ÅÇÏ½Ê½Ã¿À.
-    if (prohibit_id_check(f.mb_nick.value))
-    {
-        alert("'"+f.mb_nick.value + "'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â º°¸íÀÔ´Ï´Ù.");
-        f.mb_nick.focus();
-        return;
+    if (f.mb_password.value.strip().length > 0) {
+        if (f.mb_password_re.value.strip().length < 3) {
+            alert('ÆĞ½º¿öµå¸¦ 3±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ê½Ã¿À.');
+            f.mb_password_re.activate();
+            return;
+        }
     }
-    */
 
-    var domain = prohibit_email_check(f.mb_email.value);
-    if (domain) {
-        alert("'"+domain+"'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â ¸ŞÀÏÀÔ´Ï´Ù.");
-        f.mb_email.focus();
+    if (f.mb_password_q.value.strip().length < 1) {
+        alert('ÆĞ½º¿öµå ºĞ½Ç½Ã Áú¹®À» ¼±ÅÃÇÏ°Å³ª ÀÔ·ÂÇÏ½Ê½Ã¿À.');
+        f.mb_password_q.activate();
         return;
     }
 
-    if ((f.w.value == "" && f.mb_email_enabled.value == "") || 
-        (f.w.value == "u" && f.mb_email_enabled.value == "" && f.mb_email.defaultValue != f.mb_email.value)) {
-        alert("E-mail Áßº¹È®ÀÎÀ» ÇØÁÖ½Ê½Ã¿À.");
-        f.mb_email.focus();
+    if (f.mb_password_a.value.strip().length < 1) {
+        alert('ÆĞ½º¿öµå ºĞ½Ç½Ã ´äº¯À» ÀÔ·ÂÇÏ½Ê½Ã¿À.');
+        f.mb_password_a.activate();
         return;
-    } else if (f.mb_email_enabled.value == -1) {
-        alert("'"+f.mb_email.value+"'Àº(´Â) ÀÌ¹Ì ´Ù¸¥ È¸¿øÀÌ »ç¿ëÇÏ´Â E-mailÀÌ¹Ç·Î »ç¿ëÇÏ½Ç ¼ö ¾ø½À´Ï´Ù.");
-        return;
+    }
+
+    // ÀÌ¸§ °Ë»ç
+    if (f.w.value=='') {
+        if (f.mb_name.value.strip().length < 1) {
+            alert('ÀÌ¸§À» ÀÔ·ÂÇÏ½Ê½Ã¿À.');
+            f.mb_name.activate();
+            return;
+        }
+
+        var pattern = /([^°¡-ÆR\x20])/i; 
+        if (pattern.test(f.mb_name.value)) {
+            alert('ÀÌ¸§Àº ÇÑ±Û·Î ÀÔ·ÂÇÏ½Ê½Ã¿À.');
+            f.mb_name.activate();
+            return;
+        }
+    }
+
+    // º°¸í °Ë»ç
+    if ((f.w.value == "") ||
+        (f.w.value == "u" && f.mb_nick.defaultValue != f.mb_nick.value)) {
+
+        reg_mb_nick_check();
+
+        if ($F('mb_nick_enabled')!='000') {
+            alert('º°¸íÀ» ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
+            $('reg_mb_nick').activate();
+            return;
+        }
+    }
+
+    // E-mail °Ë»ç
+    if ((f.w.value == "") ||
+        (f.w.value == "u" && f.mb_email.defaultValue != f.mb_email.value)) {
+
+        reg_mb_email_check();
+
+        if ($F('mb_email_enabled')!='000') {
+            alert('E-mailÀ» ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
+            $('reg_mb_email').activate();
+            return;
+        }
+
+        // »ç¿ëÇÒ ¼ö ¾ø´Â E-mail µµ¸ŞÀÎ
+        var domain = prohibit_email_check(f.mb_email.value);
+        if (domain) {
+            alert("'"+domain+"'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â ¸ŞÀÏÀÔ´Ï´Ù.");
+            $('reg_mb_email').activate();
+            return;
+        }
     }
 
     if (typeof(f.mb_birth) != 'undefined') {
+        if (f.mb_birth.value.strip().length < 1) {
+            alert('´Ş·Â ¹öÆ°À» Å¬¸¯ÇÏ¿© »ıÀÏÀ» ÀÔ·ÂÇÏ¿© ÁÖ½Ê½Ã¿À.');
+            //f.mb_birth.activate();
+            return;
+        }
+
         var todays = <?=date("Ymd", $g4['server_time']);?>;
-        // ¿À´Ã³¯Â¥¿¡¼­ »ıÀÏÀ» »©°í °Å±â¼­ 140000 À» »«´Ù. 
+        // ¿À´Ã³¯Â¥¿¡¼­ »ıÀÏÀ» »©°í °Å±â¼­ 140000 À» »«´Ù.
         // °á°ú°¡ 0 ÀÌ»óÀÇ ¾ç¼öÀÌ¸é ¸¸ 14¼¼°¡ Áö³­°ÍÀÓ
         var n = todays - parseInt(f.mb_birth.value) - 140000;
         if (n < 0) {
@@ -412,11 +444,19 @@ function fregisterform_submit(f)
         }
     }
 
-    if (typeof f.mb_icon != "undefined") {
+    if (typeof(f.mb_sex) != 'undefined') {
+        if (f.mb_sex.value == '') {
+            alert('¼ºº°À» ¼±ÅÃÇÏ¿© ÁÖ½Ê½Ã¿À.');
+            f.mb_sex.activate();
+            return;
+        }
+    }
+
+    if (typeof f.mb_icon != 'undefined') {
         if (f.mb_icon.value) {
             if (!f.mb_icon.value.toLowerCase().match(/.(gif)$/i)) {
-                alert("È¸¿ø¾ÆÀÌÄÜÀÌ gif ÆÄÀÏÀÌ ¾Æ´Õ´Ï´Ù.");
-                f.mb_icon.focus();
+                alert('È¸¿ø¾ÆÀÌÄÜÀÌ gif ÆÄÀÏÀÌ ¾Æ´Õ´Ï´Ù.');
+                f.mb_icon.activate();
                 return;
             }
         }
@@ -424,123 +464,27 @@ function fregisterform_submit(f)
 
     if (typeof(f.mb_recommend) != 'undefined') {
         if (f.mb_id.value == f.mb_recommend.value) {
-            alert("º»ÀÎÀ» ÃßÃµÇÒ ¼ö ¾ø½À´Ï´Ù.");
-            f.mb_recommend.focus();
+            alert('º»ÀÎÀ» ÃßÃµÇÒ ¼ö ¾ø½À´Ï´Ù.');
+            f.mb_recommend.activate();
             return;
         }
     }
 
-    if (typeof(f.wr_key) != "undefined") {
+    if (typeof(f.wr_key) != 'undefined') {
         if (hex_md5(f.wr_key.value) != md5_norobot_key) {
-            alert("ÀÚµ¿µî·Ï¹æÁö¿ë »¡°£±ÛÀÚ°¡ ¼ø¼­´ë·Î ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.");
-            f.wr_key.focus();
+            alert('ÀÚµ¿µî·Ï¹æÁö¿ë »¡°£±ÛÀÚ°¡ ¼ø¼­´ë·Î ÀÔ·ÂµÇÁö ¾Ê¾Ò½À´Ï´Ù.');
+            f.wr_key.activate();
             return;
         }
     }
 
-    f.action = "./register_form_update.php";
+    <?
+    if ($g4[https_url])
+        echo "f.action = '$g4[https_url]/$g4[bbs]/register_form_update.php';";
+    else
+        echo "f.action = './register_form_update.php';";
+    ?>
     f.submit();
-}
-
-// È¸¿ø¾ÆÀÌµğ °Ë»ç
-function mb_id_check()
-{
-    var f = document.fregisterform;
-
-    if (f.mb_id.value == "") {
-        alert("È¸¿ø ¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
-        f.mb_id.focus();
-        return;
-    }
-
-    /*
-    var id = prohibit_id_check(f.mb_id.value);
-    if (id) {
-        alert("'"+id + "'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â È¸¿ø¾ÆÀÌµğÀÔ´Ï´Ù.");
-        f.mb_id.focus();
-        return;
-    }
-    */
-
-    if (g4_charset.toUpperCase() == "UTF-8")
-        win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+encodeURI(document.fregisterform.mb_id.value), "hiddenframe");
-    else
-        win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+document.fregisterform.mb_id.value, "hiddenframe");
-}
-
-// º°¸í °Ë»ç
-function mb_nick_check()
-{
-    var f = document.fregisterform;
-
-    if (f.mb_nick.value == "") {
-        alert("º°¸íÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
-        f.mb_nick.focus();
-        return;
-    }
-
-    /*
-    var id = prohibit_id_check(f.mb_nick.value);
-    if (id) {
-        alert("'"+id + "'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â º°¸íÀÔ´Ï´Ù.");
-        f.mb_nick.focus();
-        return;
-    }
-    */
-
-    if (f.mb_nick.defaultValue == f.mb_nick.value && f.mb_nick.value != "") {
-        alert("º°¸íÀÌ ¹Ù²îÁö ¾Ê¾ÒÀ¸¹Ç·Î Áßº¹È®ÀÎ ÇÏ½Ç ÇÊ¿ä°¡ ¾ø½À´Ï´Ù.");
-        return;
-    }
-
-    if (g4_charset.toUpperCase() == "UTF-8")
-        win_open(g4_path+"/"+g4_bbs+"/member_nick_check.php?mb_nick="+encodeURI(document.fregisterform.mb_nick.value), "hiddenframe");
-    else
-        win_open(g4_path+"/"+g4_bbs+"/member_nick_check.php?mb_nick="+document.fregisterform.mb_nick.value, "hiddenframe");
-}
-
-// E-mail °Ë»ç
-function mb_email_check()
-{
-    if (document.fregisterform.mb_email.value == "") {
-        alert("E-mailÀ» ÀÔ·ÂÇÏ¼¼¿ä.");
-        return;
-    }
-
-    if (g4_charset.toUpperCase() == "UTF-8")
-        win_open(g4_path+"/"+g4_bbs+"/member_email_check.php?mb_email="+encodeURI(document.fregisterform.mb_email.value), "hiddenframe");
-    else
-        win_open(g4_path+"/"+g4_bbs+"/member_email_check.php?mb_email="+document.fregisterform.mb_email.value, "hiddenframe");
-}
-
-function mb_id_change()
-{
-    if (document.fregisterform.mb_id.value != document.fregisterform.mb_id.defaultValue)
-        document.fregisterform.mb_id_enabled.value = "";
-}
-
-// ±İÁö ¾ÆÀÌµğ, º°¸í °Ë»ç
-function prohibit_id_check(id)
-{
-    id = id.toLowerCase();
-
-    var prohibit_id = "<?=trim(strtolower($config[cf_prohibit_id]))?>";
-    var s = prohibit_id.split(",");
-    var tmp_id;
-
-    for (i=0; i<s.length; i++) 
-    {
-        /* ºÎ°ü¸®ÀÚ, °ü¸®ÀÚ2 ¿Í °°Àº ¾ÆÀÌµğ¿Í º°¸íµµ »ç¿ëÇÏÁö ¸øÇÏ°Ô ÇÒ °æ¿ì¿¡ ÁÖ¼®À» Á¦°ÅÇÏ¼¼¿ä.
-        tmp_id = s[i].toLowerCase();
-        if (id.indexOf(tmp_id, 0) > -1)
-        {
-            return id;
-        }
-        */
-        if (s[i] == id) 
-            return id;
-    }
-    return "";
 }
 
 // ±İÁö ¸ŞÀÏ µµ¸ŞÀÎ °Ë»ç

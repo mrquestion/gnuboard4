@@ -527,8 +527,13 @@ if (($w != "u" && $wr_trackback) || ($w=="u" && $wr_trackback && $re_trackback))
 
 @include_once("$board_skin_path/write_update.tail.skin.php");
 
-if ($file_upload_msg)
-    alert($file_upload_msg, "./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
+if ($g4[https_url])
+    $https_url = "$g4[url]/$g4[bbs]";
 else
-    goto_url("./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
+    $https_url = ".";
+
+if ($file_upload_msg)
+    alert($file_upload_msg, "{$https_url}/board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
+else
+    goto_url("{$https_url}/board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
 ?>

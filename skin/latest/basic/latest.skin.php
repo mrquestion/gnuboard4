@@ -3,15 +3,11 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 ?>
 
 <table width=100% cellpadding=0 cellspacing=0>
-<colgroup width=14>
-<colgroup>
-<colgroup width=37>
-<colgroup width=14>
 <tr>
-    <td><img src='<?=$latest_skin_path?>/img/latest_t01.gif'></td>
-    <td background='<?=$latest_skin_path?>/img/bg_latest.gif'>&nbsp;&nbsp;<strong><a href='<?=$g4[bbs_path]?>/board.php?bo_table=<?=$bo_table?>'><?=$board[bo_subject]?></a></strong></td>
-    <td background='<?=$latest_skin_path?>/img/bg_latest.gif'><a href='<?=$g4[bbs_path]?>/board.php?bo_table=<?=$bo_table?>'><img src='<?=$latest_skin_path?>/img/more.gif' border=0></a></td>
-    <td><img src='<?=$latest_skin_path?>/img/latest_t02.gif'></td>
+    <td width=14><img src='<?=$latest_skin_path?>/img/latest_t01.gif'></td>
+    <td width='100%' background='<?=$latest_skin_path?>/img/bg_latest.gif'>&nbsp;&nbsp;<strong><a href='<?=$g4[bbs_path]?>/board.php?bo_table=<?=$bo_table?>'><?=$board[bo_subject]?></a></strong></td>
+    <td width=37 background='<?=$latest_skin_path?>/img/bg_latest.gif'><a href='<?=$g4[bbs_path]?>/board.php?bo_table=<?=$bo_table?>'><img src='<?=$latest_skin_path?>/img/more.gif' border=0></a></td>
+    <td width=14><img src='<?=$latest_skin_path?>/img/latest_t02.gif'></td>
 </tr>
 
 <? for ($i=0; $i<count($list); $i++) { ?>

@@ -522,10 +522,7 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
         if ($search_str == "") continue;
 
         // 인기검색어
-        $sql = " insert into $g4[popular_table]
-                    set pp_word = '$search_str',
-                        pp_date = '$g4[time_ymd]',
-                        pp_ip = '$_SERVER[REMOTE_ADDR]' ";
+        $sql = " insert into $g4[popular_table] set pp_word = '$search_str', pp_date = '$g4[time_ymd]', pp_ip = '$_SERVER[REMOTE_ADDR]' ";
         sql_query($sql, FALSE);
 
         $str .= $op1;

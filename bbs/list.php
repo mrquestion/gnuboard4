@@ -89,9 +89,11 @@ if (!$sca && !$stx)
     $arr_notice = split("\n", trim($board[bo_notice]));
     for ($k=0; $k<count($arr_notice); $k++) 
     {
+        if (trim($arr_notice[$k])=='') continue;
+
         $row = sql_fetch(" select * from $write_table where wr_id = '$arr_notice[$k]' ");
-        if (!$row[wr_id])
-            continue;
+
+        if (!$row[wr_id]) continue;
 
         $list[$i] = get_list($row, $board, $board_skin_path, $board[bo_subject_len]);
         $list[$i][is_notice] = true;

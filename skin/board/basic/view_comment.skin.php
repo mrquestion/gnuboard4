@@ -21,40 +21,43 @@ for ($i=0; $i<count($list); $i++) {
 <tr>
     <td><? for ($k=0; $k<strlen($list[$i][wr_comment_reply]); $k++) echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"; ?></td>
     <td width='100%'>
-        <table width=100% cellpadding=0 cellspacing=0>
+        <table width=100% height="32" cellpadding=0 cellspacing=0>
         <tr>
+        	<td width="2"><img src="<?=$board_skin_path?>/img/comment_left.gif" alt=""></td>
             <!-- 이름, 아이피 -->
-            <td><strong><?=$list[$i][name]?><? if ($is_ip_view) { echo "&nbsp;({$list[$i][ip]})"; } ?></strong></td>
+            <td style="background:url(<?=$board_skin_path?>/img/comment_bg.gif) repeat-x; padding-left:5px;"><strong><?=$list[$i][name]?><? if ($is_ip_view) { echo "&nbsp;({$list[$i][ip]})"; } ?></strong></td>
             <!-- 링크 버튼, 코멘트 작성시간 -->
-            <td align=right>
-                <? if ($list[$i][is_reply]) { echo "<a href=\"javascript:comment_box('{$comment_id}', 'c');\"><img src='$board_skin_path/img/btn_comment_reply.gif' border=0 align=absmiddle></a> "; } ?>
-                <? if ($list[$i][is_edit]) { echo "<a href=\"javascript:comment_box('{$comment_id}', 'cu');\"><img src='$board_skin_path/img/btn_comment_update.gif' border=0 align=absmiddle></a> "; } ?>
-                <? if ($list[$i][is_del])  { echo "<a href=\"javascript:comment_delete('{$list[$i][del_link]}');\"><img src='$board_skin_path/img/btn_comment_delete.gif' border=0 align=absmiddle></a> "; } ?>
+            <td align="right" style="background:url(<?=$board_skin_path?>/img/comment_bg.gif) repeat-x; padding-right:5px;">
+                <? if ($list[$i][is_reply]) { echo "<a href=\"javascript:comment_box('{$comment_id}', 'c');\"><img src='$board_skin_path/img/btn_c_reply.gif' border=0 align=absmiddle alt='답변'></a> "; } ?>
+                <? if ($list[$i][is_edit]) { echo "<a href=\"javascript:comment_box('{$comment_id}', 'cu');\"><img src='$board_skin_path/img/btn_c_modify.gif' border=0 align=absmiddle alt='수정'></a> "; } ?>
+                <? if ($list[$i][is_del])  { echo "<a href=\"javascript:comment_delete('{$list[$i][del_link]}');\"><img src='$board_skin_path/img/btn_c_del.gif' border=0 align=absmiddle alt='삭제'></a> "; } ?>
                 &nbsp;&nbsp;<?=$list[$i][datetime]?></td>
+        	<td width="2"><img src="<?=$board_skin_path?>/img/comment_right.gif" alt=""></td>
         </tr>
         </table>
 
-        <table width=100% cellpadding=0 cellspacing=0 style='border:1px solid #BBBBBB;background:#F8F8F9;'>
+        <table width=100% cellpadding=0 cellspacing=0>
         <tr>                            
-            <td colspan=2 style='line-height:150%; padding:7px; word-break:break-all;'>
+            <td colspan=2 style='line-height:20px; padding:7px; word-break:break-all;'>
                 <!-- 코멘트 출력 -->
-                <div><span class="ct lh">
+                <div>
                 <?
-                    $str = $list[$i][content];
+                $str = $list[$i][content];
+                if ($str == '비밀글 입니다.')
+                    $str = "<span class='cloudy small'>$str</span>";
 
-                    $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp|mms)\:\/\/([^[:space:]]+)\.(mp3|wma|wmv|asf|asx|mpg|mpeg)\".*\<\/a\>\]/i", "<script>doc_write(obj_movie('$1://$2.$3'));</script>", $str);
-                    $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(swf)\".*\<\/a\>\]/i", "<script>doc_write(flash_movie('$1://$2.$3'));</script>", $str);
-                    $str = preg_replace("/\[\<a\s*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(gif|png|jpg|jpeg|bmp)\"\s*[^\>]*\>[^\s]*\<\/a\>\]/i", "<img src='$1://$2.$3' id='target_resize_image[]' onclick='image_window(this);'>", $str);
-
-                    echo $str;
+                $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp|mms)\:\/\/([^[:space:]]+)\.(mp3|wma|wmv|asf|asx|mpg|mpeg)\".*\<\/a\>\]/i", "<script>doc_write(obj_movie('$1://$2.$3'));</script>", $str);
+                $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(swf)\".*\<\/a\>\]/i", "<script>doc_write(flash_movie('$1://$2.$3'));</script>", $str);
+                $str = preg_replace("/\[\<a\s*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(gif|png|jpg|jpeg|bmp)\"\s*[^\>]*\>[^\s]*\<\/a\>\]/i", "<img src='$1://$2.$3' id='target_resize_image[]' onclick='image_window(this);'>", $str);
+                echo $str;
                 ?>
-                </span></div>
+                </div>
                 <? if ($list[$i][trackback]) { echo "<p>".$list[$i][trackback]."</p>"; } ?>
                 <span id='edit_<?=$comment_id?>' style='display:none;'></span><!-- 수정 -->
-                <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- 답변 -->
-            </td>
+                <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- 답변 -->            </td>
         </tr>
         </table>
+        <?  echo "<input type=hidden id='secret_comment_{$comment_id}' value='".strstr($list[$i][wr_option],"secret")."'>";  ?>
 
         <table width=100% cellpadding=0 cellspacing=0>
         <tr><td colspan=2 height=20></td></tr>
@@ -65,10 +68,9 @@ for ($i=0; $i<count($list); $i++) {
 </div>
 <!-- 코멘트 리스트 -->
 
-
 <? if ($is_comment_write) { ?>
 <!-- 코멘트 입력 -->
-<table width=100% cellpadding=3 cellspacing=0 bgcolor=#FFFFFF><tr><td align=right><a href="javascript:comment_box('', 'c');"><span class='small' style='color:#888888;'>코멘트입력</span></a></td></tr></table>
+<table width=100% cellpadding=3 cellspacing=0 bgcolor=#FFFFFF><tr><td align=right><a href="javascript:comment_box('', 'c');"><img src="<?=$board_skin_path?>/img/btn_c_write.gif" alt=""></a></td></tr></table>
 
 <span id=comment_write style='display:none;'>
 <form name="fviewcomment" method="post" action="./write_comment_update.php" onsubmit="return fviewcomment_submit(this);" autocomplete="off" style="margin:0px;">
@@ -82,21 +84,22 @@ for ($i=0; $i<count($list); $i++) {
 <input type=hidden name=spt         value='<?=$spt?>'>
 <input type=hidden name=page        value='<?=$page?>'>
 <input type=hidden name=cwin        value='<?=$cwin?>'>
-<table width=100% cellpadding=3 cellspacing=0 bgcolor=#F8F8F9>
-<tr><td colspan=2>
+<table width=100% cellpadding=3 cellspacing=0 bgcolor=#F8F8F9 style="border:1px solid #DFDFDF;">
+<tr><td colspan="2" style="padding:5px 0 0 5px;">
+
+    <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 10);"><img src="<?=$board_skin_path?>/img/btn_c_up.gif"></span>
+    <span style="cursor: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/btn_c_start.gif"></span>
+    <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 10);"><img src="<?=$board_skin_path?>/img/btn_c_down.gif"></span>
 
     <? if ($is_guest) { ?>
-        이름 <INPUT type=text maxLength=20 size=15 name="wr_name" itemname="이름" required class=ed>
-        패스워드 <INPUT type=password maxLength=20 size=15 name="wr_password" itemname="패스워드" required class=ed>
+        이름 <INPUT type=text maxLength=20 size=10 name="wr_name" itemname="이름" required class=ed>
+        패스워드 <INPUT type=password maxLength=20 size=10 name="wr_password" itemname="패스워드" required class=ed>
             <? if ($is_norobot) { ?>
                 <?=$norobot_str?>
-                <INPUT title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" itemname="자동등록방지" required class=ed>
+                <INPUT title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" size="10" itemname="자동등록방지" required class=ed>
             <?}?>
-    <?}?>
-
-    <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 10);"><img src="<?=$board_skin_path?>/img/up.gif"></span>
-    <span style="cursor: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/start.gif"></span>
-    <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 10);"><img src="<?=$board_skin_path?>/img/down.gif"></span>
+    <? } ?>
+    <input type=checkbox id="wr_secret" name="wr_secret" value="secret">비밀글
 
     <? if ($comment_min || $comment_max) { ?><span id=char_count></span>글자<?}?></td></tr>
 <tr>
@@ -104,7 +107,7 @@ for ($i=0; $i<count($list); $i++) {
         <textarea id="wr_content" name="wr_content" rows="10" itemname="내용" required 
             <? if ($comment_min || $comment_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?}?> style='width:100%; word-break:break-all;' class=tx></textarea>
             <? if ($comment_min || $comment_max) { ?><script language="javascript"> check_byte('wr_content', 'char_count'); </script><?}?></td>
-    <td width=80 align=center><input type="image" src="<?=$board_skin_path?>/img/ok_btn.gif" border=0 accesskey='s'></td></tr>
+    <td width=80 align=center><input type="image" src="<?=$board_skin_path?>/img/btn_c_ok.gif" border=0 accesskey='s'></td></tr>
 </table>
 </form>
 </span>
@@ -212,6 +215,10 @@ function comment_box(comment_id, work)
             document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
             if (typeof char_count != 'undefined')
                 check_byte('wr_content', 'char_count');
+            if (document.getElementById('secret_comment_'+comment_id).value)
+                document.getElementById('wr_secret').checked = true;
+            else
+                document.getElementById('wr_secret').checked = false;
         }
 
         document.getElementById('comment_id').value = comment_id;

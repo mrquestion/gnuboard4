@@ -15,7 +15,7 @@ function chkReset(f)
 <!-- 로그인 전 외부로그인 시작 -->
 <table width="220" border="0" cellpadding="0" cellspacing="0">
 <form name="fhead" method="post" action="javascript:fhead_submit(document.fhead);" autocomplete="off">
-<input type="hidden" name="url" value="<?=$urlencode?>">
+<input type="hidden" name="url" value="<?=$g4['https_url']?$g4['url'].$urlencode:$urlencode;?>">
 <tr> 
     <td width="220" height="42" colspan="6" valign="top"><img src="<?=$outlogin_skin_path?>/img/login_top.gif" width="220" height="42"></td>
 </tr>
@@ -83,7 +83,12 @@ function fhead_submit(f)
         return;
     }
 
-    f.action = "<?=$g4[bbs_path]?>/login_check.php";
+    <?
+    if ($g4[https_url])
+        echo "f.action = '$g4[https_url]/$g4[bbs]/login_check.php';";
+    else
+        echo "f.action = '$g4[bbs_path]/login_check.php';";
+    ?>
     f.submit();
 }
 </script>

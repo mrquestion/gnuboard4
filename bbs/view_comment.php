@@ -28,11 +28,19 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     else
         $list[$i][name] = "<span class='".($row[mb_id]?'member':'guest')."'>$tmp_name</span>";
 
+
     
     // 공백없이 연속 입력한 문자 자르기 (way 보드 참고. way.co.kr)
     //$list[$i][content] = eregi_replace("[^ \n<>]{130}", "\\0\n", $row[wr_content]);
-    $list[$i][content] = conv_content($row[wr_content], 0, 'wr_content');
-    $list[$i][content] = search_font($stx, $list[$i][content]);
+
+    $list[$i][content] = "비밀글 입니다.";
+    if (!strstr($row[wr_option], "secret") ||
+        $is_admin || 
+        ($write[mb_id]==$member[mb_id] && $member[mb_id]) || 
+        ($row[mb_id]==$member[mb_id] && $member[mb_id])) {
+        $list[$i][content] = conv_content($row[wr_content], 0, 'wr_content');
+        $list[$i][content] = search_font($stx, $list[$i][content]);
+    }
 
     $list[$i][trackback] = url_auto_link($row[wr_trackback]);
     $list[$i][datetime] = substr($row[wr_datetime],2,14);

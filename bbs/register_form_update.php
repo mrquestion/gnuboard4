@@ -46,7 +46,7 @@ if ($w == '' || $w == 'u')
 
     if ($w=='')
     {
-        if ($mb_id == $mb_recommend) alert('본인을 추천할 수 없습니다.');
+        if (strtolower($mb_id) == strtolower($mb_recommend)) alert('본인을 추천할 수 없습니다.');
 
         $sql = " select count(*) as cnt from $g4[member_table] where mb_nick = '$mb_nick' ";
         $row = sql_fetch($sql);
@@ -308,26 +308,26 @@ else if ($w == "u")
 if ($msg) 
     echo "<script language='JavaScript'>alert('{$msg}');</script>";
 
+if ($g4[https_url])
+    $https_url = "$g4[https_url]/$g4[bbs]";
+else
+    $https_url = ".";
 
-if ($w == "")
-    goto_url("./register_result.php");
-else if ($w == "u") 
-{
+if ($w == "") {
+    goto_url("{$https_url}/register_result.php");
+} else if ($w == "u") {
     if ($mb_password)
         $tmp_password = $mb_password;
     else
         $tmp_password = get_session("ss_tmp_password");
 
-    if ($old_email != $mb_email && $config[cf_use_email_certify])
-    {
+    if ($old_email != $mb_email && $config[cf_use_email_certify]) {
         set_session("ss_mb_id", "");
         alert("회원 정보가 수정 되었습니다.\\n\\nE-mail 주소가 변경되었으므로 다시 인증하셔야 합니다.", $g4[path]);
-    }
-    else
-    {
+    } else {
         echo "
         <html><title>회원정보수정</title><meta http-equiv='Content-Type' content='text/html; charset=$g4[charset]'></html><body> 
-        <form name='fregisterupdate' method='post' action='./register_form.php'>
+        <form name='fregisterupdate' method='post' action='{$https_url}/register_form.php'>
         <input type='hidden' name='w' value='u'>
         <input type='hidden' name='mb_id' value='{$mb_id}'>
         <input type='hidden' name='mb_password' value='{$tmp_password}'>

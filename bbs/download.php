@@ -8,10 +8,7 @@ include_once("./_common.php");
 if (!get_session("ss_view_{$bo_table}_{$wr_id}")) 
     alert("잘못된 접근입니다.");  
 
-$sql = " select bf_source, bf_file from $g4[board_file_table]
-          where bo_table = '$bo_table'
-            and wr_id = '$wr_id'
-            and bf_no = '$no' ";
+$sql = " select bf_source, bf_file from $g4[board_file_table] where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$no' ";
 $file = sql_fetch($sql);
 if (!$file[bf_file])
     alert_close("파일 정보가 존재하지 않습니다.");
