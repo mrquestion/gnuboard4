@@ -6,7 +6,11 @@ if (!$bo_table)
 
 $notice_array = explode("\n", trim($board[bo_notice]));
 
-if ($w == "") {
+if ($w == "") 
+{
+    if (isset($wr_id))
+        alert("글쓰기에는 \$wr_id 값을 사용하지 않습니다.", "$g4[bbs_path]/board.php?bo_table=$bo_table");
+
     if ($member[mb_level] < $board[bo_write_level]) { 
         if ($member[mb_id]) 
             alert("글을 쓸 권한이 없습니다.");
@@ -125,7 +129,7 @@ if ($group[gr_use_access])
 $g4[title] = "$group[gr_subject] > $board[bo_subject] > " . $title_msg;
 
 if (($w == "u" || $w == "r") && !$write[wr_id]) 
-    alert("글이 존재하지 않습니다.\\n\\n삭제되었거나 이동된 경우입니다.", "./");
+    alert("글이 존재하지 않습니다.\\n\\n삭제되었거나 이동된 경우입니다.", $g4[path]);
 
 $is_notice = false;
 if ($is_admin && $w != "r") 

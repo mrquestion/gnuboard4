@@ -16,7 +16,7 @@ $colspan = 4;
 
 <table width=100% cellpadding=3 cellspacing=1>
 <tr>
-    <td>* <? echo "<a href='./member_form.php?w=u&mb_id=$mb[mb_id]'><b>$mb[mb_id]</b>($mb[mb_nick])</a> 님이 접근가능한 그룹 목록"; ?></td>
+    <td>* <? echo "<a href='./member_form.php?w=u&mb_id=$mb[mb_id]'><b>$mb[mb_id]</b> ($mb[mb_name] / $mb[mb_nick])</a> 님이 접근가능한 그룹 목록"; ?></td>
 </tr>
 </table>
     

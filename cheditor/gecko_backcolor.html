@@ -5,7 +5,8 @@
 <script>
 function selectColor(color)
 {
- 	var obj = window.opener.chutil.myobj;
+ 	//var obj = window.opener.chutil.myobj;
+    var obj = window.opener.saveobj;
  	eval("window.opener."+obj).SetGeckoColor('BackColor', color);
  	window.close();
 }

@@ -51,9 +51,10 @@ if ($_REQUEST['do'] == "submit") {
         $filename = $save_as_url . $attach->file['name'];
 
         echo '<script language=javascript>';
-            echo 'var obj = window.opener.chutil.myobj;';
-            echo 'var img = document.createElement("img");';
-            echo "img.src    = \"$filename\";";
+        //echo 'var obj = window.opener.chutil.myobj;';
+        echo 'var obj = window.opener.saveobj;';
+        echo 'var img = document.createElement("img");';
+        echo "img.src    = \"$filename\";";
         if ($_REQUEST['description']) echo 'img.alt = "' . $_REQUEST['description'] . '";';
         if ($_REQUEST['alignment']) echo 'img.align = "' . $_REQUEST['alignment'] . '";';
         if ($_REQUEST['b']) echo 'img.border = "' . $_REQUEST['b'] . '";';

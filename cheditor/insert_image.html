@@ -58,7 +58,9 @@ function display_image_url()
 
 function imgComplete (tmpImg)
 {
-    var img = document.createElement("img");
+    //var img = document.createElement("img");
+    var obj = window.opener.saveobj;
+    var img = document.createElement("img"+id);
     img.src = tmpImg.src;
 
     var w = 230;
@@ -96,9 +98,9 @@ function imgComplete (tmpImg)
 
 function DoReturn()
 {
-    var inputimg = document.getElementById("linkurl");
+    var inputimg = document.getElementById("linkurl"+id);
     var imgurl = inputimg.value;
-    var img = document.createElement("img");
+    var img = document.createElement("img"+id);
     img.src = imgurl;
 
     var alt = document.getElementById("description").value;
@@ -117,7 +119,8 @@ function DoReturn()
     if (align)  { img.align  = align; }
     if (border) { img.border = border; }
 
-    var obj = window.opener.chutil.myobj;
+    //var obj = window.opener.chutil.myobj;
+    var obj = window.opener.saveobj;
     eval("window.opener."+obj).insertImage(img);
     window.close();
 }

@@ -72,7 +72,8 @@ function DoReturn()
 {
   var file = document.getElementById("linkurl");
   var media = "<embed src='"+file.value+"'autostart='true' loop='true'>";
-  var obj = window.opener.chutil.myobj;
+  //var obj = window.opener.chutil.myobj;
+  var obj = window.opener.saveobj;
   eval("window.opener."+obj).insertEl(media);
   window.close();
 }

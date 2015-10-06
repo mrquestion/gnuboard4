@@ -13,6 +13,7 @@
 var chutil = new CH_UTILITIES();
 var command = "";
 var editorPath = "";
+var saveobj = ""; // 여러창에서 제어하기위한 전역변수
 
 var htmlKey = [
     "!DOCTYPE", "A", "ABBR", "ACRONYM", "ADDRESS", "APPLET",
@@ -633,6 +634,7 @@ function put_content(sContent)
 
 function insert (what)
 {
+    saveobj = this.oname;
     var myobj = eval("id" + this.oname);
     var tmpl;
     var w;
@@ -736,7 +738,8 @@ function insertIE (what)
 
 function SetGeckoColor(cmd, colour)
 {
-    document.getElementById("id"+myobj).contentWindow.document.execCommand(cmd, false, colour);
+    //document.getElementById("id"+myobj).contentWindow.document.execCommand(cmd, false, colour);
+    document.getElementById("id"+saveobj).contentWindow.document.execCommand(cmd, false, colour);
 }
 
 function insertTable(insertNode)
