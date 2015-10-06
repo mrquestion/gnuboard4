@@ -1,3 +1,22 @@
+4.37.07 (2014.03.24)
+    : SQL Injection 취약점 해결 (코코파님께서 알려 주셨습니다.)
+        
+        common.php
+        lib/common.lib.php
+
+        common.php 에서 $sst 변수에 특수문자를 허용하지 않습니다.
+
+            $sst = preg_replace("/[\<\>\'\"\%\=\(\)\s]/", "", $sst);
+
+        lib/common.lib.php 의 sql_query() 함수에서 union 사용 및 information_schema DB 로의 접근을 허락하지 않습니다.
+
+            // Blind SQL Injection 취약점 해결
+            $sql = trim($sql);
+            // union의 사용을 허락하지 않습니다.
+            $sql = preg_replace("#^select.*from.*union.*#i", "select 1", $sql);
+            // `information_schema` DB로의 접근을 허락하지 않습니다.
+            $sql = preg_replace("#^select.*from.*where.*`?information_schema`?.*#i", "select 1", $sql);
+
 4.37.06 (2014.03.20)
     : 4.37.07 버전의 코드에 문제가 있어 4.37.06 버전으로 되돌립니다.
 
