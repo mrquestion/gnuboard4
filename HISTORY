@@ -1,3 +1,17 @@
+4.36.19 (2013.02.26)
+    :   form 태그의 action 속성을 이용한 XSS 취약점 해결 (i2sec 13기 박성진님께서 직접 알려 주셨습니다.)
+        이 취약점은 ie 브라우저에서만 발생하는 것으로 알려져 있습니다.
+
+        lib/common.lib.php 의 bad_tag_convert() 함수중에서 
+
+            return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>?/i", "&lt;$1$2$3&gt;", $code);
+
+            를 
+
+            return preg_replace("/\<([\/]?)(script|iframe|form)([^\>]*)\>?/i", "&lt;$1$2$3&gt;", $code);
+
+            와 같이 수정 하였습니다.
+
 4.36.18 (2013.02.22)
     :   iframe 태그에 주석문을 사용한 XSS 취약점 해결 (i2sec 13기 김태현님께서 직접 알려 주셨습니다.)
         기존 코드의 위치를 바꿔서 해결 했습니다.
