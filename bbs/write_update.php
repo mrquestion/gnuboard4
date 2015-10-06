@@ -454,5 +454,6 @@ HEREDOC;
     }
 }
 
-goto_url("./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
+//goto_url("./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
+header("Location:./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);
 ?>

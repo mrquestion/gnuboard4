@@ -14,11 +14,12 @@ if (!isset($sop) || !($sop == "and" || $sop == "or")) $sop = "and"; // 연산자 an
 if (!isset($srows)) $srows = 10; // 한페이지에 출력하는 검색 행수
 
 unset($g4_search[tables]);
-$sql = " select gr_id, bo_table 
+unset($g4_search[read_level]);
+$sql = " select gr_id, bo_table, bo_read_level
            from $g4[board_table]
           where bo_use_search = '1'
-            and bo_list_level <= '$member[mb_level]' 
-            and bo_read_level <= '$member[mb_level]' ";
+            and bo_list_level <= '$member[mb_level]' ";
+//            and bo_read_level <= '$member[mb_level]' ";
 if ($gr_id)
     $sql .= " and gr_id = '$gr_id' ";
 if ($onetable) // 하나의 게시판만 검색한다면
@@ -49,6 +50,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         }
     }
     $g4_search[tables][] = $row[bo_table];
+    $g4_search[read_level][] = $row[bo_read_level];
 }
 
 $search_query = "sfl=" . urlencode($sfl) . "&stx=$stx&sop=$sop";
@@ -107,17 +109,15 @@ $total_count = 0;
 for ($i=0; $i<count($g4_search[tables]); $i++) 
 {
     $tmp_write_table   = $g4[write_prefix] . $g4_search[tables][$i];
-    $tmp_comment_table = $g4[write_prefix] . $g4_search[tables][$i] . $g4[comment_suffix];
+    //$tmp_comment_table = $g4[write_prefix] . $g4_search[tables][$i] . $g4[comment_suffix];
 
     $sql = " select count(*) as cnt 
                from $tmp_write_table a,
                     $g4[board_table] b ";
-    if (strstr($sfl, "wc_content")) 
-        $sql .= " , $tmp_comment_table c ";
+    //if (strstr($sfl, "wc_content")) $sql .= " , $tmp_comment_table c ";
     $sql .= "   where (b.bo_table = '{$g4_search[tables][$i]}') 
                   and $sql_search ";
-    if (strstr($sfl, 'wc_content')) 
-        $sql .= " and a.wr_id = c.wr_id ";
+    //if (strstr($sfl, 'wc_content')) $sql .= " and a.wr_id = c.wr_id ";
     // 권한별 검색기능
     //$sql .= " and (b.bo_table='{$g4_search[tables][$i]}' and b.bo_list_level <= '$member[mb_level]' and b.bo_read_level <= '$member[mb_level]') ";
     $row = sql_fetch($sql);
@@ -126,6 +126,7 @@ for ($i=0; $i<count($g4_search[tables]); $i++)
     {
         $board_count++;
         $search_table[] = $g4_search[tables][$i];
+        $read_level[]   = $g4_search[read_level][$i];
         $search_table_count[] = $total_count;
 
         $sql2 = " select bo_subject from $g4[board_table] where bo_table = '{$g4_search[tables][$i]}' ";
@@ -161,20 +162,10 @@ for ($idx=$table_index; $idx<count($search_table); $idx++)
 
     $tmp_write_table = $g4[write_prefix] . $search_table[$idx];
 
-    if (strstr($sfl, "wc_content")) 
-    {
-        $sql = " select * 
-                   from $tmp_comment_table c
-                  where $sql_search
-                  order by wc_id desc limit $from_record, $rows ";
-    } 
-    else 
-    {
-        $sql = " select * 
-                   from $tmp_write_table a
-                  where $sql_search
-                  order by a.wr_id desc limit $from_record, $rows ";
-    }
+    $sql = " select * 
+               from $tmp_write_table a
+              where $sql_search
+              order by a.wr_id desc limit $from_record, $rows ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++) 
     {
@@ -194,23 +185,18 @@ for ($idx=$table_index; $idx<count($search_table); $idx++)
                 $row[wr_content] = "[비밀글 입니다.]";
         }
 
-        if (strstr($sfl, "wc_content")) 
+        $subject = $row[wr_subject];
+        if (strstr($sfl, "wr_subject")) 
+            $subject = search_font($stx, $subject);
+
+        if ($read_level[$idx] <= $member[mb_level])
         {
-            $subject = '코멘트';
-            $content = cut_str(get_text($row[wc_content]),300,"…");
-            $content = search_font($stx, $content);
-        } 
-        else 
-        {
-            $subject = $row[wr_subject];
             $content = cut_str(get_text($row[wr_content]),300,"…");
-
-            if (strstr($sfl, "wr_subject")) 
-                $subject = search_font($stx, $subject);
-
             if (strstr($sfl, "wr_content")) 
                 $content = search_font($stx, $content);
         }
+        else
+            $content = '';
 
         $list[$idx][$i][subject] = $subject;
         $list[$idx][$i][content] = $content;

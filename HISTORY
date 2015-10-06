@@ -1,3 +1,17 @@
+4.00.16 (05.06.28)
+    :   사용자의 레벨보다 읽기 레벨이 더 큰 경우 내용을 보여주지 않고 검색되게 함
+        아꽈님께서 알려주셨습니다.
+    :   DHTML Editor (cheditor : http://chsoft.co.kr) 기본 탑재
+    :   불여우에서 글등록시 글읽기로 넘어가지 않던 오류 수정
+    :   config.php 에 아래와 같이 두줄 추가하세요
+        $g4[editor]         = "cheditor";
+        $g4[editor_path]    = $g4[path] . "/" . $g4[editor];
+
+        bbs/search.php
+        bbs/write_update.php
+        cheditor/*
+        lib/cheditor.lib.php
+
 4.00.15 (05.06.21)
     :   코멘트 수정시 연속 게시물 등록 메시지로 인한 오류 수정
     :   회원메일 발송시 생일부분의 코드 오류 수정

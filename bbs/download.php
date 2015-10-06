@@ -31,7 +31,7 @@ if ($board[bo_download_level] >= 1) {
     if (!get_session($ss_name)) 
     {
         // 자신의 글이거나 관리자라면 통과
-        if (($write[mb_id] && $write[mb_id] == $member[mb_id]) || $is_admin)
+        if ($write[mb_id] && $write[mb_id] == $member[mb_id])
             ;
         else if ($board[bo_download_level] > 1) // 회원이상 다운로드가 가능하다면
         {

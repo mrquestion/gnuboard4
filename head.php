@@ -151,8 +151,10 @@ function fsearchbox_submit(f)
 #middiv #mright { width:683px; float:left; padding:0 0 0 15; }
 </style>
 
-<div id=middiv>
-    <div id=mleft>
+<table width='<?=$table_width?>' cellpadding=0 cellspacing=0>
+<tr>
+    <td width=43></td>
+    <td width=220 valign=top>
         <?=outlogin("basic"); // 외부 로그인 ?>
 
         <div style='height:10px;'></div>
@@ -166,5 +168,6 @@ function fsearchbox_submit(f)
         <div style='height:10px;'></div>
 
         <?=connect(); // 현재 접속자수 ?>
-    </div>
-    <div id=mright>
+    </td>
+    <td width=15></td>
+    <td width=683 valign=top>

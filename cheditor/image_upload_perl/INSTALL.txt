@@ -1,0 +1,17 @@
+Perl를 이용하여 이미지를 업로드하고자 할 경우만 사용합니다.
+
+이미지 업로드 모듈 설치: 
+
+1. attach 디렉토리의 퍼미션을 777로 설정합니다.
+2. cgi가 실행 가능한 디렉토리에 cheditor라는 이름의 디렉토리를 만듭니다.
+예: /home/account/cgi-bin/cheditor
+
+3. 만들어진 cheditor라는 디렉토리로 AttachFile.pm롸 attach.cgi 파일을 복사합니다.
+4. attach.cgi 파일을 간단한 편집기로 엽니다.
+5. $editor_path와 $editor_url 경로를 수정합니다.
+6. 수정한 attach.cgi 파일을 저장한 다음, 퍼미션을 755로 설정합니다.
+7. insert_image.html 파일에 입력되어 있는 'form' action 경로를 바르게 수정합니다.
+예) <form action="http://yourdomain.com/cgi-bin/cheditor/attach.cgi" ... >
+
+8. image_upload_perl 디렉토리에 있는 insert_image.html 파일을 기존의 것과 교체합니다.
+9. cheditor.js 파일을 교체합니다.

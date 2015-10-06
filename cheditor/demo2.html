@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>CHEditor</title>
+<META http-equiv="Content-Type" content="text/html; charset=euc-kr">
+
+<script language="javaScript" src="cheditor.js"></script>
+<script language="javaScript">
+function chkform(obj) {
+    obj.contents.value = myeditor.outputBodyHTML();
+
+    if (obj.contents.value.length < 10) {
+        alert("내용은 한글 5자 이상 입력해 주세요.");
+        return myeditor.returnFalse();
+    }
+
+    return true;
+}
+</script>
+</head>
+<body bgcolor="#f0f0f0">
+<center>
+<h3>CHEditor Demo 2</h3>
+<form method="post" name="postform" onSubmit="return chkform(this);">
+<input type="hidden" name="paste" value="hello">
+<input type="hidden" name="contents">
+<script>
+var myeditor = new cheditor("myeditor");
+myeditor.width = "90%";
+myeditor.height = 400;
+myeditor.pasteContent = true;
+myeditor.pasteContentForm = "paste";
+myeditor.editorToolbar = "background-color:#f0f0f0;margin-bottom:3px;";
+myeditor.formName = "postform";
+myeditor.run();
+</script>
+
+<input type="submit" value="확인">
+</form>
+
+<p>&nbsp;<p>
+<font face="verdana" size="1" color="#666666">
+Copyright ⓒ 1997-2005 by <b>CHCODE.</b> All right reserved.</font>
+
+</center>
+</body>
+</html>
