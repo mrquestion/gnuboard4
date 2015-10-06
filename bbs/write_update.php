@@ -595,6 +595,7 @@ if (!($w == "u" || $w == "cu") && $config[cf_email_use] && $board[bo_use_email])
 
     // 吝汗等 皋老 林家绰 力芭
     $unique_email = array_unique($array_email);
+    $unique_email = array_values($unique_email);
     for ($i=0; $i<count($unique_email); $i++) {
         mailer($wr_name, $wr_email, $unique_email[$i], $subject, $content, 1);
     }

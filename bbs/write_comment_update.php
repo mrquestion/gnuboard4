@@ -254,6 +254,7 @@ if ($w == "c") // 코멘트 입력
 
         // 중복된 메일 주소는 제거
         $unique_email = array_unique($array_email);
+        $unique_email = array_values($unique_email);
         for ($i=0; $i<count($unique_email); $i++) {
             mailer($wr_name, $wr_email, $unique_email[$i], $subject, $content, 1);
         }
