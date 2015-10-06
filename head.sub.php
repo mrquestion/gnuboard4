@@ -61,6 +61,5 @@ var g4_is_ie     = navigator.userAgent.toLowerCase().indexOf("msie") != -1;
 <? if ($is_admin) { echo "var g4_admin = '{$g4['admin']}';"; } ?>
 </script>
 <script type="text/javascript" src="<?=$g4['path']?>/js/common.js"></script>
-<script type="text/javascript" src="<?=$g4['path']?>/js/ajax.js"></script>
 <body topmargin="0" leftmargin="0" <?=isset($g4['body_script']) ? $g4['body_script'] : "";?>>
 <a name="g4_head"></a>

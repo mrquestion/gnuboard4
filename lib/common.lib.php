@@ -471,7 +471,8 @@ function conv_content($content, $html)
         // 완벽한 XSS 방지는 없다.
         // 081022 : CSRF 방지
         //$content = preg_replace("/(on)(abort|blur|change|click|dblclick|dragdrop|error|focus|keydown|keypress|keyup|load|mousedown|mousemove|mouseout|mouseover|mouseup|mouseenter|mouseleave|move|reset|resize|select|submit|unload)/i", "$1<!-- XSS Filter -->$2", $content);
-        $content = preg_replace("/(on)([^\=]+)/i", "&#111;&#110;$2", $content);
+        //$content = preg_replace("/(on)([^\=]+)/i", "&#111;&#110;$2", $content);
+        $content = preg_replace("/(on)([a-z]+)([^a-z]*)(\=)/i", "&#111;&#110;$2$3$4", $content);
         $content = preg_replace("/(dy)(nsrc)/i", "&#100;&#121;$2", $content);
         $content = preg_replace("/(lo)(wsrc)/i", "&#108;&#111;$2", $content);
         $content = preg_replace("/(sc)(ript)/i", "&#115;&#99;$2", $content);

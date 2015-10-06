@@ -1,3 +1,8 @@
+4.31.02 (08.11.03)
+    :   HTML 쓰기에서 on으로 시작되는 이벤트(예:onclick) 사용시 에러나는 부분을 수정 : conv_content()
+
+        lib/common.lib.php            
+
 4.31.01 (08.10.29)
     :   extract($_GET); 으로 인한 오류 수정
         letsgolee 님께서 도움 주셨습니다.

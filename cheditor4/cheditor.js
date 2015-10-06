@@ -1583,7 +1583,7 @@ cleanFromWord : function () {
     }
     var sHTML = editorTmp.document.body.innerHTML;
     var str = sHTML;
-    var arrTmp = str.split('<?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" />');
+    var arrTmp = str.split('<'+'?xml:namespace prefix = o ns = "urn:schemas-microsoft-com:office:office" />');
     if (arrTmp.length > 1) str = arrTmp.join("");
     var arrTmp = str.split("<o:p>");
     if (arrTmp.length > 1) str = arrTmp.join("");
