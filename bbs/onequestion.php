@@ -20,7 +20,17 @@ $filename = upload_file("$g4[path]/data/one/$ob_table", $_FILES[on_qfile]);
 
 $sql_common = " on_subject = '$on_subject', 
                 on_question = '$on_question',
-                on_qdatetime = '$g4[time_ymdhis]' ";
+                on_qdatetime = '$g4[time_ymdhis]',
+                on_1 = '$on_1',
+                on_2 = '$on_2',
+                on_3 = '$on_3',
+                on_4 = '$on_4',
+                on_5 = '$on_5',
+                on_6 = '$on_6',
+                on_7 = '$on_7',
+                on_8 = '$on_8',
+                on_9 = '$on_9',
+                on_10 = '$on_10' ";
 if ($source || $on_qfile_del) {
     $sql_common .= ",on_qfile = '$filename'
                     ,on_qsource = '$source' ";

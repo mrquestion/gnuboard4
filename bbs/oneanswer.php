@@ -21,6 +21,16 @@ $filename = upload_file($filepath, $_FILES[on_afile]);
 $sql = " update $g4[one_prefix]$ob_table
             set on_answer = '$on_answer',
                 on_adatetime = '$g4[time_ymdhis]' ";
+if (isset($on_1)) $sql .= " , on_1 = '$on_1' ";
+if (isset($on_2)) $sql .= " , on_2 = '$on_2' ";
+if (isset($on_3)) $sql .= " , on_3 = '$on_3' ";
+if (isset($on_4)) $sql .= " , on_4 = '$on_4' ";
+if (isset($on_5)) $sql .= " , on_5 = '$on_5' ";
+if (isset($on_6)) $sql .= " , on_6 = '$on_6' ";
+if (isset($on_7)) $sql .= " , on_7 = '$on_7' ";
+if (isset($on_8)) $sql .= " , on_8 = '$on_8' ";
+if (isset($on_9)) $sql .= " , on_9 = '$on_9' ";
+if (isset($on_10)) $sql .= " , on_10 = '$on_10' ";
 if ($source || $on_afile_del) {
     $sql .= " ,on_afile = '$filename' 
               ,on_asource = '$source' ";

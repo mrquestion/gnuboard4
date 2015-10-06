@@ -26,6 +26,16 @@ CREATE TABLE `__TABLE_NAME__` (
   `on_asource` varchar(255) NOT NULL,
   `on_qdatetime` datetime NOT NULL,
   `on_adatetime` datetime NOT NULL,
+  `on_1` text NOT NULL,
+  `on_2` text NOT NULL,
+  `on_3` text NOT NULL,
+  `on_4` text NOT NULL,
+  `on_5` text NOT NULL,
+  `on_6` text NOT NULL,
+  `on_7` text NOT NULL,
+  `on_8` text NOT NULL,
+  `on_9` text NOT NULL,
+  `on_10` text NOT NULL,
   PRIMARY KEY  (`on_id`),
   KEY `mb_no` (`mb_no`)
 );
@@ -36,4 +46,4 @@ CREATE TABLE `__TABLE_NAME__` (
 
 
 
-## Dump completed on 2007-04-23 14:13:55
+## Dump completed on 2007-04-26  5:26:46

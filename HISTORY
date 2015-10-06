@@ -1,3 +1,12 @@
+4.20.02 (07.04.26)
+    :   1:1 게시판 기능 수정
+        sql_one.sql 에 누락된 여분필드 on_1 ~ on_10 필드 추가
+        파이어폭스에서는 dhtml editor 사용시 답변에서 오류 발생합니다.
+
+        adm/sql_one.sql
+        bbs/oneanswer.php
+        bbs/onequestion.php
+
 4.20.01 (07.04.23 16:25)
     :   1:1 게시판 기능 수정
 
