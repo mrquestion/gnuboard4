@@ -32,7 +32,7 @@ HEREDOC;
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
-<title>그누보드 포에버 설치 (2/3) - 설정</title>
+<title>그누보드4 설치 (2/3) - 설정</title>
 <style type="text/css">
 <!--
 .body {
@@ -118,7 +118,7 @@ HEREDOC;
             <td height=15><img src="img/box_line.gif" width="562" height="2"></td>
           </tr>
           <tr> 
-            <td class=body align=right height=35><font color=crimson>이미 그누보드 포에버가 존재한다면 DB 자료가 망실되므로 주의하십시오.</font></td>
+            <td class=body align=right height=35><font color=crimson>이미 그누보드4가 존재한다면 DB 자료가 망실되므로 주의하십시오.</font></td>
           </tr>
           <tr> 
             <td height=15><img src="img/box_line.gif" width="562" height="2"></td>

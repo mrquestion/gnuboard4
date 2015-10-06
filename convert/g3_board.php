@@ -4,7 +4,7 @@ include_once("./_common.php");
 if ($is_admin != "super")
     alert("최고관리자만 변환 가능합니다", "$g4[bbs_path]/login.php?url=".urlencode($_SERVER[PHP_SELF]));
 
-$g4[title] = "게시판 변환 : 그누보드3 -> 포에버";
+$g4[title] = "게시판 변환 : 그누보드3 -> 그누보드4";
 include_once("$g4[path]/head.sub.php");
 
 $tmp_source = "gb_write_" . $source;
@@ -153,7 +153,7 @@ HEREDOC;
 	<td height=50 align=center><strong><?=$g4[title]?></strong></td>
 </tr>
 <tr>
-	<td height=30>그누보드3 = 원본 , 포에버 = 복사본</td>
+	<td height=30>그누보드3 = 원본 , 그누보드4 = 복사본</td>
 </tr>
 <tr>
 	<td height=30>그누보드3 게시판명 : <input type=text name=source value="<?=$source?>" required></td>

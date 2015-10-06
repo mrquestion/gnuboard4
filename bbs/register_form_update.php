@@ -133,26 +133,33 @@ if ($w == "")
         insert_point($mb_recommend, $config[cf_recommend_point], "{$mb_id}의 추천인", '@member', $mb_recommend, "{$mb_id} 추천");
 
     // 회원님께 메일 발송
-    $subject = "회원가입을 축하드립니다.";
+    if ($config[cf_email_mb_member]) 
+    {
+        $subject = "회원가입을 축하드립니다.";
 
-    $mb_md5 = md5($mb_id.$mb_email.$g4[time_ymdhis]);
-    $certify_href = "$g4[url]/$g4[bbs]/email_certify.php?mb_id=$mb_id&mb_md5=$mb_md5";
-    
-    ob_start();
-    include_once ("./register_form_update_mail1.php");
-    $content = ob_get_contents();
-    ob_end_clean();
-    
-    mailer($admin[mb_nick], $admin[mb_email], $mb_email, $subject, $content, 1);
+        $mb_md5 = md5($mb_id.$mb_email.$g4[time_ymdhis]);
+        $certify_href = "$g4[url]/$g4[bbs]/email_certify.php?mb_id=$mb_id&mb_md5=$mb_md5";
+        
+        ob_start();
+        include_once ("./register_form_update_mail1.php");
+        $content = ob_get_contents();
+        ob_end_clean();
+        
+        mailer($admin[mb_nick], $admin[mb_email], $mb_email, $subject, $content, 1);
+    }
 
-    $subject = $mb_nick . " 님께서 회원으로 가입하셨습니다.";
-    
-    ob_start();
-    include_once ("./register_form_update_mail2.php");
-    $content = ob_get_contents();
-    ob_end_clean();
+    // 최고관리자님께 메일 발송
+    if ($config[cf_email_mb_super_admin]) 
+    {
+        $subject = $mb_nick . " 님께서 회원으로 가입하셨습니다.";
+        
+        ob_start();
+        include_once ("./register_form_update_mail2.php");
+        $content = ob_get_contents();
+        ob_end_clean();
 
-    mailer($mb_nick, $mb_email, $admin[mb_email], $subject, $content, 1);
+        mailer($mb_nick, $mb_email, $admin[mb_email], $subject, $content, 1);
+    }
 
     // 메일인증 사용하지 않는 경우에만 로그인
     if (!$config[cf_use_email_certify]) 

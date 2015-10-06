@@ -79,48 +79,75 @@ if ($_POST[title]) {
 
     //write_log("$g4[path]/data/log/aaa", $msg);
 
-    if ($msg) { // 비정상(오류)
+    if ($msg) // 비정상(오류)
+    { 
         echo "<?xml version=\"1.0\" encoding=\"$g4[charset]\"?>\n";
         echo "<response>\n";
         echo "<error>1</error>\n";
         echo "<message>$msg</message>\n";
         echo "</response>\n";
-    } else { // 정상
-        include_once("$g4[path]/lib/mailer.lib.php");
+    } 
+    else // 정상
+    { 
+        // 메일발송 사용
+        if ($config[cf_email_use])
+        {
+            include_once("$g4[path]/lib/mailer.lib.php");
 
-        // 메일발송
-        $admin = get_admin("board");
+            // 관리자의 정보를 얻고
+            $super_admin = get_admin("super");
+            $group_admin = get_admin("group");
+            $board_admin = get_admin("board");
 
-        $wr_name    = $blog_name = get_text(stripslashes($_POST[blog_name]));
-        $wr_subject = $title = get_text(stripslashes($title));
-        $wr_content = $excerpt = nl2br(get_text(stripslashes($excerpt)));
+            $wr_name    = $blog_name = get_text(stripslashes($_POST[blog_name]));
+            $wr_subject = $title = get_text(stripslashes($title));
+            $wr_content = $excerpt = nl2br(get_text(stripslashes($excerpt)));
 
-        $link_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+            $link_url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
-        $subject = "'{$board[bo_subject]}' 게시판에 트랙백에 의한 글이 올라왔습니다.";
+            $subject = "'{$board[bo_subject]}' 게시판에 트랙백에 의한 글이 올라왔습니다.";
 
-        define("_GNUBOARD_", TRUE);
-        ob_start();
-        include_once ("./write_update_mail.php");
-        $content = ob_get_contents();
-        ob_end_clean();
+            define("_GNUBOARD_", TRUE);
+            ob_start();
+            include_once ("./write_update_mail.php");
+            $content = ob_get_contents();
+            ob_end_clean();
 
-        // 관리자에게 보내는 메일
-        mailer($blog_name, "", $admin[mb_email], $subject, $content, 1);
+            // 게시판 관리자에게 보내는 메일
+            if ($config[cf_email_wr_board_admin])
+                mailer($blog_name, "", $board_admin[mb_email], $subject, $content, 1);
 
-        // 답변 메일받기 (원게시자에게 보내는 메일)
-        if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) {
-            mailer($blog_name, "", $wr[wr_email], $subject, $content, 1);
+            // 그룹 관리자에게 보내는 메일
+            if ($group_admin[mb_email] != $board_admin[mb_email])
+            {
+                if ($config[cf_email_wr_group_admin])
+                    mailer($blog_name, "", $group_admin[mb_email], $subject, $content, 1);
+            }
+            
+            // 최고관리자에게 보내는 메일
+            if ($super_admin[mb_email] != $board_admin[mb_email])
+            {
+                if ($config[cf_email_wr_super_admin])
+                    mailer($blog_name, "", $super_admin[mb_email], $subject, $content, 1);
+            }
 
-            // 코멘트 쓴 모든이에게 메일 발송
-            if ($config[cf_comment_all_email]) {
-                $sql = " select wr_email from $write_table
-                          where wr_email not in ( '$admin[mb_email]' , '$wr[wr_email]', '' )
-                            and wr_parent = '$wr_id'
-                          group by wr_email ";
-                $result = sql_query($sql);
-                while ($row=sql_fetch_array($result)) 
-                    mailer($blog_name, "", $row[wr_email], $subject, $content, 1);
+            // 답변 메일받기 (원게시자에게 보내는 메일)
+            if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
+            {
+                if ($config[cf_email_wr_write])
+                    mailer($blog_name, "", $wr[wr_email], $subject, $content, 1);
+
+                // 코멘트 쓴 모든이에게 메일 발송
+                if ($config[cf_email_wr_comment_all])
+                {
+                    $sql = " select wr_email from $write_table
+                              where wr_email not in ( '$admin[mb_email]' , '$wr[wr_email]', '' )
+                                and wr_parent = '$wr_id'
+                              group by wr_email ";
+                    $result = sql_query($sql);
+                    while ($row=sql_fetch_array($result)) 
+                        mailer($blog_name, "", $row[wr_email], $subject, $content, 1);
+                }
             }
         }
     }

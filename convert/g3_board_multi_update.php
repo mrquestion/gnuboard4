@@ -5,7 +5,7 @@ if ($is_admin != "super")
     alert("최고관리자만 변환 가능합니다", "$g4[bbs_path]/login.php?url=".urlencode($_SERVER[PHP_SELF]));
 
 if (!$source || !$target)
-    alert("그누보드3과 그누보드 포에버 게시판 두개 모두 선택하여 주십시오.");
+    alert("그누보드3 와 그누보드4 게시판 두개 모두 선택하여 주십시오.");
 
 $tmp_source = "gb_write_" . $source;
 $tmp_target = $g4[write_prefix] . $target;

@@ -2,16 +2,10 @@
 if (!defined("_GNUBOARD_")) exit;
 ?>
 
-                    </td></tr>
-                </table>
-            </td></tr>
-            </table><br>
-        </td>
-        </tr>
-        </table>
-        </td>
-    </tr>
-    </table>
+                    </td></tr></table>
+                </td></tr></table><br>
+            </td></tr></table>
+        </td></tr></table><br>
     </td>
     <td></td>
 </tr>

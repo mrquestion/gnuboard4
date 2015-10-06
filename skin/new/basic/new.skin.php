@@ -10,20 +10,28 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </style>
 
 <!-- 분류 시작 -->
+<form name=fnew method=get style="margin:0px;">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td height=30>
         <?=$group_select?>
+        <select id=view name=view onchange="select_change()">
+            <option value=''>전체게시물
+            <option value='w'>원글만
+            <option value='c'>코멘트만
+        </select>
         <script language="JavaScript">
-        function group_change(fld)
+        function select_change()
         {
-            document.location.href = "./new.php?gr_id="+fld.value;
+            document.fnew.submit();
         }
         document.getElementById("gr_id").value = "<?=$gr_id?>";
+        document.getElementById("view").value = "<?=$view?>";
         </script>
     </td>
 </tr>
 </table>
+</form>
 <!-- 분류 끝 -->
 
 <!-- 제목 시작 -->

@@ -4,7 +4,7 @@ include_once("./_common.php");
 if ($is_admin != "super")
     alert("최고관리자만 변환 가능합니다", "$g4[bbs_path]/login.php?url=".urlencode($_SERVER[PHP_SELF]));
 
-$g4[title] = "게시판 멀티 변환 : 그누보드3 -> 포에버";
+$g4[title] = "게시판 멀티 변환 : 그누보드3 -> 그누보드4";
 include_once("$g4[path]/head.sub.php");
 ?>
 
@@ -16,7 +16,7 @@ include_once("$g4[path]/head.sub.php");
 <tr align=center>
 	<td><b>그누보드3</b></td>
 	<td width=30 align=center rowspan=2>→</td>
-	<td><b>그누보드 포에버</b></td>
+	<td><b>그누보드4</b></td>
 </tr>
 <tr>
 	<td valign=top style='line-height:200%;'>

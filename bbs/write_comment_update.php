@@ -8,6 +8,13 @@ $w = $_POST["w"];
 $wr_name  = strip_tags($_POST["wr_name"]);
 $wr_email = strip_tags($_POST["wr_email"]);
 
+// 비회원의 경우 이름이 누락되는 경우가 있음
+if (!$is_member)
+{
+    if (!trim($wr_name))
+        alert("이름은 필히 입력하셔야 합니다.");
+}
+
 if ($w == "c" || $w == "cu") 
 {
     if ($member[mb_level] < $board[bo_comment_level]) 
@@ -168,11 +175,13 @@ if ($w == "c") // 코멘트 입력
     // 포인트 부여
     insert_point($member[mb_id], $board[bo_comment_point], "$board[bo_subject] {$wr_id}-{$comment_id} 코멘트쓰기", $bo_table, $comment_id, '코멘트');
 
-    // 메일발송
+    // 메일발송 사용
+    if ($config[cf_email_use])
     {
         // 관리자의 정보를 얻고
-        $super = get_admin("super");
-        $admin = get_admin("board");
+        $super_admin = get_admin("super");
+        $group_admin = get_admin("group");
+        $board_admin = get_admin("board");
 
         $wr_subject = get_text(stripslashes($wr[wr_subject]));
         $wr_content = nl2br(get_text(stripslashes("----- 원글 -----\n\n$wr[wr_subject]\n\n\n----- 코멘트 -----\n\n$wr_content")));
@@ -191,20 +200,32 @@ if ($w == "c") // 코멘트 입력
         $content = ob_get_contents();
         ob_end_clean();
 
-        // 관리자에게 보내는 메일
-        mailer($wr_name, $wr_email, $admin[mb_email], $subject, $content, 1);
+        // 게시판 관리자에게 보내는 메일
+        if ($config[cf_email_wr_board_admin])
+            mailer($wr_name, $wr_email, $board_admin[mb_email], $subject, $content, 1);
 
+        // 그룹 관리자에게 보내는 메일
+        if ($group_admin[mb_email] != $board_admin[mb_email])
+        {
+            if ($config[cf_email_wr_group_admin])
+                mailer($wr_name, $wr_email, $group_admin[mb_email], $subject, $content, 1);
+        }
+        
         // 최고관리자에게 보내는 메일
-        if ($super[mb_email] != $admin[mb_email])
-            mailer($wr_name, $wr_email, $super[mb_email], $subject, $content, 1);
+        if ($super_admin[mb_email] != $board_admin[mb_email])
+        {
+            if ($config[cf_email_wr_super_admin])
+                mailer($wr_name, $wr_email, $super_admin[mb_email], $subject, $content, 1);
+        }
 
         // 답변 메일받기 (원게시자에게 보내는 메일)
         if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
         {
-            mailer($wr_name, $wr_email, $wr[wr_email], $subject, $content, 1);
+            if ($config[cf_email_wr_write])
+                mailer($wr_name, $wr_email, $wr[wr_email], $subject, $content, 1);
 
             // 코멘트 쓴 모든이에게 메일 발송
-            if ($config[cf_comment_all_email]) 
+            if ($config[cf_email_wr_comment_all])
             {
                 $sql = " select distinct wr_email from $write_table
                           where wr_email not in ( '$wr[wr_email]', '' )

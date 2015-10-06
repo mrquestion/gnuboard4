@@ -2,9 +2,13 @@
 if (!defined("_GNUBOARD_")) exit;
 
 // 메일 보내기 (파일 여러개 첨부 가능)
+// type : text=0, html=1, text+html=2
 function mailer($fname, $fmail, $to, $subject, $content, $type=0, $file="", $charset="EUC-KR", $cc="", $bcc="") 
 {
-    // type : text=0, html=1, text+html=2
+    global $config;
+
+    // 메일발송 사용을 하지 않는다면
+    if (!$config[cf_email_use]) return;
 
     $fname   = "=?$charset?B?" . base64_encode($fname) . "?=";
     $subject = "=?$charset?B?" . base64_encode($subject) . "?=";

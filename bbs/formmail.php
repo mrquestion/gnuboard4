@@ -1,6 +1,9 @@
 <?
 include_once("./_common.php");
 
+if (!$config[cf_email_use])
+    alert("환경설정에서 \'메일발송 사용\'에 체크하셔야 메일을 발송할 수 있습니다.\\n\\n관리자에게 문의하시기 바랍니다.");
+
 if (!$is_member && $config[cf_formmail_is_member])  
     alert_close("회원만 이용하실 수 있습니다.");
 

@@ -8,6 +8,10 @@ $sql_common = " from $g4[board_new_table] a, $g4[board_table] b, $g4[group_table
                where a.bo_table = b.bo_table and b.gr_id = c.gr_id ";
 if ($gr_id)
     $sql_common .= " and b.gr_id = '$gr_id' ";
+if ($view == "w")
+    $sql_common .= " and a.wr_id = a.wr_parent ";
+else if ($view == "c")
+    $sql_common .= " and a.wr_id <> a.wr_parent ";
 $sql_order = " order by a.bn_id desc ";
 
 $sql = " select count(*) as cnt $sql_common ";
@@ -19,7 +23,7 @@ $total_page  = ceil($total_count / $rows);  // 전체 페이지 계산
 if (!$page) $page = 1; // 페이지가 없으면 첫 페이지 (1 페이지)
 $from_record = ($page - 1) * $rows; // 시작 열을 구함
 
-$group_select = "<select name=gr_id id=gr_id onchange='group_change(this);'><option value=''>--- 그룹 선택 ---";
+$group_select = "<select name=gr_id id=gr_id onchange='select_change();'><option value=''>전체그룹";
 $sql = " select gr_id, gr_subject from $g4[group_table] order by gr_id ";
 $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++) 
@@ -91,7 +95,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $list[$i][wr_subject] = $row2[wr_subject];
 }
 
-$write_pages = get_paging($config[cf_write_pages], $page, $total_page, "?gr_id=$gr_id&page=");
+$write_pages = get_paging($config[cf_write_pages], $page, $total_page, "?gr_id=$gr_id&view=$view&page=");
 
 $new_skin_path = "$g4[path]/skin/new/$config[cf_new_skin]";
 

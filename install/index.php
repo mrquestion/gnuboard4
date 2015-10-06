@@ -82,7 +82,7 @@ HEREDOC;
 <html>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=euc-kr">
-<title>그누보드 포에버 설치 (1/3) - 라이센스(License)</title>
+<title>그누보드4 설치 (1/3) - 라이센스(License)</title>
 <style type="text/css">
 <!--
 .body {

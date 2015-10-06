@@ -1,3 +1,31 @@
+4.04.00 (05.08.17)
+    :   메일발송 설정 필드 추가
+    :   수정시 공지사항 수정되지 않던 오류 수정
+    :   게시글 작성시 이름이 누락되는 경우를 수정
+    :   최근게시물에 원글, 코멘트글 분리하여 볼 수 있도록 수정
+
+        필드가 추가, 변경 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/upgrade.php
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/mail_test.php
+        adm/sendmail_test.php
+        adm/mail_form.php
+        adm/mail_select_form.php
+        bbs/register_form_update.php
+        bbs/formmail.php
+        bbs/formmail_send.php
+        bbs/poll_etc_update.php
+        bbs/write_update.php
+        bbs/write_comment_update.php
+        bbs/tb.php
+        bbs/write.php
+        bbs/new.php
+        skin/board/basic/write.skin.php
+        skin/new/basic/new.skin.php
+        lib/mailer.lib.php
+
 4.03.03 (05.08.11)
     :   이메일인증 사용시 자동로그인 제대로 되지 않던 오류 수정
         g6man님께서 알려주셨습니다.
@@ -1026,11 +1054,11 @@
 
 05.03.29    베타 1 배포
 
-그누보드 포에버 이력 ↑
+그누보드4 이력 ↑
 
 
 ================================================================================
-그누보드 포에버 주요기능
+그누보드4 주요기능
 --------------------------------------------------------------------------------
     1. 가변 파일 업로드 지원
     2. 관리자 페이지에 가변적으로 메뉴 추가 가능

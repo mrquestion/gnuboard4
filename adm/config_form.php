@@ -153,10 +153,6 @@ include_once ("./admin.head.php");
     <td><input type=text class=ed name='cf_write_pages' size='10' required itemname='페이지 표시 수' value='<?=$config[cf_write_pages]?>'> 페이지씩 표시</td>
 </tr>
 <tr class='ht'>
-    <td>코멘트글 메일 발송</td>
-    <td colspan=3><input type='checkbox' name='cf_comment_all_email' value='1' <?=$config[cf_comment_all_email]?'checked':'';?>> 사용 (원글에 코멘트가 올라오는 경우 원글, 코멘트 쓴 모든이에게 메일 발송)</td>
-</tr>
-<tr class='ht'>
     <td>이미지 업로드 확장자</td>
     <td colspan=3><input type=text class=ed name='cf_image_extension' size='80' itemname='이미지 업로드 확장자' value='<?=$config[cf_image_extension]?>'><br>게시판 글작성시 이미지 파일 업로드 가능 확장자. | 로 구분</td>
 </tr>
@@ -277,6 +273,59 @@ include_once ("./admin.head.php");
 <tr class='ht'>
     <td>회원가입약관</td>
     <td valign=top colspan=3><textarea class=ed name='cf_stipulation' rows='10' style='width:99%;'><?=$config[cf_stipulation]?></textarea></td>
+</tr>
+<tr><td colspan=4 class=line2></td></tr>
+<tr><td colspan=4 class=ht></td></tr>
+
+
+<tr class='ht'>
+    <td colspan=4 class=title align=left><img src='<?=$g4[admin_path]?>/img/icon_title.gif'> 메일 설정</td>
+</tr>
+<tr><td colspan=4 class=line1></td></tr>
+<tr class='ht'>
+    <td>메일발송 사용</td>
+    <td colspan=3><input type=checkbox name=cf_email_use value='1' <?=$config[cf_email_use]?'checked':'';?>> 사용 (체크하지 않으면 메일발송을 아예 사용하지 않습니다. 메일 테스트도 불가합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td><span class=title>게시판 글 작성시</span></td>
+</tr>
+<tr class='ht'>
+    <td>최고관리자 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_wr_super_admin value='1' <?=$config[cf_email_wr_super_admin]?'checked':'';?>> 사용 (최고관리자에게 메일을 발송합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td>그룹관리자 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_wr_group_admin value='1' <?=$config[cf_email_wr_group_admin]?'checked':'';?>> 사용 (그룹관리자에게 메일을 발송합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td>게시판관리자 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_wr_board_admin value='1' <?=$config[cf_email_wr_board_admin]?'checked':'';?>> 사용 (게시판관리자에게 메일을 발송합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td>원글 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_wr_write value='1' <?=$config[cf_email_wr_write]?'checked':'';?>> 사용 (게시자님께 메일을 발송합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td>코멘트 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_wr_comment_all value='1' <?=$config[cf_email_wr_comment_all]?'checked':'';?>> 사용 (원글에 코멘트가 올라오는 경우 코멘트 쓴 모든 분들께 메일을 발송합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td><span class=title>회원 가입시</title></td>
+</tr>
+<tr class='ht'>
+    <td>최고관리자 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_mb_super_admin value='1' <?=$config[cf_email_mb_super_admin]?'checked':'';?>> 사용 (최고관리자에게 메일을 발송합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td>회원님께 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_mb_member value='1' <?=$config[cf_email_mb_member]?'checked':'';?>> 사용 (회원가입한 회원님께 메일을 발송합니다.)</td>
+</tr>
+<tr class='ht'>
+    <td><span class=title>투표 기타의견 작성시</title></td>
+</tr>
+<tr class='ht'>
+    <td>최고관리자 메일발송</td>
+    <td colspan=3><input type=checkbox name=cf_email_po_super_admin value='1' <?=$config[cf_email_po_super_admin]?'checked':'';?>> 사용 (최고관리자에게 메일을 발송합니다.)</td>
 </tr>
 <tr><td colspan=4 class=line2></td></tr>
 <tr><td colspan=4 class=ht></td></tr>

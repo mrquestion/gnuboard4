@@ -60,7 +60,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
     <td><? if ($is_notice) { ?><input type=checkbox name=notice value="1" <?=$notice_checked?>>공지&nbsp;<? } ?>
         <? if ($is_html) { ?><input onclick="html_auto_br(this);" type=checkbox value="<?=$html_value?>" name="html" <?=$html_checked?>><span class=w_title>html</span>&nbsp;<? } ?>
         <? if ($is_secret) { ?><input type=checkbox value="secret" name="secret" <?=$secret_checked?>><span class=w_title>비밀글</span>&nbsp;<? } ?>
-        <input type=checkbox value="mail" name="mail" <?=$recv_email_checked?>>답변메일받기&nbsp;</td></tr>
+        <? if ($is_mail) { ?><input type=checkbox value="mail" name="mail" <?=$recv_email_checked?>>답변메일받기&nbsp;<? } ?></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 
 <? if ($is_category) { ?>

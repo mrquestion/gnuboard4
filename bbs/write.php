@@ -156,6 +156,10 @@ $is_secret = false;
 if ($board[bo_use_secret]) 
     $is_secret = true;
 
+$is_mail = false;
+if ($config[cf_email_use])
+    $is_mail = true;
+
 $recv_email_checked = "";
 if ($w == "" || strstr($write[wr_option], "mail")) 
     $recv_email_checked = "checked";

@@ -8,6 +8,21 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 환경설정 테이블에 메일발송 설정 추가
+sql_query(" ALTER TABLE `$g4[config_table]` 
+    ADD `cf_email_use` TINYINT NOT NULL AFTER `cf_search_part` , 
+    ADD `cf_email_wr_super_admin` TINYINT NOT NULL AFTER `cf_email_use` , 
+    ADD `cf_email_wr_group_admin` TINYINT NOT NULL AFTER `cf_email_wr_super_admin` , 
+    ADD `cf_email_wr_board_admin` TINYINT NOT NULL AFTER `cf_email_wr_group_admin` , 
+    ADD `cf_email_wr_write` TINYINT NOT NULL AFTER `cf_email_wr_board_admin` ", FALSE);
+sql_query(" ALTER TABLE `$g4[config_table]` 
+    CHANGE `cf_comment_all_email` `cf_email_wr_comment_all` TINYINT DEFAULT '0' NOT NULL ", FALSE);
+sql_query(" ALTER TABLE `$g4[config_table]` 
+    ADD `cf_email_mb_super_admin` TINYINT NOT NULL AFTER `cf_email_wr_comment_all` , 
+    ADD `cf_email_mb_member` TINYINT NOT NULL AFTER `cf_email_mb_super_admin` ,
+    ADD `cf_email_po_super_admin` TINYINT NOT NULL AFTER `cf_email_mb_member` ", FALSE);
+
+
 // 회원테이블에 SMS 수신여부 필드 추가
 sql_query(" ALTER TABLE `$g4[member_table]` ADD `mb_sms` TINYINT NOT NULL AFTER `mb_mailling` ", FALSE);
 
