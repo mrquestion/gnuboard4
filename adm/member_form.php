@@ -182,7 +182,10 @@ include_once("./admin.head.php");
 <p align=center>
     <input type=submit class=btn1 accesskey='s' value='  확    인  '>&nbsp;
     <input type=button class=btn1 value='  목  록  ' onclick="document.location.href='./member_list.php?<?=$qstr?>';">&nbsp;
+    
+    <? if ($w != '') { ?>
     <input type=button class=btn1 value='  삭  제  ' onclick="del('./member_delete.php?<?=$qstr?>&w=d&mb_id=<?=$mb[mb_id]?>&url=<?=$_SERVER[PHP_SELF]?>');">&nbsp;
+    <? } ?>
 </form>
 
 <script language='Javascript'>

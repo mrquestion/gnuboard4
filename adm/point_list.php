@@ -85,7 +85,7 @@ function point_clear()
             echo "&nbsp;(전체 포인트 합계 : " . number_format($row2[sum_point]) . "점)";
         }
         ?>
-        <? if ($is_admin == "super") { ?><a href="javascript:point_clear();">포인트정리</a><? } ?>
+        <? if ($is_admin == "super") { ?><!-- <a href="javascript:point_clear();">포인트정리</a> --><? } ?>
     </td>
     <td width=50% align=right>
         <select name=sfl class=cssfl>

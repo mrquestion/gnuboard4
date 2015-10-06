@@ -213,6 +213,28 @@ function subtitle($title, $more="")
     return $s;
 }
 
+// 출력순서
+function order_select($fld, $sel="") 
+{
+    $s = "<select name='$fld'>";
+    for ($i=1; $i<=100; $i++) {
+        $s .= "<option value='$i' ";
+        if ($sel) {
+            if ($i == $sel) {
+                $s .= "selected";
+            }
+        } else {
+            if ($i == 50) {
+                $s .= "selected";
+            }
+        }
+        $s .= ">$i</option>";
+    }
+    $s .= "</select>\n";
+
+    return $s;
+}
+
 // 접근 권한 검사
 if (!$member[mb_id])
 {

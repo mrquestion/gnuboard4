@@ -57,6 +57,7 @@ for ($i=0; $i<count($list); $i++) {
 <input type=hidden name=bo_table    value='<?=$bo_table?>'>
 <input type=hidden name=wr_id       value='<?=$wr_id?>'>
 <input type=hidden name=comment_id  id='comment_id' value=''>
+<input type=hidden name=sca         value='<?=$sca?>' >
 <input type=hidden name=sfl         value='<?=$sfl?>' >
 <input type=hidden name=stx         value='<?=$stx?>'>
 <input type=hidden name=spt         value='<?=$spt?>'>

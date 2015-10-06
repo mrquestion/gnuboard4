@@ -273,8 +273,6 @@ if ($w == "" || $w == "r")
 } 
 else if ($w == "u") 
 {
-    $qstr .= "&sca=$ca_name";
-
     if ($member[mb_id]) 
     {
         // 자신의 글이라면

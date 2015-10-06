@@ -48,9 +48,9 @@ include_once ("./admin.head.php");
     <td>최근게시물 삭제</td>
     <td><input type=text class=ed name='cf_new_del' value='<?=$config[cf_new_del]?>' size=5> 일
         <?=help("설정일이 지난 최근게시물 자동 삭제")?></td>
-    <td>메모 삭제</td>
+    <td>쪽지 삭제</td>
     <td><input type=text class=ed name='cf_memo_del' value='<?=$config[cf_memo_del]?>' size=5> 일
-        <?=help("설정일이 지난 메모 자동 삭제")?></td>
+        <?=help("설정일이 지난 쪽지 자동 삭제")?></td>
 </tr>
 <tr class='ht'>
     <td>접속자로그 삭제</td>

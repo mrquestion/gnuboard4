@@ -42,11 +42,11 @@ if ($is_nogood) $colspan++;
     <? if ($is_category) { ?><td width=70>분류</td><?}?>
     <? if ($is_checkbox) { ?><td width=40><INPUT onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><?}?>
     <td>제목</td>
-    <td width=110>글쓴이</td>
-    <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
     <td width=40><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
+    <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
     <? if ($is_good) { ?><td width=40><?=subject_sort_link('wr_good', $qstr2, 1)?>추천</a></td><?}?>
     <? if ($is_nogood) { ?><td width=40><?=subject_sort_link('wr_nogood', $qstr2, 1)?>비추천</a></td><?}?>
+    <td width=110>글쓴이</td>
 </tr>
 <tr><td colspan=<?=$colspan?> height=1 bgcolor=#B0ADF5></td></tr>
 
@@ -96,11 +96,11 @@ if ($is_nogood) $colspan++;
         echo " " . $list[$i][icon_secret];
         echo $nobr_end;
         ?></td>
-    <td><?=$list[$i][name]?></td>
-    <td><?=$list[$i][datetime2]?></td>
     <td><?=$list[$i][wr_hit]?></td>
+    <td><?=$list[$i][datetime2]?></td>
     <? if ($is_good) { ?><td align="center"><?=$list[$i][wr_good]?></td><? } ?>
     <? if ($is_nogood) { ?><td align="center"><?=$list[$i][wr_nogood]?></td><? } ?>
+    <td><?=$list[$i][name]?></td>
 </tr>
 <tr><td colspan=<?=$colspan?> height=1 bgcolor=#E7E7E7></td></tr>
 <?}?>

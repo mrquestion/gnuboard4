@@ -4,7 +4,7 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
-$g4[title] = "년도별 접속자현황";
+$g4[title] = "연도별 접속자현황";
 include_once("./admin.head.php");
 include_once("./visit.sub.php");
 

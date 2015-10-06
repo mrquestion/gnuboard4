@@ -72,7 +72,7 @@ for ($i=0; $i<count($member_list); $i++) {
         //mailer($default[de_subject], $default[de_admin_email], $email, $subject, $content, 1);
         mailer($config[cf_title], $member[mb_email], $email, $subject, $content, 1);
 
-        echo "<script> document.all.cont.innerHTML += '$cnt. $email ($name)<br>'; </script>\n";
+        echo "<script> document.all.cont.innerHTML += '$cnt. $email ($mb_id : $name)<br>'; </script>\n";
         //echo "+";
         flush();
         ob_flush();

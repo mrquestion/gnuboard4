@@ -242,7 +242,9 @@ if (typeof(SIDEVIEW_JS) == 'undefined') // 한번만 실행
                     if ( (el_left >= ly_left && el_top >= ly_top && el_left <= ly_right && el_top <= ly_bottom) || 
                          (el_right >= ly_left && el_right <= ly_right && el_top >= ly_top && el_top <= ly_bottom) ||
                          (el_left >= ly_left && el_bottom >= ly_top && el_right <= ly_right && el_bottom <= ly_bottom) ||
-                         (el_left >= ly_left && el_left <= ly_right && el_bottom >= ly_top && el_bottom <= ly_bottom) )
+                         (el_left >= ly_left && el_left <= ly_right && el_bottom >= ly_top && el_bottom <= ly_bottom) ||
+                         (el_top <= ly_bottom && el_left <= ly_left && el_right >= ly_right)
+                        )
                         el.style.visibility = 'hidden';
                 }
             }
