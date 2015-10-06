@@ -1,3 +1,16 @@
+4.37.28 (2015.05.27)
+    : 접속자현황에서 XSS 취약점이 발견되어 수정 (KISA 침해사고분석단 취약점점검팀 방성천님께서 알려 주셨습니다.)
+
+        adm/visit_list.php 의
+
+            $link = "<a href='$row[vi_referer]' target=_blank title='$title '>";
+        
+            를
+
+            $link = "<a href='".htmlspecialchars($row['vi_referer'])."' target=_blank title='$title '>";
+
+            로 수정하세요.
+
 4.37.27 (2015.05.13)
     : 로그인 검사시 Magic Hash 취약점이 발견되어 수정 (빈경윤님께서 알려주셨습니다.)
 
