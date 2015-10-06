@@ -1,3 +1,23 @@
+4.37.21 (2014.08.21)
+    : 이 패치를 적용하신다면 어제 올린 4.37.20 버전 패치는 따로 하지 않으셔도 됩니다.
+      zip.skin.php 의 역할이 사라져 버려 삭제를 하게 되었습니다.
+      이미 패치를 하여 이상없이 사용하시는 분들께서는 그냥 사용하셔도 좋습니다.
+    : juso.sir.co.kr 도로명주소에서 다음 주소 서비스로 변경 되었습니다.
+      SIR의 도로명주소 서비스는 2014.10.31 까지만 지원할 예정입니다.
+      http://sir.co.kr/bbs/board.php?bo_table=co_notice&wr_id=1160
+
+        adm/member_form.php - 이전 코드는 주석 처리되어 있으므로 참고하세요.
+        bbs/zip.db - 삭제 되었습니다.
+        bbs/zip.php - 대부분의 코드가 변경 되었으므로 새로 교체하세요.
+        js/zip.js - 대부분의 코드가 변경 되었으므로 새로 교체하세요.
+
+        js/common.js - 아래의 코드가 수정 되었습니다.
+            //win_open(url, "winZip", "left=50,top=50,width=616,height=460,scrollbars=1");
+            win_open(url, "winZip", "left=50,top=50,width=483,height=600,scrollbars=1");
+
+        skin/member/basic/register_form.skin.php - 이전 코드는 주석 처리되어 있으므로 참고하세요.
+        skin/member/basic/zip.skin.php - 삭제 되었습니다.
+
 4.37.20 (2014.08.20)
     : 이 패치를 적용하신다면 어제 올린 4.37.19 버전 패치는 따로 하지 않으셔도 됩니다.
     : juso.sir.co.kr 도로명주소에서 다음 주소 서비스로 변경 되었습니다.
