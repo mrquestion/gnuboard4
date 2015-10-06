@@ -271,6 +271,14 @@ if (isset($page)) { // 리스트 페이지
     $qstr .= '&page=' . urlencode($page); 
 }
 
+if ($wr_id) {
+    $wr_id = (int)$wr_id;
+}
+
+if ($bo_table) {
+    $bo_table = preg_match("/^[a-zA-Z0-9_]+$/", $bo_table) ? $bo_table : "";
+}
+
 // URL ENCODING
 if (isset($url)) {
     $urlencode = urlencode($url);

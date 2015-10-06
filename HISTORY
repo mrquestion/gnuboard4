@@ -1,3 +1,16 @@
+4.31.05 (09.01.30)
+    :   XSS 취약점 수정
+
+        if ($wr_id) {
+            $wr_id = (int)$wr_id;
+        }
+
+        if ($bo_table) {
+            $bo_table = preg_match("/^[a-zA-Z0-9_]+$/", $bo_table) ? $bo_table : "";
+        }
+
+        common.php
+
 4.31.04 (09.01.17)
     :   PHP의 설정중 register_globals=on 로 사용하는 경우에 $g4_path 변수를 이용한 그누보드 취약점을 수정 하였습니다.
         register_globals=off 로 사용하는 경우에는 문제되지 않습니다.
