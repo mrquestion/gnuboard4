@@ -1,5 +1,8 @@
 <?
 include_once("./_common.php");
+
+@include_once("$board_skin_path/write_comment_update.head.skin.php");
+
 include_once("$g4[path]/lib/trackback.lib.php");
 
 $g4[title] = $wr_subject . "코멘트입력";
@@ -148,6 +151,7 @@ if ($w == "c") // 코멘트 입력
                     wr_email = '$wr_email',
                     wr_homepage = '$wr_homepage',
                     wr_datetime = '$g4[time_ymdhis]',
+                    wr_last = '',
                     wr_ip = '$_SERVER[REMOTE_ADDR]',
                     wr_1 = '$wr_1',
                     wr_2 = '$wr_2',
@@ -163,8 +167,8 @@ if ($w == "c") // 코멘트 입력
 
     $comment_id = mysql_insert_id();
 
-    // 원글에 코멘트수 증가
-    sql_query(" update $write_table set wr_comment = wr_comment + 1 where wr_id = '$wr_id' ");
+    // 원글에 코멘트수 증가 & 마지막 시간 반영
+    sql_query(" update $write_table set wr_comment = wr_comment + 1, wr_last = '$g4[time_ymdhis]' where wr_id = '$wr_id' ");
 
     // 새글 INSERT
     //sql_query(" insert into $g4[board_new_table] ( bo_table, wr_id, wr_parent, bn_datetime ) values ( '$bo_table', '$comment_id', '$wr_id', '$g4[time_ymdhis]' ) ");
@@ -285,6 +289,7 @@ else if ($w == "cu") // 코멘트 수정
 
 // 사용자 코드 실행
 @include_once("$board_skin_path/write_comment_update.skin.php");
+@include_once("$board_skin_path/write_comment_update.tail.skin.php");
 
 goto_url("./board.php?bo_table=$bo_table&wr_id=$wr[wr_parent]&page=$page" . $qstr . "&cwin=$cwin#c_{$comment_id}");
 ?>

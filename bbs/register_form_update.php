@@ -29,10 +29,40 @@ if ($w == '' || $w == 'u')
     if (!$mb_name) alert('이름(실명)이 넘어오지 않았습니다.');
     if (!$mb_nick) alert('별명이 넘어오지 않았습니다.');
     if (!$mb_email) alert('E-mail 이 넘어오지 않았습니다.');
-}
 
-if ($w=='')
-    if ($mb_id == $mb_recommend) alert('본인을 추천할 수 없습니다.');
+    if (preg_match("/[\,]?{$mb_id}/i", $config[cf_prohibit_id]))
+        alert("\'$mb_id\' 은(는) 예약어로 사용하실 수 없는 회원아이디입니다.");
+
+    if (preg_match("/[\,]?{$mb_nick}/i", $config[cf_prohibit_id]))
+        alert("\'$mb_nick\' 은(는) 예약어로 사용하실 수 없는 별명입니다.");
+
+    if ($w=='')
+    {
+        if ($mb_id == $mb_recommend) alert('본인을 추천할 수 없습니다.');
+
+        $sql = " select count(*) as cnt from $g4[member_table] where mb_nick = '$mb_nick' ";
+        $row = sql_fetch($sql);
+        if ($row[cnt])
+            alert("\'$mb_nick\' 은(는) 이미 다른분이 사용중인 별명이므로 사용이 불가합니다.");
+
+        $sql = " select count(*) as cnt from $g4[member_table] where mb_email = '$mb_email' ";
+        $row = sql_fetch($sql);
+        if ($row[cnt])
+            alert("\'$mb_email\' 은(는) 이미 다른분이 사용중인 E-mail이므로 사용이 불가합니다.");
+    }
+    else
+    {
+        $sql = " select count(*) as cnt from $g4[member_table] where mb_nick = '$mb_nick' and mb_id <> '$mb_id' ";
+        $row = sql_fetch($sql);
+        if ($row[cnt])
+            alert("\'$mb_nick\' 은(는) 이미 다른분이 사용중인 별명이므로 사용이 불가합니다.");
+
+        $sql = " select count(*) as cnt from $g4[member_table] where mb_email = '$mb_email' and mb_id <> '$mb_id' ";
+        $row = sql_fetch($sql);
+        if ($row[cnt])
+            alert("\'$mb_email\' 은(는) 이미 다른분이 사용중인 E-mail이므로 사용이 불가합니다.");
+    }
+}
 
 $mb_dir = "$g4[path]/data/member/".substr($mb_id,0,2);
 

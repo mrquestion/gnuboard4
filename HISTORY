@@ -1,3 +1,53 @@
+4.09.00 (06.07.01)
+    :   정보공개 하지 않은 회원에게 쪽지를 발송할 수 있는 오류 수정
+        헐랭이님께서 알아내셨습니다.
+    :   회원정보수정시 별명, E-mail을 중복 등록할 수 있는 오류 수정
+        가을님께서 알아내셨습니다.
+    :   회원이 비밀글을 올리고 관리자가 답변글을 올렸을 경우 회원이 관리자가 올린 답변글을 바로 볼 수 없던 오류를 수정
+    :   관리자화면에서 최근포인트 리스트에 첫줄의 회원별명이 나오지 않던 오류 수정
+    :   게시판 복사시 쿼리문 오류 수정
+        01010101010101010101님께서 알려주셨습니다.
+    :   게시판에 최근(마지막 코멘트 쓴 시간) 기능 추가
+    :   게시판 스킨의 구조 변경 (basic 스킨 참고하세요)
+    :   게시판 테이블에 게시판 리스트 정렬 필드 추가
+    :   게시판 테이블에 여분필드 제목 필드 추가
+    :   게시판 그룹 테이블에 여분필드 제목 필드 추가
+    :   기본환경설정 테이블에 여분필드 제목 필드 추가
+    :   쪽지보내고 삭제했을 경우 쪽지메세지를 보내지 않도록 수정
+        유아원님께서 알려주셨습니다.
+
+        필드가 추가, 변경 되었으니 반드시 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/board_copy_update.php
+        adm/board_form.php
+        adm/board_form_update.php
+        adm/boardgroup_form.php
+        adm/boardgroup_form_update.php
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/index.php
+        adm/point_list.php
+        adm/upgrade.php
+        bbs/board.php
+        bbs/delete_all.php
+        bbs/delete_comment.php
+        bbs/download.php
+        bbs/good.php
+        bbs/list.php
+        bbs/member_id_check.php
+        bbs/member_nick_check.php
+        bbs/memo_delete.php
+        bbs/memo_form_update.php
+        bbs/move_update.php
+        bbs/register_form_update.php
+        bbs/write.php
+        bbs/write_comment_update.php
+        bbs/write_update.php
+        lib/common.lib.php
+        skin/member/basic/register_form.skin.php
+        skin/board/basic/*
+        skin/board/cheditor/*
+
 4.08.00 (06.05.13) [필수패치]
     :   파이어폭스(불여우)에서 게시판 파일이 제대로 다운로드 되지 않던 오류 수정
         zzzz님께서 알려주셨습니다.

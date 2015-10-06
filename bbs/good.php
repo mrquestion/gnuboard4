@@ -1,6 +1,8 @@
 <?
 include_once("./_common.php");
 
+@include_once("$board_skin_path/good.head.skin.php");
+
 echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
 
 if (!$is_member) 
@@ -63,5 +65,7 @@ if ($good == "good" || $good == "nogood")
         echo "<script language='JavaScript'> alert('이 글을 \'$status\' 하셨습니다.');</script>";
     }
 }
+
+@include_once("$board_skin_path/good.tail.skin.php");
 ?>
 <script language="JavaScript"> window.close(); </script>

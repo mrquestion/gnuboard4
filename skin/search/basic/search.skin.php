@@ -18,7 +18,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <option value="wr_name">이름</option>
         </select>
 
-        <input type=text name=stx maxlength=20 required itemname="검색어" value="<?=$text_stx?>"> 
+        <input type=text name=stx maxlength=20 required itemname="검색어" value='<?=$text_stx?>'> 
 
         <input type=submit value=" 검 색 ">
 

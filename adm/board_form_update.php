@@ -82,6 +82,17 @@ $sql_common = " gr_id               = '$_POST[gr_id]',
                 bo_write_max        = '$bo_write_max',
                 bo_comment_min      = '$bo_comment_min',
                 bo_comment_max      = '$bo_comment_max',
+                bo_sort_field       = '$bo_sort_field',
+                bo_1_subj           = '$bo_1_subj',
+                bo_2_subj           = '$bo_2_subj',
+                bo_3_subj           = '$bo_3_subj',
+                bo_4_subj           = '$bo_4_subj',
+                bo_5_subj           = '$bo_5_subj',
+                bo_6_subj           = '$bo_6_subj',
+                bo_7_subj           = '$bo_7_subj',
+                bo_8_subj           = '$bo_8_subj',
+                bo_9_subj           = '$bo_9_subj',
+                bo_10_subj          = '$bo_10_subj',
                 bo_1                = '$bo_1',
                 bo_2                = '$bo_2',
                 bo_3                = '$bo_3',
@@ -240,6 +251,7 @@ if ($chk_hot) $s .= " , bo_hot = '$bo_hot' ";
 if ($chk_image_width) $s .= " , bo_image_width = '$bo_image_width' ";
 if ($chk_reply_order) $s .= " , bo_reply_order = '$bo_reply_order' ";
 if ($chk_disable_tags) $s .= " , bo_disable_tags = '$bo_disable_tags' ";
+if ($chk_sort_field) $s .= " , bo_sort_field = '$bo_sort_field' ";
 if ($chk_write_min) $s .= " , bo_write_min = '$bo_write_min' ";
 if ($chk_write_max) $s .= " , bo_write_max = '$bo_write_max' ";
 if ($chk_comment_min) $s .= " , bo_comment_min = '$bo_comment_min' ";
@@ -256,7 +268,10 @@ if ($chk_order_search) $s .= " , bo_order_search = '$bo_order_search' ";
 for ($i=1; $i<=10; $i++) 
 {
     if ($_POST["chk_{$i}"]) 
+    {
+        $s .= " , bo_{$i}_subj = '".$_POST["bo_{$i}_subj"]."' ";
         $s .= " , bo_{$i} = '".$_POST["bo_{$i}"]."' ";
+    }
 }
 
 if ($s)

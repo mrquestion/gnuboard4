@@ -1,6 +1,8 @@
 <?
 include_once("./_common.php");
 
+@include_once("$board_skin_path/download.head.skin.php");
+
 // 쿠키에 저장된 ID값과 넘어온 ID값을 비교하여 같지 않을 경우 오류 발생
 // 다른곳에서 링크 거는것을 방지하기 위한 코드
 if (!get_session("ss_view_{$bo_table}_{$wr_id}")) 
@@ -97,4 +99,6 @@ if (file_exists($filepath)) {
 } else {
     alert("파일을 찾을 수 없습니다.");
 }
+
+@include_once("$board_skin_path/download.tail.skin.php");
 ?>

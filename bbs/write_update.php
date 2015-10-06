@@ -1,6 +1,9 @@
 <?
 $g4[title] = $wr_subject . "±ÛÀÔ·Â";
 include_once("./_common.php");
+
+@include_once("$board_skin_path/write_update.head.skin.php");
+
 include_once("$g4[path]/lib/trackback.lib.php");
 
 $upload_max_filesize = ini_get('upload_max_filesize');
@@ -237,6 +240,7 @@ if ($w == "" || $w == "r")
                     wr_email = '$wr_email',
                     wr_homepage = '$wr_homepage',
                     wr_datetime = '$g4[time_ymdhis]',
+                    wr_last = '$g4[time_ymdhis]',
                     wr_ip = '$_SERVER[REMOTE_ADDR]',
                     wr_1 = '$wr_1',
                     wr_2 = '$wr_2',
@@ -520,6 +524,8 @@ if (($w != "u" && $wr_trackback) || ($w=="u" && $wr_trackback && $re_trackback))
     if ($msg) 
         echo "<script language='JavaScript'>alert('$msg $wr_trackback');</script>";
 }
+
+@include_once("$board_skin_path/write_update.tail.skin.php");
 
 if ($file_upload_msg)
     alert($file_upload_msg, "./board.php?bo_table=$bo_table&wr_id=$wr_id&page=$page" . $qstr);

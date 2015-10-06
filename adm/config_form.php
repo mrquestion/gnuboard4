@@ -364,10 +364,10 @@ include_once ("./admin.head.php");
 <tr><td colspan=4 class=line1></td></tr>
 <? for ($i=1; $i<=10; $i=$i+2) { $k=$i+1; ?>
 <tr class='ht'>
-    <td>여분 필드<?=$i?></td>
-    <td><input type='text' class=ed style='width:99%;' name=cf_<?=$i?> value='<?=$config["cf_$i"]?>'></td>
-    <td>여분 필드<?=$k?></td>
-    <td><input type='text' class=ed style='width:99%;' name=cf_<?=$k?> value='<?=$config["cf_$k"]?>'></td>
+    <td><input type=text class=ed name='cf_<?=$i?>_subj' value='<?=get_text($config["cf_{$i}_subj"])?>' title='여분필드 <?=$i?> 제목' style='text-align:right;font-weight:bold;' size=15></td>
+    <td><input type='text' class=ed style='width:99%;' name=cf_<?=$i?> value='<?=$config["cf_$i"]?>' title='여분필드 <?=$i?> 설정값'></td>
+    <td><input type=text class=ed name='cf_<?=$k?>_subj' value='<?=get_text($config["cf_{$k}_subj"])?>' title='여분필드 <?=$k?> 제목' style='text-align:right;font-weight:bold;' size=15></td>
+    <td><input type='text' class=ed style='width:99%;' name=cf_<?=$k?> value='<?=$config["cf_$k"]?>' title='여분필드 <?=$k?> 설정값'></td>
 </tr>
 <? } ?>
 <tr><td colspan=4 class=line2></td></tr>

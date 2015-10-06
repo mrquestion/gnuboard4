@@ -28,36 +28,36 @@ $sql_common = " mb_name         = '$mb_name',
                 mb_open         = '$mb_open',
                 mb_profile      = '$mb_profile',
                 mb_level        = '$mb_level',
-                mb_1            = '$mb_1', 
-                mb_2            = '$mb_2', 
-                mb_3            = '$mb_3', 
-                mb_4            = '$mb_4', 
-                mb_5            = '$mb_5', 
-                mb_6            = '$mb_6', 
-                mb_7            = '$mb_7', 
-                mb_8            = '$mb_8', 
-                mb_9            = '$mb_9', 
+                mb_1            = '$mb_1',
+                mb_2            = '$mb_2',
+                mb_3            = '$mb_3',
+                mb_4            = '$mb_4',
+                mb_5            = '$mb_5',
+                mb_6            = '$mb_6',
+                mb_7            = '$mb_7',
+                mb_8            = '$mb_8',
+                mb_9            = '$mb_9',
                 mb_10           = '$mb_10' ";
 
 if ($w == "")
 {
     $mb = get_member($mb_id);
     if ($mb[mb_id])
-        alert("이미 존재하는 회원입니다.\\n\\nＩＤ : $mb[mb_id]\\n\\n이름 : $mb[mb_name]\\n\\n별명 : $mb[mb_nick]\\n\\n메일 : $mb[mb_email]"); 
+        alert("이미 존재하는 회원입니다.\\n\\nＩＤ : $mb[mb_id]\\n\\n이름 : $mb[mb_name]\\n\\n별명 : $mb[mb_nick]\\n\\n메일 : $mb[mb_email]");
 
     if ($mb[mb_nick] == $mb_nick)
-        alert("이미 존재하는 별명입니다.\\n\\nＩＤ : $mb[mb_id]\\n\\n이름 : $mb[mb_name]\\n\\n별명 : $mb[mb_nick]\\n\\n메일 : $mb[mb_email]"); 
+        alert("이미 존재하는 별명입니다.\\n\\nＩＤ : $mb[mb_id]\\n\\n이름 : $mb[mb_name]\\n\\n별명 : $mb[mb_nick]\\n\\n메일 : $mb[mb_email]");
 
     if ($mb[mb_email] == $mb_email)
-        alert("이미 존재하는 E-mail 입니다.\\n\\nＩＤ : $mb[mb_id]\\n\\n이름 : $mb[mb_name]\\n\\n별명 : $mb[mb_nick]\\n\\n메일 : $mb[mb_email]"); 
+        alert("이미 존재하는 E-mail 입니다.\\n\\nＩＤ : $mb[mb_id]\\n\\n이름 : $mb[mb_name]\\n\\n별명 : $mb[mb_nick]\\n\\n메일 : $mb[mb_email]");
 
     sql_query(" insert into $g4[member_table] set mb_id = '$mb_id', mb_password = '".sql_password($mb_password)."', mb_datetime = '$g4[time_ymdhis]', mb_ip = '$_SERVER[REMOTE_ADDR]', mb_email_certify = '$g4[time_ymdhis]', $sql_common  ");
 }
-else if ($w == "u") 
+else if ($w == "u")
 {
     $mb = get_member($mb_id);
     if (!$mb[mb_id])
-        alert("존재하지 않는 회원자료입니다."); 
+        alert("존재하지 않는 회원자료입니다.");
 
     if ($is_admin != "super" && $mb[mb_level] >= $member[mb_level])
         alert("자신보다 권한이 높거나 같은 회원은 수정할 수 없습니다.");
@@ -90,7 +90,7 @@ else if ($w == "u")
                     @unlink($dest_path);
                 }
             }
-        } 
+        }
     }
 
     if ($mb_password)
@@ -105,11 +105,11 @@ else if ($w == "u")
 
     $sql = " update $g4[member_table]
                 set $sql_common
-                    $sql_password 
+                    $sql_password
                     $sql_certify
               where mb_id = '$mb_id' ";
     sql_query($sql);
-} 
+}
 else
     alert("제대로 된 값이 넘어오지 않았습니다.");
 

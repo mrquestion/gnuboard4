@@ -7,21 +7,22 @@ if (!$member[mb_id])
 $tmp_list = explode(",", $me_recv_mb_id);
 $me_recv_mb_id_list = "";
 $msg = "";
-$comma = "";
+$comma1 = $comma2 = "";
 $mb_list = array();
 for ($i=0; $i<count($tmp_list); $i++) {
     $row = get_member($tmp_list[$i]);
-    if (!$row[mb_id] || $row[mb_leave_date] || $row[mb_intercept_date]) {
-        $msg .= "$comma$tmp_list[$i]";
+    if (!$row[mb_id] || !$row[mb_open] || $row[mb_leave_date] || $row[mb_intercept_date]) {
+        $msg .= "$comma1$tmp_list[$i]";
+        $comma1 = ",";
     } else {
-        $me_recv_mb_id_list .= "$comma$row[mb_nick]";
+        $me_recv_mb_id_list .= "$comma2$row[mb_nick]";
         $mb_list[] = $tmp_list[$i];
+        $comma2 = ",";
     }
-    $comma = ", ";
 }
 
 if ($msg)
-    alert($msg . " 은(는) 존재하지 않는 회원아이디 이거나 탈퇴, 접근차단된 회원아이디 입니다.\\n\\n쪽지를 발송하지 않았습니다.");
+    alert("회원아이디 \'".$msg."\' 은(는) 존재(또는 정보공개)하지 않는 회원아이디 이거나 탈퇴, 접근차단된 회원아이디 입니다.\\n\\n쪽지를 발송하지 않았습니다.");
 
 for ($i=0; $i<count($mb_list); $i++) {
     if (trim($mb_list[$i])) {
@@ -42,5 +43,5 @@ for ($i=0; $i<count($mb_list); $i++) {
     }
 }
 
-alert("$me_recv_mb_id_list 님께 쪽지를 전달하였습니다.", "./memo.php?kind=send");
+alert("\'$me_recv_mb_id_list\' 님께 쪽지를 전달하였습니다.", "./memo.php?kind=send");
 ?>

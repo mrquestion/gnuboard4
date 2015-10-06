@@ -32,12 +32,12 @@ function chkReset(f)
                 <table width="141" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td width="35" height="23"><img src="<?=$outlogin_skin_path?>/img/login_id.gif" width="35" height="23"></td>
-                    <td width="106" height="23" colspan="2" align="center"><input name="mb_id" type="text" size="12" maxlength="20" required itemname="아이디" value='아이디' onMouseOver='chkReset(this.form);' onFocus='chkReset(this.form);'></td>
+                    <td width="106" height="23" colspan="2" align="center"><input name="mb_id" type="text" class=ed size="12" maxlength="20" required itemname="아이디" value='아이디' onMouseOver='chkReset(this.form);' onFocus='chkReset(this.form);'></td>
                 </tr>
                 <tr> 
                     <td width="35" height="23"><img src="<?=$outlogin_skin_path?>/img/login_pw.gif" width="35" height="23"></td>
-                    <td id=pw1 width="106" height="23" colspan="2" align="center"><input type="text" size="12" maxlength="20" required itemname="패스워드" value='패스워드' onMouseOver='chkReset(this.form);' onfocus='chkReset(this.form);'></td>
-                    <td id=pw2 style='display:none;' width="106" height="23" colspan="2" align="center"><input name="mb_password" type="password" size="12" maxlength="20" itemname="패스워드" onMouseOver='chkReset(this.form);' onfocus='chkReset(this.form);'></td>
+                    <td id=pw1 width="106" height="23" colspan="2" align="center"><input type="text" class=ed size="12" maxlength="20" required itemname="패스워드" value='패스워드' onMouseOver='chkReset(this.form);' onfocus='chkReset(this.form);'></td>
+                    <td id=pw2 style='display:none;' width="106" height="23" colspan="2" align="center"><input name="mb_password" type="password" class=ed size="12" maxlength="20" itemname="패스워드" onMouseOver='chkReset(this.form);' onfocus='chkReset(this.form);'></td>
                 </tr>
                 </table>
             </td>

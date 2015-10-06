@@ -315,7 +315,8 @@ $colspan = 7;
 <input type=hidden name=stx  value='<?=$stx?>'>
 <input type=hidden name=page value='<?=$page?>'>
 <colgroup width=100>
-<colgroup width=100>
+<colgroup width=80>
+<colgroup width=80>
 <colgroup width=140>
 <colgroup width=''>
 <colgroup width=50>
@@ -323,6 +324,7 @@ $colspan = 7;
 <tr><td colspan='<?=$colspan?>' class='line1'></td></tr>
 <tr class='bgcol1 bold col1 ht center'>
     <td>회원아이디</td>
+    <td>이름</td>
     <td>별명</td>
     <td>일시</td>
     <td>포인트 내용</td>
@@ -331,11 +333,12 @@ $colspan = 7;
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
+$row2['mb_id'] = '';
 for ($i=0; $row=sql_fetch_array($result); $i++) 
 {
     if ($row2['mb_id'] != $row['mb_id'])
     {
-        $sql2 = " select mb_id, mb_nick, mb_email, mb_homepage, mb_point from $g4[member_table] where mb_id = '$row[mb_id]' ";
+        $sql2 = " select mb_id, mb_name, mb_nick, mb_email, mb_homepage, mb_point from $g4[member_table] where mb_id = '$row[mb_id]' ";
         $row2 = sql_fetch($sql2);
     }
 
@@ -354,6 +357,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     <input type=hidden name=mb_id[$i] value='$row[mb_id]'>
     <tr class='list$list col1 ht center'>
         <td><a href='./point_list.php?sfl=mb_id&stx=$row[mb_id]'>$row[mb_id]</a></td>
+        <td>$row2[mb_name]</td>
         <td>$mb_nick</td>
         <td>$row[po_datetime]</td>
         <td align=left>&nbsp;{$link1}$row[po_content]{$link2}</td>

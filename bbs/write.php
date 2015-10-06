@@ -4,6 +4,8 @@ include_once("./_common.php");
 if (!$bo_table) 
     alert("bo_table 값이 넘어오지 않았습니다.\\n\\nwrite.php?bo_table=code 와 같은 방식으로 넘겨 주세요.");
 
+@include_once ("$board_skin_path/write.head.skin.php");
+
 $notice_array = explode("\n", trim($board[bo_notice]));
 
 if ($w == "") 
@@ -353,4 +355,6 @@ echo "<script language='javascript' src='$g4[path]/js/filter.js'></script>\n";
 
 include_once("./board_tail.php");
 include_once("$g4[path]/tail.sub.php");
+
+@include_once ("$board_skin_path/write.tail.skin.php");
 ?>

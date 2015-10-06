@@ -302,6 +302,13 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
         $list['datetime2'] = substr($list['datetime2'],11,5);
     else
         $list['datetime2'] = substr($list['datetime2'],5,5);
+    // 4.1
+    $list['last'] = substr($list['wr_last'],0,10);
+    $list['last2'] = $list['wr_last'];
+    if ($list['last'] == $g4['time_ymd'])
+        $list['last2'] = substr($list['last2'],11,5);
+    else
+        $list['last2'] = substr($list['last2'],5,5);
 
     $list['wr_homepage'] = get_text(addslashes($list['wr_homepage']));
 
@@ -435,7 +442,9 @@ function conv_content($content, $html)
 
         if ($board[bo_disable_tags])
         {
-            $source[] = "/(\<)([\/]?)($board[bo_disable_tags])/i";
+            //$source[] = "/(\<)([\/]?)($board[bo_disable_tags])/i";
+            // 태그에만 적용하던것을 속성(프로퍼티)에도 적용하도록 수정
+            $source[] = "/([\<]?)([\/]?)($board[bo_disable_tags])/i";
             $target[] = "$1$2$3-x";
             //$source[] = "/^/";
             //$target[] = "<b>이 페이지는 사용금지 태그 사용으로 인하여 정상 출력되지 않을 수 있습니다.</b><p>";

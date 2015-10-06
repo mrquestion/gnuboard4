@@ -83,14 +83,33 @@ if ($wr_id)
     else 
     {
         // 비밀글이라면
-        if (strstr($write[wr_option], "secret")) {
+        if (strstr($write[wr_option], "secret")) 
+        {
+            // 회원이 비밀글을 올리고 관리자가 답변글을 올렸을 경우
+            // 회원이 관리자가 올린 답변글을 바로 볼 수 없던 오류를 수정
+            $is_owner = false;
+            if ($write[wr_reply] && $member[mb_id])
+            {
+                $sql = " select mb_id from $write_table 
+                          where wr_num = '$write[wr_num]' 
+                            and wr_reply = ''
+                            and wr_is_comment = '0' ";
+                $row = sql_fetch($sql);
+                if ($row[mb_id] == $member[mb_id]) 
+                    $is_owner = true;
+            }
+
             $ss_name = "ss_secret_{$bo_table}_$write[wr_num]";
-            //$ss_name = "ss_secret_{$bo_table}_{$wr_id}";
-            // 한번 읽은 게시물의 번호는 세션에 저장되어 있고 같은 게시물을 읽을 경우는 다시 패스워드를 묻지 않습니다.
-            // 이 게시물이 저장된 게시물이 아니면서 관리자가 아니라면
-            //if ("$bo_table|$write[wr_num]" != get_session("ss_secret")) 
-            if (!get_session($ss_name)) 
-                goto_url("./password.php?w=s&bo_table=$bo_table&wr_id=$wr_id{$qstr}");
+            
+            if (!$is_owner)
+            {
+                //$ss_name = "ss_secret_{$bo_table}_{$wr_id}";
+                // 한번 읽은 게시물의 번호는 세션에 저장되어 있고 같은 게시물을 읽을 경우는 다시 패스워드를 묻지 않습니다.
+                // 이 게시물이 저장된 게시물이 아니면서 관리자가 아니라면
+                //if ("$bo_table|$write[wr_num]" != get_session("ss_secret")) 
+                if (!get_session($ss_name)) 
+                    goto_url("./password.php?w=s&bo_table=$bo_table&wr_id=$wr_id{$qstr}");
+            }
 
             set_session($ss_name, TRUE);
         }

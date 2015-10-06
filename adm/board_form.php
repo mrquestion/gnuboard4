@@ -391,8 +391,36 @@ include_once ("./admin.head.php");
 <tr class='ht'>
     <td><input type=checkbox name=chk_disable_tags value=1></td>
     <td>사용금지 태그</td>
-    <td><input type=text class=ed name=bo_disable_tags style='width:80%;' value='<?=$board[bo_disable_tags]?>'>
-        <?=help("태그와 태그 사이는 | 로 구분하세요. (예: <b>script</b>|<b>iframe</b>)\n\nHTML 사용시 금지할 태그를 입력하는곳 입니다.", -50)?>
+    <td><input type=text class=ed name=bo_disable_tags style='width:80%;' value='<?=get_text($board[bo_disable_tags])?>'>
+        <?=help("태그와 태그 사이는 | 로 구분하세요. (예: <b>script</b>|<b>iframe</b>)\n\nHTML 사용시 금지할 태그를 입력하는곳 입니다.", -50)?></td>
+</tr>
+<tr class='ht'>
+    <td><input type=checkbox name=chk_sort_field value=1></td>
+    <td>리스트 정렬 필드</td>
+    <td>
+        <select name=bo_sort_field>
+        <option value=''>wr_num, wr_reply : 기본
+        <option value='wr_datetime asc'>wr_datetime asc : 날짜 이전것 부터
+        <option value='wr_datetime desc'>wr_datetime desc : 날짜 최근것 부터
+        <option value='wr_hit asc, wr_num, wr_reply'>wr_hit asc : 조회수 낮은것 부터
+        <option value='wr_hit desc, wr_num, wr_reply'>wr_hit desc : 조회수 높은것 부터
+        <option value='wr_last asc'>wr_last asc : 최근글 이전것 부터
+        <option value='wr_last desc'>wr_last desc : 최근글 최근것 부터
+        <option value='wr_comment asc, wr_num, wr_reply'>wr_comment asc : 코멘트수 낮은것 부터
+        <option value='wr_comment desc, wr_num, wr_reply'>wr_comment asc : 코멘트수 높은것 부터
+        <option value='wr_good asc, wr_num, wr_reply'>wr_good asc : 추천수 낮은것 부터
+        <option value='wr_good desc, wr_num, wr_reply'>wr_good asc : 추천수 높은것 부터
+        <option value='wr_nogood asc, wr_num, wr_reply'>wr_nogood asc : 비추천수 낮은것 부터
+        <option value='wr_nogood desc, wr_num, wr_reply'>wr_nogood asc : 비추천수 높은것 부터
+        <option value='wr_subject asc, wr_num, wr_reply'>wr_subject : 제목 내림차순
+        <option value='wr_subject desc, wr_num, wr_reply'>wr_subject : 제목 오름차순
+        <option value='wr_name asc, wr_num, wr_reply'>wr_name : 글쓴이 내림차순
+        <option value='wr_name desc, wr_num, wr_reply'>wr_name : 글쓴이 오름차순
+        <option value='ca_name asc, wr_num, wr_reply'>ca_name : 분류명 내림차순
+        <option value='ca_name desc, wr_num, wr_reply'>ca_name : 분류명 오름차순
+        </select>
+        <script language='javascript'> document.fboardform.bo_sort_field.value = '<?=$board[bo_sort_field]?>'; </script>
+        <?=help("리스트에서 기본으로 정렬에 사용할 필드를 선택합니다.\n\n'기본'으로 사용하지 않으시는 경우 속도가 느려질 수 있습니다.", -50)?>
     </td>
 </tr>
 
@@ -487,8 +515,8 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
 <? for ($i=1; $i<=10; $i++) { ?>
 <tr class='ht'>
     <td><input type=checkbox name=chk_<?=$i?> value=1></td>
-    <td>여분 필드 <?=$i?></td>
-    <td><input type=text class=ed style='width:80%;' name=bo_<?=$i?> value='<?=$board["bo_$i"]?>'></td>
+    <td><input type=text class=ed name='bo_<?=$i?>_subj' value='<?=get_text($board["bo_{$i}_subj"])?>' title='여분필드 <?=$i?> 제목' style='text-align:right;font-weight:bold;'></td>
+    <td><input type=text class=ed style='width:80%;' name='bo_<?=$i?>' value='<?=get_text($board["bo_$i"])?>' title='여분필드 <?=$i?> 설정값'></td>
 </tr>
 <? } ?>
 

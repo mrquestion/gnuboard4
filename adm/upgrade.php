@@ -11,6 +11,57 @@ $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
 
+// 4.09.00
+// 기본환경설정 테이블 필드 추가
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_1_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_open_modify` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_2_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_1_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_3_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_2_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_4_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_3_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_5_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_4_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_6_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_5_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_7_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_6_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_8_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_7_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_9_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_8_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['config_table']}` ADD `cf_10_subj` VARCHAR( 255 ) NOT NULL AFTER `cf_9_subj` ", FALSE);
+
+// 게시판 그룹 테이블 필드 추가
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_1_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_use_access` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_2_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_1_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_3_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_2_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_4_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_3_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_5_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_4_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_6_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_5_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_7_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_6_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_8_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_7_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_9_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_8_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['group_table']}` ADD `gr_10_subj` VARCHAR( 255 ) NOT NULL AFTER `gr_9_subj` ", FALSE);
+
+// 게시판 테이블 필드 추가
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_sort_field` VARCHAR( 255 ) NOT NULL AFTER `bo_use_email` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_1_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_sort_field` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_2_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_1_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_3_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_2_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_4_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_3_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_5_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_4_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_6_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_5_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_7_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_6_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_8_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_7_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_9_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_8_subj` ", FALSE);
+sql_query(" ALTER TABLE `{$g4['board_table']}` ADD `bo_10_subj` VARCHAR( 255 ) NOT NULL AFTER `bo_9_subj` ", FALSE);
+
+// 게시판 리스트에서 코멘트를 포함하여 최근에 올라온 글을 확인하는 시간 필드 생성
+$sql = " select bo_table from $g4[board_table] ";
+$res = sql_query($sql);
+for($i=0;$row=sql_fetch_array($res);$i++)
+{
+    sql_query(" ALTER TABLE `{$g4['write_prefix']}{$row[bo_table]}` ADD `wr_last` VARCHAR( 19 ) NOT NULL AFTER `wr_datetime` ", FALSE);
+    $sql2 = " select count(*) as cnt from `{$g4['write_prefix']}{$row[bo_table]}` where wr_last <> '' ";
+    $row2 = sql_fetch_array($sql2);
+    if (!$row2[cnt]) // 원글에만 최근시간을 반영합니다.
+        sql_query(" UPDATE `{$g4['write_prefix']}{$row[bo_table]}` set wr_last = wr_datetime WHERE wr_is_comment = 0 ");
+}
+
+
 // 4.08.00
 // 정보공개를 바꾸면 일정기간 동안 변경할 수 없음
 sql_query(" ALTER TABLE `{$g4[member_table]}` ADD `mb_open_date` DATE NOT NULL AFTER `mb_open` ", false);

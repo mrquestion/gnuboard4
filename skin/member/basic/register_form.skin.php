@@ -338,6 +338,10 @@ function fregisterform_submit(f)
             alert("'"+f.mb_id.value+"'은(는) 이미 가입된 회원아이디이므로 사용하실 수 없습니다.");
             f.mb_id.focus();
             return;
+        } else if (f.mb_id_enabled.value == -2) {
+            alert("'"+f.mb_id.value+"'은(는) 예약어로 사용하실 수 없는 회원아이디입니다.");
+            f.mb_id.focus();
+            return;
         }
     }
 
@@ -350,14 +354,20 @@ function fregisterform_submit(f)
         alert("'"+f.mb_nick.value+"'은(는) 이미 등록된 별명이므로 사용하실 수 없습니다.");
         f.mb_nick.focus();
         return;
+    } else if (f.mb_nick_enabled.value == -2) {
+        alert("'"+f.mb_nick.value+"'은(는) 예약어로 사용하실 수 없는 회원아이디입니다.");
+        f.mb_nick.focus();
+        return;
     }
 
+    /*
     var id = prohibit_id_check(f.mb_id.value);
     if (id) {
         alert("'"+id+"'은(는) 사용하실 수 없는 회원아이디입니다.");
         f.mb_id.focus();
         return;
     }
+    */
 
     if (f.mb_password.value != f.mb_password_re.value) {
         alert("패스워드가 같지 않습니다.");
@@ -438,12 +448,14 @@ function mb_id_check()
         return;
     }
 
+    /*
     var id = prohibit_id_check(f.mb_id.value);
     if (id) {
         alert("'"+id + "'은(는) 사용하실 수 없는 회원아이디입니다.");
         f.mb_id.focus();
         return;
     }
+    */
 
     if (g4_charset.toUpperCase() == "UTF-8")
         win_open(g4_path+"/"+g4_bbs+"/member_id_check.php?mb_id="+encodeURI(document.fregisterform.mb_id.value), "hiddenframe");
@@ -462,12 +474,14 @@ function mb_nick_check()
         return;
     }
 
+    /*
     var id = prohibit_id_check(f.mb_nick.value);
     if (id) {
         alert("'"+id + "'은(는) 사용하실 수 없는 별명입니다.");
         f.mb_nick.focus();
         return;
     }
+    */
 
     if (f.mb_nick.defaultValue == f.mb_nick.value && f.mb_nick.value != "") {
         alert("별명이 바뀌지 않았으므로 중복확인 하실 필요가 없습니다.");

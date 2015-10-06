@@ -103,6 +103,7 @@ for ($i=1; $i<=$g4[link_count]; $i++)
         ?>
 
         <span class="ct lh"><?=$view[content];?></span>
+        
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a>
         
@@ -126,16 +127,25 @@ function resize_image()
     var image_width = parseInt('<?=$board[bo_image_width]?>');
     var image_height = 0;
 
-    for(i=0; i<target.length; i++) { 
+    for(i=0; i<target.length; i++) 
+    { 
         // 원래 사이즈를 저장해 놓는다
         target[i].tmp_width  = target[i].width;
         target[i].tmp_height = target[i].height;
         // 이미지 폭이 테이블 폭보다 크다면 테이블폭에 맞춘다
-        if(target[i].width > image_width) {
+        if(target[i].width > image_width) 
+        {
             image_height = parseFloat(target[i].width / target[i].height)
             target[i].width = image_width;
             target[i].height = parseInt(image_width / image_height);
+
+            // 스타일에 적용된 이미지의 폭과 높이를 삭제한다
+            target[i].style.width = '';
+            target[i].style.height = '';
         }
+        target[i].style.borderWidth = '1px';
+        target[i].style.borderStyle = 'solid';
+        target[i].style.borderColor = '#000000';
     }
 }
 

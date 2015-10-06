@@ -34,6 +34,7 @@ CREATE TABLE __TABLE_NAME__ (
   wr_email varchar(255) NOT NULL default '',
   wr_homepage varchar(255) NOT NULL default '',
   wr_datetime datetime NOT NULL default '0000-00-00 00:00:00',
+  wr_last varchar(19) NOT NULL default '',
   wr_ip varchar(255) NOT NULL default '',
   wr_1 varchar(255) NOT NULL default '',
   wr_2 varchar(255) NOT NULL default '',

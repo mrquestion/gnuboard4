@@ -60,7 +60,10 @@ if ($board[bo_gallery_cols])
 //if (!$sst || ($sst && !(strstr($sst, 'wr_id') || strstr($sst, "wr_datetime")))) {
 if (!$sst) 
 {
-    $sst  = "wr_num, wr_reply";
+    if ($board[bo_sort_field])
+        $sst = $board[bo_sort_field];
+    else
+        $sst  = "wr_num, wr_reply";
     $sod = "";
 }
 $sql_order = " order by $sst $sod ";
@@ -148,5 +151,6 @@ if (preg_match("/gecko|firefox/i", $_SERVER['HTTP_USER_AGENT'])) {
 // 4.00.12
 $rss_href = "./rss.php?bo_table=$bo_table";
 
+$stx = get_text(stripslashes($stx));
 include_once("$board_skin_path/list.skin.php");
 ?>

@@ -53,7 +53,7 @@ if ($sfl == "mb_id" && $stx)
 $g4[title] = "포인트관리";
 include_once ("./admin.head.php");
 
-$colspan = 7;
+$colspan = 8;
 ?>
 
 <script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
@@ -107,7 +107,8 @@ function point_clear()
 <input type=hidden name=page value='<?=$page?>'>
 <colgroup width=30>
 <colgroup width=100>
-<colgroup width=100>
+<colgroup width=80>
+<colgroup width=80>
 <colgroup width=140>
 <colgroup width=''>
 <colgroup width=50>
@@ -116,6 +117,7 @@ function point_clear()
 <tr class='bgcol1 bold col1 ht center'>
     <td><input type=checkbox name=chkall value='1' onclick='check_all(this.form)'></td>
     <td><?=subject_sort_link('mb_id')?>회원아이디</a></td>
+    <td>이름</td>
     <td>별명</td>
     <td><?=subject_sort_link('po_datetime')?>일시</a></td>
     <td><?=subject_sort_link('po_content')?>포인트 내용</a></td>
@@ -128,7 +130,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     if ($row2[mb_id] != $row[mb_id])
     {
-        $sql2 = " select mb_id, mb_nick, mb_email, mb_homepage, mb_point from $g4[member_table] where mb_id = '$row[mb_id]' ";
+        $sql2 = " select mb_id, mb_name, mb_nick, mb_email, mb_homepage, mb_point from $g4[member_table] where mb_id = '$row[mb_id]' ";
         $row2 = sql_fetch($sql2);
     }
 
@@ -148,6 +150,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     <tr class='list$list col1 ht center'>
         <td><input type=checkbox name=chk[] value='$i'></td>
         <td><a href='?sfl=mb_id&stx=$row[mb_id]'>$row[mb_id]</a></td>
+        <td>$row2[mb_name]</td>
         <td>$mb_nick</td>
         <td>$row[po_datetime]</td>
         <td align=left>&nbsp;{$link1}$row[po_content]{$link2}</td>

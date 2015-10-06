@@ -8,9 +8,7 @@ var char_min = parseInt(<?=$write_min?>); // 최소
 var char_max = parseInt(<?=$write_max?>); // 최대
 </script>
 
-<!-- 김선용 2005.4 - ff(불여우) 에서는 innerhtml 사용시 폼이 <table> 아래에 있으면 인식하지 못합니다. -->
 <form name="fwrite" method="post" action="javascript:fwrite_check(document.fwrite);" enctype="multipart/form-data" style="margin:0px;">
-<input type=hidden name=null><!-- 삭제하지 마십시오. -->
 <input type=hidden name=w        value="<?=$w?>">
 <input type=hidden name=bo_table value="<?=$bo_table?>">
 <input type=hidden name=wr_id    value="<?=$wr_id?>">
@@ -56,6 +54,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
+<? if ($is_notice || $is_html || $is_secret || $is_mail) { ?>
 <tr>
     <td width=120 style='padding-left:20px; height:30px;'>· 옵션</td>
     <td><? if ($is_notice) { ?><input type=checkbox name=notice value="1" <?=$notice_checked?>>공지&nbsp;<? } ?>
@@ -63,6 +62,7 @@ var char_max = parseInt(<?=$write_max?>); // 최대
         <? if ($is_secret) { ?><input type=checkbox value="secret" name="secret" <?=$secret_checked?>><span class=w_title>비밀글</span>&nbsp;<? } ?>
         <? if ($is_mail) { ?><input type=checkbox value="mail" name="mail" <?=$recv_email_checked?>>답변메일받기&nbsp;<? } ?></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
+<? } ?>
 
 <? if ($is_category) { ?>
 <tr>
@@ -211,7 +211,8 @@ if ($is_admin)
 } 
 ?>
 
-with (document.fwrite) {
+with (document.fwrite) 
+{
     if (typeof(wr_name) != "undefined")
         wr_name.focus();
     else if (typeof(wr_subject) != "undefined")
@@ -226,7 +227,8 @@ with (document.fwrite) {
 
 function html_auto_br(obj)
 {
-    if (obj.checked) {
+    if (obj.checked) 
+    {
         result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
         if (result)
             obj.value = "html2";
@@ -240,12 +242,14 @@ function html_auto_br(obj)
 function fwrite_check(f)
 {
     var s = "";
-    if (s = word_filter_check(f.wr_subject.value)) {
+    if (s = word_filter_check(f.wr_subject.value)) 
+    {
         alert("제목에 금지단어('"+s+"')가 포함되어있습니다");
         return;
     }
 
-    if (s = word_filter_check(f.wr_content.value)) {
+    if (s = word_filter_check(f.wr_content.value)) 
+    {
         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
         return;
     }
@@ -257,15 +261,18 @@ function fwrite_check(f)
         {
             alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
             return;
-        } else if (char_max > 0 && char_max < cnt)
+        } 
+        else if (char_max > 0 && char_max < cnt)
         {
             alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
             return;
         }
     }
 
-    if (typeof(f.wr_key) != "undefined") {
-        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
+    if (typeof(f.wr_key) != "undefined") 
+    {
+        if (hex_md5(f.wr_key.value) != md5_norobot_key) 
+        {
             alert("자동등록방지용 빨간글자가 순서대로 입력되지 않았습니다.");
             f.wr_key.focus();
             return;

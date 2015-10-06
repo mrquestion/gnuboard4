@@ -9,21 +9,30 @@ $mb_nick = trim($mb_nick);
 $mb = sql_fetch(" select mb_nick from $g4[member_table] where mb_nick = '$mb_nick' ");
 if ($mb[mb_nick]) 
 {
-    echo "
-    <script language='JavaScript'> 
-        alert(\"'{$mb_nick}'은(는) 이미 다른분께서 사용하고 있는 별명이므로 사용하실 수 없습니다.\"); 
-        parent.document.getElementById('mb_nick_enabled').value = -1;
-        window.close();
-    </script>";
+    echo "<script language='JavaScript'>";
+    echo "alert(\"'{$mb_nick}'은(는) 이미 다른분께서 사용하고 있는 별명이므로 사용하실 수 없습니다.\");";
+    echo "parent.document.getElementById('mb_nick_enabled').value = -1;";
+    echo "window.close();";
+    echo "</script>";
 } 
 else 
 {
-    echo "
-    <script language='JavaScript'> 
-        alert(\"'{$mb_nick}'은(는) 별명으로 사용할 수 있습니다.\"); 
-        parent.document.getElementById('mb_nick_enabled').value = 1;
-        window.close();
-    </script>";
+    if (preg_match("/[\,]?{$mb_nick}/i", $config[cf_prohibit_id]))
+    {
+        echo "<script language='JavaScript'>";
+        echo "alert(\"'{$mb_nick}'은(는) 예약어로 사용하실 수 없는 별명입니다.\");";
+        echo "parent.document.getElementById('mb_nick_enabled').value = -2;";
+        echo "window.close();";
+        echo "</script>";
+    }
+    else
+    {
+        echo "<script language='JavaScript'>";
+        echo "alert(\"'{$mb_nick}'은(는) 별명으로 사용할 수 있습니다.\");";
+        echo "parent.document.getElementById('mb_nick_enabled').value = 1;";
+        echo "window.close();";
+        echo "</script>";
+    }
 }
 
 include_once("$g4[path]/tail.sub.php");

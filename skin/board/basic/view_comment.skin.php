@@ -36,17 +36,7 @@ for ($i=0; $i<count($list); $i++) {
         <tr>                            
             <td bgcolor=#F8F8F9 colspan=2 style='line-height:150%; padding:7px; word-break:break-all;'>
                 <!-- 코멘트 출력 -->
-                <span class="ct lh">
-                <?
-                    echo $list[$i][content];
-
-                    //$str = preg_replace("/\[(http|https|mms|ftp):\/\/([^[:space:]]+)\.(mp3|wma|wmv|asf|asx|mpg|mpeg)\]/i", "<script>doc_write(obj_movie('$1://$2.$3'));</script>", $str);
-                    //$str = preg_replace("/\[(http|https|mms|ftp):\/\/([^[:space:]]+)\.(swf)\]/i", "<script>doc_write(flash_movie('$1://$2.$3'));</script>", $str);
-                    //$str = preg_replace("/\[(http|https|mms|ftp):\/\/([^[:space:]]+)\.(gif|png|jpg|jpeg|bmp)\]/i", "<img src='$1://$2.$3' id='target_resize_image[]'>", $str);
-                    //$str = url_auto_link($str);
-                    //echo $str;
-                ?>
-                </span>
+                <span class="ct lh"><?=$list[$i][content]?></span>
                 <? if ($list[$i][trackback]) { echo "<p>".$list[$i][trackback]."</p>"; } ?>
                 <span id='edit_<?=$comment_id?>' style='display:none;'></span><!-- 수정 -->
                 <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- 답변 -->
@@ -87,7 +77,7 @@ for ($i=0; $i<count($list); $i++) {
         패스워드 <INPUT type=password maxLength=20 size=15 name="wr_password" itemname="패스워드" required class=ed>
             <? if ($is_norobot) { ?>
                 <?=$norobot_str?>
-                <INPUT title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" itemname="자동등록방지" required class=ed size=10>
+                <INPUT title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" itemname="자동등록방지" required class=ed>
             <?}?>
     <?}?>
 
@@ -206,9 +196,7 @@ function comment_box(comment_id, work)
         // 코멘트 수정
         if (work == 'cu')
         {
-            cont = document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
-            rr=cont.split("\n");
-            document.getElementById('wr_content').rows = rr.length+2;
+            document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
             if (typeof char_count != 'undefined')
                 check_byte('wr_content', 'char_count');
         }

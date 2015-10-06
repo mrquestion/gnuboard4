@@ -488,8 +488,9 @@ function setDisplayMode()
 
         editor.document.body.innerHTML = content;
         editor.document.body.clearAttributes;
-        editor.document.body.style.fontFamily = 'Courier New';
+        editor.document.body.style.fontFamily = 'Verdana';
         editor.document.body.style.fontSize = '9pt';
+        editor.document.body.style.lineHeight = '120%';
         editor.document.body.style.color = '#000000';
         editor.document.body.style.background = '#ffffff';
         editor.document.body.contentEditable = true;

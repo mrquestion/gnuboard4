@@ -2,6 +2,9 @@
 // 코멘트 삭제
 include_once("./_common.php");
 
+// 4.1
+@include_once("$board_skin_path/delete_comment.head.skin.php");
+
 $write = sql_fetch(" select * from $write_table where wr_id = '$comment_id' ");
 
 if (!$write[wr_id] || !$write[wr_is_comment])
@@ -55,9 +58,13 @@ if (!delete_point($write[mb_id], $bo_table, $comment_id, '코멘트'))
 
 // 코멘트 삭제
 sql_query(" delete from $write_table where wr_id = '$comment_id' ");
+
+// 코멘트가 삭제되므로 해당 게시물에 대한 최근 시간을 다시 얻는다.
+$sql = " select max(wr_datetime) as wr_last from $write_table where wr_parent = '$write[wr_parent]' ";
+$row = sql_fetch($sql);
                                       
 // 원글의 코멘트 숫자를 감소
-sql_query(" update $write_table set wr_comment = wr_comment - 1 where wr_id = '$write[wr_parent]' ");
+sql_query(" update $write_table set wr_comment = wr_comment - 1, wr_last = '$row[wr_last]' where wr_id = '$write[wr_parent]' ");
 
 // 코멘트 숫자 감소
 sql_query(" update $g4[board_table] set bo_count_comment = bo_count_comment - 1 where bo_table = '$bo_table' ");
@@ -67,6 +74,8 @@ sql_query(" delete from $g4[board_new_table] where bo_table = '$bo_table' and wr
 
 // 사용자 코드 실행
 @include_once("$board_skin_path/delete_comment.skin.php");
+// 4.1
+@include_once("$board_skin_path/delete_comment.tail.skin.php");
 
 goto_url("./board.php?bo_table=$bo_table&wr_id=$write[wr_parent]&page=$page" . $qstr);
 ?>

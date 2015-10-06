@@ -2,7 +2,7 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 
 // 선택옵션으로 인해 셀합치기가 가변적으로 변함
-$colspan = 5;
+$colspan = 6;
 if ($is_category) $colspan++;
 if ($is_checkbox) $colspan++;
 if ($is_good) $colspan++;
@@ -18,7 +18,7 @@ if ($is_nogood) $colspan++;
 <!-- 분류 셀렉트 박스, 게시물 몇건, 관리자화면 링크 -->
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr height="25">
-    <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+<?=($g4[charset]=='UTF-8'?'encodeURI(this.value)':'this.value');?>;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
+    <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+this.value;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
     <td align="right">
         게시물 <?=number_format($total_count)?>건 
         <? if ($rss_href) { ?><a href='<?=$rss_href?>'><img src='<?=$board_skin_path?>/img/btn_rss.gif' border=0 align=absmiddle></a><?}?>
@@ -29,12 +29,12 @@ if ($is_nogood) $colspan++;
 
 <!-- 제목 -->
 <form name="fboardlist" method="post" style="margin:0px;">
-<input type="hidden" name="bo_table" value="<?=$bo_table?>">
-<input type="hidden" name="sfl"  value="<?=$sfl?>">
-<input type="hidden" name="stx"  value="<?=$stx?>">
-<input type="hidden" name="spt"  value="<?=$spt?>">
-<input type="hidden" name="page" value="<?=$page?>">
-<input type="hidden" name="sw"   value="">
+<input type='hidden' name='bo_table' value='<?=$bo_table?>'>
+<input type='hidden' name='sfl'  value='<?=$sfl?>'>
+<input type='hidden' name='stx'  value='<?=$stx?>'>
+<input type='hidden' name='spt'  value='<?=$spt?>'>
+<input type='hidden' name='page' value='<?=$page?>'>
+<input type='hidden' name='sw'   value=''>
 <table width=100% cellpadding=0 cellspacing=0>
 <tr><td colspan=<?=$colspan?> height=2 bgcolor=#B0ADF5></td></tr>
 <tr bgcolor=#F8F8F9 height=30 align=center>
@@ -43,8 +43,9 @@ if ($is_nogood) $colspan++;
     <? if ($is_checkbox) { ?><td width=40><INPUT onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><?}?>
     <td>제목</td>
     <td width=110>글쓴이</td>
-    <td width=40><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
     <td width=40><?=subject_sort_link('wr_datetime', $qstr2, 1)?>날짜</a></td>
+    <td width=40><?=subject_sort_link('wr_hit', $qstr2, 1)?>조회</a></td>
+    <td width=40 title='마지막 코멘트 쓴 시간'><?=subject_sort_link('wr_last', $qstr2, 1)?>최근</a></td>
     <? if ($is_good) { ?><td width=40><?=subject_sort_link('wr_good', $qstr2, 1)?>추천</a></td><?}?>
     <? if ($is_nogood) { ?><td width=40><?=subject_sort_link('wr_nogood', $qstr2, 1)?>비추천</a></td><?}?>
 </tr>
@@ -71,14 +72,14 @@ if ($is_nogood) $colspan++;
         echo $list[$i][icon_reply];
         echo "<a href='{$list[$i][href]}'>";
         if ($list[$i][is_notice])
-            echo "<font color='#FF6600'><strong>{$list[$i][subject]}</strong></font>";
+            echo "<font color='#AF6BE3'><strong>{$list[$i][subject]}</strong></font>";
         else
         {
             $style1 = $style2 = "";
             if ($list[$i][icon_new]) // 최신글은 검정
                 $style1 = "color:#112222;";
             if (!$list[$i][comment_cnt]) // 코멘트 없는것만 굵게
-                $style2 = "";
+                $style2 = "font-weight:bold;";
             echo "<span style='$style1 $style2'>{$list[$i][subject]}</span>";
         }
         echo "</a>";
@@ -96,9 +97,10 @@ if ($is_nogood) $colspan++;
         echo " " . $list[$i][icon_secret];
         echo $nobr_end;
         ?></td>
-    <td><nobr style='display:block; overflow:hidden; width:95px;'><?=$list[$i][name]?></nobr></td>
-    <td><?=$list[$i][wr_hit]?></td>
+    <td><?=$list[$i][name]?></td>
     <td><?=$list[$i][datetime2]?></td>
+    <td><?=$list[$i][wr_hit]?></td>
+    <td><?=$list[$i][last2]?></td>
     <? if ($is_good) { ?><td align="center"><?=$list[$i][wr_good]?></td><? } ?>
     <? if ($is_nogood) { ?><td align="center"><?=$list[$i][wr_nogood]?></td><? } ?>
 </tr>
@@ -152,8 +154,10 @@ if ($is_nogood) $colspan++;
             <option value='wr_subject'>제목</option>
             <option value='wr_content'>내용</option>
             <option value='mb_id,1'>회원아이디</option>
+            <option value='mb_id,0'>회원아이디(코)</option>
             <option value='wr_name,1'>이름</option>
-        </select><input name=stx maxlength=15 size=10 itemname="검색어" required value="<?=$stx?>"><select name=sop>
+            <option value='wr_name,0'>이름(코)</option>
+        </select><input name=stx maxlength=15 size=10 itemname="검색어" required value='<?=$stx?>'><select name=sop>
             <option value=and>and</option>
             <option value=or>or</option>
         </select>
@@ -165,10 +169,10 @@ if ($is_nogood) $colspan++;
 </td></tr></table>
 
 <script language="JavaScript">
-if ("<?=$sca?>") document.fcategory.sca.value = "<?=$sca?>";
-if ("<?=$stx?>") {
-    document.fsearch.sfl.value = "<?=$sfl?>";
-    document.fsearch.sop.value = "<?=$sop?>";
+if ('<?=$sca?>') document.fcategory.sca.value = '<?=$sca?>';
+if ('<?=$stx?>') {
+    document.fsearch.sfl.value = '<?=$sfl?>';
+    document.fsearch.sop.value = '<?=$sop?>';
 }
 </script>
 
