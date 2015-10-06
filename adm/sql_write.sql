@@ -2,7 +2,7 @@
 ##
 ## Host: localhost    Database: gnuboard4
 ## ######################################################
-## Server version	5.0.33-log
+## Server version	5.0.37-log
 
 
 
@@ -63,4 +63,4 @@ CREATE TABLE `__TABLE_NAME__` (
 
 
 
-## Dump completed on 2007-03-10 18:34:46
+## Dump completed on 2007-04-23  5:05:38

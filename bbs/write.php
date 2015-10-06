@@ -4,6 +4,7 @@ include_once("./_common.php");
 if (!$bo_table) 
     alert("bo_table 값이 넘어오지 않았습니다.\\n\\nwrite.php?bo_table=code 와 같은 방식으로 넘겨 주세요.", $g4[path]);
 
+@include_once ("$g4[path]/skin/board/write.head.skin.php");
 @include_once ("$board_skin_path/write.head.skin.php");
 
 $notice_array = explode("\n", trim($board[bo_notice]));

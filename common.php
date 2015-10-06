@@ -336,7 +336,9 @@ if ($is_admin != "super") {
             if (empty($pattern[$i])) 
                 continue;
 
-            $pat = "/({$pattern[$i]})/";
+            //$pat = "/({$pattern[$i]})/";
+            $pattern[$i] = str_replace(".", "\.", $pattern[$i]);
+            $pat = "/^{$pattern[$i]}/";
             $is_possible_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
             if ($is_possible_ip) 
                 break;
@@ -353,7 +355,8 @@ if ($is_admin != "super") {
         if (empty($pattern[$i])) 
             continue;
 
-        $pat = "/({$pattern[$i]})/";
+        $pattern[$i] = str_replace(".", "\.", $pattern[$i]);
+        $pat = "/^{$pattern[$i]}/";
         $is_intercept_ip = preg_match($pat, $_SERVER['REMOTE_ADDR']);
         if ($is_intercept_ip) 
             die ("접근 불가합니다.");

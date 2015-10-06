@@ -10,6 +10,58 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 4.20.00
+// 1:1 게시판 테이블 생성
+$sql = " CREATE TABLE `$g4[oneboard_table]` (
+  `ob_table` varchar(20) NOT NULL,
+  `ob_subject` varchar(255) NOT NULL,
+  `ob_admin` varchar(255) NOT NULL,
+  `ob_skin` varchar(255) NOT NULL,
+  `ob_write_level` tinyint(4) NOT NULL,
+  `ob_upload_level` tinyint(4) NOT NULL,
+  `ob_use_dhtml_editor` tinyint(4) NOT NULL,
+  `ob_use_email` tinyint(4) NOT NULL,
+  `ob_table_width` smallint(6) NOT NULL,
+  `ob_subject_len` smallint(6) NOT NULL,
+  `ob_page_rows` smallint(6) NOT NULL,
+  `ob_image_width` smallint(6) NOT NULL,
+  `ob_image_head` varchar(255) NOT NULL,
+  `ob_image_tail` varchar(255) NOT NULL,
+  `ob_include_head` varchar(255) NOT NULL,
+  `ob_include_tail` varchar(255) NOT NULL,
+  `ob_content_head` text NOT NULL,
+  `ob_content_tail` text NOT NULL,
+  `ob_insert_content` text NOT NULL,
+  `ob_1_subj` varchar(255) NOT NULL,
+  `ob_2_subj` varchar(255) NOT NULL,
+  `ob_3_subj` varchar(255) NOT NULL,
+  `ob_4_subj` varchar(255) NOT NULL,
+  `ob_5_subj` varchar(255) NOT NULL,
+  `ob_6_subj` varchar(255) NOT NULL,
+  `ob_7_subj` varchar(255) NOT NULL,
+  `ob_8_subj` varchar(255) NOT NULL,
+  `ob_9_subj` varchar(255) NOT NULL,
+  `ob_10_subj` varchar(255) NOT NULL,
+  `ob_1` varchar(255) NOT NULL,
+  `ob_2` varchar(255) NOT NULL,
+  `ob_3` varchar(255) NOT NULL,
+  `ob_4` varchar(255) NOT NULL,
+  `ob_5` varchar(255) NOT NULL,
+  `ob_6` varchar(255) NOT NULL,
+  `ob_7` varchar(255) NOT NULL,
+  `ob_8` varchar(255) NOT NULL,
+  `ob_9` varchar(255) NOT NULL,
+  `ob_10` varchar(255) NOT NULL,
+  PRIMARY KEY  (`ob_table`)
+) ";
+sql_query($sql, false);
+
+// 회원테이블의 주키를 mb_no 로 교체
+sql_query(" ALTER TABLE `$g4[member_table]` DROP PRIMARY KEY ", false);
+sql_query(" ALTER TABLE `$g4[member_table]` ADD `mb_no` INT NOT NULL AUTO_INCREMENT PRIMARY KEY FIRST ", false);
+sql_query(" ALTER TABLE `$g4[member_table]` ADD UNIQUE `mb_id` ( `mb_id` ) ", false);
+
+
 // 4.11.00
 // 트랙백 토큰
 sql_query("CREATE TABLE `$g4[token_table]` (

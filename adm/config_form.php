@@ -135,9 +135,9 @@ include_once ("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>접근가능 IP</td>
-    <td valign=top><textarea class=ed name='cf_possible_ip' rows='5' style='width:99%;'><?=$config[cf_possible_ip]?></textarea><br>입력된 IP의 컴퓨터만 접근할 수 있음.<br>123.123.* 도 입력 가능. (엔터로 구분)</td>
+    <td valign=top><textarea class=ed name='cf_possible_ip' rows='5' style='width:99%;'><?=$config[cf_possible_ip]?></textarea><br>입력된 IP의 컴퓨터만 접근할 수 있음.<br>123.123.+ 도 입력 가능. (엔터로 구분)</td>
     <td>접근차단 IP</td>
-    <td valign=top><textarea class=ed name='cf_intercept_ip' rows='5' style='width:99%;'><?=$config[cf_intercept_ip]?></textarea><br>입력된 IP의 컴퓨터는 접근할 수 없음.<br>123.123.* 도 입력 가능. (엔터로 구분)</td>
+    <td valign=top><textarea class=ed name='cf_intercept_ip' rows='5' style='width:99%;'><?=$config[cf_intercept_ip]?></textarea><br>입력된 IP의 컴퓨터는 접근할 수 없음.<br>123.123.+ 도 입력 가능. (엔터로 구분)</td>
 </tr>
 <tr><td colspan=4 class=line2></td></tr>
 <tr><td colspan=4 class=ht></td></tr>

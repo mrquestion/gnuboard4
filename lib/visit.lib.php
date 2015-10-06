@@ -30,16 +30,18 @@ function get_brow($agent)
 
     //echo $agent; echo "<br/>";
 
-    if (preg_match("/msie 5.0[0-9]*/", $agent))     { $s = "MSIE 5.0"; }
-    else if(preg_match("/msie 5.5[0-9]*/", $agent)) { $s = "MSIE 5.5"; }
-    else if(preg_match("/msie 6.0[0-9]*/", $agent)) { $s = "MSIE 6.0"; }
-    else if(preg_match("/msie 7.0[0-9]*/", $agent)) { $s = "MSIE 7.0"; }
-    else if(preg_match("/msie 4.[0-9]*/", $agent))  { $s = "MSIE 4.x"; }
-    else if(preg_match("/firefox/", $agent))        { $s = "FireFox"; }
-    else if(preg_match("/x11/", $agent))            { $s = "Netscape"; }
-    else if(preg_match("/opera/", $agent))          { $s = "Opera"; }
-    else if(preg_match("/gec/", $agent))            { $s = "Gecko"; }
-    else if(preg_match("/bot|slurp/", $agent))      { $s = "Robot"; }
+    if (preg_match("/msie 5.0[0-9]*/", $agent))         { $s = "MSIE 5.0"; }
+    else if(preg_match("/msie 5.5[0-9]*/", $agent))     { $s = "MSIE 5.5"; }
+    else if(preg_match("/msie 6.0[0-9]*/", $agent))     { $s = "MSIE 6.0"; }
+    else if(preg_match("/msie 7.0[0-9]*/", $agent))     { $s = "MSIE 7.0"; }
+    else if(preg_match("/msie 4.[0-9]*/", $agent))      { $s = "MSIE 4.x"; }
+    else if(preg_match("/firefox/", $agent))            { $s = "FireFox"; }
+    else if(preg_match("/x11/", $agent))                { $s = "Netscape"; }
+    else if(preg_match("/opera/", $agent))              { $s = "Opera"; }
+    else if(preg_match("/gec/", $agent))                { $s = "Gecko"; }
+    else if(preg_match("/bot|slurp/", $agent))          { $s = "Robot"; }
+    else if(preg_match("/internet explorer/", $agent))  { $s = "IE"; }
+    else if(preg_match("/mozilla/", $agent))            { $s = "Mozilla"; }
     else { $s = "기타"; }
 
     return $s;
@@ -65,6 +67,8 @@ function get_os($agent)
     else if(preg_match("/irix/", $agent))                   { $s = "IRIX"; }
     else if(preg_match("/phone/", $agent))                  { $s = "Phone"; }
     else if(preg_match("/bot|slurp/", $agent))              { $s = "Robot"; }
+    else if(preg_match("/internet explorer/", $agent))      { $s = "IE"; }
+    else if(preg_match("/mozilla/", $agent))                { $s = "Mozilla"; }
     else { $s = "기타"; }
 
     return $s;

@@ -1,3 +1,31 @@
+4.20.00 (07.04.23)
+    :   접근가능 IP, 접근차단 IP 코드 수정
+        sjsjin님께서 알려 주셨습니다.
+    :   세션데이터 삭제 기능 추가
+        자동으로 삭제되지 않는 세션데이터를 삭제 
+    :   회원테이블에 mb_no AUTO_INCREMENT PRIMARY KEY 로 대체
+    :   1:1 게시판 기능 추가
+
+        config.php 에
+        $g4['one_prefix']          = $g4['table_prefix'] . "one_";   // 1:1 게시판 테이블명 접두사
+        $g4['oneboard_table']      = $g4['table_prefix'] . "oneboard";      // 1:1게시판 설정 테이블
+        와 같이 두줄 추가해 주십시오.
+
+        테이블이 변경 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        common.php
+        config.php
+        adm/admin.menu100.php
+        adm/admin.menu300.php
+        adm/config_form.php
+        adm/oneboard*.php
+        adm/sql_one.sql
+        adm/session_delete.php
+        adm/upgrade.php
+        bbs/one*.php
+        lib/one.lib.php
+        skin/oneboard/one/*
+
 4.11.00 (06.12.29)
     :   게시판 검색에서 공란이 두개 연속될 경우 오류 발생하는 현상을 수정
         lib/common.lib.php 의 get_sql_search(), search_font() 함수 수정

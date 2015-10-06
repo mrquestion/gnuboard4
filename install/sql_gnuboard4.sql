@@ -2,7 +2,7 @@
 ##
 ## Host: localhost    Database: gnuboard4
 ## ######################################################
-## Server version	5.0.33-log
+## Server version	5.0.37-log
 
 
 
@@ -168,6 +168,54 @@ CREATE TABLE `$g4[board_new_table]` (
   `mb_id` varchar(20) NOT NULL default '',
   PRIMARY KEY  (`bn_id`),
   KEY `mb_id` (`mb_id`)
+);
+
+##
+## Table structure for table `$g4[oneboard_table]`
+##
+
+DROP TABLE IF EXISTS `$g4[oneboard_table]`;
+CREATE TABLE `$g4[oneboard_table]` (
+  `ob_table` varchar(20) NOT NULL,
+  `ob_subject` varchar(255) NOT NULL,
+  `ob_admin` varchar(255) NOT NULL,
+  `ob_skin` varchar(255) NOT NULL,
+  `ob_write_level` tinyint(4) NOT NULL,
+  `ob_upload_level` tinyint(4) NOT NULL,
+  `ob_use_dhtml_editor` tinyint(4) NOT NULL,
+  `ob_use_email` tinyint(4) NOT NULL,
+  `ob_table_width` smallint(6) NOT NULL,
+  `ob_subject_len` smallint(6) NOT NULL,
+  `ob_page_rows` smallint(6) NOT NULL,
+  `ob_image_width` smallint(6) NOT NULL,
+  `ob_image_head` varchar(255) NOT NULL,
+  `ob_image_tail` varchar(255) NOT NULL,
+  `ob_include_head` varchar(255) NOT NULL,
+  `ob_include_tail` varchar(255) NOT NULL,
+  `ob_content_head` text NOT NULL,
+  `ob_content_tail` text NOT NULL,
+  `ob_insert_content` text NOT NULL,
+  `ob_1_subj` varchar(255) NOT NULL,
+  `ob_2_subj` varchar(255) NOT NULL,
+  `ob_3_subj` varchar(255) NOT NULL,
+  `ob_4_subj` varchar(255) NOT NULL,
+  `ob_5_subj` varchar(255) NOT NULL,
+  `ob_6_subj` varchar(255) NOT NULL,
+  `ob_7_subj` varchar(255) NOT NULL,
+  `ob_8_subj` varchar(255) NOT NULL,
+  `ob_9_subj` varchar(255) NOT NULL,
+  `ob_10_subj` varchar(255) NOT NULL,
+  `ob_1` varchar(255) NOT NULL,
+  `ob_2` varchar(255) NOT NULL,
+  `ob_3` varchar(255) NOT NULL,
+  `ob_4` varchar(255) NOT NULL,
+  `ob_5` varchar(255) NOT NULL,
+  `ob_6` varchar(255) NOT NULL,
+  `ob_7` varchar(255) NOT NULL,
+  `ob_8` varchar(255) NOT NULL,
+  `ob_9` varchar(255) NOT NULL,
+  `ob_10` varchar(255) NOT NULL,
+  PRIMARY KEY  (`ob_table`)
 );
 
 ##
@@ -360,6 +408,7 @@ CREATE TABLE `$g4[mail_table]` (
 
 DROP TABLE IF EXISTS `$g4[member_table]`;
 CREATE TABLE `$g4[member_table]` (
+  `mb_no` int(11) NOT NULL auto_increment,
   `mb_id` varchar(255) NOT NULL default '',
   `mb_password` varchar(255) NOT NULL default '',
   `mb_name` varchar(255) NOT NULL default '',
@@ -406,7 +455,8 @@ CREATE TABLE `$g4[member_table]` (
   `mb_8` varchar(255) NOT NULL default '',
   `mb_9` varchar(255) NOT NULL default '',
   `mb_10` varchar(255) NOT NULL default '',
-  PRIMARY KEY  (`mb_id`),
+  PRIMARY KEY  (`mb_no`),
+  UNIQUE KEY `mb_id` (`mb_id`),
   KEY `mb_today_login` (`mb_today_login`),
   KEY `mb_datetime` (`mb_datetime`)
 );
@@ -572,4 +622,4 @@ CREATE TABLE `$g4[visit_sum_table]` (
 
 
 
-## Dump completed on 2007-03-10 18:34:46
+## Dump completed on 2007-04-23  5:05:38

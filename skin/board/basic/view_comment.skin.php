@@ -38,7 +38,17 @@ for ($i=0; $i<count($list); $i++) {
         <tr>                            
             <td colspan=2 style='line-height:150%; padding:7px; word-break:break-all;'>
                 <!-- 코멘트 출력 -->
-                <div><span class="ct lh"><?=$list[$i][content]?></span></div>
+                <div><span class="ct lh">
+                <?
+                    $str = $list[$i][content];
+
+                    $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp|mms)\:\/\/([^[:space:]]+)\.(mp3|wma|wmv|asf|asx|mpg|mpeg)\".*\<\/a\>\]/i", "<script>doc_write(obj_movie('$1://$2.$3'));</script>", $str);
+                    $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(swf)\".*\<\/a\>\]/i", "<script>doc_write(flash_movie('$1://$2.$3'));</script>", $str);
+                    $str = preg_replace("/\[\<a\s*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(gif|png|jpg|jpeg|bmp)\"\s*[^\>]*\>[^\s]*\<\/a\>\]/i", "<img src='$1://$2.$3' id='target_resize_image[]' onclick='image_window(this);'>", $str);
+
+                    echo $str;
+                ?>
+                </span></div>
                 <? if ($list[$i][trackback]) { echo "<p>".$list[$i][trackback]."</p>"; } ?>
                 <span id='edit_<?=$comment_id?>' style='display:none;'></span><!-- 수정 -->
                 <span id='reply_<?=$comment_id?>' style='display:none;'></span><!-- 답변 -->
