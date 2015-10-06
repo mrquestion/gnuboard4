@@ -24,9 +24,12 @@ function tb_xml_msg($error, $msg="")
 
 
 $arr = explode("/", $_SERVER[PATH_INFO]);
-$bo_table = $arr[1];
-$wr_id = $arr[2];
-$to_token = $arr[3];
+// 영문자 숫자 _ 과 일치하지 않는 문자는 삭제한다. (최대 20자)
+$bo_table = preg_replace("/\W/", "", substr($arr[1],0,20));
+// 정수형으로 변환
+$wr_id = (int)$arr[2];
+// 영소문자 숫자 와 일치하지 않는 문자는 삭제한다. (최대 32자)
+$to_token = preg_replace("/[^a-z0-9]/", "", substr($arr[3],0,32));
 
 $write_table   = $g4[write_prefix] . $bo_table; // 게시판 테이블 전체이름
 

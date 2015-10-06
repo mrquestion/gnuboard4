@@ -119,7 +119,7 @@ include_once ("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>접속자 스킨</td>
-    <td colspan=3><select id=cf_connect_skin name=cf_connect_skin required itemname="최근게시물 스킨">
+    <td colspan=3><select id=cf_connect_skin name=cf_connect_skin required itemname="접속자 스킨">
         <?
         $arr = get_skin_dir("connect");
         for ($i=0; $i<count($arr); $i++) {
