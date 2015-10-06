@@ -1074,12 +1074,11 @@ function run ()
         document.getElementById("id"+myobj).contentWindow.document.designMode = "on";
 
     editor.document.open("text/html", "replace");
-    //editor.document.write("<html><head></head>");
-    editor.document.write("<body style='margin:5;background-color:"+this.editorBgcolor+"'></body>");
-    //editor.document.write("</html>");
+    editor.document.write("<html><head></head>");
+    editor.document.write("<body style='margin:0;background-color:"+this.editorBgcolor+"'></body></html>");
 
-    var el = editor.document.createElement("<link rel='stylesheet' type='text/css' href='"+this.editorPath+"/default.css'>");
-    editor.document.childNodes[0].childNodes[0].appendChild(el);
+    //var el = editor.document.createElement("<link rel='stylesheet' type='text/css' href='"+this.editorPath+"/default.css'>");
+    //editor.document.childNodes[0].childNodes[0].appendChild(el);
 
     editor.document.close();
 
@@ -1108,7 +1107,7 @@ function run ()
         var tmpeditor = eval("idtmp"+myobj);
         tmpeditor.document.designMode = "on";
         tmpeditor.document.open("text/html","replace");
-        //tmpeditor.document.write("<html><head></head><body><div></div></body></html>");
+        tmpeditor.document.write("<html><head></head><body><div></div></body></html>");
         tmpeditor.document.close();
     }
 

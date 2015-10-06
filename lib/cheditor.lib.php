@@ -3,9 +3,7 @@ if (!defined('_GNUBOARD_')) exit;
 
 function cheditor1($id, $content)
 {
-    global $g4;
-
-    return "<div id='ps_{$id}' style='display:none;'>{$content}</div>";
+    return "<textarea id='ps_{$id}' style='display:none;'>{$content}</textarea>";
 }
 
 function cheditor2($form, $id, $width='100%', $height='250')
@@ -26,10 +24,8 @@ function cheditor2($form, $id, $width='100%', $height='250')
     </script>";
 }
 
-function cheditor3($form, $id)
+function cheditor3($id)
 {
-    global $g4;
-
-    return "{$form}.{$id}.value = ed_{$id}.outputHTML();";
+    return "document.getElementById('{$id}').value = ed_{$id}.outputHTML();";
 }
 ?>

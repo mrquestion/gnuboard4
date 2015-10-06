@@ -1,3 +1,40 @@
+4.00.17 (05.06.29)
+    :   버전확인 페이지 추가
+        조병완(korone)님 , 남규아빠(eagletalon)님께서 만들어 주셨습니다.
+    :   게시판설정에서 연관성없는 그룹동일적용 분리
+    :   cheditor 연동 부분 상당부분 수정
+    :   common.lib.php 의 goto_url() 수정
+    :   쪽지, 스크랩, 우편번호, 아이디/패스워드 찾기, 회원정보조회 페이지 
+        모두 스킨으로 대체 (skin/member/basic/*)
+    :   투표한 회원을 저장하여 두번이상 투표를 하지 못하도록 수정
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+        
+        adm/version.php
+        adm/menu/m100960_version.php
+        adm/board_form.php
+        adm/board_form_update.php
+        adm/poll_form.php
+        adm/upgrade.php
+        bbs/formmail.php
+        bbs/memo.php
+        bbs/memo_form.php
+        bbs/memo_view.php
+        bbs/password_forget.php
+        bbs/password_forget2.php
+        bbs/password_forget3.php
+        bbs/poll_update.php
+        bbs/profile.php
+        bbs/scrap.php
+        bbs/scrap_popin.php
+        bbs/write_update.php
+        bbs/zip.php
+        lib/common.lib.php
+        lib/cheditor.lib.php
+        cheditor/cheditor.js
+        cheditor/cheditorSimple.js
+        skin/board/cheditor/*
+        skin/member/basic/*
+
 4.00.16 (05.06.28)
     :   사용자의 레벨보다 읽기 레벨이 더 큰 경우 내용을 보여주지 않고 검색되게 함
         아꽈님께서 알려주셨습니다.

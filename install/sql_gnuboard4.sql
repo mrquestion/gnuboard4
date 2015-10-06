@@ -391,6 +391,7 @@ CREATE TABLE $g4[poll_table] (
   po_point int(11) NOT NULL default '0',
   po_date date NOT NULL default '0000-00-00',
   po_ips mediumtext NOT NULL,
+  mb_ids text NOT NULL,
   PRIMARY KEY  (po_id)
 ) TYPE=MyISAM;
 

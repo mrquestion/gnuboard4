@@ -211,11 +211,17 @@ while ($row = sql_fetch_array($result)) {
         sql_query($sql);
     }        
 
-    if ($group_same3) {
+    if ($group_same3_1) {
         $sql = " update $g4[board_table]
                     set bo_use_category     = '$bo_use_category',
-                        bo_category_list    = '$bo_category_list',
-                        bo_disable_tags     = '$bo_disable_tags',
+                        bo_category_list    = '$bo_category_list'
+                  where bo_table = '$row[bo_table]'";
+        sql_query($sql);
+    }
+
+    if ($group_same3_2) {
+        $sql = " update $g4[board_table]
+                    set bo_disable_tags     = '$bo_disable_tags',
                         bo_use_sideview     = '$bo_use_sideview',
                         bo_use_secret       = '$bo_use_secret',
                         bo_use_comment      = '$bo_use_comment',
@@ -283,16 +289,16 @@ while ($row = sql_fetch_array($result)) {
 
     if ($group_same9) {
         $sql = " update $g4[board_table]
-                    set bo_1            = '$bo_1',
-                        bo_2            = '$bo_2',
-                        bo_3            = '$bo_3',
-                        bo_4            = '$bo_4',
-                        bo_5            = '$bo_5',
-                        bo_6            = '$bo_6',
-                        bo_7            = '$bo_7',
-                        bo_8            = '$bo_8',
-                        bo_9            = '$bo_9',
-                        bo_10           = '$bo_10'
+                    set bo_1  = '$bo_1',
+                        bo_2  = '$bo_2',
+                        bo_3  = '$bo_3',
+                        bo_4  = '$bo_4',
+                        bo_5  = '$bo_5',
+                        bo_6  = '$bo_6',
+                        bo_7  = '$bo_7',
+                        bo_8  = '$bo_8',
+                        bo_9  = '$bo_9',
+                        bo_10 = '$bo_10'
                   where bo_table = '$row[bo_table]'";
         sql_query($sql);
     }

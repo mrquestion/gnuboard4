@@ -169,5 +169,4 @@ function fsearchbox_submit(f)
 
         <?=connect(); // 현재 접속자수 ?>
     </td>
-    <td width=15></td>
     <td width=683 valign=top>

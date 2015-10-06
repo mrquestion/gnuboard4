@@ -304,4 +304,18 @@ function fwrite_check(f)
     f.action = "./write_update.php";
     f.submit();
 }
+
+<?
+// 관리자라면 분류 선택에 '공지' 옵션을 추가함
+if ($is_admin) 
+{
+    echo "
+    if (typeof(document.fwrite.ca_name) != 'undefined')
+    {
+        document.fwrite.ca_name.options.length += 1;
+        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].value = '공지';
+        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].text = '공지';
+    }";
+} 
+?>
 </script>

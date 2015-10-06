@@ -109,7 +109,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         <td><input type=checkbox name=chk[] value='$i'></td>
         <td><a href='?sfl=a.mb_id&stx=$row[mb_id]'>$row[mb_id]</a></td>
         <td>$mb_nick</td>
-        <td>{$auth_menu[$row[au_menu]]}</td>
+        <td align=left>&nbsp; [$row[au_menu]] {$auth_menu[$row[au_menu]]}</td>
         <td>$row[au_auth]</td>
     </tr>";
 }

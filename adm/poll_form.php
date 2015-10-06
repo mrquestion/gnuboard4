@@ -90,6 +90,11 @@ HEREDOC;
     <td colspan=3><textarea class='edit' name="po_ips" rows=10 style='width:99%;' readonly><?=preg_replace("/\n/", " / ", $po[po_ips])?></textarea></td>
 </tr>
 
+<tr class='ht'>
+    <td>투표참가 회원</td>
+    <td colspan=3><textarea class='edit' name="mb_ids" rows=10 style='width:99%;' readonly><?=preg_replace("/\n/", " / ", $po[mb_ids])?></textarea></td>
+</tr>
+
 <? } ?>
 
 <tr><td colspan=4 class='line2'></td></tr>

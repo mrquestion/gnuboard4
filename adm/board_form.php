@@ -196,63 +196,71 @@ include_once ("./admin.head.php");
 
 <tr class='ht'>
     <td style="<?=b_draw('top', '#00D952') ?><?=b_draw('left', '#00D952') ?> ">그룹 동일 적용</td>
-    <td style="<?=b_draw('top', '#00D952') ?><?=b_draw('right', '#00D952') ?>" colspan=3><input type=checkbox name=group_same3 value='1'>같은 그룹에 속한 게시판을 이 테두리안의 옵션으로 동일하게 적용합니다.</td>
+    <td style="<?=b_draw('top', '#00D952') ?><?=b_draw('right', '#00D952') ?>" colspan=3>
+        <input type=checkbox name=group_same3_1 value='1'>같은 그룹에 속한 게시판을 이 테두리안의 옵션으로 동일하게 적용합니다.</td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">분류 사용</td>
-    <td colspan=3 style="<?=b_draw('right', '#00D952') ?>">
+    <td style="<?=b_draw('left', '#00D952')?>">분류 사용</td>
+    <td colspan=3 style="<?=b_draw('right', '#00D952')?>">
         <input type=checkbox name=bo_use_category value='1' <?=$board[bo_use_category]?'checked':'';?>>사용
     </td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">분류</td>
-    <td colspan=3 style="<?=b_draw('right', '#00D952') ?>">
+    <td style="<?=b_draw('left', '#00D952') ?> <?=b_draw('bottom', '#00D952')?>">분류</td>
+    <td colspan=3 style="<?=b_draw('right', '#00D952') ?> <?=b_draw('bottom', '#00D952')?>">
         <input type=text class='edit' name=bo_category_list style='width:99%;' value='<?=$board[bo_category_list]?>'>
         <br> 분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변)
     </td>
 </tr>
+<tr><td colspan=4 class='ht'></td></tr>
+
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">사용금지 태그</td>
-    <td colspan=3 style="<?=b_draw('right', '#00D952') ?>">
+    <td style="<?=b_draw('top', '#74A3C8') ?><?=b_draw('left', '#74A3C8') ?> ">그룹 동일 적용</td>
+    <td style="<?=b_draw('top', '#74A3C8') ?><?=b_draw('right', '#74A3C8') ?>" colspan=3>
+        <input type=checkbox name=group_same3_1 value='1'>같은 그룹에 속한 게시판을 이 테두리안의 옵션으로 동일하게 적용합니다.</td>
+</tr>
+<tr class='ht'>
+    <td style="<?=b_draw('left', '#74A3C8') ?>">사용금지 태그</td>
+    <td colspan=3 style="<?=b_draw('right', '#74A3C8') ?>">
         <input type=text class='edit' name=bo_disable_tags style='width:99%;' value='<?=$board[bo_disable_tags]?>'>
         <br> 태그와 태그 사이는 | 로 구분하세요. (예: javascript|div) HTML 사용시 금지할 태그를 입력하세요.
     </td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">글쓴이 사이드뷰</td>
+    <td style="<?=b_draw('left', '#74A3C8') ?>">글쓴이 사이드뷰</td>
     <td><input type=checkbox name=bo_use_sideview value='1' <?=$board[bo_use_sideview]?'checked':'';?>>사용 (글쓴이 클릭시 나오는 레이어 메뉴)</td>
     <td>파일 설명 사용</td>
-    <td style="<?=b_draw('right', '#00D952') ?>"><input type=checkbox name=bo_use_file_content value='1' <?=$board[bo_use_file_content]?'checked':'';?>>사용</td>
+    <td style="<?=b_draw('right', '#74A3C8') ?>"><input type=checkbox name=bo_use_file_content value='1' <?=$board[bo_use_file_content]?'checked':'';?>>사용</td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">코멘트 새창 사용</td>
+    <td style="<?=b_draw('left', '#74A3C8') ?>">코멘트 새창 사용</td>
     <td><input type=checkbox name=bo_use_comment value='1' <?=$board[bo_use_comment]?'checked':'';?>>사용 (코멘트수 클릭시 새창으로 보임)</td>
     <td>비밀글 사용</td>
-    <td style="<?=b_draw('right', '#00D952') ?>"><input type=checkbox name=bo_use_secret value='1' <?=$board[bo_use_secret]?'checked':'';?>>사용</td>
+    <td style="<?=b_draw('right', '#74A3C8') ?>"><input type=checkbox name=bo_use_secret value='1' <?=$board[bo_use_secret]?'checked':'';?>>사용</td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">추천 사용</td>
+    <td style="<?=b_draw('left', '#74A3C8') ?>">추천 사용</td>
     <td><input type=checkbox name=bo_use_good value='1' <?=$board[bo_use_good]?'checked':'';?>>사용</td>
     <td>비추천 사용</td>
-    <td style="<?=b_draw('right', '#00D952') ?>"><input type=checkbox name=bo_use_nogood value='1' <?=$board[bo_use_nogood]?'checked':'';?>>사용</td>
+    <td style="<?=b_draw('right', '#74A3C8') ?>"><input type=checkbox name=bo_use_nogood value='1' <?=$board[bo_use_nogood]?'checked':'';?>>사용</td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">이름(실명) 사용</td>
+    <td style="<?=b_draw('left', '#74A3C8') ?>">이름(실명) 사용</td>
     <td><input type=checkbox name=bo_use_name value='1' <?=$board[bo_use_name]?'checked':'';?>>사용</td>
     <td>서명보이기 사용</td>
-    <td style="<?=b_draw('right', '#00D952') ?>"><input type=checkbox name=bo_use_signature value='1' <?=$board[bo_use_signature]?'checked':'';?>>사용</td>
+    <td style="<?=b_draw('right', '#74A3C8') ?>"><input type=checkbox name=bo_use_signature value='1' <?=$board[bo_use_signature]?'checked':'';?>>사용</td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?>">IP 보이기 사용</td>
+    <td style="<?=b_draw('left', '#74A3C8') ?>">IP 보이기 사용</td>
     <td><input type=checkbox name=bo_use_ip_view value='1' <?=$board[bo_use_ip_view]?'checked':'';?>>사용</td>
     <td>트랙백 사용</td>
-    <td style="<?=b_draw('right', '#00D952') ?>"><input type=checkbox name=bo_use_trackback value='1' <?=$board[bo_use_trackback]?'checked':'';?>>사용 (트랙백쓰기 권한 보다 우선함)</td>
+    <td style="<?=b_draw('right', '#74A3C8') ?>"><input type=checkbox name=bo_use_trackback value='1' <?=$board[bo_use_trackback]?'checked':'';?>>사용 (트랙백쓰기 권한 보다 우선함)</td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left', '#00D952') ?><?=b_draw('bottom', '#00D952') ?>">목록에서 내용 사용</td>
-    <td style="<?=b_draw('bottom', '#00D952') ?>"><input type=checkbox name=bo_use_list_content value='1' <?=$board[bo_use_list_content]?'checked':'';?>>사용 (사용시 속도 느려짐)</td>
-    <td style="<?=b_draw('bottom', '#00D952') ?>">전체목록보이기 사용</td>
-    <td style="<?=b_draw('right', '#00D952') ?><?=b_draw('bottom', '#00D952') ?>"><input type=checkbox name=bo_use_list_view value='1' <?=$board[bo_use_list_view]?'checked':'';?>>사용</td>
+    <td style="<?=b_draw('left', '#74A3C8') ?><?=b_draw('bottom', '#74A3C8') ?>">목록에서 내용 사용</td>
+    <td style="<?=b_draw('bottom', '#74A3C8') ?>"><input type=checkbox name=bo_use_list_content value='1' <?=$board[bo_use_list_content]?'checked':'';?>>사용 (사용시 속도 느려짐)</td>
+    <td style="<?=b_draw('bottom', '#74A3C8') ?>">전체목록보이기 사용</td>
+    <td style="<?=b_draw('right', '#74A3C8') ?><?=b_draw('bottom', '#74A3C8') ?>"><input type=checkbox name=bo_use_list_view value='1' <?=$board[bo_use_list_view]?'checked':'';?>>사용</td>
 </tr>
 <tr><td colspan=4 class='ht'></td></tr>
 
@@ -376,9 +384,9 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
     <td style="<?=b_draw('top') ?><?=b_draw('right') ?>" colspan=3><input type=checkbox name=group_same8 value='1'>같은 그룹에 속한 게시판을 이 테두리안의 옵션으로 동일하게 적용합니다.</td>
 </tr>
 <tr class='ht'>
-    <td style="<?=b_draw('left') ?> <?=b_draw('bottom') ?>">검색 사용</td>
+    <td style="<?=b_draw('left') ?> <?=b_draw('bottom') ?>">전체 검색 사용</td>
     <td style="<?=b_draw('bottom') ?>"><input type=checkbox name=bo_use_search value='1' <?=$board[bo_use_search]?'checked':'';?>>사용</td>
-    <td style="<?=b_draw('bottom') ?>">검색 순서</td>
+    <td style="<?=b_draw('bottom') ?>">전체 검색 순서</td>
     <td style="<?=b_draw('right') ?><?=b_draw('bottom') ?>"><input type=text class='edit' name=bo_order_search size=5 value='<?=$board[bo_order_search]?>'> 숫자가 낮은 게시판 부터 검색</td>
 </tr>
 <tr><td colspan=4 class='ht'></td></tr>

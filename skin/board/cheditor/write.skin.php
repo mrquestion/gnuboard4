@@ -2,10 +2,12 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 include_once("$g4[path]/lib/cheditor.lib.php");
+
+if ($w == 'r') $content = '';
 ?>
 
 <script src="<?=$g4[editor_path]?>/cheditor.js"></script>
-<?=cheditor1('wr_content', $content);?>
+<?=cheditor1('wr_content', $write[wr_content]);?>
 
 <script language="JavaScript">
 // 글자수 제한
@@ -297,9 +299,23 @@ function fwrite_check(f)
         }
     }
 
-    <?=cheditor3('f', 'wr_content');?>
+    <?=cheditor3('wr_content');?>
 
     f.action = "./write_update.php";
     f.submit();
 }
+
+<?
+// 관리자라면 분류 선택에 '공지' 옵션을 추가함
+if ($is_admin) 
+{
+    echo "
+    if (typeof(document.fwrite.ca_name) != 'undefined')
+    {
+        document.fwrite.ca_name.options.length += 1;
+        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].value = '공지';
+        document.fwrite.ca_name.options[document.fwrite.ca_name.options.length-1].text = '공지';
+    }";
+} 
+?>
 </script>

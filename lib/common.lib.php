@@ -66,8 +66,11 @@ function print_r2($var)
 
 // 메타태그를 이용한 URL 이동
 // header("location:URL") 을 대체
-function goto_url($url) {
-    echo "<meta http-equiv=\"refresh\" content=\"0;url=$url\">";
+function goto_url($url) 
+{
+    //echo "<meta http-equiv=\"Refresh\" content=\"0;url=$url\">";
+    //header("Location:$url");
+    header("Location:$url", false); // PHP 4.3.0 이상에서만 사용
     exit;
 }
 

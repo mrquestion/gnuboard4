@@ -4,7 +4,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 global $is_admin;
 ?>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="220" border="0" cellspacing="0" cellpadding="0">
 <tr> 
     <td colspan="3"><img src="<?=$visit_skin_path?>/img/visit_top.gif" width="220" height="11"></td>
 </tr>
