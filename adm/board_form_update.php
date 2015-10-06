@@ -7,6 +7,10 @@ if ($w == 'u')
 
 auth_check($auth[$sub_menu], "w");
 
+if ($member[mb_password] != sql_password($_POST['admin_password'])) {
+    alert("패스워드가 다릅니다.");
+}
+
 if (!$_POST[gr_id]) { alert("그룹 ID는 반드시 선택하세요."); }
 if (!$bo_table) { alert("게시판 TABLE명은 반드시 입력하세요."); }
 if (!preg_match("/^([A-Za-z0-9_]{1,20})$/", $bo_table)) { alert("게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)"); }

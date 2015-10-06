@@ -466,6 +466,7 @@ function conv_content($content, $html)
         $content = preg_replace("/(lo)(wsrc)/i", "&#108;&#111;$2", $content);
         $content = preg_replace("/(sc)(ript)/i", "&#115;&#99;$2", $content);
         $content = preg_replace("/(ex)(pression)/i", "&#101&#120;$2", $content);
+        $content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "", $content);
         /*
         $content = preg_replace("/\#/", "&#35;", $content);
         $content = preg_replace("/\</", "&lt;", $content);
