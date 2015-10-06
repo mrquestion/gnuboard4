@@ -512,7 +512,8 @@ function conv_content($content, $html)
         $pattern .= "(e|&#(x65|101);?)";
         $pattern .= "(s|&#(x73|115);?)";
         $pattern .= "(s|&#(x73|115);?)";
-        $pattern .= "(i|&#(x6a|105);?)";
+        //$pattern .= "(i|&#(x6a|105);?)";
+        $pattern .= "(i|&#(x69|105);?)";
         $pattern .= "(o|&#(x6f|111);?)";
         $pattern .= "(n|&#(x6e|110);?)";
         //$content = preg_replace("/".$pattern."/i", "__EXPRESSION__", $content);
