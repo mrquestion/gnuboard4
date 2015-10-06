@@ -465,6 +465,10 @@ else if ($w == "u")
 // 나중에 테이블에 저장하는 이유는 $wr_id 값을 저장해야 하기 때문입니다.
 for ($i=0; $i<count($upload); $i++) 
 {
+    if (!get_magic_quotes_gpc()) {
+        $upload[$i]['source'] = addslashes($upload[$i]['source']);
+    }
+
     $row = sql_fetch(" select count(*) as cnt from $g4[board_file_table] where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$i' ");
     if ($row[cnt]) 
     {

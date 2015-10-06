@@ -1,3 +1,23 @@
+4.34.07 (11.07.01)
+    :   [보안패치] 파일업로드의 오류를 이용한 XSS 공격 취약점을 수정 ( wh1ant님께서 도움 주셨습니다. )
+        php.ini 의 magic_quotes_gpc = Off 로 사용하는 경우에만 오류가 발생합니다.
+    :   [보안패치] CHEDITOR5 에서 허가받지 않은 파일 삭제 버그가 발견 되었습니다. ( letsgolee님께서 도움 주셨습니다. )
+    :   우편번호 파일 업데이트 (잉크님께서 도움 주셨습니다.)
+        리 다음에 공란이 없어 "계곡리" 같은 주소가 표시되지 않던 버그를 수정
+
+        bbs/write_update.php 에 아래 코드를 추가하세요.
+
+        if (!get_magic_quotes_gpc()) {
+            $upload[$i]['source'] = addslashes($upload[$i]['source']);
+        }
+
+
+        아래 3개 파일을 교체해 주시기 바랍니다.
+        
+        cheditor5/imageUpload/upload.php
+        cheditor5/imageUpload/delete.php
+        bbs/zip.db
+
 4.34.06 (11.06.21)
     :   [추가보안패치] CHSOFT 대표 나창호님께서 도움 주셨습니다. ( CHEDITOR 제작자 )
         4.34.05 에서 보완된 패치입니다.
