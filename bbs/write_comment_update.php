@@ -40,7 +40,7 @@ set_session("ss_datetime", $g4[server_time]);
 // 동일내용 연속 등록 불가
 $sql = " select MD5(CONCAT(wr_ip, wr_subject, wr_content)) as prev_md5 from $write_table ";
 if ($w == "cu")
-    $sql .= " where wr_id <> '$commend_id' ";
+    $sql .= " where wr_id <> '$comment_id' ";
 $sql .= " order by wr_id desc limit 1 ";
 $row = sql_fetch($sql);
 $curr_md5 = md5($_SERVER[REMOTE_ADDR].$wr_subject.$wr_content);
