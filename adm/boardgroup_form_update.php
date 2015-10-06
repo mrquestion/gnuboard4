@@ -4,19 +4,12 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "w");
 
-if (!ereg("^([A-Za-z0-9_]{1,10})$", $gr_id)) {
+if ($is_admin != "super" && $w == "") alert("최고관리자만 접근 가능합니다.");
+
+if (!ereg("^([A-Za-z0-9_]{1,10})$", $gr_id))
     alert("그룹 ID는 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (10자 이내)");
-}
 
 if (!$gr_subject) alert("그룹 제목을 입력하세요.");
-
-/*
-if ($gr_admin) {
-    $mb = get_member($gr_admin);
-    if (!$mb[mb_id]) 
-        alert("그룹 관리자 회원아이디가 존재하지 않습니다.");
-}
-*/
 
 $sql_common = " gr_subject      = '$gr_subject',
                 gr_admin        = '$gr_admin',  
@@ -33,7 +26,8 @@ $sql_common = " gr_subject      = '$gr_subject',
                 gr_10           = '$gr_10'
                 ";
 
-if ($w == "") {
+if ($w == "") 
+{
     $sql = " select count(*) as cnt from $g4[group_table] where gr_id = '$gr_id' ";
     $row = sql_fetch($sql);
     if ($row[cnt]) 
@@ -43,15 +37,17 @@ if ($w == "") {
                 set gr_id = '$gr_id',
                     $sql_common ";
     sql_query($sql);
-} else if ($w == "u") {
+} 
+else if ($w == "u") 
+{
     $sql = " update $g4[group_table]
                 set $sql_common
-              where gr_id = '$gr_id' ";
+              where gr_id = '$gr_id'
+                and gr_admin = '$member[mb_id]' ";
     sql_query($sql);
-} else
+} 
+else
     alert("제대로 된 값이 넘어오지 않았습니다.");
-
-//sql_query(" OPTIMIZE TABLE `$g4[group_table]` ");
 
 goto_url("./boardgroup_form.php?w=u&gr_id=$gr_id&$qstr");
 ?>

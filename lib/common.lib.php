@@ -260,8 +260,6 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
 
     $list[is_notice] = preg_match("/[^0-9]{0,1}{$list[wr_id]}[\r]{0,1}/",$board[bo_notice]);
 
-    //$list[num] = number_format($total_count - ($page - 1) * $board[bo_page_rows] - $i);
-
     if ($subject_len)
         $list[subject] = conv_subject($list[wr_subject], $subject_len, "…");
     else
@@ -273,12 +271,7 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
 
     $list[comment_cnt] = "";
     if ($list[wr_comment])
-    {
         $list[comment_cnt] = "($list[wr_comment])";
-
-        // wr_last_comment 필드 없음
-        //if ($list[wr_last_comment] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600))) $list[comment_cnt] = '<b>' . $list[comment_cnt] . '</b>';
-    }
 
     $list[datetime] = substr($list[wr_datetime],0,10);
 
@@ -289,7 +282,6 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     else
         $list[datetime2] = substr($list[datetime2],5,5);
 
-    //$list[wr_email] = get_text($list[wr_email]);
     $list[wr_homepage] = get_text(addslashes($list[wr_homepage]));
 
     $tmp_name = get_text(cut_str($list[wr_name], $config[cf_cut_name])); // 설정된 자리수 만큼만 이름 출력
@@ -298,11 +290,11 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     else
         $list[name] = "<span class='".($list[mb_id]?'member':'guest')."'>$tmp_name</span>";
 
-    //$reply = substr($list[wr_id], 5, 10);
     $reply = $list[wr_reply];
 
     $list[reply] = "";
-    if (strlen($reply) > 0) {
+    if (strlen($reply) > 0) 
+    {
         for ($k=0; $k<strlen($reply); $k++)
             $list[reply] .= ' &nbsp;&nbsp; ';
     }
@@ -337,7 +329,8 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
         $list[icon_secret] = "<img src='$skin_path/img/icon_secret.gif' align='absmiddle'>";
 
     // 링크
-    for ($i=1; $i<=$g4[link_count]; $i++) {
+    for ($i=1; $i<=$g4[link_count]; $i++) 
+    {
         $list[link][$i] = set_http(get_text($list["wr_link{$i}"]));
         $list[link_href][$i] = "$g4[bbs_path]/link.php?bo_table=$board[bo_table]&wr_id=$list[wr_id]&no=$i" . $qstr;
         $list[link_hit][$i] = (int)$list["wr_link{$i}_hit"];
@@ -482,10 +475,13 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
     $str .= " ( ";
     for ($i=0; $i<count($s); $i++) {
         // 검색어
+        /*
         if (preg_match("/[a-zA-Z]/", $s[$i]))
             $search_str = strtolower($s[$i]);
         else
             $search_str = $s[$i];
+        */
+        $search_str = $s[$i];
 
         // 인기검색어
         $sql = " insert into $g4[popular_table]
@@ -519,7 +515,7 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
                 // LIKE 보다 INSTR 속도가 빠름
                 default :
                     if (preg_match("/[a-zA-Z]/", $search_str))
-                        $str .= " INSTR(LOWER($field[$k]), '$search_str') > 0 ";
+                        $str .= " INSTR(LOWER($field[$k]), LOWER('$search_str')) > 0 ";
                     else
                         $str .= " INSTR($field[$k], '$search_str') > 0 ";
                     break;
@@ -668,15 +664,15 @@ function get_category_option($bo_table)
 // 게시판 그룹을 SELECT 형식으로 얻음
 function get_group_select($name, $selected='', $event='')
 {
-    global $is_admin;
-    global $g4;
+    global $g4, $is_admin, $member;
 
     $sql = " select gr_id, gr_subject from $g4[group_table] a ";
-    if ($is_admin == 'group') {
+    if ($is_admin == "group") {
         $sql .= " left join $g4[member_table] b on (b.mb_id = a.gr_admin)
                   where b.mb_id = '$member[mb_id]' ";
     }
     $sql .= " order by a.gr_id ";
+
     $result = sql_query($sql);
     $str = "<select name='$name' $event>";
     for ($i=0; $row=sql_fetch_array($result); $i++)
@@ -835,24 +831,35 @@ function get_sideview($mb_id, $name="", $email="", $homepage="")
 
 
 // 파일을 보이게 하는 링크 (이미지, 플래쉬, 동영상)
-function view_file_link($file, $width, $height, $content='')
+function view_file_link($file, $width, $height, $content="")
 {
     global $config, $board;
     global $g4;
 
     if (!$file) return;
 
-    //$size = @getimagesize("$g4[path]/data/file/$board[bo_table]/$file");
+    // 파일의 폭이 게시판설정의 이미지폭 보다 크다면 게시판설정 폭으로 맞추고 비율에 따라 높이를 계산
+    if ($width > $board[bo_image_width] && $board[bo_image_width])
+    {
+        $rate = $board[bo_image_width] / $width;
+        $width = $board[bo_image_width];
+        $height = (int)($height * $rate);
+    }
 
-    //$width  = $size[0] ? $size[0] : 640;
-    //$height = $size[1] ? $size[1] : 480;
+    // 폭이 있는 경우 폭과 높이의 속성을 주고, 없으면 자동 계산되도록 코드를 만들지 않는다.
+    if ($width)
+        $attr = " width='$width' height='$height' ";
+    else
+        $attr = "";
 
     if (preg_match("/\.($config[cf_image_extension])$/i", $file))
+        // 이미지에 속성을 주지 않는 이유는 이미지 클릭시 원본 이미지를 보여주기 위한것임
+        // 게시판설정 이미지보다 크다면 스킨의 자바스크립트에서 이미지를 줄여준다
         return "<img src='$g4[path]/data/file/$board[bo_table]/".urlencode($file)."' name='target_resize_image[]' onclick='image_window(this);' style='cursor:pointer;' title='$content'>";
     else if (preg_match("/\.($config[cf_flash_extension])$/i", $file))
-        return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' width='$width' height='$height'></embed>";
+        return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
     else if (preg_match("/\.($config[cf_movie_extension])$/i", $file))
-        return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' width='$width' height='$height'></embed>";
+        return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
 }
 
 

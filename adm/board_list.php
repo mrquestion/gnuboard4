@@ -4,19 +4,13 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
-$sql_common = " from $g4[board_table] a where (1) ";
-
-// 그룹관리자가 접근할 경우
 $sql_common = " from $g4[board_table] a ";
-if ($is_admin == 'group') {
-    $sql_common .= " left join $g4[group_table] b on (b.gr_id = a.gr_id)
-                     left join $g4[member_table] c on (c.mb_id = b.gr_admin) ";
-}
+$sql_search = " where (1) ";
 
-if ($is_admin == 'group') {
-    $sql_search = " where (c.mb_id = '$member[mb_id]') ";
-} else {
-    $sql_search = " where (1) ";
+if ($is_admin != "super") 
+{
+    $sql_common .= " , $g4[group_table] b ";
+    $sql_search .= " and (a.gr_id = b.gr_id and b.gr_admin = '$member[mb_id]') ";
 }
 
 if ($stx) {
@@ -25,7 +19,7 @@ if ($stx) {
         case "bo_table" :
             $sql_search .= " ($sfl like '$stx%') ";
             break;
-        case "gr_id" :
+        case "a.gr_id" :
             $sql_search .= " ($sfl = '$stx') ";
             break;
         default : 
@@ -81,7 +75,7 @@ var list_delete_php = 'board_list_delete.php';
         <select name=sfl>
             <option value='bo_table'>TABLE</option>
             <option value='bo_subject'>제목</option>
-            <option value='gr_id'>그룹ID</option>
+            <option value='a.gr_id'>그룹ID</option>
         </select>
         <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
         <input type=image src='./img/btn_search.gif' align=absmiddle></td>
@@ -136,7 +130,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     // 스킨디렉토리
     $skin_options = "";
     $arr = get_skin_dir("board");
-    for ($k=0; $k<count($arr); $k++) {
+    for ($k=0; $k<count($arr); $k++) 
+    {
         $option = $arr[$k];
         if (strlen($option) > 10)
             $option = substr($arr[$k], 0, 18) . "…";
@@ -148,25 +143,28 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     }
 
     $list = $i % 2;
-    echo "
-    <input type=hidden name=board_table[$i] value='$row[bo_table]'>
-    <tr class='list$list col1 ht center'>
-        <td rowspan=2 height=25><input type=checkbox name=chk[] value='$i'></td>
-        <td rowspan=2><a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]'><b>$row[bo_table]</b></a></td>
-        <td colspan=2 align=left height=25><input type=text class=edit name=bo_subject[$i] value='$row[bo_subject]' style='width:99%'></td>
-        <td rowspan=2 title='읽기 포인트'><input type=text class=edit name=bo_read_point[$i] value='$row[bo_read_point]' style='width:33px;'></td>
-        <td rowspan=2 title='쓰기 포인트'><input type=text class=edit name=bo_write_point[$i] value='$row[bo_write_point]' style='width:33px;'></td>
-        <td rowspan=2 title='속글쓰기 포인트'><input type=text class=edit name=bo_comment_point[$i] value='$row[bo_comment_point]' style='width:33px;'></td>
-        <td rowspan=2 title='다운로드 포인트'><input type=text class=edit name=bo_download_point[$i] value='$row[bo_download_point]' style='width:33px;'></td>
-        <td rowspan=2 title='검색사용'><input type=checkbox name=bo_use_search[$i] ".($row[bo_use_search]?'checked':'')." value='1'></td>
-        <td rowspan=2 title='검색순서'><input type=text class=edit name=bo_order_search[$i] value='$row[bo_order_search]' size=2></td>
-        <td rowspan=2>$s_upd $s_del $s_copy</td>
-    </tr>
-    <tr class='list$list col1 ht center'>
-        <td align=left>".get_group_select("gr_id[$i]", $row[gr_id])."</td>
-        <td align=left><select name=bo_skin[$i]>$skin_options</select></td>
-    </tr>
-    ";
+    echo "<input type=hidden name=board_table[$i] value='$row[bo_table]'>";
+    echo "<tr class='list$list col1 ht center'>";
+    echo "<td rowspan=2 height=25><input type=checkbox name=chk[] value='$i'></td>";
+    echo "<td rowspan=2><a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]'><b>$row[bo_table]</b></a></td>";
+    echo "<td colspan=2 align=left height=25><input type=text class=edit name=bo_subject[$i] value='$row[bo_subject]' style='width:99%'></td>";
+    echo "<td rowspan=2 title='읽기 포인트'><input type=text class=edit name=bo_read_point[$i] value='$row[bo_read_point]' style='width:33px;'></td>";
+    echo "<td rowspan=2 title='쓰기 포인트'><input type=text class=edit name=bo_write_point[$i] value='$row[bo_write_point]' style='width:33px;'></td>";
+    echo "<td rowspan=2 title='속글쓰기 포인트'><input type=text class=edit name=bo_comment_point[$i] value='$row[bo_comment_point]' style='width:33px;'></td>";
+    echo "<td rowspan=2 title='다운로드 포인트'><input type=text class=edit name=bo_download_point[$i] value='$row[bo_download_point]' style='width:33px;'></td>";
+    echo "<td rowspan=2 title='검색사용'><input type=checkbox name=bo_use_search[$i] ".($row[bo_use_search]?'checked':'')." value='1'></td>";
+    echo "<td rowspan=2 title='검색순서'><input type=text class=edit name=bo_order_search[$i] value='$row[bo_order_search]' size=2></td>";
+    echo "<td rowspan=2>$s_upd $s_del $s_copy</td>";
+    echo "</tr>";
+    echo "<tr class='list$list col1 ht center'>";
+
+    if ($is_admin == "super")
+        echo "<td align=left>".get_group_select("gr_id[$i]", $row[gr_id])."</td>";
+    else
+        echo "<td align=center><input type=hidden name='gr_id[$i]' value='$row[gr_id]'>$row[gr_subject]</td>";
+
+    echo "<td align=left><select name=bo_skin[$i]>$skin_options</select></td>";
+    echo "</tr>\n";
 } 
 
 if ($i == 0)
@@ -179,7 +177,10 @@ $pagelist = get_paging($config[cf_write_pages], $page, $total_page, "$_SERVER[PH
 echo "<table width=100% cellpadding=3 cellspacing=1>";
 echo "<tr><td width=70%>";
 echo "<input type=button class='btn1' value='선택수정' onclick=\"btn_check(this.form, 'update')\"> ";
-echo "<input type=button class='btn1' value='선택삭제' onclick=\"btn_check(this.form, 'delete')\">";
+
+if ($is_admin == "super")
+    echo "<input type=button class='btn1' value='선택삭제' onclick=\"btn_check(this.form, 'delete')\">";
+
 echo "</td>";
 echo "<td width=30% align=right>$pagelist</td></tr></table>\n";
 

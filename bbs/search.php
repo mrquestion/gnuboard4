@@ -34,11 +34,13 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         $sql2 = " select gr_use_access, gr_admin from $g4[group_table] where gr_id = '$row[gr_id]' ";
         $row2 = sql_fetch($sql2);
         // 그룹접근을 사용한다면
-        if ($row2[gr_use_access]) {
+        if ($row2[gr_use_access])
+        {
             // 그룹관리자가 있으며 현재 회원이 그룹관리자라면 통과
             if ($row2[gr_admin] && $row2[gr_admin] == $member[mb_id])
                 ;
-            else {
+            else 
+            {
                 $sql3 = " select count(*) as cnt from $g4[group_member_table]
                            where gr_id = '$row[gr_id]'
                              and mb_id = '$member[mb_id]' 
@@ -75,7 +77,8 @@ $field = explode("+", trim($sfl));
 $str = " ( ";
 for ($i=0; $i<count($s); $i++) 
 {
-    $search_str = strtolower($s[$i]);
+    //$search_str = strtolower($s[$i]);
+    $search_str = $s[$i];
     $str .= $op1;
     $str .= " ( ";
     
@@ -92,7 +95,10 @@ for ($i=0; $i<count($s); $i++)
                 $str .= " $field[$k] like '%$s[$i]' ";
                 break;
             default :
-                $str .= " INSTR(LOWER($field[$k]), '$search_str') > 0 ";
+                if (preg_match("/[a-zA-Z]/", $search_str))
+                    $str .= " INSTR(LOWER($field[$k]), LOWER('$search_str')) > 0 ";
+                else
+                    $str .= " INSTR($field[$k], '$search_str') > 0 ";
                 break;
         }
         $op2 = " or ";
@@ -110,7 +116,8 @@ for ($i=0; $i<count($s); $i++)
 }
 $str .= " ) ";
 
-$sql_search = $str . " and wr_option not like '%secret%' "; // 비밀글은 제외
+//$sql_search = $str . " and wr_option not like '%secret%' "; // 비밀글은 제외
+$sql_search = $str;
 
 $str_board_list = "";
 $board_count = 0;
@@ -121,15 +128,15 @@ $total_count = 0;
 for ($i=0; $i<count($g4_search[tables]); $i++) 
 {
     $tmp_write_table   = $g4[write_prefix] . $g4_search[tables][$i];
-    //$tmp_comment_table = $g4[write_prefix] . $g4_search[tables][$i] . $g4[comment_suffix];
 
+    /*
     $sql = " select count(*) as cnt 
                from $tmp_write_table a,
                     $g4[board_table] b ";
-    //if (strstr($sfl, "wc_content")) $sql .= " , $tmp_comment_table c ";
     $sql .= "   where (b.bo_table = '{$g4_search[tables][$i]}') 
                   and $sql_search ";
-    //if (strstr($sfl, 'wc_content')) $sql .= " and a.wr_id = c.wr_id ";
+    */
+    $sql = " select count(*) as cnt from $tmp_write_table where $sql_search ";
     // 권한별 검색기능
     //$sql .= " and (b.bo_table='{$g4_search[tables][$i]}' and b.bo_list_level <= '$member[mb_level]' and b.bo_read_level <= '$member[mb_level]') ";
     $row = sql_fetch($sql);
@@ -191,11 +198,11 @@ for ($idx=$table_index; $idx<count($search_table); $idx++)
             $sql2 = " select wr_subject, wr_option from $tmp_write_table where wr_id = '$row[wr_parent]' ";
             $row2 = sql_fetch($sql2);
             $row[wr_subject] = $row2[wr_subject];
-
-            // 비밀글은 검색 불가
-            if (strstr($row2[wr_secret], "secret")) 
-                $row[wr_content] = "[비밀글 입니다.]";
         }
+
+        // 비밀글은 검색 불가
+        if (strstr($row[wr_option].$row2[wr_option], "secret")) 
+            $row[wr_content] = "[비밀글 입니다.]";
 
         $subject = $row[wr_subject];
         if (strstr($sfl, "wr_subject")) 

@@ -57,6 +57,12 @@ else if ($w == "u")
     $bo_table_attr = "readonly style='background-color:#dddddd'";
 }
 
+if ($is_admin != "super")
+{
+    $group = get_group($board[gr_id]);
+    $is_admin = is_admin($member[mb_id]);
+}
+
 $g4[title] = $html_title;
 include_once ("./admin.head.php");
 ?>
@@ -92,7 +98,7 @@ include_once ("./admin.head.php");
     <td>그룹</td>
     <td colspan=3>
         <?=get_group_select('gr_id', $board[gr_id], "required itemname='그룹'");?>
-        <? if ($w=='u') { ?><a href="javascript:location.href='./board_list.php?sfl=gr_id&stx='+document.fboardform.gr_id.value;">동일그룹게시판목록</a><?}?></td>
+        <? if ($w=='u') { ?><a href="javascript:location.href='./board_list.php?sfl=a.gr_id&stx='+document.fboardform.gr_id.value;">동일그룹게시판목록</a><?}?></td>
 </tr>
 <tr class='ht'>
     <td>게시판 제목</td>
@@ -215,7 +221,7 @@ include_once ("./admin.head.php");
     <td style="<?=b_draw('left', '#00D952') ?> <?=b_draw('bottom', '#00D952')?>">분류</td>
     <td colspan=3 style="<?=b_draw('right', '#00D952') ?> <?=b_draw('bottom', '#00D952')?>">
         <input type=text class='edit' name=bo_category_list style='width:99%;' value='<?=$board[bo_category_list]?>'>
-        <br> 분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변)
+        <br> 분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변) 첫자로 #은 입력하지 마세요. (예: #질문|#답변 [X])
     </td>
 </tr>
 <tr><td colspan=4 class='ht'></td></tr>

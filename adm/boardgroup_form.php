@@ -4,16 +4,22 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "w");
 
+if ($is_admin != "super" && $w == "") alert("최고관리자만 접근 가능합니다.");
+
 $html_title = "게시판그룹";
-if ($w == "") {
+if ($w == "") 
+{
     $gr_id_attr = "required";
     $gr[gr_use_access] = 0;
     $html_title .= " 생성";
-} else if ($w == "u") {
+} 
+else if ($w == "u") 
+{
     $gr_id_attr = "readonly style='background-color:#dddddd'";
-    $gr = sql_fetch(" select * from $g4[group_table] where gr_id = '$gr_id' ");
+    $gr = sql_fetch(" select * from $g4[group_table] where gr_id = '$gr_id' and gr_admin = '$member[mb_id]' ");
     $html_title .= " 수정";
-} else
+} 
+else
     alert("제대로 된 값이 넘어오지 않았습니다.");
 
 $g4[title] = $html_title;
@@ -52,7 +58,13 @@ include_once("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>그룹 관리자</td>
-    <td><?=get_member_id_select("gr_admin", 9, $gr[gr_admin])?></td>
+    <td>
+        <?
+        if ($is_admin == "super")
+            echo get_member_id_select("gr_admin", 9, $row[gr_admin]);
+        else
+            echo "<input type=hidden name='gr_admin' value='$gr[gr_admin]'>$gr[gr_admin]";
+        ?></td>
     <td>접근회원사용</td>
     <td><input type=checkbox name=gr_use_access value='1' <?=$gr[gr_use_access]?'checked':'';?>>사용</td>
 </tr>

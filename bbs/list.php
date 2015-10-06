@@ -3,7 +3,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 // 분류 사용 여부
 $is_category = false;
-if ($board[bo_use_category]) {
+if ($board[bo_use_category]) 
+{
     $is_category = true;
     $category_location = "./board.php?bo_table=$bo_table&sca=";
     $category_option = get_category_option($bo_table); // SELECT OPTION 태그로 넘겨받음
@@ -14,7 +15,8 @@ if ($sop != "and" && $sop != "or")
     $sop = "and";
 
 // 분류 선택 또는 검색어가 있다면
-if ($sca || $stx) {
+if ($sca || $stx) 
+{
     $sql_search = get_sql_search($sca, $sfl, $stx, $sop);
 
     // 가장 작은 번호를 얻어서 변수에 저장 (하단의 페이징에서 사용)
@@ -32,7 +34,9 @@ if ($sca || $stx) {
                where $sql_search ";
     $result = sql_query($sql);
     $total_count = mysql_num_rows($result);
-} else {
+} 
+else 
+{
     $sql_search = "";
 
     $total_count = $board[bo_count_write];
@@ -56,19 +60,23 @@ if ($board[bo_gallery_cols])
 // 정렬
 // 인덱스 필드가 아니면 정렬에 사용하지 않음
 //if (!$sst || ($sst && !(strstr($sst, 'wr_id') || strstr($sst, "wr_datetime")))) {
-if (!$sst) {
+if (!$sst) 
+{
     $sst  = "wr_num, wr_reply";
     $sod = "";
 }
 $sql_order = " order by $sst $sod ";
 
-if ($sca || $stx) {
+if ($sca || $stx) 
+{
     $sql = " select distinct wr_parent
                from $write_table
               where $sql_search
               $sql_order
               limit $from_record, $board[bo_page_rows] ";
-} else {
+} 
+else
+{
     $sql = " select * 
                from $write_table a 
               where wr_comment > -1
@@ -83,9 +91,11 @@ $today2 = $g4[time_ymd];
 $list = array();
 $i = 0;
 
-if (!$sca && !$stx) {
+if (!$sca && !$stx) 
+{
     $arr_notice = split("\n", trim($board[bo_notice]));
-    for ($k=0; $k<count($arr_notice); $k++) {
+    for ($k=0; $k<count($arr_notice); $k++) 
+    {
         $row = sql_fetch(" select * from $write_table where wr_id = '$arr_notice[$k]' ");
         if (!$row[wr_id])
             continue;
@@ -120,7 +130,8 @@ $write_pages = get_paging($config[cf_write_pages], $page, $total_page, "./board.
 $list_href = '';
 $prev_part_href = '';
 $next_part_href = '';
-if ($sca || $stx)  {
+if ($sca || $stx)  
+{
     $list_href = "./board.php?bo_table=$bo_table";
 
     //if ($prev_spt >= $min_spt) 

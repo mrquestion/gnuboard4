@@ -1,8 +1,8 @@
-## MySQL dump 8.23
+## MySQL dump 9.10
 ##
 ## Host: localhost    Database: gnuboard4
-########################################################-
-## Server version	3.23.58-log
+## ######################################################
+## Server version	4.0.17-log
 
 ##
 ## Table structure for table `__TABLE_NAME__`

@@ -12,9 +12,6 @@ a.menu:hover { text-decoration:none; }
 .lh { line-height: 150%; }
 .jt { text-align:justify; }
 
-.lmb  { height:30px; background-image:url('http://run.sir.co.kr/kagla/sir/img/lmb.gif'); padding-left:40px; padding-top:3px; }
-.lmb2 { height:27; background-image:url('http://run.sir.co.kr/kagla/sir/img/lmb2.gif'); padding-left:55px; padding-top:0px; }
-
 /*.li { font-weight:bold; font-size:18px; vertical-align:-4px; color:#66AEAD; padding-right:4px; }*/
 .li { font-weight:bold; font-size:18px; vertical-align:-4px; color:#66AEAD; }
 

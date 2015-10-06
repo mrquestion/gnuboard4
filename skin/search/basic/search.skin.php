@@ -13,6 +13,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <select name=sfl class=select>
         <option value="wr_subject">제목</option>
         <option value="wr_content">내용</option>
+        <option value="concat(wr_subject,wr_content)">제목+내용</option>
         <option value="mb_id">회원아이디</option>
         <option value="wr_name">이름</option>
         </select>

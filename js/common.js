@@ -419,7 +419,8 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     {
         var parentObj = null;
         var clientObj = obj;
-        var left = obj.offsetLeft + document.body.clientLeft;
+        //var left = obj.offsetLeft + document.body.clientLeft;
+        var left = obj.offsetLeft;
 
         while((parentObj=clientObj.offsetParent) != null)
         {
@@ -435,7 +436,8 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     {
         var parentObj = null;
         var clientObj = obj;
-        var top = obj.offsetTop + document.body.clientTop;
+        //var top = obj.offsetTop + document.body.clientTop;
+        var top = obj.offsetTop;
 
         while((parentObj=clientObj.offsetParent) != null)
         {

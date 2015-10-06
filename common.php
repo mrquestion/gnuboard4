@@ -303,7 +303,7 @@ if ($bo_table) {
     if ($board[bo_table]) {
         $gr_id = $board[gr_id];
         $write_table = $g4[write_prefix] . $bo_table; // 게시판 테이블 전체이름
-        $comment_table = $g4[write_prefix] . $bo_table . $g4[comment_suffix]; // 코멘트 테이블 전체이름
+        //$comment_table = $g4[write_prefix] . $bo_table . $g4[comment_suffix]; // 코멘트 테이블 전체이름
         if ($wr_id)
             $write = sql_fetch(" select * from $write_table where wr_id = '$wr_id' ");
     }

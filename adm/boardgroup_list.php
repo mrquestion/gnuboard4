@@ -7,7 +7,7 @@ auth_check($auth[$sub_menu], "r");
 $sql_common = " from $g4[group_table] ";
 
 $sql_search = " where (1) ";
-if ($is_admin == 'group')
+if ($is_admin != "super")
     $sql_search .= " and (gr_admin = '$member[mb_id]') ";
 
 if ($stx) {
@@ -101,11 +101,12 @@ var list_delete_php = "./boardgroup_list_delete.php";
     <td>게시판</td>
     <td>접근사용</td>
     <td>접근회원수</td>
-    <td><a href="./boardgroup_form.php"><img src='./img/icon_insert.gif' border=0 title='생성'></a></td>
+    <td><? if ($is_admin == "super") { echo "<a href='./boardgroup_form.php'><img src='./img/icon_insert.gif' border=0 title='생성'></a>"; } ?></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
-for ($i=0; $row=sql_fetch_array($result); $i++) {
+for ($i=0; $row=sql_fetch_array($result); $i++) 
+{
     $sql1 = " select count(*) as cnt from $g4[group_member_table] where gr_id = '$row[gr_id]' ";
     $row1 = sql_fetch($sql1);
 
@@ -118,18 +119,22 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         $s_del = "<a href=\"javascript:del('./boardgroup_delete.php?$qstr&gr_id=$row[gr_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
 
     $list = $i%2;
-    echo "
-    <input type=hidden name=gr_id[$i] value='$row[gr_id]'>
-    <tr class='list$list' onmouseover=\"this.className='mouseover';\" onmouseout=\"this.className='list$list';\" height=27 align=center>
-        <td><input type=checkbox name=chk[] value='$i'></td>
-        <td><a href='$g4[bbs_path]/group.php?gr_id=$row[gr_id]'><b>$row[gr_id]</b></a></td>
-        <td><input type=text class=edit name=gr_subject[$i] value='$row[gr_subject]' size=30></td>
-        <td>".get_member_id_select("gr_admin[$i]", 9, $row[gr_admin])."</td>
-        <td><a href='./board_list.php?sfl=gr_id&stx=$row[gr_id]'>$row2[cnt]</a></td>
-        <td><input type=checkbox name=gr_use_access[$i] ".($row[gr_use_access]?'checked':'')." value='1'></td>
-        <td><a href='./boardgroupmember_list.php?gr_id=$row[gr_id]'>$row1[cnt]</a></td>
-        <td>$s_upd $s_del</td>
-    </tr>";
+    echo "<input type=hidden name=gr_id[$i] value='$row[gr_id]'>";
+    echo "<tr class='list$list' onmouseover=\"this.className='mouseover';\" onmouseout=\"this.className='list$list';\" height=27 align=center>";
+    echo "<td><input type=checkbox name=chk[] value='$i'></td>";
+    echo "<td><a href='$g4[bbs_path]/group.php?gr_id=$row[gr_id]'><b>$row[gr_id]</b></a></td>";
+    echo "<td><input type=text class=edit name=gr_subject[$i] value='$row[gr_subject]' size=30></td>";
+
+    if ($is_admin == "super")
+        echo "<td>".get_member_id_select("gr_admin[$i]", 9, $row[gr_admin])."</td>";
+    else
+        echo "<input type=hidden name='gr_admin[$i]' value='$row[gr_admin]'><td>$row[gr_admin]</td>";
+
+    echo "<td><a href='./board_list.php?sfl=gr_id&stx=$row[gr_id]'>$row2[cnt]</a></td>";
+    echo "<td><input type=checkbox name=gr_use_access[$i] ".($row[gr_use_access]?'checked':'')." value='1'></td>";
+    echo "<td><a href='./boardgroupmember_list.php?gr_id=$row[gr_id]'>$row1[cnt]</a></td>";
+    echo "<td>$s_upd $s_del</td>";
+    echo "</tr>\n";
 } 
 
 if ($i == 0)
