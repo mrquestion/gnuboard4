@@ -19,7 +19,7 @@ if ($w == "") {
         alert("회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.", "./register.php");
 
     if (!$_POST[agree2])
-        alert("개인정보보호정책의 내용에 동의하셔야 회원가입 하실 수 있습니다.", "./register.php");
+        alert("개인정보취급방침의 내용에 동의하셔야 회원가입 하실 수 있습니다.", "./register.php");
 
     // 주민등록번호를 사용한다면 중복검사를 합니다.
     if ($config[cf_use_jumin]) {

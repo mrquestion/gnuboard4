@@ -1,7 +1,7 @@
 <?
 if (!defined('_GNUBOARD_')) exit;
 
-function cheditor1($id, $content, $width='100%', $height='250', $image_width='500')
+function cheditor1($id, $width='100%', $height='250')
 {
     global $g4;
 
@@ -17,7 +17,7 @@ function cheditor1($id, $content, $width='100%', $height='250', $image_width='50
     </script>";
 }
 
-function cheditor2($id, $content='', $width='100%', $height='250', $image_width='500')
+function cheditor2($id, $content='')
 {
     global $g4;
 

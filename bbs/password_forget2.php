@@ -25,6 +25,9 @@ else if (is_admin($mb[mb_id]))
 $g4[title] = "패스워드 찾기 2단계";
 include_once("$g4[path]/head.sub.php");
 
+// 081022 : CSRF 보안 결함으로 인한 코드 수정
+$mb[mb_password_q] = get_text($mb[mb_password_q]);
+
 $member_skin_path = "$g4[path]/skin/member/$config[cf_member_skin]";
 include_once("$member_skin_path/password_forget2.skin.php");
 

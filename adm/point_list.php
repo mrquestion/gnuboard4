@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 $sql_common = " from $g4[point_table] ";
 
 $sql_search = " where (1) ";
@@ -92,19 +94,21 @@ function point_clear()
             <option value='mb_id'>회원아이디</option>
             <option value='po_content'>내용</option>
         </select>
-        <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
+        <input type=text name=stx class=ed required itemname='검색어' value='<?=$stx?>'>
         <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
 
-<table width=100% cellpadding=0 cellspacing=1>
 <form name=fpointlist method=post>
-<input type=hidden name=sst  value='<?=$sst?>'>
-<input type=hidden name=sod  value='<?=$sod?>'>
-<input type=hidden name=sfl  value='<?=$sfl?>'>
-<input type=hidden name=stx  value='<?=$stx?>'>
-<input type=hidden name=page value='<?=$page?>'>
+<input type=hidden name=sst   value='<?=$sst?>'>
+<input type=hidden name=sod   value='<?=$sod?>'>
+<input type=hidden name=sfl   value='<?=$sfl?>'>
+<input type=hidden name=stx   value='<?=$stx?>'>
+<input type=hidden name=page  value='<?=$page?>'>
+<input type=hidden name=token value='<?=$token?>'>
+
+<table width=100% cellpadding=0 cellspacing=1>
 <colgroup width=30>
 <colgroup width=100>
 <colgroup width=80>
@@ -186,13 +190,14 @@ else
 
 <?$colspan=4?>
 <p>
-<table width=100% cellpadding=0 cellspacing=1 class=tablebg>
 <form name=fpointlist2 method=post onsubmit="return fpointlist2_submit(this);" autocomplete="off">
-<input type=hidden name=sfl  value='<?=$sfl?>'>
-<input type=hidden name=stx  value='<?=$stx?>'>
-<input type=hidden name=sst  value='<?=$sst?>'>
-<input type=hidden name=sod  value='<?=$sod?>'>
-<input type=hidden name=page value='<?=$page?>'>
+<input type=hidden name=sfl   value='<?=$sfl?>'>
+<input type=hidden name=stx   value='<?=$stx?>'>
+<input type=hidden name=sst   value='<?=$sst?>'>
+<input type=hidden name=sod   value='<?=$sod?>'>
+<input type=hidden name=page  value='<?=$page?>'>
+<input type=hidden name=token value='<?=$token?>'>
+<table width=100% cellpadding=0 cellspacing=1 class=tablebg>
 <colgroup width=150>
 <colgroup width=''>
 <colgroup width=100>

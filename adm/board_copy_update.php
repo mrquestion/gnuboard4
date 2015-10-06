@@ -4,6 +4,9 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "w");
 
+$target_table   = mysql_real_escape_string(trim($_POST['target_table']));
+$target_subject = mysql_real_escape_string(trim($_POST['target_subject']));
+
 if (!preg_match("/[A-Za-z0-9_]{1,20}/", $target_table)) 
 { 
     alert("게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)"); 
@@ -12,6 +15,8 @@ if (!preg_match("/[A-Za-z0-9_]{1,20}/", $target_table))
 $row = sql_fetch(" select count(*) as cnt from $g4[board_table] where bo_table = '$target_table' ");
 if ($row[cnt])
     alert("{$target_table}은(는) 이미 존재하는 게시판 TABLE 입니다.\\n\\n복사할 TABLE로 사용할 수 없습니다.");
+
+check_token();
 
 // 게시판 테이블 생성
 $sql = get_table_define($g4[write_prefix] . $bo_table);
@@ -23,8 +28,8 @@ $file_copy = array();
 // 게시판 정보
 $sql = " insert into $g4[board_table]
             set bo_table            = '$target_table',
-                gr_id               = '$board[gr_id]', 
                 bo_subject          = '$target_subject',
+                gr_id               = '$board[gr_id]', 
                 bo_admin            = '$board[bo_admin]',
                 bo_list_level       = '$board[bo_list_level]',
                 bo_read_level       = '$board[bo_read_level]',
@@ -65,9 +70,9 @@ $sql = " insert into $g4[board_table]
                 bo_skin             = '$board[bo_skin]',
                 bo_include_head     = '$board[bo_include_head]',
                 bo_include_tail     = '$board[bo_include_tail]',
-                bo_content_head     = '".addslashes($board[bo_content_head])."', 
-                bo_content_tail     = '".addslashes($board[bo_content_tail])."', 
-                bo_insert_content   = '".addslashes($board[bo_insert_content])."', 
+                bo_content_head     = '".addslashes($board['bo_content_head'])."', 
+                bo_content_tail     = '".addslashes($board['bo_content_tail'])."', 
+                bo_insert_content   = '".addslashes($board['bo_insert_content'])."', 
                 bo_gallery_cols     = '$board[bo_gallery_cols]',
                 bo_upload_size      = '$board[bo_upload_size]',
                 bo_reply_order      = '$board[bo_reply_order]',

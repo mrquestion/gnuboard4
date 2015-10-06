@@ -102,7 +102,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     if ($row2[cnt])
         $group = "<a href='./boardgroupmember_form.php?mb_id=$row[mb_id]'>$row2[cnt]</a>";
 
-    $s_del = "<a href=\"javascript:del('./boardgroupmember_update.php?w=listdelete&gm_id=$row[gm_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    //$s_del = "<a href=\"javascript:del('./boardgroupmember_update.php?w=listdelete&gm_id=$row[gm_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    $s_del = "<a href=\"javascript:post_delete('boardgroupmember_update.php', '$row[gm_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
 
     $mb_nick = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
 
@@ -133,6 +134,33 @@ if ($pagelist)
 
 if ($stx) 
     echo "<script language='javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
+?>
 
+<script>
+// POST 방식으로 삭제
+function post_delete(action_url, val)
+{
+	var f = document.fpost;
+
+	if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
+        f.gm_id.value = val;
+		f.action      = action_url;
+		f.submit();
+	}
+}
+</script>
+
+<form name='fpost' method='post'>
+<input type='hidden' name='sst'   value='<?=$sst?>'>
+<input type='hidden' name='sod'   value='<?=$sod?>'>
+<input type='hidden' name='sfl'   value='<?=$sfl?>'>
+<input type='hidden' name='stx'   value='<?=$stx?>'>
+<input type='hidden' name='page'  value='<?=$page?>'>
+<input type='hidden' name='token' value='<?=$token?>'>
+<input type='hidden' name='w'     value='listdelete'>
+<input type='hidden' name='gm_id'>
+</form>
+
+<?
 include_once("./admin.tail.php");
 ?>

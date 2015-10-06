@@ -84,7 +84,6 @@ $colspan = 12;
 <colgroup width=40>
 <colgroup width=40>
 <colgroup width=40>
-<colgroup width=80>
 <tr><td colspan='<?=$colspan?>' class='line1'></td></tr>
 <tr class='bgcol1 bold col1 ht center'>
     <td>회원아이디</td>
@@ -98,7 +97,6 @@ $colspan = 12;
     <td title='이메일인증'>인증</td>
     <td>차단</td>
     <td title='접근가능한 그룹수'>그룹</td>
-	<td><a href="./member_form.php"><img src='<?=$g4['admin_path']?>/img/icon_insert.gif' border=0 title='추가'></a></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
@@ -149,7 +147,6 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         <td title='$row[mb_email_certify]'>".(preg_match('/[1-9]/', $row['mb_email_certify'])?'&radic;':'&nbsp;')."</td>
         <td title='$row[mb_intercept_date]'>".($row['mb_intercept_date']?'&radic;':'&nbsp;')."</td>
         <td>$group</td>               
-        <td>$s_mod $s_del $s_grp</td>
     </tr>";
 }
 

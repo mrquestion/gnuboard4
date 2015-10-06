@@ -132,7 +132,9 @@ if ($board[bo_use_signature] && $view[mb_id])
     $mb = get_member($view[mb_id]);
     $signature = $mb[mb_signature];
 
-    $signature = bad_tag_convert($signature);
+    //$signature = bad_tag_convert($signature);
+    // 081022 : CSRF 보안 결함으로 인한 코드 수정
+    $signature = conv_content($signature, 1);
 }
 
 include_once("$board_skin_path/view.skin.php");

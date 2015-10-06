@@ -469,9 +469,12 @@ function conv_content($content, $html)
 
         // XSS (Cross Site Script) 막기
         // 완벽한 XSS 방지는 없다.
-        $content = preg_replace("/(on)(abort|blur|change|click|dblclick|dragdrop|error|focus|keydown|keypress|keyup|load|mousedown|mousemove|mouseout|mouseover|mouseup|move|reset|resize|select|submit|unload)/i", "$1<!-- XSS Filter -->$2", $content);
-        $content = preg_replace("/(scr)(ipt)/i", "$1<!- XSS Filter -->$2", $content);
-        $content = preg_replace("/(expre)(ssion)/i", "$1<!-- XSS Filter -->$2", $content);
+        // 081022 : CSRF 방지
+        //$content = preg_replace("/(on)(abort|blur|change|click|dblclick|dragdrop|error|focus|keydown|keypress|keyup|load|mousedown|mousemove|mouseout|mouseover|mouseup|mouseenter|mouseleave|move|reset|resize|select|submit|unload)/i", "$1<!-- XSS Filter -->$2", $content);
+        $content = preg_replace("/(on)([^\=]+)/i", "&#111;&#110;$2", $content);
+        $content = preg_replace("/(dy)(nsrc)/i", "&#100;&#121;$2", $content);
+        $content = preg_replace("/(sc)(ript)/i", "&#115;&#99;$2", $content);
+        $content = preg_replace("/(ex)(pression)/i", "&#101&#120;$2", $content);
         /*
         $content = preg_replace("/\#/", "&#35;", $content);
         $content = preg_replace("/\</", "&lt;", $content);
@@ -1406,5 +1409,28 @@ function explain($sql)
 function bad_tag_convert($code) 
 {
     return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>/i", "&lt;$1$2$3&gt;", $code);
+}
+
+
+// 불법접근을 막도록 토큰을 생성하면서 토큰값을 리턴
+function get_token()
+{
+    $token = md5(uniqid(rand(), true));
+    set_session("ss_token", $token);
+
+    return $token;
+}
+
+
+// POST로 넘어온 토큰과 세션에 저장된 토큰 비교
+function check_token()
+{
+    // 세션에 저장된 토큰과 폼값으로 넘어온 토큰을 비교하여 틀리면 에러
+    if ($_POST['token'] && get_session('ss_token') == $_POST['token']) {
+        // 맞으면 세션을 지운다. 세션을 지우는 이유는 새로운 폼을 통해 다시 들어오도록 하기 위함
+        set_session('ss_token', '');
+    } else {
+        alert_close('토큰 에러');
+    }
 }
 ?>

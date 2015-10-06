@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 $sql_common = " from $g4[poll_table] ";
 
 $sql_search = " where (1) ";
@@ -58,7 +60,7 @@ $colspan = 6;
         <select name=sfl>
             <option value='po_subject'>제목</option>
         </select>
-        <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
+        <input type=text name=stx class=ed required itemname='검색어' value='<?=$stx?>'>
         <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
@@ -88,7 +90,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $po_etc = ($row[po_etc]) ? "사용" : "미사용";
 
     $s_mod = "<a href='./poll_form.php?$qstr&w=u&po_id=$row[po_id]'><img src='img/icon_modify.gif' border=0 title='수정'></a>";
-    $s_del = "<a href=\"javascript:del('./poll_form_update.php?$qstr&w=d&po_id=$row[po_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    //$s_del = "<a href=\"javascript:del('./poll_form_update.php?$qstr&w=d&po_id=$row[po_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    $s_del = "<a href=\"javascript:post_delete('poll_form_update.php', '$row[po_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
 
     $list = $i%2;
     echo "
@@ -120,6 +123,31 @@ if ($stx)
 <script language='javascript'>
     document.fsearch.stx.focus();
 </script>
+
+<script>
+// POST 방식으로 삭제
+function post_delete(action_url, val)
+{
+	var f = document.fpost;
+
+	if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
+        f.po_id.value = val;
+		f.action      = action_url;
+		f.submit();
+	}
+}
+</script>
+
+<form name='fpost' method='post'>
+<input type='hidden' name='sst'   value='<?=$sst?>'>
+<input type='hidden' name='sod'   value='<?=$sod?>'>
+<input type='hidden' name='sfl'   value='<?=$sfl?>'>
+<input type='hidden' name='stx'   value='<?=$stx?>'>
+<input type='hidden' name='page'  value='<?=$page?>'>
+<input type='hidden' name='token' value='<?=$token?>'>
+<input type='hidden' name='w'    value='d'>
+<input type='hidden' name='po_id'>
+</form>
 
 <?
 include_once ("./admin.tail.php");

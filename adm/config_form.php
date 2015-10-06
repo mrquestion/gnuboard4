@@ -14,15 +14,17 @@ sql_query(" ALTER TABLE `$g4[config_table]` ADD `cf_memo_send_point` INT NOT NUL
 $sql = " ALTER TABLE `$g4[config_table]` ADD `cf_privacy` TEXT NOT NULL AFTER `cf_stipulation` ";
 sql_query($sql, FALSE);
 if (!trim($config[cf_privacy])) {
-    $config[cf_privacy] = "해당 홈페이지에 맞는 개인정보보호정책을 입력합니다.";
+    $config[cf_privacy] = "해당 홈페이지에 맞는 개인정보취급방침을 입력합니다.";
 }
 
 $g4['title'] = "기본환경설정";
 include_once ("./admin.head.php");
 ?>
 
+<form name='fconfigform' method='post' onsubmit="return fconfigform_submit(this);">
+<input type=hidden name=token value='<?=get_token();?>'>
+
 <table width=100% cellpadding=0 cellspacing=0 border=0>
-<form name=fconfigform method=post onsubmit="return fconfigform_submit(this);">
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=30% class='col2 pad2'>
 <colgroup width=20% class='col1 pad1 bold right'>
@@ -306,7 +308,7 @@ include_once ("./admin.head.php");
     <td valign=top colspan=3><textarea class=ed name='cf_stipulation' rows='10' style='width:99%;'><?=$config[cf_stipulation]?> </textarea></td>
 </tr>
 <tr class='ht'>
-    <td>개인정보보호정책</td>
+    <td>개인정보취급방침</td>
     <td valign=top colspan=3><textarea class=ed name='cf_privacy' rows='10' style='width:99%;'><?=$config[cf_privacy]?> </textarea></td>
 </tr>
 <tr><td colspan=4 class=line2></td></tr>
@@ -389,15 +391,45 @@ include_once ("./admin.head.php");
 </tr>
 <? } ?>
 <tr><td colspan=4 class=line2></td></tr>
+<tr><td colspan=4 class=ht></td></tr>
+
+
+<tr class='ht'>
+    <td colspan=4 align=left><?=subtitle("CSRF 방지")?></td>
+</tr>
+<tr><td colspan=4 class=line1></td></tr>
+<tr class='ht'>
+    <td>
+        <img id='kcaptcha_image' border='0' width=120 height=60 onclick="imageClick();" style="cursor:pointer;" title="글자가 잘안보이는 경우 클릭하시면 새로운 글자가 나옵니다.">
+    </td>
+    <td colspan=3>
+        <input class='ed' type=input size=10 name='kcaptcha_key' itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.
+    </td>
+</tr>
+<tr><td colspan=4 class=line2></td></tr>
+<tr><td colspan=4 class=ht></td></tr>
 </table>
 
 <p align=center>
     <input type=submit class=btn1 accesskey='s' value='  확  인  '>
 </form>
 
+<script type="text/javascript" src="<?="$g4[path]/js/prototype.js"?>"></script>
+<script type="text/javascript" src="<?="$g4[path]/js/md5.js"?>"></script>
+<script type="text/javascript" src="<?="$g4[path]/js/kcaptcha.js"?>"></script>
+
 <script language="javascript">
 function fconfigform_submit(f)
 {
+    if (typeof(f.kcaptcha_key) != 'undefined') {
+        if (hex_md5(f.kcaptcha_key.value) != md5_norobot_key) {
+            alert('자동등록방지용 글자가 제대로 입력되지 않았습니다.');
+            f.kcaptcha_key.select();
+            f.kcaptcha_key.focus();
+            return false;
+        }
+    }
+
     f.action = "./config_form_update.php";
     return true;
 }

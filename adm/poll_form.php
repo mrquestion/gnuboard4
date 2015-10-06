@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "w");
 
+$token = get_token();
+
 $html_title = "투표";
 if ($w == "")
     $html_title .= " 생성";
@@ -18,7 +20,6 @@ $g4[title] = $html_title;
 include_once("./admin.head.php");
 ?>
 
-<table width=100% cellpadding=0 cellspacing=0>
 <form name=fpoll method=post onsubmit="return fpoll_check(this);" enctype="multipart/form-data">
 <input type=hidden name=po_id value='<?=$po_id?>'>
 <input type=hidden name=w     value='<?=$w?>'>
@@ -27,6 +28,8 @@ include_once("./admin.head.php");
 <input type=hidden name=sst   value='<?=$sst?>'>
 <input type=hidden name=sod   value='<?=$sod?>'>
 <input type=hidden name=page  value='<?=$page?>'>
+<input type=hidden name=token value='<?=$token?>'>
+<table width=100% cellpadding=0 cellspacing=0>
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=30% class='col2 pad2'>
 <colgroup width=20% class='col1 pad1 bold right'>

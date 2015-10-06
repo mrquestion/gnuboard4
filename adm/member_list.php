@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 $sql_common = " from $g4[member_table] ";
 
 $sql_search = " where (1) ";
@@ -111,19 +113,21 @@ var list_delete_php = "member_list_delete.php";
             <option value='mb_ip'>IP</option>
             <option value='mb_recommend'>추천인</option>
         </select>
-        <input type=text name=stx required itemname='검색어' value='<? echo $stx ?>'>
+        <input type=text name=stx class=ed required itemname='검색어' value='<? echo $stx ?>'>
         <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
 
-<table width=100% cellpadding=0 cellspacing=0>
 <form name=fmemberlist method=post>
-<input type=hidden name=sst  value='<?=$sst?>'>
-<input type=hidden name=sod  value='<?=$sod?>'>
-<input type=hidden name=sfl  value='<?=$sfl?>'>
-<input type=hidden name=stx  value='<?=$stx?>'>
-<input type=hidden name=page value='<?=$page?>'>
+<input type=hidden name=sst   value='<?=$sst?>'>
+<input type=hidden name=sod   value='<?=$sod?>'>
+<input type=hidden name=sfl   value='<?=$sfl?>'>
+<input type=hidden name=stx   value='<?=$stx?>'>
+<input type=hidden name=page  value='<?=$page?>'>
+<input type=hidden name=token value='<?=$token?>'>
+
+<table width=100% cellpadding=0 cellspacing=0>
 <colgroup width=30>
 <colgroup width=90>
 <colgroup width=90>
@@ -172,7 +176,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     else 
     {
         $s_mod = "<a href=\"./member_form.php?$qstr&w=u&mb_id=$row[mb_id]\"><img src='img/icon_modify.gif' border=0 title='수정'></a>";
-        $s_del = "<a href=\"javascript:del('./member_delete.php?$qstr&w=d&mb_id=$row[mb_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+        //$s_del = "<a href=\"javascript:del('./member_delete.php?$qstr&w=d&mb_id=$row[mb_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+        $s_del = "<a href=\"javascript:post_delete('member_delete.php', '$row[mb_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
     }
     $s_grp = "<a href='./boardgroupmember_form.php?mb_id=$row[mb_id]'><img src='img/icon_group.gif' border=0 title='그룹'></a>";
 
@@ -228,6 +233,30 @@ if ($stx)
 </form>
 
 * 회원자료 삭제시 다른 회원이 기존 회원아이디를 사용하지 못하도록 회원아이디, 이름, 별명은 삭제하지 않고 영구 보관합니다.
+
+<script>
+// POST 방식으로 삭제
+function post_delete(action_url, val)
+{
+	var f = document.fpost;
+
+	if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
+        f.mb_id.value = val;
+		f.action      = action_url;
+		f.submit();
+	}
+}
+</script>
+
+<form name='fpost' method='post'>
+<input type='hidden' name='sst'   value='<?=$sst?>'>
+<input type='hidden' name='sod'   value='<?=$sod?>'>
+<input type='hidden' name='sfl'   value='<?=$sfl?>'>
+<input type='hidden' name='stx'   value='<?=$stx?>'>
+<input type='hidden' name='page'  value='<?=$page?>'>
+<input type='hidden' name='token' value='<?=$token?>'>
+<input type='hidden' name='mb_id'>
+</form>
 
 <?
 include_once ("./admin.tail.php");

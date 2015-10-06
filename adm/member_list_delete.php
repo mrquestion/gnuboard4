@@ -6,13 +6,15 @@ check_demo();
 
 auth_check($auth[$sub_menu], "d");
 
+check_token();
+
 $msg = "";
 for ($i=0; $i<count($chk); $i++) 
 {
     // 실제 번호를 넘김
-    $k = $chk[$i];
+    $k = $_POST['chk'][$i];
 
-    $mb = get_member($mb_id[$k]);
+    $mb = get_member($_POST['mb_id'][$k]);
 
     if (!$mb[mb_id]) {
         $msg .= "$mb[mb_id] : 회원자료가 존재하지 않습니다.\\n";

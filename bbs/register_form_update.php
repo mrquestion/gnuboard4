@@ -2,6 +2,8 @@
 include_once("./_common.php");
 include_once("$g4[path]/lib/mailer.lib.php");
 
+/*
+// 081022 : CSRF 에서 토큰 비교는 의미 없음
 // 세션에 저장된 토큰과 폼값으로 넘어온 토큰을 비교하여 틀리면 에러
 if ($_POST["token"] && get_session("ss_token") == $_POST["token"]) 
 {
@@ -17,6 +19,7 @@ else
     alert_close("토큰 에러");
     exit;
 }
+*/
 
 // 리퍼러 체크
 //referer_check();
@@ -32,12 +35,10 @@ if ($w == "u" && $is_admin == "super") {
 // 자동등록방지 검사
 //include_once ("./norobot_check.inc.php");
 
-if ($w == "") {
-    $key = get_session("captcha_keystring");
-    if (!($key && $key == $_POST[wr_key])) {
-        session_unregister("captcha_keystring");
-        alert("정상적인 접근이 아닌것 같습니다.");
-    }
+$key = get_session("captcha_keystring");
+if (!($key && $key == $_POST[wr_key])) {
+    session_unregister("captcha_keystring");
+    alert("정상적인 접근이 아닌것 같습니다.");
 }
 
 $mb_id = trim(strip_tags($_POST[mb_id]));

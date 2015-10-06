@@ -9,7 +9,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 <div style="clear:both; height:30px;">
     <div style="float:left; margin-top:6px;">
-    <img src="<?=$board_skin_path?>/img/icon_date.gif" align=absmiddle>
+    <img src="<?=$board_skin_path?>/img/icon_date.gif" align=absmiddle border='0'>
     <span style="color:#888888;">작성일 : <?=date("y-m-d H:i", strtotime($view[wr_datetime]))?></span>
     </div>
 
@@ -45,7 +45,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         </td>
         <td align="right" style="padding:6px 6px 0 0;" width=120>
             <? if ($scrap_href) { echo "<a href=\"javascript:;\" onclick=\"win_scrap('$scrap_href');\"><img src='$board_skin_path/img/btn_scrap.gif' border='0' align='absmiddle'></a> "; } ?>
-            <? if ($trackback_url) { ?><a href="javascript:trackback_send_server('<?=$trackback_url?>');" style="letter-spacing:0;" title='주소 복사'><img src="<?=$board_skin_path?>/img/btn_trackback.gif" alt="" align="absmiddle"></a><?}?>
+            <? if ($trackback_url) { ?><a href="javascript:trackback_send_server('<?=$trackback_url?>');" style="letter-spacing:0;" title='주소 복사'><img src="<?=$board_skin_path?>/img/btn_trackback.gif" border='0' align="absmiddle"></a><?}?>
         </td>
     </tr>
     </table>
@@ -61,9 +61,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <?=$view[name]?><? if ($is_ip_view) { echo "&nbsp;($ip)"; } ?>
         </div>
         <div style="float:right;">
-        <img src="<?=$board_skin_path?>/img/icon_view.gif" align=absmiddle> 조회 : <?=number_format($view[wr_hit])?>
-        <? if ($is_good) { ?>&nbsp;<img src="<?=$board_skin_path?>/img/icon_good.gif" align=absmiddle> 추천 : <?=number_format($view[wr_good])?><? } ?>
-        <? if ($is_nogood) { ?>&nbsp;<img src="<?=$board_skin_path?>/img/icon_nogood.gif" align=absmiddle> 비추천 : <?=number_format($view[wr_nogood])?><? } ?>
+        <img src="<?=$board_skin_path?>/img/icon_view.gif" border='0' align=absmiddle> 조회 : <?=number_format($view[wr_hit])?>
+        <? if ($is_good) { ?>&nbsp;<img src="<?=$board_skin_path?>/img/icon_good.gif" border='0' align=absmiddle> 추천 : <?=number_format($view[wr_good])?><? } ?>
+        <? if ($is_nogood) { ?>&nbsp;<img src="<?=$board_skin_path?>/img/icon_nogood.gif" border='0' align=absmiddle> 비추천 : <?=number_format($view[wr_nogood])?><? } ?>
         &nbsp;
         </div>
     </td>
@@ -76,7 +76,7 @@ for ($i=0; $i<count($view[file]); $i++) {
     if ($view[file][$i][source] && !$view[file][$i][view]) {
         $cnt++;
         echo "<tr><td height=30 background=\"$board_skin_path/img/view_dot.gif\">";
-        echo "&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_file.gif' align=absmiddle>";
+        echo "&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_file.gif' align=absmiddle border='0'>";
         echo "<a href=\"javascript:file_download('{$view[file][$i][href]}', '{$view[file][$i][source]}');\" title='{$view[file][$i][content]}'>";
         echo "&nbsp;<span style=\"color:#888;\">{$view[file][$i][source]} ({$view[file][$i][size]})</span>";
         echo "&nbsp;<span style=\"color:#ff6600; font-size:11px;\">[{$view[file][$i][download]}]</span>";
@@ -92,7 +92,7 @@ for ($i=1; $i<=$g4[link_count]; $i++) {
         $cnt++;
         $link = cut_str($view[link][$i], 70);
         echo "<tr><td height=30 background=\"$board_skin_path/img/view_dot.gif\">";
-        echo "&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_link.gif' align=absmiddle>";
+        echo "&nbsp;&nbsp;<img src='{$board_skin_path}/img/icon_link.gif' align=absmiddle border='0'>";
         echo "<a href='{$view[link_href][$i]}' target=_blank>";
         echo "&nbsp;<span style=\"color:#888;\">{$link}</span>";
         echo "&nbsp;<span style=\"color:#ff6600; font-size:11px;\">[{$view[link_hit][$i]}]</span>";
@@ -119,14 +119,14 @@ for ($i=1; $i<=$g4[link_count]; $i++) {
         <? if ($nogood_href) {?>
         <div style="width:72px; height:55px; background:url(<?=$board_skin_path?>/img/good_bg.gif) no-repeat; text-align:center; float:right;">
         <div style="color:#888; margin:7px 0 5px 0;">비추천 : <?=number_format($view[wr_nogood])?></div>
-        <div><a href="<?=$nogood_href?>" target="hiddenframe"><img src="<?=$board_skin_path?>/img/icon_nogood.gif" align="absmiddle"></a></div>
+        <div><a href="<?=$nogood_href?>" target="hiddenframe"><img src="<?=$board_skin_path?>/img/icon_nogood.gif" border='0' align="absmiddle"></a></div>
         </div>
         <? } ?>
 
         <? if ($good_href) {?>
         <div style="width:72px; height:55px; background:url(<?=$board_skin_path?>/img/good_bg.gif) no-repeat; text-align:center; float:right;">
         <div style="color:#888; margin:7px 0 5px 0;"><span style='color:crimson;'>추천 : <?=number_format($view[wr_good])?></span></div>
-        <div><a href="<?=$good_href?>" target="hiddenframe"><img src="<?=$board_skin_path?>/img/icon_good.gif" align="absmiddle"></a></div>
+        <div><a href="<?=$good_href?>" target="hiddenframe"><img src="<?=$board_skin_path?>/img/icon_good.gif" border='0' align="absmiddle"></a></div>
         </div>
         <? } ?>
 

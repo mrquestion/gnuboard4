@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 $sql_common = " from $g4[group_table] ";
 
 $sql_search = " where (1) ";
@@ -70,19 +72,20 @@ var list_update_php = "./boardgroup_list_update.php";
             <option value="gr_id">ID</option>
             <option value="gr_admin">그룹관리자</option>
         </select>
-        <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
+        <input type=text name=stx class=ed required itemname='검색어' value='<?=$stx?>'>
         <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
 
-<table width=100% cellpadding=0 cellspacing=1 border=0>
 <form name=fboardgrouplist method=post>
-<input type=hidden name=sst  value='<?=$sst?>'>
-<input type=hidden name=sod  value='<?=$sod?>'>
-<input type=hidden name=sfl  value='<?=$sfl?>'>
-<input type=hidden name=stx  value='<?=$stx?>'>
-<input type=hidden name=page value='<?=$page?>'>
+<input type=hidden name=sst   value='<?=$sst?>'>
+<input type=hidden name=sod   value='<?=$sod?>'>
+<input type=hidden name=sfl   value='<?=$sfl?>'>
+<input type=hidden name=stx   value='<?=$stx?>'>
+<input type=hidden name=page  value='<?=$page?>'>
+<input type=hidden name=token value='<?=$token?>'>
+<table width=100% cellpadding=0 cellspacing=1 border=0>
 <colgroup width=30>
 <colgroup width=120>
 <colgroup width=180>
@@ -116,8 +119,10 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 
     $s_upd = "<a href='./boardgroup_form.php?$qstr&w=u&gr_id=$row[gr_id]'><img src='img/icon_modify.gif' border=0 title='수정'></a>";
     $s_del = "";
-    if ($is_admin == "super")
-        $s_del = "<a href=\"javascript:del('./boardgroup_delete.php?$qstr&gr_id=$row[gr_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    if ($is_admin == "super") {
+        //$s_del = "<a href=\"javascript:del('./boardgroup_delete.php?$qstr&gr_id=$row[gr_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+        $s_del = "<a href=\"javascript:post_delete('boardgroup_delete.php', '$row[gr_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    }
 
     $list = $i%2;
     echo "<input type=hidden name=gr_id[$i] value='$row[gr_id]'>";
@@ -156,6 +161,30 @@ echo "<td width=30% align=right>$pagelist</td></tr></table>\n";
 if ($stx)
     echo "<script>document.fsearch.sfl.value = '$sfl';</script>";
 ?>
+</form>
+
+<script>
+// POST 방식으로 삭제
+function post_delete(action_url, val)
+{
+	var f = document.fpost;
+
+	if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
+        f.gr_id.value = val;
+		f.action      = action_url;
+		f.submit();
+	}
+}
+</script>
+
+<form name='fpost' method='post'>
+<input type='hidden' name='sst'   value='<?=$sst?>'>
+<input type='hidden' name='sod'   value='<?=$sod?>'>
+<input type='hidden' name='sfl'   value='<?=$sfl?>'>
+<input type='hidden' name='stx'   value='<?=$stx?>'>
+<input type='hidden' name='page'  value='<?=$page?>'>
+<input type='hidden' name='token' value='<?=$token?>'>
+<input type='hidden' name='gr_id'>
 </form>
 
 <?

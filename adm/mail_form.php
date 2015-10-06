@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 $html_title = "회원메일";
 
 if ($w == "u") {
@@ -22,10 +24,11 @@ $g4[title] = $html_title;
 include_once("./admin.head.php");
 ?>
 
-<table cellpadding=0 cellspacing=0 width=100%>
 <form name=fmailform method=post action="./mail_update.php" onsubmit="return fmailform_check(this);">
-<input type=hidden name=w     value='<? echo $w ?>'>
-<input type=hidden name=ma_id value='<? echo $ma[ma_id] ?>'>
+<input type=hidden name=w     value='<?=$w?>'>
+<input type=hidden name=ma_id value='<?=$ma[ma_id]?>'>
+<input type=hidden name=token value='<?=$token?>'>
+<table cellpadding=0 cellspacing=0 width=100%>
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=80% class='col2 pad2'>
 <tr>

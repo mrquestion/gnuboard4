@@ -49,13 +49,13 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <br>
     <table width="100%" cellpadding="4" cellspacing="0" bgcolor=#EEEEEE>
         <tr> 
-            <td height=40>&nbsp; <b>개인정보보호정책</b></td>
+            <td height=40>&nbsp; <b>개인정보취급방침</b></td>
         </tr>
         <tr> 
             <td align="center" valign="top"><textarea style="width: 98%" rows=5 readonly class=ed><?=get_text($config[cf_privacy])?></textarea></td>
         </tr>
         <tr> 
-            <td height=40>&nbsp; <input type=checkbox value=1 name=agree2 id=agree2>&nbsp;<label for=agree2>개인정보보호정책을 읽었으며 내용에 동의합니다.</label></td>
+            <td height=40>&nbsp; <input type=checkbox value=1 name=agree2 id=agree2>&nbsp;<label for=agree2>개인정보취급방침을 읽었으며 내용에 동의합니다.</label></td>
         </tr>
     </table>
 
@@ -78,7 +78,7 @@ function fregister_submit(f) {
     }
 
     if (!f.agree2.checked) {
-        alert("개인정보보호정책의 내용에 동의해야 회원가입 하실 수 있습니다.");
+        alert("개인정보취급방침의 내용에 동의해야 회원가입 하실 수 있습니다.");
         f.agree2.focus();
         return false;
     }

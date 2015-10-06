@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 $html_title = "선택된 회원메일리스트";
 
 $ma_last_option = "";
@@ -88,7 +90,8 @@ include_once("./admin.head.php");
 <?//=subtitle_bar($html_title)?><p>
 
 <div align=right>선택된 회원수 : <?=number_format($cnt)?> 명</div>
-<form name=fmailselectlist method=post onsubmit="return fmailselectlist_submit(this);" style="margin:0px;">
+<form name=fmailselectlist method=post onsubmit="return fmailselectlist_submit(this);">
+<input type=hidden name=token value='<?=$token?>'>
 <table cellpadding=4 cellspacing=1 width=100% class=tablebg>
 <input type="hidden" name="ma_id" value="<? echo $ma_id ?>">
 <tr>

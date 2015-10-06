@@ -300,7 +300,7 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     {
         if (!url)
             url = g4_path + "/" + g4_bbs + "/memo.php";
-        win_open(url, "winMemo", "left=50,top=50,width=616,height=460,scrollbars=1");
+        win_open(url, "winMemo", "left=50,top=50,width=620,height=460,scrollbars=1");
     }
 
     // 포인트 창
@@ -333,7 +333,7 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     function win_formmail(mb_id, name, email)
     {
 		if (g4_charset.toLowerCase() == 'euc-kr')
-	        win_open(g4_path+"/" + g4_bbs + "/formmail.php?mb_id="+mb_id+"&name="+name+"&email="+email, "winFormmail", "left=50, top=50, width=600, height=480, scrollbars=0");
+	        win_open(g4_path+"/" + g4_bbs + "/formmail.php?mb_id="+mb_id+"&name="+name+"&email="+email, "winFormmail", "left=50, top=50, width=600, height=500, scrollbars=0");
 		else
 	        win_open(g4_path+"/" + g4_bbs + "/formmail.php?mb_id="+mb_id+"&name="+encodeURIComponent(name)+"&email="+email, "winFormmail", "left=50, top=50, width=600, height=480, scrollbars=0");
     }
@@ -357,7 +357,7 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     // 자기소개 창
     function win_profile(mb_id)
     {
-        win_open(g4_path+"/" + g4_bbs + "/profile.php?mb_id="+mb_id, 'winProfile', 'left=50,top=50,width=616,height=500,scrollbars=1');
+        win_open(g4_path+"/" + g4_bbs + "/profile.php?mb_id="+mb_id, 'winProfile', 'left=50,top=50,width=620,height=510,scrollbars=1');
     }
 
     var last_id = null;

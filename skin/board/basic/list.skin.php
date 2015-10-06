@@ -65,10 +65,10 @@ if ($is_nogood) $colspan++;
             </form>
         </div>
         <div style="float:right;">
-            <img src="<?=$board_skin_path?>/img/icon_total.gif" align="absmiddle">
+            <img src="<?=$board_skin_path?>/img/icon_total.gif" align="absmiddle" border='0'>
             <span style="color:#888888; font-weight:bold;">Total <?=number_format($total_count)?></span>
-            <? if ($rss_href) { ?><a href='<?=$rss_href?>'><img src='<?=$board_skin_path?>/img/btn_rss.gif' border="0" align="absmiddle"></a><?}?>
-            <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/btn_admin.gif" title="관리자" align="absmiddle"></a><?}?>
+            <? if ($rss_href) { ?><a href='<?=$rss_href?>'><img src='<?=$board_skin_path?>/img/btn_rss.gif' border='0' align="absmiddle"></a><?}?>
+            <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/btn_admin.gif" border='0' title="관리자" align="absmiddle"></a><?}?>
         </div>
     </div>
 
@@ -162,23 +162,23 @@ if ($is_nogood) $colspan++;
     <div class="board_button">
         <div style="float:left;">
         <? if ($list_href) { ?>
-        <a href="<?=$list_href?>"><img src="<?=$board_skin_path?>/img/btn_list.gif" align="absmiddle"></a>
+        <a href="<?=$list_href?>"><img src="<?=$board_skin_path?>/img/btn_list.gif" align="absmiddle" border='0'></a>
         <? } ?>
         <? if ($is_checkbox) { ?>
-        <a href="javascript:select_delete();"><img src="<?=$board_skin_path?>/img/btn_select_delete.gif" align="absmiddle"></a>
-        <a href="javascript:select_copy('copy');"><img src="<?=$board_skin_path?>/img/btn_select_copy.gif" align="absmiddle"></a>
-        <a href="javascript:select_copy('move');"><img src="<?=$board_skin_path?>/img/btn_select_move.gif" align="absmiddle"></a>
+        <a href="javascript:select_delete();"><img src="<?=$board_skin_path?>/img/btn_select_delete.gif" align="absmiddle" border='0'></a>
+        <a href="javascript:select_copy('copy');"><img src="<?=$board_skin_path?>/img/btn_select_copy.gif" align="absmiddle" border='0'></a>
+        <a href="javascript:select_copy('move');"><img src="<?=$board_skin_path?>/img/btn_select_move.gif" align="absmiddle" border='0'></a>
         <? } ?>
         </div>
 
         <div style="float:right;">
-        <? if ($write_href) { ?><a href="<?=$write_href?>"><img src="<?=$board_skin_path?>/img/btn_write.gif" border="0"></a><? } ?>
+        <? if ($write_href) { ?><a href="<?=$write_href?>"><img src="<?=$board_skin_path?>/img/btn_write.gif" border='0'></a><? } ?>
         </div>
     </div>
 
     <!-- 페이지 -->
     <div class="board_page">
-        <? if ($prev_part_href) { echo "<a href='$prev_part_href'><img src='$board_skin_path/img/page_search_prev.gif' border=0 align=absmiddle title='이전검색'></a>"; } ?>
+        <? if ($prev_part_href) { echo "<a href='$prev_part_href'><img src='$board_skin_path/img/page_search_prev.gif' border='0' align=absmiddle title='이전검색'></a>"; } ?>
         <?
         // 기본으로 넘어오는 페이지를 아래와 같이 변환하여 이미지로도 출력할 수 있습니다.
         //echo $write_pages;
@@ -190,7 +190,7 @@ if ($is_nogood) $colspan++;
         $write_pages = preg_replace("/<b>([0-9]*)<\/b>/", "<b><span style=\"color:#4D6185; font-size:12px; text-decoration:underline;\">$1</span></b>", $write_pages);
         ?>
         <?=$write_pages?>
-        <? if ($next_part_href) { echo "<a href='$next_part_href'><img src='$board_skin_path/img/page_search_next.gif' border=0 align=absmiddle title='다음검색'></a>"; } ?>
+        <? if ($next_part_href) { echo "<a href='$next_part_href'><img src='$board_skin_path/img/page_search_next.gif' border='0' align=absmiddle title='다음검색'></a>"; } ?>
     </div>
 
     <!-- 검색 -->
@@ -208,7 +208,7 @@ if ($is_nogood) $colspan++;
             <option value="wr_name,0">글쓴이(코)</option>
         </select>
         <input name="stx" class="stx" maxlength="15" itemname="검색어" required value='<?=$stx?>'>
-        <input type="image" src="<?=$board_skin_path?>/img/btn_search.gif" border="0" align="absmiddle">
+        <input type="image" src="<?=$board_skin_path?>/img/btn_search.gif" border='0' align="absmiddle">
         <input type="radio" name="sop" value="and">and
         <input type="radio" name="sop" value="or">or
         </form>

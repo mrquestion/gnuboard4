@@ -1,3 +1,25 @@
+4.31.00 (08.10.28)
+    :   CSRF 보안 강화를 위한 코드 수정
+        관리자 > 기본환경설정 페이지에 cpatcha 적용
+        추천) 관리자 기본 폴더명인 adm 폴더를 다른 이름 변경하신 후 
+              config.php 의 $g4['admin'] = "adm"; 값을 변경하시면 CSRF 에서 좀 더 안전할 수 있습니다.
+    :   대부분의 관리자 페이지에 CSRF 보안 강화를 위한 토큰 적용
+    :   cheditor4 코드 수정
+    :   회원정보 수정시에도 captcha 적용
+    :   "개인정보보호정책" 문구를 "개인정보취급방침"으로 수정
+
+        adm/* (대부분의 코드가 변경 되었습니다.)
+        bbs/password_forget2.php
+        bbs/register_form_update.php
+        lib/cheditor4.lib.php
+        lib/common.lib.php
+        skin/board/basic/*
+        skin/member/basic/register_form.skin.php
+        skin/member/basic/register.skin.php
+        skin/board/basic/write.skin.php
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 4.30.00 (08.10.01)
     :   DHTML 사용시 geditor를 cheditor4.2 버전으로 변경
 

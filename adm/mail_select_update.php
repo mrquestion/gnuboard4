@@ -8,6 +8,8 @@ $html_title = "회원메일 발송";
 
 check_demo();
 
+check_token();
+
 include_once("./admin.head.php");
 include_once("$g4[path]/lib/mailer.lib.php");
 

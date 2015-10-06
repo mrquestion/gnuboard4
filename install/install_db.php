@@ -293,7 +293,7 @@ $sql = " insert into $g4[config_table]
                 cf_formmail_is_member = '1',
                 cf_page_rows = '15',
                 cf_stipulation = '해당 홈페이지에 맞는 회원가입약관을 입력합니다.',
-                cf_privacy = '해당 홈페이지에 맞는 개인정보보호정책을 입력합니다.'
+                cf_privacy = '해당 홈페이지에 맞는 개인정보취급방침을 입력합니다.'
                 ";
 mysql_query($sql) or die(mysql_error() . "<p>" . $sql);
 

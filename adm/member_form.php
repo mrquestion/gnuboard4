@@ -163,7 +163,7 @@ include_once("./admin.head.php");
 <? if ($config[cf_use_recommend]) { // 추천인 사용 ?>
 <tr class='ht'>
     <td>추천인</td>
-    <td colspan=3><?=($mb[mb_recommend] ? $mb[mb_recommend] : "없음");?></td>
+    <td colspan=3><?=($mb[mb_recommend] ? get_text($mb[mb_recommend]) : "없음"); // 081022 : CSRF 보안 결함으로 인한 코드 수정 ?></td>
 </tr>
 <? } ?>
 

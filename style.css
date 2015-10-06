@@ -1,6 +1,8 @@
 body, td, p, input, button, textarea, select, .c1 { font-family:Tahoma,±¼¸²; font-size:9pt; color:#222222; }
 
-img {border:0px;}
+form { margin:0px; }
+
+/* img {border:0px;} */
 
 a:link, a:visited, a:active { text-decoration:none; color:#466C8A; }
 a:hover { text-decoration:underline; }

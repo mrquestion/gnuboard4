@@ -200,6 +200,12 @@ ini_set("session.cookie_domain", $g4['cookie_domain']);
 
 @session_start();
 
+/*
+// 081022 : CSRF 방지를 위해 코드를 작성했으나 효과가 없어 주석처리 함
+if (strpos($_SERVER[PHP_SELF], $g4['admin']) === false)
+    set_session("ss_admin", false);
+*/
+
 // 4.00.03 : [보안관련] PHPSESSID 가 틀리면 로그아웃한다.
 if ($_REQUEST['PHPSESSID'] && $_REQUEST['PHPSESSID'] != session_id())
     goto_url("{$g4['bbs_path']}/logout.php");

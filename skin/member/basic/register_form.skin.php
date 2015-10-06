@@ -26,7 +26,7 @@ var member_skin_path = "<?=$member_skin_path?>";
 <input type=hidden name=mb_id_enabled    value="" id="mb_id_enabled">
 <input type=hidden name=mb_nick_enabled  value="" id="mb_nick_enabled">
 <input type=hidden name=mb_email_enabled value="" id="mb_email_enabled">
-<input type=hidden name=token value="<?=$token?>">
+<!-- <input type=hidden name=token value="<?=$token?>"> -->
 
 <table width=100% cellspacing=0 cellspacing=0 align=center>
 <tr>
@@ -289,7 +289,6 @@ var member_skin_path = "<?=$member_skin_path?>";
 </tr>
 </table>
 
-<? if ($w == "") { ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td height="1" bgcolor="#ffffff"></td>
@@ -312,8 +311,6 @@ var member_skin_path = "<?=$member_skin_path?>";
     </td>
 </tr>
 </table>
-<? } ?>
-
 
 <p align=center>
     <INPUT type=image width="66" height="20" src="<?=$member_skin_path?>/img/join_ok_btn.gif" border=0 accesskey='s'>

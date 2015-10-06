@@ -7,13 +7,24 @@ $mb_password = $_POST[mb_password];
 if (!trim($mb_id) || !trim($mb_password))
     alert("회원아이디나 패스워드가 공백이면 안됩니다.");
 
+/*
+// 자동 스크립트를 이용한 공격에 대비하여 로그인 실패시에는 일정시간이 지난후에 다시 로그인 하도록 함
+if ($check_time = get_session("ss_login_check_time")) {
+    if ($check_time > $g4['server_time'] - 15) {
+        alert("로그인 실패시에는 15초 이후에 다시 로그인 하시기 바랍니다.");
+    }
+}
+set_session("ss_login_check_time", $g4['server_time']);
+*/
+
 $mb = get_member($mb_id);
 
 // 가입된 회원이 아니다. 패스워드가 틀리다. 라는 메세지를 따로 보여주지 않는 이유는 
 // 회원아이디를 입력해 보고 맞으면 또 패스워드를 입력해보는 경우를 방지하기 위해서입니다.
 // 불법사용자의 경우 회원아이디가 틀린지, 패스워드가 틀린지를 알기까지는 많은 시간이 소요되기 때문입니다.
-if (!$mb[mb_id] || (sql_password($mb_password) != $mb[mb_password]))
+if (!$mb[mb_id] || (sql_password($mb_password) != $mb[mb_password])) {
     alert("가입된 회원이 아니거나 패스워드가 틀립니다.\\n\\n패스워드는 대소문자를 구분합니다.");
+}
 
 // 차단된 아이디인가?
 if ($mb[mb_intercept_date] && $mb[mb_intercept_date] <= date("Ymd", $g4[server_time])) {

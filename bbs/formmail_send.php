@@ -8,36 +8,6 @@ if (!$config[cf_email_use])
 if (!$is_member && $config[cf_formmail_is_member])
     alert_close("회원만 이용하실 수 있습니다.");
 
-/*
-if (!$is_admin)
-{
-    $sendmail_count = (int)get_session('ss_sendmail_count') + 1;
-    if ($sendmail_count > 3)
-        alert_close('한번 접속후 일정수의 메일만 발송할 수 있습니다.\n\n계속해서 메일을 보내시려면 다시 로그인 또는 접속하여 주십시오.');
-    set_session('ss_sendmail_count', $sendmail_count);
-}
-*/
-
-/*
-// 세션에 저장된 토큰과 폼값으로 넘어온 토큰을 비교하여 틀리면 에러
-if ($_POST["token"] && get_session("ss_token") == $_POST["token"]) {
-    // 맞으면 세션을 지워 다시 입력폼을 통해서 들어오도록 한다.
-    set_session("ss_token", "");
-} else {
-    alert_close("토큰 에러");
-    exit;
-}
-
-// 해당 도메인에서 전송되지 않았다면 오류
-//referer_check();
-
-$sendmail_count = (int)get_session('ss_sendmail_count') + 1;
-if ($sendmail_count > 3)
-    alert_close('한번 접속후 일정수의 메일만 발송할 수 있습니다.\n\n계속해서 메일을 보내시려면 다시 로그인 또는 접속하여 주십시오.');
-set_session('ss_sendmail_count', $sendmail_count);
-
-*/
-
 $to = base64_decode($to);
 
 if (substr_count($to, "@") > 1)

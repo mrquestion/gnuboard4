@@ -55,7 +55,7 @@ for ($i=0; $i<count($list); $i++) {
 
                 $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp|mms)\:\/\/([^[:space:]]+)\.(mp3|wma|wmv|asf|asx|mpg|mpeg)\".*\<\/a\>\]/i", "<script>doc_write(obj_movie('$1://$2.$3'));</script>", $str);
                 $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(swf)\".*\<\/a\>\]/i", "<script>doc_write(flash_movie('$1://$2.$3'));</script>", $str);
-                $str = preg_replace("/\[\<a\s*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(gif|png|jpg|jpeg|bmp)\"\s*[^\>]*\>[^\s]*\<\/a\>\]/i", "<img src='$1://$2.$3' id='target_resize_image[]' onclick='image_window(this);'>", $str);
+                $str = preg_replace("/\[\<a\s*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(gif|png|jpg|jpeg|bmp)\"\s*[^\>]*\>[^\s]*\<\/a\>\]/i", "<img src='$1://$2.$3' id='target_resize_image[]' onclick='image_window(this);' border='0'>", $str);
                 echo $str;
                 ?>
                 </div>
@@ -99,9 +99,9 @@ for ($i=0; $i<count($list); $i++) {
 <table width=100% cellpadding=3 height=156 cellspacing=0 bgcolor="#ffffff" style="border:1px solid #fff; background:url(<?=$board_skin_path?>/img/co_bg.gif) x-repeat;">
 <tr>
     <td colspan="2" style="padding:5px 0 0 5px;">
-        <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 8);"><img src="<?=$board_skin_path?>/img/co_btn_up.gif"></span>
-        <span style="cursor: pointer;" onclick="textarea_original('wr_content', 8);"><img src="<?=$board_skin_path?>/img/co_btn_init.gif"></span>
-        <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 8);"><img src="<?=$board_skin_path?>/img/co_btn_down.gif"></span>
+        <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 8);"><img src="<?=$board_skin_path?>/img/co_btn_up.gif" border='0'></span>
+        <span style="cursor: pointer;" onclick="textarea_original('wr_content', 8);"><img src="<?=$board_skin_path?>/img/co_btn_init.gif" border='0'></span>
+        <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 8);"><img src="<?=$board_skin_path?>/img/co_btn_down.gif" border='0'></span>
         <? if ($is_guest) { ?>
             이름 <INPUT type=text maxLength=20 size=10 name="wr_name" itemname="이름" required class=ed>
             패스워드 <INPUT type=password maxLength=20 size=10 name="wr_password" itemname="패스워드" required class=ed>
@@ -153,8 +153,6 @@ function imageClickResult(req) {
 
     md5_norobot_key = result;
 }
-
-//Event.observe(window, "load", imageClick);
 
 
 var save_before = '';
@@ -235,6 +233,7 @@ function fviewcomment_submit(f)
         if (hex_md5(f.wr_key.value) != md5_norobot_key)
         {
             alert('자동등록방지용 글자가 순서대로 입력되지 않았습니다.');
+            f.wr_key.select();
             f.wr_key.focus();
             return false;
         }
@@ -285,8 +284,9 @@ function comment_box(comment_id, work)
         save_before = el_id;
     }
 
-    if (work == 'c')
-        imageClick();
+    if (work == 'c') {
+        <? if (!$is_member) { ?>imageClick();<? } ?>
+    }
 }
 
 function comment_delete(url)

@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 // DHTML 에디터 사용 필드 추가 : 061021
 sql_query(" ALTER TABLE `$g4[board_table]` ADD `bo_use_dhtml_editor` TINYINT NOT NULL AFTER `bo_use_secret` ", false);
 // RSS 보이기 사용 필드 추가 : 061106
@@ -81,19 +83,20 @@ var list_delete_php = 'board_list_delete.php';
             <option value='bo_subject'>제목</option>
             <option value='a.gr_id'>그룹ID</option>
         </select>
-        <input type=text name=stx required itemname='검색어' value='<?=$stx?>'>
+        <input type=text name=stx class=ed required itemname='검색어' value='<?=$stx?>'>
         <input type=image src='<?=$g4[admin_path]?>/img/btn_search.gif' align=absmiddle></td>
 </tr>
 </form>
 </table>
 
-<table width=100% cellpadding=0 cellspacing=1>
 <form name=fboardlist method=post>
 <input type=hidden name=sst   value="<?=$sst?>">
-<input type=hidden name=sod  value="<?=$sod?>">
-<input type=hidden name=sfl value="<?=$sfl?>">
+<input type=hidden name=sod   value="<?=$sod?>">
+<input type=hidden name=sfl   value="<?=$sfl?>">
 <input type=hidden name=stx   value="<?=$stx?>">
-<input type=hidden name=page    value="<?=$page?>">
+<input type=hidden name=page  value="<?=$page?>">
+<input type=hidden name=token value="<?=$token?>">
+<table width=100% cellpadding=0 cellspacing=1>
 <colgroup width=30>
 <colgroup width=>
 <colgroup width=100>
@@ -139,8 +142,10 @@ for ($k=0; $k<count($arr); $k++)
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $s_upd = "<a href='./board_form.php?w=u&bo_table=$row[bo_table]&$qstr'><img src='img/icon_modify.gif' border=0 title='수정'></a>";
     $s_del = "";
-    if ($is_admin == "super") 
-        $s_del = "<a href=\"javascript:del('./board_delete.php?bo_table=$row[bo_table]&$qstr');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    if ($is_admin == "super") {
+        //$s_del = "<a href=\"javascript:del('./board_delete.php?bo_table=$row[bo_table]&$qstr');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+        $s_del = "<a href=\"javascript:post_delete('board_delete.php', '$row[bo_table]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
+    }
     $s_copy = "<a href=\"javascript:board_copy('$row[bo_table]');\"><img src='img/icon_copy.gif' border=0 title='복사'></a>";
 
     /*
@@ -213,6 +218,30 @@ function board_copy(bo_table) {
     window.open("./board_copy.php?bo_table="+bo_table, "BoardCopy", "left=10,top=10,width=500,height=200");
 }
 </script>
+
+<script>
+// POST 방식으로 삭제
+function post_delete(action_url, val)
+{
+	var f = document.fpost;
+
+	if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
+        f.bo_table.value = val;
+		f.action         = action_url;
+		f.submit();
+	}
+}
+</script>
+
+<form name='fpost' method='post'>
+<input type='hidden' name='sst'   value='<?=$sst?>'>
+<input type='hidden' name='sod'   value='<?=$sod?>'>
+<input type='hidden' name='sfl'   value='<?=$sfl?>'>
+<input type='hidden' name='stx'   value='<?=$stx?>'>
+<input type='hidden' name='page'  value='<?=$page?>'>
+<input type='hidden' name='token' value='<?=$token?>'>
+<input type='hidden' name='bo_table'>
+</form>
 
 <?
 include_once("./admin.tail.php");

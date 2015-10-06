@@ -4,7 +4,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 if ($is_dhtml_editor) {
     include_once("$g4[path]/lib/cheditor4.lib.php");
     echo "<script src='$g4[cheditor4_path]/cheditor.js'></script>";
-    echo cheditor1('wr_content', $content, '100%', '250', '500');
+    echo cheditor1('wr_content', '100%', '250');
 }
 ?>
 
@@ -129,7 +129,7 @@ if ($option) {
     <td class=write_head style='padding-left:20px;'>내용</td>
     <td style='padding:5 0 5 0;'>
         <? if ($is_dhtml_editor) { ?>
-            <?=cheditor2('wr_content', "$write[wr_content]", '100%', '100', "$board[bo_image_width]");?>
+            <?=cheditor2('wr_content', $content);?>
         <? } else { ?>
         <table width=100% cellpadding=0 cellspacing=0>
         <tr>
@@ -281,7 +281,7 @@ function imageClickResult(req) {
     md5_norobot_key = result;
 }
 
-Event.observe(window, "load", imageClick);
+<? if (!$is_member) { ?>Event.observe(window, "load", imageClick);<? } ?>
 
 <?
 // 관리자라면 분류 선택에 '공지' 옵션을 추가함
@@ -366,6 +366,7 @@ function fwrite_submit(f)
     if (typeof(f.wr_key) != 'undefined') {
         if (hex_md5(f.wr_key.value) != md5_norobot_key) {
             alert('자동등록방지용 글자가 제대로 입력되지 않았습니다.');
+            f.wr_key.select();
             f.wr_key.focus();
             return false;
         }

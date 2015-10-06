@@ -1,10 +1,6 @@
 <?
 include_once("./_common.php");
 
-// 불법접근을 막도록 토큰생성
-$token = md5(uniqid(rand(), true));
-set_session("ss_token", $token);
-
 if (!$config[cf_email_use])
     alert("환경설정에서 \'메일발송 사용\'에 체크하셔야 메일을 발송할 수 있습니다.\\n\\n관리자에게 문의하시기 바랍니다.");
 

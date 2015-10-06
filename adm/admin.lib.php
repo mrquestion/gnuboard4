@@ -1,6 +1,14 @@
 <?
 if (!defined("_GNUBOARD_")) exit;
 
+/*
+// 081022 : CSRF 방지를 위해 코드를 작성했으나 효과가 없어 주석처리 함
+if (!get_session("ss_admin")) {
+    set_session("ss_admin", true);
+    goto_url(".");
+}
+*/
+
 // 스킨경로를 얻는다
 function get_skin_dir($skin, $len='')
 {
@@ -31,7 +39,7 @@ function member_delete($mb_id)
     $sql = " select mb_name, mb_nick, mb_ip, mb_recommend, mb_memo, mb_level from $g4[member_table] where mb_id= '$mb_id' ";
     $mb = sql_fetch($sql);
     if ($mb[mb_recommend]) {
-        $row = sql_fetch(" select count(*) as cnt from $g4[member_table] where mb_id = '$mb[mb_recommend]' ");
+        $row = sql_fetch(" select count(*) as cnt from $g4[member_table] where mb_id = '".addslashes($mb[mb_recommend])."' ");
         if ($row[cnt])
             insert_point($mb[mb_recommend], $config[cf_recommend_point] * (-1), "{$mb_id}님의 회원자료 삭제로 인한 추천인 포인트 반환", '@member', $mb[mb_recommend], "{$mb_id} 추천인 삭제");
     }

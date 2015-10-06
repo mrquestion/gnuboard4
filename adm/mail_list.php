@@ -46,7 +46,8 @@ $colspan = 6;
 <?
 for ($i=0; $row=mysql_fetch_array($result); $i++) {
     $s_mod = icon("수정", "./mail_form.php?w=u&ma_id=$row[ma_id]");
-    $s_del = icon("삭제", "javascript:del('./mail_update.php?w=d&ma_id=$row[ma_id]');");
+    //$s_del = icon("삭제", "javascript:del('./mail_update.php?w=d&ma_id=$row[ma_id]');");
+    $s_del = "<a href=\"javascript:post_delete('mail_update.php', '$row[ma_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제' align='absmiddle'></a>";
     $s_vie = icon("보기", "./mail_preview.php?ma_id=$row[ma_id]", "_blank");
 
     $num = number_format($total_count - ($page - 1) * $config[cf_page_rows] - $i);
@@ -68,6 +69,30 @@ if (!$i)
 ?>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 </table>
+
+<script>
+// POST 방식으로 삭제
+function post_delete(action_url, val)
+{
+	var f = document.fpost;
+
+	if(confirm("한번 삭제한 자료는 복구할 방법이 없습니다.\n\n정말 삭제하시겠습니까?")) {
+        f.ma_id.value = val;
+		f.action      = action_url;
+		f.submit();
+	}
+}
+</script>
+
+<form name='fpost' method='post'>
+<input type='hidden' name='sst'  value='<?=$sst?>'>
+<input type='hidden' name='sod'  value='<?=$sod?>'>
+<input type='hidden' name='sfl'  value='<?=$sfl?>'>
+<input type='hidden' name='stx'  value='<?=$stx?>'>
+<input type='hidden' name='page' value='<?=$page?>'>
+<input type='hidden' name='w'    value='d'>
+<input type='hidden' name='ma_id'>
+</form>
 
 <?
 include_once ("./admin.tail.php");

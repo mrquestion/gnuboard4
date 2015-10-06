@@ -1,7 +1,7 @@
 if (typeof(CAPSLOCK_JS) == 'undefined') // 한번만 실행
 {
     if (typeof g4_path == 'undefined')
-        alert('g4_path 변수가 선언되지 않았습니다. js/wrest.js');
+        alert('g4_path 변수가 선언되지 않았습니다. js/capslock.js');
 
     var CAPSLOCK_JS = true;
 

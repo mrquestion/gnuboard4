@@ -4,15 +4,17 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "w");
 
+$token = get_token();
+
 $g4[title] = "게시판 복사";
 include_once("$g4[path]/head.sub.php");
 ?>
 
 <link rel="stylesheet" href="./admin.style.css" type="text/css">
 
-<form name="fboardcopy" onsubmit="return fboardcopy_check(this);" autocomplete="off">
+<form name="fboardcopy" method='post' onsubmit="return fboardcopy_check(this);" autocomplete="off">
 <input type="hidden" name="bo_table" value="<?=$bo_table?>">
-
+<input type="hidden" name="token"    value="<?=$token?>">
 <table width=100% cellpadding=0 cellspacing=0>
 <colgroup width=30% class='col1 pad1 bold right'>
 <colgroup width=70% class='col2 pad2'>
