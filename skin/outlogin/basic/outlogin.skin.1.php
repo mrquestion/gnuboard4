@@ -68,7 +68,8 @@ function chkReset(f)
             <div style="float:left; padding-left:5px;"><img src="<?=$outlogin_skin_path?>/img/login_auto.gif" width="46" height="28"></div>
         </div>
         <div style="clear:both; padding:0 0 0 42px;">
-            <a href="javascript:win_password_forget();"><img src="<?=$outlogin_skin_path?>/img/login_pw_find_button.gif" width="90" height="20" border="0"></a>
+            <!-- <a href="javascript:win_password_forget();"><img src="<?=$outlogin_skin_path?>/img/login_pw_find_button.gif" width="90" height="20" border="0"></a> -->
+            <a href="javascript:win_password_lost();"><img src="<?=$outlogin_skin_path?>/img/login_pw_find_button.gif" width="90" height="20" border="0"></a>
             <a href="<?=$g4[bbs_path]?>/register.php"><img src="<?=$outlogin_skin_path?>/img/login_join_button.gif" width="69" height="20" border="0"></a>
         </div>
     </div>
@@ -77,7 +78,7 @@ function chkReset(f)
 </div>
 </form>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function fhead_submit(f)
 {
     if (!f.mb_id.value) {

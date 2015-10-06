@@ -67,7 +67,7 @@ include_once("./admin.head.php");
                 <input type=text class=ed id=mb_id1_from name=mb_id1_from value="<?=$mb_id1_from?>"> 에서 
                 <input type=text class=ed id=mb_id1_to name=mb_id1_to value="<?=$mb_id1_to?>"> 까지
 
-                <script language="JavaScript">
+                <script type="text/javascript">
                 function mb_id1_click(num)
                 {
                     if (num == 1) {
@@ -104,7 +104,7 @@ include_once("./admin.head.php");
                     <option value='F'>여자
                     <option value='M'>남자
                 </select>
-                <script language="JavaScript"> document.getElementById('mb_sex').value = "<?=$mb_sex?>"; </script>
+                <script type="text/javascript"> document.getElementById('mb_sex').value = "<?=$mb_sex?>"; </script>
             </td>
         </tr>
         <tr class='ht'>
@@ -129,7 +129,7 @@ include_once("./admin.head.php");
                     <option value='충남'>충남
                     <option value='충북'>충북
                 </select>
-                <script language="JavaScript"> document.getElementById('mb_area').value = "<?=$mb_area?>"; </script>
+                <script type="text/javascript"> document.getElementById('mb_area').value = "<?=$mb_area?>"; </script>
             </td>
         </tr>
         <tr class='ht'>
@@ -139,7 +139,7 @@ include_once("./admin.head.php");
                     <option value='1'>수신동의한 회원만
                     <option value=''>전체
                 </select>
-                <script language="JavaScript"> document.getElementById('mb_mailling').value = "<?=$mb_mailling?>"; </script>
+                <script type="text/javascript"> document.getElementById('mb_mailling').value = "<?=$mb_mailling?>"; </script>
             </td>
         </tr>
         <tr class='ht'>
@@ -155,8 +155,8 @@ include_once("./admin.head.php");
                     <option value='<? echo $i ?>'><? echo $i ?>
                 <? } ?>
                 </select> 까지
-                <script language="JavaScript"> document.getElementById('mb_level_from').value = "<?=$mb_level_from?>"; </script>
-                <script language="JavaScript"> document.getElementById('mb_level_to').value = "<?=$mb_level_to?>"; </script>
+                <script type="text/javascript"> document.getElementById('mb_level_from').value = "<?=$mb_level_from?>"; </script>
+                <script type="text/javascript"> document.getElementById('mb_level_to').value = "<?=$mb_level_to?>"; </script>
             </td>
         </tr>
         <tr class='ht'>
@@ -173,7 +173,7 @@ include_once("./admin.head.php");
                 }
                 ?>
                 </select>
-                <script language="JavaScript"> document.getElementById('gr_id').value = "<?=$gr_id?>"; </script>
+                <script type="text/javascript"> document.getElementById('gr_id').value = "<?=$gr_id?>"; </script>
             </td>
         </tr>
         <tr><td colspan='2' class='line2'></td></tr>

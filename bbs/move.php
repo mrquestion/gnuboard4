@@ -126,7 +126,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 
 </form>
 
-<script language='JavaScript'>
+<script type='text/javascript'>
 function fboardmoveall_submit(f)
 {
     var check = false;

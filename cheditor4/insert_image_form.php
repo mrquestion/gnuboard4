@@ -301,7 +301,7 @@ function setWrapper () {
 </head>
 <body oncontextmenu="return true" onload="setWrapper();">
 <div style="text-align:center">
-<script language="javascript" type="text/javascript">CHXUploadRUN();</script>
+<script type="text/javascript">CHXUploadRUN();</script>
 </div>
 <div id="imageSize" style="margin-bottom:3px;font-size:8pt;font-family:verdana;font-weight:bold;text-align:center">0 X 0</div>
 <div id="tmpImage"></div>

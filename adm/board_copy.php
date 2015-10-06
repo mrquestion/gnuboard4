@@ -53,7 +53,7 @@ include_once("$g4[path]/head.sub.php");
 
 </form>
 
-<script language='javascript'>
+<script type='text/javascript'>
 function fboardcopy_check(f)
 {
     f.action = "./board_copy_update.php";

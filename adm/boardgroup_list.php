@@ -58,7 +58,7 @@ include_once("./admin.head.php");
 $colspan = 8;
 ?>
 
-<script language="JavaScript">
+<script type="text/javascript">
 var list_update_php = "./boardgroup_list_update.php";
 </script>
 

@@ -54,7 +54,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </tr>
 </table>
 
-<script language="JavaScript">
+<script type="text/javascript">
 // 탈퇴의 경우 아래 코드를 연동하시면 됩니다.
 function member_leave() 
 {

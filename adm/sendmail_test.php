@@ -23,7 +23,7 @@ if ($mail) {
         mailer($from_name, $from_email, trim($email[$i]), "[메일검사] 제목", "<span style='font-size:9pt;'>[메일검사] 내용<p>이 내용이 제대로 보인다면 보내는 메일 서버에는 이상이 없는것입니다.<p>".date("Y-m-d H:i:s")."<p>이 메일 주소로는 회신되지 않습니다.</span>", 1);
 
     echo <<<HEREDOC
-    <SCRIPT LANGUAGE="JavaScript">
+    <SCRIPT type="text/javascript">
         alert("{$mail} (으)로 메일을 발송 하였습니다.\\n\\n해당 주소로 메일이 왔는지 확인하여 주십시오.\\n\\n메일이 오지 않는다면 프로그램의 오류가 아닌 메일 서버(sendmail)의 오류일 가능성이 있습니다.\\n\\n이런 경우에는 웹 서버관리자에게 문의하여 주십시오.");
     </SCRIPT>
 HEREDOC;

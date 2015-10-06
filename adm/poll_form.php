@@ -108,7 +108,7 @@ HEREDOC;
     <input type=button class=btn1 value='  ¸ñ  ·Ï  ' onclick="document.location.href='./poll_list.php?<?=$qstr?>';">
 </form>
 
-<script language='Javascript'>
+<script type='text/javascript'>
 function fpoll_check(f)
 {
     f.action = './poll_form_update.php';

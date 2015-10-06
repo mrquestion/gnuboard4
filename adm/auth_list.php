@@ -53,8 +53,8 @@ include_once("./admin.head.php");
 $colspan = 5;
 ?>
 
-<script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
-<script language="JavaScript">
+<script type="text/javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
+<script type="text/javascript">
 var list_update_php = "";
 var list_delete_php = "auth_list_delete.php";
 </script>
@@ -137,7 +137,7 @@ echo "</td>";
 echo "<td width=50% align=right>$pagelist</td></tr></table>\n";
 
 if ($stx)
-    echo "<script language='javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
+    echo "<script type='text/javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
 
 if (strstr($sfl, "mb_id"))
     $mb_id = $stx;
@@ -146,7 +146,7 @@ else
 ?>
 </form>
 
-<script language='javascript'> document.fsearch.stx.focus(); </script>
+<script type='text/javascript'> document.fsearch.stx.focus(); </script>
 
 <?$colspan=4?>
 <p>
@@ -206,7 +206,7 @@ else
 
 </form>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function fauthlist2_submit(f)
 {
     f.action = "./auth_update.php";

@@ -214,7 +214,7 @@ $g4     = array();
 // php 인젝션 ( 임의로 변수조작으로 인한 리모트공격) 취약점에 대비한 코드
 // prosper 님께서 알려주셨습니다.
 if (!$g4_path || preg_match("/:\/\//", $g4_path))
-    die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script language='JavaScript'> alert('잘못된 방법으로 변수가 정의되었습니다.'); </script>");
+    die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script type='text/javascript'> alert('잘못된 방법으로 변수가 정의되었습니다.'); </script>");
 //if (!$g4_path) $g4_path = ".";
 $g4['path'] = $g4_path;
 
@@ -249,19 +249,19 @@ $dirname = dirname(__FILE__).'/';
 $dbconfig_file = "dbconfig.php";
 if (file_exists("$g4[path]/$dbconfig_file"))
 {
-    if (is_dir("$g4[path]/install")) die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script language='JavaScript'> alert('install 디렉토리를 삭제하여야 정상 실행됩니다.'); </script>");
+    if (is_dir("$g4[path]/install")) die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script type='text/javascript'> alert('install 디렉토리를 삭제하여야 정상 실행됩니다.'); </script>");
 
     include_once("$g4[path]/$dbconfig_file");
     $connect_db = sql_connect($mysql_host, $mysql_user, $mysql_password);
     $select_db = sql_select_db($mysql_db, $connect_db);
     if (!$select_db)
-        die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script language='JavaScript'> alert('DB 접속 오류'); </script>");
+        die("<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><script type='text/javascript'> alert('DB 접속 오류'); </script>");
 }
 else
 {
     echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
     echo <<<HEREDOC
-    <script language="JavaScript">
+    <script type="text/javascript">
     alert("DB 설정 파일이 존재하지 않습니다.\\n\\n프로그램 설치 후 실행하시기 바랍니다.");
     location.href = "./install/";
     </script>
@@ -421,7 +421,7 @@ else
                     set_session("ss_mb_id", $tmp_mb_id);
 
                     // 페이지를 재실행
-                    echo "<script language='javascript'> window.location.reload(); </script>";
+                    echo "<script type='text/javascript'> window.location.reload(); </script>";
                     exit;
                 }
             }

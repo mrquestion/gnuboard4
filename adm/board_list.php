@@ -68,7 +68,7 @@ include_once("./admin.head.php");
 $colspan = 13;
 ?>
 
-<script language="JavaScript">
+<script type="text/javascript">
 var list_update_php = 'board_list_update.php';
 var list_delete_php = 'board_list_delete.php';
 </script>
@@ -188,7 +188,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     echo "<td align=left><select id=bo_skin_$i name=bo_skin[$i]>$skin_options</select></td>";
     echo "</tr>\n";
-    echo "<script language='JavaScript'>document.getElementById('bo_skin_$i').value='$row[bo_skin]';</script>";
+    echo "<script type='text/javascript'>document.getElementById('bo_skin_$i').value='$row[bo_skin]';</script>";
 } 
 
 if ($i == 0)
@@ -213,7 +213,7 @@ if ($stx)
 ?>
 </form>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function board_copy(bo_table) {
     window.open("./board_copy.php?bo_table="+bo_table, "BoardCopy", "left=10,top=10,width=500,height=200");
 }

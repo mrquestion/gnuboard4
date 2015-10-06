@@ -72,15 +72,15 @@ function goto_url($url)
     if (preg_match("/MSIE/", $_SERVER[HTTP_USER_AGENT]))
         echo "<meta http-equiv='Refresh' content='0;url=$url'>";
     else
-        echo "<script language='JavaScript'> document.location.href = '$url'; </script>";
+        echo "<script type='text/javascript'> document.location.href = '$url'; </script>";
     */
     //header("Location:$url");
     //flush();
     //if (!headers_sent())
     //    header("Location:$url");
     //else
-    //echo "<script language='JavaScript'> document.location.href = '$url'; </script>";
-    echo "<script language='JavaScript'> location.replace('$url'); </script>";
+    //echo "<script type='text/javascript'> document.location.href = '$url'; </script>";
+    echo "<script type='text/javascript'> location.replace('$url'); </script>";
     exit;
 }
 
@@ -127,7 +127,7 @@ function alert($msg='', $url='')
 
 	//header("Content-Type: text/html; charset=$g4[charset]");
 	echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=$g4[charset]\">";
-	echo "<script language='javascript'>alert('$msg');";
+	echo "<script type='text/javascript'>alert('$msg');";
     if (!$url)
         echo "history.go(-1);";
     echo "</script>";
@@ -145,7 +145,7 @@ function alert_close($msg)
 	global $g4;
 
 	echo "<meta http-equiv=\"content-type\" content=\"text/html; charset=$g4[charset]\">";
-    echo "<script language='javascript'> alert('$msg'); window.close(); </script>";
+    echo "<script type='text/javascript'> alert('$msg'); window.close(); </script>";
     exit;
 }
 
@@ -162,7 +162,9 @@ function url_auto_link($str)
     $str = preg_replace("/&quot;/", "\"", $str);
     $str = preg_replace("/&nbsp;/", "\t_nbsp_\t", $str);
     $str = preg_replace("/([^(http:\/\/)]|\(|^)(www\.[^[:space:]]+)/i", "\\1<A HREF=\"http://\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
-    $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+    //$str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+    // 100825 : () 추가
+    $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,\(\)]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
     // 이메일 정규표현식 수정 061004
     //$str = preg_replace("/(([a-z0-9_]|\-|\.)+@([^[:space:]]*)([[:alnum:]-]))/i", "<a href='mailto:\\1'>\\1</a>", $str);
     $str = preg_replace("/([0-9a-z]([-_\.]?[0-9a-z])*@[0-9a-z]([-_\.]?[0-9a-z])*\.[a-z]{2,4})/i", "<a href='mailto:\\1'>\\1</a>", $str);
@@ -513,7 +515,8 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
     if ($search_ca_name)
         $str = " ca_name = '$search_ca_name' ";
 
-    $search_text = trim($search_text);
+    //$search_text = trim($search_text);
+    $search_text = trim(stripslashes($search_text));
 
     if (!$search_text)
         return $str;

@@ -100,7 +100,7 @@ if ($i == 0) {
 </table>
 </form>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function boardgroupmember_form_check(f) 
 {
     if (f.gr_id.value == '') {

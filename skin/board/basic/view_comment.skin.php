@@ -2,7 +2,7 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 ?>
 
-<script language="JavaScript">
+<script type="text/javascript">
 // 글자수 제한
 var char_min = parseInt(<?=$comment_min?>); // 최소
 var char_max = parseInt(<?=$comment_max?>); // 최대
@@ -118,7 +118,7 @@ for ($i=0; $i<count($list); $i++) {
     <td width=95%>
         <textarea id="wr_content" name="wr_content" rows=8 itemname="내용" required
         <? if ($comment_min || $comment_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?}?> style='width:100%; word-break:break-all;' class=tx></textarea>
-        <? if ($comment_min || $comment_max) { ?><script language="javascript"> check_byte('wr_content', 'char_count'); </script><?}?>
+        <? if ($comment_min || $comment_max) { ?><script type="text/javascript"> check_byte('wr_content', 'char_count'); </script><?}?>
     </td>
     <td width=85 align=center>
         <div><input type="image" src="<?=$board_skin_path?>/img/co_btn_write.gif" border=0 accesskey='s'></div>

@@ -117,10 +117,10 @@ if ($pagelist)
     echo "<table width=100% cellpadding=3 cellspacing=1><tr><td align=right>$pagelist</td></tr></table>\n";
 
 if ($stx)
-    echo "<script language='javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
+    echo "<script type='text/javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
 ?>
 
-<script language='javascript'>
+<script type='text/javascript'>
     document.fsearch.stx.focus();
 </script>
 

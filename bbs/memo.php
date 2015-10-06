@@ -74,7 +74,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     $list[$i][del_href] = "./memo_delete.php?me_id=$row[me_id]&kind=$kind";
 }
 
-echo "<script language='javascript' src='$g4[path]/js/sideview.js'></script>";
+echo "<script type='text/javascript' src='$g4[path]/js/sideview.js'></script>";
 
 $member_skin_path = "$g4[path]/skin/member/$config[cf_member_skin]";
 include_once("$member_skin_path/memo.skin.php");

@@ -207,7 +207,7 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
             w = (parseInt)(h * (w / h)); 
         } 
 
-        var js_url = "<script language='JavaScript1.2'> \n"; 
+        var js_url = "<script type='text/javascript'> \n"; 
             js_url += "<!-- \n"; 
             js_url += "var ie=document.all; \n"; 
             js_url += "var nn6=document.getElementById&&!document.all; \n"; 
@@ -319,6 +319,12 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
         if (!url)
             url = g4_path + "/" + g4_bbs + "/scrap.php";
         win_open(url, "scrap", "left=20, top=20, width=616, height=500, scrollbars=1");
+    }
+
+    // 새로운 패스워드 분실 창 : 100902
+    function win_password_lost()
+    {
+        win_open(g4_path + "/" + g4_bbs + "/password_lost.php", 'winPasswordLost', 'left=50, top=50, width=617, height=330, scrollbars=1');
     }
 
     // 패스워드 분실 창

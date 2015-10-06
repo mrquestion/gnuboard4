@@ -351,7 +351,7 @@ else if ($w == "u")
 
 
 if ($msg) 
-    echo "<script language='JavaScript'>alert('{$msg}');</script>";
+    echo "<script type='text/javascript'>alert('{$msg}');</script>";
 
 /*
 // 결과페이지는 https 에서 http 로 변경이 되어야 함
@@ -382,7 +382,7 @@ if ($w == "") {
         <input type='hidden' name='mb_id' value='{$mb_id}'>
         <input type='hidden' name='mb_password' value='{$tmp_password}'>
         </form>
-        <script language='JavaScript'>
+        <script type='text/javascript'>
         alert('회원 정보가 수정 되었습니다.');
         document.fregisterupdate.submit();
         </script>

@@ -108,7 +108,7 @@ function popupClose() {
 <div style="text-align:center">
   <button onclick="popupClose()" class="button">´Ý±â</button>
 </div>
-<script type="text/javascript" language="javascript">
+<script type="text/javascript">
 //<![CDATA[
 var imgs = document.getElementsByTagName('img');
 for (i=0; i < imgs.length; i++) imgs[i].className = 'handCursor';

@@ -85,7 +85,7 @@ for ($i=0; $row2=sql_fetch_array($result); $i++)
 
 include_once("$g4[path]/head.sub.php");
 
-echo "<script language='javascript' src='$g4[path]/js/sideview.js'></script>";
+echo "<script type='text/javascript' src='$g4[path]/js/sideview.js'></script>";
 
 if (!$skin_dir) $skin_dir = "basic";
 $poll_skin_path = "$g4[path]/skin/poll/$skin_dir";

@@ -65,7 +65,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 </form>
 
-<script language='JavaScript'>
+<script type='text/javascript'>
 document.fboardpassword.wr_password.focus();
 
 function fboardpassword_submit(f)

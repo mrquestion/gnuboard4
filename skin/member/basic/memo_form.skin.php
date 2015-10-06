@@ -87,7 +87,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </table>
 </form>
 
-<script language="JavaScript">
+<script type="text/javascript">
 with (document.fmemoform) {
     if (me_recv_mb_id.value == "")
         me_recv_mb_id.focus();

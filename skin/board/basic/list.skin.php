@@ -207,7 +207,7 @@ if ($is_nogood) $colspan++;
             <option value="wr_name,1">글쓴이</option>
             <option value="wr_name,0">글쓴이(코)</option>
         </select>
-        <input name="stx" class="stx" maxlength="15" itemname="검색어" required value='<?=$stx?>'>
+        <input name="stx" class="stx" maxlength="15" itemname="검색어" required value='<?=stripslashes($stx)?>'>
         <input type="image" src="<?=$board_skin_path?>/img/btn_search.gif" border='0' align="absmiddle">
         <input type="radio" name="sop" value="and">and
         <input type="radio" name="sop" value="or">or
@@ -216,7 +216,7 @@ if ($is_nogood) $colspan++;
 
 </td></tr></table>
 
-<script language="JavaScript">
+<script type="text/javascript">
 if ('<?=$sca?>') document.fcategory.sca.value = '<?=$sca?>';
 if ('<?=$stx?>') {
     document.fsearch.sfl.value = '<?=$sfl?>';
@@ -232,7 +232,7 @@ if ('<?=$stx?>') {
 </script>
 
 <? if ($is_checkbox) { ?>
-<script language="JavaScript">
+<script type="text/javascript">
 function all_checked(sw) {
     var f = document.fboardlist;
 

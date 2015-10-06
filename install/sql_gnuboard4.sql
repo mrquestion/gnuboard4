@@ -391,6 +391,7 @@ CREATE TABLE `$g4[member_table]` (
   `mb_intercept_date` varchar(8) NOT NULL default '',
   `mb_email_certify` datetime NOT NULL default '0000-00-00 00:00:00',
   `mb_memo` text NOT NULL,
+  `mb_lost_certify` varchar(255) NOT NULL,
   `mb_mailling` tinyint(4) NOT NULL default '0',
   `mb_sms` tinyint(4) NOT NULL default '0',
   `mb_open` tinyint(4) NOT NULL default '0',
@@ -574,4 +575,4 @@ CREATE TABLE `$g4[visit_sum_table]` (
 
 
 
-## Dump completed on 2010-08-23  8:02:19
+## Dump completed on 2010-09-07 10:47:04

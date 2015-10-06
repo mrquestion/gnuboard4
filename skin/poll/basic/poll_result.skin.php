@@ -81,7 +81,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         </table>
         </form>
 
-        <script language="JavaScript">
+        <script type="text/javascript">
         function fpollresult_submit(f)
         {
             f.action = "./poll_etc_update.php";
@@ -145,7 +145,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </table>
 <br>
 
-<script language='JavaScript'>
+<script type='text/javascript'>
 function select_po_id(fld) 
 {
     document.location.href = "./poll_result.php?po_id="+fld.options[fld.selectedIndex].value;

@@ -57,7 +57,7 @@ include_once("./admin.head.php");
 
 
 
-<script language="javascript">
+<script type="text/javascript">
 function fmailform_check(f) 
 {
     errmsg = "";

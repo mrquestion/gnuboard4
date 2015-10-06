@@ -6,7 +6,7 @@ include_once("$g4[path]/head.sub.php");
 if (!$member[mb_id]) 
 {
     $href = "./login.php?$qstr&url=".urlencode("./board.php?bo_table=$bo_table&wr_id=$wr_id");
-    echo "<script language='JavaScript'> alert('회원만 접근 가능합니다.'); top.location.href = '$href'; </script>";
+    echo "<script type='text/javascript'> alert('회원만 접근 가능합니다.'); top.location.href = '$href'; </script>";
     exit;
 }
 
@@ -18,7 +18,7 @@ $row = sql_fetch($sql);
 if ($row[cnt]) 
 {
     echo "
-    <script language='JavaScript'> 
+    <script type='text/javascript'> 
     if (confirm('이미 스크랩하신 글 입니다.\\n\\n지금 스크랩을 확인하시겠습니까?'))
         document.location.href = './scrap.php';
     else
@@ -85,7 +85,7 @@ $sql = " insert into $g4[scrap_table] ( mb_id, bo_table, wr_id, ms_datetime )
 sql_query($sql);
 
 echo <<<HEREDOC
-<script language="JavaScript">
+<script type="text/javascript">
     if (confirm("이 글을 스크랩 하였습니다.\\n\\n지금 스크랩을 확인하시겠습니까?")) 
         document.location.href = "./scrap.php";
     else

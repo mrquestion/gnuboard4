@@ -1,10 +1,11 @@
 <?
+die("이 프로그램은 더 이상 사용하지 않습니다. 그누보드 4.32.09 를 참고하세요.");
 include_once("./_common.php");
 
 if ($member[mb_id]) 
 {
     echo <<<HEREDOC
-    <script language="javascript">
+    <script type="text/javascript">
         alert("이미 로그인중입니다.");
         window.close();
         opener.document.location.reload();

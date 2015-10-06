@@ -58,13 +58,13 @@ include_once ("./admin.head.php");
 $colspan = 8;
 ?>
 
-<script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
-<script language="JavaScript">
+<script type="text/javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
+<script type="text/javascript">
 var list_update_php = "";
 var list_delete_php = "point_list_delete.php";
 </script>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function point_clear()
 {
     if (confirm("포인트 정리를 하시면 최근 50건 이전의 포인트 부여 내역을 삭제하므로\n\n포인트 부여 내역을 필요로 할때 찾지 못할 수도 있습니다.\n\n\n그래도 진행하시겠습니까?"))
@@ -177,7 +177,7 @@ echo "</td>";
 echo "<td width=50% align=right>$pagelist</td></tr></table>\n";
 
 if ($stx)
-    echo "<script language='javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
+    echo "<script type='text/javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
 
 if (strstr($sfl, "mb_id"))
     $mb_id = $stx;
@@ -186,7 +186,7 @@ else
 ?>
 </form>
 
-<script language='javascript'> document.fsearch.stx.focus(); </script>
+<script type='text/javascript'> document.fsearch.stx.focus(); </script>
 
 <?$colspan=4?>
 <p>
@@ -220,7 +220,7 @@ else
 </form>
 </table>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function fpointlist2_submit(f)
 {
     f.action = "./point_update.php";

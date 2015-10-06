@@ -101,7 +101,7 @@ $write_pages = get_paging($config[cf_write_pages], $page, $total_page, "?gr_id=$
 
 $new_skin_path = "$g4[path]/skin/new/$config[cf_new_skin]";
 
-echo "<script language=\"javascript\" src=\"$g4[path]/js/sideview.js\"></script>\n";
+echo "<script type=\"text/javascript\" src=\"$g4[path]/js/sideview.js\"></script>\n";
 
 include_once("$new_skin_path/new.skin.php");
 

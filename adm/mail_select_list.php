@@ -128,7 +128,7 @@ include_once("./admin.head.php");
 
 </td></tr></table>
 
-<script language='javascript'> 
+<script type='text/javascript'> 
 function fmailselectlist_submit(f)
 {
     f.action = "./mail_select_update.php";

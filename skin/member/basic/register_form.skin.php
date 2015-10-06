@@ -76,9 +76,9 @@ jQuery(function($){
 <script>
 var member_skin_path = "<?=$member_skin_path?>";
 </script>
-<script language="javascript" src="<?=$member_skin_path?>/ajax_register_form.jquery.js"></script>
-<script language="javascript" src="<?=$g4[path]?>/js/md5.js"></script>
-<script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
+<script type="text/javascript" src="<?=$member_skin_path?>/ajax_register_form.jquery.js"></script>
+<script type="text/javascript" src="<?=$g4[path]?>/js/md5.js"></script>
+<script type="text/javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
 
 <form id="fregisterform" name=fregisterform method=post onsubmit="return fregisterform_submit(this);" enctype="multipart/form-data" autocomplete="off">
 <input type=hidden name=w                value="<?=$w?>">
@@ -116,7 +116,7 @@ var member_skin_path = "<?=$member_skin_path?>";
             <TD class=m_title>패스워드 확인</TD>
             <TD class=m_padding><INPUT class=ed type=password name="mb_password_re" size=20 maxlength=20 <?=($w=="")?"required":"";?> itemname="패스워드 확인"></TD>
         </TR>
-        <TR bgcolor="#FFFFFF">
+        <!-- <TR bgcolor="#FFFFFF">
             <TD class=m_title>패스워드 분실시 질문</TD>
             <TD class=m_padding>
                 <select name=mb_password_q_select onchange="this.form.mb_password_q.value=this.value;">
@@ -150,7 +150,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>패스워드 분실시 답변</TD>
             <TD class=m_padding><input class=ed type=text name='mb_password_a' size=38 required itemname='패스워드 분실시 답변' value='<?=$member[mb_password_a]?>'></TD>
-        </TR>
+        </TR> -->
         </TABLE>
     </td>
 </tr>
@@ -223,7 +223,7 @@ var member_skin_path = "<?=$member_skin_path?>";
                     <option value='F'>여자
                     <option value='M'>남자
                     </select>
-                    <script language="JavaScript">//document.getElementById('mb_sex').value='<?=$member[mb_sex]?>';</script>
+                    <script type="text/javascript">//document.getElementById('mb_sex').value='<?=$member[mb_sex]?>';</script>
                     </td>
             </TR>
         <? } ?>
@@ -425,6 +425,7 @@ function fregisterform_submit(f)
         }
     }
 
+    /*
     if (f.mb_password_q.value.length < 1) {
         alert('패스워드 분실시 질문을 선택하거나 입력하십시오.');
         f.mb_password_q.focus();
@@ -436,6 +437,7 @@ function fregisterform_submit(f)
         f.mb_password_a.focus();
         return false;
     }
+    */
 
     // 이름 검사
     if (f.w.value=='') {

@@ -15,7 +15,7 @@ if ($is_dhtml_editor) {
 .field { border:1px solid #ccc; }
 </style>
 
-<script language="javascript">
+<script type="text/javascript">
 // 글자수 제한
 var char_min = parseInt(<?=$write_min?>); // 최소
 var char_max = parseInt(<?=$write_max?>); // 최대
@@ -142,7 +142,7 @@ if ($option) {
         </table>
         <textarea id="wr_content" name="wr_content" class=tx style='width:100%; word-break:break-all;' rows=10 itemname="내용" required 
         <? if ($write_min || $write_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?}?>><?=$content?></textarea>
-        <? if ($write_min || $write_max) { ?><script language="javascript"> check_byte('wr_content', 'char_count'); </script><?}?>
+        <? if ($write_min || $write_max) { ?><script type="text/javascript"> check_byte('wr_content', 'char_count'); </script><?}?>
         <? } ?>
     </td>
 </tr>
@@ -172,7 +172,7 @@ if ($option) {
         </table>
     </td>
     <td style='padding:5 0 5 0;'><table id="variableFiles" cellpadding=0 cellspacing=0></table><?// print_r2($file); ?>
-        <script language="JavaScript">
+        <script type="text/javascript">
         var flen = 0;
         function add_file(delete_code)
         {
@@ -396,5 +396,5 @@ function fwrite_submit(f)
 }
 </script>
 
-<script language="JavaScript" src="<?="$g4[path]/js/board.js"?>"></script>
-<script language="JavaScript"> window.onload=function() { drawFont(); } </script>
+<script type="text/javascript" src="<?="$g4[path]/js/board.js"?>"></script>
+<script type="text/javascript"> window.onload=function() { drawFont(); } </script>

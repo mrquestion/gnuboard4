@@ -84,7 +84,7 @@ $po = sql_fetch(" select * from $g4[poll_table] where po_id = '$po_id' ");
 </form>
 </table>
 
-<script language='JavaScript'>
+<script type='text/javascript'>
 function fpoll_submit(f)
 {
     var chk = false;

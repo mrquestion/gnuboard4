@@ -177,7 +177,7 @@ $opener_href = "./board.php?bo_table=$bo_table&page=$page&$qstr";
 
 echo <<<HEREDOC
 <meta http-equiv='content-type' content='text/html; charset={$g4['charset']}'> 
-<script language="javascript">
+<script type="text/javascript">
 alert("{$msg}");
 opener.document.location.href = "{$opener_href}";
 window.close();

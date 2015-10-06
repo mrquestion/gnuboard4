@@ -50,7 +50,7 @@ header("Pragma: no-cache"); // HTTP/1.0
 <title><?=$g4['title']?></title>
 <link rel="stylesheet" href="<?=$g4['path']?>/style.css" type="text/css">
 </head>
-<script language="javascript">
+<script type="text/javascript">
 // 자바스크립트에서 사용하는 전역변수 선언
 var g4_path      = "<?=$g4['path']?>";
 var g4_bbs       = "<?=$g4['bbs']?>";

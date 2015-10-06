@@ -32,7 +32,7 @@ $qstr = "fr_date=$fr_date&to_date=$to_date";
 </form>
 </table>
 
-<script language='javascript'>
+<script type='text/javascript'>
 function fvisit_submit(act) 
 {
     var f = document.fvisit;

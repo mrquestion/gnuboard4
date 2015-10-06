@@ -50,7 +50,7 @@ function print_menu2($key, $no)
 }
 ?>
 
-<script language="JavaScript">
+<script type="text/javascript">
 if (!g4_is_ie) document.captureEvents(Event.MOUSEMOVE)
 document.onmousemove = getMouseXY;
 var tempX = 0;
@@ -121,9 +121,9 @@ function textarea_size(fld, size)
 }
 </script>
 
-<script language="javascript" src="<?=$g4['path']?>/js/common.js"></script>
-<script language="javascript" src="<?=$g4['path']?>/js/sideview.js"></script>
-<script language="JavaScript">
+<script type="text/javascript" src="<?=$g4['path']?>/js/common.js"></script>
+<script type="text/javascript" src="<?=$g4['path']?>/js/sideview.js"></script>
+<script type="text/javascript">
 var save_layer = null;
 function layer_view(link_id, menu_id, opt, x, y)
 {

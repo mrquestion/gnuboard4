@@ -104,7 +104,7 @@ $table_width = 1004;
 </tr>
 </table>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function fsearchbox_submit(f)
 {
     if (f.stx.value.length < 2) {

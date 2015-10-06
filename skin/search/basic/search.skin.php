@@ -8,7 +8,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <tr>
     <td align=center>
         <?=$group_select?>
-        <script language="JavaScript">document.getElementById("gr_id").value = "<?=$gr_id?>";</script>
+        <script type="text/javascript">document.getElementById("gr_id").value = "<?=$gr_id?>";</script>
 
         <select name=sfl class=select>
         <option value="wr_subject||wr_content">제목+내용</option>
@@ -22,7 +22,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
         <input type=submit value=" 검 색 ">
 
-        <script language="javascript">
+        <script type="text/javascript">
         document.fsearch.sfl.value = "<?=$sfl?>";
 
         function fsearch_submit(f)

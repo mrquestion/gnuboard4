@@ -40,7 +40,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </table>
 <!-- 검색결과 여기서부터 -->
 
-<script language='javascript'>
+<script type='text/javascript'>
 document.fzip.addr1.focus();
 </script>
 
@@ -73,7 +73,7 @@ document.fzip.addr1.focus();
 </tr>
 </table>
 
-<script language="javascript">
+<script type="text/javascript">
 function find_zip(zip1, zip2, addr1)
 {
     var of = opener.document.<?=$frm_name?>;

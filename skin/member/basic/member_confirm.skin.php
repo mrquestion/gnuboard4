@@ -80,7 +80,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 </form>
 
-<script language='Javascript'>
+<script type='text/javascript'>
 document.onload = document.fmemberconfirm.mb_password.focus();
 
 function fmemberconfirm_submit(f)

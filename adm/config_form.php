@@ -99,7 +99,7 @@ include_once ("./admin.head.php");
             echo "<option value='$arr[$i]'>$arr[$i]</option>\n";
         }
         ?></select>
-        <script language="JavaScript"> document.getElementById('cf_new_skin').value="<?=$config[cf_new_skin]?>";</script>
+        <script type="text/javascript"> document.getElementById('cf_new_skin').value="<?=$config[cf_new_skin]?>";</script>
     </td>
     <td>최근게시물 라인수</td>
     <td><input type=text class=ed name='cf_new_rows' value='<?=$config[cf_new_rows]?>' size=5> 라인
@@ -114,7 +114,7 @@ include_once ("./admin.head.php");
             echo "<option value='$arr[$i]'>$arr[$i]</option>\n";
         }
         ?></select>
-        <script language="JavaScript"> document.getElementById('cf_search_skin').value="<?=$config[cf_search_skin]?>";</script>
+        <script type="text/javascript"> document.getElementById('cf_search_skin').value="<?=$config[cf_search_skin]?>";</script>
     </td>
 </tr>
 <tr class='ht'>
@@ -126,7 +126,7 @@ include_once ("./admin.head.php");
             echo "<option value='$arr[$i]'>$arr[$i]</option>\n";
         }
         ?></select>
-        <script language="JavaScript"> document.getElementById('cf_connect_skin').value="<?=$config[cf_connect_skin]?>";</script>
+        <script type="text/javascript"> document.getElementById('cf_connect_skin').value="<?=$config[cf_connect_skin]?>";</script>
     </td>
 </tr>
 <tr class='ht'>
@@ -219,7 +219,7 @@ include_once ("./admin.head.php");
             echo "<option value='$arr[$i]'>$arr[$i]</option>\n";
         }
         ?></select>
-        <script language="JavaScript"> document.getElementById('cf_member_skin').value="<?=$config[cf_member_skin]?>";</script>
+        <script type="text/javascript"> document.getElementById('cf_member_skin').value="<?=$config[cf_member_skin]?>";</script>
     </td>
 </tr>
 <tr class='ht'>
@@ -281,7 +281,7 @@ include_once ("./admin.head.php");
         </select>
         <?=help("게시물에 게시자 별명 대신 아이콘 사용")?>
     </td>
-    <script language='javascript'> document.fconfigform.cf_use_member_icon.value = '<?=$config[cf_use_member_icon]?>'; </script>
+    <script type='text/javascript'> document.fconfigform.cf_use_member_icon.value = '<?=$config[cf_use_member_icon]?>'; </script>
     <td>아이콘 업로드 권한</td>
     <td colspan=3><? echo get_member_level_select('cf_icon_level', 1, 9, $config[cf_icon_level]) ?> 이상</td>
 </tr>
@@ -419,7 +419,7 @@ include_once ("./admin.head.php");
 <script type="text/javascript" src="<?="$g4[path]/js/md5.js"?>"></script>
 <script type="text/javascript" src="<?="$g4[path]/js/jquery.kcaptcha.js"?>"></script>
 
-<script language="javascript">
+<script type="text/javascript">
 function fconfigform_submit(f)
 {
     if (typeof(f.kcaptcha_key) != 'undefined') {

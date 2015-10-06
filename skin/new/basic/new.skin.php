@@ -23,7 +23,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         &nbsp;<b>회원아이디 : </b>
         <input type=text class=ed id='mb_id' name='mb_id' value='<?=$mb_id?>'>
         <input type=submit value='검색'>
-        <script language="JavaScript">
+        <script type="text/javascript">
         function select_change()
         {
             document.fnew.submit();

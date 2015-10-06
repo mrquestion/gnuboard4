@@ -85,8 +85,8 @@ $result = sql_query($sql);
 $colspan = 15;
 ?>
 
-<script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
-<script language="JavaScript">
+<script type="text/javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
+<script type="text/javascript">
 var list_update_php = "member_list_update.php";
 var list_delete_php = "member_list_delete.php";
 </script>
@@ -228,7 +228,7 @@ echo "</td>";
 echo "<td width=50% align=right>$pagelist</td></tr></table>\n";
 
 if ($stx)
-    echo "<script language='javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
+    echo "<script type='text/javascript'>document.fsearch.sfl.value = '$sfl';</script>\n";
 ?>
 </form>
 

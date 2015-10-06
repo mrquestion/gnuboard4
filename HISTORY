@@ -1,3 +1,33 @@
+4.32.10 (10.09.07)
+    :   아이디/패스워드 찾기 코드 보완 (보안서버 적용 등)
+        기존에 사용하던 password_forget 을 더 이상 사용하지 않으며 password_lost 로 대체합니다.
+        회원가입시 패스워드 분실시 질문, 답변을 더 이상 입력 받지 않습니다.
+    
+        bbs/password_lost.php
+        bbs/password_lost2.php
+        bbs/password_lost_certify.php
+        skin/member/basic/password_lost.skin.php
+        skin/member/basic/register_form.skin.php
+        skin/member/basic/login.skin.php            : win_password_forget() -> win_password_lost() 로 대체
+        skin/outlogin/basic/outlogin.skin.1.php     : win_password_forget() -> win_password_lost() 로 대체
+        js/common.js                                : function win_password_lost() 추가
+
+        // 위의 패치를 적용하신 후 아래 3개의 파일은 반드시 삭제하시기 바랍니다.
+        bbs/password_forget.php
+        bbs/password_forget2.php
+        bbs/password_forget3.php
+
+4.32.09 (10.09.07)
+    :   게시판에서 \ 를 검색할 수 있도록 수정 (애나양님께서 알려주셨습니다.)
+    
+        lib/common.lib.php                          : $search_text = trim(stripslashes($search_text)); 로 변경
+        skin/board/basic/list.skin.php              : value='<?=stripslashes($stx)?>' 로 변경
+
+4.32.08 (10.08.25)
+    :   url_auto_link() 함수 코드 보완
+    
+        lib/common.lib.php 
+
 4.32.07 (10.08.23)
     :   [보안] XSS(Cross Site Scripting) 공격에 의한 데이터 검증 및 차단 기능을 보완하였습니다. (sjsjin 님께서 알려주셨습니다.)
     :   회원의 포인트가 0 미만일 경우 게시판의 글쓰기 포인트가 설정된 경우에 나오던 오류를 수정 (곱슬최씨님께서 다시 알려 주셨습니다.)    
@@ -585,7 +615,7 @@
     :   스팸트랙백을 막기 위해 기능 수정
         config.php 에 $g4['token_time'] = 3; 추가
     :   head.sub.php 에 아래와 같이 한줄 추가하십시오.
-        <script language="javascript" src="<?=$g4['path']?>/js/ajax.js"></script> 
+        <script type="text/javascript" src="<?=$g4['path']?>/js/ajax.js"></script> 
 
         테이블이 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
 

@@ -80,7 +80,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
 </form>
 
-<script language="JavaScript">
+<script type="text/javascript">
 function fpasswordforget_submit(f)
 {
     if (f.pass_mb_id.value == "") {

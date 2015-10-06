@@ -117,7 +117,7 @@ include_once("./admin.head.php");
     <td>남녀</td>
     <td>
         <select name=mb_sex><option value=''>----<option value='F'>여자<option value='M'>남자</select>
-        <script language="JavaScript"> document.fmember.mb_sex.value = "<?=$mb[mb_sex]?>"; </script></td>
+        <script type="text/javascript"> document.fmember.mb_sex.value = "<?=$mb[mb_sex]?>"; </script></td>
 </tr>
 <tr class='ht'>
     <td>메일 수신</td>
@@ -198,7 +198,7 @@ include_once("./admin.head.php");
     <? } ?>
 </form>
 
-<script language='Javascript'>
+<script type='text/javascript'>
 if (document.fmember.w.value == "")
     document.fmember.mb_id.focus();
 else if (document.fmember.w.value == "u")

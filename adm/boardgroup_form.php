@@ -106,7 +106,7 @@ include_once("./admin.head.php");
     <input type=button class=btn1 value='  ¸ñ  ·Ï  ' onclick="document.location.href='./boardgroup_list.php?<?=$qstr?>';">
 </form>
 
-<script language='JavaScript'>
+<script type='text/javascript'>
 if (document.fboardgroup.w.value == '')
     document.fboardgroup.gr_id.focus();
 else

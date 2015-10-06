@@ -585,7 +585,7 @@ if (($w != "u" && $wr_trackback) || ($w=="u" && $wr_trackback && $re_trackback))
     $msg = "";
     $msg = send_trackback($wr_trackback, $trackback_url, $wr_subject, $board[bo_subject], $_POST[wr_content]);
     if ($msg) 
-        echo "<script language='JavaScript'>alert('$msg $wr_trackback');</script>";
+        echo "<script type='text/javascript'>alert('$msg $wr_trackback');</script>";
 }
 
 @include_once("$board_skin_path/write_update.tail.skin.php");
