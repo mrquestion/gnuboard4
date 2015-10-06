@@ -429,6 +429,7 @@ function bad120422($matches)
     } else if (preg_match("#base64#i", $code)) {
         return "OBJECT 태그에 BASE64는 사용 불가합니다.";
     }
+    return $matches[0];
 }
 
 // 내용을 변환

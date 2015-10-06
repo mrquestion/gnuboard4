@@ -1,3 +1,19 @@
+4.34.26 (2012.05.03)
+    :   4.34.23 에서 이상 없는 OBJECT 태그의 반환이 제대로 되지 않던 오류 수정 (곱슬최씨님께서 고쳐 주셨습니다.)
+
+        lib/common.lib.php 의
+
+            function bad120422($matches)
+            {
+                $code = $matches[1];
+                if (preg_match("#script#i", $code)) {
+                    return "OBJECT 태그에 스크립트는 사용 불가합니다.";
+                } else if (preg_match("#base64#i", $code)) {
+                    return "OBJECT 태그에 BASE64는 사용 불가합니다.";
+                }
+                return $matches[0]; // 이 코드가 추가 되었습니다.
+            }
+
 4.34.25 (2012.04.30)
     :   [보안강화] 설치시 data 디렉토리에 .htaccess 파일을 생성하여 data 디렉토리 및 하위 디렉토리에서는 
         .htaccess .htpasswd .php .phtml .html .htm .inc .cgi .pl 파일을 실행 할 수 없습니다.
