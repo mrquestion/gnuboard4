@@ -131,11 +131,11 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     }
 
     // 쿠키 입력
-    function set_cookie(name, value, expirehours) 
+    function set_cookie(name, value, expirehours, domain) 
     {
         var today = new Date();
         today.setTime(today.getTime() + (60*60*1000*expirehours));
-        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + today.toGMTString() + ";";
+        document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + today.toGMTString() + "; domain=" + domain + ";";
     }
 
     // 쿠키 얻음
@@ -176,7 +176,7 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
         var today = new Date();
 
         today.setTime(today.getTime() - 1);
-        var value = getCookie(name);
+        var value = get_cookie(name);
         if(value != "")
             document.cookie = name + "=" + value + "; path=/; expires=" + today.toGMTString();
     }

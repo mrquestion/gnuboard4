@@ -77,5 +77,5 @@ sql_query(" delete from $g4[board_new_table] where bo_table = '$bo_table' and wr
 // 4.1
 @include_once("$board_skin_path/delete_comment.tail.skin.php");
 
-goto_url("./board.php?bo_table=$bo_table&wr_id=$write[wr_parent]&page=$page" . $qstr);
+goto_url("./board.php?bo_table=$bo_table&wr_id=$write[wr_parent]&cwin=$cwin&page=$page" . $qstr);
 ?>

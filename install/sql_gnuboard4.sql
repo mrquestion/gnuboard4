@@ -110,11 +110,11 @@ CREATE TABLE $g4[board_table] (
 ) TYPE=MyISAM;
 
 ##
-## Table structure for table `$g4[board_table]_file`
+## Table structure for table `$g4[board_file_table]`
 ##
 
-DROP TABLE IF EXISTS $g4[board_table]_file;
-CREATE TABLE $g4[board_table]_file (
+DROP TABLE IF EXISTS $g4[board_file_table];
+CREATE TABLE $g4[board_file_table] (
   bo_table varchar(20) NOT NULL default '',
   wr_id int(11) NOT NULL default '0',
   bf_no int(11) NOT NULL default '0',
@@ -131,11 +131,11 @@ CREATE TABLE $g4[board_table]_file (
 ) TYPE=MyISAM;
 
 ##
-## Table structure for table `$g4[board_table]_good`
+## Table structure for table `$g4[board_good_table]`
 ##
 
-DROP TABLE IF EXISTS $g4[board_table]_good;
-CREATE TABLE $g4[board_table]_good (
+DROP TABLE IF EXISTS $g4[board_good_table];
+CREATE TABLE $g4[board_good_table] (
   bg_id int(11) NOT NULL auto_increment,
   bo_table varchar(20) NOT NULL default '',
   wr_id int(11) NOT NULL default '0',
@@ -147,11 +147,11 @@ CREATE TABLE $g4[board_table]_good (
 ) TYPE=MyISAM;
 
 ##
-## Table structure for table `$g4[board_table]_new`
+## Table structure for table `$g4[board_new_table]`
 ##
 
-DROP TABLE IF EXISTS $g4[board_table]_new;
-CREATE TABLE $g4[board_table]_new (
+DROP TABLE IF EXISTS $g4[board_new_table];
+CREATE TABLE $g4[board_new_table] (
   bn_id int(11) NOT NULL auto_increment,
   bo_table varchar(20) NOT NULL default '',
   wr_id int(11) NOT NULL default '0',

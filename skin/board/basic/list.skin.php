@@ -109,7 +109,7 @@ if ($is_nogood) $colspan++;
 <?}?>
 
 <? if (count($list) == 0) { echo "<tr><td colspan='$colspan' height=100 align=center>게시물이 없습니다.</td></tr>"; } ?>
-<tr><td colspan=<?=$colspan?> bgcolor=#5C86AD height=1>
+<tr><td colspan=<?=$colspan?> bgcolor=#5C86AD height=1></td></tr>
 </table>
 </form>
 

@@ -31,6 +31,7 @@ $colspan = 4;
     <td>弊缝</td>
     <td>贸府老矫</td>
     <td>昏力</td>
+</tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
 $sql = " select * 

@@ -106,9 +106,11 @@ var list_update_php = "./boardgroup_list_update.php";
 <?
 for ($i=0; $row=sql_fetch_array($result); $i++) 
 {
+    // 접근회원수
     $sql1 = " select count(*) as cnt from $g4[group_member_table] where gr_id = '$row[gr_id]' ";
     $row1 = sql_fetch($sql1);
 
+    // 게시판수
     $sql2 = " select count(*) as cnt from $g4[board_table] where gr_id = '$row[gr_id]' ";
     $row2 = sql_fetch($sql2);
 
@@ -148,7 +150,7 @@ echo "<table width=100% cellpadding=3 cellspacing=1>";
 echo "<tr><td width=70%>";
 echo "<input type=button class='btn1' value='선택수정' onclick=\"btn_check(this.form, 'update')\">";
 //echo " <input type=button value='선택삭제' onclick=\"btn_check(this.form, 'delete')\">";
-echo "<td>";
+echo "</td>";
 echo "<td width=30% align=right>$pagelist</td></tr></table>\n";
 
 if ($stx)

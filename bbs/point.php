@@ -105,7 +105,6 @@ HEREDOC;
 <tr>
     <td height="30" align="center" bgcolor="#F6F6F6">
         <img src='<?=$g4[bbs_img_path]?>/icon_02.gif'> 보유 포인트 : <B><?=number_format($member[mb_point])?> 점</B></td>
-    </td>
 </tr>
 <tr> 
     <td height="2" align="center" valign="top" bgcolor="#D5D5D5"></td>

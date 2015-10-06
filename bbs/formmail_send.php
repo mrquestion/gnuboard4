@@ -48,12 +48,11 @@ if ($type == 2)
 if ($type) 
 {
     $current_url = $g4[url];
-    $mail_content = "<html><head><meta http-equiv='content-type' content='text/html; charset=$cfg[charset]'><title>메일보내기</title><link rel='stylesheet' href='$current_url/style.css' type='text/css'></head><body>$content</body></html>";
+    $mail_content = "<html><head><meta http-equiv='content-type' content='text/html; charset=$g4[charset]'><title>메일보내기</title><link rel='stylesheet' href='$current_url/style.css' type='text/css'></head><body>$content</body></html>";
 } 
 else 
     $mail_content = $content;
 
-//mailer($fnick, $fmail, $to, $subject, $mail_content, $type, $file, $cfg[charset]);
 mailer($fnick, $fmail, $to, $subject, $mail_content, $type, $file);
 
 //$html_title = $tmp_to . "님께 메일발송";

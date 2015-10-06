@@ -3,8 +3,6 @@ include_once("./_common.php");
 
 @include_once("$board_skin_path/write_comment_update.head.skin.php");
 
-include_once("$g4[path]/lib/trackback.lib.php");
-
 $g4[title] = $wr_subject . "코멘트입력";
 
 $w = $_POST["w"];
@@ -40,7 +38,9 @@ if ($w == "cu")
 $sql .= " order by wr_id desc limit 1 ";
 $row = sql_fetch($sql);
 $curr_md5 = md5($_SERVER[REMOTE_ADDR].$wr_subject.$wr_content);
-if ($row[prev_md5] == $curr_md5 && !$is_admin)
+// 코멘트 수정의 경우에는 동일한 내용을 등록할 수 없는 오류 수정
+//if ($row[prev_md5] == $curr_md5 && !$is_admin)
+if ($row[prev_md5] == $curr_md5 && $w != 'cu' && !$is_admin)
     alert("동일한 내용을 연속해서 등록할 수 없습니다.");
 
 $wr = get_write($write_table, $wr_id);
@@ -218,7 +218,6 @@ if ($w == "c") // 코멘트 입력
         
         // 최고관리자에게 보내는 메일
         // 게시판관리자가 존재할 경우 최고관리자에게 메일이 두번씩 발송되는 문제 해결
-        //if ($super_admin[mb_email] != $board_admin[mb_email])
         if ($super_admin[mb_email] != $board_admin[mb_email] && $super_admin[mb_email] != $group_admin[mb_email])
         {
             if ($config[cf_email_wr_super_admin])
@@ -226,7 +225,8 @@ if ($w == "c") // 코멘트 입력
         }
 
         // 답변 메일받기 (원게시자에게 보내는 메일)
-        if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
+        //if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
+        if (strstr($wr[wr_option], 'mail') && $wr[wr_email] && $wr[wr_email] != $member[mb_email]) 
         {
             if ($config[cf_email_wr_write])
                 mailer($wr_name, $wr_email, $wr[wr_email], $subject, $content, 1);
@@ -235,7 +235,7 @@ if ($w == "c") // 코멘트 입력
             if ($config[cf_email_wr_comment_all])
             {
                 $sql = " select distinct wr_email from $write_table
-                          where wr_email not in ( '$wr[wr_email]', '' )
+                          where wr_email not in ( '$wr[wr_email]', '$member[mb_email]', '' )
                             and wr_parent = '$wr_id' ";
                 $result = sql_query($sql);
                 while ($row=sql_fetch_array($result))
@@ -246,14 +246,40 @@ if ($w == "c") // 코멘트 입력
 } 
 else if ($w == "cu") // 코멘트 수정
 { 
-    $sql = " select wr_comment, wr_comment_reply from $write_table 
+    $sql = " select mb_id, wr_comment, wr_comment_reply from $write_table 
               where wr_id = '$comment_id' ";
-    $reply_array = sql_fetch($sql);
+    $comment = $reply_array = sql_fetch($sql);
     $tmp_comment = $reply_array[wr_comment];
 
     $len = strlen($reply_array[wr_comment_reply]);
     if ($len < 0) $len = 0; 
     $comment_reply = substr($reply_array[wr_comment_reply], 0, $len);
+    //print_r2($GLOBALS); exit;
+
+    if ($is_admin == "super") // 최고관리자 통과 
+        ; 
+    else if ($is_admin == "group") { // 그룹관리자 
+        $mb = get_member($comment[mb_id]); 
+        if ($member[mb_id] == $group[gr_admin]) { // 자신이 관리하는 그룹인가? 
+            if ($member[mb_level] >= $mb[mb_level]) // 자신의 레벨이 크거나 같다면 통과 
+                ; 
+            else 
+                alert("그룹관리자의 권한보다 높은 회원의 코멘트이므로 수정할 수 없습니다."); 
+        } else 
+            alert("자신이 관리하는 그룹의 게시판이 아니므로 코멘트를 수정할 수 없습니다."); 
+    } else if ($is_admin == "board") { // 게시판관리자이면 
+        $mb = get_member($comment[mb_id]); 
+        if ($member[mb_id] == $board[bo_admin]) { // 자신이 관리하는 게시판인가? 
+            if ($member[mb_level] >= $mb[mb_level]) // 자신의 레벨이 크거나 같다면 통과 
+                ; 
+            else 
+                alert("게시판관리자의 권한보다 높은 회원의 코멘트이므로 수정할 수 없습니다."); 
+        } else 
+            alert("자신이 관리하는 게시판이 아니므로 코멘트를 수정할 수 없습니다."); 
+    } else if ($member[mb_id]) { 
+        if ($member[mb_id] != $comment[mb_id]) 
+            alert("자신의 글이 아니므로 수정할 수 없습니다."); 
+    } 
 
     $sql = " select count(*) as cnt from $write_table
               where wr_comment_reply like '$comment_reply%'

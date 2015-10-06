@@ -49,10 +49,6 @@ $sql = " select wr_id, wr_subject, wr_content, wr_name, wr_datetime, wr_option
 $result = sql_query($sql);
 for ($i=0; $row=sql_fetch_array($result); $i++) {
     $file = "";
-    //$file .= view_file_link($row[wr_file1]);
-    //$file .= view_file_link($row[wr_file2]);
-
-    //$file = preg_replace("/\.\//", "$cfg[d_url]/", $file);
 
     if (strstr($row[wr_option], 'html'))
         $html = 1;

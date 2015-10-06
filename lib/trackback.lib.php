@@ -49,7 +49,7 @@ function send_trackback($tb_url, $url, $title, $blog_name, $excerpt)
         return "트랙백 URL이 존재하지 않습니다.";
 
 	//전송
-	$fp = fsockopen($uinfo[host],$uinfo[port]);
+	//$fp = fsockopen($uinfo[host],$uinfo[port]);
 	fputs($fp,$send_str);
 
 	//응답 받음

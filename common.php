@@ -119,6 +119,7 @@ $g4['path'] = $g4_path;
 // 경로의 오류를 없애기 위해 $g4_path 변수는 해제
 unset($g4_path);
 
+include_once("$g4[path]/lib/constant.php");  // 상수 정의
 include_once("$g4[path]/config.php");  // 설정 파일
 include_once("$g4[path]/lib/common.lib.php"); // 공통 라이브러리
 

@@ -25,6 +25,11 @@ $f = @fopen($file, "w");
 @fclose($f);
 @chmod($file, 0606);
 
+// 분류에 & 나 = 는 사용이 불가하므로 2바이트로 바꾼다.
+$src_char = array('&', '=');
+$dst_char = array('＆', '〓'); 
+$bo_category_list = str_replace($src_char, $dst_char, $bo_category_list);
+
 $sql_common = " gr_id               = '$_POST[gr_id]',
                 bo_subject          = '$bo_subject',
                 bo_admin            = '$bo_admin',

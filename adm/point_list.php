@@ -169,7 +169,7 @@ $pagelist = get_paging($config[cf_write_pages], $page, $total_page, "$_SERVER[PH
 echo "<table width=100% cellpadding=3 cellspacing=1>";
 echo "<tr><td width=50%>";
 echo "<input type=button class='btn1' value='선택삭제' onclick=\"btn_check(this.form, 'delete')\">";
-echo "<td>";
+echo "</td>";
 echo "<td width=50% align=right>$pagelist</td></tr></table>\n";
 
 if ($stx)
@@ -199,10 +199,10 @@ else
 <colgroup width=100>
 <tr><td colspan='<?=$colspan?>' class='line1'></td></tr>
 <tr class='bgcol1 bold col1 ht center'>
-    <td>회원아이디</span></td>
-    <td>포인트 내용</span></td>
-    <td>포인트</span></td>
-    <td>입력</span></td>
+    <td>회원아이디</td>
+    <td>포인트 내용</td>
+    <td>포인트</td>
+    <td>입력</td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <tr class='ht center'>

@@ -162,7 +162,9 @@ function url_auto_link($str)
     $str = preg_replace("/&nbsp;/", "\t_nbsp_\t", $str);
     $str = preg_replace("/([^(http:\/\/)]|\(|^)(www\.[^[:space:]]+)/i", "\\1<A HREF=\"http://\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
     $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
-    $str = preg_replace("/(([a-z0-9_]|\-|\.)+@([^[:space:]]*)([[:alnum:]-]))/i", "<a href='mailto:\\1'>\\1</a>", $str);
+    // 이메일 정규표현식 수정 061004
+    //$str = preg_replace("/(([a-z0-9_]|\-|\.)+@([^[:space:]]*)([[:alnum:]-]))/i", "<a href='mailto:\\1'>\\1</a>", $str);
+    $str = preg_replace("/([0-9a-z]([-_\.]?[0-9a-z])*@[0-9a-z]([-_\.]?[0-9a-z])*\.[a-z]{2,4})/i", "<a href='mailto:\\1'>\\1</a>", $str);
     $str = preg_replace("/\t_nbsp_\t/", "&nbsp;" , $str);
     $str = preg_replace("/\t_lt_\t/", "&lt;", $str);
     $str = preg_replace("/\t_gt_\t/", "&gt;", $str);
@@ -680,13 +682,16 @@ function is_admin($mb_id)
 
 // 분류 옵션을 얻음
 // 4.00 에서는 카테고리 테이블을 없애고 보드테이블에 있는 내용으로 대체
-function get_category_option($bo_table)
+function get_category_option($bo_table='')
 {
-    global $g4;
+    global $g4, $board;
 
+    /*
     $sql = " select bo_category_list from $g4[board_table] where bo_table = '$bo_table' ";
     $row = sql_fetch($sql);
     $arr = explode("|", $row[bo_category_list]); // 구분자가 , 로 되어 있음
+    */
+    $arr = explode("|", $board[bo_category_list]); // 구분자가 , 로 되어 있음
     $str = "";
     for ($i=0; $i<count($arr); $i++)
         if (trim($arr[$i]))
@@ -749,9 +754,6 @@ function insert_point($mb_id, $point, $content='', $rel_table='', $rel_id='', $r
 
     // 포인트가 없다면 업데이트 할 필요 없음
     if ($point == 0) { return 0; }
-
-    // 최고관리자는 포인트 추가 내역 남기지 않음
-    //if ($is_admin == "super") { return; }
 
     // 회원아이디가 없다면 업데이트 할 필요 없음
     if ($mb_id == "") { return 0; }
@@ -1271,6 +1273,79 @@ function check_demo()
     global $g4;
     if (file_exists("$g4[path]/DEMO"))
         alert("데모 화면에서는 하실(보실) 수 없는 작업입니다.");
+}
+
+
+// 문자열이 한글, 영문, 숫자, 특수문자로 구성되어 있는지 검사
+function check_string($str, $options) 
+{
+    $s = '';
+    for($i=0;$i<strlen($str);$i++) {
+        $c = $str[$i];
+        $oc = ord($c);
+
+        // 한글
+        if ($oc >= 0xA0 && $oc <= 0xFF) {
+            // 한글은 2바이트 이므로 문자하나를 건너뜀
+            $i++;
+            if ($options & _G4_HANGUL_) {
+                $s .= $c . $str[$i];
+            }
+        } 
+        // 숫자
+        else if ($oc >= 0x30 && $oc <= 0x39) {
+            if ($options & _G4_NUMERIC_) {
+                $s .= $c;
+            }
+        }
+        // 영대문자
+        else if ($oc >= 0x41 && $oc <= 0x5A) {
+            if (($options & _G4_ALPHABETIC_) || ($options & _G4_ALPHAUPPER_)) {
+                $s .= $c;
+            }
+        }
+        // 영소문자
+        else if ($oc >= 0x61 && $oc <= 0x7A) {
+            if (($options & _G4_ALPHABETIC_) || ($options & _G4_ALPHALOWER_)) {
+                $s .= $c;
+            }
+        }
+        // 공백
+        else if ($oc >= 0x20) {
+            if ($options & _G4_SPACE_) {
+                $s .= $c;
+            }
+        }
+        else {
+            if ($options & _G4_SPECIAL_) {
+                $s .= $c;
+            }
+        }
+    }
+
+    // 넘어온 값과 비교하여 같으면 참, 틀리면 거짓
+    return ($str == $s);
+}
+
+
+// 한글(2bytes)에서 마지막 글자가 1byte로 끝나는 경우
+// 출력시 깨지는 현상이 발생하므로 마지막 완전하지 않은 글자(1byte)를 하나 없앰
+function cut_hangul_last($hangul)
+{
+    // 한글이 반쪽나면 ?로 표시되는 현상을 막음
+    $cnt = 0;
+    for($i=0;$i<strlen($hangul);$i++) {
+        // 한글만 센다
+        if (ord($hangul[$i]) >= 0xA0) {
+            $cnt++;
+        }
+    }
+
+    // 홀수라면 한글이 반쪽난 상태이므로
+    if ($cnt%2)
+        $hangul = substr($hangul, 0, $cnt-1);
+
+    return $hangul;
 }
 
 

@@ -28,11 +28,11 @@ $box_height = (int)$line_mod * (int)$height;
     <td background='<?=$latest_skin_path?>/img/bg_latest.gif'><a href='<?=$g4['bbs_path']?>/board.php?bo_table=<?=$bo_table?>'><img src='<?=$latest_skin_path?>/img/more.gif' border=0></a></td>
     <td><img src='<?=$latest_skin_path?>/img/latest_t02.gif'></td>
 </tr>
-<tr><td colspan=4 style='padding-left:20px; padding-right:20px; padding-top:5px; padding-bottom:5px;'>
 
 <? if (count($list) == 0) { ?>
     <tr><td colspan=4 align=center height=50>게시물이 없습니다.</td></tr>
 <? } else { ?>
+    <tr><td colspan=4 style='padding-left:20px; padding-right:20px; padding-top:5px; padding-bottom:5px;'>
 
     <script language="javascript">
     var roll_height_<?=$uni?> = <?=$box_height?>;
@@ -152,8 +152,8 @@ $box_height = (int)$line_mod * (int)$height;
     </script>
     </div>							   
 
+    </td></tr>
 <? } ?>
 
-</td></tr>
 <tr><td colspan=4 bgcolor=#EBEBEB height=1></td></tr>
 </table>

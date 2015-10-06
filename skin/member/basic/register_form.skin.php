@@ -109,7 +109,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <TD width="160" class=m_title>이름</TD>
             <TD class=m_padding>
                 <!-- 한글만 입력받을 경우 <INPUT name=mb_name itemname="이름" required minlength="2" nospace hangul value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=m_text2":"class=m_text";?>> -->
-                <INPUT name=mb_name itemname="이름" required minlength="2" nospace value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=m_text2":"class=m_text";?>>
+                <INPUT name=mb_name itemname="이름" required minlength="2" nospace hangul value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=m_text2":"class=m_text";?>> (공백없이 한글만 입력 가능)
             </TD>
         </TR>
 
@@ -118,8 +118,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>별명</TD>
             <TD class='m_padding lh'>
-                <input class=m_text type=text name='mb_nick' maxlength=20 minlength="2" required hangulalphanumeric itemname="별명" value='<?=$member[mb_nick]?>' onchange="fregisterform.mb_nick_enabled.value='';">
-                &nbsp;<a href="javascript:mb_nick_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a> (한글, 영문, 숫자만 가능)
+                <input class=m_text type=text name='mb_nick' maxlength=20 minlength="2" required nospace hangulalphanumeric itemname="별명" value='<?=$member[mb_nick]?>' onchange="fregisterform.mb_nick_enabled.value='';">
+                &nbsp;<a href="javascript:mb_nick_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a> (공백없이 한글,영문,숫자만 입력 가능)
                 <br>별명을 바꾸시면 앞으로 <?=(int)$config[cf_nick_modify]?>일 이내에는 변경이 안됩니다.
             </TD>
         </TR>
@@ -141,7 +141,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </TD>
         </TR>
 
-        <? if ($w=="") { ?>
+        <? if ($w=="u") { ?>
             <TR bgcolor="#FFFFFF">
                 <TD class=m_title>생년월일</TD>
                 <TD class=m_padding><input class=m_text type=text id=mb_birth name='mb_birth' size=8 maxlength=8 minlength=8 required numeric itemname='생년월일' value='<?=$member[mb_birth]?>' readonly title='옆의 달력 아이콘을 클릭하여 날짜를 입력하세요.'>
@@ -403,12 +403,20 @@ function fregisterform_submit(f)
         return;
     }
 
-    if (typeof f.mb_icon != "undefined") 
-    {
-        if (f.mb_icon.value) 
-        {
-            if (!f.mb_icon.value.toLowerCase().match(/.(gif)$/i)) 
-            {
+    if (typeof(f.mb_birth) != 'undefined') {
+        var todays = <?=date("Ymd", $g4['server_time']);?>;
+        // 오늘날짜에서 생일을 빼고 거기서 140000 을 뺀다. 
+        // 결과가 0 이상의 양수이면 만 14세가 지난것임
+        var n = todays - parseInt(f.mb_birth.value) - 140000;
+        if (n < 0) {
+            alert("만 14세가 지나지 않은 어린이는 정보통신망 이용촉진 및 정보보호 등에 관한 법률\n\n제 31조 1항의 규정에 의하여 법정대리인의 동의를 얻어야 하므로\n\n법정대리인의 이름과 연락처를 '자기소개'란에 별도로 입력하시기 바랍니다.");
+            return;
+        }
+    }
+
+    if (typeof f.mb_icon != "undefined") {
+        if (f.mb_icon.value) {
+            if (!f.mb_icon.value.toLowerCase().match(/.(gif)$/i)) {
                 alert("회원아이콘이 gif 파일이 아닙니다.");
                 f.mb_icon.focus();
                 return;
@@ -416,10 +424,8 @@ function fregisterform_submit(f)
         }
     }
 
-    if (typeof(f.mb_recommend) != 'undefined')
-    {
-        if (f.mb_id.value == f.mb_recommend.value)
-        {
+    if (typeof(f.mb_recommend) != 'undefined') {
+        if (f.mb_id.value == f.mb_recommend.value) {
             alert("본인을 추천할 수 없습니다.");
             f.mb_recommend.focus();
             return;

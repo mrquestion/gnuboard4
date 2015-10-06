@@ -211,7 +211,7 @@ echo "<table width=100% cellpadding=3 cellspacing=1>";
 echo "<tr><td width=50%>";
 echo "<input type=button class='btn1' value='선택수정' onclick=\"btn_check(this.form, 'update')\">&nbsp;";
 echo "<input type=button class='btn1' value='선택삭제' onclick=\"btn_check(this.form, 'delete')\">";
-echo "<td>";
+echo "</td>";
 echo "<td width=50% align=right>$pagelist</td></tr></table>\n";
 
 if ($stx)

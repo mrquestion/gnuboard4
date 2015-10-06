@@ -93,6 +93,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         ?>
         </table>
     </td>
+</tr>
 <tr>
     <td align=center height=30>
         <span style='background-color:<?=$today_bgcolor?>;'>

@@ -58,16 +58,32 @@ include_once("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>그룹 관리자</td>
-    <td>
+    <td colspan=3>
         <?
         if ($is_admin == "super")
             //echo get_member_id_select("gr_admin", 9, $row[gr_admin]);
-            echo "<input type='text' class=ed name=gr_admin value='$gr[gr_admin]'>";
+            echo "<input type='text' class=ed name='gr_admin' value='$gr[gr_admin]' maxlength=20>";
         else
-            echo "<input type=hidden name='gr_admin' value='$gr[gr_admin]'>$gr[gr_admin]";
+            echo "<input type=hidden name='gr_admin' value='$gr[gr_admin]' size=40>$gr[gr_admin]";
         ?></td>
+</tr>
+<tr class='ht'>
     <td>접근회원사용</td>
-    <td><input type=checkbox name=gr_use_access value='1' <?=$gr[gr_use_access]?'checked':'';?>>사용</td>
+    <td colspan=3>
+        <input type=checkbox name=gr_use_access value='1' <?=$gr[gr_use_access]?'checked':'';?>>사용 
+        <?=help("사용에 체크하시면 이 그룹에 속한 게시판은 접근가능한 회원만 접근이 가능합니다.")?>
+    </td>
+</tr>
+<tr class='ht'>
+    <td>접근회원수</td>
+    <td colspan=3>
+        <?
+        // 접근회원수
+        $sql1 = " select count(*) as cnt from $g4[group_member_table] where gr_id = '$gr_id' ";
+        $row1 = sql_fetch($sql1);
+        echo "<a href='./boardgroupmember_list.php?gr_id=$gr_id'>$row1[cnt]</a>";
+        ?>
+    </td>
 </tr>
 
 <? for ($i=1; $i<=10; $i=$i+2) { $k=$i+1; ?>

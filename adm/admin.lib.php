@@ -138,7 +138,7 @@ function auth_check($auth, $attr)
 // 텍스트에리어 늘리기, 줄이기
 function textarea_size($fld) 
 {
-    global $cfg, $g4;
+    global $g4;
 
     $size = 10;
     $s  = "<table cellpadding=2 cellspacing=0 border=0 width=100%><tr><td align=right>";
@@ -152,12 +152,13 @@ function textarea_size($fld)
 // 작업아이콘 출력
 function icon($act, $link="", $target="_parent")
 {
-    global $cfg, $g4;
+    global $g4;
 
     $img = array("입력"=>"insert", "추가"=>"insert", "생성"=>"insert", "수정"=>"modify", "삭제"=>"delete", "이동"=>"move", "그룹"=>"move", "보기"=>"view", "미리보기"=>"view");
     $icon = "<img src='{$g4[admin_path]}/img/icon_{$img[$act]}.gif' border=0 align=absmiddle title='$act' width=22 height=21>";
     if ($link)
-        $s = "<a href=\"$link\" target=\"$target\">$icon</a>";
+        //$s = "<a href=\"$link\" target=\"$target\">$icon</a>";
+        $s = "<a href=\"$link\">$icon</a>";
     else
         $s = $icon;
     return $s;

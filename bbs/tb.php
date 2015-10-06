@@ -86,6 +86,7 @@ if ($_POST[title]) {
         echo "<error>1</error>\n";
         echo "<message>$msg</message>\n";
         echo "</response>\n";
+        exit;
     } 
     else // 정상
     { 
@@ -132,7 +133,8 @@ if ($_POST[title]) {
             }
 
             // 답변 메일받기 (원게시자에게 보내는 메일)
-            if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
+            //if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
+            if (strstr($wr[wr_option], 'mail') && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
             {
                 if ($config[cf_email_wr_write])
                     mailer($blog_name, "", $wr[wr_email], $subject, $content, 1);

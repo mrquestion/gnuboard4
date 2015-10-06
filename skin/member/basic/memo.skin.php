@@ -42,7 +42,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <td height="200" align="center" valign="top">
         <table width="540" border="0" cellspacing="0" cellpadding="0">
         <tr> 
-            <td height="20"></td>
+            <td height="30">* 쪽지 보관일수는 최장 <?=$config[cf_memo_del]?>일 입니다.</td>
         </tr>
         <tr> 
             <td height="2" bgcolor="#808080"></td>
@@ -81,3 +81,4 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <td height="40" align="center" valign="bottom"><a href="javascript:window.close();"><img src="<?=$member_skin_path?>/img/btn_close.gif" width="48" height="20" border="0"></a><br><br></td>
 </tr>
 </table>
+

@@ -36,6 +36,7 @@ $po = sql_fetch(" select * from $g4[poll_table] where po_id = '$po_id' ");
                     <td width=5><img src="<?=$poll_skin_path?>/img/bg_mcl.gif"></td>
                     <td align=center background="<?=$poll_skin_path?>/img/bg_mc.gif"><img src="<?=$poll_skin_path?>/img/title.gif"></td>
                     <td width=4><img src="<?=$poll_skin_path?>/img/bg_mcr.gif"></td>
+                </tr>
                 </table></td>
             <td width="5"></td>
         </tr>

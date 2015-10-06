@@ -36,6 +36,14 @@ if ($w == '' || $w == 'u')
     if (preg_match("/[\,]?{$mb_nick}/i", $config[cf_prohibit_id]))
         alert("\'$mb_nick\' 은(는) 예약어로 사용하실 수 없는 별명입니다.");
 
+    // 이름은 한글만 가능
+    if (!check_string($mb_name, _G4_HANGUL_)) 
+        alert('이름은 공백없이 한글만 입력 가능합니다.');
+
+    // 별명은 한글, 영문, 숫자만 가능
+    if (!check_string($mb_nick, _G4_HANGUL_ + _G4_ALPHABETIC_ + _G4_NUMERIC_))
+        alert('별명은 공백없이 한글, 영문, 숫자만 입력 가능합니다.');
+
     if ($w=='')
     {
         if ($mb_id == $mb_recommend) alert('본인을 추천할 수 없습니다.');

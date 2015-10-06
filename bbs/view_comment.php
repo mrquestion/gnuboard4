@@ -49,7 +49,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         {
             if ($row[mb_id] == $member[mb_id] || $is_admin) 
             {
-                $list[$i][del_link]  = "./delete_comment.php?bo_table=$bo_table&comment_id=$row[wr_id]&page=$page".$qstr;
+                $list[$i][del_link]  = "./delete_comment.php?bo_table=$bo_table&comment_id=$row[wr_id]&cwin=$cwin&page=$page".$qstr;
                 $list[$i][is_edit]   = true;
                 $list[$i][is_del]    = true;
             }
@@ -57,7 +57,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
         else 
         {
             if (!$row[mb_id]) {
-                $list[$i][del_link] = "./password.php?w=x&bo_table=$bo_table&comment_id=$row[wr_id]&page=$page".$qstr;
+                $list[$i][del_link] = "./password.php?w=x&bo_table=$bo_table&comment_id=$row[wr_id]&cwin=$cwin&page=$page".$qstr;
                 $list[$i][is_del]   = true;
             }
         }

@@ -1,5 +1,35 @@
+4.09.02 (06.10.10)
+    :   첨부파일설명에서 ' 또는 " 입력되면 오류나는 부분 수정
+    :   코멘트 수정의 경우에는 동일한 내용을 등록할 수 없는 오류 수정
+    :   게시판 분류에 & 나 = 사용이 불가한것을 2바이트 문자로 처리
+    :   상수 정의 (lib/constant.php)
+    :   관리자 > 게시판 복사시에 트랙백쓰기 권한이 복사되지 않던 오류 수정
+    :   게시판 글쓰기에 bo_table 없이 직접 접근하는 경우 메인으로 이동하도록 수정
+    :   한글(2bytes)에서 마지막 글자가 1byte로 끝나는 경우
+        출력시 깨지는 현상이 발생하므로 
+        마지막 완전하지 않은 글자(1byte)를 하나 없앰 (cut_hangul_last)
+    :   새창으로 코멘트로 띄운 경우 삭제하면 head.php, tail.php 가 적용되어 출력되던 오류 수정
+    :   쪽지 보관일수를 알림
+    :   이메일 정규표현식 수정 ( lib/common.lib.php -> url_auto_link() )
+    :   게시판 분류를 select 형식으로 가져오는 함수 수정 ( get_category_option() )
+    :   타인의 코멘트를 수정할 수 있는 오류 수정
+    :   답변 메일받기 (원게시자에게 보내는 메일) 오류 수정
+    :   사용하지 않는 $cfg 배열 변수 삭제
+
+        adm/board_copy_update.php
+        adm/board_form_update.php
+        bbs/delete_comment.php
+        bbs/formmail_send.php
+        bbs/tb.php
+        bbs/view_comment.php
+        bbs/write.php
+        bbs/write.php
+        bbs/write_comment_update.php
+        lib/common.lib.php
+        lib/constant.php
+        skin/member/basic/memo.skin.php
+
 4.09.01 (06.08.28)
-    :   common.php 의 extend 폴더 포함위치 수정
     :   우편번호파일 2006년 7월 1일자로 변경
     :   자바스크립트로 회원정보수정시 정보변경이 가능한 버그 수정
 

@@ -53,6 +53,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                 <tr> 
                     <td height="1" background="<?=$member_skin_path?>/img/dot_line.gif" colspan="2"></td>
                 </tr>
+                </table>
 
                 <table>
                 <tr align="center"> 
