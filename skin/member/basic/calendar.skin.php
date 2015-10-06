@@ -67,8 +67,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                             if (trim($nal[$tmp][2]) == "*") 
                                 echo "<script language='JavaScript'>document.getElementById('id$i$k').style.color='$sunday_color';</script>";
                         }
+                        
                         // 오늘이라면
-                        else if ($today[year] == $yyyy && $today[mon] == $mm && $today[mday] == $day)
+                        if ($today[year] == $yyyy && $today[mon] == $mm && $today[mday] == $day)
                         {
                             echo "<script language='JavaScript'>document.getElementById('id$i$k').style.backgroundColor='$today_bgcolor';</script>";
                             echo "<script language='JavaScript'>document.getElementById('id$i$k').title+='[오늘]';</script>";

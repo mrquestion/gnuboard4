@@ -2,6 +2,10 @@
 include_once("./_common.php");
 
 if ($_REQUEST['do'] == "submit") {
+
+    if (!preg_match("/\.(gif|png|jp[e]?g)/i", $_FILES['AttachFile']['name']))
+        alert("그림 삽입은 GIF, JPG, PNG 파일만 가능합니다.");
+
     require_once "./imageupload-class.php";
     $attach = new uploader;
 

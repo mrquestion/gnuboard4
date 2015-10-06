@@ -1,3 +1,11 @@
+4.06.04 (05.10.17)
+    :   현재 선택한 날짜가 bbs/calendar/*.txt 에 있다면 색상 표시하지 못하던 오류 수정
+    :   [필수] cheditor 보안 관련 패치
+        배부른꿀꿀이님께서 알려주셨습니다.
+
+        skin/member/basic/calendar.skin.php
+        cheditor/insert_image.php
+
 4.06.03 (05.10.12)
     :   한글파일은 urlencode($filename) 처리를 할경우 '%'를 붙여주게 되는데 '%'표시는 미디어플레이어가 인식을 못하기 때문에 재생이 안됩니다. 
         그래서 변경한 파일명에서 '%'부분을 빼주면 해결됩니다. 
