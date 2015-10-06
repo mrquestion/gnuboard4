@@ -8,6 +8,30 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 회원테이블에 SMS 수신여부 필드 추가
+sql_query(" ALTER TABLE `$g4[member_table]` ADD `mb_sms` TINYINT NOT NULL AFTER `mb_mailling` ", FALSE);
+
+// 게시판 인덱스 변경
+$sql = " select bo_table from $g4[board_table] ";
+$result = sql_query($sql);
+while($row=sql_fetch_array($result))
+{
+    $row2 = sql_fetch(" select * from `{$g4[write_prefix]}{$row[bo_table]}` limit 1 ");
+    if (!isset($row2[wr_is_comment]))
+    {
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` ADD `wr_is_comment` TINYINT NOT NULL AFTER `wr_parent` ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` DROP INDEX `wr_comment_num` ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` DROP INDEX `wr_num_reply_parent` ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` DROP INDEX `wr_parent_comment` ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` DROP INDEX `wr_is_comment` ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` ADD INDEX `wr_is_comment` (`wr_is_comment`, `wr_num`, `wr_reply`) ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` ADD INDEX `wr_num` (`wr_num`) ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` ADD INDEX `wr_parent` (`wr_parent`) ", FALSE);
+        sql_query(" ALTER TABLE `{$g4[write_prefix]}{$row[bo_table]}` ADD INDEX `ca_name` (`ca_name`) ", FALSE);
+        sql_query(" UPDATE `{$g4[write_prefix]}{$row[bo_table]}` set wr_is_comment = 1 where  wr_comment < 0 ", FALSE);
+    }
+}
+
 // 파일테이블에 이미지 폭, 높이, 타입, 일시 넣기
 // getimagesize() 함수보다 속도가 빠름
 sql_query(" ALTER TABLE `$g4[board_file_table]` ADD `bf_filesize` INT NOT NULL , ADD `bf_width` INT NOT NULL , ADD `bf_height` SMALLINT NOT NULL , ADD `bf_type` TINYINT NOT NULL , ADD `bf_datetime` DATETIME NOT NULL ", FALSE);
@@ -15,6 +39,9 @@ sql_query(" ALTER TABLE `$g4[board_file_table]` ADD `bf_filesize` INT NOT NULL ,
 // 이메일 인증사용
 sql_query(" ALTER TABLE `$g4[member_table]` ADD `mb_email_certify` DATETIME NOT NULL AFTER `mb_intercept_date` ", FALSE);
 sql_query(" ALTER TABLE `$g4[config_table]` ADD `cf_use_email_certify` TINYINT NOT NULL AFTER `cf_use_copy_log` ", FALSE);
+
+// 최근게시물 라인수
+sql_query(" ALTER TABLE `$g4[config_table]` ADD `cf_new_rows` INT NOT NULL AFTER `cf_login_skin` ", FALSE);
 
 // 포인트 테이블에 필드 추가
 sql_query(" ALTER TABLE `$g4[point_table]` ADD `po_rel_table` VARCHAR( 20 ) NOT NULL , ADD `po_rel_id` VARCHAR( 20 ) NOT NULL , ADD `po_rel_action` VARCHAR( 255 ) NOT NULL ", FALSE);

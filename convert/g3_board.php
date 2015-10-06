@@ -81,10 +81,14 @@ if ($_POST[proc]) {
                          wr_9 = '$row[wr_9]',
                          wr_10 = '$row[wr_10]' ";
         if ($row[wr_comment] == 0)
+        {
             $sql2 .= " , wr_comment = '$row[wr_commentcnt]' ";
-        else 
+            $sql2 .= " , wr_is_comment = '0' ";
+        }
+        else // ÄÚ¸àÆ®¶ó¸é
         {
             $sql2 .= " , wr_comment = '$comment' ";
+            $sql2 .= " , wr_is_comment = '1' ";
             $comment--;
         }
         sql_query($sql2);

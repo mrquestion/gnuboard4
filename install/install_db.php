@@ -237,6 +237,7 @@ $sql = " insert into $g4[config_table]
                 cf_cut_name = '10',
                 cf_nick_modify = '60',
                 cf_new_skin = 'basic',
+                cf_new_rows = '15',
                 cf_search_skin = 'basic',
                 cf_connect_skin = 'basic',
                 cf_read_point = '$read_point',

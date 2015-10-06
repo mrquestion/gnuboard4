@@ -29,9 +29,7 @@ if ($sca || $stx)
     $sql_search .= " and (wr_num between '".$spt."' and '".($spt + $config[cf_search_part])."') ";
 
     // 원글만 얻는다. (코멘트의 내용도 검색하기 위함)
-    $sql = " select distinct wr_parent 
-               from $write_table 
-               where $sql_search ";
+    $sql = " select distinct wr_parent from $write_table where $sql_search ";
     $result = sql_query($sql);
     $total_count = mysql_num_rows($result);
 } 
@@ -69,19 +67,11 @@ $sql_order = " order by $sst $sod ";
 
 if ($sca || $stx) 
 {
-    $sql = " select distinct wr_parent
-               from $write_table
-              where $sql_search
-              $sql_order
-              limit $from_record, $board[bo_page_rows] ";
+    $sql = " select distinct wr_parent from $write_table where $sql_search $sql_order limit $from_record, $board[bo_page_rows] ";
 } 
 else
 {
-    $sql = " select * 
-               from $write_table a 
-              where wr_comment > -1
-              $sql_order 
-              limit $from_record, $board[bo_page_rows] ";
+    $sql = " select * from $write_table where wr_is_comment = 0 $sql_order limit $from_record, $board[bo_page_rows] ";
 }
 $result = sql_query($sql);
 

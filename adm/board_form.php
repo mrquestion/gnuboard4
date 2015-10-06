@@ -142,7 +142,7 @@ include_once ("./admin.head.php");
 
 <tr class='ht'>
     <td style="<?=b_draw('bottom', '#00D952') ?><?=b_draw('left', '#00D952') ?> ">게시판 관리자</td>
-    <td style="<?=b_draw('bottom', '#00D952') ?><?=b_draw('right', '#00D952') ?>" colspan=3><?=get_member_id_select("bo_admin", 9, $board[bo_admin])?></td>
+    <td style="<?=b_draw('bottom', '#00D952') ?><?=b_draw('right', '#00D952') ?>" colspan=3><input type=text class='edit' name=bo_admin maxlength=20 value='<?=$board[bo_admin]?>'></td>
 </tr>
 <tr><td colspan=4 class='ht'></td></tr>
 

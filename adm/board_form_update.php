@@ -135,12 +135,12 @@ if ($w == "") {
 else if ($w == "u") 
 {
     // 게시판의 글 수
-    $sql = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_comment > -1 ";
+    $sql = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_is_comment = 0 ";
     $row = sql_fetch($sql);
     $bo_count_write = $row[cnt];
 
     // 게시판의 코멘트 수
-    $sql = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_comment < 0 ";
+    $sql = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_is_comment = 1 ";
     $row = sql_fetch($sql);
     $bo_count_comment = $row[cnt];
 
@@ -148,12 +148,12 @@ else if ($w == "u")
     if ($proc_count) 
     {
         // 원글을 얻습니다.
-        $sql = " select wr_id from $g4[write_prefix]$bo_table where wr_comment > -1 ";
+        $sql = " select wr_id from $g4[write_prefix]$bo_table where wr_is_comment = 0 ";
         $result = sql_query($sql);
         for ($i=0; $row=sql_fetch_array($result); $i++) 
         {
             // 코멘트수를 얻습니다.
-            $sql2 = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_parent = '$row[wr_id]' and wr_comment < 0 ";
+            $sql2 = " select count(*) as cnt from $g4[write_prefix]$bo_table where wr_parent = '$row[wr_id]' and wr_is_comment = 1 ";
             $row2 = sql_fetch($sql2);
 
             sql_query(" update $g4[write_prefix]$bo_table set wr_comment = '$row2[cnt]' where wr_id = '$row[wr_id]' ");

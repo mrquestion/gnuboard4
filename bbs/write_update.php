@@ -73,7 +73,7 @@ if ($w == "" || $w == "r")
     set_session("ss_datetime", $g4[server_time]);
 
     // 동일내용 연속 등록 불가
-    $row = sql_fetch(" select MD5(CONCAT(wr_ip, wr_subject, wr_content)) as prev_md5 from $write_table where wr_comment > -1 order by wr_id desc limit 1 ");
+    $row = sql_fetch(" select MD5(CONCAT(wr_ip, wr_subject, wr_content)) as prev_md5 from $write_table order by wr_id desc limit 1 ");
     $curr_md5 = md5($_SERVER[REMOTE_ADDR].$wr_subject.$wr_content);
     if ($row[prev_md5] == $curr_md5 && !$is_admin)
         alert("동일한 내용을 연속해서 등록할 수 없습니다.");
@@ -391,7 +391,8 @@ if ($secret)
 // 메일발송 사용 (수정글은 발송하지 않음)
 if (!($w == "u" || $w == "cu")) 
 {
-    // 게시판 관리자의 정보를 얻고
+    // 관리자의 정보를 얻고
+    $super = get_admin("super");
     $admin = get_admin("board");
 
     $wr_subject = get_text(stripslashes($wr_subject));
@@ -419,8 +420,11 @@ if (!($w == "u" || $w == "cu"))
     ob_end_clean();
 
     // 관리자에게 보내는 메일
-    if ($wr_email != $admin[mb_email])
-        mailer($wr_name, $wr_email, $admin[mb_email], $subject, $content, 1);
+    mailer($wr_name, $wr_email, $admin[mb_email], $subject, $content, 1);
+
+    // 최고관리자에게 보내는 메일
+    if ($super[mb_email] != $admin[mb_email])
+        mailer($wr_name, $wr_email, $super[mb_email], $subject, $content, 1);
 
     // 답변 메일받기 (원게시자에게 보내는 메일)
     //if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) {

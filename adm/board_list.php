@@ -120,13 +120,27 @@ var list_delete_php = 'board_list_delete.php';
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <?
-for ($i=0; $row=sql_fetch_array($result); $i++) {
+// 스킨디렉토리
+$skin_options = "";
+$arr = get_skin_dir("board");
+for ($k=0; $k<count($arr); $k++) 
+{
+    $option = $arr[$k];
+    if (strlen($option) > 10)
+        $option = substr($arr[$k], 0, 18) . "…";
+
+    $skin_options .= "<option value='$arr[$k]'>$option</option>";
+}
+
+for ($i=0; $row=sql_fetch_array($result); $i++)
+{
     $s_upd = "<a href='./board_form.php?w=u&bo_table=$row[bo_table]&$qstr'><img src='img/icon_modify.gif' border=0 title='수정'></a>";
     $s_del = "";
     if ($is_admin == "super") 
         $s_del = "<a href=\"javascript:del('./board_delete.php?bo_table=$row[bo_table]&$qstr');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
     $s_copy = "<a href=\"javascript:board_copy('$row[bo_table]');\"><img src='img/icon_copy.gif' border=0 title='복사'></a>";
 
+    /*
     // 스킨디렉토리
     $skin_options = "";
     $arr = get_skin_dir("board");
@@ -139,8 +153,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
         $skin_options .= "<option value='$arr[$k]'";
         if ($arr[$k] == $row[bo_skin])
             $skin_options .= " selected";
-        $skin_options .= ">$option</option>\n";
+        $skin_options .= ">$option</option>";
     }
+    */
 
     $list = $i % 2;
     echo "<input type=hidden name=board_table[$i] value='$row[bo_table]'>";
@@ -163,8 +178,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     else
         echo "<td align=center><input type=hidden name='gr_id[$i]' value='$row[gr_id]'>$row[gr_subject]</td>";
 
-    echo "<td align=left><select name=bo_skin[$i]>$skin_options</select></td>";
+    echo "<td align=left><select id=bo_skin_$i name=bo_skin[$i]>$skin_options</select></td>";
     echo "</tr>\n";
+    echo "<script language='JavaScript'>document.getElementById('bo_skin_$i').value='$row[bo_skin]';</script>";
 } 
 
 if ($i == 0)

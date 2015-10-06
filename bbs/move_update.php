@@ -16,13 +16,13 @@ $save_count_write = 0;
 $save_count_comment = 0;
 $cnt = 0;
 
-$sql = " select distinct wr_num from $write_table 
-           where wr_id in (" . stripslashes($wr_id_list) . ") 
-           order by wr_id ";
+$sql = " select distinct wr_num from $write_table where wr_id in (" . stripslashes($wr_id_list) . ") order by wr_id ";
 $result = sql_query($sql);
-while ($row = sql_fetch_array($result)) {
+while ($row = sql_fetch_array($result)) 
+{
     $wr_num = $row[wr_num];
-    for ($i=0; $i<count($_POST['chk_bo_table']); $i++) {
+    for ($i=0; $i<count($_POST['chk_bo_table']); $i++) 
+    {
         $move_bo_table = $_POST['chk_bo_table'][$i];
         $move_write_table = $g4['write_prefix'] . $move_bo_table;
 
@@ -36,14 +36,16 @@ while ($row = sql_fetch_array($result)) {
 
         $sql2 = " select * from $write_table where wr_num = '$wr_num' order by wr_parent, wr_comment desc, wr_id ";
         $result2 = sql_query($sql2);
-        while ($row2 = sql_fetch_array($result2)) {
+        while ($row2 = sql_fetch_array($result2)) 
+        {
             $nick = cut_str($member[mb_nick], $config[cf_cut_name]);
-            if ($row2[wr_comment] > -1 && $config[cf_use_copy_log]) 
+            if (!$row2[wr_is_comment] && $config[cf_use_copy_log]) 
                 $row2[wr_content] .= " \n[이 게시물은 {$nick}님에 의해 $g4[time_ymdhis] {$board[bo_subject]}에서 " . ($sw == 'copy' ? '복사' : '이동') ." 됨]";
 
             $sql = " insert into $move_write_table
                         set wr_num            = '$next_wr_num',
                             wr_reply          = '$row2[wr_reply]',
+                            wr_is_comment     = '$row2[wr_is_comment]',
                             wr_comment        = '$row2[wr_comment]',
                             wr_comment_reply  = '$row2[wr_comment_reply]',
                             ca_name           = '".addslashes($row2[ca_name])."',
@@ -80,7 +82,7 @@ while ($row = sql_fetch_array($result)) {
             $insert_id = mysql_insert_id();
 
             // 코멘트가 아니라면
-            if ($row2[wr_comment] > -1) 
+            if (!$row2[wr_is_comment]) 
             {
                 $save_parent = $insert_id;
 
@@ -138,9 +140,9 @@ while ($row = sql_fetch_array($result)) {
 
             sql_query(" update $move_write_table set wr_parent = '$save_parent' where wr_id = '$insert_id' ");
 
-            if ($sw == "move") {
+            if ($sw == "move")
                 $save[$cnt][wr_id] = $row2[wr_parent];
-            }
+
             $cnt++;
         }
 
@@ -153,8 +155,10 @@ while ($row = sql_fetch_array($result)) {
     $save_count_comment += $count_comment;
 }
 
-if ($sw == "move") {
-    for ($i=0; $i<count($save); $i++) {
+if ($sw == "move") 
+{
+    for ($i=0; $i<count($save); $i++) 
+    {
         for ($k=0; $k<count($save[$i][bf_file]); $k++)
             @unlink($save[$i][bf_file][$k]);    
 

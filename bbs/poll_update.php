@@ -9,7 +9,7 @@ if ($member[mb_level] < $po[po_level])
     alert_close("권한 $po[po_level] 이상 회원만 투표에 참여하실 수 있습니다.");
 
 // 쿠키에 저장된 투표번호가 없다면
-if (get_cookie("ck_po_id") == $po_id) 
+if (get_cookie("ck_po_id") != $po[po_id]) 
 {
     // 투표했던 ip들 중에서 찾아본다
     $search_ip = false;
@@ -50,7 +50,7 @@ if (get_cookie("ck_po_id") == $po_id)
         insert_point($member[mb_id], $po[po_point], $po[po_id] . ". " . cut_str($po[po_subject],20) . " 투표 참여 ", "@poll", $po[po_id], "투표");
 }
 
-set_cookie("ck_po_id", $po_id, 86400 * 15); // 투표 쿠키 보름간 저장
+set_cookie("ck_po_id", $po[po_id], 86400 * 15); // 투표 쿠키 보름간 저장
 
 goto_url("./poll_result.php?po_id=$po_id&skin_dir=$skin_dir");
 ?>

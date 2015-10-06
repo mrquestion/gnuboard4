@@ -11,9 +11,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <script language="JavaScript">document.getElementById("gr_id").value = "<?=$gr_id?>";</script>
 
         <select name=sfl class=select>
+        <option value="wr_subject||wr_content">제목+내용</option>
         <option value="wr_subject">제목</option>
         <option value="wr_content">내용</option>
-        <option value="concat(wr_subject,wr_content)">제목+내용</option>
         <option value="mb_id">회원아이디</option>
         <option value="wr_name">이름</option>
         </select>
@@ -93,7 +93,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             for ($i=0; $i<count($list[$idx]) && $k<$rows; $i++, $k++) 
             {
                 echo "<ul><ul type=square><li style='line-height:130%;'>";
-                if ($list[$idx][$i][wr_comment] < 0) 
+                if ($list[$idx][$i][wr_is_comment]) 
                 {
                     echo "<font color=999999>[코멘트]</font> ";
                     $comment_href = "#c_".$list[$idx][$i][wr_id];

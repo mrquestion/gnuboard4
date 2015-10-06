@@ -51,14 +51,15 @@ if ($_POST[title]) {
     if (!$msg) {
         $next_num = get_next_num($write_table);
 
-        $sql = " select min(wr_comment) as max_comment from $write_table 
-                  where wr_parent = '$wr_id' and wr_comment < 0 ";
+        $sql = " select max(wr_comment) as max_comment from $write_table 
+                  where wr_parent = '$wr_id' and wr_is_comment = 1 ";
         $row = sql_fetch($sql);
-        $row[max_comment] -= 1;
+        $row[max_comment] += 1;
 
         $sql = " insert into $g4[write_prefix]$bo_table
                     set wr_num = '$next_num',
                         wr_parent = '$wr_id',
+                        wr_is_comment = '1',
                         wr_comment = '$row[max_comment]',
                         wr_content = '$title\n$excerpt',
                         wr_trackback = '$_POST[url]',

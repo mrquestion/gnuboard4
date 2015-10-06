@@ -1,3 +1,49 @@
+4.03.00 (05.07.23)
+    :   추후 확장을 위하여 SMS 수신여부 필드를 회원테이블에 추가
+    :   그룹, 게시판관리자가 있어도 최고관리자에게 메일을 발송
+    :   게시물 복사, 이동시 그룹관리자가 관리하는 게시판이 모두 출력되지 않던 오류 수정
+    :   투표 수정
+    :   게시판테이블에 wr_is_comment 필드를 추가하여 원글과 코멘트를 구분하여 쿼리 실행시 속도를 월등히 향상 시킴
+    :   게시판관리자, 그룹관리자 선택하는것에서 입력하는것으로 수정
+    :   관리자 > 회원관리 수정에 수동인증 추가
+    :   회원가입시 회원결과페이지로 이동하지 않던 오류 수정
+
+        필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/board_form.php
+        adm/board_form_update.php
+        adm/board_list.php
+        adm/boardgroup_form.php
+        adm/boardgroup_form_update.php
+        adm/boardgroup_list.php
+        adm/index.php
+        adm/member_form.php
+        adm/member_form_update.php
+        adm/repair.php
+        adm/upgrade.php
+        bbs/board.php
+        bbs/delete.php
+        bbs/delete_all.php
+        bbs/delete_comment.php
+        bbs/list.php
+        bbs/move.php
+        bbs/move_update.php
+        bbs/poll_update.php
+        bbs/register_form_update.php
+        bbs/rss.php
+        bbs/search.php
+        bbs/scrap_popin.php
+        bbs/scrap_popin_update.php
+        bbs/tb.php
+        bbs/view.php
+        bbs/view_comment.php
+        bbs/write.php
+        bbs/write_comment_update.php
+        bbs/write_update.php
+        lib/latest.lib.php
+        skin/search/basic/search.skin.php
+        skin/member/basic/register_form.skin.php
+
 4.02.01 (05.07.18)
     :   관리자가 회원아이디 직접 생성시 메일인증일시 입력
     :   게시판그룹관리자가 관리자페이지에서 게시판 생성, 수정을 할 수 없었던 오류 수정
@@ -938,4 +984,8 @@
     8. 게시판별로 포인트 점수를 다르게 부여할 수 있음
     9. 회원가입시 이메일 본인인증 가능
    10. 그외 다수
+--------------------------------------------------------------------------------
+알려진 버그
+--------------------------------------------------------------------------------
+    1. 코멘트가 검색에 포함된 경우 목록에서 정렬(조회순 등등)이 제대로 되지 않습니다.
 ================================================================================

@@ -41,9 +41,9 @@ echo "<link>".specialchars_replace("$g4[url]/$g4[bbs]/board.php?bo_table=$bo_tab
 echo "<description>테스트 버전 0.2 (2004-04-26)</description>\n";
 echo "<language>ko</language>\n";
 
-$sql = " select wr_id, wr_subject, wr_content, wr_name, wr_datetime, wr_option
+$sql = " select wr_id, wr_subject, wr_content, wr_name, wr_datetime, wr_option 
            from $g4[write_prefix]$bo_table 
-          where wr_comment = 0 
+          where wr_is_comment = 0 
             and wr_option not like '%secret%'
           order by wr_num, wr_reply limit 0, $lines ";
 $result = sql_query($sql);

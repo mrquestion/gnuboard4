@@ -42,8 +42,7 @@ else if ($w == "u")
 {
     $sql = " update $g4[group_table]
                 set $sql_common
-              where gr_id = '$gr_id'
-                and gr_admin = '$member[mb_id]' ";
+              where gr_id = '$gr_id' ";
     sql_query($sql);
 } 
 else

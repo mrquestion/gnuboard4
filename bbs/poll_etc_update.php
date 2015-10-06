@@ -45,5 +45,5 @@ if ($w == "") {
     }
 }
 
-goto_url("./poll_result.php?po_id=$po_id");
+goto_url("./poll_result.php?po_id=$po_id&skin_dir=$skin_dir");
 ?>

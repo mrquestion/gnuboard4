@@ -1,8 +1,7 @@
 <?
 include_once("./_common.php");
 
-if (!$stx) 
-    alert("검색어가 없습니다."); 
+if (!$stx) alert("검색어가 없습니다."); 
 
 $g4[title] = "검색 : " . $stx;
 include_once("./_head.php");
@@ -72,40 +71,38 @@ $op1 = "";
 $s = explode(" ", $stx);
 
 // 검색필드를 구분자로 나눈다. 여기서는 +
-$field = explode("+", trim($sfl));
+$field = explode("||", trim($sfl));
 
-$str = " ( ";
+$str = "(";
 for ($i=0; $i<count($s); $i++) 
 {
     //$search_str = strtolower($s[$i]);
     $search_str = $s[$i];
     $str .= $op1;
-    $str .= " ( ";
+    $str .= "(";
     
     $op2 = "";
     for ($k=0; $k<count($field); $k++) // 필드의 수만큼 다중 필드 검색 가능 (필드1+필드2...)
     {
-        $str .= " $op2 ";
+        $str .= $op2;
         switch ($field[$k]) 
         {
             case "mb_id" :
-                $str .= " $field[$k] = '$s[$i]' ";
-                break;
             case "mb_name" :
-                $str .= " $field[$k] like '%$s[$i]' ";
+                $str .= "$field[$k] = '$s[$i]'";
                 break;
             default :
                 if (preg_match("/[a-zA-Z]/", $search_str))
-                    $str .= " INSTR(LOWER($field[$k]), LOWER('$search_str')) > 0 ";
+                    $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
                 else
-                    $str .= " INSTR($field[$k], '$search_str') > 0 ";
+                    $str .= "INSTR($field[$k], '$search_str')";
                 break;
         }
         $op2 = " or ";
     }
-    $str .= " ) ";
+    $str .= ")";
 
-    $op1 = " " . $sop . " ";
+    $op1 = " $sop ";
 
     // 인기검색어
     $sql = " insert into $g4[popular_table]
@@ -114,7 +111,7 @@ for ($i=0; $i<count($s); $i++)
                     pp_ip = '$_SERVER[REMOTE_ADDR]' ";
     sql_query($sql, FALSE);
 }
-$str .= " ) ";
+$str .= ")";
 
 //$sql_search = $str . " and wr_option not like '%secret%' "; // 비밀글은 제외
 $sql_search = $str;
@@ -128,18 +125,14 @@ $total_count = 0;
 for ($i=0; $i<count($g4_search[tables]); $i++) 
 {
     $tmp_write_table   = $g4[write_prefix] . $g4_search[tables][$i];
+    
+    $sql = " select wr_id from $tmp_write_table where $sql_search ";
+    $result = sql_query($sql);
+    $row[cnt] = @mysql_num_rows($result);
 
-    /*
-    $sql = " select count(*) as cnt 
-               from $tmp_write_table a,
-                    $g4[board_table] b ";
-    $sql .= "   where (b.bo_table = '{$g4_search[tables][$i]}') 
-                  and $sql_search ";
-    */
-    $sql = " select count(*) as cnt from $tmp_write_table where $sql_search ";
-    // 권한별 검색기능
-    //$sql .= " and (b.bo_table='{$g4_search[tables][$i]}' and b.bo_list_level <= '$member[mb_level]' and b.bo_read_level <= '$member[mb_level]') ";
-    $row = sql_fetch($sql);
+    //$sql = " select count(*) as cnt from $tmp_write_table where $sql_search ";
+    //$row = sql_fetch($sql);
+
     $total_count += $row[cnt];
     if ($row[cnt]) 
     {
@@ -181,10 +174,7 @@ for ($idx=$table_index; $idx<count($search_table); $idx++)
 
     $tmp_write_table = $g4[write_prefix] . $search_table[$idx];
 
-    $sql = " select * 
-               from $tmp_write_table a
-              where $sql_search
-              order by a.wr_id desc limit $from_record, $rows ";
+    $sql = " select * from $tmp_write_table where $sql_search order by wr_id desc limit $from_record, $rows ";
     $result = sql_query($sql);
     for ($i=0; $row=sql_fetch_array($result); $i++) 
     {
@@ -192,7 +182,7 @@ for ($idx=$table_index; $idx<count($search_table); $idx++)
         $list[$idx][$i] = $row;
         $list[$idx][$i][href] = "./board.php?bo_table=$search_table[$idx]&wr_id=$row[wr_parent]";
 
-        if ($row[wr_comment] < 0) 
+        if ($row[wr_is_comment]) 
         { 
             $link .= "#c{$row[wr_id]}";
             $sql2 = " select wr_subject, wr_option from $tmp_write_table where wr_id = '$row[wr_parent]' ";

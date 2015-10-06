@@ -126,7 +126,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     echo "<td><input type=text class=edit name=gr_subject[$i] value='$row[gr_subject]' size=30></td>";
 
     if ($is_admin == "super")
-        echo "<td>".get_member_id_select("gr_admin[$i]", 9, $row[gr_admin])."</td>";
+        //echo "<td>".get_member_id_select("gr_admin[$i]", 9, $row[gr_admin])."</td>";
+        echo "<td><input type=text class=edit name=gr_admin[$i] value='$row[gr_admin]' maxlength=20></td>";
     else
         echo "<input type=hidden name='gr_admin[$i]' value='$row[gr_admin]'><td>$row[gr_admin]</td>";
 

@@ -58,11 +58,11 @@ include_once ("./admin.head.php");
     <td>현재 접속자</td>
     <td><input type=text class='edit' name='cf_login_minutes' value='<?=$config[cf_login_minutes]?>' size=5> 분<br>설정값 이내의 접속자를 현재 접속자로 인정</td>
     <td>한페이지당 라인수</td>
-    <td><input type=text class='edit' name='cf_page_rows' value='<?=$config[cf_page_rows]?>' size=5> 라인<br>(목록 한페이지당 라인수)</td>
+    <td><input type=text class='edit' name='cf_page_rows' value='<?=$config[cf_page_rows]?>' size=5> 라인 (목록 한페이지당 라인수)</td>
 </tr>
 <tr class='ht'>
     <td>최근게시물 스킨</td>
-    <td colspan=3><select id=cf_new_skin name=cf_new_skin required itemname="최근게시물 스킨">
+    <td><select id=cf_new_skin name=cf_new_skin required itemname="최근게시물 스킨">
         <?
         $arr = get_skin_dir("new");
         for ($i=0; $i<count($arr); $i++) {
@@ -71,10 +71,12 @@ include_once ("./admin.head.php");
         ?></select>
         <script language="JavaScript"> document.getElementById('cf_new_skin').value="<?=$config[cf_new_skin]?>";</script>
     </td>
+    <td>최근게시물 라인수</td>
+    <td><input type=text class='edit' name='cf_new_rows' value='<?=$config[cf_new_rows]?>' size=5> 라인 (목록 한페이지당 라인수)</td>
 </tr>
 <tr class='ht'>
     <td>검색 스킨</td>
-    <td><select id=cf_search_skin name=cf_search_skin required itemname="검색 스킨">
+    <td colspan=3><select id=cf_search_skin name=cf_search_skin required itemname="검색 스킨">
         <?
         $arr = get_skin_dir("search");
         for ($i=0; $i<count($arr); $i++) {
@@ -83,8 +85,10 @@ include_once ("./admin.head.php");
         ?></select>
         <script language="JavaScript"> document.getElementById('cf_search_skin').value="<?=$config[cf_search_skin]?>";</script>
     </td>
+</tr>
+<tr class='ht'>
     <td>접속자 스킨</td>
-    <td><select id=cf_connect_skin name=cf_connect_skin required itemname="최근게시물 스킨">
+    <td colspan=3><select id=cf_connect_skin name=cf_connect_skin required itemname="최근게시물 스킨">
         <?
         $arr = get_skin_dir("connect");
         for ($i=0; $i<count($arr); $i++) {

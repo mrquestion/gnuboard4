@@ -16,7 +16,7 @@ if ($w == "")
 else if ($w == "u") 
 {
     $gr_id_attr = "readonly style='background-color:#dddddd'";
-    $gr = sql_fetch(" select * from $g4[group_table] where gr_id = '$gr_id' and gr_admin = '$member[mb_id]' ");
+    $gr = sql_fetch(" select * from $g4[group_table] where gr_id = '$gr_id' ");
     $html_title .= " ¼öÁ¤";
 } 
 else
@@ -61,7 +61,8 @@ include_once("./admin.head.php");
     <td>
         <?
         if ($is_admin == "super")
-            echo get_member_id_select("gr_admin", 9, $row[gr_admin]);
+            //echo get_member_id_select("gr_admin", 9, $row[gr_admin]);
+            echo "<input type='text' class='edit' name=gr_admin value='$gr[gr_admin]'>";
         else
             echo "<input type=hidden name='gr_admin' value='$gr[gr_admin]'>$gr[gr_admin]";
         ?></td>

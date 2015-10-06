@@ -470,17 +470,12 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
 
     // 검색필드를 구분자로 나눈다. 여기서는 +
     $field = array();
-    $field = explode("+", trim($search_field));
+    $field = explode("||", trim($search_field));
 
-    $str .= " ( ";
-    for ($i=0; $i<count($s); $i++) {
+    $str .= "(";
+    for ($i=0; $i<count($s); $i++) 
+    {
         // 검색어
-        /*
-        if (preg_match("/[a-zA-Z]/", $s[$i]))
-            $search_str = strtolower($s[$i]);
-        else
-            $search_str = $s[$i];
-        */
         $search_str = $s[$i];
 
         // 인기검색어
@@ -490,18 +485,16 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
                         pp_ip = '$_SERVER[REMOTE_ADDR]' ";
         sql_query($sql, FALSE);
 
-        $str .= " " . $op1 . " ";
-        $str .= " ( ";
+        $str .= $op1;
+        $str .= "(";
 
         $op2 = "";
         for ($k=0; $k<count($field); $k++) { // 필드의 수만큼 다중 필드 검색 가능 (필드1+필드2...)
-            $str .= " $op2 ";
+            $str .= $op2;
             switch ($field[$k]) {
                 case "mb_id" :
+                case "wr_name" :
                     $str .= " $field[$k] = '$s[$i]' ";
-                    break;
-                case "mb_name" :
-                    $str .= " $field[$k] like '%$s[$i]' ";
                     break;
                 case "wr_hit" :
                 case "wr_good" :
@@ -510,24 +503,24 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
                     break;
                 // 번호는 해당 검색어에 -1 을 곱함
                 case "wr_num" :
-                    $str .= " $field[$k] = ".((-1)*$s[$i]);
+                    $str .= "$field[$k] = ".((-1)*$s[$i]);
                     break;
                 // LIKE 보다 INSTR 속도가 빠름
                 default :
                     if (preg_match("/[a-zA-Z]/", $search_str))
-                        $str .= " INSTR(LOWER($field[$k]), LOWER('$search_str')) > 0 ";
+                        $str .= "INSTR(LOWER($field[$k]), LOWER('$search_str'))";
                     else
-                        $str .= " INSTR($field[$k], '$search_str') > 0 ";
+                        $str .= "INSTR($field[$k], '$search_str')";
                     break;
             }
             $op2 = " or ";
         }
-        $str .= " ) ";
+        $str .= ")";
 
         //$op1 = ($search_operator) ? ' and ' : ' or ';
-        $op1 = $search_operator;
+        $op1 = " $search_operator ";
     }
-    $str .= " ) ";
+    $str .= ")";
 
     return $str;
 }

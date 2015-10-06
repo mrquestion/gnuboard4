@@ -9,7 +9,7 @@ if (!$board[bo_table])
        alert("존재하지 않는 게시판입니다.", $g4[path]);
 }
 
-if ($write[wr_comment] < 0) 
+if ($write[wr_is_comment]) 
 {
     if ($cwin) // 코멘트 보기
         alert_close("코멘트는 상세보기 하실 수 없습니다.");

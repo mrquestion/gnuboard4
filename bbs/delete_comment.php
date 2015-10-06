@@ -4,7 +4,7 @@ include_once("./_common.php");
 
 $write = sql_fetch(" select * from $write_table where wr_id = '$comment_id' ");
 
-if (!$write[wr_id] || $write[wr_comment] > -1)
+if (!$write[wr_id] || !$write[wr_is_comment])
     alert("등록된 코멘트가 없거나 코멘트 글이 아닙니다.");
 
 if ($is_admin == "super") // 최고관리자 통과
@@ -43,7 +43,8 @@ $sql = " select count(*) as cnt from $write_table
           where wr_comment_reply like '$comment_reply%'
             and wr_id <> '$comment_id'
             and wr_parent = '$write[wr_parent]'
-            and wr_comment = '$write[wr_comment]' ";
+            and wr_comment = '$write[wr_comment]' 
+            and wr_is_comment = 1 ";
 $row = sql_fetch($sql);
 if ($row[cnt] && !$is_admin)
     alert("이 코멘트와 관련된 답변코멘트가 존재하므로 삭제 할 수 없습니다.");

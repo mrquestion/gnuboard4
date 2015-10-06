@@ -30,8 +30,9 @@ else if ($w == "u")
 else 
     alert("제대로 된 값이 넘어오지 않았습니다.");
 
-if ($mb[mb_mailling])   $mailling_checked = "checked";  // 메일링 서비스
-if ($mb[mb_open])       $open_checked = "checked";      // 정보 공개
+if ($mb[mb_mailling]) $mailling_checked = "checked"; // 메일 수신
+if ($mb[mb_sms])      $sms_checked = "checked"; // SMS 수신
+if ($mb[mb_open])     $open_checked = "checked"; // 정보 공개
 
 $g4[title] = "회원정보 " . $html_title;
 include_once("./admin.head.php");
@@ -116,10 +117,14 @@ include_once("./admin.head.php");
         <script language="JavaScript"> document.fmember.mb_sex.value = "<?=$mb[mb_sex]?>"; </script></td>
 </tr>
 <tr class='ht'>
-    <td>메일링 서비스</td>
+    <td>메일 수신</td>
     <td><input type=checkbox name=mb_mailling value='1' <?=$mailling_checked?>> 정보 메일을 받음</td>
+    <td>SMS 수신</td>
+    <td><input type=checkbox name=mb_sms value='1' <?=$sms_checked?>> 문자메세지를 받음</td>
+</tr>
+<tr class='ht'>
     <td>정보 공개</td>
-    <td><input type=checkbox name=mb_open value='1' <?=$open_checked?>> 타인에게 자신의 정보를 공개</td>
+    <td colspan=3><input type=checkbox name=mb_open value='1' <?=$open_checked?>> 타인에게 자신의 정보를 공개</td>
 </tr>
 <tr class='ht'>
     <td>서명</td>
@@ -145,7 +150,8 @@ include_once("./admin.head.php");
     
     <? if ($config[cf_use_email_certify]) { ?>
     <td>인증일시</td>
-    <td><?=$mb[mb_email_certify]?></td>
+    <td><?=$mb[mb_email_certify]?> 
+        <? if ($mb[mb_email_certify] == "0000-00-00 00:00:00") { echo "<input type=checkbox name=passive_certify>수동인증"; } ?></td>
     <? } else { ?>
     <td></td>
     <td></td>

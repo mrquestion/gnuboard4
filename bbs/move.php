@@ -33,21 +33,15 @@ $sql = " select *
           where a.gr_id = b.gr_id
             and bo_table <> '$bo_table' ";
 if ($is_admin == 'group') 
-    $sql .= " and a.gr_id = '$group[gr_id]' ";
+    $sql .= " and b.gr_admin = '$member[mb_id]' ";
 else if ($is_admin == 'board') 
     $sql .= " and a.bo_admin = '$member[mb_id]' ";
 $sql .= " order by a.gr_id, a.bo_table ";
 $result = sql_query($sql);
-for ($i=0; $row=sql_fetch_array($result); $i++) {
+for ($i=0; $row=sql_fetch_array($result); $i++) 
+{
     $list[$i] = $row;
-    /*
-    $list[$i][gr_subject] = $row[gr_subject];
-    $list[$i][bo_table]   = $row[bo_table];
-    $list[$i][bo_subject] = $row[bo_subject];
-    */
 }
-
-//echo $title_image;
 ?>
 
 <table width="100%" border="0" cellpadding="2" cellspacing="0"><tr><td>

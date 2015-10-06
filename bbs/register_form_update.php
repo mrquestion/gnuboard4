@@ -108,6 +108,7 @@ if ($w == "")
                     mb_recommend = '$mb_recommend',
                     mb_login_ip = '$_SERVER[REMOTE_ADDR]',
                     mb_mailling = '$mb_mailling',
+                    mb_sms = '$mb_sms',
                     mb_open = '$mb_open',
                     mb_1 = '$mb_1',
                     mb_2 = '$mb_2',
@@ -155,10 +156,9 @@ if ($w == "")
 
     // 메일인증 사용하지 않는 경우에만 로그인
     if (!$config[cf_use_email_certify]) 
-    {
         set_session("ss_mb_id", $mb_id);
-        set_session("ss_mb_reg", $mb_id);
-    }
+
+    set_session("ss_mb_reg", $mb_id);
 } 
 else if ($w == "u") 
 {

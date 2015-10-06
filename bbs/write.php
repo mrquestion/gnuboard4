@@ -37,7 +37,7 @@ else if ($w == "u")
               where wr_reply like '$reply%'
                 and wr_id <> '$write[wr_id]'
                 and wr_num = '$write[wr_num]'
-                and wr_comment > -1 ";
+                and wr_is_comment = 0 ";
     $row = sql_fetch($sql);
     if ($row[cnt] && !$is_admin)
         alert("이 글과 관련된 답변글이 존재하므로 수정 할 수 없습니다.\\n\\n답변글이 있는 원글은 수정할 수 없습니다.");
@@ -46,7 +46,7 @@ else if ($w == "u")
     $sql = " select count(*) as cnt from $write_table
               where wr_parent = '$wr_id'
                 and mb_id <> '$member[mb_id]'
-                and wr_comment < 0 ";
+                and wr_is_comment = 1 ";
     $row = sql_fetch($sql);
     if ($row[cnt] >= $board[bo_count_modify] && !$is_admin)
         alert("이 글과 관련된 코멘트가 존재하므로 수정 할 수 없습니다.\\n\\n코멘트가 {$board[bo_count_delete]}건 이상 달린 원글은 수정할 수 없습니다.");

@@ -238,6 +238,10 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <TD class=m_padding><input type=checkbox name=mb_mailling value='1' <?=($w=='' || $member[mb_mailling])?'checked':'';?>>정보 메일을 받겠습니다.</TD>
         </TR>
         <TR bgcolor="#FFFFFF">
+            <TD width="160" class=m_title>SMS 수신여부</TD>
+            <TD class=m_padding><input type=checkbox name=mb_sms value='1' <?=($w=='' || $member[mb_sms])?'checked':'';?>>핸드폰 문자메세지를 받겠습니다.</TD>
+        </TR>
+        <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>정보공개</TD>
             <TD class=m_padding><input type=checkbox name=mb_open value='1' <?=($w=='' || $member[mb_open])?'checked':'';?>>다른분들이 나의 정보를 볼 수 있도록 합니다.</td>
         </TR>

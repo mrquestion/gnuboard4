@@ -115,6 +115,6 @@ function poll_result(po_id)
         echo " alert('권한 $po[po_level] 이상의 회원만 결과를 보실 수 있습니다.'); return false; ";
     ?>
 
-    win_poll("<?=$g4[bbs_path]?>/poll_result.php?po_id="+po_id);
+    win_poll("<?=$g4[bbs_path]?>/poll_result.php?po_id="+po_id+"&skin_dir="+document.fpoll.skin_dir.value);
 }
 </script>

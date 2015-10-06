@@ -22,6 +22,7 @@ $sql = " update $g4[config_table]
                 cf_cut_name             = '$cf_cut_name',
                 cf_nick_modify          = '$cf_nick_modify',
                 cf_new_skin             = '$cf_new_skin',
+                cf_new_rows             = '$cf_new_rows',
                 cf_search_skin          = '$cf_search_skin',
                 cf_connect_skin         = '$cf_connect_skin',
                 cf_read_point           = '$cf_read_point',

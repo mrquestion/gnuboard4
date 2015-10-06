@@ -21,6 +21,7 @@ $sql_common = " mb_name         = '$mb_name',
                 mb_intercept_date='$mb_intercept_date',
                 mb_memo         = '$mb_memo',
                 mb_mailling     = '$mb_mailling',
+                mb_sms          = '$mb_sms',
                 mb_open         = '$mb_open',
                 mb_profile      = '$mb_profile',
                 mb_level        = '$mb_level',
@@ -94,9 +95,15 @@ else if ($w == "u")
     else
         $sql_password = "";
 
+    if ($passive_certify)
+        $sql_certify = " , mb_email_certify = '$g4[time_ymdhis]' ";
+    else
+        $sql_certify = "";
+
     $sql = " update $g4[member_table]
                 set $sql_common
                     $sql_password 
+                    $sql_certify
               where mb_id = '$mb_id' ";
     sql_query($sql);
 } 

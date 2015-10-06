@@ -18,7 +18,7 @@ function latest($skin_dir="", $bo_table, $rows=10, $subject_len=40)
     $board = sql_fetch($sql);
 
     $tmp_write_table = $g4[write_prefix] . $bo_table; // 게시판 테이블 전체이름
-    $sql = " select * from $tmp_write_table where wr_comment > -1 order by wr_id desc limit 0, $rows ";
+    $sql = " select * from $tmp_write_table where wr_is_comment = 0 order by wr_id desc limit 0, $rows ";
     //explain($sql);
     $result = sql_query($sql);
     for ($i=0; $row = sql_fetch_array($result); $i++) 

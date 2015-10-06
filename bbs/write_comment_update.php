@@ -24,7 +24,11 @@ if ($w == "c" && $_SESSION["ss_datetime"] >= ($g4[server_time] - $config[cf_dela
 set_session("ss_datetime", $g4[server_time]);
 
 // 동일내용 연속 등록 불가
-$row = sql_fetch(" select MD5(CONCAT(wr_ip, wr_subject, wr_content)) as prev_md5 from $write_table where wr_comment = -1 order by wr_id desc limit 1 ");
+$sql = " select MD5(CONCAT(wr_ip, wr_subject, wr_content)) as prev_md5 from $write_table ";
+if ($w == "cu")
+    $sql .= " where wr_id <> '$commend_id' ";
+$sql .= " order by wr_id desc limit 1 ";
+$row = sql_fetch($sql);
 $curr_md5 = md5($_SERVER[REMOTE_ADDR].$wr_subject.$wr_content);
 if ($row[prev_md5] == $curr_md5 && !$is_admin)
     alert("동일한 내용을 연속해서 등록할 수 없습니다.");
@@ -111,10 +115,11 @@ if ($w == "c") // 코멘트 입력
     }
     else 
     {
-        $sql = " select min(wr_comment) as max_comment from $write_table 
-                  where wr_parent = '$wr_id' and wr_comment < 0 ";
+        $sql = " select max(wr_comment) as max_comment from $write_table 
+                  where wr_parent = '$wr_id' and wr_is_comment = 1 ";
         $row = sql_fetch($sql);
-        $row[max_comment] -= 1;
+        //$row[max_comment] -= 1;
+        $row[max_comment] += 1;
         $tmp_comment = $row[max_comment];
         $tmp_comment_reply = "";
     }
@@ -125,6 +130,7 @@ if ($w == "c") // 코멘트 입력
                     wr_num = '$wr[wr_num]',
                     wr_reply = '',
                     wr_parent = '$wr_id',
+                    wr_is_comment = '1',
                     wr_comment = '$tmp_comment',
                     wr_comment_reply = '$tmp_comment_reply',
                     wr_subject = '$wr_subject',
@@ -164,7 +170,8 @@ if ($w == "c") // 코멘트 입력
 
     // 메일발송
     {
-        // 게시판 관리자의 정보를 얻고
+        // 관리자의 정보를 얻고
+        $super = get_admin("super");
         $admin = get_admin("board");
 
         $wr_subject = get_text(stripslashes($wr[wr_subject]));
@@ -185,8 +192,11 @@ if ($w == "c") // 코멘트 입력
         ob_end_clean();
 
         // 관리자에게 보내는 메일
-        if ($wr_email != $admin[mb_email])
-            mailer($wr_name, $wr_email, $admin[mb_email], $subject, $content, 1);
+        mailer($wr_name, $wr_email, $admin[mb_email], $subject, $content, 1);
+
+        // 최고관리자에게 보내는 메일
+        if ($super[mb_email] != $admin[mb_email])
+            mailer($wr_name, $wr_email, $super[mb_email], $subject, $content, 1);
 
         // 답변 메일받기 (원게시자에게 보내는 메일)
         if ($wr[wr_recv_email] && $wr[wr_email] && $wr[wr_email] != $admin[mb_email]) 
@@ -221,7 +231,8 @@ else if ($w == "cu") // 코멘트 수정
               where wr_comment_reply like '$comment_reply%'
                 and wr_id <> '$comment_id'
                 and wr_parent = '$wr_id'
-                and wr_comment = '$tmp_comment' ";
+                and wr_comment = '$tmp_comment' 
+                and wr_is_comment = 1 ";
     $row = sql_fetch($sql);
     if ($row[cnt] && !$is_admin)
         alert("이 코멘트와 관련된 답변코멘트가 존재하므로 수정 할 수 없습니다.");

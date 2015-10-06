@@ -13,6 +13,7 @@ CREATE TABLE __TABLE_NAME__ (
   wr_num int(11) NOT NULL default '0',
   wr_reply varchar(10) NOT NULL default '',
   wr_parent int(11) NOT NULL default '0',
+  wr_is_comment tinyint(4) NOT NULL default '0',
   wr_comment int(11) NOT NULL default '0',
   wr_comment_reply varchar(5) NOT NULL default '',
   ca_name varchar(255) NOT NULL default '',
@@ -45,8 +46,7 @@ CREATE TABLE __TABLE_NAME__ (
   wr_9 varchar(255) NOT NULL default '',
   wr_10 varchar(255) NOT NULL default '',
   PRIMARY KEY  (wr_id),
-  KEY wr_comment_num (wr_comment,wr_num,wr_reply),
   KEY wr_num_reply_parent (wr_num,wr_reply,wr_parent),
-  KEY wr_parent_comment (wr_parent,wr_comment)
+  KEY wr_is_comment (wr_is_comment,wr_id)
 ) TYPE=MyISAM;
 

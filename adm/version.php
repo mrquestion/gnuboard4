@@ -21,7 +21,7 @@ echo "</b>";
 <tr> 
     <td> 
 
-<textarea name="textarea" style='width:100%; line-height:150%;' rows="25" class="box" readonly><?=implode("", file("../HISTORY"));?></textarea> 
+<textarea name="textarea" style='width:100%; line-height:150%;' rows="25" class="box" readonly><?=implode("", file("$g4[path]/HISTORY"));?></textarea> 
 
     </td> 
 </tr> 

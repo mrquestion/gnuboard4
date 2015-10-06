@@ -84,7 +84,8 @@ $table_width = 1004;
     <td>
         <table width="100%" height="33" cellspacing="0" cellpadding="0">
         <form name="fsearchbox" method="get" action="javascript:fsearchbox_submit(document.fsearchbox);">
-        <input type="hidden" name="sfl" value="concat(wr_subject,wr_content)">
+        <!-- <input type="hidden" name="sfl" value="concat(wr_subject,wr_content)"> -->
+        <input type="hidden" name="sfl" value="wr_subject||wr_content">
         <input type="hidden" name="sop" value="and">
         <tr>
             <td width="25" height="25"><img src="<?=$g4[path]?>/img/search_01.gif" width="25" height="25"></td>

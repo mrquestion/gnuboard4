@@ -61,7 +61,7 @@ for ($i=count($tmp_array)-1; $i>=0; $i--)
               where wr_reply like '$reply%'
                 and wr_id <> '$write[wr_id]'
                 and wr_num = '$write[wr_num]'
-                and wr_comment > -1 ";
+                and wr_is_comment = 0 ";
     $row = sql_fetch($sql);
     if ($row[cnt])
             continue;
@@ -72,8 +72,8 @@ for ($i=count($tmp_array)-1; $i>=0; $i--)
     $result = sql_query($sql);
     while ($row = sql_fetch_array($result)) 
     {
-        // wr_comment 가 -1 보다 크면 원글입니다.
-        if ($row[wr_comment] > -1) 
+        // 원글이라면
+        if (!$row[wr_is_comment]) 
         {
             // 원글 포인트 삭제
             if (!delete_point($row[mb_id], $bo_table, $row[wr_id], '쓰기'))
