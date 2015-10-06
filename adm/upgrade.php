@@ -10,6 +10,7 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+/*
 // 4.20.00
 // 1:1 게시판 테이블 생성
 $sql = " CREATE TABLE `$g4[oneboard_table]` (
@@ -55,6 +56,7 @@ $sql = " CREATE TABLE `$g4[oneboard_table]` (
   PRIMARY KEY  (`ob_table`)
 ) ";
 sql_query($sql, false);
+*/
 
 // 회원테이블의 주키를 mb_no 로 교체
 sql_query(" ALTER TABLE `$g4[member_table]` DROP PRIMARY KEY ", false);

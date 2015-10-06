@@ -189,7 +189,7 @@ else
 $config = sql_fetch(" select * from $g4[config_table] ");
 
 ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
-ini_set("session.gc_maxlifetime", 1440); // session data의 gabage collection 존재 기간을 지정 (초)
+ini_set("session.gc_maxlifetime", 10800); // session data의 gabage collection 존재 기간을 지정 (초)
 
 session_set_cookie_params(0, "/");
 ini_set("session.cookie_domain", $g4['cookie_domain']); 
@@ -206,21 +206,55 @@ $qstr = "";
 if (isset($bo_table))   $qstr .= 'bo_table=' . urlencode($bo_table);
 if (isset($wr_id))      $qstr .= '&wr_id=' . urlencode($wr_id);
 */
-if (isset($sca))  $qstr .= '&sca=' . urlencode($sca);
-if (isset($sfl))  $qstr .= '&sfl=' . urlencode($sfl); // search field (검색 필드)
-if (isset($stx))  $qstr .= '&stx=' . urlencode($stx); // search text (검색어)
-if (isset($sst))  $qstr .= '&sst=' . urlencode($sst); // search sort (검색 정렬 필드)
-if (isset($sod))  $qstr .= '&sod=' . urlencode($sod); // search order (검색 오름, 내림차순)
-if (isset($sop))  $qstr .= '&sop=' . urlencode($sop); // search operator (검색 or, and 오퍼레이터)
-if (isset($spt))  $qstr .= '&spt=' . urlencode($spt); // search part (검색 파트[구간])
-if (isset($page)) $qstr .= '&page=' . urlencode($page);
+if (isset($sca))  { 
+    $sca = mysql_real_escape_string($sca);
+    $qstr .= '&sca=' . urlencode($sca); 
+}
+
+if (isset($sfl))  {
+    $sfl = mysql_real_escape_string($sfl);
+    $qstr .= '&sfl=' . urlencode($sfl); // search field (검색 필드)
+}
+
+if (isset($stx))  { // search text (검색어)
+    $stx = mysql_real_escape_string($stx);
+    $qstr .= '&stx=' . urlencode($stx); 
+}
+
+if (isset($sst))  {
+    $sst = mysql_real_escape_string($sst);
+    $qstr .= '&sst=' . urlencode($sst); // search sort (검색 정렬 필드)
+}
+
+if (isset($sod))  { // search order (검색 오름, 내림차순)
+    $sod = preg_match("/^(asc|desc)$/i", $sod) ? $sod : "";
+    $qstr .= '&sod=' . urlencode($sod); 
+}
+
+if (isset($sop))  { // search operator (검색 or, and 오퍼레이터)
+    $sop = preg_match("/^(or|and)$/i", $sop) ? $sop : "";
+    $qstr .= '&sop=' . urlencode($sop); 
+}
+
+if (isset($spt))  { // search part (검색 파트[구간])
+    $spt = (int)$spt; 
+    $qstr .= '&spt=' . urlencode($spt); 
+}
+
+if (isset($page)) { // 리스트 페이지
+    $page = (int)$page; 
+    $qstr .= '&page=' . urlencode($page); 
+}
 
 // URL ENCODING
-if (isset($url)) 
+if (isset($url)) {
     $urlencode = urlencode($url);
-else 
-    //$urlencode = urlencode($_SERVER[REQUEST_URI]);
-    $urlencode = $_SERVER['REQUEST_URI'];
+}
+else {
+    // 2008.01.25 Cross Site Scripting 때문에 수정
+    //$urlencode = $_SERVER['REQUEST_URI'];
+    $urlencode = urlencode($_SERVER[REQUEST_URI]);
+}
 //===================================
 
 /* 코드 위치 수정 (최하단으로 내림)

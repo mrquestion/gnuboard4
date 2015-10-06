@@ -230,8 +230,23 @@ if ($option) {
 
 <? if ($is_norobot) { ?>
 <tr>
-    <td class=write_head><?=$norobot_str?></td>
-    <td><input class='field' type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;* 왼쪽의 글자중 <font color="red">빨간글자만</font> 순서대로 입력하세요.</td>
+    <td class=write_head>
+        <?//=$norobot_str?>
+        <?
+        // 이미지 생성이 가능한 경우 자동등록체크코드를 이미지로 만든다.
+        if (function_exists("imagecreate")) {
+            echo "<img src='$g4[bbs_path]/norobot_image.php' border='0'>";
+            $norobot_msg = "* 왼쪽의 자동등록방지 코드를 입력하세요.";
+        }
+        else {
+            echo $norobot_str;
+            $norobot_msg = "* 왼쪽의 글자중 <FONT COLOR='red'>빨간글자</font>만 순서대로 입력하세요.";
+        }
+        ?>
+    </td>
+    <td><input class='field' type=input size=10 name=wr_key itemname="자동등록방지" required>
+        &nbsp;&nbsp;<?=$norobot_msg?>
+    </td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
@@ -290,6 +305,7 @@ function html_auto_br(obj) {
 }
 
 function fwrite_check(f) {
+    /*
     var s = "";
     if (s = word_filter_check(f.wr_subject.value)) {
         alert("제목에 금지단어('"+s+"')가 포함되어있습니다");
@@ -300,6 +316,7 @@ function fwrite_check(f) {
         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
         return;
     }
+    */
 
     if (document.getElementById('char_count')) {
         if (char_min > 0 || char_max > 0) {

@@ -1,3 +1,20 @@
+4.22.00 (08.02.18) [자동등록방지 필수 패치]
+    :   상대경로 지정시 자동으로 절대경로로 바뀌던 오류 수정
+        
+        cheditor/cheditor.js
+
+    :   지에디터 사용시 본문 required 옵션 무시되는 오류를 수정
+        
+        js/wrest.js
+
+    :   자동등록방지 코드 추가 (gd lib 를 지원하는 서버에서만 정상 적용됩니다.)
+        
+        bbs/norobot.inc.php
+        bbs/norobot_image.php
+        skin/member/basic/register_form.skin.php
+        skin/board/basic/write.skin.php
+        skin/board/basic/view_comment.skin.php
+
 4.21.04 (07.12.04) [보안관련 필수 패치]
     :   외부에서 회원정보를 수정할 수 있는 오류를 수정
         회원정보 입력폼에서 f.submit() 전에 이 코드가 반드시 추가 되어야 합니다.

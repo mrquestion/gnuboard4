@@ -407,12 +407,15 @@ if (typeof(WREST_JS) == 'undefined') // 한번만 실행
         // 필드가 null 이 아니라면 오류메세지 출력후 포커스를 해당 오류 필드로 옮김
         // 오류 필드는 배경색상을 바꾼다.
         if (wrestFld != null) 
-        {
-            alert(wrestMsg);
-            wrestFld.style.backgroundColor = wrestFldBackColor;
-            wrestFld.focus();
-            return false;
-        }
+        { 
+            alert(wrestMsg); 
+            if (wrestFld.style.display != 'none') 
+            { 
+                wrestFld.style.backgroundColor = wrestFldBackColor; 
+                wrestFld.focus(); 
+            } 
+            return false; 
+        } 
 
         if (this.oldsubmit && this.oldsubmit() == false)
             return false;

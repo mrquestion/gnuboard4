@@ -9,14 +9,14 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 $is_norobot = false;
 if ($config[cf_use_norobot]) {
     // 임의의 md5 문자열을 생성
-    $tmp_str = substr(md5($g4[server_time]),0,10);
+    $tmp_str = substr(md5($g4[server_time]),0,12);
     // 난수 발생기
     list($usec, $sec) = explode(' ', microtime()); 
     $seed =  (float)$sec + ((float)$usec * 100000); 
     srand($seed);
     $keylen = strlen($tmp_str);
     $div = (int)($keylen / 2);
-    while (count($arr) < 3) 
+    while (count($arr) < 4) 
     {
         unset($arr);
         for ($i=0; $i<$keylen; $i++) 

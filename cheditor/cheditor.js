@@ -1119,7 +1119,16 @@ function run ()
 		editor.document.childNodes[0].childNodes[0].appendChild(el);
 	}
 
-	editor.document.close();
+    // 상대경로 지정시 절대경로로 바뀌던 오류로 추가 : 080122 Begin
+	if (this.pasteContent) {
+		var theForm = this.formName;
+		var formValue = document.getElementById(this.pasteContentForm).value;
+		if (formValue)
+			editor.document.write(formValue);
+	}
+    // End
+
+    editor.document.close();
 
 	editor.document.body.style.fontSize   = this.fontsize;
 	editor.document.body.style.color      = this.fontcolor;
@@ -1138,15 +1147,19 @@ function run ()
 		editor.document.body.contentEditable = true;
 	}
 
+    // 상대경로 지정시 절대경로로 바뀌던 오류로 주석 처리 : 080122 : Begin
+    /*
 	if (this.pasteContent) {
 		var theForm = this.formName;
 		//var formValue = eval("document."+theForm+"."+this.pasteContentForm+".value");
 		var formValue = document.getElementById(this.pasteContentForm).innerHTML;
-//        editor.document.body.innerHTML = formValue;
-		// formValue 값이 없을때 &nbsp; 로 변환되는것을 막음
+        //editor.document.body.innerHTML = formValue;
+		//formValue 값이 없을때 &nbsp; 로 변환되는것을 막음
 		if (formValue)
 			editor.document.body.innerHTML = this.unescape_html(formValue);
 	}
+    */
+    // End
 
 	if (this.IE) {
 		document.write("<iframe name='idtmp"+myobj+"' contentEditable=true id='idtmp"+myobj+"' style='width:0;height:0;overflow:auto;' noborder onfocus='"+myobj+".box_hide()'></iframe>");

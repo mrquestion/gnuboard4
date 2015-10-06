@@ -106,8 +106,20 @@ for ($i=0; $i<count($list); $i++) {
             이름 <INPUT type=text maxLength=20 size=10 name="wr_name" itemname="이름" required class=ed>
             패스워드 <INPUT type=password maxLength=20 size=10 name="wr_password" itemname="패스워드" required class=ed>
             <? if ($is_norobot) { ?>
-            <?=$norobot_str?>
-            <input title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" size="10" itemname="자동등록방지" required class=ed>
+            <?//=$norobot_str?>
+            <?
+            // 이미지 생성이 가능한 경우 자동등록체크코드를 이미지로 만든다.
+            if (function_exists("imagecreate")) {
+                echo "<img src='$g4[bbs_path]/norobot_image.php' border='0' align='absmiddle' style='margin-left:10px;'>";
+                $norobot_msg = "* 왼쪽의 자동등록방지 코드를 입력하세요.";
+            }
+            else {
+                echo $norobot_str;
+                $norobot_msg = "* 왼쪽의 글자중 <FONT COLOR='red'>빨간글자</font>만 순서대로 입력하세요.";
+            }
+            ?>
+            <!-- <input title="왼쪽의 글자중 빨간글자만 순서대로 입력하세요." type="input" name="wr_key" size="10" itemname="자동등록방지" required class=ed> -->
+            <input title="<?=$norobot_msg?>" type="input" name="wr_key" size="10" itemname="자동등록방지" required class=ed>
             <?}?>
         <? } ?>
         <input type=checkbox id="wr_secret" name="wr_secret" value="secret">비밀글

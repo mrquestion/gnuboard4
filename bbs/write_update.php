@@ -6,6 +6,21 @@ include_once("./_common.php");
 
 include_once("$g4[path]/lib/trackback.lib.php");
 
+/*
+$filters = explode(",", $config[cf_filter]);
+for ($i=0; $i<count($filters); $i++) {
+    $s = trim($filters[$i]); // 필터단어의 앞뒤 공백을 없앰
+    if (stristr($wr_subject, $s)) {
+        alert("제목에 금지단어(\'{$s}\')가 포함되어 있습니다.");
+        exit;
+    }
+    if (stristr($wr_content, $s)) {
+        alert("내용에 금지단어(\'{$s}\')가 포함되어 있습니다.");
+        exit;
+    }
+}
+*/
+
 $upload_max_filesize = ini_get('upload_max_filesize');
 
 if (empty($_POST))

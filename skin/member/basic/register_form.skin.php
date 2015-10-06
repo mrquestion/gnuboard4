@@ -25,7 +25,7 @@ var member_skin_path = "<?=$member_skin_path?>";
 <script language="javascript" src="<?=$g4[path]?>/js/md5.js"></script>
 <script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
 
-<table width=600 cellspacing=0 cellspacing=0 align=center>
+<table width=100% cellspacing=0 cellspacing=0 align=center>
 <form name=fregisterform method=post action="javascript:fregisterform_submit(document.fregisterform);" enctype="multipart/form-data" autocomplete="off">
 <input type=hidden name=w                value="<?=$w?>">
 <input type=hidden name=url              value="<?=$urlencode?>">
@@ -34,10 +34,8 @@ var member_skin_path = "<?=$member_skin_path?>";
 <input type=hidden name=mb_nick_enabled  value="" id="mb_nick_enabled">
 <input type=hidden name=mb_email_enabled value="" id="mb_email_enabled">
 <input type=hidden name=token value="<?=$token?>">
-<tr><td>
-
-
-<img src="<?=$member_skin_path?>/img/join_form_title.gif" width="624" height="72">
+<tr>
+    <td><img src="<?=$member_skin_path?>/img/join_form_title.gif" width="624" height="72">
 
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr>
@@ -47,7 +45,7 @@ var member_skin_path = "<?=$member_skin_path?>";
             <TD width="160" class=m_title>아이디</TD>
             <TD class=m_padding>
                 <input class=m_text maxlength=20 size=20 id='reg_mb_id' name="mb_id" value="<?=$member[mb_id]?>" <? if ($w=='u') { echo "readonly style='background-color:#dddddd;'"; } ?>
-                    <? if ($w=='') { echo "onkeyup='reg_mb_id_check();'"; } ?>>
+                    <? if ($w=='') { echo "onblur='reg_mb_id_check();'"; } ?>>
                 <span id='msg_mb_id'></span>
                 <table height=25 cellspacing=0 cellpadding=0 border=0>
                 <tr><td><font color="#66a2c8">※ 영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요.</font></td></tr>
@@ -126,7 +124,7 @@ var member_skin_path = "<?=$member_skin_path?>";
             <TD class=m_title>별명</TD>
             <TD class='m_padding lh'>
                 <input class=m_text type=text id='reg_mb_nick' name='mb_nick' maxlength=20 value='<?=$member[mb_nick]?>'
-                    onkeyup="reg_mb_nick_check();">
+                    onblur="reg_mb_nick_check();">
                 <span id='msg_mb_nick'></span>
                 <br>공백없이 한글,영문,숫자만 입력 가능 (한글2자, 영문4자 이상)
                 <br>별명을 바꾸시면 앞으로 <?=(int)$config[cf_nick_modify]?>일 이내에는 변경 할 수 없습니다.
@@ -142,7 +140,7 @@ var member_skin_path = "<?=$member_skin_path?>";
             <TD class=m_title>E-mail</TD>
             <TD class='m_padding lh'>
                 <input class=m_text type=text id='reg_mb_email' name='mb_email' size=38 maxlength=100 value='<?=$member[mb_email]?>'
-                    onkeyup="reg_mb_email_check()">
+                    onblur="reg_mb_email_check()">
                 <span id='msg_mb_email'></span>
                 <? if ($config[cf_use_email_certify]) { ?>
                     <? if ($w=='') { echo "<br>e-mail 로 발송된 내용을 확인한 후 인증하셔야 회원가입이 완료됩니다."; } ?>
@@ -308,8 +306,23 @@ var member_skin_path = "<?=$member_skin_path?>";
     <td bgcolor="#CCCCCC">
         <TABLE cellSpacing=1 cellPadding=0 width=100%>
         <TR bgcolor="#FFFFFF">
-            <td width="160" height="28" class=m_title><?=$norobot_str?></td>
-            <td class=m_padding><input class=m_text type=text name='wr_key' required itemname='자동등록방지' size=15>&nbsp;&nbsp;* 왼쪽의 글자중 <FONT COLOR="red">빨간글자</font>만 순서대로 입력하세요.</td>
+            <td width="160" height="28" class=m_title>
+                <?
+                // 이미지 생성이 가능한 경우 자동등록체크코드를 이미지로 만든다.
+                if (function_exists("imagecreate")) {
+                    echo "<img src='$g4[bbs_path]/norobot_image.php' border='0'>";
+                    $norobot_msg = "* 왼쪽의 자동등록방지 코드를 입력하세요.";
+                }
+                else {
+                    echo $norobot_str;
+                    $norobot_msg = "* 왼쪽의 글자중 <FONT COLOR='red'>빨간글자</font>만 순서대로 입력하세요.";
+                }
+                ?>
+            </td>
+            <td class=m_padding>
+                <input class=m_text type=text name='wr_key' required itemname='자동등록방지' size=15>&nbsp;&nbsp;
+                <?=$norobot_msg?>
+            </td>
         </tr>
         </table>
     </td>
@@ -473,7 +486,7 @@ function fregisterform_submit(f)
 
     if (typeof(f.wr_key) != 'undefined') {
         if (hex_md5(f.wr_key.value) != md5_norobot_key) {
-            alert('자동등록방지용 빨간글자가 순서대로 입력되지 않았습니다.');
+            alert('자동등록방지용 코드가 맞지 않습니다.');
             f.wr_key.activate();
             return;
         }
