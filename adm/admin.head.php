@@ -200,9 +200,14 @@ function layer_view(link_id, menu_id, opt, x, y)
         $tmp_menu = substr($sub_menu, 0, 3);
         if (isset($menu["menu{$tmp_menu}"][0][1]))
         {
-            echo "<a href='".$menu["menu{$tmp_menu}"][0][2]."'>";
-            echo $menu["menu{$tmp_menu}"][0][1];
-            echo "</a> > ";
+            if ($menu["menu{$tmp_menu}"][0][2])
+            {
+                echo "<a href='".$menu["menu{$tmp_menu}"][0][2]."'>";
+                echo $menu["menu{$tmp_menu}"][0][1];
+                echo "</a> > ";
+            }
+            else
+                echo $menu["menu{$tmp_menu}"][0][1]." > ";
         }
         ?>
         <?=$g4[title]?> <span class=small>: <?=$member[mb_id]?>ดิ</span>&nbsp;&nbsp;</td>

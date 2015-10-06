@@ -144,14 +144,16 @@ function url_auto_link($str)
 {
     global $config;
 
-    // 속도 향샹 031011
+    // 속도 향상 031011
     $str = preg_replace("/&lt;/", "\t_lt_\t", $str);
     $str = preg_replace("/&gt;/", "\t_gt_\t", $str);
     $str = preg_replace("/&amp;/", "&", $str);
     $str = preg_replace("/&quot;/", "\"", $str);
+    $str = preg_replace("/&nbsp;/", "\t_nbsp_\t", $str);
     $str = preg_replace("/([^(http:\/\/)]|\(|^)(www\.[^[:space:]]+)/i", "\\1<A HREF=\"http://\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
     $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
     $str = preg_replace("/(([a-z0-9_]|\-|\.)+@([^[:space:]]*)([[:alnum:]-]))/i", "<a href='mailto:\\1'>\\1</a>", $str);
+    $str = preg_replace("/\t_nbsp_\t/", "&nbsp;" , $str);
     $str = preg_replace("/\t_lt_\t/", "&lt;", $str);
     $str = preg_replace("/\t_gt_\t/", "&gt;", $str);
 

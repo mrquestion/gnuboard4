@@ -71,7 +71,7 @@ if ($is_nogood) $colspan++;
         echo $list[$i][icon_reply];
         echo "<a href='{$list[$i][href]}'>";
         if ($list[$i][is_notice])
-            echo "<font color='#AF6BE3'><strong>{$list[$i][subject]}</strong></font>";
+            echo "<font color='#FF6600'><strong>{$list[$i][subject]}</strong></font>";
         else
         {
             $style1 = $style2 = "";

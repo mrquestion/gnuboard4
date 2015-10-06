@@ -17,7 +17,7 @@ if ($addr1)
             if ($addr[sizeof($addr)-1]) 
             {
                 $list[$search_count][addr] = str_replace($addr[sizeof($addr)-1], "", substr($zipcode[1],8));
-                $list[$search_count][bunji] = $addr[sizeof($addr)-1];
+                $list[$search_count][bunji] = trim($addr[sizeof($addr)-1]);
             }
             else
                 $list[$search_count][addr] = substr($zipcode[1],8);

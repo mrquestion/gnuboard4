@@ -99,6 +99,13 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 {
     $mb_nick = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
 
+    // 메뉴번호가 바뀌는 경우에 현재 없는 저장된 메뉴는 삭제함
+    if (!isset($auth_menu[$row[au_menu]]))
+    {
+        sql_query(" delete from $g4[auth_table] where au_menu = '$row[au_menu]' ");
+        continue;
+    }
+
     $list = $i%2;
     echo "
     <input type=hidden name=mb_id[$i] value='$row[mb_id]'>
