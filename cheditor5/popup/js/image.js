@@ -253,6 +253,11 @@ function startUpload(count) {
 	}
 }
 
+function fileFilterError(selectedFile) {
+	alert("선택하신 '" + selectedFile + "' 파일은 전송할 수 없습니다.\n" +
+		  "gif, png, jpg, 그림 파일만 전송할 수 있습니다.");
+}
+
 function uploadComplete(fileData) {
 // ----------------------------------------------------------------------------------
 	if (/^-ERR/.test(fileData)) {

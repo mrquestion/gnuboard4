@@ -1,3 +1,14 @@
+4.34.06 (11.06.21)
+    :   [추가보안패치] CHSOFT 대표 나창호님께서 도움 주셨습니다. ( CHEDITOR 제작자 )
+        4.34.05 에서 보완된 패치입니다.
+        플래시에서 이미지 파일이 아닌 경우에는 업로드 하지 않습니다.
+
+        아래 3개 파일을 교체해 주시기 바랍니다.
+
+        cheditor5/imageUpload/upload.php
+        cheditor5/popup/js/image.js
+        cheditor5/popup/flash/CHXImage.swf
+
 4.34.05 (11.06.18)
     :   [보안패치] CHSOFT 대표 나창호님께서 도움 주셨습니다. ( CHEDITOR 제작자 )
         GIF Exploit 이라고 불리우는 이 공격은 이미지 파일에 PHP 코드를 심어 서버에 업로드 합니다.
