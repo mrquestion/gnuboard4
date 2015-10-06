@@ -91,9 +91,11 @@ if( !get_magic_quotes_gpc() )
 	}
 }
 
-
-unset($_GET['g4_path']);
-unset($_POST['g4_path']);
+if ($_GET['g4_path'] || $_POST['g4_path']) {
+    unset($_GET['g4_path']);
+    unset($_POST['g4_path']);
+    unset($g4_path);
+}
 
 //==========================================================================================================================
 // extract($_GET); 명령으로 인해 page.php?_POST[var1]=data1&_POST[var2]=data2 와 같은 코드가 _POST 변수로 사용되는 것을 막음
