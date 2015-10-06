@@ -1398,7 +1398,7 @@ function check_string($str, $options)
             }
         }
         // ฐ๘น้
-        else if ($oc >= 0x20) {
+        else if ($oc == 0x20) {
             if ($options & _G4_SPACE_) {
                 $s .= $c;
             }

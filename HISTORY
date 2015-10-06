@@ -1,3 +1,28 @@
+4.36.03 (2012.07.20)
+    :   [보안] 비회원 글쓰기에서 다른 사람의 글에 수정할수 있는 오류가 있어 수정 (이준호님께서 알려 주셨습니다.)
+    :   공백 비교 코드 오류로 인한 수정 (letsgolee님께서 알려 주셨습니다.)
+    :   CHARSET 고정 - 상,하단 레이아웃을 사용하지 않는 경우 경고창등이 깨지는 경우를 방지 (곱슬최씨님께서 제안해 주셨습니다.)
+
+        bbs/write.php
+
+            set_session('ss_bo_table', $_REQUEST['bo_table']);
+            set_session('ss_wr_id', $_REQUEST['wr_id']);
+
+        bbs/write_update.php
+
+            if (get_session('ss_bo_table') != $_POST['bo_table'] || get_session('ss_wr_id') != $_POST['wr_id']) {
+                alert('올바른 방법으로 수정하여 주십시오.');
+            }
+        
+        lib/common.lib.php 의 check_string() 함수중
+        
+            else if ($oc >= 0x20) { 를
+            else if ($oc == 0x20) { 와 같이 수정했습니다.
+
+        common.php 에
+
+            header("Content-Type: text/html; charset={$g4['charset']}"); 를 추가했습니다.
+
 4.36.02 (2012.06.27)
     :   플래시의 액션스크립트와 자바스크립트의 연동을 차단하여 악의적인 사이트로의 이동을 막는다. (i2sec 김준규님께서 알려 주셨습니다.)
         value="always" 를 value="never" 로, allowScriptaccess="always" 를 allowScriptaccess="never" 로 변환하는데 목적이 있다.

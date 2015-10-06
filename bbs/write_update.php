@@ -357,6 +357,10 @@ if ($w == "" || $w == "r")
 } 
 else if ($w == "u") 
 {
+    if (get_session('ss_bo_table') != $_POST['bo_table'] || get_session('ss_wr_id') != $_POST['wr_id']) {
+        alert('올바른 방법으로 수정하여 주십시오.');
+    }
+
     if ($is_admin == "super") // 최고관리자 통과
         ;
     else if ($is_admin == "group") { // 그룹관리자
@@ -375,8 +379,9 @@ else if ($w == "u")
         if ($member[mb_id] != $write[mb_id])
             alert("자신의 글이 아니므로 수정할 수 없습니다.");
     } else {
-        if ($write[mb_id])
+        if ($write[mb_id]) {
             alert("로그인 후 수정하세요.", "./login.php?url=".urlencode("./board.php?bo_table=$bo_table&wr_id=$wr_id"));
+        }
     }
 
     if ($member[mb_id]) 

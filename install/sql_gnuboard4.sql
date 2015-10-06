@@ -141,7 +141,7 @@ CREATE TABLE `$g4[board_table]_file` (
   `bf_no` int(11) NOT NULL default '0',
   `bf_source` varchar(255) NOT NULL default '',
   `bf_file` varchar(255) NOT NULL default '',
-  `bf_download` varchar(255) NOT NULL default '',
+  `bf_download` int(11) NOT NULL,
   `bf_content` text NOT NULL,
   `bf_filesize` int(11) NOT NULL default '0',
   `bf_width` int(11) NOT NULL default '0',
