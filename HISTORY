@@ -1,3 +1,10 @@
+4.31.03 (08.12.29)
+    :   잦은 토큰 에러로 인하여 토큰을 사용하지 않도록 수정 (check_token 함수)
+    :   CAPTCHA 이미지 제대로 출력되지 않는 오류 수정 (character-set 문제)
+
+        lib/common.lib.php
+        bbs/kcaptcha_session.php
+
 4.31.02 (08.11.03)
     :   HTML 쓰기에서 on으로 시작되는 이벤트(예:onclick) 사용시 에러나는 부분을 수정 : conv_content()
 

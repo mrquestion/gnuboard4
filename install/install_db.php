@@ -325,10 +325,10 @@ $f = @fopen($file, "w");
 fwrite($f, "<?\n");
 //fwrite($f, "if (!preg_match('/^'.str_replace('/', '\/', dirname(__FILE__)).'/', \$_SERVER['SCRIPT_FILENAME'])) die('정상적인 접근이 아님.');\n");
 //fwrite($f, "if (\$dbconfig_file != str_replace(\$dirname, '', __FILE__)) die('정상적인 접근이 아님');\n");
-fwrite($f, "\$mysql_host = \"$mysql_host\";\n");
-fwrite($f, "\$mysql_user = \"$mysql_user\";\n");
-fwrite($f, "\$mysql_password = \"$mysql_pass\";\n");
-fwrite($f, "\$mysql_db = \"$mysql_db\";\n");
+fwrite($f, "\$mysql_host = '$mysql_host';\n");
+fwrite($f, "\$mysql_user = '$mysql_user';\n");
+fwrite($f, "\$mysql_password = '$mysql_pass';\n");
+fwrite($f, "\$mysql_db = '$mysql_db';\n");
 fwrite($f, "?>");
 
 fclose($f);

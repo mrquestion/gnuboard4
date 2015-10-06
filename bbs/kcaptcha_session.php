@@ -1,5 +1,6 @@
 <?
 include_once("_common.php");
+header("Content-Type: text/html; charset=$g4[charset]");
 require(dirname(__FILE__).'/kcaptcha_config.php');
 include('kcaptcha.php');
 
