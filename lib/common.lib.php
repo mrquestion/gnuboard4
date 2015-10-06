@@ -420,6 +420,16 @@ function conv_subject($subject, $len, $suffix="")
     return cut_str(get_text($subject), $len, $suffix);
 }
 
+// OBJECT 태그의 XSS 막기
+function bad120422($matches)
+{
+    $code = $matches[1];
+    if (preg_match("#script#i", $code)) {
+        return "OBJECT 태그에 스크립트는 사용 불가합니다.";
+    } else if (preg_match("#base64#i", $code)) {
+        return "OBJECT 태그에 BASE64는 사용 불가합니다.";
+    }
+}
 
 // 내용을 변환
 function conv_content($content, $html)
@@ -464,16 +474,6 @@ function conv_content($content, $html)
 
         // XSS (Cross Site Script) 막기
         // 완벽한 XSS 방지는 없다.
-
-        function bad120422($matches)
-        {
-            $code = $matches[1];
-            if (preg_match("#script#i", $code)) {
-                return "OBJECT 태그에 스크립트는 사용 불가합니다.";
-            } else if (preg_match("#base64#i", $code)) {
-                return "OBJECT 태그에 BASE64는 사용 불가합니다.";
-            }
-        }
 
         // object 태그에서 javascript 코드 막기
         $content = preg_replace_callback("#<object([^>]+)>#i", "bad120422", $content);
