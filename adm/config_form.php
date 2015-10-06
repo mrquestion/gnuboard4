@@ -4,6 +4,8 @@ include_once("./_common.php");
 
 auth_check($auth[$sub_menu], "r");
 
+$token = get_token();
+
 if ($is_admin != "super")
     alert("최고관리자만 접근 가능합니다.");
 
@@ -22,7 +24,7 @@ include_once ("./admin.head.php");
 ?>
 
 <form name='fconfigform' method='post' onsubmit="return fconfigform_submit(this);">
-<input type=hidden name=token value='<?=get_token();?>'>
+<input type=hidden name=token value='<?=$token?>'>
 
 <table width=100% cellpadding=0 cellspacing=0 border=0>
 <colgroup width=20% class='col1 pad1 bold right'>

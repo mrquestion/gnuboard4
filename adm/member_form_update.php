@@ -7,6 +7,8 @@ if ($w == 'u')
 
 auth_check($auth[$sub_menu], "w");
 
+check_token();
+
 $mb_id = mysql_real_escape_string(trim($_POST['mb_id']));
 
 $sql_common = " mb_name         = '$_POST[mb_name]',
