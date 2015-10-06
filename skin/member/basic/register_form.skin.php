@@ -253,18 +253,21 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>林家</TD>
             <TD valign="middle" class=m_padding>
-                <table width="330" border="0" cellspacing="0" cellpadding="0">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td height="25"><input class=ed type=text name='mb_zip1' size=4 maxlength=3 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='快祈锅龋 菊磊府' value='<?=$member[mb_zip1]?>' style="vertical-align:middle">
                          - 
                         <input class=ed type=text name='mb_zip2' size=4 maxlength=3 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='快祈锅龋 缔磊府' value='<?=$member[mb_zip2]?>' style="vertical-align:middle">
-                        &nbsp;<a href="javascript:;" onclick="win_zip('fregisterform', 'mb_zip1', 'mb_zip2', 'mb_addr1', 'mb_addr2', 'mb_addr_jibeon');" align=absmiddle><img width="74" height="20" src="<?=$member_skin_path?>/img/post_search_btn.gif" border=0 align=absmiddle></a></td>
+                        &nbsp;<a href="javascript:;" onclick="win_zip('fregisterform', 'mb_zip1', 'mb_zip2', 'mb_addr1', 'mb_addr2', 'mb_addr3', 'mb_addr_jibeon');" align=absmiddle><img width="74" height="20" src="<?=$member_skin_path?>/img/post_search_btn.gif" border=0 align=absmiddle></a></td>
                 </tr>
                 <tr>
-                    <td height="25" colspan="2"><input class=ed type=text name='mb_addr1' size=60 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='林家' value='<?=$member[mb_addr1]?>'></td>
+                    <td height="25" colspan="2"><input class=ed type=text name='mb_addr1' size=60 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='扁夯林家' value='<?=$member[mb_addr1]?>'> 扁夯林家</td>
                 </tr>
                 <tr>
-                    <td height="25" colspan="2"><input class=ed type=text name='mb_addr2' size=60 <?=$config[cf_req_addr]?'required':'';?> itemname='惑技林家' value='<?=$member[mb_addr2]?>'></td>
+                    <td height="25" colspan="2"><input class=ed type=text name='mb_addr2' size=60 <?=$config[cf_req_addr]?'required':'';?> itemname='惑技林家' value='<?=$member[mb_addr2]?>'> 惑技林家</td>
+                </tr>
+                <tr>
+                    <td height="25" colspan="2"><input class=ed type=text name='mb_addr3' size=60 readonly itemname='曼绊亲格' value='<?=$member[mb_addr3]?>'> 曼绊亲格</td>
                 </tr>
                 <tr>
                     <td height="25" colspan="2">
