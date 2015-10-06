@@ -1,3 +1,39 @@
+4.34.21 (2012.03.09)
+    :   [º¸¾ÈÆÐÄ¡] ÆÄÀÏ¸íÀ» ÀÌ¿ëÇÑ XSS Ãë¾àÁ¡ ¼öÁ¤ (wh1ant´Ô²²¼­ µµ¿ò ÁÖ¼Ì½À´Ï´Ù.)
+    :   UTF-8 »ç¿ë½Ã ¸µÅ©¿¡¼­ ÇÑ±ÛÀÌ ±úÁö´ø ¿À·ù ¼öÁ¤ (forever´Ô, NaviGator´Ô²²¼­ µµ¿ò ÁÖ¼Ì½À´Ï´Ù.)
+
+
+        skin/board/basic/view.skin.php À» ¾Æ·¡¿Í °°ÀÌ ¼öÁ¤ÇÏ¼¼¿ä.
+
+            echo "<a href=\"javascript:file_download('{$view[file][$i][href]}', '".urlencode($view[file][$i][source])."');\" title='{$view[file][$i][content]}'>";
+            ...
+            <? if ($board[bo_download_point] < 0) { ?>if (confirm("'"+decodeURIComponent(file)+"' ÆÄÀÏÀ» ´Ù¿î·Îµå ÇÏ½Ã¸é Æ÷ÀÎÆ®°¡ Â÷°¨(<?=number_format($board[bo_download_point])?>Á¡)µË´Ï´Ù.\n\nÆ÷ÀÎÆ®´Â °Ô½Ã¹°´ç ÇÑ¹ø¸¸ Â÷°¨µÇ¸ç ´ÙÀ½¿¡ ´Ù½Ã ´Ù¿î·Îµå ÇÏ¼Åµµ Áßº¹ÇÏ¿© Â÷°¨ÇÏÁö ¾Ê½À´Ï´Ù.\n\n±×·¡µµ ´Ù¿î·Îµå ÇÏ½Ã°Ú½À´Ï±î?"))<?}?>
+
+
+        lib/common.lib.php ÀÇ function url_auto_link($str) ¿¡¼­
+
+            $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,\(\)]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+            ¸¦ 
+
+            global $g4;
+            ...
+            if (strtoupper($g4['charset']) == 'UTF-8') {
+                $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[°¡-ÆR\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,\(\)]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+            } else {
+                $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,\(\)]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+            }
+            ·Î ¼öÁ¤ÇÏ¼¼¿ä.
+
+
+4.34.20 (2012.03.02)
+    :   UTF-8 »ç¿ë½Ã cut_str ÇÔ¼ö°¡ Á¦´ë·Î ÀÛµ¿µÇÁö ¾Ê´ø ºÎºÐÀ» ¼öÁ¤ (°ö½½ÃÖ¾¾´Ô²²¼­ µµ¿ò ÁÖ¼Ì½À´Ï´Ù.)
+        °ÅÄ£¸¶·ç´ÔÀÇ ÆÁÀÌ Àû¿ë µÇ¾ú½À´Ï´Ù.
+        http://www.sir.co.kr/bbs/board.php?bo_table=g4_tiptech&wr_id=1328#c_1355
+    :   ¿ìÆí¹øÈ£ 2012.01.26.ÀÚ ¹Ý¿µ 51,898°Ç (FM2fmedia´Ô²²¼­ µµ¿ò ÁÖ¼Ì½À´Ï´Ù.)
+
+        lib/common.lib.php ÀÇ cut_str() ÇÔ¼ö ¼öÁ¤
+        bbs/zip.db 
+
 4.34.19 (2012.01.17)
     :   Æ¯Á¤ ¼­¹ö¿¡ µû¶ó Ä¸Ã­ÀÌ¹ÌÁöÀÇ °á°ú¸¦ ÀÎ½ÄÇÏÁö ¸øÇÏ´Â ¿À·ù¸¦ ¼öÁ¤
         (ÇØ¿Ü ¼­¹ö¿¡¼­ euc-kr À» »ç¿ëÇÏ´Â °æ¿ì¿¡ ¿À·ù°¡ º¸°íµÈ¹Ù ÀÖ½À´Ï´Ù.)

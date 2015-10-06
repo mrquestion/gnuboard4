@@ -141,6 +141,7 @@ function alert_close($msg)
 // way.co.kr ÀÇ wayboard Âü°í
 function url_auto_link($str)
 {
+    global $g4;
     global $config;
 
     // ¼Óµµ Çâ»ó 031011
@@ -152,7 +153,12 @@ function url_auto_link($str)
     $str = preg_replace("/([^(http:\/\/)]|\(|^)(www\.[^[:space:]]+)/i", "\\1<A HREF=\"http://\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
     //$str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
     // 100825 : () Ãß°¡
-    $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,\(\)]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+    // 120315 : CHARSET ¿¡ µû¶ó ¸µÅ©½Ã ±ÛÀÚ Àß¸² Çö»óÀÌ ÀÖ¾î ¼öÁ¤
+    if (strtoupper($g4['charset']) == 'UTF-8') {
+        $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[°¡-ÆR\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,\(\)]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+    } else {
+        $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,\(\)]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
+    }
     // ÀÌ¸ÞÀÏ Á¤±ÔÇ¥Çö½Ä ¼öÁ¤ 061004
     //$str = preg_replace("/(([a-z0-9_]|\-|\.)+@([^[:space:]]*)([[:alnum:]-]))/i", "<a href='mailto:\\1'>\\1</a>", $str);
     $str = preg_replace("/([0-9a-z]([-_\.]?[0-9a-z])*@[0-9a-z]([-_\.]?[0-9a-z])*\.[a-z]{2,4})/i", "<a href='mailto:\\1'>\\1</a>", $str);
@@ -1001,18 +1007,22 @@ function cut_str($str, $len, $suffix="¡¦")
 {
     global $g4;
 
-    $s = substr($str, 0, $len);
-    $cnt = 0;
-    for ($i=0; $i<strlen($s); $i++)
-        if (ord($s[$i]) > 127)
-            $cnt++;
-    if (strtoupper($g4['charset']) == 'UTF-8')
-        $s = substr($s, 0, $len - ($cnt % 3));
-    else
+    if (strtoupper($g4['charset']) == 'UTF-8') {
+        $c = substr(str_pad(decbin(ord($str{$len})),8,'0',STR_PAD_LEFT),0,2); 
+        if ($c == '10') 
+            for (;$c != '11' && $c{0} == 1;$c = substr(str_pad(decbin(ord($str{--$len})),8,'0',STR_PAD_LEFT),0,2)); 
+        return substr($str,0,$len) . (strlen($str)-strlen($suffix) >= $len ? $suffix : ''); 
+    } else {
+        $s = substr($str, 0, $len);
+        $cnt = 0;
+        for ($i=0; $i<strlen($s); $i++)
+            if (ord($s[$i]) > 127)
+                $cnt++;
         $s = substr($s, 0, $len - ($cnt % 2));
-    if (strlen($s) >= strlen($str))
-        $suffix = "";
-    return $s . $suffix;
+        if (strlen($s) >= strlen($str))
+            $suffix = "";
+        return $s . $suffix;
+    }
 }
 
 
