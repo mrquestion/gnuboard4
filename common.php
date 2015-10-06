@@ -401,11 +401,11 @@ else
     // 회원아이디가 쿠키에 저장되어 있다면 (3.27)
     if ($tmp_mb_id = get_cookie("ck_mb_id"))
     {
+        $tmp_mb_id = substr(preg_replace("/[^a-zA-Z0-9_]*/", "", $tmp_mb_id), 0, 20);
         // 최고관리자는 자동로그인 금지
         if ($tmp_mb_id != $config['cf_admin'])
         {
-            $sql = " select mb_password, mb_intercept_date, mb_leave_date, mb_email_certify
-                       from {$g4['member_table']} where mb_id = '$tmp_mb_id' ";
+            $sql = " select mb_password, mb_intercept_date, mb_leave_date, mb_email_certify from {$g4['member_table']} where mb_id = '{$tmp_mb_id}' ";
             $row = sql_fetch($sql);
             $key = md5($_SERVER['SERVER_ADDR'] . $_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT'] . $row['mb_password']);
             // 쿠키에 저장된 키와 같다면

@@ -1,3 +1,19 @@
+4.32.11 (10.09.11)
+    :   [보안패치] 반드시 패치하시기 바랍니다.
+        자동로그인 기능에 심각한 버그가 존재합니다. 
+
+        common.php 의 코드를 아래와 같이 수정해 주십시오.
+
+        if ($tmp_mb_id = get_cookie("ck_mb_id"))
+        {
+            $tmp_mb_id = substr(preg_replace("/[^a-zA-Z0-9_]*/", "", $tmp_mb_id), 0, 20);
+            // 최고관리자는 자동로그인 금지
+            if ($tmp_mb_id != $config['cf_admin'])
+            {
+                $sql = " select mb_password, mb_intercept_date, mb_leave_date, mb_email_certify from {$g4['member_table']} where mb_id = '{$tmp_mb_id}' ";
+
+        common.php
+
 4.32.10 (10.09.07)
     :   아이디/패스워드 찾기 코드 보완 (보안서버 적용 등)
         기존에 사용하던 password_forget 을 더 이상 사용하지 않으며 password_lost 로 대체합니다.
