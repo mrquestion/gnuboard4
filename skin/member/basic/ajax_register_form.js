@@ -1,3 +1,7 @@
+/*
+** 2010.03.12 : jQuery 로 대체하여 앞으로 사용하지 않습니다.
+*/
+
 // 회원아이디 검사
 function reg_mb_id_check() {
     var url = member_skin_path + "/ajax_mb_id_check.php";

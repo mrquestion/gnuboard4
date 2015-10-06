@@ -14,12 +14,11 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
 <script>
 var member_skin_path = "<?=$member_skin_path?>";
 </script>
-<script language="javascript" src="<?=$g4['path']?>/js/prototype.js"></script>
-<script language="javascript" src="<?=$member_skin_path?>/ajax_register_form.js"></script>
+<script language="javascript" src="<?=$member_skin_path?>/ajax_register_form.jquery.js"></script>
 <script language="javascript" src="<?=$g4[path]?>/js/md5.js"></script>
 <script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
 
-<form name=fregisterform method=post onsubmit="return fregisterform_submit(this);" enctype="multipart/form-data" autocomplete="off">
+<form id="fregisterform" name=fregisterform method=post onsubmit="return fregisterform_submit(this);" enctype="multipart/form-data" autocomplete="off">
 <input type=hidden name=w                value="<?=$w?>">
 <input type=hidden name=url              value="<?=$urlencode?>">
 <input type=hidden name=mb_jumin         value="<?=$jumin?>">
@@ -321,34 +320,12 @@ var member_skin_path = "<?=$member_skin_path?>";
 </form>
 
 
-<script type="text/javascript"> var md5_norobot_key = ''; </script>
-<script type="text/javascript" src="<?="$g4[path]/js/prototype.js"?>"></script>
+<script type="text/javascript" src="<?="$g4[path]/js/jquery.kcaptcha.js"?>"></script>
 <script type="text/javascript">
-function imageClick() {
-    var url = "<?=$g4[bbs_path]?>/kcaptcha_session.php";
-    var para = "";
-    var myAjax = new Ajax.Request(
-        url, 
-        {
-            method: 'post', 
-            asynchronous: true,
-            parameters: para, 
-            onComplete: imageClickResult
-        });
-}
-
-function imageClickResult(req) { 
-    var result = req.responseText;
-    var img = document.createElement("IMG");
-    img.setAttribute("src", "<?=$g4[bbs_path]?>/kcaptcha_image.php?t=" + (new Date).getTime());
-    document.getElementById('kcaptcha_image').src = img.getAttribute('src');
-
-    md5_norobot_key = result;
-}
-
-Event.observe(window, "load", imageClick);
-
-Form.focusFirstElement('fregisterform');
+$(function() {
+    // ÆûÀÇ Ã¹¹øÂ° ÀÔ·Â¹Ú½º¿¡ Æ÷Ä¿½º ÁÖ±â 
+    $("#fregisterform :input[type=text]:visible:enabled:first").focus(); 
+});
 
 // submit ÃÖÁ¾ ÆûÃ¼Å©
 function fregisterform_submit(f) 
@@ -358,59 +335,59 @@ function fregisterform_submit(f)
 
         reg_mb_id_check();
 
-        if ($F('mb_id_enabled')!='000') {
+        if (document.getElementById('mb_id_enabled').value!='000') {
             alert('È¸¿ø¾ÆÀÌµð¸¦ ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
-            $('reg_mb_id').activate();
+            document.getElementById('reg_mb_id').select();
             return false;
         }
     }
 
     if (f.w.value == '') {
-        if (f.mb_password.value.strip().length < 3) {
+        if (f.mb_password.value.length < 3) {
             alert('ÆÐ½º¿öµå¸¦ 3±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ê½Ã¿À.');
-            f.mb_password.activate();
+            f.mb_password.focus();
             return false;
         }
     }
 
     if (f.mb_password.value != f.mb_password_re.value) {
         alert('ÆÐ½º¿öµå°¡ °°Áö ¾Ê½À´Ï´Ù.');
-        f.mb_password_re.activate();
+        f.mb_password_re.focus();
         return false;
     }
 
-    if (f.mb_password.value.strip().length > 0) {
-        if (f.mb_password_re.value.strip().length < 3) {
+    if (f.mb_password.value.length > 0) {
+        if (f.mb_password_re.value.length < 3) {
             alert('ÆÐ½º¿öµå¸¦ 3±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ê½Ã¿À.');
-            f.mb_password_re.activate();
+            f.mb_password_re.focus();
             return false;
         }
     }
 
-    if (f.mb_password_q.value.strip().length < 1) {
+    if (f.mb_password_q.value.length < 1) {
         alert('ÆÐ½º¿öµå ºÐ½Ç½Ã Áú¹®À» ¼±ÅÃÇÏ°Å³ª ÀÔ·ÂÇÏ½Ê½Ã¿À.');
-        f.mb_password_q.activate();
+        f.mb_password_q.focus();
         return false;
     }
 
-    if (f.mb_password_a.value.strip().length < 1) {
+    if (f.mb_password_a.value.length < 1) {
         alert('ÆÐ½º¿öµå ºÐ½Ç½Ã ´äº¯À» ÀÔ·ÂÇÏ½Ê½Ã¿À.');
-        f.mb_password_a.activate();
+        f.mb_password_a.focus();
         return false;
     }
 
     // ÀÌ¸§ °Ë»ç
     if (f.w.value=='') {
-        if (f.mb_name.value.strip().length < 1) {
+        if (f.mb_name.value.length < 1) {
             alert('ÀÌ¸§À» ÀÔ·ÂÇÏ½Ê½Ã¿À.');
-            f.mb_name.activate();
+            f.mb_name.focus();
             return false;
         }
 
         var pattern = /([^°¡-ÆR\x20])/i; 
         if (pattern.test(f.mb_name.value)) {
             alert('ÀÌ¸§Àº ÇÑ±Û·Î ÀÔ·ÂÇÏ½Ê½Ã¿À.');
-            f.mb_name.activate();
+            f.mb_name.focus();
             return false;
         }
     }
@@ -421,9 +398,9 @@ function fregisterform_submit(f)
 
         reg_mb_nick_check();
 
-        if ($F('mb_nick_enabled')!='000') {
+        if (document.getElementById('mb_nick_enabled').value!='000') {
             alert('º°¸íÀ» ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
-            $('reg_mb_nick').activate();
+            document.getElementById('reg_mb_nick').select();
             return false;
         }
     }
@@ -434,9 +411,9 @@ function fregisterform_submit(f)
 
         reg_mb_email_check();
 
-        if ($F('mb_email_enabled')!='000') {
+        if (document.getElementById('mb_email_enabled').value!='000') {
             alert('E-mailÀ» ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
-            $('reg_mb_email').activate();
+            document.getElementById('reg_mb_email').select();
             return false;
         }
 
@@ -444,15 +421,15 @@ function fregisterform_submit(f)
         var domain = prohibit_email_check(f.mb_email.value);
         if (domain) {
             alert("'"+domain+"'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â ¸ÞÀÏÀÔ´Ï´Ù.");
-            $('reg_mb_email').activate();
+            document.getElementById('reg_mb_email').focus();
             return false;
         }
     }
 
     if (typeof(f.mb_birth) != 'undefined') {
-        if (f.mb_birth.value.strip().length < 1) {
+        if (f.mb_birth.value.length < 1) {
             alert('´Þ·Â ¹öÆ°À» Å¬¸¯ÇÏ¿© »ýÀÏÀ» ÀÔ·ÂÇÏ¿© ÁÖ½Ê½Ã¿À.');
-            //f.mb_birth.activate();
+            //f.mb_birth.focus();
             return false;
         }
 
@@ -469,7 +446,7 @@ function fregisterform_submit(f)
     if (typeof(f.mb_sex) != 'undefined') {
         if (f.mb_sex.value == '') {
             alert('¼ºº°À» ¼±ÅÃÇÏ¿© ÁÖ½Ê½Ã¿À.');
-            f.mb_sex.activate();
+            f.mb_sex.focus();
             return false;
         }
     }
@@ -478,7 +455,7 @@ function fregisterform_submit(f)
         if (f.mb_icon.value) {
             if (!f.mb_icon.value.toLowerCase().match(/.(gif)$/i)) {
                 alert('È¸¿ø¾ÆÀÌÄÜÀÌ gif ÆÄÀÏÀÌ ¾Æ´Õ´Ï´Ù.');
-                f.mb_icon.activate();
+                f.mb_icon.focus();
                 return false;
             }
         }
@@ -487,7 +464,7 @@ function fregisterform_submit(f)
     if (typeof(f.mb_recommend) != 'undefined') {
         if (f.mb_id.value == f.mb_recommend.value) {
             alert('º»ÀÎÀ» ÃßÃµÇÒ ¼ö ¾ø½À´Ï´Ù.');
-            f.mb_recommend.activate();
+            f.mb_recommend.focus();
             return false;
         }
     }
@@ -495,7 +472,7 @@ function fregisterform_submit(f)
     if (typeof(f.wr_key) != 'undefined') {
         if (hex_md5(f.wr_key.value) != md5_norobot_key) {
             alert('ÀÚµ¿µî·Ï¹æÁö¿ë ÄÚµå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.');
-            f.wr_key.activate();
+            f.wr_key.focus();
             return false;
         }
     }

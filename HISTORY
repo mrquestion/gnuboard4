@@ -1,3 +1,22 @@
+4.32.01 (10.03.12)
+    :   다양한 플러그인을 사용할 수 있도록 prototype.js 에서 jquery.js 로 대체합니다.
+        기존 코드를 유지하기 위하여 js/prototype.js 는 삭제하지 않습니다.
+    :   2010년 2월 5일자 우편번호로 변경 (곱슬최씨님께서 올려주신 자료입니다.)
+    :   게시판관리에 cheditor 기능 추가
+
+        head.sub.php
+        adm/board_form.php
+        adm/config_form.php
+        bbs/zip.db
+        js/jquery-1.4.2.min.js
+        js/jquery.kcaptcha.js
+        skin/board/basic/view_comment.skin.php
+        skin/board/basic/write.skin.php
+        skin/member/basic/ajax_register_form.jquery.js
+        skin/member/basic/formmail.skin.php
+        skin/member/basic/password_forget2.skin.php
+        skin/member/basic/register_form.skin.php                
+
 4.31.15 (10.02.08)
     :   회원삭제시 주민등록번호도 공란으로 수정
         function member_delete($mb_id) { ... mb_jumin = '', ...

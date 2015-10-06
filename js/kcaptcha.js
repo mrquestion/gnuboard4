@@ -1,3 +1,7 @@
+/*
+** 2010.03.12 : jQuery 로 대체하여 앞으로 사용하지 않습니다.
+*/
+
 if (typeof(KCAPTCHA_JS) == 'undefined') // 한번만 실행
 {
     if (typeof g4_path == 'undefined')

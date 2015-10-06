@@ -402,7 +402,7 @@ include_once ("./admin.head.php");
 <tr><td colspan=4 class=line1></td></tr>
 <tr class='ht'>
     <td>
-        <img id='kcaptcha_image' border='0' width=120 height=60 onclick="imageClick();" style="cursor:pointer;" title="글자가 잘안보이는 경우 클릭하시면 새로운 글자가 나옵니다.">
+        <img id='kcaptcha_image'/>
     </td>
     <td colspan=3>
         <input class='ed' type=input size=10 name='kcaptcha_key' itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.
@@ -416,9 +416,8 @@ include_once ("./admin.head.php");
     <input type=submit class=btn1 accesskey='s' value='  확  인  '>
 </form>
 
-<script type="text/javascript" src="<?="$g4[path]/js/prototype.js"?>"></script>
 <script type="text/javascript" src="<?="$g4[path]/js/md5.js"?>"></script>
-<script type="text/javascript" src="<?="$g4[path]/js/kcaptcha.js"?>"></script>
+<script type="text/javascript" src="<?="$g4[path]/js/jquery.kcaptcha.js"?>"></script>
 
 <script language="javascript">
 function fconfigform_submit(f)

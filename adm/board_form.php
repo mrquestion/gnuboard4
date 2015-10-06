@@ -1,6 +1,7 @@
 <?
 $sub_menu = "300100";
 include_once("./_common.php");
+include_once ("$g4[path]/lib/cheditor4.lib.php");
 
 auth_check($auth[$sub_menu], "w");
 
@@ -65,6 +66,10 @@ if ($is_admin != "super") {
 $g4[title] = $html_title;
 include_once ("./admin.head.php");
 ?>
+
+<script src="<?=$g4[cheditor4_path]?>/cheditor.js"></script>
+<?=cheditor1('bo_content_head', '100%', '200');?>
+<?=cheditor1('bo_content_tail', '100%', '200');?>
 
 <form name=fboardform method=post onsubmit="return fboardform_submit(this)" enctype="multipart/form-data">
 <input type=hidden name="w"     value="<?=$w?>">
@@ -492,7 +497,7 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
 <tr class='ht'>
     <td><input type=checkbox name=chk_upload_size value=1></td>
     <td>파일 업로드 용량</td>
-    <td>업로드 파일 한개당 <input type=text class=ed name=bo_upload_size size=10 required itemname='파일 업로드 용량' value='<?=$board[bo_upload_size]?>'> bytes 이하 (최대 <?=ini_get("upload_max_filesize")?> 이하) <?=help("1 MB = 1,048,576 bytes")?></td>
+    <td>업로드 파일 한개당 <input type=text class=ed name=bo_upload_size size=10 required itemname='파일 업로드 용량' value='<?=$board[bo_upload_size]?>'> bytes 이하 (최대 <?=ini_get("upload_max_filesize")?> 이하) <?=help("1 MB = 1,024,768 bytes")?></td>
 </tr>
 
 <tr><td colspan=3 class='line2'></td></tr>
@@ -511,12 +516,14 @@ if (!preg_match("/([m|M])$/", $upload_max_filesize)) {
 <tr class='ht'>
     <td><input type=checkbox name=chk_content_head value=1></td>
     <td>상단 내용</td>
-    <td><textarea class=ed name=bo_content_head rows=5 style='width:80%;'><?=$board[bo_content_head] ?></textarea></td>
+    <!-- <td><textarea class=ed name=bo_content_head rows=5 style='width:80%;'><?=$board[bo_content_head] ?></textarea></td> -->
+    <td style='padding-top:7px; padding-bottom:7px;'><?=cheditor2('bo_content_head', $board[bo_content_head]);?></td>
 </tr>
 <tr class='ht'>
     <td><input type=checkbox name=chk_content_tail value=1></td>
     <td>하단 내용</td>
-    <td><textarea class=ed name=bo_content_tail rows=5 style='width:80%;'><?=$board[bo_content_tail] ?></textarea></td></tr>
+    <!-- <td><textarea class=ed name=bo_content_tail rows=5 style='width:80%;'><?=$board[bo_content_tail] ?></textarea></td> -->
+    <td style='padding-top:7px; padding-bottom:7px;'><?=cheditor2('bo_content_tail', $board[bo_content_tail]);?></td>
 </tr>
 
 <tr><td colspan=3 class='line2'></td></tr>
@@ -608,6 +615,9 @@ function fboardform_submit(f) {
         f.bo_count_delete.focus();
         return false;
     }
+
+    <?=cheditor3('bo_content_head')."\n";?>
+    <?=cheditor3('bo_content_tail')."\n";?>
 
     f.action = "./board_form_update.php";
     return true;

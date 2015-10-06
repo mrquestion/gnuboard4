@@ -102,7 +102,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                     <td height="1" colspan="3" bgcolor="#E9E9E9"></td>
                 </tr>
                 <tr> 
-                    <td height="27" align="center"><img id='kcaptcha_image' border='0' width=120 height=60 onclick="imageClick();" style="cursor:pointer;" title="글자가 잘안보이는 경우 클릭하시면 새로운 글자가 나옵니다."></td>
+                    <td height="27" align="center"><img id='kcaptcha_image' /></td>
                     <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
                     <td><input class='ed' type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.</td>
                 </tr>
@@ -126,33 +126,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </form>
 
 <script type="text/javascript" src="<?="$g4[path]/js/md5.js"?>"></script>
-<script type="text/javascript"> var md5_norobot_key = ''; </script>
-<script type="text/javascript" src="<?="$g4[path]/js/prototype.js"?>"></script>
+<script type="text/javascript" src="<?="$g4[path]/js/jquery.kcaptcha.js"?>"></script>
 <script type="text/javascript">
-function imageClick() {
-    var url = "<?=$g4[bbs_path]?>/kcaptcha_session.php";
-    var para = "";
-    var myAjax = new Ajax.Request(
-        url, 
-        {
-            method: 'post', 
-            asynchronous: true,
-            parameters: para, 
-            onComplete: imageClickResult
-        });
-}
-
-function imageClickResult(req) { 
-    var result = req.responseText;
-    var img = document.createElement("IMG");
-    img.setAttribute("src", "<?=$g4[bbs_path]?>/kcaptcha_image.php?t=" + (new Date).getTime());
-    document.getElementById('kcaptcha_image').src = img.getAttribute('src');
-
-    md5_norobot_key = result;
-}
-
-Event.observe(window, "load", imageClick);
-
 with (document.fformmail) {
     if (typeof fname != "undefined")
         fname.focus();
@@ -165,7 +140,7 @@ function fformmail_submit(f)
     if (typeof(f.wr_key) != 'undefined') {
         if (hex_md5(f.wr_key.value) != md5_norobot_key) {
             alert('자동등록방지용 글자가 제대로 입력되지 않았습니다.');
-            f.wr_key.focus();
+            f.wr_key.select();
             return false;
         }
     }
