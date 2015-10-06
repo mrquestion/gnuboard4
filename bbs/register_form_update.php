@@ -369,7 +369,9 @@ if ($w == "") {
     if ($mb_password)
         $tmp_password = $mb_password;
     else
-        $tmp_password = get_session("ss_tmp_password");
+        //$tmp_password = get_session("ss_tmp_password");
+        // 복호화를 한 후 회원가입일시를 없애주면 원래 패스워드가 나옴
+        $tmp_password = preg_replace("/^".$member[mb_datetime]."/", "", base64_decode(get_session("ss_tmp_password")));
 
     if ($old_email != $mb_email && $config[cf_use_email_certify]) {
         set_session("ss_mb_id", "");

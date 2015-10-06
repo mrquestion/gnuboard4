@@ -74,7 +74,9 @@ else if ($w == "u")
         alert("패스워드가 틀립니다.");
 
     // 수정 후 다시 이 폼으로 돌아오기 위해 임시로 저장해 놓음
-    set_session("ss_tmp_password", $_POST[mb_password]);
+    //set_session("ss_tmp_password", $_POST[mb_password]);
+    // 패스워드를 알아볼 수 없도록 회원가입일시를 넣어서 암호화 함
+    set_session("ss_tmp_password", base64_encode($member[mb_datetime].$_POST[mb_password]));
 
     $g4[title] = "회원 정보 수정";
 } else

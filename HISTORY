@@ -1,3 +1,32 @@
+4.33.10 (11.04.27)
+    :   [보안패치] 회원정보수정시 세션에 기록된 패스워드를 알아낼 수 있는 취약점이 발견되었습니다.
+        (한국인터넷진흥원을 통하여 Null@Root 소속의 Hacker@n 님께서 알려주셨습니다.)
+    :   게시판복사시 복사되는 게시판 테이블의 CHARSET 이 제대로 생성되지 않는 오류를 수정하였습니다. 
+        ( 밀로즈님께서 알려주셨습니다. )
+
+        bbs/register_form.php
+
+            // 패스워드를 알아볼 수 없도록 회원가입일시를 넣어서 암호화 함
+            set_session("ss_tmp_password", base64_encode($member[mb_datetime].$_POST[mb_password]));
+
+        bbs/register_form_update.php
+
+            // 복호화를 한 후 회원가입일시를 없애주면 원래 패스워드가 나옴
+            $tmp_password = preg_replace("/^".$member[mb_datetime]."/", "", base64_decode(get_session("ss_tmp_password")));
+
+        lib/common.lib.php
+
+        function get_table_define($table, $crlf="\n")
+        {
+            global $g4;
+
+            ...
+            
+            if (strtolower($g4['charset']) == "utf-8")
+                $schema_create .= $crlf . ') DEFAULT CHARSET=utf8';
+            else
+                $schema_create .= $crlf . ')';
+
 4.33.09 (11.04.15)
     :   아래 두개의 취약점은 한국인터넷진흥원(KISA)을 통하여 
         선린인터넷고등학교 1학년에 재학중인 강인욱님께서 알려 주셨습니다.

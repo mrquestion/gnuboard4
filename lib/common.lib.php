@@ -1120,6 +1120,8 @@ function sql_password($value)
 // PHPMyAdmin Âü°í
 function get_table_define($table, $crlf="\n")
 {
+    global $g4;
+
     // For MySQL < 3.23.20
     $schema_create .= 'CREATE TABLE ' . $table . ' (' . $crlf;
 
@@ -1185,7 +1187,10 @@ function get_table_define($table, $crlf="\n")
         $schema_create     .= implode($columns, ', ') . ')';
     } // end while
 
-    $schema_create .= $crlf . ')';
+    if (strtolower($g4['charset']) == "utf-8")
+        $schema_create .= $crlf . ') DEFAULT CHARSET=utf8';
+    else
+        $schema_create .= $crlf . ')';
 
     return $schema_create;
 } // end of the 'PMA_getTableDef()' function
