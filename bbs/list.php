@@ -31,8 +31,8 @@ if ($sca || $stx)
 
     // 원글만 얻는다. (코멘트의 내용도 검색하기 위함)
     $sql = " select distinct wr_parent from $write_table where $sql_search ";
-    $result = sql_query($sql);
-    $total_count = mysql_num_rows($result);
+    $result = sql_query($sql, false);
+    $total_count = @mysql_num_rows($result);
 }
 else
 {
@@ -85,7 +85,7 @@ else
 {
     $sql = " select * from $write_table where wr_is_comment = 0 $sql_order limit $from_record, $board[bo_page_rows] ";
 }
-$result = sql_query($sql);
+$result = sql_query($sql, false);
 
 // 년도 2자리
 $today2 = $g4[time_ymd];

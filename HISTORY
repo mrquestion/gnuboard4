@@ -1,3 +1,13 @@
+4.37.25 (2015.02.04)
+    : SQL 오류메세지가 노출되는 것을 방지 (한국인터넷진흥원 취약점 분석가 박지희님이 알려주셨습니다.)
+
+        bbs/list.php 를 다음과 같이 수정 (앞의 숫자는 라인 표시)
+
+            34 : $result = sql_query($sql, false);
+            35 : $total_count = @mysql_num_rows($result);
+            ...
+            88 : $result = sql_query($sql, false);
+
 4.37.24 (2015.01.16)
     : SQL Injection 취약점이 발견되어 수정 (한국인터넷진흥원 취약점 담당자 최명균님이 알려주셨습니다.)
 
