@@ -1,6 +1,50 @@
+4.01.00 (05.07.11)
+    :   방문자수 전체구하는 코드 오류 수정
+        todayis 님께서 알려주셨습니다.
+    :   투표결과페이지 스킨 적용
+    :   bbs/link.php 에서 SQL Injection 에 대비한 코드 수정
+        root 님께서 알려주셨습니다.
+    :   검색 코드 수정
+    :   관리자일 경우에만 자바스크립트 변수에 관리자 디렉토리 정보 생성
+    :   E-mail 본인인증 기능추가로 인한 코드 상당부분 수정
+        bbs/mail_stop.php 를 bbs/email_stop.php 로 이름 변경합니다.
+        
+        ※ 기존 사용자가 업그레이드 할 경우에는 별도로 email_certify.php, email_certify2.php 를 다운로드 받으셔야 합니다.
+
+        필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/_common.php
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/mail_preview.php
+        adm/mail_select_update.php
+        adm/mail_test.php
+        adm/member_form.php
+        adm/member_list.php
+        adm/upgrade.php
+        bbs/link.php
+        bbs/email_certify.php
+        bbs/email_stop.php
+        bbs/login_check.php
+        bbs/register_form.php
+        bbs/register_form_update.php
+        bbs/register_form_update_mail1.php
+        bbs/register_form_update_mail2.php
+        bbs/register_form_update_mail3.php
+        bbs/poll_result.php
+        bbs/poll_update.php
+        bbs/search.php
+        bbs/visit_insert.inc.php
+        lib/common.lib.php
+        lib/poll.lib.php
+        skin/member/basic/register_form.skin.php
+        skin/member/basic/register_result.skin.php
+        skin/poll_result.skin.php
+        head.sub.php
+
 4.00.20 (05.07.06)
     :   lib/common.lib.php 에 get_yoil() 함수등 추가
-    :   bbs/download.php 에서 중복되 코드 삭제
+    :   bbs/download.php 에서 중복된 코드 삭제
         prosper 님께서 알려주셨습니다.
 
     :   한국소프트웨어진흥원 공개SW지원센터에서 보내온 문서를 토대로 PHP, SQL Injection 에 대처하기 위해 코드 수정
@@ -831,5 +875,6 @@
     6. 로봇에 의한 글쓰기 차단 기능
     7. RSS
     8. 게시판별로 포인트 점수를 다르게 부여할 수 있음
-    9. 그외 다수
+    9. 회원가입시 이메일 본인인증 가능
+   10. 그외 다수
 ================================================================================

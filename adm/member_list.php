@@ -87,7 +87,7 @@ var list_delete_php = "member_list_delete.php";
 <table width=100%>
 <form name=fsearch method=get>
 <tr>
-    <td width=50% align=left><?=$listall?> (총회원수 : <?=number_format($total_count)?>, 차단 : <?=number_format($intercept_count)?>, 탈퇴 : <?=number_format($leave_count)?>)</td>
+    <td width=50% align=left><?=$listall?> (총회원수 : <?=number_format($total_count)?>, <font color=orange>차단 : <?=number_format($intercept_count)?></font>, <font color=crimson>탈퇴 : <?=number_format($leave_count)?></font>)</td>
     <td width=50% align=right>
         <select name=sfl class=cssfl>
             <option value='mb_id'>회원아이디</option>
@@ -138,12 +138,11 @@ var list_delete_php = "member_list_delete.php";
     <td><?=subject_sort_link('mb_nick')?>별명</a></td>
     <td><?=subject_sort_link('mb_level', '', 'desc')?>권한</a></td>
     <td><?=subject_sort_link('mb_point', '', 'desc')?>포인트</a></td>
-    <!-- <td><?=subject_sort_link('mb_datetime', '', 'desc')?>가입일</a></td> -->
     <td><?=subject_sort_link('mb_today_login', '', 'desc')?>최종접속</a></td>
-    <!-- <td><?=subject_sort_link('mb_birth', '', 'desc')?>생일</a></td> -->
     <td title='메일수신허용여부'><?=subject_sort_link('mb_mailling', '', 'desc')?>수신</a></td>
     <td title='정보공개여부'><?=subject_sort_link('mb_open', '', 'desc')?>공개</a></td>
-    <td><?=subject_sort_link('mb_leave_date', '', 'desc')?>탈퇴</a></td>
+    <!-- <td><?=subject_sort_link('mb_leave_date', '', 'desc')?>탈퇴</a></td> -->
+    <td><?=subject_sort_link('mb_email_certify', '', 'desc')?>인증</a></td>
     <td><?=subject_sort_link('mb_intercept_date', '', 'desc')?>차단</a></td>
     <td title='접근가능한 그룹수'>그룹</td>
 	<td><a href="./member_form.php"><img src='./img/icon_insert.gif' border=0 title='추가'></a></td>
@@ -158,10 +157,13 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     if ($row2[cnt])
         $group = "<a href='./boardgroupmember_form.php?mb_id=$row[mb_id]'>$row2[cnt]</a>";
 
-    if ($is_admin == 'group') {
+    if ($is_admin == 'group') 
+    {
         $s_mod = "";
         $s_del = "";
-    } else {
+    } 
+    else 
+    {
         $s_mod = "<a href=\"./member_form.php?$qstr&w=u&mb_id=$row[mb_id]\"><img src='img/icon_modify.gif' border=0 title='수정'></a>";
         $s_del = "<a href=\"javascript:del('./member_delete.php?$qstr&w=d&mb_id=$row[mb_id]');\"><img src='img/icon_delete.gif' border=0 title='삭제'></a>";
     }
@@ -172,22 +174,27 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
 
     $mb_nick = get_sideview($row[mb_id], $row[mb_nick], $row[mb_email], $row[mb_homepage]);
 
+    $mb_id = $row[mb_id];
+    if ($row[mb_leave_date])
+        $mb_id = "<font color=crimson>$mb_id</font>";
+    else if ($row[mb_intercept_date])
+        $mb_id = "<font color=orange>$mb_id</font>";
+
     $list = $i%2;
     echo "
     <input type=hidden name=mb_id[$i] value='$row[mb_id]'>
     <tr class='list$list col1 ht center'>
         <td><input type=checkbox name=chk[] value='$i'></td>
-        <td title='$row[mb_id]'><nobr style='display:block; overflow:hidden; width:100px;'>&nbsp;$row[mb_id]</nobr></td>
+        <td title='$row[mb_id]'><nobr style='display:block; overflow:hidden; width:100px;'>&nbsp;$mb_id</nobr></td>
         <td>$row[mb_name]</td>
         <td><u>$mb_nick</u></td>
         <td>".get_member_level_select("mb_level[$i]", 1, 10, $row[mb_level])."</td>
         <td align=right><a href='point_list.php?sfl=a.mb_id&stx=$row[mb_id]' class=tt>".number_format($row[mb_point])."</a>&nbsp;</td>
-        <!-- <td>".substr($row[mb_datetime],2,8)."</td> -->
         <td>".substr($row[mb_today_login],2,8)."</td>
-        <!-- <td>".$row[mb_birth]."</td> -->
         <td>".($row[mb_mailling]?'&radic;':'&nbsp;')."</td>
         <td>".($row[mb_open]?'&radic;':'&nbsp;')."</td>
-        <td title='$row[mb_leave_date]'>".($row[mb_leave_date]?'&radic;':'&nbsp;')."</td>
+        <!-- <td title='$row[mb_leave_date]'>".($row[mb_leave_date]?'&radic;':'&nbsp;')."</td> -->
+        <td title='$row[mb_email_certify]'>".(preg_match('/[1-9]/', $row[mb_email_certify])?'&radic;':'&nbsp;')."</td>
         <td title='$row[mb_intercept_date]'><input type=checkbox name=mb_intercept_date[$i] ".($row[mb_intercept_date]?'checked':'')." value='$intercept_date'></td>
         <td>$group</td>               
         <td>$s_mod $s_del $s_grp</td>

@@ -103,8 +103,8 @@ include_once ("./admin.head.php");
 <tr class='ht'>
     <td>복사, 이동시 로그</td>
     <td><input type='checkbox' name='cf_use_copy_log' value='1' <?=$config[cf_use_copy_log]?'checked':'';?>> 남김<br>게시물 아래 누구로 부터 복사, 이동됨 표시</td>
-    <td></td>
-    <td></td>
+    <td>E-mail 인증 사용</td>
+    <td><input type='checkbox' name='cf_use_email_certify' value='1' <?=$config[cf_use_email_certify]?'checked':'';?>> 사용<br>메일에 배달된 주소 클릭후 회원으로 인정</td>
 </tr>
 <tr class='ht'>
     <td>접근가능 IP</td>

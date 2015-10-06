@@ -493,6 +493,12 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
         for ($k=0; $k<count($field); $k++) { // 필드의 수만큼 다중 필드 검색 가능 (필드1+필드2...)
             $str .= " $op2 ";
             switch ($field[$k]) {
+                case "mb_id" :
+                    $str .= " $field[$k] = '$s[$i]' ";
+                    break;
+                case "mb_name" :
+                    $str .= " $field[$k] like '%$s[$i]' ";
+                    break;
                 case "wr_hit" :
                 case "wr_good" :
                 case "wr_nogood" :

@@ -17,6 +17,7 @@ $sql = " update $g4[config_table]
                 cf_use_point            = '$cf_use_point',
                 cf_use_norobot          = '$cf_use_norobot',
                 cf_use_copy_log         = '$cf_use_copy_log',
+                cf_use_email_certify    = '$cf_use_email_certify',
                 cf_login_point          = '$cf_login_point',
                 cf_cut_name             = '$cf_cut_name',
                 cf_nick_modify          = '$cf_nick_modify',

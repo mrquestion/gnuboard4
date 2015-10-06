@@ -36,7 +36,17 @@ body, th, td, form, input, select, text, textarea, caption { font-size: 12px; fo
                 <p>
 
                 <table width="500" border="0" align="center" cellpadding="4" cellspacing="0">
-                <tr><td height="150"><b><?=$mb_name?></b> 님의 회원가입을 진심으로 축하합니다.<p>회원님의 성원에 보답하고자 더욱 더 열심히 하겠습니다.<p>감사합니다.</td></tr>
+                <tr><td height="150">
+                    <b><?=$mb_name?></b> 님의 회원가입을 진심으로 축하합니다.
+
+                    <? if ($config[cf_use_email_certify]) { ?>
+                    <p>아래의 주소를 클릭하시면 회원가입이 완료됩니다.
+                    <p><a href='<?=$certify_href?>'><b><?=$certify_href?></b></a>
+                    <? } ?>
+
+                    <p>회원님의 성원에 보답하고자 더욱 더 열심히 하겠습니다.
+                    <p>감사합니다.
+                    </td></tr>
                 </table>
                 <p>
 

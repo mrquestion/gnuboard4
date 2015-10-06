@@ -80,7 +80,7 @@ $table_width = 1004;
 <tr>
     <td height="33"><img src="<?=$g4[path]?>/img/bar_01.gif" width="43" height="33"></td>
     <td><img src="<?=$g4[path]?>/img/bar_02.gif" width="220" height="33"></td>
-    <td background="<?=$g4[path]?>/img/bar_03.gif" width="472" height="33"><table width=100% cellpadding=0 cellspacing=0><tr><td width=25>&nbsp;</td><td><?=popular();?></td></tr></table></td>
+    <td background="<?=$g4[path]?>/img/bar_03.gif" width="472" height="33"><table width=100% cellpadding=0 cellspacing=0><tr><td width=25>&nbsp;</td><td><?//=popular();?></td></tr></table></td>
     <td>
         <table width="100%" height="33" cellspacing="0" cellpadding="0">
         <form name="fsearchbox" method="get" action="javascript:fsearchbox_submit(document.fsearchbox);">

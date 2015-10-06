@@ -8,10 +8,12 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 이메일 인증사용
+sql_query(" ALTER TABLE `$g4[member_table]` ADD `mb_email_certify` DATETIME NOT NULL AFTER `mb_intercept_date` ", FALSE);
+sql_query(" ALTER TABLE `$g4[config_table]` ADD `cf_use_email_certify` TINYINT NOT NULL AFTER `cf_use_copy_log` ", FALSE);
+
 // 포인트 테이블에 필드 추가
-sql_query(" ALTER TABLE `$g4[point_table]` ADD `po_rel_table` VARCHAR( 20 ) NOT NULL ,
-                                           ADD `po_rel_id` VARCHAR( 20 ) NOT NULL ,
-                                           ADD `po_rel_action` VARCHAR( 255 ) NOT NULL ", FALSE);
+sql_query(" ALTER TABLE `$g4[point_table]` ADD `po_rel_table` VARCHAR( 20 ) NOT NULL , ADD `po_rel_id` VARCHAR( 20 ) NOT NULL , ADD `po_rel_action` VARCHAR( 255 ) NOT NULL ", FALSE);
 
 // 포인트 테이블의 회원아이디 길이 변경
 sql_query(" ALTER TABLE `$g4[point_table]` CHANGE `mb_id` `mb_id` VARCHAR( 20 ) NOT NULL ", FALSE);

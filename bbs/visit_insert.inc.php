@@ -40,9 +40,10 @@ if (get_cookie('ck_visit_ip') != $_SERVER[REMOTE_ADDR]) {
         $vi_max = $row[cnt];
 
         // 전체
-        $sql = " select count(*) as cnt from $g4[visit_table] ";
+        //$sql = " select count(*) as cnt from $g4[visit_table] ";
+        $sql = " select sum(vs_count) as total from $g4[visit_sum_table] "; 
         $row = sql_fetch($sql);
-        $vi_sum = $row[cnt];
+        $vi_sum = $row[total];
 
         $visit = "오늘:$vi_today,어제:$vi_yesterday,최대:$vi_max,전체:$vi_sum";
 

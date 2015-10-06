@@ -123,13 +123,13 @@ include_once("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>서명</td>
-    <td><textarea class='edit' name=mb_signature rows=5 style='width:99%;'><? echo $mb[mb_signature] ?></textarea></td>
+    <td><textarea class='edit' name=mb_signature rows=5 style='width:99%; word-break:break-all;'><? echo $mb[mb_signature] ?></textarea></td>
     <td>자기 소개</td>
-    <td><textarea class='edit' name=mb_profile rows=5 style='width:99%;'><? echo $mb[mb_profile] ?></textarea></td>
+    <td><textarea class='edit' name=mb_profile rows=5 style='width:99%; word-break:break-all;'><? echo $mb[mb_profile] ?></textarea></td>
 </tr>
 <tr class='ht'>
     <td>메모</td>
-    <td colspan=3><textarea class='edit' name=mb_memo rows=5 style='width:99%;'><? echo $mb[mb_memo] ?></textarea></td>
+    <td colspan=3><textarea class='edit' name=mb_memo rows=5 style='width:99%; word-break:break-all;'><? echo $mb[mb_memo] ?></textarea></td>
 </tr>
 
 <? if ($w == "u") { ?>
@@ -141,7 +141,16 @@ include_once("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>IP</td>
-    <td colspan=3><?=$mb[mb_ip]?></td>
+    <td><?=$mb[mb_ip]?></td>
+    
+    <? if ($config[cf_use_email_certify]) { ?>
+    <td>인증일시</td>
+    <td><?=$mb[mb_email_certify]?></td>
+    <? } else { ?>
+    <td></td>
+    <td></td>
+    <? } ?>
+
 </tr>
 <? } ?>
 

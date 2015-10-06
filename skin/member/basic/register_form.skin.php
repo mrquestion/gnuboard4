@@ -121,21 +121,26 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <input type=hidden name=mb_nick_default value='<?=$member[mb_nick]?>'>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>별명</TD>
-            <TD class=m_padding>
+            <TD class='m_padding lh'>
                 <input class=m_text type=text name='mb_nick' maxlength=20 minlength="2" required itemname="별명" value='<?=$member[mb_nick]?>' onchange="fregisterform.mb_nick_enabled.value='';">
                 &nbsp;<a href="javascript:mb_nick_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a>
-                <table width=100% cellpadding=0 cellspacing=0><tr><td height=20 valign=bottom>별명을 바꾸시면 앞으로 <?=(int)$config[cf_nick_modify]?>일 이내에는 변경이 안됩니다.</td></tr></table>
+                <br>별명을 바꾸시면 앞으로 <?=(int)$config[cf_nick_modify]?>일 이내에는 변경이 안됩니다.
             </TD>
         </TR>
         <? } else { ?>
         <input type=hidden name="mb_nick" value="<?=$member[mb_nick]?>">
         <? } ?>
 
+        <input type=hidden name='old_email' value='<?=$member[mb_email]?>'>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>E-mail</TD>
-            <TD class=m_padding>
+            <TD class='m_padding lh'>
                 <INPUT class=m_text type=text name='mb_email' size=38 maxlength=100 email required itemname='E-mail' value='<?=$member[mb_email]?>'>
                 &nbsp;<a href="javascript:mb_email_check();"><img width="70" height="20" src="<?=$member_skin_path?>/img/join_check_btn.gif" border=0 align=absmiddle></a>
+                <? if ($config[cf_use_email_certify]) { ?>
+                    <? if ($w=='') { echo "<br>E-mail 로 발송된 내용을 확인한 후 인증하셔야 회원가입이 완료됩니다."; } ?>
+                    <? if ($w=='u') { echo "<br>E-mail 주소를 변경하시면 다시 인증하셔야 합니다."; } ?>
+                <? } ?>
             </TD>
         </TR>
 

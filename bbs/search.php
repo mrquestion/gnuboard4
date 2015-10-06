@@ -70,7 +70,7 @@ $op1 = "";
 $s = explode(" ", $stx);
 
 // 검색필드를 구분자로 나눈다. 여기서는 +
-$f = explode("+", trim($sfl));
+$field = explode("+", trim($sfl));
 
 $str = " ( ";
 for ($i=0; $i<count($s); $i++) 
@@ -80,9 +80,21 @@ for ($i=0; $i<count($s); $i++)
     $str .= " ( ";
     
     $op2 = "";
-    for ($k=0; $k<count($f); $k++) // 필드의 수만큼 다중 필드 검색 가능 (필드1+필드2...)
+    for ($k=0; $k<count($field); $k++) // 필드의 수만큼 다중 필드 검색 가능 (필드1+필드2...)
     {
-        $str .= " $op2 INSTR(LOWER($f[$k]), '$search_str') > 0 ";
+        $str .= " $op2 ";
+        switch ($field[$k]) 
+        {
+            case "mb_id" :
+                $str .= " $field[$k] = '$s[$i]' ";
+                break;
+            case "mb_name" :
+                $str .= " $field[$k] like '%$s[$i]' ";
+                break;
+            default :
+                $str .= " INSTR(LOWER($field[$k]), '$search_str') > 0 ";
+                break;
+        }
         $op2 = " or ";
     }
     $str .= " ) ";

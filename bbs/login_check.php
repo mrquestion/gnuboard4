@@ -9,6 +9,9 @@ if (!trim($mb_id) || !trim($mb_password))
 
 $mb = get_member($mb_id);
 
+if ($config[cf_use_email_certify] && !preg_match("/[1-9]/", $mb[mb_email_certify]))
+    alert("메일인증을 받으셔야 로그인 하실 수 있습니다.\\n\\n회원님의 메일주소는 $mb[mb_email] 입니다.");
+
 // 가입된 회원이 아니다. 패스워드가 틀리다. 라는 메세지를 따로 보여주지 않는 이유는 
 // 회원아이디를 입력해 보고 맞으면 또 패스워드를 입력해보는 경우를 방지하기 위해서입니다.
 // 불법사용자의 경우 회원아이디가 틀린지, 패스워드가 틀린지를 알기까지는 많은 시간이 소요되기 때문입니다.

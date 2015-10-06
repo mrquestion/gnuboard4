@@ -47,5 +47,5 @@ if (get_cookie("ck_po_id") == $po_id)
 
 set_cookie("ck_po_id", $po_id, 86400 * 15); // 투표 쿠키 보름간 저장
 
-goto_url("./poll_result.php?po_id=$po_id");
+goto_url("./poll_result.php?po_id=$po_id&skin_dir=$skin_dir");
 ?>

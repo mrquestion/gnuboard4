@@ -19,7 +19,8 @@ if ($_REQUEST['do'] == "submit") {
 
     //////////////////////////////////////////////////////////////////////////
     // $save_as_directory의 URL 경로를 입력합니다.
-    $save_as_url = "$g4[url]/data/$g4[editor]/$ym/";
+    //$save_as_url = "$g4[url]/data/$g4[editor]/$ym/";
+    $save_as_url = "$g4[path]/data/$g4[editor]/$ym/";
 
     //////////////////////////////////////////////////////////////////////////
     // 옵션:

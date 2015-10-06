@@ -29,22 +29,27 @@ function member_delete($mb_id)
     global $config;
     global $g4;
 
-    $sql = " select mb_recommend from $g4[member_table] where mb_id= '$mb_id' ";
+    $sql = " select mb_name, mb_nick, mb_ip, mb_recommend from $g4[member_table] where mb_id= '$mb_id' ";
     $mb = sql_fetch($sql);
-    if ($mb[mb_recommend]) {
+    if ($mb[mb_recommend]) 
+    {
         $row = sql_fetch(" select count(*) as cnt from $g4[member_table] where mb_id = '$mb[mb_recommend]' ");
         if ($row[cnt])
             insert_point($mb[mb_recommend], $config[cf_recommend_point] * (-1), "{$mb_id}님의 회원자료 삭제로 인한 추천인 포인트 반환");
     }
 
-    $mb = sql_fetch(" select mb_name, mb_ip from $g4[member_table] where mb_id = '$mb_id' ");
+    //$mb = sql_fetch(" select mb_name, mb_ip from $g4[member_table] where mb_id = '$mb_id' ");
     
     // 회원 자료 삭제
     sql_query(" delete from $g4[member_table] where mb_id = '$mb_id' ");
 
-    // 다른 사람이 이 회원아이디를 사용하지 못하도록 아이디만 생성해 놓습니다.
-    // 게시판에서 회원아이디는 삭제하지 않기 때문입니다.
-    sql_query(" insert into $g4[member_table] set mb_id = '$mb_id', mb_name='$mb[mb_name]', mb_nick='[삭제됨]', mb_ip='$mb[mb_ip]', mb_datetime = '$g4[time_ymdhis]' ");
+    // 삭제된 자료를 또 삭제하면 완전 삭제함
+    if ($mb[mb_nick] != '[삭제됨]')
+    {
+        // 다른 사람이 이 회원아이디를 사용하지 못하도록 아이디만 생성해 놓습니다.
+        // 게시판에서 회원아이디는 삭제하지 않기 때문입니다.
+        sql_query(" insert into $g4[member_table] set mb_id = '$mb_id', mb_name='$mb[mb_name]', mb_nick='[삭제됨]', mb_ip='$mb[mb_ip]', mb_datetime = '$g4[time_ymdhis]' ");
+    }
     
     // 포인트 테이블에서 삭제
     sql_query(" delete from $g4[point_table] where mb_id = '$mb_id' ");

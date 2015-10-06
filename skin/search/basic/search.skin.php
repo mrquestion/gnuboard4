@@ -88,14 +88,18 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         for ($idx=$table_index, $k=0; $idx<count($search_table) && $k<$rows; $idx++) 
         { 
             echo "<ul type=circle><li><b><a href='./board.php?bo_table={$search_table[$idx]}&{$search_query}'><u>{$bo_subject[$idx]}</u></a>에서의 검색결과</b></ul>";
+            $comment_href = "";
             for ($i=0; $i<count($list[$idx]) && $k<$rows; $i++, $k++) 
             {
                 echo "<ul><ul type=square><li style='line-height:130%;'>";
                 if ($list[$idx][$i][wr_comment] < 0) 
-                        echo "<font color=999999>[코멘트]</font> ";
-                echo "<a href='{$list[$idx][$i][href]}'><u>";
+                {
+                    echo "<font color=999999>[코멘트]</font> ";
+                    $comment_href = "#c_".$list[$idx][$i][wr_id];
+                }
+                echo "<a href='{$list[$idx][$i][href]}{$comment_href}'><u>";
                 echo $list[$idx][$i][subject];
-                echo "</u></a> [<a href='{$list[$idx][$i][href]}' target=_blank>새창</a>]<br>";
+                echo "</u></a> [<a href='{$list[$idx][$i][href]}{$comment_href}' target=_blank>새창</a>]<br>";
                 echo $list[$idx][$i][content];
                 echo "<br><font color=#999999>{$list[$idx][$i][wr_datetime]}</font>&nbsp;&nbsp;&nbsp;";
                 echo $list[$idx][$i][name];
