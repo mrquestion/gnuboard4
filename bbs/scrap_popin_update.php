@@ -78,7 +78,7 @@ if ($wr_content && ($member[mb_level] >= $board[bo_comment_level]))
         sql_query(" update $g4[board_table] set bo_count_comment = bo_count_comment + 1 where bo_table = '$bo_table' ");
 
         // 포인트 부여
-        insert_point($member[mb_id], $board[bo_comment_point], "$board[bo_subject] {$wr_id}-{$comment_id} 코멘트쓰기");
+        insert_point($member[mb_id], $board[bo_comment_point], "$board[bo_subject] {$wr_id}-{$comment_id} 코멘트쓰기", $bo_table, $comment_id, '코멘트');
     }
 }
 

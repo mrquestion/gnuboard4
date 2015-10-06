@@ -133,7 +133,7 @@ class uploader {
             switch($overwrite_mode) {
                 case 1:
                     $aok = move_uploaded_file($this->file["tmp_name"], $this->path . $this->file["name"]);
-                    chmod($this->path . $this->file["name"], 0775);
+                    @chmod($this->path . $this->file["name"], 0606);
                     break;
                 case 2:
                     while (file_exists($this->path . $this->file['raw_name'] . $copy . $this->file["extention"])) {
@@ -143,7 +143,7 @@ class uploader {
 
                     $this->file["name"]  = $this->file['raw_name'] . $copy . $this->file["extention"];
                     $aok = move_uploaded_file($this->file["tmp_name"], $this->path . $this->file["name"]);
-                    chmod($this->path . $this->file["name"], 0775);
+                    @chmod($this->path . $this->file["name"], 0606);
                     break;
                 case 3:
                     if (file_exists($this->path . $this->file["name"])){
@@ -152,7 +152,7 @@ class uploader {
                     }
                     else {
                         $aok = move_uploaded_file($this->file["tmp_name"], $this->path . $this->file["name"]);
-                        chmod($this->path . $this->file["name"], 0775);
+                        @chmod($this->path . $this->file["name"], 0606);
                     }
                     break;
                 default:

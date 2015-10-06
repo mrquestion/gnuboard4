@@ -352,12 +352,15 @@ CREATE TABLE $g4[memo_table] (
 DROP TABLE IF EXISTS $g4[point_table];
 CREATE TABLE $g4[point_table] (
   po_id int(11) NOT NULL auto_increment,
-  mb_id varchar(255) NOT NULL default '',
+  mb_id varchar(20) NOT NULL default '',
   po_datetime datetime NOT NULL default '0000-00-00 00:00:00',
   po_content varchar(255) NOT NULL default '',
   po_point int(11) NOT NULL default '0',
+  po_rel_table varchar(20) NOT NULL default '',
+  po_rel_id varchar(20) NOT NULL default '',
+  po_rel_action varchar(255) NOT NULL default '',
   PRIMARY KEY  (po_id),
-  KEY index1 (mb_id,po_id)
+  KEY index1 (mb_id,po_rel_table,po_rel_id,po_rel_action)
 ) TYPE=MyISAM;
 
 ##

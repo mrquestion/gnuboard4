@@ -57,8 +57,8 @@ while ($row = sql_fetch_array($result))
     // wr_comment 가 -1 보다 크면 원글입니다.
     if ($row[wr_comment] > -1) 
     {
-        // 회원이라면 원글 포인트 반환
-        if ($row[mb_id])
+        // 원글 포인트 삭제
+        if (!delete_point($row[mb_id], $bo_table, $row[wr_id], '쓰기'))
             insert_point($row[mb_id], $board[bo_write_point] * (-1), "$board[bo_subject] $row[wr_id] 글삭제");
 
         // 업로드된 파일이 있다면 파일삭제
@@ -74,8 +74,8 @@ while ($row = sql_fetch_array($result))
     } 
     else 
     {
-        // 회원이라면 코멘트 포인트 반환
-        if ($row[mb_id])
+        // 코멘트 포인트 삭제
+        if (!delete_point($row[mb_id], $bo_table, $row[wr_id], '코멘트'))
             insert_point($row[mb_id], $board[bo_comment_point] * (-1), "$board[bo_subject] {$write[wr_id]}-{$row[wr_id]} 코멘트삭제");
 
         $count_comment++;

@@ -22,38 +22,28 @@ if ($member[mb_level] < $board[bo_download_level]) {
         alert($alert_msg . "\\n\\n회원이시라면 로그인 후 이용해 보십시오.", "./login.php?wr_id=$wr_id&$qstr&url=".urlencode("board.php?bo_table=$bo_table&wr_id=$wr_id"));
 }
 
-// 회원이상 다운로드가 가능하다면
-if ($board[bo_download_level] >= 1) {
-    // 이미 다운로드 받은 파일인지를 검사
-    // d 는 download의 약자
-    //if (!preg_match("/^(d," . $index . "," . $member[mb_id].")/m", $write[wr_history])) {
-    $ss_name = "ss_down_{$bo_table}_{$wr_id}_{$no}";
-    if (!get_session($ss_name)) 
+// 이미 다운로드 받은 파일인지를 검사
+$ss_name = "ss_down_{$bo_table}_{$wr_id}_{$no}";
+if (!get_session($ss_name)) 
+{
+    // 자신의 글이라면 통과
+    if ($write[mb_id] && $write[mb_id] == $member[mb_id])
+        ;
+    else if ($board[bo_download_level] > 1) // 회원이상 다운로드가 가능하다면
     {
-        // 자신의 글이거나 관리자라면 통과
-        if ($write[mb_id] && $write[mb_id] == $member[mb_id])
-            ;
-        else if ($board[bo_download_level] > 1) // 회원이상 다운로드가 가능하다면
-        {
-            // 다운로드 포인트가 음수이고 회원의 포인트가 0 이거나 작다면
-            //if ($board[bo_download_point] < 0 && $member[mb_point] <= 0)
-            if ($member[mb_point] + $board[bo_download_point] < 0)
-                alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 다운로드(".number_format($board[bo_download_point]).")가 불가합니다.\\n\\n포인트를 적립하신 후 다시 다운로드 해 주십시오.");
+        // 다운로드 포인트가 음수이고 회원의 포인트가 0 이거나 작다면
+        //if ($board[bo_download_point] < 0 && $member[mb_point] <= 0)
+        if ($member[mb_point] + $board[bo_download_point] < 0)
+            alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 다운로드(".number_format($board[bo_download_point]).")가 불가합니다.\\n\\n포인트를 적립하신 후 다시 다운로드 해 주십시오.");
 
-            insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id {$index}번 파일 다운로드");
-        }
-
-        /*
-        $history = $write[wr_history] . "d," . $index . "," . $member[mb_id] . "\n";
-        sql_query(" update $write_table set wr_history = '$history' where wr_id = '$wr_id' ");
-        */
-
-        // 다운로드 카운트 증가
-        $sql = " update $g4[board_file_table] set bf_download = bf_download + 1 where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$no' ";
-        sql_query($sql);
-
-        set_session($ss_name, TRUE);
+        insert_point($member[mb_id], $board[bo_download_point], "$board[bo_subject] $wr_id {$no}번 파일 다운로드", $bo_table, $wr_id, "다운로드 $no");
     }
+
+    // 다운로드 카운트 증가
+    $sql = " update $g4[board_file_table] set bf_download = bf_download + 1 where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$no' ";
+    sql_query($sql);
+
+    set_session($ss_name, TRUE);
 }
 
 $g4[title] = "$group[gr_subject] > $board[bo_subject] > " . conv_subject($write[wr_subject], 255) . " > 다운로드";

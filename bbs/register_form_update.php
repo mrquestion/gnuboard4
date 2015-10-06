@@ -106,11 +106,11 @@ if ($w == "") {
     sql_query($sql);
 
     // 회원가입 포인트 부여
-    insert_point($mb_id, $config[cf_register_point], "회원가입 축하");
+    insert_point($mb_id, $config[cf_register_point], "회원가입 축하", '@member', $mb_id, '회원가입');
 
     // 추천인에게 포인트 부여
     if ($config[cf_use_recommend] && $mb_recommend)
-        insert_point($mb_recommend, $config[cf_recommend_point], "{$mb_id}의 추천인");
+        insert_point($mb_recommend, $config[cf_recommend_point], "{$mb_id}의 추천인", '@member', $mb_recommend, "{$mb_id} 추천");
 
     // 메일 발송
     {

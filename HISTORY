@@ -1,3 +1,37 @@
+4.00.18 (05.07.04)
+    :   설치시 data/cheditor 디렉토리 생성
+    :   별명 수정일에서 계산이 틀린 오류를 수정
+    :   제목에 " 들어가는 경우 수정 안되던 오류를 수정
+        yesmoa, 보람찬 님께서 알려주셨습니다.
+    :   게시판 복사시 게시판 제목 입력 가능하게 수정
+    :   포인트 부여와 관련된 모든 파일 수정
+        (글[코멘트]삭제시 원글[코멘트]포인트 부여 레코드 삭제)
+        (다운로드시 한번만 포인트 부여)
+    :   디렉토리에 m000 이름이 존재하면 관리자 메뉴를 불러오지 못하던 오류를 수정
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/board_copy.php
+        adm/board_copy_update.php
+        adm/point_update.php
+        adm/menu/*
+        bbs/board.php
+        bbs/delete.php
+        bbs/delete_all.php
+        bbs/delete_comment.php
+        bbs/download.php
+        bbs/poll_update.php
+        bbs/register_form_update.php
+        bbs/scrap_popin_update.php
+        bbs/write.php
+        bbs/write_comment_update.php
+        bbs/write_update.php
+        common.php
+        lib/common.lib.php
+        skin/member/basic/register_form.skin.php
+        install/install_db.php
+        cheditor/insert_image.php
+        cheditor/imageupload-class.php
+
 4.00.17 (05.06.29)
     :   버전확인 페이지 추가
         조병완(korone)님 , 남규아빠(eagletalon)님께서 만들어 주셨습니다.

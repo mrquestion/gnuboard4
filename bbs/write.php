@@ -243,7 +243,7 @@ else if ($w == "u") {
     $password_required = "required";
 }
 
-$subject = get_text(cut_str($write[wr_subject], 255), 0);
+$subject = preg_replace("/\"/", "&#034;", get_text(cut_str($write[wr_subject], 255), 0));
 if ($w == "") 
     $content = $board[bo_insert_content];
 else if ($w == "r") {

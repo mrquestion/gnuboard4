@@ -68,3 +68,4 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <a href="javascript:window.close();"><img src="<?=$member_skin_path?>/img/btn_close.gif" width="48" height="20" border="0"></a></td>
 </tr>
 </table>
+<br>

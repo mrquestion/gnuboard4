@@ -8,6 +8,17 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 포인트 테이블에 필드 추가
+sql_query(" ALTER TABLE `$g4[point_table]` ADD `po_rel_table` VARCHAR( 20 ) NOT NULL ,
+                                           ADD `po_rel_id` VARCHAR( 20 ) NOT NULL ,
+                                           ADD `po_rel_action` VARCHAR( 255 ) NOT NULL ", FALSE);
+
+// 포인트 테이블의 회원아이디 길이 변경
+sql_query(" ALTER TABLE `$g4[point_table]` CHANGE `mb_id` `mb_id` VARCHAR( 20 ) NOT NULL ", FALSE);
+
+// 포인트 테이블의 인덱스 변경
+sql_query(" ALTER TABLE `$g4[point_table]` DROP INDEX `index1` , ADD INDEX `index1` ( `mb_id` , `po_rel_table` , `po_rel_id` , `po_rel_action` ) ", FALSE);
+
 // 투표 테이블에 투표한 회원 필드 추가
 sql_query(" ALTER TABLE `$g4[poll_table]` ADD `mb_ids` TEXT NOT NULL ", FALSE);
 

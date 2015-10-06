@@ -132,7 +132,7 @@ if (!$select_db) {
         </table>
         <table width="562" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
-            <td height=30><img src="image/box_line.gif" width="562" height="2"></td>
+            <td height=30><img src="img/box_line.gif" width="562" height="2"></td>
           </tr>
         </table>
         <table width="551" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -142,10 +142,10 @@ if (!$select_db) {
             </td>
           </tr>
         </table></td>
-      <td width="3"><img src="image/box_right.gif" width="3" height="340"></td>
+      <td width="3"><img src="img/box_right.gif" width="3" height="340"></td>
     </tr>
     <tr> 
-      <td colspan="3"><img src="image/box_bottom.gif" width="587" height="3"></td>
+      <td colspan="3"><img src="img/box_bottom.gif" width="587" height="3"></td>
     </tr>
     </form>
   </table>
@@ -335,7 +335,8 @@ $dir_arr = array ("../extend",
                   "../data/file",
                   "../data/log",
                   "../data/member",
-                  "../data/session");
+                  "../data/session",
+                  "../data/$g4[editor]");
 for ($i=0; $i<count($dir_arr); $i++) {
     @mkdir($dir_arr[$i], 0707);
     @chmod($dir_arr[$i], 0707);

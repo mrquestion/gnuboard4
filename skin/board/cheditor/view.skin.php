@@ -139,8 +139,7 @@ HEREDOC;
         ?>
 
         <span class="ct lh"><?=$view[content];?></span>
-
-<!-- ↓ 이 코드는 삭제하셔도 상관 없습니다. -->
+<!-- ↓ 이 코드는 삭제하셔도 좋습니다. -->
 <center>
 <br><br><br>
 <script type="text/javascript"><!--
@@ -157,10 +156,9 @@ google_color_url = "666666";
 google_color_text = "333333";
 //--></script>
 <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
-<br><br><span style='font-size:8pt; font-family:돋움; color:silver;'>광고 수입은 그누보드의 호스팅 비용으로 사용합니다. (배너 새창 : Shift + 클릭)</span><br>
+<br><br><span style='font-size:8pt; font-family:돋움; color:silver;'>광고 수입은 그누보드의 호스팅 비용으로 사용합니다. (새창 : Shift + 링크 클릭)</span><br>
 </center>
-<!-- ↑ 이 코드는 삭제하셔도 상관 없습니다. -->
-
+<!-- ↑ 이 코드는 삭제하셔도 좋습니다. -->
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a></td>
 </tr>

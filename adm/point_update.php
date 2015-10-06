@@ -12,7 +12,7 @@ if (!$mb[mb_id])
 if (($po_point < 0) && ($po_point * (-1) > $mb[mb_point]))
     alert("포인트를 깎는 경우 현재 포인트보다 작으면 안됩니다.");
 
-insert_point($mb_id, $po_point, $po_content);
+insert_point($mb_id, $po_point, $po_content, '@passive', $mb_id, $member[mb_id]);
 
 //sql_query(" OPTIMIZE TABLE `$g4[point_table]` ");
 

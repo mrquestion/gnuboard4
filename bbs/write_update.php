@@ -247,14 +247,14 @@ if ($w == "" || $w == "r")
             sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table = '$bo_table' ");
         }
 
-        insert_point($member[mb_id], $board[bo_write_point], "$board[bo_subject] $wr_id 글쓰기");
+        insert_point($member[mb_id], $board[bo_write_point], "$board[bo_subject] $wr_id 글쓰기", $bo_table, $wr_id, '쓰기');
     }
     else 
     {
         //insert_point($member[mb_id], $board[bo_write_point], "$board[bo_subject] $wr_id 글답변");
         // 답변은 코멘트 포인트를 부여함
         // 답변 포인트가 많은 경우 코멘트 대신 답변을 하는 경우가 많음
-        insert_point($member[mb_id], $board[bo_comment_point], "$board[bo_subject] $wr_id 글답변");
+        insert_point($member[mb_id], $board[bo_comment_point], "$board[bo_subject] $wr_id 글답변", $bo_table, $wr_id, '쓰기');
     }
 } 
 else if ($w == "u") 

@@ -66,11 +66,18 @@ function print_r2($var)
 
 // 메타태그를 이용한 URL 이동
 // header("location:URL") 을 대체
-function goto_url($url) 
+function goto_url($url)
 {
-    //echo "<meta http-equiv=\"Refresh\" content=\"0;url=$url\">";
+    if (preg_match("/MSIE/", $_SERVER[HTTP_USER_AGENT]))
+        echo "<meta http-equiv='Refresh' content='0;url=$url'>";
+    else
+        echo "<script language='JavaScript'> document.location.href = '$url'; </script>";
     //header("Location:$url");
-    header("Location:$url", false); // PHP 4.3.0 이상에서만 사용
+    //flush();
+    //if (!headers_sent())
+    //    header("Location:$url");
+    //else
+    //echo "<script language='JavaScript'> document.location.href = '$url'; </script>";
     exit;
 }
 
@@ -142,7 +149,7 @@ function url_auto_link($str)
     $str = preg_replace("/&quot;/", "\"", $str);
     $str = preg_replace("/([^(http:\/\/)]|\(|^)(www\.[^[:space:]]+)/i", "\\1<A HREF=\"http://\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
     $str = preg_replace("/([^(HREF=\"?'?)|(SRC=\"?'?)]|\(|^)((http|https|ftp|telnet|news|mms):\/\/[a-zA-Z0-9\.-]+\.[\xA1-\xFEa-zA-Z0-9\.:&#=_\?\/~\+%@;\-\|\,]+)/i", "\\1<A HREF=\"\\2\" TARGET='$config[cf_link_target]'>\\2</A>", $str);
-    $str = preg_replace("/(([a-z0-9_]|\-|\.)+@([^[:space:]]*)([[:alnum:]-]))/i", "<a href='mailto:\\1'>\\1</a>", $str); 
+    $str = preg_replace("/(([a-z0-9_]|\-|\.)+@([^[:space:]]*)([[:alnum:]-]))/i", "<a href='mailto:\\1'>\\1</a>", $str);
     $str = preg_replace("/\t_lt_\t/", "&lt;", $str);
     $str = preg_replace("/\t_gt_\t/", "&gt;", $str);
 
@@ -170,9 +177,9 @@ function get_filesize($file)
     $size = @filesize(addslashes($file));
     if ($size >= 1024768) {
         $size = number_format($size/1024768, 1) . "M";
-    } else if ($size >= 1024) { 
+    } else if ($size >= 1024) {
         $size = number_format($size/1024, 1) . "K";
-    } else { 
+    } else {
         $size = number_format($size, 0) . "byte";
     }
     return $size;
@@ -187,7 +194,8 @@ function get_file($bo_table, $wr_id)
     $file["count"] = 0;
     $sql = " select * from $g4[board_file_table] where bo_table = '$bo_table' and wr_id = '$wr_id' order by bf_no ";
     $result = sql_query($sql);
-    while ($row = sql_fetch_array($result)) {
+    while ($row = sql_fetch_array($result))
+    {
         $no = $row[bf_no];
         $file[$no][href] = "./download.php?bo_table=$bo_table&wr_id=$wr_id&no=$no" . $qstr;
         $file[$no][download] = $row[bf_download];
@@ -200,6 +208,8 @@ function get_file($bo_table, $wr_id)
         $file[$no][content] = get_text($row[bf_content]);
         $file[$no][view] = view_file_link($row[bf_file], $file[$no][content]);
         $file[$no][file] = $row[bf_file];
+        // prosper 님 제안
+        $file[$no][imgsize] = @getimagesize("{$file[$no][path]}/$row[bf_file]");
         $file["count"]++;
     }
 
@@ -208,7 +218,7 @@ function get_file($bo_table, $wr_id)
 
 
 // 폴더의 용량 ($dir는 / 없이 넘기세요)
-function get_dirsize($dir) 
+function get_dirsize($dir)
 {
     $size = 0;
     $d = dir($dir);
@@ -240,7 +250,7 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     // 배열전체를 복사
     $list = $write_row;
     unset($write_row);
-    
+
     $list[is_notice] = preg_match("/[^0-9]{0,1}{$list[wr_id]}[\r]{0,1}/",$board[bo_notice]);
 
     //$list[num] = number_format($total_count - ($page - 1) * $board[bo_page_rows] - $i);
@@ -251,18 +261,18 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
         $list[subject] = conv_subject($list[wr_subject], $board[bo_subject_len], "…");
 
     // 목록에서 내용 미리보기 사용한 게시판만 내용을 변환함 (속도 향상) : kkal3(커피)님께서 알려주셨습니다.
-    if ($board[bo_use_list_content]) 
+    if ($board[bo_use_list_content])
         $list[content] = conv_content($list[wr_content], $list[wr_html]);
 
     $list[comment_cnt] = "";
-    if ($list[wr_comment]) 
-    {                     
+    if ($list[wr_comment])
+    {
         $list[comment_cnt] = "($list[wr_comment])";
-        
-        if ($list[wr_last_comment] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600))) 
+
+        if ($list[wr_last_comment] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600)))
             $list[comment_cnt] = '<b>' . $list[comment_cnt] . '</b>';
     }
-    
+
     $list[datetime] = substr($list[wr_datetime],0,10);
 
     // 당일인 경우 시간으로 표시함
@@ -286,16 +296,16 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
 
     $list[reply] = "";
     if (strlen($reply) > 0) {
-        for ($k=0; $k<strlen($reply); $k++) 
+        for ($k=0; $k<strlen($reply); $k++)
             $list[reply] .= ' &nbsp;&nbsp; ';
     }
 
     $list[icon_reply] = "";
-    if ($list[reply]) 
+    if ($list[reply])
         $list[icon_reply] = "<img src='$skin_path/img/icon_reply.gif' align='absmiddle'>";
 
     $list[icon_link] = "";
-    if ($list[wr_link1] || $list[wr_link2]) 
+    if ($list[wr_link1] || $list[wr_link2])
         $list[icon_link] = "<img src='$skin_path/img/icon_link.gif' align='absmiddle'>";
 
     // 분류명 링크
@@ -308,15 +318,15 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
         $list[comment_href] = $list[href];
 
     $list[icon_new] = "";
-    if ($list[wr_datetime] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600))) 
+    if ($list[wr_datetime] >= date("Y-m-d H:i:s", $g4[server_time] - ($board[bo_new] * 3600)))
         $list[icon_new] = "<img src='$skin_path/img/icon_new.gif' align='absmiddle'>";
 
     $list[icon_hot] = "";
-    if ($list[wr_hit] >= $board[bo_hot]) 
+    if ($list[wr_hit] >= $board[bo_hot])
         $list[icon_hot] = "<img src='$skin_path/img/icon_hot.gif' align='absmiddle'>";
 
     $list[icon_secret] = "";
-    if (strstr($list[wr_option], "secret")) 
+    if (strstr($list[wr_option], "secret"))
         $list[icon_secret] = "<img src='$skin_path/img/icon_secret.gif' align='absmiddle'>";
 
     // 링크
@@ -329,7 +339,7 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     // 가변 파일
     $list[file] = get_file($board[bo_table], $list[wr_id]);
 
-    if ($list[file][count]) 
+    if ($list[file][count])
         $list[icon_file] = "<img src='$skin_path/img/icon_file.gif' align='absmiddle'>";
 
     return $list;
@@ -351,7 +361,7 @@ function search_font($stx, $str)
 
     // 검색어 전체를 공란으로 나눈다
     $s = explode(" ", $stx);
-    
+
     // "/(검색1|검색2)/i" 와 같은 패턴을 만듬
     $pattern = "";
     $bar = "";
@@ -382,7 +392,7 @@ function conv_content($content, $html)
 {
     global $config, $board;
 
-    if ($html) 
+    if ($html)
     {
         $source = array();
         $target = array();
@@ -412,9 +422,9 @@ function conv_content($content, $html)
         }
 
         $content = preg_replace($source, $target, $content);
-    } 
+    }
     else // text 이면
-    {    
+    {
         // & 처리 : &amp; &nbsp; 등의 코드를 정상 출력함
         $content = html_symbol($content);
 
@@ -465,7 +475,7 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
     for ($i=0; $i<count($s); $i++) {
         // 검색어
         if (preg_match("/[a-zA-Z]/", $s[$i]))
-            $search_str = strtolower($s[$i]); 
+            $search_str = strtolower($s[$i]);
         else
             $search_str = $s[$i];
 
@@ -479,7 +489,7 @@ function get_sql_search($search_ca_name, $search_field, $search_text, $search_op
         $str .= " " . $op1 . " ";
         $str .= " ( ";
 
-        $op2 = "";        
+        $op2 = "";
         for ($k=0; $k<count($field); $k++) { // 필드의 수만큼 다중 필드 검색 가능 (필드1+필드2...)
             $str .= " $op2 ";
             switch ($field[$k]) {
@@ -563,23 +573,23 @@ function subject_sort_link($col, $query_string='', $flag='asc')
     global $sst, $sod, $sfl, $stx, $page;
 
     $q1 = "sst=$col";
-    if ($flag == 'asc') 
+    if ($flag == 'asc')
     {
         $q2 = 'sod=asc';
-        if ($sst == $col) 
+        if ($sst == $col)
         {
-            if ($sod == 'asc') 
+            if ($sod == 'asc')
             {
                 $q2 = 'sod=desc';
             }
         }
-    } 
-    else 
+    }
+    else
     {
         $q2 = 'sod=desc';
-        if ($sst == $col) 
+        if ($sst == $col)
         {
-            if ($sod == 'desc') 
+            if ($sod == 'desc')
             {
                 $q2 = 'sod=asc';
             }
@@ -639,8 +649,8 @@ function get_category_option($bo_table)
     $row = sql_fetch($sql);
     $arr = explode("|", $row[bo_category_list]); // 구분자가 , 로 되어 있음
     $str = "";
-    for ($i=0; $i<count($arr); $i++) 
-        if (trim($arr[$i])) 
+    for ($i=0; $i<count($arr); $i++)
+        if (trim($arr[$i]))
             $str .= "<option value='$arr[$i]'>$arr[$i]</option>\n";
 
     return $str;
@@ -661,7 +671,7 @@ function get_group_select($name, $selected='', $event='')
     $sql .= " order by a.gr_id ";
     $result = sql_query($sql);
     $str = "<select name='$name' $event>";
-    for ($i=0; $row=sql_fetch_array($result); $i++) 
+    for ($i=0; $row=sql_fetch_array($result); $i++)
     {
         $str .= "<option value='$row[gr_id]'";
         if ($row[gr_id] == $selected) $str .= " selected";
@@ -689,29 +699,48 @@ function get_yn_select($name, $selected='1', $event='')
 
 
 // 포인트 부여
-function insert_point($mb_id, $point, $content="")
+function insert_point($mb_id, $point, $content='', $rel_table='', $rel_id='', $rel_action='')
 {
     global $config;
     global $g4;
     global $is_admin;
 
     // 포인트 사용을 하지 않는다면 return
-    if (!$config[cf_use_point]) { return; }
+    if (!$config[cf_use_point]) { return 0; }
 
     // 포인트가 없다면 업데이트 할 필요 없음
-    if ($point == 0) { return; }
+    if ($point == 0) { return 0; }
 
     // 최고관리자는 포인트 추가 내역 남기지 않음
     //if ($is_admin == "super") { return; }
-    
+
     // 회원아이디가 없다면 업데이트 할 필요 없음
-    if ($mb_id == "") { return; }
-    $mb = get_member($mb_id);
-    if (!$mb[mb_id]) { return; }
+    if ($mb_id == "") { return 0; }
+    $mb = sql_fetch(" select mb_id from $g4[member_table] where mb_id = '$mb_id' ");
+    if (!$mb[mb_id]) { return 0; }
+
+    // 이미 등록된 내역이라면 건너뜀
+    if ($rel_table || $rel_id || $rel_action)
+    {
+        $sql = " select count(*) as cnt from $g4[point_table]
+                  where mb_id = '$mb_id'
+                    and po_rel_table = '$rel_table'
+                    and po_rel_id = '$rel_id'
+                    and po_rel_action = '$rel_action' ";
+        $row = sql_fetch($sql);
+        if ($row[cnt])
+            return -1;
+    }
 
     // 포인트 건별 생성
-    $sql = " insert $g4[point_table] ( mb_id, po_datetime, po_content, po_point )
-             values ( '$mb_id', '$g4[time_ymdhis]', '$content', '$point' ) ";
+    $sql = " insert into $g4[point_table]
+                set mb_id = '$mb_id',
+                    po_datetime = '$g4[time_ymdhis]',
+                    po_content = '$content',
+                    po_point = '$point',
+                    po_rel_table = '$rel_table',
+                    po_rel_id = '$rel_id',
+                    po_rel_action = '$rel_action' ";
     sql_query($sql);
 
     // 포인트 내역의 합을 구하고
@@ -722,8 +751,26 @@ function insert_point($mb_id, $point, $content="")
     // 포인트 UPDATE
     $sql = " update $g4[member_table] set mb_point = '$sum_point' where mb_id = '$mb_id' ";
     sql_query($sql);
+
+    return 1;
 }
 
+// 포인트 삭제
+function delete_point($mb_id, $rel_table, $rel_id, $rel_action)
+{
+    global $g4;
+
+    $result = false;
+    if ($rel_table || $rel_id || $rel_action)
+    {
+        $result = sql_query(" delete from $g4[point_table]
+                     where mb_id = '$mb_id'
+                       and po_rel_table = '$rel_table'
+                       and po_rel_id = '$rel_id'
+                       and po_rel_action = '$rel_action' ", false);
+    }
+    return $result;
+}
 
 // 회원 레이어
 function get_sideview($mb_id, $name="", $email="", $homepage="")
@@ -758,7 +805,7 @@ function get_sideview($mb_id, $name="", $email="", $homepage="")
                 if ($config[cf_use_member_icon] == 2) // 회원아이콘+이름
                     $tmp_name = $tmp_name . " <span class='member'>$name</span>";
             }
-        } 
+        }
         $title_mb_id = "[$mb_id]";
     } else {
         $tmp_name = "<span class='guest'>$name</span>";
@@ -870,7 +917,7 @@ function get_text($str, $html=0)
 
 /*
 // HTML 특수문자 변환 htmlspecialchars
-function hsc($str) 
+function hsc($str)
 {
     $trans = array("\"" => "&#034;", "'" => "&#039;", "<"=>"&#060;", ">"=>"&#062;");
     $str = strtr($str, $trans);
@@ -878,7 +925,7 @@ function hsc($str)
 }
 */
 
-// 3.31 
+// 3.31
 // HTML SYMBOL 변환
 // &nbsp; &amp; &middot; 등을 정상으로 출력
 function html_symbol($str)
@@ -912,7 +959,7 @@ function sql_query($sql, $error=TRUE)
 {
     if ($error)
         $result = @mysql_query($sql) or die("<p>$sql<p>" . mysql_errno() . " : " .  mysql_error() . "<p>error file : $_SERVER[PHP_SELF]");
-    else 
+    else
         $result = @mysql_query($sql);
     return $result;
 }
@@ -937,8 +984,8 @@ function sql_fetch_array($result)
 
 
 // $result에 대한 메모리(memory)에 있는 내용을 모두 제거한다.
-// sql_free_result()는 결과로부터 얻은 질의 값이 커서 많은 메모리를 사용할 염려가 있을 때 사용된다. 
-// 단, 결과 값은 스크립트(script) 실행부가 종료되면서 메모리에서 자동적으로 지워진다. 
+// sql_free_result()는 결과로부터 얻은 질의 값이 커서 많은 메모리를 사용할 염려가 있을 때 사용된다.
+// 단, 결과 값은 스크립트(script) 실행부가 종료되면서 메모리에서 자동적으로 지워진다.
 function sql_free_result($result)
 {
     return mysql_free_result($result);
@@ -962,18 +1009,18 @@ function get_table_define($table, $crlf="\n")
 
     $sql = 'SHOW FIELDS FROM ' . $table;
     $result = sql_query($sql);
-    while ($row = sql_fetch_array($result)) 
+    while ($row = sql_fetch_array($result))
     {
         $schema_create .= '    ' . $row['Field'] . ' ' . $row['Type'];
-        if (isset($row['Default']) && $row['Default'] != '') 
+        if (isset($row['Default']) && $row['Default'] != '')
         {
             $schema_create .= ' DEFAULT \'' . $row['Default'] . '\'';
         }
-        if ($row['Null'] != 'YES') 
+        if ($row['Null'] != 'YES')
         {
             $schema_create .= ' NOT NULL';
         }
-        if ($row['Extra'] != '') 
+        if ($row['Extra'] != '')
         {
             $schema_create .= ' ' . $row['Extra'];
         }
@@ -1042,10 +1089,10 @@ function referer_check($url="")
 
 
 // DEMO 라는 파일이 있으면 데모 화면으로 인식함
-function check_demo() 
+function check_demo()
 {
     global $g4;
-    if (file_exists("$g4[path]/DEMO")) 
+    if (file_exists("$g4[path]/DEMO"))
         alert("데모 화면에서는 하실(보실) 수 없는 작업입니다.");
 }
 

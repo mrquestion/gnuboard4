@@ -27,5 +27,7 @@ function cheditor2($form, $id, $width='100%', $height='250')
 function cheditor3($id)
 {
     return "document.getElementById('{$id}').value = ed_{$id}.outputHTML();";
+    // body 태그 안의 내용만 반환 (백경동 님)
+    //return "document.getElementById('{$id}').value = ed_{$id}.outputBodyHTML();";
 }
 ?>

@@ -171,7 +171,7 @@ if ($_SESSION[ss_mb_id]) // 로그인중이라면
     if (substr($member[mb_today_login], 0, 10) != $g4[time_ymd])
     {
         // 첫 로그인 포인트 지급
-        insert_point($member[mb_id], $config[cf_login_point], "$g4[time_ymd] 첫로그인");
+        insert_point($member[mb_id], $config[cf_login_point], "$g4[time_ymd] 첫로그인", "@login", $member[mb_id], $g4[time_ymd]);
 
         // 오늘의 로그인이 될 수도 있으며 마지막 로그인일 수도 있음
         // 해당 회원의 접근일시와 IP 를 저장
@@ -183,17 +183,21 @@ else
 {
     // 자동로그인 ---------------------------------------
     // 회원아이디가 쿠키에 저장되어 있다면 (3.27)
-    if ($tmp_mb_id = get_cookie("ck_mb_id")) {
+    if ($tmp_mb_id = get_cookie("ck_mb_id")) 
+    {
         // 최고관리자는 자동로그인 금지
-        if ($tmp_mb_id != $config[cf_admin]) {
+        if ($tmp_mb_id != $config[cf_admin]) 
+        {
             $sql = " select mb_password, mb_intercept_date, mb_leave_date from $g4[member_table] where mb_id = '$tmp_mb_id' ";
             $row = sql_fetch($sql);
             $key = md5($_SERVER[SERVER_ADDR] . $_SERVER[REMOTE_ADDR] . $_SERVER[HTTP_USER_AGENT] . $row[mb_password]);
             // 쿠키에 저장된 키와 같다면
             $tmp_key = get_cookie("ck_auto");
-            if ($tmp_key == $key && $tmp_key) {
+            if ($tmp_key == $key && $tmp_key) 
+            {
                 // 차단 또는 탈퇴가 아니라면
-                if ($row[mb_intercept_date] == "" && $row[mb_leave_date] == "") {
+                if ($row[mb_intercept_date] == "" && $row[mb_leave_date] == "") 
+                {
                     // 세션에 회원아이디를 저장하여 로그인으로 간주
                     set_session("ss_mb_id", $tmp_mb_id);
 

@@ -1,19 +1,25 @@
 <?php
+include_once("./_common.php");
+
 if ($_REQUEST['do'] == "submit") {
-    require_once "imageupload-class.php";
+    require_once "./imageupload-class.php";
     $attach = new uploader;
 
     //////////////////////////////////////////////////////////////////////////
     // 이미지 파일이 저장될 디렉토리 경로를 지정합니다.
     // $save_as_directory의 퍼미션은 777로 설정합니다.
 
-    $save_as_directory = "/usr/local/apache/htdocs/cheditor2/attach/";
+    $ym = date("ym", $g4[server_time]);
 
+    //$save_as_directory = "/usr/local/apache/htdocs/cheditor2/attach/";
+    $save_as_directory = "$g4[path]/data/$g4[editor]/$ym/";
+
+    @mkdir($save_as_directory, 0707);
+    @chmod($save_as_directory, 0707);
 
     //////////////////////////////////////////////////////////////////////////
     // $save_as_directory의 URL 경로를 입력합니다.
-
-    $save_as_url = "http://www.chcode.com/cheditor2/attach/";
+    $save_as_url = "$g4[url]/data/$g4[editor]/$ym/";
 
     //////////////////////////////////////////////////////////////////////////
     // 옵션:

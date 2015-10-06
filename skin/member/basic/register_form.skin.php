@@ -117,7 +117,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </TD>
         </TR>
 
-        <? if ($member[mb_nick_date] < date("Y-m-d", $g4[server_time] - ($config[cf_nick_modify] * 86400))) { // 별명수정일이 지났다면 수정가능 ?>
+        <? if ($member[mb_nick_date] <= date("Y-m-d", $g4[server_time] - ($config[cf_nick_modify] * 86400))) { // 별명수정일이 지났다면 수정가능 ?>
         <input type=hidden name=mb_nick_default value='<?=$member[mb_nick]?>'>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>별명</TD>

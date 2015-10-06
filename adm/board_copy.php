@@ -61,6 +61,10 @@ a:hover { text-decoration:underline; color:#EBC95F; }
 	<td><input type=text class=edit name="target_table" size="20" maxlength="20" required alphanumericunderline itemname="TABLE"> 영문자, 숫자, _ 만 가능 (공백없이)</td>
 </tr>
 <tr class='ht'>
+	<td>게시판 제목</td>
+	<td><input type=text class='edit' name='target_subject' size=60 maxlength=120 required itemname='게시판 제목' value='[복사본] <?=$board[bo_subject]?>'></td>
+</tr>
+<tr class='ht'>
 	<td>복사 유형</td>
 	<td>
         <input type="radio" name="copy_case" value="schema_only" checked>구조만
