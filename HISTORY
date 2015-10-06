@@ -1,0 +1,624 @@
+4.00.09 (05.06.13)
+    :   글입력시 공지사항에 나오지 않던 오류를 수정
+    :   끌쓰기, 코멘트쓰기, 글읽기에서 관리자도 포인트 가감
+    :   사이드뷰 사용하지 않을 경우 코멘트 이름에 사이드뷰 출력되는 오류 수정
+    :   인덱스 필드가 아니면 정렬에 사용하지 않음 코드 제거
+
+        bbs/write_update.php
+        bbs/write_comment_update.php
+        bbs/board.php
+        bbs/view_comment.php
+        bbs/list.php
+
+4.00.08 (05.06.10)
+    :   검색 수정
+    :   최근게시물 수정
+    :   게시판관리 리스트 페이지 수정 (제목을 넓게 ... 관리자 선택부분 삭제)
+    :   코멘트 입력 체크 루틴 추가
+    :   회원가입, 글쓰기, 코멘트쓰기시에 이름에 태그 적용할 수 없도록 수정
+
+        adm/board_list.php
+        bbs/search.php
+        bbs/new.php
+        bbs/register_form_update.php
+        bbs/write_update.php
+        bbs/write_comment_update.php
+        skin/new/basic/new.skin.php
+        skin/board/basic/view_comment.skin.php
+
+4.00.07 (05.06.09)
+    :   관리자는 글읽기, 글쓰기, 코멘트쓰기, 다운로드시 포인트 가감하지 않음
+        nasca님께서 알려주셨습니다.
+    :   회원메일발송에서 잘못된 변수명 바로 잡음
+        smile4u님께서 알려주셨습니다.
+    :   게시판스킨의 잘못된 주석 바로 잡음
+        까만도둑님께서 알려주셨습니다.
+    :   게시판스킨의 테이블폭(500->100%) 수정
+        wanie님께서 알려주셨습니다.
+
+        adm/mail_select_update.php
+        adm/mail_test.php
+        bbs/board.php
+        bbs/write_comment_update.php
+        bbs/write.php
+        bbs/write_update.php
+        skin/board/basic/view.skin.php
+        skin/board/basic/list.skin.php
+
+4.00.06 (05.06.07)
+    :   환경설정테이블에 여분필드 10개 추가
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/upgrade.php
+
+4.00.05 (05.06.06)
+    :   bbs/member_confirm.php 를 스킨화
+    :   login 스킨과 register 스킨을 묶어 member 스킨으로 수정
+    :   login 스킨과 register 스킨은 삭제
+    :   출력되는 제목에 get_text() 함수 적용 (스크립트 실행 무력화)
+    :   그외 다수
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/upgrade.php
+        bbs/register_form.php
+        bbs/member_confirm.php
+        bbs/register_result.php
+        bbs/register_form_update.php
+        bbs/register.php
+        bbs/good.php
+        bbs/scrap.php
+        bbs/scrap_popin.php
+        bbs/login.php
+        skin/member/*
+        
+
+4.00.04 (05.06.03)
+    :   다른 디렉토리와 구조를 맞추기 위하여 파일 추가
+        _common.php , _head.php , _tail.php
+
+        _common.php
+        _head.php
+        _tail.php
+        index.php
+
+
+4.00.03 (05.06.01)
+    :   [보안관련] PHPSESSID 가 틀리면 로그아웃한다.
+    :   data 및 자동생성되는 디렉토리에 내용없는 index.php 생성
+        (서버의 설정에 따라 해당 디렉토리의 파일이 보이는것을 사전에 차단)
+    :   $g4[url] 경로 부분 수정
+
+        common.php
+        install/install_db.php
+
+4.00.02 (05.05.31)
+    :   검색에서 제대로 출력되지 않던 오류 수정
+
+        skin/search/basic/search.skin.php
+
+4.00.01 (05.05.30)
+    :   관리자 > 게시판관리 > 게시판복사시에 쿼리 오류 발생
+
+        adm/board_copy_update.php
+
+4.00.00 (05.05.30)
+    :   안정버전 배포
+
+05.05.30
+    :   로그인 페이지를 스킨으로 사용할 수 있게 수정
+    :   그외 다수
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/board_copy_update.php
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/member_form_update.php
+        adm/upgrade.php
+        bbs/login.php
+        bbs/password.php
+        bbs/register_form_update.php
+        skin/login/*
+
+05.05.28
+    :   현재접속자 스킨으로 수정
+    :   그외 다수
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+        adm/upgrade.php
+        adm/config_form_update.php
+        adm/config_form.php
+        bbs/current_connect.php
+        bbs/view_comment.php
+        skin/new/*
+        skin/connect/*
+        lib/connect.lib.php
+
+05.05.27
+    :   글삭제시 최근게시물에서 코멘트 삭제되지 않던 오류를 수정
+        root님께서 알려주셨습니다.
+
+        bbs/delete.php
+        bbs/delete_all.php
+
+05.05.26
+    :   파일 테이블에 파일 내용을 필드 추가
+        관리자 > 게시판설정에서 파일 설명 사용에 체크하십시오.
+    :   자기소개 페이지에 자신보다 높은 권한의 사용자는 가입일과 최종접속일을 알 수 없게 함
+        황제.com님께서 알려주셨습니다.
+    :   프레임 사용시 중복 회원아이디, 이메일 계속 묻는 오류 수정
+        root님께서 알려주셨습니다. top.document -> parent.document
+    :   gallery 형식 스킨 추가
+        이 스킨은 기존의 답사기 스킨을 구현한것으로 아직 썸네일 기능은 넣지 못하였습니다.
+        관리자 > 게시판설정에 아래의 값을 반드시 입력해 주세요.
+        여분필드 1은 한행에 출력하는 이미지 수 지정
+        여분필드 2는 이미지의 폭을 픽셀로 지정
+
+    adm/board_form_update.php
+    adm/board_form.php
+    adm/upgrade.php
+    bbs/write.php
+    bbs/member_email_check.php
+    bbs/member_nick_check.php
+    bbs/write_update.php
+    bbs/view.php
+    bbs/profile.php
+    lib/common.lib.php
+    skin/board/basic/view.skin.php
+    skin/board/basic/write.skin.php
+    skin/board/gallery/*
+
+05.05.25
+    :   검색을 스킨으로 수정
+    :   접속자로그 삭제일, 인기검색어 삭제일 설정 추가
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+    config.php
+    adm/config_form.php
+    adm/config_form_update.php
+    adm/index.php
+    adm/upgrade.php
+    bbs/search.php
+    skin/search/*
+
+05.05.24
+    :   게시판관리 > 게시판복사 할때 파일 복사 안되던 오류를 수정
+    :   최근게시물 스킨으로 수정
+    :   그외 다수
+    :   필드가 추가 되었으니 adm/upgrade.php 를 한번 이상 실행하여 주십시오.
+
+    install/install_db.php
+    adm/board_copy_update.php
+    adm/config_form.php
+    adm/config_form_update.php
+    adm/index.php
+    adm/upgrade.php
+    bbs/board.php
+    bbs/current_connect.php
+    bbs/delete_comment.php
+    bbs/download.php
+    bbs/new.php
+    bbs/search.php
+    bbs/tb.php
+    bbs/view_comment.php
+    bbs/write.php
+    bbs/write_comment_update.php
+    bbs/write_update.php
+    lib/common.lib.php
+    skin/new/*
+
+05.05.23
+    :   약관(provision -> stipulation) 필드명 변경
+    :   최근게시물 코멘트에 작성자, 시간 출력 오류 수정
+        root님께서 알려주셨습니다.
+    :   OPTIMIZER TABLE 추가
+    :   그누3 투표변화시 오류 수정
+
+    adm/auth_update.php
+    adm/board_form_update.php
+    adm/boardgroup_form_update.php
+    adm/boardgroupmember_update.php
+    adm/config_form.php
+    adm/config_form_update.php
+    adm/mail_update.php
+    adm/member_form_update.php
+    adm/point_update.php
+    adm/poll_form_update.php
+    adm/upgrade.php
+    bbs/new.php
+    skin/register/basic/register.skin.php
+    convert/g3_vote.php
+
+05.05.22
+    :   RSS 수정
+    :   답변있는 코멘트는 수정, 삭제 불가
+    :   글자수 입력 제한을 게시판 설정에서 지정할 수 있게 수정
+        필드가 추가 되었으므로 adm/upgrade.php 반드시 한번 이상 실행하세요.
+    :   현재접속자 링크는 최고관리자에게만 허용
+    :   검색에서 게시판 링크에서 검색 쿼리문 삭제
+    :   코멘트 삭제시 새글도 삭제
+        torry님께서 알려주셨습니다.
+    :   포인트 부분 코딩 새로함
+    :   설치시 최고관리자 회원정보를 공개로 설정
+        hepburnstyle님께서 알려주셨습니다.
+
+    bbs/download.php
+    bbs/board.php
+    bbs/write_comment_update.php
+    bbs/write.php
+    bbs/write_update.php
+    bbs/search.php
+    bbs/delete_comment.php
+    bbs/current_connect.php
+    bbs/view_comment.php
+    bbs/list.php
+    bbs/rss.php
+    adm/index.php
+    adm/board_form_update.php
+    adm/board_form.php
+    adm/upgrade.php
+    install/install_db.php
+
+05.05.21
+    :   비밀글은 검색에서 제외
+        zzzz님께서 알려주셨습니다.
+        bbs/search.php
+
+    :   게시판 검색어도 인기검색어에 포함
+        root님께서 알려주셨습니다.
+        lib/common.lib.php
+
+05.05.20
+    :   인기검색어 기능 추가
+        adm/upgrade.php 실행
+        bbs/search.php
+        lib/popular.lib.php
+        skin/popular/*
+        common.php
+        config.php
+
+    :   관리자 메뉴 개편
+        adm/*
+
+    :   투표 참여시 포인트 부여
+        adm/poll_form.php
+        adm/poll_form_update.php
+        bbs/poll_update.php
+
+    :   최신글에 코멘트 포함
+        bbs/new.php
+        bbs/write_comment_update.php
+        bbs/write_update.php
+        bbs/tb.php
+        bbs/scrap_popin_update.php
+
+    :   글이동시 최신코멘트도 이동
+        bbs/move_update.php
+
+    :   RSS 추가
+        bbs/rss.php
+
+05.05.17
+    :   게시물 복사, 이동시 코멘트 답변 정상 복사, 이동 되도록 수정
+        bbs/move_update.php
+
+    :   코멘트 수정, 삭제 오류 수정
+        bbs/write_comment_update.php
+        bbs/delete_commnet.php
+
+05.05.16
+    :   admin 디렉토리를 adm 으로 변경
+        tomcat 설치시 충돌 미연에 방지
+        config.php
+
+    :   코멘트에 답변 기능 추가
+        필드가 추가 되었으므로 adm/upgrade.php 를 한번 이상 실행하셔야 합니다.
+        *
+
+    :   config.php 에 $g4[url] 을 직접 입력할 수 있도록 수정
+        windows 서버에서는 제대로 경로를 알 수 없어 수동으로 입력할 수 있도록 하였습니다.
+        config.php
+
+05.05.15
+    :   게시물 이동시 제대로 계산되지 않던 게시물 수를 수정
+        그외 다수
+        adm/board_delete.inc.php
+        adm/config_form.php
+        adm/board_form.php
+        bbs/move_update.php
+        bbs/write.php
+
+05.05.14
+    :   윈도우 서버에서 관리자메뉴 정상 출력되도록 수정
+        adm/menu/*
+
+    :   설정일이 지난 새글 삭제, 설정일이 지난 쪽지 삭제, 탈퇴회원 자동 삭제 루틴을
+        adm/index.php 로 옮겼습니다.
+
+    :   복사, 이동시 로그 남김 기능 추가
+        필드가 추가 되었으므로 adm/upgrade.php 를 한번 이상 실행하셔야 합니다.
+        adm/config_form.php
+        adm/config_form_update.php
+        bbs/move_update.php
+
+    :   이동시 최신글에서 사라지는 게시물 오류 수정
+        torry님께서 알려주셨습니다.
+        bbs/new.php
+        bbs/move_update.php
+
+    :   사이드뷰에서 홈페이지 클릭시 제대로 이동하지 않던 오류 수정
+        말탄개미(sehonet)님께서 알려주셨습니다.
+        lib/common.lib.php
+
+    :   코멘트 새창 사용 체크하지 않았을 때 최신글에서 코멘트 클릭시 오류 수정
+        bbking님께서 알려주셨습니다.
+        skin/latest/basic/latest.skin.php
+
+    :   회원메일에서 미리보기 기능 추가
+        NARU(kingljm)님께서 알려주셨습니다.
+        adm/mail_list.php
+        adm/mail_preview.php
+
+    :   관리자가 직접 등록한 회원 로그인 되지 않던 오류 수정
+        패스워드 입력이 되지 않고 있었음
+        정진상(chung96)님께서 알려주셨습니다.
+        adm/member_form_update.php
+
+    :   게시판 그룹 입력시 여분 필드 입력되지 않던 오류 수정
+        NARU(kingljm)님께서 알려주셨습니다.
+        boardgroup_form_update.php
+
+05.05.13
+    : 글자수 최소/제한하는 코드 추가
+      skin/board/basic/write.skin.php
+      skin/board/basic/view_comment.skin.php
+
+    : 회원가입을 스킨 방식으로 수정
+      필드가 추가 되었으므로 adm/upgrade.php 를 한번 이상 실행하셔야 합니다.
+      adm/config_*
+      skin/register/*
+      bbs/member_*_check.php
+      bbs/register_*
+
+    : 공지에는 답변할 수 없는 메세지 출력 오류 수정
+      bbs/write_update.php
+
+    : 검색 수정
+      head.php
+
+05.05.12
+    : 관리자가 직접 회원 등록 가능하도록 수정
+      adm/member_list.php
+      adm/member_form.php
+      adm/member_form_update.php
+
+    : 동일내용 연속등록 불가
+      bbs/write_update.php
+      bbs/write_comment_update.php
+
+    : 글 이동시 스크랩도 이동하도록 수정
+      bbs/move_update.php
+
+    : 글쓴이 사이드뷰 사용 기능 추가
+      필드가 추가 되었으므로 adm/upgrade.php 를 한번 이상 실행하셔야 합니다.
+      adm/board_form.php
+      adm/board_form_update.php
+
+05.05.11
+    : 게시판관리 > 수정에서 오류나는 부분들 수정
+      adm/board_form.php
+      adm/board_form_update.php
+
+    : 불여우에서 alphanumeric 과 alphanumeric_ 을 제대로 인식하지 못하던 오류를 수정
+      alphanumeric_ 을 alphanumericunderline 으로 수정
+      js/wrest.js
+
+    : bbs , admin path 전체 수정
+      *
+
+05.05.10
+    : 같은 서버에 존재하는 타계정에서 DB 정보를 감출 수 있는 방법이 마련되지 않아
+      원래의 설치 파일로 돌려 놓았습니다.
+      install/*
+      common.php
+      config.php
+
+    : php 인젝션 ( 임의로 변수조작으로 인한 리모트공격) 취약점에 대비한 코드를 추가
+      prosper 님께서 알려주셨습니다.
+      common.php
+
+    : 회원메일발송 추가
+      회원메일 테이블 추가로 인한 프로그램 실행
+      http://도메인/지포/adm/upgrade.php 를 한번 이상은 최고관리자 권한으로 실행해 주십시오.
+
+      adm/*
+      common.php
+      config.php
+
+05.05.09
+    : dbconfig.php 를 완전히 없애고 common.php 에 mysql 정보를 넣는 방식으로 수정하였습니다.
+      어떤 코드로 하던 dbconfig.php 가 따로 분리되어 있으면 같은 서버에 존재하는 타 계정들로
+      부터 자유로울 수 없습니다.
+      타인에게 mysql 정보를 알려주지 않는 한 완벽(?)하게 DB를 안전하게 보호 할 수 있습니다.
+      common.php
+      config.php
+      install/*
+
+    : 여분 필드 코드 오류 수정
+      김선용(sucjin)님께서 알려주셨습니다.
+      adm/board_form.php
+      adm/boardgroup_form.php
+      adm/member_form.php
+
+    : 회원정보수정시 관리자 아이디 접근 불가 해제
+      bbs/register_form.hp
+
+    : 설치시 퍼미션 확인 코드 수정
+      install/index.php
+
+    : sql_zip.sql 을 admin 디렉토리로 이동
+
+05.05.06
+    : 코멘트 입력시 여분 필드 입력되도록 수정
+      bbs/write_comment_update.php
+
+    : 접근권한(부관리자) 설정 기능 추가
+      가변적으로 추가되는 프로그램도 적용 가능
+      r : 읽기 , w : 입력, 수정 , d : 삭제
+      config.php
+      adm/*
+
+05.05.04
+    : 제목 길이 자르기 수정
+      김선용(sucjin)님께서 알려주셨습니다.
+      bbs/list.php 
+    : 코멘트보기 사용하지 않을 경우 오류 수정
+      lib/common.lib.php
+      skin/board/*/list.skin.php
+    : 관리자 메뉴 수정
+      adm/*
+
+05.05.03
+    : 게시판그룹설정에서 옵션 입력 가능하게 수정
+      adm/boardgroup_form.php
+      adm/boardgroup_form_update.php
+
+    : 관리자메뉴에 DHTML 메뉴 삭제
+      adm/*
+
+05.05.02
+    : 게시판설정 > 수정에서 bo_image_size 필드 존재하지 않음 오류 수정
+      adm/board_form_update.php
+    
+    : 최신글의 글자수 표시 오류 수정 
+      get_list() 함수에서 $len => $subject_len 으로 수정
+      김선용(sucjin)님께서 알려주셨습니다.
+      lib/common.lib.php 
+    
+    : get_view() 함수 수정
+      lib/common.lib.php 
+    
+    : url_auto_list() 함수 수정
+      lib/common.lib.php 
+    
+    : 답사기 게시판 변환기 추가
+      convert/g3_dabsagi.php
+
+05.04.30
+    : 회원가입시 별명에서 0일 이내 변경 안됨 부분 수정
+      bbs/register_form.php
+
+05.04.29
+    : 불여우에서 쪽지보내기 클릭시 자바스크립트 콘솔창이 뜨는것을 수정
+      js/sideview.js
+
+    : 전체검색 자바스크립트 오류 수정
+      bbs/search.php
+
+    : 회원자신의 코멘트는 삭제할 수 없는 오류 수정
+      bbs/delete_comment.php
+
+    : 게시판설정 > 수정에서 스킨디렉토리 변경되지 않던 오류를 수정
+      adm/board_form.php
+
+    : 현재접속자 오류 수정
+      head.sub.php
+
+    : 존재하지 않는 게시판일 경우 오류 출력
+      bbs/board.php
+
+    : FireFox 에서 가변파일 업로드 되지 않던 오류를 수정
+      김선용(sucjin)님께서 알려주셨습니다.
+      <!-- 김선용 2005.4 - FF(불여우) 에서는 innerHTML 사용시 폼이 <table> 아래에 있으면 인식하지 못합니다. --> 
+      게시판스킨의 write.skin.php
+
+    : 게시판설정 > 수정시 공지사항 없어지던 오류를 수정
+      adm/board_form_update.php
+
+    : 투표리스트에서 링크 수정
+      박규석(nosty)님께서 알려주셨습니다.
+      adm/poll_list.php
+
+    : 게시판설정 > 수정시 가로이미지수 필드 오류 수정
+      강남호(namo)님께서 알려주셨습니다.
+      adm/board_form_update.php
+
+    : 게시판설정에서 HTML 쓰기 권한 수정
+      바리미(koxel)님께서 알려주셨습니다.
+      adm/board_form.php
+
+    : 게시판설정에서 스킨 디렉토리 반드시 설정하도록 수정
+      adm/board_form.php
+
+    : allow_url_fopen = Off 일 경우 트랙백 오류나던 부분을 수정 (소켓 사용)
+      lib/trackback.lib.php
+
+05.04.28
+    : 포인트 변환시 오류 수정
+      convert/g3_member.php
+
+05.04.28
+    : 정식버전 배포 (안정버전 아님)
+
+05.04.28
+    : 불여우에서 회원정보수정 후 정지하던것을 수정
+    : 그누보드3 게시판자료 변환 프로그램 추가
+      convert/g3_board.php
+    : MySQL 관리툴 phpMyAdmin 2.6.2 탑재
+
+05.04.27
+    : 설치시 implode() 인수 갯수 오류 수정
+    : 그누보드3 회원자료 변환 프로그램 추가
+      convert/g3_member.php
+
+05.04.26
+    : 코멘트 몇건 이상 등록시 원글 수정, 삭제 불가 기능 추가
+    : 게시판 생성 기능 추가
+    : 게시판에 상, 하단 이미지 업로드 기능 추가
+    : 별명 변경 후 설정일 동안 별명 변경하지 못하는 기능 추가
+    : 새글 리스트에 분류검색 기능 추가
+    : 전체검색에 분류검색 기능 추가
+
+05.04.25
+    : bbs/zip2.php 삭제 (새창에서 상세주소를 입력받지 않음)
+
+05.04.24
+    : 카페24 에서 설치 되지 않던 문제와 설치시 Unknown table 'g4_board' 오류 수정
+
+05.04.22    
+    : 그룹접근 사용에 따른 글목록 보기 차단 기능 추가
+    : 그룹접근 사용에 따른 검색 차단 기능 추가
+    : 최고관리자는 포인트 추가 내역 남기지 않음
+
+05.04.21    
+    : 게시판 테이블의 wr_option 에서 set(html, htmlbr) 을 set(html1, html2) 로 변경
+    : 관리자 > 회원정보 수정시 오류 수정
+    : 회원가입시 추천인 아이디 입력 부분 수정
+    : common.lib.php 의 insert_point() 함수에서 회원아이디를 찾아 없으면 return 함
+    : 전체 검색 수정
+    : 게시판 검색에서 검색어에 색상 출력
+    : common.lib.php 의 search_font() 함수에서 검색어가 없는 경우 return 함
+
+05.04.21    오픈 베타 2 배포
+
+05.03.29    베타 1 배포
+
+그누보드 포에버 이력 ↑
+
+
+================================================================================
+그누보드 포에버 주요기능
+--------------------------------------------------------------------------------
+    1. 가변 파일 업로드 지원
+    2. 관리자 페이지에 가변적으로 메뉴 추가 가능
+    3. 관리자 메뉴별 접근 기능
+    4. 트랙백 기능
+    5. 최근게시물 지원으로 게시판이 많아도 새글을 확인할 수 있음
+    6. 로봇에 의한 글쓰기 차단 기능
+    7. RSS
+    8. 게시판별로 포인트 점수를 다르게 부여할 수 있음
+    9. 그외 다수
+================================================================================
