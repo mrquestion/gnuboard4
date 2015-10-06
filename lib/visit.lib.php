@@ -34,8 +34,10 @@ function get_brow($agent)
     else if(preg_match("/msie 5.5[0-9]*/", $agent))     { $s = "MSIE 5.5"; }
     else if(preg_match("/msie 6.0[0-9]*/", $agent))     { $s = "MSIE 6.0"; }
     else if(preg_match("/msie 7.0[0-9]*/", $agent))     { $s = "MSIE 7.0"; }
+    else if(preg_match("/msie 8.0[0-9]*/", $agent))     { $s = "MSIE 8.0"; }
     else if(preg_match("/msie 4.[0-9]*/", $agent))      { $s = "MSIE 4.x"; }
     else if(preg_match("/firefox/", $agent))            { $s = "FireFox"; }
+    else if(preg_match("/chrome/", $agent))             { $s = "Chrome"; }
     else if(preg_match("/x11/", $agent))                { $s = "Netscape"; }
     else if(preg_match("/opera/", $agent))              { $s = "Opera"; }
     else if(preg_match("/gec/", $agent))                { $s = "Gecko"; }
@@ -54,11 +56,12 @@ function get_os($agent)
     //echo $agent; echo "<br/>";
 
     if (preg_match("/windows 98/", $agent))                 { $s = "98"; }
-    else if (preg_match("/windows 95/", $agent))            { $s = "95"; }
+    else if(preg_match("/windows 95/", $agent))             { $s = "95"; }
     else if(preg_match("/windows nt 4\.[0-9]*/", $agent))   { $s = "NT"; }
     else if(preg_match("/windows nt 5\.0/", $agent))        { $s = "2000"; }
     else if(preg_match("/windows nt 5\.1/", $agent))        { $s = "XP"; }
     else if(preg_match("/windows nt 5\.2/", $agent))        { $s = "2003"; }
+    else if(preg_match("/windows nt 6\.0/", $agent))        { $s = "Vista"; }
     else if(preg_match("/windows 9x/", $agent))             { $s = "ME"; }
     else if(preg_match("/windows ce/", $agent))             { $s = "CE"; }
     else if(preg_match("/mac/", $agent))                    { $s = "MAC"; }

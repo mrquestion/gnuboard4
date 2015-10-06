@@ -1,3 +1,16 @@
+4.31.12 (09.09.25)
+    :   접속자현황 접속경로에 <!-- 주석 코드가 포함되면 화면이 제대로 표시되지 않는 오류 수정 (neue님께서 알려주셨습니다.)
+        $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), urldecode($row[vi_referer]));
+    :   접속자현황에 IE 8, CHROME, WINDOWS NT 6 이 제대로 표시되도록 수정
+    :   첨부파일 첨부시 첨부파일명에 공백이 포함되어 있으면 일부 PC에서 보이지 않거나 다운로드 되지 않는 현상이 있습니다. (길상여의 님 090925)
+        (bbs/write_update.php) $upload[$i][file] = abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.substr($shuffle,0,8).'_'.str_replace('%', '', urlencode(str_replace(' ', '_', $filename))); 
+    :   파일다운로드시 실제 파일이 존재하지 않을 경우 포인트만 차감되는 오류 수정 (아빠불당님 090914)
+
+        adm/visit_list.php
+        lib/visit.lib.php
+        bbs/write_update.php
+        bbs/download.php
+
 4.31.11 (09.07.14)
     :   파일을 변조후 업로드된 파일을 이용한 보안취약점을 보완 (반드시 패치해 주십시오.)
 

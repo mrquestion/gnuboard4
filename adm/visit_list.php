@@ -63,7 +63,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++) {
     $title = "";
     if ($row[vi_referer]) {
         $referer = get_text(cut_str($row[vi_referer], 255, ""));
-        $title = urldecode($row[vi_referer]);
+        $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), urldecode($row[vi_referer]));
         $link = "<a href='$row[vi_referer]' target=_blank title='$title '>";
         //$link = "<a href='$row[vi_referer]' target=_blank>";
     }
