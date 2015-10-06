@@ -12,6 +12,30 @@ if (!$bo_table) { alert("게시판 TABLE명은 반드시 입력하세요."); }
 if (!ereg("^([A-Za-z0-9_]{1,20})$", $bo_table)) { alert("게시판 TABLE명은 공백없이 영문자, 숫자, _ 만 사용 가능합니다. (20자 이내)"); }
 if (!$_POST[bo_subject]) { alert("게시판 제목을 입력하세요."); }
 
+if ($img = $_FILES[bo_image_head][name]) {
+    if (!preg_match("/\.(gif|jpg|png)$/i", $img)) {
+        alert("상단 이미지가 gif, jpg, png 파일이 아닙니다.");
+    }
+}
+
+if ($img = $_FILES[bo_image_tail][name]) {
+    if (!preg_match("/\.(gif|jpg|png)$/i", $img)) {
+        alert("하단 이미지가 gif, jpg, png 파일이 아닙니다.");
+    }
+}
+
+if ($file = $_POST[bo_include_head]) {
+    if (!preg_match("/\.(php|htm[l]?)$/i", $file)) {
+        alert("상단 파일 경로가 php, html 파일이 아닙니다.");
+    }
+}
+
+if ($file = $_POST[bo_include_tail]) {
+    if (!preg_match("/\.(php|htm[l]?)$/i", $file)) {
+        alert("하단 파일 경로가 php, html 파일이 아닙니다.");
+    }
+}
+
 check_token();
 
 $board_path = "$g4[path]/data/file/$bo_table";

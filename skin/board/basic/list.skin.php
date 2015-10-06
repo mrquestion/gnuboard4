@@ -57,7 +57,7 @@ if ($is_nogood) $colspan++;
         <div style="float:left;">
             <form name="fcategory" method="get" style="margin:0px;">
             <? if ($is_category) { ?>
-            <select name=sca onchange="location='<?=$category_location?>'+this.value;">
+            <select name=sca onchange="location='<?=$category_location?>'+<?=strtolower($g4[charset])=='utf-8' ? "encodeURIComponent(this.value)" : "this.value"?>;">
             <option value=''>ÀüÃ¼</option>
             <?=$category_option?>
             </select>

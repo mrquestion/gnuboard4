@@ -1,3 +1,23 @@
+4.31.14 (09.10.15)
+    :   관리자 게시판 등록시 상,하단 이미지, 상, 하단 파일 경로를 통한 보안 취약점 수정 (김성대 님 091015)
+
+        adm/board_form_update.php        
+
+4.31.13 (09.10.14)
+    :   utf-8 버전에서 게시판분류 선택시 제대로 검색되지 않는 오류 수정
+        skin/board/basic/list.skin.php 의
+        <select name=sca onchange="location='<?=$category_location?>'+this.value;"> 를
+        <select name=sca onchange="location='<?=$category_location?>'+<?=strtolower($g4[charset])=='utf-8' ? "encodeURIComponent(this.value)" : "this.value"?>;"> 와 같이 수정하십시오.
+    :   한글로 검색후 검색된 글을 삭제하고 다시 목록으로 돌아올때 한글이 깨지는 오류를 수정 (진념님 090930)
+        bbs/view.php 의
+        $delete_href = "javascript:del('./delete.php?bo_table=$bo_table&wr_id=$wr_id&page=$page".$qstr."');"; 를
+        $delete_href = "javascript:del('./delete.php?bo_table=$bo_table&wr_id=$wr_id&page=$page".urldecode($qstr)."');"; 로 수정하십시오.
+    :   2009년 제3차 우편번호 변경내역 (2009.09.29.자 : 50,554건) http://www.zipfinder.co.kr
+
+        skin/board/basic/list.skin.php
+        bbs/view.php
+        bbs/zip.db
+
 4.31.12 (09.09.25)
     :   접속자현황 접속경로에 <!-- 주석 코드가 포함되면 화면이 제대로 표시되지 않는 오류 수정 (neue님께서 알려주셨습니다.)
         $title = str_replace(array("<", ">"), array("&lt;", "&gt;"), urldecode($row[vi_referer]));
