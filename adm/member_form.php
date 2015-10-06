@@ -39,7 +39,7 @@ include_once("./admin.head.php");
 ?>
 
 <table width=100% align=center cellpadding=0 cellspacing=0>
-<form name=fmember method=post action="javascript:fmember_submit(document.fmember);" enctype="multipart/form-data" autocomplete="off">
+<form name=fmember method=post onsubmit="return fmember_submit(this);" enctype="multipart/form-data" autocomplete="off">
 <input type=hidden name=w    value='<?=$w?>'>
 <input type=hidden name=sfl  value='<?=$sfl?>'>
 <input type=hidden name=stx  value='<?=$stx?>'>
@@ -208,11 +208,11 @@ function fmember_submit(f)
 {
     if (!f.mb_icon.value.match(/\.(gif|jp[e]g|png)$/i) && f.mb_icon.value) {
         alert('아이콘이 이미지 파일이 아닙니다. (bmp 제외)');
-        return;
+        return false;
     }
 
     f.action = './member_form_update.php';
-    f.submit();
+    return true;
 }
 </script>
 

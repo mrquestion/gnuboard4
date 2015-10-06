@@ -92,6 +92,10 @@ if( !get_magic_quotes_gpc() )
 }
 
 
+unset($_GET['g4_path']);
+unset($_POST['g4_path']);
+
+
 // PHP 4.1.0 부터 지원됨
 // php.ini 의 register_globals=off 일 경우
 @extract($_GET);
@@ -256,16 +260,6 @@ else {
     $urlencode = urlencode($_SERVER[REQUEST_URI]);
 }
 //===================================
-
-/* 코드 위치 수정 (최하단으로 내림)
-// common.php 파일을 수정할 필요가 없도록 확장합니다.
-$tmp = dir("$g4[path]/extend");
-while ($entry = $tmp->read()) {
-    // php 파일만 include 함
-    if (preg_match("/(\.php)$/i", $entry)) 
-        include_once("$g4[path]/extend/$entry");
-}
-*/
 
 
 // 자동로그인 부분에서 첫로그인에 포인트 부여하던것을 로그인중일때로 변경하면서 코드도 대폭 수정하였습니다.

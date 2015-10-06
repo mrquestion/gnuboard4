@@ -22,7 +22,7 @@ include_once ("./admin.head.php");
 ?>
 
 <table width=100% cellpadding=0 cellspacing=0 border=0>
-<form name=fconfigform method=post action='javascript:fconfigform_submit(document.fconfigform);'>
+<form name=fconfigform method=post onsubmit="return fconfigform_submit(this);">
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=30% class='col2 pad2'>
 <colgroup width=20% class='col1 pad1 bold right'>
@@ -126,12 +126,12 @@ include_once ("./admin.head.php");
     </td>
 </tr>
 <tr class='ht'>
-    <td>자동등록방지 사용</td>
-    <td><input type='checkbox' name='cf_use_norobot' value='1' <?=$config[cf_use_norobot]?'checked':'';?>> 사용
-        <?=help("자동 회원가입과 글쓰기를 방지")?></td>
     <td>복사, 이동시 로그</td>
-    <td><input type='checkbox' name='cf_use_copy_log' value='1' <?=$config[cf_use_copy_log]?'checked':'';?>> 남김
+    <td colspan=3><input type='checkbox' name='cf_use_copy_log' value='1' <?=$config[cf_use_copy_log]?'checked':'';?>> 남김
         <?=help("게시물 아래에 누구로 부터 복사, 이동됨 표시")?></td>
+    <!-- <td>자동등록방지 사용</td>
+    <td><input type='checkbox' name='cf_use_norobot' value='1' <?=$config[cf_use_norobot]?'checked':'';?>> 사용
+        <?=help("자동 회원가입과 글쓰기를 방지")?></td> -->
 </tr>
 <tr class='ht'>
     <td>접근가능 IP</td>
@@ -399,7 +399,7 @@ include_once ("./admin.head.php");
 function fconfigform_submit(f)
 {
     f.action = "./config_form_update.php";
-    f.submit();
+    return true;
 }
 </script>
 

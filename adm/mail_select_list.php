@@ -88,8 +88,8 @@ include_once("./admin.head.php");
 <?//=subtitle_bar($html_title)?><p>
 
 <div align=right>선택된 회원수 : <?=number_format($cnt)?> 명</div>
+<form name=fmailselectlist method=post onsubmit="return fmailselectlist_submit(this);" style="margin:0px;">
 <table cellpadding=4 cellspacing=1 width=100% class=tablebg>
-<form name=fmailselectlist method=post action="javascript:fmailselectlist_submit(document.fmailselectlist);">
 <input type="hidden" name="ma_id" value="<? echo $ma_id ?>">
 <tr>
     <td align=center>
@@ -126,7 +126,7 @@ include_once("./admin.head.php");
 function fmailselectlist_submit(f)
 {
     f.action = "./mail_select_update.php";
-    f.submit();
+    return true;
 }
 </script>
 

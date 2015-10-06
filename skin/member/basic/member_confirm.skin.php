@@ -2,12 +2,16 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 ?>
 
+<script type="text/javascript" src="<?=$g4[path]?>/js/capslock.js"></script>
+
 <br>
 <br>
-<table width="668" border="0" cellspacing="0" cellpadding="0">
-<form name=fmemberconfirm method=post action="javascript:fmemberconfirm_submit(document.fmemberconfirm);">
+
+<form name=fmemberconfirm method=post onsubmit="return fmemberconfirm_submit(this);">
 <input type=hidden name=mb_id value='<?=$member[mb_id]?>'>
 <input type=hidden name=w     value='u'>
+
+<table width="668" border="0" cellspacing="0" cellpadding="0">
 <tr> 
     <td width="20" height="26"></td>
     <td width="628"></td>
@@ -41,7 +45,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                         <tr> 
                             <td><img src="<?=$member_skin_path?>/img/icon.gif" width="3" height="3"></td>
                             <td height="26"><b>패스워드</b></td>
-                            <td><INPUT type=password maxLength=20 size=15 name=mb_password itemname="패스워드" required></td>
+                            <td><INPUT type=password maxLength=20 size=15 name="mb_password" id="confirm_mb_password" itemname="패스워드" required onkeypress="check_capslock('confirm_mb_password');"></td>
                         </tr>
                         </table>
                     </td>
@@ -72,8 +76,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <tr> 
     <td height="20" colspan="3"></td>
 </tr>
-</form>
 </table>
+
+</form>
 
 <script language='Javascript'>
 document.onload = document.fmemberconfirm.mb_password.focus();
@@ -83,6 +88,6 @@ function fmemberconfirm_submit(f)
     document.getElementById("btn_submit").disabled = true;
 
     f.action = "<?=$url?>";
-    f.submit();
+    return true;
 }
 </script>

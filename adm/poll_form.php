@@ -19,7 +19,7 @@ include_once("./admin.head.php");
 ?>
 
 <table width=100% cellpadding=0 cellspacing=0>
-<form name=fpoll method=post action="javascript:fpoll_check(document.fpoll);" enctype="multipart/form-data">
+<form name=fpoll method=post onsubmit="return fpoll_check(this);" enctype="multipart/form-data">
 <input type=hidden name=po_id value='<?=$po_id?>'>
 <input type=hidden name=w     value='<?=$w?>'>
 <input type=hidden name=sfl   value='<?=$sfl?>'>
@@ -106,11 +106,11 @@ HEREDOC;
 </form>
 
 <script language='Javascript'>
-    function fpoll_check(f)
-    {
-        f.action = './poll_form_update.php';
-        f.submit();
-    }
+function fpoll_check(f)
+{
+    f.action = './poll_form_update.php';
+    return true;
+}
 </script>
 
 <?

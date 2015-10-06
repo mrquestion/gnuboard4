@@ -14,6 +14,9 @@ $g4['admin_path']     = $g4['path'] . "/" . $g4['admin'];
 $g4['editor']         = "cheditor";
 $g4['editor_path']    = $g4['path'] . "/" . $g4['editor'];
 
+$g4['cheditor4']      = "cheditor4";
+$g4['cheditor4_path'] = $g4['path'] . "/" . $g4['cheditor4'];
+
 $g4['geditor']        = "geditor";
 $g4['geditor_path']   = $g4['path'] . "/" . $g4['geditor'];
 

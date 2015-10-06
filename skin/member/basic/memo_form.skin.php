@@ -37,8 +37,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </tr>
 </table>
 
+<form name=fmemoform method=post onsubmit="return fmemoform_submit(this);" style="margin:0px;">
 <table width="600" border="0" cellspacing="0" cellpadding="0">
-<form name=fmemoform method=post action="javascript:fmemoform_submit(document.fmemoform);">
 <tr> 
     <td height="300" align="center" valign="top">
         <table width="540" border="0" cellspacing="0" cellpadding="0">
@@ -84,8 +84,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <input id=btn_submit type=image src="<?=$member_skin_path?>/img/btn_paper_send.gif" border=0>&nbsp;&nbsp;
         <a href="javascript:window.close();"><img src="<?=$member_skin_path?>/img/btn_close.gif" width="48" height="20" border="0"></a></td>
 </tr>
-</form>
 </table>
+</form>
 
 <script language="JavaScript">
 with (document.fmemoform) {
@@ -100,6 +100,6 @@ function fmemoform_submit(f)
     document.getElementById("btn_submit").disabled = true;
 
     f.action = "./memo_form_update.php";
-    f.submit();
+    return true;
 }
 </script>

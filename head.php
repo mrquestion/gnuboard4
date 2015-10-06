@@ -82,14 +82,14 @@ $table_width = 1004;
     <td><img src="<?=$g4['path']?>/img/bar_02.gif" width="220" height="33"></td>
     <td background="<?=$g4['path']?>/img/bar_03.gif" width="472" height="33"><table width=100% cellpadding=0 cellspacing=0><tr><td width=25>&nbsp;</td><td><?//=popular();?></td></tr></table></td>
     <td>
-        <table width="100%" height="33" cellspacing="0" cellpadding="0">
-        <form name="fsearchbox" method="get" action="javascript:fsearchbox_submit(document.fsearchbox);">
+        <form name="fsearchbox" method="get" onsubmit="return fsearchbox_submit(this);" style="margin:0px;">
         <!-- <input type="hidden" name="sfl" value="concat(wr_subject,wr_content)"> -->
         <input type="hidden" name="sfl" value="wr_subject||wr_content">
         <input type="hidden" name="sop" value="and">
+        <table width="100%" height="33" cellspacing="0" cellpadding="0">
         <tr>
             <td width="25" height="25"><img src="<?=$g4['path']?>/img/search_01.gif" width="25" height="25"></td>
-            <td width="136" valign="middle" bgcolor="#F4F4F4"><INPUT name="stx" maxlengt=20 style="BORDER : 0px solid; width: 125px; HEIGHT: 20px; BACKGROUND-COLOR: #F4F4F4" maxlength="20"></td>
+            <td width="136" valign="middle" bgcolor="#F4F4F4"><INPUT name="stx" type="text" maxlength=20 style="BORDER : 0px solid; width: 125px; HEIGHT: 20px; BACKGROUND-COLOR: #F4F4F4" maxlength="20"></td>
             <td width="12"><img src="<?=$g4['path']?>/img/search_02.gif" width="12" height="25"></td>
             <td width="48"><input type="image" src="<?=$g4['path']?>/img/search_button.gif" width="48" height="25" border="0"></td>
             <td width="13"><img src="<?=$g4['path']?>/img/search_03.gif" width="13" height="25"></td>
@@ -97,8 +97,9 @@ $table_width = 1004;
         <tr>
             <td width="234" height="8" colspan="5"><img src="<?=$g4['path']?>/img/search_down.gif" width="234" height="8"></td>
         </tr>
+        </table>
         </form>
-        </table></td>
+    </td>
     <td></td>
 </tr>
 </table>
@@ -106,51 +107,34 @@ $table_width = 1004;
 <script language="JavaScript">
 function fsearchbox_submit(f)
 {
-    if (f.stx.value == '')
-    {
-        alert("검색어를 입력하세요.");
+    if (f.stx.value.length < 2) {
+        alert("검색어는 두글자 이상 입력하십시오.");
         f.stx.select();
         f.stx.focus();
-        return;
+        return false;
     }
 
-    /*
     // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.
     var cnt = 0;
-    for (var i=0; i<f.stx.value.length; i++)
-    {
+    for (var i=0; i<f.stx.value.length; i++) {
         if (f.stx.value.charAt(i) == ' ')
             cnt++;
     }
 
-    if (cnt > 1)
-    {
+    if (cnt > 1) {
         alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
         f.stx.select();
         f.stx.focus();
-        return;
+        return false;
     }
-    */
 
     f.action = "<?=$g4['bbs_path']?>/search.php";
-    f.submit();
+    return true;
 }
 </script>
 <!-- 검색 끝 -->
 
 <div style='height:18px;'></div>
-
-<style type="text/css">
-#middiv {
-	width:<?=$table_width?>px;
-	position:relative;
-	margin:0px auto;
-    vertical-align:top;
-    float:left;
-}
-#middiv #mleft  { width:220px; float:left; padding:0 0 0 43; }
-#middiv #mright { width:683px; float:left; padding:0 0 0 15; }
-</style>
 
 <table width='<?=$table_width?>' cellpadding=0 cellspacing=0 border=0>
 <tr>

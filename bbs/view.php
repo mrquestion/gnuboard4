@@ -131,6 +131,8 @@ if ($board[bo_use_signature] && $view[mb_id])
     $is_signature = true;
     $mb = get_member($view[mb_id]);
     $signature = $mb[mb_signature];
+
+    $signature = bad_tag_convert($signature);
 }
 
 include_once("$board_skin_path/view.skin.php");

@@ -65,7 +65,7 @@ include_once ("./admin.head.php");
 ?>
 
 <table width=100% cellpadding=0 cellspacing=0 border=0>
-<form name=fboardform method=post action="javascript:fboardform_submit(document.fboardform)" enctype="multipart/form-data">
+<form name=fboardform method=post onsubmit="return fboardform_submit(this)" enctype="multipart/form-data">
 <input type=hidden name="w"    value="<?=$w?>">
 <input type=hidden name="sfl"  value="<?=$sfl?>">
 <input type=hidden name="stx"  value="<?=$stx?>">
@@ -577,7 +577,7 @@ function fboardform_submit(f) {
     if (tmp_image.value) {
         if (!tmp_image.value.toLowerCase().match(/.(gif|jpg|png)$/i)) {
             alert(tmp_title + "이미지가 gif, jpg, png 파일이 아닙니다.");
-            return;
+            return false;
         }
     }
 
@@ -586,24 +586,24 @@ function fboardform_submit(f) {
     if (tmp_image.value) {
         if (!tmp_image.value.toLowerCase().match(/.(gif|jpg|png)$/i)) {
             alert(tmp_title + "이미지가 gif, jpg, png 파일이 아닙니다.");
-            return;
+            return false;
         }
     }
 
     if (parseInt(f.bo_count_modify.value) < 1) {
         alert("원글 수정 불가 코멘트수는 1 이상 입력하셔야 합니다.");
         f.bo_count_modify.focus();
-        return;
+        return false;
     }
 
     if (parseInt(f.bo_count_delete.value) < 1) {
         alert("원글 삭제 불가 코멘트수는 1 이상 입력하셔야 합니다.");
         f.bo_count_delete.focus();
-        return;
+        return false;
     }
 
     f.action = "./board_form_update.php";
-    f.submit();
+    return true;
 }
 </script>
 

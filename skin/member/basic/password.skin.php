@@ -2,8 +2,9 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 ?>
 
-<table width="668" border="0" cellspacing="0" cellpadding="0">
-<form name="fboardpassword" method=post action="javascript:fboardpassword_submit(document.fboardpassword);">
+<script type="text/javascript" src="<?=$g4[path]?>/js/capslock.js"></script>
+
+<form name="fboardpassword" method=post onsubmit="return fboardpassword_submit(this);">
 <input type=hidden name=w           value="<?=$w?>">
 <input type=hidden name=bo_table    value="<?=$bo_table?>">
 <input type=hidden name=wr_id       value="<?=$wr_id?>">
@@ -11,9 +12,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <input type=hidden name=sfl         value="<?=$sfl?>">
 <input type=hidden name=stx         value="<?=$stx?>">
 <input type=hidden name=page        value="<?=$page?>">
-<!-- <tr align="center"> 
-    <td colspan="3"><img src="<?=$member_skin_path?>/img/secrecy_title.gif" width="624" height="72"></td>
-</tr> -->
+
+<table width="668" border="0" cellspacing="0" cellpadding="0">
 <tr> 
     <td width="20" height="26"></td>
     <td width="628"></td>
@@ -39,7 +39,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                 <tr> 
                     <td width="30" align="center"><img src="<?=$member_skin_path?>/img/icon.gif" width="3" height="3"></td>
                     <td width="70" align="left"><b>패스워드</b></td>
-                    <td width="150"><INPUT type=password maxLength=20 size=15 name="wr_password" itemname="패스워드" required></td>
+                    <td width="150"><INPUT type=password maxLength=20 size=15 name="wr_password" id="password_wr_password" itemname="패스워드" required onkeypress="check_capslock(event, 'password_wr_password');"></td>
                     <td width="100" height="100" valign="middle"><INPUT name="image" type=image src="<?=$member_skin_path?>/img/btn_confirm.gif" width="65" height="52" border=0></td>
                 </tr>
                 <tr align="center"> 
@@ -61,8 +61,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <tr> 
     <td height="20" colspan="3"></td>
 </tr>
-</form>
 </table>
+
+</form>
 
 <script language='JavaScript'>
 document.fboardpassword.wr_password.focus();
@@ -70,6 +71,6 @@ document.fboardpassword.wr_password.focus();
 function fboardpassword_submit(f)
 {
     f.action = "<?=$action?>";
-    f.submit();
+    return true;
 }
 </script>

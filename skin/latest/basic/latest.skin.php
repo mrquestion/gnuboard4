@@ -9,7 +9,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     <td width=37 background='<?=$latest_skin_path?>/img/bg_latest.gif'><a href='<?=$g4[bbs_path]?>/board.php?bo_table=<?=$bo_table?>'><img src='<?=$latest_skin_path?>/img/more.gif' border=0></a></td>
     <td width=14><img src='<?=$latest_skin_path?>/img/latest_t02.gif'></td>
 </tr>
+</table>
 
+<table width=100% cellpadding=0 cellspacing=0>
 <? for ($i=0; $i<count($list); $i++) { ?>
 <tr>
     <td colspan=4 align=center>

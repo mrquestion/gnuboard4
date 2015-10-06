@@ -27,7 +27,7 @@ include_once("./admin.head.php");
 ?>
 
 <table width=100% cellpadding=0 cellspacing=0>
-<form name=fboardgroup method=post action="javascript:fboardgroup_check(document.fboardgroup);" autocomplete="off">
+<form name=fboardgroup method=post onsubmit="return fboardgroup_check(this);" autocomplete="off">
 <input type=hidden name=w    value='<?=$w?>'>
 <input type=hidden name=sfl  value='<?=$sfl?>'>
 <input type=hidden name=stx  value='<?=$stx?>'>
@@ -112,7 +112,7 @@ else
 function fboardgroup_check(f)
 {
     f.action = "./boardgroup_form_update.php";
-    f.submit();
+    return true;
 }
 </script>
 

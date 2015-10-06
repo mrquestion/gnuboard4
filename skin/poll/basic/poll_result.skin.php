@@ -49,8 +49,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <? if ($is_etc) { ?>
 
     <? if ($member[mb_level] >= $po[po_level]) { ?>
+        <form name="fpollresult" method="post" onsubmit="return fpollresult_submit(this);" autocomplete="off" style="margin:0px;">
         <table width=570 bgcolor=#D4D4D4 cellpadding=1 cellspacing=0>
-        <form name="fpollresult" method="post" action="javascript:fpollresult_submit(document.fpollresult);" autocomplete="off">
         <input type=hidden name=po_id value="<?=$po_id?>">
         <input type=hidden name=w value="">
         <tr> 
@@ -78,14 +78,14 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                 </table>
             </td>
         </tr>
-        </form>
         </table>
+        </form>
 
         <script language="JavaScript">
         function fpollresult_submit(f)
         {
             f.action = "./poll_etc_update.php";
-            f.submit();
+            return true;
         }
         </script>
     <? } ?>

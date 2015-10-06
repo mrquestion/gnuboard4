@@ -187,7 +187,7 @@ else
 <?$colspan=4?>
 <p>
 <table width=100% cellpadding=0 cellspacing=1 class=tablebg>
-<form name=fpointlist2 method=post action="javascript:fpointlist2_submit(document.fpointlist2);" autocomplete="off">
+<form name=fpointlist2 method=post onsubmit="return fpointlist2_submit(this);" autocomplete="off">
 <input type=hidden name=sfl  value='<?=$sfl?>'>
 <input type=hidden name=stx  value='<?=$stx?>'>
 <input type=hidden name=sst  value='<?=$sst?>'>
@@ -219,7 +219,7 @@ else
 function fpointlist2_submit(f)
 {
     f.action = "./point_update.php";
-    f.submit();
+    return true;
 }
 </script>
 

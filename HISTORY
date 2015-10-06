@@ -1,3 +1,90 @@
+4.30.00 (08.10.01)
+    :   DHTML 사용시 geditor를 cheditor4.2 버전으로 변경
+
+        config.php 파일에 아래의 코드를 추가하십시오.
+        $g4['cheditor4']      = "cheditor4";
+        $g4['cheditor4_path'] = $g4['path'] . "/" . $g4['cheditor4'];
+
+        lib/cheditor4.lib.php 파일을 추가하십시오.
+        cheditor4/* 를 추가하십시오.
+
+    :   구글 크롬에서 정상 작동되도록 많은 부분의 코드 수정
+    :   SQL Injection, PHP Injection 공격으로 인한 코드 보완 (한국정보보호진흥원에서 알려주셨습니다.)
+    :   XSS (Cross Site Scripting) 취약점 보완 (한국정보보호진흥원에서 알려주셨습니다.)
+    :   GET, POST 로 g4_path 넘길때 발생하는 오류 수정 (광존님께서 알려주셨습니다.)
+    :   프로그램에 의한 회원가입, 글쓰기, 아이디/패스워드 찾기 capcha 코드 보완 (명랑폐인님께서 도움주셨습니다.)
+    :   프로그램에 의한 메일발송을 막는 capcha 코드 추가
+    :   비밀번호(패스워드) 입력시 CapsLock 이 눌러져 있는지 검사하는 코드 추가
+
+    *   이번 버전은 상당수의 코드가 변경이 되었습니다.
+        이전 버전을 사용하시는 분은 아래의 파일이 변경되었으니 파일 비교 프로그램(AcroDiff 프로그램 추천)등을 이용하여 바뀐 코드만 수정해 주시기 바랍니다.
+
+    *   cheditor는 CHSOFT Corp(http://chcode.com)의 재산이므로 그누보드의 라이센스와는 별개입니다.
+        cheditor를 빌더등에 포함하여 배포, 판매하시는 경우에는 반드시 cheditor를 별도로 구입하셔야 합니다.
+
+    *   4.30.00 에서 바뀐 파일 전체 목록
+
+        adm/auth_list.php
+        adm/board_copy.php
+        adm/board_form.php
+        adm/boardgroup_form.php
+        adm/config_form.php
+        adm/index.php
+        adm/mail_select_list.php
+        adm/member_form.php
+        adm/point_list.php
+        adm/poll_form.php
+        bbs/delete_all.php
+        bbs/delete_comment.php
+        bbs/formmail_send.php
+        bbs/fonts/*
+        bbs/kcaptcha_config.php
+        bbs/kcaptcha_image.php
+        bbs/kcaptcha.php
+        bbs/kcaptcha_session.php
+        bbs/member_nick_check.php
+        bbs/move.php
+        bbs/move_update.php
+        bbs/password_forget3.php
+        bbs/register_form_update.php
+        bbs/search.php
+        bbs/view.php
+        bbs/write_comment_update.php
+        bbs/write_update.php
+        cheditor4/_common.php
+        cheditor4/imageupload-class.php
+        cheditor4/insert_image.php
+        common.php
+        config.php
+        head.php
+        head.sub.php
+        img/capslock.gif 
+        index.php
+        js/capslock.js 
+        lib/cheditor4.lib.php
+        lib/common.lib.php
+        skin/board/basic/list.skin.php
+        skin/board/basic/view_comment.skin.php
+        skin/board/basic/view.skin.php
+        skin/board/basic/write.skin.php
+        skin/latest/basic/latest.skin.php
+        skin/member/basic/formmail.skin.php
+        skin/member/basic/login.skin.php
+        skin/member/basic/member_confirm.skin.php
+        skin/member/basic/memo_form.skin.php
+        skin/member/basic/password_forget2.skin.php
+        skin/member/basic/password_forget3.skin.php
+        skin/member/basic/password_forget.skin.php
+        skin/member/basic/password.skin.php
+        skin/member/basic/register_form.skin.php
+        skin/member/basic/register.skin.php
+        skin/new/basic/new.skin.php
+        skin/outlogin/basic/outlogin.skin.1.php
+        skin/poll/basic/poll_result.skin.php
+        skin/search/basic/search.skin.php
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 4.22.06 (08.09.07)
     :   geditor에서 이미지 업로드시 이미지 확장자만 업로드 가능하도록 수정
 

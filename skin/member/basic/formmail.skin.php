@@ -26,11 +26,11 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     </tr>
 </table>
 
-<table width="600" border="0" cellspacing="0" cellpadding="0">
-<form name="fformmail" method="post" action="javascript:fformmail_submit(document.fformmail);" enctype="multipart/form-data">
+<form name="fformmail" method="post" onsubmit="return fformmail_submit(this);" enctype="multipart/form-data" style="margin:0px;">
 <input type="hidden" name="to"     value="<?=$email?>">
 <input type="hidden" name="attach" value="2">
 <input type="hidden" name="token"  value="<?=$token?>">
+<table width="600" border="0" cellspacing="0" cellpadding="0">
 <tr> 
     <td height="330" align="center" valign="top"><table width="540" border="0" cellspacing="0" cellpadding="0">
         <tr> 
@@ -42,59 +42,69 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <tr> 
             <td width="540" height="2" align="center" valign="top" bgcolor="#FFFFFF">
                 <table width="540" border="0" cellspacing="0" cellpadding="0">
-                
+                <colgroup width="130">
+                <colgroup width="10">
+                <colgroup width="400">
                 <? if ($is_member) { // 회원이면 ?>
                 <input type='hidden' name='fnick'  value='<?=$member[mb_nick]?>'>
                 <input type='hidden' name='fmail'  value='<?=$member[mb_email]?>'>
                 <? } else { ?>
                 <tr> 
-                    <td width="80" height="27" align="center"><b>이름</b></td>
-                    <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type=text style='width:90%;' name='fnick' required minlength=2 itemname='이름'></td>
+                    <td height="27" align="center"><b>이름</b></td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><input type=text style='width:90%;' name='fnick' required minlength=2 itemname='이름'></td>
                 </tr>
                 <tr> 
-                    <td width="80" height="27" align="center"><b>E-mail</b></td>
-                    <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type=text style='width:90%;' name='fmail' required email itemname='E-mail'></td>
+                    <td height="27" align="center"><b>E-mail</b></td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><input type=text style='width:90%;' name='fmail' required email itemname='E-mail'></td>
                 </tr>
                 <? } ?>
 
                 <tr> 
-                    <td width="80" height="27" align="center"><b>제목</b></td>
-                    <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type=text style='width:90%;' name='subject' required itemname='제목'></td>
+                    <td height="27" align="center"><b>제목</b></td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><input type=text style='width:90%;' name='subject' required itemname='제목'></td>
                 </tr>
                 <tr> 
                     <td height="1" colspan="3" bgcolor="#E9E9E9"></td>
                 </tr>
                 <tr> 
-                    <td width="80" height="28" align="center"><b>선택</b></td>
-                    <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type='radio' name='type' value='0' checked> TEXT <input type='radio' name='type' value='1' > HTML <input type='radio' name='type' value='2' > TEXT+HTML</td>
+                    <td height="28" align="center"><b>선택</b></td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><input type='radio' name='type' value='0' checked> TEXT <input type='radio' name='type' value='1' > HTML <input type='radio' name='type' value='2' > TEXT+HTML</td>
                 </tr>
                 <tr> 
                     <td height="1" colspan="3" bgcolor="#E9E9E9"></td>
                 </tr>
                 <tr> 
-                    <td width="80" height="150" align="center"><b>내용</b></td>
-                    <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><textarea name="content" style='width:90%;' rows='9' required itemname='내용'></textarea></td>
+                    <td height="150" align="center"><b>내용</b></td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><textarea name="content" style='width:90%;' rows='9' required itemname='내용'></textarea></td>
                 </tr>
                 <tr> 
                     <td height="1" colspan="3" bgcolor="#E9E9E9"></td>
                 </tr>
                 <tr> 
-                    <td width="80" height="27" align="center">첨부파일 #1</td>
-                    <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type=file style='width:90%;' name='file1'></td>
+                    <td height="27" align="center">첨부파일 #1</td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><input type=file style='width:90%;' name='file1'></td>
                 </tr>
                 <tr> 
                     <td height="1" colspan="3" bgcolor="#E9E9E9"></td>
                 </tr>
                 <tr> 
-                    <td width="80" height="27" align="center">첨부파일 #2</td>
-                    <td width="10" valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
-                    <td width="450"><input type=file style='width:90%;' name='file2'></td>
+                    <td height="27" align="center">첨부파일 #2</td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><input type=file style='width:90%;' name='file2'></td>
+                </tr>
+                <tr> 
+                    <td height="1" colspan="3" bgcolor="#E9E9E9"></td>
+                </tr>
+                <tr> 
+                    <td height="27" align="center"><img id='kcaptcha_image' border='0' width=120 height=60 onclick="imageClick();" style="cursor:pointer;" title="글자가 잘안보이는 경우 클릭하시면 새로운 글자가 나옵니다."></td>
+                    <td valign="bottom"><img src="<?=$member_skin_path?>/img/l.gif" width="1" height="8"></td>
+                    <td><input class='ed' type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.</td>
                 </tr>
                 <tr> 
                     <td height="1" colspan="3" bgcolor="#E9E9E9"></td>
@@ -112,10 +122,37 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <tr>
     <td height="40" align="center" valign="bottom"><input id=btn_submit type=image src="<?=$member_skin_path?>/img/btn_mail_send.gif" border=0>&nbsp;&nbsp;<a href="javascript:window.close();"><img src="<?=$member_skin_path?>/img/btn_close.gif" width="48" height="20" border="0"></a></td>
 </tr>
-</form>
 </table>
+</form>
 
-<script language="JavaScript">
+<script type="text/javascript" src="<?="$g4[path]/js/md5.js"?>"></script>
+<script type="text/javascript"> var md5_norobot_key = ''; </script>
+<script type="text/javascript" src="<?="$g4[path]/js/prototype.js"?>"></script>
+<script type="text/javascript">
+function imageClick() {
+    var url = "<?=$g4[bbs_path]?>/kcaptcha_session.php";
+    var para = "";
+    var myAjax = new Ajax.Request(
+        url, 
+        {
+            method: 'post', 
+            asynchronous: true,
+            parameters: para, 
+            onComplete: imageClickResult
+        });
+}
+
+function imageClickResult(req) { 
+    var result = req.responseText;
+    var img = document.createElement("IMG");
+    img.setAttribute("src", "<?=$g4[bbs_path]?>/kcaptcha_image.php?t=" + (new Date).getTime());
+    document.getElementById('kcaptcha_image').src = img.getAttribute('src');
+
+    md5_norobot_key = result;
+}
+
+Event.observe(window, "load", imageClick);
+
 with (document.fformmail) {
     if (typeof fname != "undefined")
         fname.focus();
@@ -125,15 +162,23 @@ with (document.fformmail) {
 
 function fformmail_submit(f)
 {
+    if (typeof(f.wr_key) != 'undefined') {
+        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
+            alert('자동등록방지용 글자가 제대로 입력되지 않았습니다.');
+            f.wr_key.focus();
+            return false;
+        }
+    }
+
     if (f.file1.value || f.file2.value) {
         // 4.00.11
         if (!confirm("첨부파일의 용량이 큰경우 전송시간이 오래 걸립니다.\n\n메일보내기가 완료되기 전에 창을 닫거나 새로고침 하지 마십시오."))
-            return;
+            return false;
     }
 
     document.getElementById('btn_submit').disabled = true;
 
     f.action = "./formmail_send.php";
-    f.submit();
+    return true;
 }
 </script>

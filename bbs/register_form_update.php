@@ -19,7 +19,7 @@ else
 }
 
 // 리퍼러 체크
-referer_check();
+//referer_check();
 
 if (!($w == "" || $w == "u")) 
     alert("w 값이 제대로 넘어오지 않았습니다.");
@@ -30,7 +30,15 @@ if ($w == "u" && $is_admin == "super") {
 }
 
 // 자동등록방지 검사
-include_once ("./norobot_check.inc.php");
+//include_once ("./norobot_check.inc.php");
+
+if ($w == "") {
+    $key = get_session("captcha_keystring");
+    if (!($key && $key == $_POST[wr_key])) {
+        session_unregister("captcha_keystring");
+        alert("정상적인 접근이 아닌것 같습니다.");
+    }
+}
 
 $mb_id = trim(strip_tags($_POST[mb_id]));
 $mb_password = trim($_POST[mb_password]);

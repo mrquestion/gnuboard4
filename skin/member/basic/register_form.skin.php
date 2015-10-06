@@ -8,12 +8,6 @@ if (!defined("_GNUBOARD_")) exit; // °³º° ÆäÀÌÁö Á¢±Ù ºÒ°¡
 .m_padding  { PADDING-LEFT: 15px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; }
 .m_padding2 { PADDING-LEFT: 0px; PADDING-top: 5px; PADDING-BOTTOM: 0px; }
 .m_padding3 { PADDING-LEFT: 0px; PADDING-top: 5px; PADDING-BOTTOM: 5px; }
-.m_text     { BORDER: #D3D3D3 1px solid; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; }
-.m_text2    { BORDER: #D3D3D3 1px solid; HEIGHT: 18px; BACKGROUND-COLOR: #dddddd; }
-.m_textarea { BORDER: #D3D3D3 1px solid; BACKGROUND-COLOR: #ffffff; WIDTH: 100%; WORD-BREAK: break-all; }
-.w_message  { font-family:µ¸¿ò; font-size:9pt; color:#4B4B4B; }
-.w_norobot  { font-family:µ¸¿ò; font-size:9pt; color:#BB4681; }
-.w_hand     { cursor:pointer; }
 -->
 </style>
 
@@ -25,8 +19,7 @@ var member_skin_path = "<?=$member_skin_path?>";
 <script language="javascript" src="<?=$g4[path]?>/js/md5.js"></script>
 <script language="javascript" src="<?=$g4[path]?>/js/sideview.js"></script>
 
-<table width=100% cellspacing=0 cellspacing=0 align=center>
-<form name=fregisterform method=post action="javascript:fregisterform_submit(document.fregisterform);" enctype="multipart/form-data" autocomplete="off">
+<form name=fregisterform method=post onsubmit="return fregisterform_submit(this);" enctype="multipart/form-data" autocomplete="off">
 <input type=hidden name=w                value="<?=$w?>">
 <input type=hidden name=url              value="<?=$urlencode?>">
 <input type=hidden name=mb_jumin         value="<?=$jumin?>">
@@ -34,6 +27,8 @@ var member_skin_path = "<?=$member_skin_path?>";
 <input type=hidden name=mb_nick_enabled  value="" id="mb_nick_enabled">
 <input type=hidden name=mb_email_enabled value="" id="mb_email_enabled">
 <input type=hidden name=token value="<?=$token?>">
+
+<table width=100% cellspacing=0 cellspacing=0 align=center>
 <tr>
     <td><img src="<?=$member_skin_path?>/img/join_form_title.gif" width="624" height="72">
 
@@ -44,7 +39,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>¾ÆÀÌµğ</TD>
             <TD class=m_padding>
-                <input class=m_text maxlength=20 size=20 id='reg_mb_id' name="mb_id" value="<?=$member[mb_id]?>" <? if ($w=='u') { echo "readonly style='background-color:#dddddd;'"; } ?>
+                <input class=ed maxlength=20 size=20 id='reg_mb_id' name="mb_id" value="<?=$member[mb_id]?>" <? if ($w=='u') { echo "readonly style='background-color:#dddddd;'"; } ?>
                     <? if ($w=='') { echo "onblur='reg_mb_id_check();'"; } ?>>
                 <span id='msg_mb_id'></span>
                 <table height=25 cellspacing=0 cellpadding=0 border=0>
@@ -54,11 +49,11 @@ var member_skin_path = "<?=$member_skin_path?>";
         </TR>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>ÆĞ½º¿öµå</TD>
-            <TD class=m_padding><INPUT class=m_text type=password name="mb_password" size=20 maxlength=20 <?=($w=="")?"required":"";?> itemname="ÆĞ½º¿öµå"></TD>
+            <TD class=m_padding><INPUT class=ed type=password name="mb_password" size=20 maxlength=20 <?=($w=="")?"required":"";?> itemname="ÆĞ½º¿öµå"></TD>
         </TR>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>ÆĞ½º¿öµå È®ÀÎ</TD>
-            <TD class=m_padding><INPUT class=m_text type=password name="mb_password_re" size=20 maxlength=20 <?=($w=="")?"required":"";?> itemname="ÆĞ½º¿öµå È®ÀÎ"></TD>
+            <TD class=m_padding><INPUT class=ed type=password name="mb_password_re" size=20 maxlength=20 <?=($w=="")?"required":"";?> itemname="ÆĞ½º¿öµå È®ÀÎ"></TD>
         </TR>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>ÆĞ½º¿öµå ºĞ½Ç½Ã Áú¹®</TD>
@@ -86,14 +81,14 @@ var member_skin_path = "<?=$member_skin_path?>";
 
                 <table width="350" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td class=m_padding2><input class=m_text type=text name="mb_password_q" size=55 required itemname="ÆĞ½º¿öµå ºĞ½Ç½Ã Áú¹®" value="<?=$member[mb_password_q]?>"></td>
+                    <td class=m_padding2><input class=ed type=text name="mb_password_q" size=55 required itemname="ÆĞ½º¿öµå ºĞ½Ç½Ã Áú¹®" value="<?=$member[mb_password_q]?>"></td>
                 </tr>
                 </table>
             </TD>
         </TR>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>ÆĞ½º¿öµå ºĞ½Ç½Ã ´äº¯</TD>
-            <TD class=m_padding><input class=m_text type=text name='mb_password_a' size=38 required itemname='ÆĞ½º¿öµå ºĞ½Ç½Ã ´äº¯' value='<?=$member[mb_password_a]?>'></TD>
+            <TD class=m_padding><input class=ed type=text name='mb_password_a' size=38 required itemname='ÆĞ½º¿öµå ºĞ½Ç½Ã ´äº¯' value='<?=$member[mb_password_a]?>'></TD>
         </TR>
         </TABLE>
     </td>
@@ -113,7 +108,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>ÀÌ¸§</TD>
             <TD class=m_padding>
-                <input name=mb_name itemname="ÀÌ¸§" value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=m_text2":"class=m_text";?>> 
+                <input name=mb_name itemname="ÀÌ¸§" value="<?=$member[mb_name]?>" <?=$member[mb_name]?"readonly class=ed2":"class=ed";?>> 
                 <? if ($w=='') { echo "(°ø¹é¾øÀÌ ÇÑ±Û¸¸ ÀÔ·Â °¡´É)"; } ?>
             </TD>
         </TR>
@@ -123,7 +118,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>º°¸í</TD>
             <TD class='m_padding lh'>
-                <input class=m_text type=text id='reg_mb_nick' name='mb_nick' maxlength=20 value='<?=$member[mb_nick]?>'
+                <input class=ed type=text id='reg_mb_nick' name='mb_nick' maxlength=20 value='<?=$member[mb_nick]?>'
                     onblur="reg_mb_nick_check();">
                 <span id='msg_mb_nick'></span>
                 <br>°ø¹é¾øÀÌ ÇÑ±Û,¿µ¹®,¼ıÀÚ¸¸ ÀÔ·Â °¡´É (ÇÑ±Û2ÀÚ, ¿µ¹®4ÀÚ ÀÌ»ó)
@@ -139,7 +134,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>E-mail</TD>
             <TD class='m_padding lh'>
-                <input class=m_text type=text id='reg_mb_email' name='mb_email' size=38 maxlength=100 value='<?=$member[mb_email]?>'
+                <input class=ed type=text id='reg_mb_email' name='mb_email' size=38 maxlength=100 value='<?=$member[mb_email]?>'
                     onblur="reg_mb_email_check()">
                 <span id='msg_mb_email'></span>
                 <? if ($config[cf_use_email_certify]) { ?>
@@ -152,7 +147,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <? if ($w=="") { ?>
             <TR bgcolor="#FFFFFF">
                 <TD class=m_title>»ı³â¿ùÀÏ</TD>
-                <TD class=m_padding><input class=m_text type=text id=mb_birth name='mb_birth' size=8 maxlength=8 minlength=8 required numeric itemname='»ı³â¿ùÀÏ' value='<?=$member[mb_birth]?>' readonly title='¿·ÀÇ ´Ş·Â ¾ÆÀÌÄÜÀ» Å¬¸¯ÇÏ¿© ³¯Â¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä.'>
+                <TD class=m_padding><input class=ed type=text id=mb_birth name='mb_birth' size=8 maxlength=8 minlength=8 required numeric itemname='»ı³â¿ùÀÏ' value='<?=$member[mb_birth]?>' readonly title='¿·ÀÇ ´Ş·Â ¾ÆÀÌÄÜÀ» Å¬¸¯ÇÏ¿© ³¯Â¥¸¦ ÀÔ·ÂÇÏ¼¼¿ä.'>
                     <a href="javascript:win_calendar('mb_birth', document.getElementById('mb_birth').value, '');"><img src='<?=$member_skin_path?>/img/calendar.gif' border=0 align=absmiddle title='´Ş·Â - ³¯Â¥¸¦ ¼±ÅÃÇÏ¼¼¿ä'></a></TD>
             </TR>
         <? } ?>
@@ -176,21 +171,21 @@ var member_skin_path = "<?=$member_skin_path?>";
         <? if ($config[cf_use_homepage]) { ?>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>È¨ÆäÀÌÁö</TD>
-            <TD class=m_padding><input class=m_text type=text name='mb_homepage' size=38 maxlength=255 <?=$config[cf_req_homepage]?'required':'';?> itemname='È¨ÆäÀÌÁö' value='<?=$member[mb_homepage]?>'></TD>
+            <TD class=m_padding><input class=ed type=text name='mb_homepage' size=38 maxlength=255 <?=$config[cf_req_homepage]?'required':'';?> itemname='È¨ÆäÀÌÁö' value='<?=$member[mb_homepage]?>'></TD>
         </TR>
         <? } ?>
 
         <? if ($config[cf_use_tel]) { ?>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>ÀüÈ­¹øÈ£</TD>
-            <TD class=m_padding><input class=m_text type=text name='mb_tel' size=21 maxlength=20 <?=$config[cf_req_tel]?'required':'';?> itemname='ÀüÈ­¹øÈ£' value='<?=$member[mb_tel]?>'></TD>
+            <TD class=m_padding><input class=ed type=text name='mb_tel' size=21 maxlength=20 <?=$config[cf_req_tel]?'required':'';?> itemname='ÀüÈ­¹øÈ£' value='<?=$member[mb_tel]?>'></TD>
         </TR>
         <? } ?>
 
         <? if ($config[cf_use_hp]) { ?>
         <TR bgcolor="#FFFFFF">
             <TD class=m_title>ÇÚµåÆù¹øÈ£</TD>
-            <TD class=m_padding><input class=m_text type=text name='mb_hp' size=21 maxlength=20 <?=$config[cf_req_hp]?'required':'';?> itemname='ÇÚµåÆù¹øÈ£' value='<?=$member[mb_hp]?>'></TD>
+            <TD class=m_padding><input class=ed type=text name='mb_hp' size=21 maxlength=20 <?=$config[cf_req_hp]?'required':'';?> itemname='ÇÚµåÆù¹øÈ£' value='<?=$member[mb_hp]?>'></TD>
         </TR>
         <? } ?>
 
@@ -200,16 +195,16 @@ var member_skin_path = "<?=$member_skin_path?>";
             <TD valign="middle" class=m_padding>
                 <table width="330" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td height="25"><input class=m_text type=text name='mb_zip1' size=4 maxlength=3 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='¿ìÆí¹øÈ£ ¾ÕÀÚ¸®' value='<?=$member[mb_zip1]?>'>
+                    <td height="25"><input class=ed type=text name='mb_zip1' size=4 maxlength=3 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='¿ìÆí¹øÈ£ ¾ÕÀÚ¸®' value='<?=$member[mb_zip1]?>'>
                          - 
-                        <input class=m_text type=text name='mb_zip2' size=4 maxlength=3 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='¿ìÆí¹øÈ£ µŞÀÚ¸®' value='<?=$member[mb_zip2]?>'>
+                        <input class=ed type=text name='mb_zip2' size=4 maxlength=3 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='¿ìÆí¹øÈ£ µŞÀÚ¸®' value='<?=$member[mb_zip2]?>'>
                         &nbsp;<a href="javascript:;" onclick="win_zip('fregisterform', 'mb_zip1', 'mb_zip2', 'mb_addr1', 'mb_addr2');"><img width="91" height="20" src="<?=$member_skin_path?>/img/post_search_btn.gif" border=0 align=absmiddle></a></td>
                 </tr>
                 <tr>
-                    <td height="25" colspan="2"><input class=m_text type=text name='mb_addr1' size=60 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='ÁÖ¼Ò' value='<?=$member[mb_addr1]?>'></td>
+                    <td height="25" colspan="2"><input class=ed type=text name='mb_addr1' size=60 readonly <?=$config[cf_req_addr]?'required':'';?> itemname='ÁÖ¼Ò' value='<?=$member[mb_addr1]?>'></td>
                 </tr>
                 <tr>
-                    <td height="25" colspan="2"><input class=m_text type=text name='mb_addr2' size=60 <?=$config[cf_req_addr]?'required':'';?> itemname='»ó¼¼ÁÖ¼Ò' value='<?=$member[mb_addr2]?>'></td>
+                    <td height="25" colspan="2"><input class=ed type=text name='mb_addr2' size=60 <?=$config[cf_req_addr]?'required':'';?> itemname='»ó¼¼ÁÖ¼Ò' value='<?=$member[mb_addr2]?>'></td>
                 </tr>
                 </table>
             </TD>
@@ -235,21 +230,21 @@ var member_skin_path = "<?=$member_skin_path?>";
         <? if ($config[cf_use_signature]) { ?>
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>¼­¸í</TD>
-            <TD class=m_padding><textarea name=mb_signature class=m_textarea rows=3 style='width:95%;' <?=$config[cf_req_signature]?'required':'';?> itemname='¼­¸í'><?=$member[mb_signature]?></textarea></TD>
+            <TD class=m_padding><textarea name=mb_signature class=tx rows=3 style='width:95%;' <?=$config[cf_req_signature]?'required':'';?> itemname='¼­¸í'><?=$member[mb_signature]?></textarea></TD>
         </TR>
         <? } ?>
 
         <? if ($config[cf_use_profile]) { ?>
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>ÀÚ±â¼Ò°³</TD>
-            <TD class=m_padding><textarea name=mb_profile class=m_textarea rows=3 style='width:95%;' <?=$config[cf_req_profile]?'required':'';?> itemname='ÀÚ±â ¼Ò°³'><?=$member[mb_profile]?></textarea></TD>
+            <TD class=m_padding><textarea name=mb_profile class=tx rows=3 style='width:95%;' <?=$config[cf_req_profile]?'required':'';?> itemname='ÀÚ±â ¼Ò°³'><?=$member[mb_profile]?></textarea></TD>
         </TR>
         <? } ?>
 
         <? if ($member[mb_level] >= $config[cf_icon_level]) { ?>
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>È¸¿ø¾ÆÀÌÄÜ</TD>
-            <TD class=m_padding><INPUT class=m_text type=file name='mb_icon' size=30>
+            <TD class=m_padding><INPUT class=ed type=file name='mb_icon' size=30>
                 <table width="350" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class=m_padding3>* ÀÌ¹ÌÁö Å©±â´Â °¡·Î(<?=$config[cf_member_icon_width]?>ÇÈ¼¿)x¼¼·Î(<?=$config[cf_member_icon_height]?>ÇÈ¼¿) ÀÌÇÏ·Î ÇØÁÖ¼¼¿ä.<br>&nbsp;&nbsp;(gif¸¸ °¡´É / ¿ë·®:<?=number_format($config[cf_member_icon_size])?>¹ÙÀÌÆ® ÀÌÇÏ¸¸ µî·ÏµË´Ï´Ù.)
@@ -285,7 +280,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <? if ($w == "" && $config[cf_use_recommend]) { ?>
         <TR bgcolor="#FFFFFF">
             <TD width="160" class=m_title>ÃßÃµÀÎ¾ÆÀÌµğ</TD>
-            <TD class=m_padding><input type=text name=mb_recommend class=m_text></TD>
+            <TD class=m_padding><input type=text name=mb_recommend class=ed></TD>
         </TR>
         <? } ?>
 
@@ -294,7 +289,7 @@ var member_skin_path = "<?=$member_skin_path?>";
 </tr>
 </table>
 
-<? if ($w == "" && $config[cf_use_norobot]) { ?>
+<? if ($w == "") { ?>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td height="1" bgcolor="#ffffff"></td>
@@ -307,21 +302,10 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TABLE cellSpacing=1 cellPadding=0 width=100%>
         <TR bgcolor="#FFFFFF">
             <td width="160" height="28" class=m_title>
-                <?
-                // ÀÌ¹ÌÁö »ı¼ºÀÌ °¡´ÉÇÑ °æ¿ì ÀÚµ¿µî·ÏÃ¼Å©ÄÚµå¸¦ ÀÌ¹ÌÁö·Î ¸¸µç´Ù.
-                if (function_exists("imagecreate")) {
-                    echo "<img src='$g4[bbs_path]/norobot_image.php?{$g4['server_time']}' border='0'>";
-                    $norobot_msg = "* ¿ŞÂÊÀÇ ÀÚµ¿µî·Ï¹æÁö ÄÚµå¸¦ ÀÔ·ÂÇÏ¼¼¿ä.";
-                }
-                else {
-                    echo $norobot_str;
-                    $norobot_msg = "* ¿ŞÂÊÀÇ ±ÛÀÚÁß <FONT COLOR='red'>»¡°£±ÛÀÚ</font>¸¸ ¼ø¼­´ë·Î ÀÔ·ÂÇÏ¼¼¿ä.";
-                }
-                ?>
+                <img id='kcaptcha_image' border='0' width=120 height=60 onclick="imageClick();" style="cursor:pointer;" title="±ÛÀÚ°¡ Àß¾Èº¸ÀÌ´Â °æ¿ì Å¬¸¯ÇÏ½Ã¸é »õ·Î¿î ±ÛÀÚ°¡ ³ª¿É´Ï´Ù.">
             </td>
             <td class=m_padding>
-                <input class=m_text type=text name='wr_key' required itemname='ÀÚµ¿µî·Ï¹æÁö' size=15>&nbsp;&nbsp;
-                <?=$norobot_msg?>
+                <input type=input class=ed size=10 name=wr_key itemname="ÀÚµ¿µî·Ï¹æÁö" required>&nbsp;&nbsp;¿ŞÂÊÀÇ ±ÛÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.
             </td>
         </tr>
         </table>
@@ -335,10 +319,37 @@ var member_skin_path = "<?=$member_skin_path?>";
     <INPUT type=image width="66" height="20" src="<?=$member_skin_path?>/img/join_ok_btn.gif" border=0 accesskey='s'>
 
 </td></tr>
-</form>
 </table>
 
-<script language="Javascript">
+</form>
+
+
+<script type="text/javascript"> var md5_norobot_key = ''; </script>
+<script type="text/javascript" src="<?="$g4[path]/js/prototype.js"?>"></script>
+<script type="text/javascript">
+function imageClick() {
+    var url = "<?=$g4[bbs_path]?>/kcaptcha_session.php";
+    var para = "";
+    var myAjax = new Ajax.Request(
+        url, 
+        {
+            method: 'post', 
+            asynchronous: true,
+            parameters: para, 
+            onComplete: imageClickResult
+        });
+}
+
+function imageClickResult(req) { 
+    var result = req.responseText;
+    var img = document.createElement("IMG");
+    img.setAttribute("src", "<?=$g4[bbs_path]?>/kcaptcha_image.php?t=" + (new Date).getTime());
+    document.getElementById('kcaptcha_image').src = img.getAttribute('src');
+
+    md5_norobot_key = result;
+}
+
+Event.observe(window, "load", imageClick);
 
 Form.focusFirstElement('fregisterform');
 
@@ -353,7 +364,7 @@ function fregisterform_submit(f)
         if ($F('mb_id_enabled')!='000') {
             alert('È¸¿ø¾ÆÀÌµğ¸¦ ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
             $('reg_mb_id').activate();
-            return;
+            return false;
         }
     }
 
@@ -361,34 +372,34 @@ function fregisterform_submit(f)
         if (f.mb_password.value.strip().length < 3) {
             alert('ÆĞ½º¿öµå¸¦ 3±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ê½Ã¿À.');
             f.mb_password.activate();
-            return;
+            return false;
         }
     }
 
     if (f.mb_password.value != f.mb_password_re.value) {
         alert('ÆĞ½º¿öµå°¡ °°Áö ¾Ê½À´Ï´Ù.');
         f.mb_password_re.activate();
-        return;
+        return false;
     }
 
     if (f.mb_password.value.strip().length > 0) {
         if (f.mb_password_re.value.strip().length < 3) {
             alert('ÆĞ½º¿öµå¸¦ 3±ÛÀÚ ÀÌ»ó ÀÔ·ÂÇÏ½Ê½Ã¿À.');
             f.mb_password_re.activate();
-            return;
+            return false;
         }
     }
 
     if (f.mb_password_q.value.strip().length < 1) {
         alert('ÆĞ½º¿öµå ºĞ½Ç½Ã Áú¹®À» ¼±ÅÃÇÏ°Å³ª ÀÔ·ÂÇÏ½Ê½Ã¿À.');
         f.mb_password_q.activate();
-        return;
+        return false;
     }
 
     if (f.mb_password_a.value.strip().length < 1) {
         alert('ÆĞ½º¿öµå ºĞ½Ç½Ã ´äº¯À» ÀÔ·ÂÇÏ½Ê½Ã¿À.');
         f.mb_password_a.activate();
-        return;
+        return false;
     }
 
     // ÀÌ¸§ °Ë»ç
@@ -396,14 +407,14 @@ function fregisterform_submit(f)
         if (f.mb_name.value.strip().length < 1) {
             alert('ÀÌ¸§À» ÀÔ·ÂÇÏ½Ê½Ã¿À.');
             f.mb_name.activate();
-            return;
+            return false;
         }
 
         var pattern = /([^°¡-ÆR\x20])/i; 
         if (pattern.test(f.mb_name.value)) {
             alert('ÀÌ¸§Àº ÇÑ±Û·Î ÀÔ·ÂÇÏ½Ê½Ã¿À.');
             f.mb_name.activate();
-            return;
+            return false;
         }
     }
 
@@ -416,7 +427,7 @@ function fregisterform_submit(f)
         if ($F('mb_nick_enabled')!='000') {
             alert('º°¸íÀ» ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
             $('reg_mb_nick').activate();
-            return;
+            return false;
         }
     }
 
@@ -429,7 +440,7 @@ function fregisterform_submit(f)
         if ($F('mb_email_enabled')!='000') {
             alert('E-mailÀ» ÀÔ·ÂÇÏÁö ¾Ê¾Ò°Å³ª ÀÔ·Â¿¡ ¿À·ù°¡ ÀÖ½À´Ï´Ù.');
             $('reg_mb_email').activate();
-            return;
+            return false;
         }
 
         // »ç¿ëÇÒ ¼ö ¾ø´Â E-mail µµ¸ŞÀÎ
@@ -437,7 +448,7 @@ function fregisterform_submit(f)
         if (domain) {
             alert("'"+domain+"'Àº(´Â) »ç¿ëÇÏ½Ç ¼ö ¾ø´Â ¸ŞÀÏÀÔ´Ï´Ù.");
             $('reg_mb_email').activate();
-            return;
+            return false;
         }
     }
 
@@ -445,7 +456,7 @@ function fregisterform_submit(f)
         if (f.mb_birth.value.strip().length < 1) {
             alert('´Ş·Â ¹öÆ°À» Å¬¸¯ÇÏ¿© »ıÀÏÀ» ÀÔ·ÂÇÏ¿© ÁÖ½Ê½Ã¿À.');
             //f.mb_birth.activate();
-            return;
+            return false;
         }
 
         var todays = <?=date("Ymd", $g4['server_time']);?>;
@@ -454,7 +465,7 @@ function fregisterform_submit(f)
         var n = todays - parseInt(f.mb_birth.value) - 140000;
         if (n < 0) {
             alert("¸¸ 14¼¼°¡ Áö³ªÁö ¾ÊÀº ¾î¸°ÀÌ´Â Á¤º¸Åë½Å¸Á ÀÌ¿ëÃËÁø ¹× Á¤º¸º¸È£ µî¿¡ °üÇÑ ¹ı·ü\n\nÁ¦ 31Á¶ 1Ç×ÀÇ ±ÔÁ¤¿¡ ÀÇÇÏ¿© ¹ıÁ¤´ë¸®ÀÎÀÇ µ¿ÀÇ¸¦ ¾ò¾î¾ß ÇÏ¹Ç·Î\n\n¹ıÁ¤´ë¸®ÀÎÀÇ ÀÌ¸§°ú ¿¬¶ôÃ³¸¦ 'ÀÚ±â¼Ò°³'¶õ¿¡ º°µµ·Î ÀÔ·ÂÇÏ½Ã±â ¹Ù¶ø´Ï´Ù.");
-            return;
+            return false;
         }
     }
 
@@ -462,7 +473,7 @@ function fregisterform_submit(f)
         if (f.mb_sex.value == '') {
             alert('¼ºº°À» ¼±ÅÃÇÏ¿© ÁÖ½Ê½Ã¿À.');
             f.mb_sex.activate();
-            return;
+            return false;
         }
     }
 
@@ -471,7 +482,7 @@ function fregisterform_submit(f)
             if (!f.mb_icon.value.toLowerCase().match(/.(gif)$/i)) {
                 alert('È¸¿ø¾ÆÀÌÄÜÀÌ gif ÆÄÀÏÀÌ ¾Æ´Õ´Ï´Ù.');
                 f.mb_icon.activate();
-                return;
+                return false;
             }
         }
     }
@@ -480,7 +491,7 @@ function fregisterform_submit(f)
         if (f.mb_id.value == f.mb_recommend.value) {
             alert('º»ÀÎÀ» ÃßÃµÇÒ ¼ö ¾ø½À´Ï´Ù.');
             f.mb_recommend.activate();
-            return;
+            return false;
         }
     }
 
@@ -488,7 +499,7 @@ function fregisterform_submit(f)
         if (hex_md5(f.wr_key.value) != md5_norobot_key) {
             alert('ÀÚµ¿µî·Ï¹æÁö¿ë ÄÚµå°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.');
             f.wr_key.activate();
-            return;
+            return false;
         }
     }
 
@@ -502,7 +513,7 @@ function fregisterform_submit(f)
     // º¸¾ÈÀÎÁõ°ü·Ã ÄÚµå·Î ¹İµå½Ã Æ÷ÇÔµÇ¾î¾ß ÇÕ´Ï´Ù.
     set_cookie("<?=md5($token)?>", "<?=base64_encode($token)?>", 1, "<?=$g4['cookie_domain']?>");
 
-    f.submit();
+    return true;
 }
 
 // ±İÁö ¸ŞÀÏ µµ¸ŞÀÎ °Ë»ç

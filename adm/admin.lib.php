@@ -180,7 +180,7 @@ function icon($act, $link="", $target="_parent")
 {
     global $g4;
 
-    $img = array("입력"=>"insert", "추가"=>"insert", "생성"=>"insert", "수정"=>"modify", "삭제"=>"delete", "이동"=>"move", "그룹"=>"move", "보기"=>"view", "미리보기"=>"view");
+    $img = array("입력"=>"insert", "추가"=>"insert", "생성"=>"insert", "수정"=>"modify", "삭제"=>"delete", "이동"=>"move", "그룹"=>"move", "보기"=>"view", "미리보기"=>"view", "복사"=>"copy");
     $icon = "<img src='{$g4[admin_path]}/img/icon_{$img[$act]}.gif' border=0 align=absmiddle title='$act' width=22 height=21>";
     if ($link)
         //$s = "<a href=\"$link\" target=\"$target\">$icon</a>";

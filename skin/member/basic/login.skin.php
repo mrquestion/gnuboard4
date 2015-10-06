@@ -12,12 +12,12 @@ if ($g4['https_url']) {
 }
 ?>
 
-<table width="668" border="0" cellspacing="0" cellpadding="0">
-<form name="flogin" method="post" action="javascript:flogin_submit(document.flogin);" autocomplete="off">
+<script type="text/javascript" src="<?=$g4[path]?>/js/capslock.js"></script>
+
+<form name="flogin" method="post" onsubmit="return flogin_submit(this);" autocomplete="off">
 <input type="hidden" name="url" value='<?=$url?>'>
-<!-- <tr align="center"> 
-    <td colspan="3"><img src="<?=$member_skin_path?>/img/login_title.gif" width="624" height="72"></td>
-</tr> -->
+
+<table width="668" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td height="26"></td>
     <td width="628"></td>
@@ -46,12 +46,12 @@ if ($g4['https_url']) {
                         <tr>
                             <td width="10"><img src="<?=$member_skin_path?>/img/icon.gif" width="3" height="3"></td>
                             <td width="90" height="26"><b>아이디</b></td>
-                            <td width="150"><INPUT class=box1 maxLength=20 size=15 name=mb_id itemname="아이디" required minlength="2"></td>
+                            <td width="150"><INPUT type=text class=ed maxLength=20 size=15 name=mb_id itemname="아이디" required minlength="2"></td>
                         </tr>
                         <tr>
                             <td><img src="<?=$member_skin_path?>/img/icon.gif" width="3" height="3"></td>
                             <td height="26"><b>패스워드</b></td>
-                            <td><INPUT type=password class=box1 maxLength=20 size=15 name=mb_password itemname="패스워드" required></td>
+                            <td><INPUT type=password class=ed maxLength=20 size=15 name=mb_password id="login_mb_password" itemname="패스워드" required onkeypress="check_capslock(event, 'login_mb_password');"></td>
                         </tr>
                         <tr>
                             <td><img src="<?=$member_skin_path?>/img/icon.gif" width="3" height="3"></td>
@@ -91,8 +91,9 @@ if ($g4['https_url']) {
 <tr>
     <td height="20" colspan="3"></td>
 </tr>
-</form>
 </table>
+
+</form>
 
 <script language='Javascript'>
 document.flogin.mb_id.focus();
@@ -106,7 +107,6 @@ function flogin_submit(f)
         echo "f.action = '$g4[bbs_path]/login_check.php';";
     ?>
 
-    //f.action = "./login_check.php";
-    f.submit();
+    return true;
 }
 </script>

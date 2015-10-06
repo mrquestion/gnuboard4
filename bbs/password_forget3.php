@@ -1,9 +1,17 @@
 <?
 include_once("./_common.php");
 
+/*
 $wr_key = trim($_POST[wr_key]);
 if (!($wr_key && $wr_key == get_session('ss_norobot_key'))) {
     alert("정상적인 접근이 아닌것 같습니다.");
+}
+*/
+
+$key = get_session("captcha_keystring");
+if (!($key && $key == $_POST[wr_key])) {
+    session_unregister("captcha_keystring");
+    alert_close("정상적인 접근이 아닌것 같습니다.");
 }
 
 $sql = " select mb_id, mb_nick, mb_password_a, mb_email from $g4[member_table] where mb_id = '$_POST[pass_mb_id]' ";

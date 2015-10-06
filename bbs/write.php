@@ -323,7 +323,7 @@ include_once("$g4[path]/head.sub.php");
 include_once("./board_head.php");
 
 // 자동등록방지
-include_once ("./norobot.inc.php");
+//include_once ("./norobot.inc.php");
 
 //--------------------------------------------------------------------------
 // 가변 파일

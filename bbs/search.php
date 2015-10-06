@@ -182,7 +182,7 @@ if ($stx)
             if (strstr($row[wr_option].$row2[wr_option], "secret")) 
                 $row[wr_content] = "[비밀글 입니다.]";
 
-            $subject = $row[wr_subject];
+            $subject = get_text($row[wr_subject]);
             if (strstr($sfl, "wr_subject")) 
                 $subject = search_font($stx, $subject);
 

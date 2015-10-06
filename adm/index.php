@@ -254,7 +254,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     <tr class='list$list col1 ht center'>
         <td class=small><a href='$g4[bbs_path]/new.php?gr_id=$row[gr_id]'>".cut_str($row['gr_subject'],10)."</a></td>
         <td class=small><a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]'>".cut_str($row['bo_subject'],20)."</a></td>
-        <td align=left style='word-break:break-all;'>&nbsp;<a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]&wr_id=$row2[wr_id]{$comment_link}'>{$comment}{$row2['wr_subject']}</a></td>
+        <td align=left style='word-break:break-all;'>&nbsp;<a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]&wr_id=$row2[wr_id]{$comment_link}'>{$comment}".conv_subject($row2['wr_subject'], 100)."</a></td>
         <td>$name</td>
         <td>$datetime</td>
     </tr> ";  

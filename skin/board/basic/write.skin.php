@@ -1,7 +1,13 @@
 <?
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
+if ($is_dhtml_editor) {
+    include_once("$g4[path]/lib/cheditor4.lib.php");
+    echo "<script src='$g4[cheditor4_path]/cheditor.js'></script>";
+    echo cheditor1('wr_content', $content, '100%', '250', '500');
+}
 ?>
+
 <div style="height:14px; line-height:1px; font-size:1px;">&nbsp;</div>
 
 <style type="text/css">
@@ -15,7 +21,7 @@ var char_min = parseInt(<?=$write_min?>); // 최소
 var char_max = parseInt(<?=$write_max?>); // 최대
 </script>
 
-<form name="fwrite" method="post" action="javascript:fwrite_check(document.fwrite);" enctype="multipart/form-data" style="margin:0px;">
+<form name="fwrite" method="post" onsubmit="return fwrite_submit(this);" enctype="multipart/form-data" style="margin:0px;">
 <input type=hidden name=null> 
 <input type=hidden name=w        value="<?=$w?>">
 <input type=hidden name=bo_table value="<?=$bo_table?>">
@@ -44,28 +50,28 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <? if ($is_name) { ?>
 <tr>
     <td class=write_head>이 름</td>
-    <td><input class='field' maxlength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></td></tr>
+    <td><input class='ed' maxlength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_password) { ?>
 <tr>
     <td class=write_head>패스워드</td>
-    <td><input class='field' type=password maxlength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></td></tr>
+    <td><input class='ed' type=password maxlength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_email) { ?>
 <tr>
     <td class=write_head>이메일</td>
-    <td><input class='field' maxlength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></td></tr>
+    <td><input class='ed' maxlength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_homepage) { ?>
 <tr>
     <td class=write_head>홈페이지</td>
-    <td><input class='field' size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></td></tr>
+    <td><input class='ed' size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
@@ -117,27 +123,28 @@ if ($option) {
 
 <tr>
     <td class=write_head>제 목</td>
-    <td><input class="field" style="width:100%;" name=wr_subject id="wr_subject" itemname="제목" required value="<?=$subject?>"></td></tr>
+    <td><input class='ed' style="width:100%;" name=wr_subject id="wr_subject" itemname="제목" required value="<?=$subject?>"></td></tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <tr>
     <td class=write_head style='padding-left:20px;'>내용</td>
     <td style='padding:5 0 5 0;'>
-        <? if (!$is_dhtml_editor) { ?>
+        <? if ($is_dhtml_editor) { ?>
+            <?=cheditor2('wr_content', "$write[wr_content]", '100%', '100', "$board[bo_image_width]");?>
+        <? } else { ?>
         <table width=100% cellpadding=0 cellspacing=0>
         <tr>
             <td width=50% align=left valign=bottom>
-                <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 10);"><img src="<?=$board_skin_path?>/img/btn_up.gif"></span>
-                <span style="cursor: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/btn_init.gif"></span>
-                <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 10);"><img src="<?=$board_skin_path?>/img/btn_down.gif"></span></td>
+                <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 10);"><img src="<?=$board_skin_path?>/img/up.gif"></span>
+                <span style="cursor: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/start.gif"></span>
+                <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 10);"><img src="<?=$board_skin_path?>/img/down.gif"></span></td>
             <td width=50% align=right><? if ($write_min || $write_max) { ?><span id=char_count></span>글자<?}?></td>
         </tr>
         </table>
-        <? } ?>
-        <textarea id="wr_content" name="wr_content" class=tx style='width:100%; word-break:break-all;' rows=15 itemname="내용" required 
-        <? if ($is_dhtml_editor) echo ' geditor '; ?>
+        <textarea id="wr_content" name="wr_content" class=tx style='width:100%; word-break:break-all;' rows=10 itemname="내용" required 
         <? if ($write_min || $write_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?}?>><?=$content?></textarea>
         <? if ($write_min || $write_max) { ?><script language="javascript"> check_byte('wr_content', 'char_count'); </script><?}?>
-        </td>
+        <? } ?>
+    </td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#dddddd></td></tr>
 
@@ -145,7 +152,7 @@ if ($option) {
 <? for ($i=1; $i<=$g4[link_count]; $i++) { ?>
 <tr>
     <td class=write_head>링크 #<?=$i?></td>
-    <td><input type='text' class='field' size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
+    <td><input type='text' class='ed' size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
@@ -187,13 +194,13 @@ if ($option) {
             objRow = objTbl.insertRow(objTbl.rows.length);
             objCell = objRow.insertCell(0);
 
-            objCell.innerHTML = "<input type='file' class='field' name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
+            objCell.innerHTML = "<input type='file' class='ed' name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
             if (delete_code)
                 objCell.innerHTML += delete_code;
             else
             {
                 <? if ($is_file_content) { ?>
-                objCell.innerHTML += "<br><input type='text' class='field' size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
+                objCell.innerHTML += "<br><input type='text' class='ed' size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
                 <? } ?>
                 ;
             }
@@ -222,31 +229,16 @@ if ($option) {
 <? if ($is_trackback) { ?>
 <tr>
     <td class=write_head>트랙백주소</td>
-    <td><input class='field' size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
+    <td><input class='ed' size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
         <? if ($w=="u") { ?><input type=checkbox name="re_trackback" value="1">핑 보냄<? } ?></td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
-<? if ($is_norobot) { ?>
+<? if ($is_guest) { ?>
 <tr>
-    <td class=write_head>
-        <?//=$norobot_str?>
-        <?
-        // 이미지 생성이 가능한 경우 자동등록체크코드를 이미지로 만든다.
-        if (function_exists("imagecreate")) {
-            echo "<img src='$g4[bbs_path]/norobot_image.php?{$g4['server_time']}' border='0'>";
-            $norobot_msg = "* 왼쪽의 자동등록방지 코드를 입력하세요.";
-        }
-        else {
-            echo $norobot_str;
-            $norobot_msg = "* 왼쪽의 글자중 <FONT COLOR='red'>빨간글자</font>만 순서대로 입력하세요.";
-        }
-        ?>
-    </td>
-    <td><input class='field' type=input size=10 name=wr_key itemname="자동등록방지" required>
-        &nbsp;&nbsp;<?=$norobot_msg?>
-    </td>
+    <td class=write_head><img id='kcaptcha_image' border='0' width=120 height=60 onclick="imageClick();" style="cursor:pointer;" title="글자가 잘안보이는 경우 클릭하시면 새로운 글자가 나옵니다."></td>
+    <td><input class='ed' type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.</td>
 </tr>
 <tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
@@ -264,7 +256,33 @@ if ($option) {
 </td></tr></table>
 </form>
 
-<script language="javascript">
+<script type="text/javascript"> var md5_norobot_key = ''; </script>
+<script type="text/javascript" src="<?="$g4[path]/js/prototype.js"?>"></script>
+<script type="text/javascript">
+function imageClick() {
+    var url = "<?=$g4[bbs_path]?>/kcaptcha_session.php";
+    var para = "";
+    var myAjax = new Ajax.Request(
+        url, 
+        {
+            method: 'post', 
+            asynchronous: true,
+            parameters: para, 
+            onComplete: imageClickResult
+        });
+}
+
+function imageClickResult(req) { 
+    var result = req.responseText;
+    var img = document.createElement("IMG");
+    img.setAttribute("src", "<?=$g4[bbs_path]?>/kcaptcha_image.php?t=" + (new Date).getTime());
+    document.getElementById('kcaptcha_image').src = img.getAttribute('src');
+
+    md5_norobot_key = result;
+}
+
+Event.observe(window, "load", imageClick);
+
 <?
 // 관리자라면 분류 선택에 '공지' 옵션을 추가함
 if ($is_admin) 
@@ -279,7 +297,8 @@ if ($is_admin)
 } 
 ?>
 
-with (document.fwrite) {
+with (document.fwrite) 
+{
     if (typeof(wr_name) != "undefined")
         wr_name.focus();
     else if (typeof(wr_subject) != "undefined")
@@ -292,7 +311,8 @@ with (document.fwrite) {
             ca_name.value = "<?=$write[ca_name]?>";
 }
 
-function html_auto_br(obj) {
+function html_auto_br(obj) 
+{
     if (obj.checked) {
         result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
         if (result)
@@ -304,51 +324,50 @@ function html_auto_br(obj) {
         obj.value = "";
 }
 
-function fwrite_check(f) {
-    /*
+function fwrite_submit(f) 
+{
     var s = "";
     if (s = word_filter_check(f.wr_subject.value)) {
         alert("제목에 금지단어('"+s+"')가 포함되어있습니다");
-        return;
+        return false;
     }
 
     if (s = word_filter_check(f.wr_content.value)) {
         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
-        return;
+        return false;
     }
-    */
 
     if (document.getElementById('char_count')) {
         if (char_min > 0 || char_max > 0) {
             var cnt = parseInt(document.getElementById('char_count').innerHTML);
             if (char_min > 0 && char_min > cnt) {
                 alert("내용은 "+char_min+"글자 이상 쓰셔야 합니다.");
-                return;
+                return false;
             } 
             else if (char_max > 0 && char_max < cnt) {
                 alert("내용은 "+char_max+"글자 이하로 쓰셔야 합니다.");
-                return;
+                return false;
             }
         }
     }
 
-    if (typeof(f.wr_key) != "undefined") {
-        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
-            alert("자동등록방지용 빨간글자가 순서대로 입력되지 않았습니다.");
-            f.wr_key.focus();
-            return;
+    <?
+    if ($is_dhtml_editor) echo cheditor3('wr_content');
+    ?>
+
+    if (document.getElementById('tx_wr_content')) {
+        if (!ed_wr_content.outputBodyText()) { 
+            alert('내용을 입력하십시오.'); 
+            ed_wr_content.returnFalse();
+            return false;
         }
     }
 
-    var geditor_status = document.getElementById("geditor_wr_content_geditor_status");
-
-    if (geditor_status != null)
-    {
-        if (geditor_status.value == "TEXT") {
-            f.html.value = "html2";
-        }
-        else if (geditor_status.value == "WYSIWYG") {
-            f.html.value = "html1";
+    if (typeof(f.wr_key) != 'undefined') {
+        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
+            alert('자동등록방지용 글자가 제대로 입력되지 않았습니다.');
+            f.wr_key.focus();
+            return false;
         }
     }
 
@@ -361,14 +380,10 @@ function fwrite_check(f) {
     else
         echo "f.action = './write_update.php';";
     ?>
-    f.submit();
+    
+    return true;
 }
 </script>
 
 <script language="JavaScript" src="<?="$g4[path]/js/board.js"?>"></script>
-<? if ($is_dhtml_editor) {?><script language="JavaScript" src="<?="$g4[path]/geditor/geditor.js"?>"></script><?}?>
-<script language="JavaScript">
-window.onload=function() {
-    drawFont();
-}
-</script>
+<script language="JavaScript"> window.onload=function() { drawFont(); } </script>

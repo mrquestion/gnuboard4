@@ -444,6 +444,7 @@ function conv_content($content, $html)
             $target[] = "<br/>";
         }
 
+        /*
         if ($board[bo_disable_tags])
         {
             //$source[] = "/(\<)([\/]?)($board[bo_disable_tags])/i";
@@ -453,6 +454,7 @@ function conv_content($content, $html)
             //$source[] = "/^/";
             //$target[] = "<b>이 페이지는 사용금지 태그 사용으로 인하여 정상 출력되지 않을 수 있습니다.</b><p>";
         }
+        */
 
         // 테이블 태그의 갯수를 세어 테이블이 깨지지 않도록 한다.
         $table_begin_count = substr_count(strtolower($content), "<table");
@@ -463,6 +465,20 @@ function conv_content($content, $html)
         }
 
         $content = preg_replace($source, $target, $content);
+        $content = bad_tag_convert($content);
+
+        // XSS (Cross Site Script) 막기
+        // 완벽한 XSS 방지는 없다.
+        $content = preg_replace("/(on)(abort|blur|change|click|dblclick|dragdrop|error|focus|keydown|keypress|keyup|load|mousedown|mousemove|mouseout|mouseover|mouseup|move|reset|resize|select|submit|unload)/i", "$1<!-- XSS Filter -->$2", $content);
+        $content = preg_replace("/(scr)(ipt)/i", "$1<!- XSS Filter -->$2", $content);
+        $content = preg_replace("/(expre)(ssion)/i", "$1<!-- XSS Filter -->$2", $content);
+        /*
+        $content = preg_replace("/\#/", "&#35;", $content);
+        $content = preg_replace("/\</", "&lt;", $content);
+        $content = preg_replace("/\>/", "&gt;", $content);
+        $content = preg_replace("/\(/", "&#40;", $content);
+        $content = preg_replace("/\)/", "&#41;", $content);
+        */
     }
     else // text 이면
     {
@@ -1018,6 +1034,7 @@ function sql_connect($host, $user, $pass)
     global $g4;
 
     if (strtolower($g4['charset']) == 'utf-8') @mysql_query(" set names utf8 ");
+    else if (strtolower($g4['charset']) == 'euc-kr') @mysql_query(" set names euckr ");
     return @mysql_connect($host, $user, $pass);
 }
 
@@ -1028,6 +1045,7 @@ function sql_select_db($db, $connect)
     global $g4;
 
     if (strtolower($g4['charset']) == 'utf-8') @mysql_query(" set names utf8 ");
+    else if (strtolower($g4['charset']) == 'euc-kr') @mysql_query(" set names euckr ");
     return @mysql_select_db($db, $connect);
 }
 
@@ -1381,5 +1399,12 @@ function explain($sql)
         if (!$row[key]) $row[key] = "NULL";
         echo " <font color=blue>(type=$row[type] , key=$row[key])</font>";
     }
+}
+
+
+// 악성태그 변환
+function bad_tag_convert($code) 
+{
+    return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>/i", "&lt;$1$2$3&gt;", $code);
 }
 ?>

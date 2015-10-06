@@ -2,7 +2,8 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 ?>
 
-<form name="fregister" method="POST" action="javascript:fregister_submit(document.fregister);" autocomplete="off">
+<form name="fregister" method="POST" onsubmit="return fregister_submit(this);" autocomplete="off">
+
 <table width=600 cellspacing=0 cellspacing=0 align=center><tr><td align=center>
 
     <table width="100%" cellspacing="0" cellpadding="0">
@@ -64,6 +65,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <div align=center>
 <input type=image width="66" height="20" src="<?=$member_skin_path?>/img/join_ok_btn.gif" border=0>
 </div>
+
 </form>
 
 
@@ -72,17 +74,17 @@ function fregister_submit(f) {
     if (!f.agree.checked) {
         alert("회원가입약관의 내용에 동의해야 회원가입 하실 수 있습니다.");
         f.agree.focus();
-        return;
+        return false;
     }
 
     if (!f.agree2.checked) {
         alert("개인정보보호정책의 내용에 동의해야 회원가입 하실 수 있습니다.");
         f.agree2.focus();
-        return;
+        return false;
     }
 
     f.action = "./register_form.php";
-    f.submit();
+    return true;
 }
 
 if (typeof(document.fregister.mb_name) != "undefined")

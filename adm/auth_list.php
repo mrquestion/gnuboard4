@@ -146,13 +146,15 @@ else
 
 <?$colspan=4?>
 <p>
-<table cellpadding=0 cellspacing=0>
-<form name=fauthlist2 method=post action="javascript:fauthlist2_submit(document.fauthlist2);" autocomplete="off">
+
+<form name=fauthlist2 method=post onsubmit="return fauthlist2_submit(this);" autocomplete="off">
 <input type=hidden name=sfl  value='<?=$sfl?>'>
 <input type=hidden name=stx  value='<?=$stx?>'>
 <input type=hidden name=sst  value='<?=$sst?>'>
 <input type=hidden name=sod  value='<?=$sod?>'>
 <input type=hidden name=page value='<?=$page?>'>
+
+<table cellpadding=0 cellspacing=0>
 <colgroup width=150>
 <colgroup width=''>
 <colgroup width=150>
@@ -195,14 +197,15 @@ else
     <td><input type=submit class=btn1 value='  È®  ÀÎ  '></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
-</form>
 </table>
+
+</form>
 
 <script language="JavaScript">
 function fauthlist2_submit(f)
 {
     f.action = "./auth_update.php";
-    f.submit();
+    return true;
 }
 </script>
 

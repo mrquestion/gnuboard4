@@ -2,8 +2,8 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 ?>
 
+<form name=fsearch method=get onsubmit="return fsearch_submit(this);" style="margin:0px;">
 <table align=center width=95% cellpadding=2 cellspacing=0>
-<form name=fsearch method=get action="javascript:fsearch_submit(document.fsearch);">
 <input type="hidden" name="srows" value="<?=$srows?>">
 <tr>
     <td align=center>
@@ -18,7 +18,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <option value="wr_name">이름</option>
         </select>
 
-        <input type=text name=stx maxlength=20 required itemname="검색어" value='<?=$text_stx?>'> 
+        <input type=text name=stx class=ed maxlength=20 required itemname="검색어" value='<?=$text_stx?>'> 
 
         <input type=submit value=" 검 색 ">
 
@@ -27,26 +27,29 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 
         function fsearch_submit(f)
         {
-            /*
+            if (f.stx.value.length < 2) {
+                alert("검색어는 두글자 이상 입력하십시오.");
+                f.stx.select();
+                f.stx.focus();
+                return false;
+            }
+
             // 검색에 많은 부하가 걸리는 경우 이 주석을 제거하세요.
             var cnt = 0;
-            for (var i=0; i<f.stx.value.length; i++)
-            {
+            for (var i=0; i<f.stx.value.length; i++) {
                 if (f.stx.value.charAt(i) == ' ')
                     cnt++;
             }
 
-            if (cnt > 1)
-            {
+            if (cnt > 1) {
                 alert("빠른 검색을 위하여 검색어에 공백은 한개만 입력할 수 있습니다.");
                 f.stx.select();
                 f.stx.focus();
-                return;
+                return false;
             }
-            */
             
             f.action = "";
-            f.submit();
+            return true;
         }
         </script>
     </td>
@@ -58,8 +61,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <input type="radio" name="sop" value="and" <?=($sop == "and") ? "checked" : "";?>>AND
     </td>
 </tr>
-</form>
 </table>
+</form>
 <p>
 
 

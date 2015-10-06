@@ -21,8 +21,7 @@ if ($wr_id)
 else {
     $comma = "";
     for ($i=0; $i<count($_POST[chk_wr_id]); $i++) {
-    //for ($i=count($_POST[chk_wr_id])-1; $i>0; $i--) {
-        $wr_id_list .= $comma . "'" . $_POST[chk_wr_id][$i] . "'";
+        $wr_id_list .= $comma . $_POST[chk_wr_id][$i];
         $comma = ",";
     }
 }
@@ -69,8 +68,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 </tr>
 </table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<form name="fboardmoveall" method="post" action='javascript:fboardmoveall_submit(document.fboardmoveall);'>
+<form name="fboardmoveall" method="post" onsubmit="return fboardmoveall_submit(this);">
 <input type=hidden name=sw          value='<?=$sw?>'>
 <input type=hidden name=bo_table    value='<?=$bo_table?>'>
 <input type=hidden name=wr_id_list  value="<?=$wr_id_list?>">
@@ -79,6 +77,8 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 <input type=hidden name=spt         value='<?=$spt?>'>
 <input type=hidden name=page        value='<?=$page?>'>
 <input type=hidden name=act         value='<?=$act?>'>
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr> 
     <td height="20" align="center" valign="top">&nbsp;</td>
 </tr>
@@ -122,8 +122,9 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
 <tr> 
     <td height="40" align="center" valign="bottom"><input id="btn_submit" type=image src='<?=$g4[bbs_img_path]?>/ok_btn.gif' border=0>&nbsp;&nbsp;<a href="javascript:window.close();"><img src="<?=$g4[bbs_img_path]?>/btn_close.gif" width="48" height="20" border="0"></a></td>
 </tr>
-</form>
 </table>
+
+</form>
 
 <script language='JavaScript'>
 function fboardmoveall_submit(f)
@@ -148,13 +149,13 @@ function fboardmoveall_submit(f)
 
     if (!check) {
         alert('게시물을 '+f.act.value+'할 게시판을 한개 이상 선택해 주십시오.');
-        return;
+        return false;
     }
 
     document.getElementById("btn_submit").disabled = true;
 
     f.action = "./move_update.php";
-    f.submit();
+    return true;
 }
 </script>
 
