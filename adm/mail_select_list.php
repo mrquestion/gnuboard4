@@ -54,6 +54,9 @@ if ($gr_id)
     $sql_where .= " and mb_id in ($group_member) ";
 }
 
+// Å»Åð, Â÷´ÜµÈ È¸¿øÀº Á¦¿Ü
+$sql_where .= " and mb_leave_date = '' and mb_intercept_date = '' ";
+
 $sql = " select COUNT(*) as cnt $sql_common $sql_where ";
 $row = sql_fetch($sql);
 $cnt = $row[cnt];

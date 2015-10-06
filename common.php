@@ -189,8 +189,8 @@ else
 // 기본적으로 사용하는 필드만 얻은 후 상황에 따라 필드를 추가로 얻음
 $config = sql_fetch(" select * from $g4[config_table] ");
 
-ini_set("session.cache_expire", 10800); // 세션 캐쉬 보관시간 (18000 = 3시간)
-ini_set("session.gc_maxlifetime", 10800); // session data의 gabage collection 존재 기간을 지정 (10800 = 3시간)
+ini_set("session.cache_expire", 180); // 세션 캐쉬 보관시간 (분)
+ini_set("session.gc_maxlifetime", 1440); // session data의 gabage collection 존재 기간을 지정 (초)
 
 session_set_cookie_params(0, "/");
 ini_set("session.cookie_domain", $g4[cookie_domain]); 

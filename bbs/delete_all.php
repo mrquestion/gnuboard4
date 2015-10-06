@@ -10,6 +10,11 @@ if ($wr_id) // 건별삭제
 else // 일괄삭제
     $tmp_array = $_POST[chk_wr_id];
 
+
+// 사용자 코드 실행
+@include_once("$board_skin_path/delete_all.skin.php");
+
+
 // 거꾸로 읽는 이유는 답변글부터 삭제가 되어야 하기 때문임
 for ($i=count($tmp_array)-1; $i>=0; $i--) 
 {
@@ -124,9 +129,6 @@ for ($i=count($tmp_array)-1; $i>=0; $i--)
 // 글숫자 감소
 if ($count_write > 0 || $count_comment > 0)
     sql_query(" update $g4[board_table] set bo_count_write = bo_count_write - '$count_write', bo_count_comment = bo_count_comment - '$count_comment' where bo_table = '$bo_table' ");
-
-// 사용자 코드 실행
-@include_once("$board_skin_path/delete_all.skin.php");
 
 goto_url("./board.php?bo_table=$bo_table&page=$page" . $qstr);
 ?>

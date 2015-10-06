@@ -54,7 +54,10 @@ $g4[title] = "$group[gr_subject] > $board[bo_subject] > " . conv_subject($write[
 
 $filepath = "$g4[path]/data/file/$bo_table/$file[bf_file]";
 $filepath = addslashes($filepath);
-$original = $file[bf_source];
+if (preg_match("/^utf/i", $g4[charset]))
+    $original = urlencode($file[bf_source]);
+else
+    $original = $file[bf_source];
 
 if (file_exists($filepath)) {
     if(eregi("msie", $_SERVER[HTTP_USER_AGENT]) && eregi("5\.5", $_SERVER[HTTP_USER_AGENT])) {

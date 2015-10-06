@@ -1,3 +1,26 @@
+4.06.15 (06.01.13)
+    :   폼메일에서 스팸 발송이 힘들도록 수정
+        한번에 한사람에게만 메일을 발송할 수 있도록 함
+    :   코멘트 수정시 텍스트박스를 글 높이에 맞추도록 함
+        균이님의 팁을 적용하였습니다.
+    :   회원메일 발송시 탈퇴, 차단된 회원은 메일 발송에서 제외
+        대장군님께서 알려주셨습니다.
+    :   bbs/delete_all.php 의 사용자 실행 코드 위치 변경
+    :   세션 설정값 변경
+    :   input 태그에 name 누락된것 수정
+        나라오름님께서 알려주셨습니다.
+    :   bbs/good.php 에 charset 변경시 경고메세지 정상 출력되도록 수정
+    :   utf-8 에서 한글파일명 다운로드시 파일명 깨지는 오류 수정
+
+        common.php
+        adm/board_form.php
+        adm/mail_select_list.php
+        bbs/delete_all.php
+        bbs/download.php
+        bbs/formmail_send.php
+        bbs/good.php
+        skin/board/basic/view_comment.skin.php
+
 4.06.14 (05.12.31)
     :   delete.skin.php 의 실행 순서를 수정 (프로그램 하단에서 중앙부분으로 위치만 이동함)
         헐랭이, 플록, 달빛온도님께서 제안하셨습니다.

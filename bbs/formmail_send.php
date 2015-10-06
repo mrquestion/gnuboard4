@@ -8,6 +8,7 @@ if (!$config[cf_email_use])
 if (!$is_member && $config[cf_formmail_is_member])
     alert_close("회원만 이용하실 수 있습니다.");
 
+/*
 if (!$is_admin)
 {
     $sendmail_count = (int)get_session('ss_sendmail_count') + 1;
@@ -15,6 +16,20 @@ if (!$is_admin)
         alert_close('한번 접속후 일정수의 메일만 발송할 수 있습니다.\n\n계속해서 메일을 보내시려면 다시 로그인 또는 접속하여 주십시오.');
     set_session('ss_sendmail_count', $sendmail_count);
 }
+*/
+
+// 해당 도메인에서 전송되지 않았다면 오류
+referer_check();
+
+$sendmail_count = (int)get_session('ss_sendmail_count') + 1;
+if ($sendmail_count > 3)
+    alert_close('한번 접속후 일정수의 메일만 발송할 수 있습니다.\n\n계속해서 메일을 보내시려면 다시 로그인 또는 접속하여 주십시오.');
+set_session('ss_sendmail_count', $sendmail_count);
+
+$to = base64_decode($to);
+
+if (substr_count($to, "@") > 1)
+    alert_close('한번에 한사람에게만 메일을 발송할 수 있습니다.');
 
 for ($i=1; $i<=$attach; $i++) 
 {
@@ -37,8 +52,6 @@ if ($type)
 } 
 else 
     $mail_content = $content;
-
-$to = base64_decode($to);
 
 mailer($fnick, $fmail, $to, $subject, $mail_content, $type, $file, $cfg[charset]);
 

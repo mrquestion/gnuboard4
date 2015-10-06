@@ -378,7 +378,7 @@ include_once ("./admin.head.php");
     <td><input type=text class=ed name=bo_image_width size=10 required itemname='이미지 폭 크기' value='<?=$board[bo_image_width]?>'> 픽셀 (게시판에서 출력되는 이미지의 폭 크기)</td>
 </tr>
 <tr class='ht'>
-    <td><input type=checkbox name= value=1></td>
+    <td><input type=checkbox name=chk_reply_order value=1></td>
     <td>답변 달기</td>
     <td>
         <select name=bo_reply_order>

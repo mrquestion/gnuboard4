@@ -1,6 +1,8 @@
 <?
 include_once("./_common.php");
 
+echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
+
 if (!$is_member) 
 {
     $href = "./login.php?$qstr&url=".urlencode("./board.php?bo_table=$bo_table&wr_id=$wr_id");

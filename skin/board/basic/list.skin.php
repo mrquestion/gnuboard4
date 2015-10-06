@@ -78,7 +78,7 @@ if ($is_nogood) $colspan++;
             if ($list[$i][icon_new]) // 최신글은 검정
                 $style1 = "color:#112222;";
             if (!$list[$i][comment_cnt]) // 코멘트 없는것만 굵게
-                $style2 = "font-weight:bold;";
+                $style2 = "";
             echo "<span style='$style1 $style2'>{$list[$i][subject]}</span>";
         }
         echo "</a>";

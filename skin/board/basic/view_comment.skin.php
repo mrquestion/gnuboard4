@@ -196,7 +196,9 @@ function comment_box(comment_id, work)
         // 코멘트 수정
         if (work == 'cu')
         {
-            document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
+            cont = document.getElementById('wr_content').value = document.getElementById('save_comment_' + comment_id).value;
+            rr=cont.split("\n");
+            document.getElementById('wr_content').rows = rr.length+2;
             if (typeof char_count != 'undefined')
                 check_byte('wr_content', 'char_count');
         }
