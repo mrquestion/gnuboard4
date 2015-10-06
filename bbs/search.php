@@ -183,7 +183,8 @@ if ($stx)
                 $link .= "#c{$row[wr_id]}";
                 $sql2 = " select wr_subject, wr_option from $tmp_write_table where wr_id = '$row[wr_parent]' ";
                 $row2 = sql_fetch($sql2);
-                $row[wr_subject] = $row2[wr_subject];
+                //$row[wr_subject] = $row2[wr_subject];
+                $row[wr_subject] = get_text($row2[wr_subject]);
             }
 
             // 비밀글은 검색 불가

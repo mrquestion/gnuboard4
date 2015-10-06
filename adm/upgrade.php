@@ -8,6 +8,7 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 게시판설정 테이블에 업로드 갯수, 이메일 사용 필드 추가
 sql_query(" ALTER TABLE `$g4[board_table]` 
     ADD `bo_upload_count` TINYINT NOT NULL AFTER `bo_notice` ,
     ADD `bo_use_email` TINYINT NOT NULL AFTER `bo_upload_count` ", FALSE);

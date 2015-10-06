@@ -106,7 +106,7 @@ include_once ("./admin.head.php");
     <td></td>
     <td>게시판 제목</td>
     <td>
-        <input type=text class=ed name=bo_subject size=60 maxlength=120 required itemname='게시판 제목' value='<?=$board[bo_subject]?>'>
+        <input type=text class=ed name=bo_subject size=60 maxlength=120 required itemname='게시판 제목' value='<?=get_text($board[bo_subject])?>'>
     </td>
 </tr>
 <tr class='ht'>

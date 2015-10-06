@@ -124,7 +124,9 @@ function alert($msg='', $url='')
         echo "history.go(-1);";
     echo "</script>";
     if ($url)
-        echo "<meta http-equiv='refresh' content='0;url=$url'>";
+        // 4.06.00 : 불여우의 경우 아래의 코드를 제대로 인식하지 못함
+        //echo "<meta http-equiv='refresh' content='0;url=$url'>";
+        goto_url($url);
     exit;
 }
 
@@ -273,9 +275,8 @@ function get_list($write_row, $board, $skin_path, $subject_len=40)
     if ($list[wr_comment])
         $list[comment_cnt] = "($list[wr_comment])";
 
-    $list[datetime] = substr($list[wr_datetime],0,10);
-
     // 당일인 경우 시간으로 표시함
+    $list[datetime] = substr($list[wr_datetime],0,10);
     $list[datetime2] = $list[wr_datetime];
     if ($list[datetime] == $g4[time_ymd])
         $list[datetime2] = substr($list[datetime2],11,5);

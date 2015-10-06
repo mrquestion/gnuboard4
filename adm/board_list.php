@@ -162,7 +162,7 @@ for ($i=0; $row=sql_fetch_array($result); $i++)
     echo "<tr class='list$list col1 ht center'>";
     echo "<td rowspan=2 height=25><input type=checkbox name=chk[] value='$i'></td>";
     echo "<td rowspan=2><a href='$g4[bbs_path]/board.php?bo_table=$row[bo_table]'><b>$row[bo_table]</b></a></td>";
-    echo "<td colspan=2 align=left height=25><input type=text class=ed name=bo_subject[$i] value='$row[bo_subject]' style='width:99%'></td>";
+    echo "<td colspan=2 align=left height=25><input type=text class=ed name=bo_subject[$i] value='".get_text($row[bo_subject])."' style='width:99%'></td>";
     echo "<td rowspan=2 title='읽기 포인트'><input type=text class=ed name=bo_read_point[$i] value='$row[bo_read_point]' style='width:33px;'></td>";
     echo "<td rowspan=2 title='쓰기 포인트'><input type=text class=ed name=bo_write_point[$i] value='$row[bo_write_point]' style='width:33px;'></td>";
     echo "<td rowspan=2 title='속글쓰기 포인트'><input type=text class=ed name=bo_comment_point[$i] value='$row[bo_comment_point]' style='width:33px;'></td>";

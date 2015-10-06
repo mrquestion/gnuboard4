@@ -1,3 +1,21 @@
+4.05.01 (05.09.06)
+    :   불여우에서 제대로 인식하지 못하는 코드를 수정
+    :   검색제목에 HTML 태그가 들어간 경우의 오류를 수정
+    :   게시판 복사시에 data/file 디렉토리에 index.php 생성
+        yesmoa님께서 알려주셨습니다.
+    :   아이디/패스워드 찾기에서 주민등록번호로 자료를 찾지 못하던 오류를 수정
+        너부리님께서 알려주셨습니다.
+    :   게시판 제목, 게시판그룹 제목에 ' 표시 가능하도록 수정
+        손명철님께서 알려주셨습니다.
+
+        lib/common.lib.php : alert() 함수
+        bbs/search.php
+        bbs/password_forget2.php
+        adm/board_list.php
+        adm/board_form.php
+        adm/boardgroup_list.php
+        adm/boardgroup_form.php
+
 4.05.00 (05.09.01)
     :   검색사용 게시판만 최근게시물에 출력
     :   게시판 설정에서 필드별로 그룹적용이 가능하도록 수정

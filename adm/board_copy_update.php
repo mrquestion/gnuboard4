@@ -91,6 +91,14 @@ sql_query($sql);
 @mkdir("$g4[path]/data/file/$target_table", 0707);
 @chmod("$g4[path]/data/file/$target_table", 0707);
 
+// 디렉토리에 있는 파일의 목록을 보이지 않게 한다.
+$board_path = "$g4[path]/data/file/$target_table";
+$file = $board_path . "/index.php";
+$f = @fopen($file, "w");
+@fwrite($f, "");
+@fclose($f);
+@chmod($file, 0606);
+
 $copy_file = 0;
 if ($copy_case == "schema_data_both") 
 {

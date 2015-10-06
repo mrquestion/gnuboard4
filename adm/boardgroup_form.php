@@ -49,7 +49,7 @@ include_once("./admin.head.php");
 <tr class='ht'>
     <td>그룹 제목</td>
     <td colspan=3>
-        <input type='text' class=ed name=gr_subject size=40 required itemname='그룹 제목' value='<?=$group[gr_subject]?>'>
+        <input type='text' class=ed name=gr_subject size=40 required itemname='그룹 제목' value='<?=get_text($group[gr_subject])?>'>
         <? 
         if ($w == 'u')
             echo "<input type=button class='btn1' value='게시판생성' onclick=\"location.href='./board_form.php?gr_id=$gr_id';\">";

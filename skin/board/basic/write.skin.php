@@ -268,6 +268,9 @@ function fwrite_check(f)
         }
     }
 
+    document.getElementById('btn_submit').disabled = true;
+    document.getElementById('btn_list').disabled = true;
+
     f.action = "./write_update.php";
     f.submit();
 }
