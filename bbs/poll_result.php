@@ -89,6 +89,7 @@ echo "<script language='javascript' src='$g4[path]/js/sideview.js'></script>";
 
 if (!$skin_dir) $skin_dir = "basic";
 $poll_skin_path = "$g4[path]/skin/poll/$skin_dir";
+if (!file_exists("$poll_skin_path/poll_result.skin.php")) die("skin error");
 include_once ("$poll_skin_path/poll_result.skin.php");
 
 include_once("$g4[path]/tail.sub.php");

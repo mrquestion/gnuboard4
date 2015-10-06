@@ -1,3 +1,32 @@
+4.31.06 (09.02.03)
+    :   SQL Injection 취약점 보완
+    :   게시판 업로드 파일명을 유추해 볼 수 있는 코드를 보완
+
+        /bbs/point.php
+            $sql_common = " from $g4[point_table] where mb_id = '".mysql_escape_string($member[mb_id])."' ";
+
+        /bbs/poll_result.php
+            if (!file_exists("$poll_skin_path/poll_result.skin.php")) die("skin error");
+
+        /bbs/register_form_update.php
+            $mb_id = trim(strip_tags($_POST[mb_id]));
+            ...
+            $mb_email = trim(strip_tags($_POST[mb_email]));
+
+        /bbs/write_update.php
+            $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
+            ...
+            shuffle($chars_array);
+            $shuffle = implode("", $chars_array);
+            $upload[$i][file] = abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.substr($shuffle,0,8).'_'.str_replace('%', '', urlencode($filename)); 
+
+
+        // 수정된 파일
+        /bbs/point.php
+        /bbs/poll_result.php
+        /bbs/register_form_update.php
+        /bbs/write_update.php
+
 4.31.05 (09.01.30)
     :   XSS 취약점 수정
 

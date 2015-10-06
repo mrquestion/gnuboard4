@@ -134,6 +134,9 @@ if (!isset($_POST[wr_subject]) || !trim($_POST[wr_subject]))
 // 이 옵션을 사용 안 함으로 설정할 경우 어떤 스크립트도 실행 되지 않습니다.
 //if (!$_POST[wr_content]) die ("내용을 입력하여 주십시오.");
 
+$chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
+//print_r2($chars_array); exit;
+
 // 가변 파일 업로드
 $file_upload_msg = "";
 $upload = array();
@@ -196,7 +199,10 @@ for ($i=0; $i<count($_FILES[bf_file][name]); $i++)
         // 접미사를 붙인 파일명
         //$upload[$i][file] = abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.substr(md5(uniqid($g4[server_time])),0,8).'_'.urlencode($filename);
         // 달빛온도님 수정 : 한글파일은 urlencode($filename) 처리를 할경우 '%'를 붙여주게 되는데 '%'표시는 미디어플레이어가 인식을 못하기 때문에 재생이 안됩니다. 그래서 변경한 파일명에서 '%'부분을 빼주면 해결됩니다. 
-        $upload[$i][file] = abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.substr(md5(uniqid($g4[server_time])),0,8).'_'.str_replace('%', '', urlencode($filename)); 
+        //$upload[$i][file] = abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.substr(md5(uniqid($g4[server_time])),0,8).'_'.str_replace('%', '', urlencode($filename)); 
+        shuffle($chars_array);
+        $shuffle = implode("", $chars_array);
+        $upload[$i][file] = abs(ip2long($_SERVER[REMOTE_ADDR])).'_'.substr($shuffle,0,8).'_'.str_replace('%', '', urlencode($filename)); 
 
         $dest_file = "$g4[path]/data/file/$bo_table/" . $upload[$i][file];
 

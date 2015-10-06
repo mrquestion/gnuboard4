@@ -41,11 +41,11 @@ if (!($key && $key == $_POST[wr_key])) {
     alert("정상적인 접근이 아닌것 같습니다.");
 }
 
-$mb_id = trim(strip_tags($_POST[mb_id]));
-$mb_password = trim($_POST[mb_password]);
-$mb_name = trim(strip_tags($_POST[mb_name]));
-$mb_nick = trim(strip_tags($_POST[mb_nick]));
-$mb_email = trim(strip_tags($_POST[mb_email]));
+$mb_id = trim(strip_tags(mysql_escape_string($_POST[mb_id])));
+$mb_password = trim(mysql_escape_string($_POST[mb_password]));
+$mb_name = trim(strip_tags(mysql_escape_string($_POST[mb_name])));
+$mb_nick = trim(strip_tags(mysql_escape_string($_POST[mb_nick])));
+$mb_email = trim(strip_tags(mysql_escape_string($_POST[mb_email])));
 
 if ($w == '' || $w == 'u') 
 {
