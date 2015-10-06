@@ -5,7 +5,9 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 // 우측, 하단 화면을 꾸미려면 이 파일을 수정합니다.
 ?>
 
-</td></tr></table>
+</td>
+<td width=40></td>
+</tr></table>
 
 <div style='height:5px;'></div>
 <div style="clear:both;"></div> 

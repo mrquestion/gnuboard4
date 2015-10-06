@@ -33,7 +33,7 @@ $sql = " select gr_subject from $g4[group_table] where gr_id = '$row[gr_id]' ";
 $row = sql_fetch($sql);
 $subj1 = specialchars_replace($row[gr_subject], 255);
 
-echo "<?xml version=\"1.0\" encoding=\"euc-kr\"?>\n";
+echo "<?xml version=\"1.0\" encoding=\"$g4[charset]\"?>\n";
 echo "<rss version=\"2.0\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\">\n";
 echo "<channel>\n";
 echo "<title>".specialchars_replace("$subj1 > $subj2")."</title>\n";

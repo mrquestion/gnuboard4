@@ -907,15 +907,21 @@ function view_link($view, $number, $attribute)
 */
 
 
-// 한글 한글자(2byte)는 길이 2, 공란.영숫자.특수문자는 길이 1
+// 한글 한글자(2byte, 유니코드 3byte)는 길이 2, 공란.영숫자.특수문자는 길이 1
+// 유니코드는 http://g4uni.winnwe.net/bbs/board.php?bo_table=g4uni_faq&wr_id=7 의 Mr.Learn님의 글을 참고하였습니다.
 function cut_str($str, $len, $suffix="…")
 {
+    global $g4;
+
     $s = substr($str, 0, $len);
     $cnt = 0;
     for ($i=0; $i<strlen($s); $i++)
         if (ord($s[$i]) > 127)
             $cnt++;
-    $s = substr($s, 0, $len - ($cnt % 2));
+    if (strtoupper($g4[charset]) == 'UTF-8')
+        $s = substr($s, 0, $len - ($cnt % 3));
+    else
+        $s = substr($s, 0, $len - ($cnt % 2));
     if (strlen($s) >= strlen($str))
         $suffix = "";
     return $s . $suffix;

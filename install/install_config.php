@@ -3,6 +3,7 @@ include_once ("../config.php");
 
 // 파일이 존재한다면 설치할 수 없다.
 if (file_exists("../dbconfig.php")) {
+    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
     echo <<<HEREDOC
     <script language="JavaScript">
     alert("설치하실 수 없습니다.");
@@ -20,6 +21,7 @@ header("Cache-Control: pre-check=0, post-check=0, max-age=0"); // HTTP/1.1
 header("Pragma: no-cache"); // HTTP/1.0
 
 if ($_POST["agree"] != "동의함") {
+    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
     echo <<<HEREDOC
     <script language="JavaScript">
     alert("라이센스(License) 내용에 동의하셔야 설치를 계속하실 수 있습니다.");
@@ -31,7 +33,7 @@ HEREDOC;
 ?>
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+<meta http-equiv="content-type" content="text/html; charset=<?=$g4[charset]?>">
 <title>그누보드4 설치 (2/3) - 설정</title>
 <style type="text/css">
 <!--

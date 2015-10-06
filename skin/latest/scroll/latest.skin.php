@@ -118,7 +118,7 @@ $box_height = (int)$line_mod * (int)$height;
     for ($i=0; $i<count($list); $i++) {
         $k = (int)($i / $line_mod);
 
-        $roll_text[$k] .= "<div style=\"height:{$height}px; padding-top:5px;\">";
+        $roll_text[$k] .= "<div style=\"height:{$height}px; padding-top:0px;\">";
         $roll_text[$k] .= "<a href=\"{$list[$i][href]}\">";
         $roll_text[$k] .= "<img src=\"{$latest_skin_path}/img/latest_icon.gif\" align=absmiddle border=0>&nbsp;&nbsp;";
         $roll_text[$k] .= $list[$i][subject];

@@ -1,3 +1,19 @@
+4.06.14 (05.12.31)
+    :   delete.skin.php 의 실행 순서를 수정 (프로그램 하단에서 중앙부분으로 위치만 이동함)
+        헐랭이, 플록, 달빛온도님께서 제안하셨습니다.
+    :   cut_str() 함수에서 유니코드 문자 제대로 자르도록 수정
+        http://g4uni.winnwe.net/bbs/board.php?bo_table=g4uni_faq&wr_id=7 의 Mr.Learn님의 글을 참고하였습니다.
+    :   charset 변경으로 인한 코드 수정 (기능과 전혀 상관 없음)
+
+        common.php
+        js/common.js
+        bbs/delete.php
+        bbs/rss.php
+        lib/common.lib.php
+        install/index.php
+        install/install_config.php
+        install/install_db.php
+
 4.06.13 (05.12.25)
     :   [필수패치] 비밀글을 타인이 열람할 수 있는 오류 수정
         헐랭이, 플록님께서 알려주셨습니다.

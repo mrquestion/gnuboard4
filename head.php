@@ -152,7 +152,7 @@ function fsearchbox_submit(f)
 #middiv #mright { width:683px; float:left; padding:0 0 0 15; }
 </style>
 
-<table width='<?=$table_width?>' cellpadding=0 cellspacing=0>
+<table width='<?=$table_width?>' cellpadding=0 cellspacing=0 border=0>
 <tr>
     <td width=43></td>
     <!-- 왼쪽 메뉴 -->
@@ -171,5 +171,6 @@ function fsearchbox_submit(f)
 
         <?=connect(); // 현재 접속자수 ?>
     </td>
+    <td width=18></td>
     <!-- 중간 -->
     <td width=683 valign=top>

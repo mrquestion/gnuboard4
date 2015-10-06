@@ -5,6 +5,7 @@ include_once ("../config.php");
 
 // 파일이 존재한다면 설치할 수 없다.
 if (file_exists("../dbconfig.php")) {
+    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
     echo <<<HEREDOC
     <script language="JavaScript">
     alert("설치하실 수 없습니다.");
@@ -32,19 +33,21 @@ $admin_email = $_POST[admin_email];
 
 $dblink = @mysql_connect($mysql_host, $mysql_user, $mysql_pass);
 if (!$dblink) {
+    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
     echo "<script language='JavaScript'>alert('MySQL Host, User, Password 를 확인해 주십시오.');history.back();</script>"; 
     exit;
 }
 
 $select_db = @mysql_select_db($mysql_db, $dblink);
 if (!$select_db) {
+    echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
     echo "<script language='JavaScript'>alert('MySQL DB 를 확인해 주십시오.');history.back();</script>"; 
     exit;
 }
 ?>
 <html>
 <head>
-<meta http-equiv="content-type" content="text/html; charset=euc-kr">
+<meta http-equiv="content-type" content="text/html; charset=<?=$g4[charset]?>">
 <title>그누보드4 설치 (3/3) - DB</title>
 <style type="text/css">
 <!--
@@ -132,7 +135,7 @@ if (!$select_db) {
         </table>
         <table width="562" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
-            <td height=30><img src="img/box_line.gif" width="562" height="2"></td>
+            <td height=20><img src="img/box_line.gif" width="562" height="2"></td>
           </tr>
         </table>
         <table width="551" border="0" align="center" cellpadding="0" cellspacing="0">
