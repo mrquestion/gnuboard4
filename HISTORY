@@ -1,3 +1,68 @@
+4.33.03 (11.02.10)
+    :   회원권한 코드 수정 (코타군님)
+    :   글읽기 포인트가 설정되어 있을때 글읽기 레벨이 1로 설정되어 있으면 포인트 차감이 제대로 되지 않던 오류 수정 (forever님, 진서기님)
+    :   [보안패치] SQL INJECTION 공격에 대비한 코드 수정 (개미인간님)
+
+        adm/member_form.php
+
+            <?=get_member_level_select("mb_level", 1, $member[mb_level], $member[mb_level])?>
+
+        bbs/board.php
+
+            if (!get_session($ss_name))
+            {
+                sql_query(" update $write_table set wr_hit = wr_hit + 1 where wr_id = '$wr_id' ");
+
+                // 자신의 글이면 통과
+                if ($write[mb_id] && $write[mb_id] == $member[mb_id]) {
+                    ;
+                } else if ($is_guest && $board[bo_read_level] == 1 && $write[wr_ip] == $_SERVER['REMOTE_ADDR']) {
+                    // 비회원이면서 읽기레벨이 1이고 등록된 아이피가 같다면 자신의 글이므로 통과
+                    ;
+                } else {
+                    /*
+                    // 회원이상 글읽기가 가능하다면
+                    if ($board[bo_read_level] > 1) {
+                        if ($member[mb_point] + $board[bo_read_point] < 0)
+                            alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 글읽기(".number_format($board[bo_read_point]).")가 불가합니다.\\n\\n포인트를 모으신 후 다시 글읽기 해 주십시오.");
+
+                        insert_point($member[mb_id], $board[bo_read_point], "$board[bo_subject] $wr_id 글읽기", $bo_table, $wr_id, '읽기');
+                    }
+                    */
+                    // 글읽기 포인트가 설정되어 있다면
+                    if ($board[bo_read_point] && $member[mb_point] + $board[bo_read_point] < 0)
+                        alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 글읽기(".number_format($board[bo_read_point]).")가 불가합니다.\\n\\n포인트를 모으신 후 다시 글읽기 해 주십시오.");
+
+                    insert_point($member[mb_id], $board[bo_read_point], "$board[bo_subject] $wr_id 글읽기", $bo_table, $wr_id, '읽기');
+                }
+
+                set_session($ss_name, TRUE);
+            }
+
+
+        common.php
+        
+            if (isset($sca))  {
+                $sca = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $sca);
+                $qstr .= '&sca=' . urlencode($sca);
+            }
+
+            if (isset($sfl))  {
+                $sfl = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $sfl);
+                $qstr .= '&sfl=' . urlencode($sfl); // search field (검색 필드)
+            }
+
+            if (isset($stx))  { // search text (검색어)
+                $stx = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $stx);
+                $qstr .= '&stx=' . urlencode($stx);
+            }
+
+            if (isset($sst))  {
+                $sst = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $sst);
+                $qstr .= '&sst=' . urlencode($sst); // search sort (검색 정렬 필드)
+            }
+
+
 4.33.02 (11.01.24)
     :   [보안패치] LFI(Local File Include )
         LFI 취약점이 발견되어 수정한 코드입니다. (SK인포섹 장경칩님)

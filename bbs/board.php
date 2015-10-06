@@ -123,10 +123,13 @@ if ($wr_id)
         sql_query(" update $write_table set wr_hit = wr_hit + 1 where wr_id = '$wr_id' ");
 
         // 자신의 글이면 통과
-        if ($write[mb_id] && $write[mb_id] == $member[mb_id])
+        if ($write[mb_id] && $write[mb_id] == $member[mb_id]) {
             ;
-        else
-        {
+        } else if ($is_guest && $board[bo_read_level] == 1 && $write[wr_ip] == $_SERVER['REMOTE_ADDR']) {
+            // 비회원이면서 읽기레벨이 1이고 등록된 아이피가 같다면 자신의 글이므로 통과
+            ;
+        } else {
+            /*
             // 회원이상 글읽기가 가능하다면
             if ($board[bo_read_level] > 1) {
                 if ($member[mb_point] + $board[bo_read_point] < 0)
@@ -134,6 +137,12 @@ if ($wr_id)
 
                 insert_point($member[mb_id], $board[bo_read_point], "$board[bo_subject] $wr_id 글읽기", $bo_table, $wr_id, '읽기');
             }
+            */
+            // 글읽기 포인트가 설정되어 있다면
+            if ($board[bo_read_point] && $member[mb_point] + $board[bo_read_point] < 0)
+                alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 글읽기(".number_format($board[bo_read_point]).")가 불가합니다.\\n\\n포인트를 모으신 후 다시 글읽기 해 주십시오.");
+
+            insert_point($member[mb_id], $board[bo_read_point], "$board[bo_subject] $wr_id 글읽기", $bo_table, $wr_id, '읽기');
         }
 
         set_session($ss_name, TRUE);

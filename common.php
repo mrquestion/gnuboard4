@@ -320,22 +320,22 @@ if (isset($bo_table))   $qstr .= 'bo_table=' . urlencode($bo_table);
 if (isset($wr_id))      $qstr .= '&wr_id=' . urlencode($wr_id);
 */
 if (isset($sca))  {
-    $sca = mysql_real_escape_string($sca);
+    $sca = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $sca);
     $qstr .= '&sca=' . urlencode($sca);
 }
 
 if (isset($sfl))  {
-    $sfl = mysql_real_escape_string($sfl);
+    $sfl = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $sfl);
     $qstr .= '&sfl=' . urlencode($sfl); // search field (검색 필드)
 }
 
 if (isset($stx))  { // search text (검색어)
-    $stx = mysql_real_escape_string($stx);
+    $stx = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $stx);
     $qstr .= '&stx=' . urlencode($stx);
 }
 
 if (isset($sst))  {
-    $sst = mysql_real_escape_string($sst);
+    $sst = preg_replace("/([\'\"\`\<\>\(\)\;\/~@?=%&!]+)/", "", $sst);
     $qstr .= '&sst=' . urlencode($sst); // search sort (검색 정렬 필드)
 }
 

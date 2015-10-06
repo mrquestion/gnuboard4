@@ -74,7 +74,7 @@ include_once("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>회원 권한</td>
-    <td><?=get_member_level_select("mb_level", 1, $member[mb_level], $row[bo_list_level])?></td>
+    <td><?=get_member_level_select("mb_level", 1, $member[mb_level], $member[mb_level])?></td>
     <td>포인트</td>
     <td><a href='./point_list.php?sfl=mb_id&stx=<?=$mb[mb_id]?>' class='bold'><?=number_format($mb[mb_point])?></a> 점</td>
 </tr>
