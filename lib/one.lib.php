@@ -1,7 +1,7 @@
 <?
 if (!defined('_GNUBOARD_')) exit;
 
-function upload_file($path, $file) {
+function upload_file2($path, $file) {
     global $g4;
 
     if (!$file[name]) return '';

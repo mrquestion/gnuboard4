@@ -16,7 +16,7 @@ if ($w=='u') {
 }
 
 $source = $_FILES[on_qfile][name];
-$filename = upload_file("$g4[path]/data/one/$ob_table", $_FILES[on_qfile]);
+$filename = upload_file2("$g4[path]/data/one/$ob_table", $_FILES[on_qfile]);
 
 $sql_common = " on_subject = '$on_subject', 
                 on_question = '$on_question',

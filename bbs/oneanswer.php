@@ -16,7 +16,7 @@ if ($_FILES[on_afile][name]) {
 }
 
 $source = $_FILES[on_afile][name];
-$filename = upload_file($filepath, $_FILES[on_afile]);
+$filename = upload_file2($filepath, $_FILES[on_afile]);
 
 $sql = " update $g4[one_prefix]$ob_table
             set on_answer = '$on_answer',

@@ -1,3 +1,12 @@
+4.20.03 (07.05.04)
+    :   최신글 속도를 빠르게 하기 위해 SELECT 쿼리를 수정
+    :   lib/one.lib.php 의 upload_file() 함수명을 upload_file2() 로 수정
+
+        lib/latest.lib.php
+        lib/one.lib.php
+        bbs/oneanswer.php
+        bbs/onequestion.php
+
 4.20.02 (07.04.26)
     :   1:1 게시판 기능 수정
         sql_one.sql 에 누락된 여분필드 on_1 ~ on_10 필드 추가
