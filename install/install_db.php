@@ -31,6 +31,7 @@ $admin_pass  = $_POST[admin_pass];
 $admin_name  = $_POST[admin_name];
 $admin_email = $_POST[admin_email];
 
+if (strtoupper($g4[charset]) == 'UTF-8') @mysql_query("set names utf8"); 
 $dblink = @mysql_connect($mysql_host, $mysql_user, $mysql_pass);
 if (!$dblink) {
     echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
@@ -38,6 +39,7 @@ if (!$dblink) {
     exit;
 }
 
+if (strtoupper($g4[charset]) == 'UTF-8') @mysql_query("set names utf8"); 
 $select_db = @mysql_select_db($mysql_db, $dblink);
 if (!$select_db) {
     echo "<meta http-equiv='content-type' content='text/html; charset=$g4[charset]'>";
