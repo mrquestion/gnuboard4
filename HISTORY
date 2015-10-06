@@ -1,3 +1,10 @@
+4.34.22 (2012.03.30)
+    :   2012년 3월 30일 부터 시행되는 개인정보보호법으로 인해 회원가입시 주민등록번호를 입력 받지 못하도록 수정
+
+        adm/config_form.php
+        bbs/register_form.php
+        skin/member/basic/register.skin.php
+
 4.34.21 (2012.03.09)
     :   [보안패치] 파일명을 이용한 XSS 취약점 수정 (wh1ant님께서 도움 주셨습니다.)
     :   UTF-8 사용시 링크에서 한글이 깨지던 오류 수정 (forever님, NaviGator님께서 도움 주셨습니다.)

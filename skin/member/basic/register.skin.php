@@ -13,7 +13,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     </table>
 
     <? if ($config[cf_use_jumin]) { // 주민등록번호를 사용한다면 ?>
-    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td height=25></td>
         </tr>
@@ -30,7 +30,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                 </tr>
                 </table></td>
         </tr>
-    </table>
+    </table> -->
     <? } ?>
 
     <br>

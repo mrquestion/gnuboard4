@@ -265,11 +265,11 @@ include_once ("./admin.head.php");
     <td><input type=text class=ed name='cf_register_point' size='5' value='<?=$config[cf_register_point]?>'> 점</td>
 </tr>
 <tr class='ht'>
-    <td>주민등록번호</td>
+    <!-- <td>주민등록번호</td>
     <td><input type='checkbox' name='cf_use_jumin' value='1' <?=$config[cf_use_jumin]?'checked':'';?>> 사용
-        <?=help("주민등록번호는 암호화하여 저장하므로 회원정보 DB가 유출되어도 알 수 없습니다.")?></td>
+        <?=help("주민등록번호는 암호화하여 저장하므로 회원정보 DB가 유출되어도 알 수 없습니다.")?></td> -->
     <td>회원탈퇴후 삭제일</td>
-    <td><input type=text class=ed name='cf_leave_day' size='5' value='<?=$config[cf_leave_day]?>'> 일 후 자동 삭제</td>
+    <td colspan="3"><input type=text class=ed name='cf_leave_day' size='5' value='<?=$config[cf_leave_day]?>'> 일 후 자동 삭제</td>
 </tr>
 <tr class='ht'>
     <td>회원아이콘 사용</td>

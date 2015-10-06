@@ -22,6 +22,7 @@ if ($w == "") {
         alert("개인정보취급방침의 내용에 동의하셔야 회원가입 하실 수 있습니다.", "./register.php");
 
     // 주민등록번호를 사용한다면 중복검사를 합니다.
+    /*
     if ($config[cf_use_jumin]) {
         $jumin = sql_password($mb_jumin);
         $row = sql_fetch(" select mb_name from $g4[member_table] where mb_jumin = '$jumin' ");
@@ -52,6 +53,7 @@ if ($w == "") {
         else // 오류
             $birth = "xx" . $birth;
     }
+    */
 
     $member[mb_birth] = $birth;
     $member[mb_sex] = $sex;
