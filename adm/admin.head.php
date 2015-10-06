@@ -121,10 +121,11 @@ function textarea_size(fld, size)
             }
         } else {
             echo disp_sub_menu("그누보드 포에버", "", "");
-            echo disp_sub_menu2("매뉴얼", "http://sir.co.kr/manual/gnuboard4/", "_blank");
-            echo disp_sub_menu2("스킨", "http://sir.co.kr/bbs/board.php?bo_table=g4_skin", "_blank");
-            echo disp_sub_menu2("팁앤테크", "http://sir.co.kr/bbs/board.php?bo_table=g4_tiptech", "_blank");
+            //echo disp_sub_menu2("매뉴얼", "http://sir.co.kr/manual/gnuboard4/", "_blank");
+            echo disp_sub_menu2("자주하시는 질문", "http://sir.co.kr/bbs/board.php?bo_table=g4_faq", "_blank");
             echo disp_sub_menu2("묻고답하기", "http://sir.co.kr/bbs/board.php?bo_table=g4_qa", "_blank");
+            echo disp_sub_menu2("팁앤테크", "http://sir.co.kr/bbs/board.php?bo_table=g4_tiptech", "_blank");
+            echo disp_sub_menu2("스킨", "http://sir.co.kr/bbs/board.php?bo_table=g4_skin", "_blank");
         }
         ?>
     </td>

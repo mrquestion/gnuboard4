@@ -4,6 +4,8 @@ include_once("./_common.php");
 if (!$bo_table) 
     alert("bo_table 값이 넘어오지 않았습니다.\\n\\nwrite.php?bo_table=code 와 같은 방식으로 넘겨 주세요.");
 
+$notice_array = explode("\n", trim($board[bo_notice]));
+
 if ($w == "") {
     if ($member[mb_level] < $board[bo_write_level]) { 
         if ($member[mb_id]) 
@@ -63,7 +65,8 @@ else if ($w == "r")
     if ($member[mb_point] + $board[bo_comment_point] < 0)
         alert("보유하신 포인트(".number_format($member[mb_point]).")가 없거나 모자라서 글답변(".number_format($board[bo_comment_point]).")가 불가합니다.\\n\\n포인트를 적립하신 후 다시 글답변 해 주십시오.");
 
-    if (preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice]))
+    //if (preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice]))
+    if (in_array((int)$wr_id, $notice_array))
         alert("공지에는 답변 할 수 없습니다.");
 
     // 게시글 배열 참조
@@ -124,17 +127,21 @@ if (($w == "u" || $w == "r") && !$write[wr_id])
     alert("글이 존재하지 않습니다.\\n\\n삭제되었거나 이동된 경우입니다.", "./");
 
 $is_notice = false;
-if ($is_admin && $w != "r") {
+if ($is_admin && $w != "r") 
+{
     $is_notice = true;
 
-    if ($w == "u") {
+    if ($w == "u") 
+    {
         // 답변 수정시 공지 체크 없음
         if ($write[wr_reply])
             $is_notice = false;
-        else {
+        else 
+        {
             $notice_checked = "";
             //if (preg_match("/^".$wr_id."/m", trim($board[bo_notice]))) 
-            if (preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice]))
+            //if (preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice]))
+            if (in_array((int)$wr_id, $notice_array))
                 $notice_checked = "checked";
         }
     }

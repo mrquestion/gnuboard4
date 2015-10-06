@@ -84,7 +84,9 @@ include_once ("./admin.head.php");
 </tr>
 <tr class='ht'>
     <td>그룹</td>
-    <td colspan=3><?=get_group_select('gr_id', $board[gr_id], "required itemname='그룹'");?></td>
+    <td colspan=3>
+        <?=get_group_select('gr_id', $board[gr_id], "required itemname='그룹'");?>
+        <? if ($w=='u') { ?><a href="javascript:location.href='./board_list.php?sfl=gr_id&stx='+document.fboardform.gr_id.value;">동일그룹게시판목록</a><?}?></td>
 </tr>
 <tr class='ht'>
     <td>게시판 제목</td>

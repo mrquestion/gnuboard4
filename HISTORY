@@ -1,3 +1,18 @@
+4.00.13 (05.06.18)
+    :   공지사항 제대로 체크되지 않던 오류를 수정
+    :   실명 사용일때 코멘트에 별명으로 입력되던 오류를 수정
+    :   회원의 권한이 게시판의 권한보다 낮으면 그룹 최신글에서 해당 게시판 출력 안함
+    :   그외 다수
+
+        bbs/write.php
+        bbs/write_update.php
+        bbs/write_comment_update.php
+        bbs/group.php
+        adm/admin.head.php
+        adm/board_form.php
+        adm/boardgroupmember_form.php
+        adm/member_form.php
+
 4.00.12 (05.06.17)
     :   글복사, 이동시 게시판 선택창에서 제목을 클릭해도 체크되도록 수정
     :   게시판 스킨 코드 최적화

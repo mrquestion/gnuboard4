@@ -12,6 +12,7 @@ if ($w == "")
     $mb[mb_mailling] = 1;
     $mb[mb_open] = 1;
     $mb[mb_level] = $config[cf_register_level];
+    $html_title = "등록";
 }
 else if ($w == "u") 
 {
@@ -24,6 +25,7 @@ else if ($w == "u")
 
     $required_mb_id = "readonly style='background-color:#dddddd;'";
     $required_mb_password = "";
+    $html_title = "수정";
 } 
 else 
     alert("제대로 된 값이 넘어오지 않았습니다.");
@@ -31,7 +33,7 @@ else
 if ($mb[mb_mailling])   $mailling_checked = "checked";  // 메일링 서비스
 if ($mb[mb_open])       $open_checked = "checked";      // 정보 공개
 
-$g4[title] = "회원정보 수정";
+$g4[title] = "회원정보 " . $html_title;
 include_once("./admin.head.php");
 ?>
 
@@ -48,12 +50,15 @@ include_once("./admin.head.php");
 <colgroup width=20% class='col1 pad1 bold right'>
 <colgroup width=30% class='col2 pad2'>
 <tr>
-    <td colspan=4 class=title align=left><img src='./img/icon_title.gif'> 회원정보수정</td>
+    <td colspan=4 class=title align=left><img src='./img/icon_title.gif'> <?=$g4[title]?></td>
 </tr>
 <tr><td colspan=4 class=line1></td></tr>
 <tr class='ht'>
     <td>아이디</td>
-    <td><input type=text class='edit' name='mb_id' size=20 maxlength=20 minlength=2 <?=$required_mb_id?> itemname='아이디' value='<? echo $mb[mb_id] ?>'></td>
+    <td>
+        <input type=text class='edit' name='mb_id' size=20 maxlength=20 minlength=2 <?=$required_mb_id?> itemname='아이디' value='<? echo $mb[mb_id] ?>'>
+        <?if ($w=="u"){?><a href='./boardgroupmember_form.php?mb_id=<?=$mb[mb_id]?>'>접근가능그룹보기</a><?}?>
+    </td>
     <td>패스워드</td>
     <td><input type=password class='edit' name='mb_password' size=20 maxlength=20 <?=$required_mb_password?> itemname='암호'></td>
 </tr>

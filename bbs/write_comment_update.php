@@ -42,7 +42,8 @@ include_once ("./norobot_check.inc.php");
 if ($member[mb_id]) 
 {
     $mb_id = $member[mb_id];
-    $wr_name = $member[mb_nick];
+    // 4.00.13 - 실명 사용일때 코멘트에 별명으로 입력되던 오류를 수정
+    $wr_name = $board[bo_use_name] ? $member[mb_name] : $member[mb_nick];
     $wr_password = $member[mb_password];
     $wr_email = $member[mb_email];
     $wr_homepage = $member[mb_homepage];

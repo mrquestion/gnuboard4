@@ -20,6 +20,8 @@ $w = $_POST["w"];
 $wr_name  = strip_tags($_POST["wr_name"]);
 $wr_email = strip_tags($_POST["wr_email"]);
 
+$notice_array = explode("\n", trim($board[bo_notice]));
+
 if ($w == "u" || $w == "r") {
     $wr = get_write($write_table, $wr_id);
     if (!$wr[wr_id])
@@ -29,8 +31,11 @@ if ($w == "u" || $w == "r") {
 if ($w == "" || $w == "u") {
     if ($member[mb_level] < $board[bo_write_level]) 
         alert("글을 쓸 권한이 없습니다.");
-} else if ($w == "r") {
-    if (preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice]))
+} 
+else if ($w == "r") 
+{
+    //if (preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice]))
+    if (in_array((int)$wr_id, $notice_array))
         alert("공지에는 답변 할 수 없습니다.");
 
     if ($member[mb_level] < $board[bo_reply_level]) 
@@ -300,7 +305,8 @@ else if ($w == "u")
 
     if ($notice) 
     {
-        if (!preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice])) 
+        //if (!preg_match("/[^0-9]{0,1}{$wr_id}[\r]{0,1}/",$board[bo_notice])) 
+        if (!in_array((int)$wr_id, $notice_array))
         {
             $bo_notice = $wr_id . '\n' . $board[bo_notice];
             sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table = '$bo_table' ");
@@ -308,7 +314,12 @@ else if ($w == "u")
     } 
     else 
     {
-        $bo_notice = preg_replace("/^".$wr_id."[\n]?$/m", "", $board[bo_notice]);
+        $bo_notice = '';
+        for ($i=0; $i<count($notice_array); $i++)
+            if ((int)$wr_id != (int)$notice_array[$i])
+                $bo_notice .= $notice_array[$i] . '\n';
+        $bo_notice = trim($bo_notice);
+        //$bo_notice = preg_replace("/^".$wr_id."[\n]?$/m", "", $board[bo_notice]);
         sql_query(" update $g4[board_table] set bo_notice = '$bo_notice' where bo_table = '$bo_table' ");
     }
 }
