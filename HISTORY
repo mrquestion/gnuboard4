@@ -1,3 +1,11 @@
+4.32.02 (10.03.16)
+    :   로그인 중인 관리자 레벨 수정시 버그 수정
+    :   회원가입시 별명에서 한글을 제대로 인식하지 못하는 버그 수정
+
+        adm/member_form_update.php
+        skin/member/basic/ajax_mb_nick_check.php
+        skin/member/basic/ajax_register_form.jquery.js
+
 4.32.01 (10.03.12)
     :   다양한 플러그인을 사용할 수 있도록 prototype.js 에서 jquery.js 로 대체합니다.
         기존 코드를 유지하기 위하여 js/prototype.js 는 삭제하지 않습니다.

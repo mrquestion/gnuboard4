@@ -300,7 +300,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <TABLE cellSpacing=1 cellPadding=0 width=100%>
         <TR bgcolor="#FFFFFF">
             <td width="160" height="28" class=m_title>
-                <img id='kcaptcha_image' border='0' width=120 height=60 onclick="imageClick();" style="cursor:pointer;" title="글자가 잘안보이는 경우 클릭하시면 새로운 글자가 나옵니다.">
+                <img id='kcaptcha_image' />
             </td>
             <td class=m_padding>
                 <input type=input class=ed size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.

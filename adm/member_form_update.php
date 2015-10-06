@@ -66,7 +66,7 @@ else if ($w == "u")
     if ($is_admin != "super" && $mb[mb_level] >= $member[mb_level])
         alert("자신보다 권한이 높거나 같은 회원은 수정할 수 없습니다.");
 
-    if ($_POST[mb_id] == $mb[mb_id] && $_POST[mb_level] != $mb[mb_level])
+    if ($_POST[mb_id] == $member[mb_id] && $_POST[mb_level] != $mb[mb_level])
         alert("$mb[mb_id] : 로그인 중인 관리자 레벨은 수정 할 수 없습니다.");
 
     $mb_dir = substr($mb_id,0,2);

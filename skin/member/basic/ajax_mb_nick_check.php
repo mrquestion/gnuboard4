@@ -21,7 +21,8 @@ if (!function_exists('convert_charset')) {
     }
 }
 
-$reg_mb_nick = convert_charset('UTF-8','CP949',$reg_mb_nick);
+if (strtolower($g4[charset]) == 'euc-kr') 
+    $reg_mb_nick = convert_charset('UTF-8','CP949',$reg_mb_nick);
 
 // 별명은 한글, 영문, 숫자만 가능
 if (!check_string($reg_mb_nick, _G4_HANGUL_ + _G4_ALPHABETIC_ + _G4_NUMERIC_)) {

@@ -27,7 +27,7 @@ var reg_mb_nick_check = function() {
         type: 'POST',
         url: member_skin_path+'/ajax_mb_nick_check.php',
         data: {
-            'reg_mb_nick': encodeURIComponent($('#reg_mb_nick').val())
+            'reg_mb_nick': ($('#reg_mb_nick').val())
         },
         cache: false,
         async: false,
