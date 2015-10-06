@@ -1,3 +1,12 @@
+4.36.09 (2012.11.30)
+    :   게시판에서 DHTML 에디터를 사용하지 않고 html 글을 작성하는 경우에 XSS 취약점이 발견되어 보완합니다.
+        윤태성(삽지리)님 께서 한국인터넷진흥원을 통하여 알려 주셨습니다.
+
+        lib/common.lib.php 를 아래와 같이 수정합니다.
+        
+            //$content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "", $content);
+            $content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "_$1$2_", $content);
+
 4.36.08 (2012.11.01)
     :   SQL Injection 취약점 보완 (Stealth in BlackFalcon 김동현님께서 한국인터넷진흥원을 통하여 알려 주셨습니다.)
         단, register_globals = On, magic_quotes_gpc = Off 설정을 만족하는 경우에만 해당됩니다.
