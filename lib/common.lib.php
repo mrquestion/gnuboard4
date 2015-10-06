@@ -464,6 +464,20 @@ function conv_content($content, $html)
 
         // XSS (Cross Site Script) 막기
         // 완벽한 XSS 방지는 없다.
+
+        function bad120422($matches)
+        {
+            $code = $matches[1];
+            if (preg_match("#script#i", $code)) {
+                return "OBJECT 태그에 스크립트는 사용 불가합니다.";
+            } else if (preg_match("#base64#i", $code)) {
+                return "OBJECT 태그에 BASE64는 사용 불가합니다.";
+            }
+        }
+
+        // object 태그에서 javascript 코드 막기
+        $content = preg_replace_callback("#<object([^>]+)>#i", "bad120422", $content);
+
         // 081022 : CSRF 방지
         //$content = preg_replace("/(on)(abort|blur|change|click|dblclick|dragdrop|error|focus|keydown|keypress|keyup|load|mousedown|mousemove|mouseout|mouseover|mouseup|mouseenter|mouseleave|move|reset|resize|select|submit|unload)/i", "$1<!-- XSS Filter -->$2", $content);
         //$content = preg_replace("/(on)([^\=]+)/i", "&#111;&#110;$2", $content);

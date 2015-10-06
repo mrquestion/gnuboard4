@@ -13,7 +13,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
     </table>
 
     <? if ($config[cf_use_jumin]) { // 주민등록번호를 사용한다면 ?>
-    <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <!-- 2012년 8월 부터 주민등록번호 수집과 이용이 제한됨 (사실상 수집 금지)
+    <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
             <td height=25></td>
         </tr>
