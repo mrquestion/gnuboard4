@@ -1,3 +1,17 @@
+4.36.02 (2012.06.27)
+    :   플래시의 액션스크립트와 자바스크립트의 연동을 차단하여 악의적인 사이트로의 이동을 막는다. (i2sec 김준규님께서 알려 주셨습니다.)
+        value="always" 를 value="never" 로, allowScriptaccess="always" 를 allowScriptaccess="never" 로 변환하는데 목적이 있다.
+    :   4.36.01 의 코드에 오류가 있어 수정했습니다.
+
+        lib/common.lib.php 의 아래 코드를 수정 및 추가하십시오.
+
+            $content = preg_replace_callback("#<([^>]+)#", create_function('$m', 'return "<".str_replace("<", "&lt;", $m[1]);'), $content);
+            $content = preg_replace("/\<(\w|\s|\?)*(xml)/i", "", $content);
+
+            // 플래시의 액션스크립트와 자바스크립트의 연동을 차단하여 악의적인 사이트로의 이동을 막는다.
+            // value="always" 를 value="never" 로, allowScriptaccess="always" 를 allowScriptaccess="never" 로 변환하는데 목적이 있다.
+            $content = preg_replace("/((?<=\<param|\<embed)[^>]+)(\s*=\s*[\'\"]?)always([\'\"]?)([^>]+(?=\>))/i", "$1$2never$3$4", $content);
+
 4.36.01 (2012.06.26)
     :   XSS 취약점 수정 보완 (i2sec 강우석님께서 원인과 해결책을 모두 알려 주셨습니다.)
         기존코드에 헛점이 있어 코드를 수정 보완 하였습니다.
