@@ -52,7 +52,7 @@ if ($w == "") {
 $row = sql_fetch(" select max(po_id) as max_po_id from $g4[poll_table] ");
 sql_query(" update $g4[config_table] set cf_max_po_id = '$row[max_po_id]' ");
 
-sql_query(" OPTIMIZE TABLE `$g4[poll_table]`, `$g4[poll_etc_table]` ");
+//sql_query(" OPTIMIZE TABLE `$g4[poll_table]`, `$g4[poll_etc_table]` ");
 
 if ($w == "d")
     goto_url("./poll_list.php?$qstr");

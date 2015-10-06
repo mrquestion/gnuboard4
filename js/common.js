@@ -309,7 +309,7 @@ if (typeof(COMMON_JS) == 'undefined') { // 한번만 실행
     {
         if (!url)
             url = g4_path + "/" + g4_bbs + "/memo.php";
-        win_open(url, "winMemo", "left=50,top=50,width=600,height=460,scrollbars=0");
+        win_open(url, "winMemo", "left=50,top=50,width=616,height=460,scrollbars=1");
     }
 
     // 포인트 창

@@ -51,7 +51,7 @@ if ($w == "") {
 } else
     alert("제대로 된 값이 넘어오지 않았습니다.");
 
-sql_query(" OPTIMIZE TABLE `$g4[group_table]` ");
+//sql_query(" OPTIMIZE TABLE `$g4[group_table]` ");
 
 goto_url("./boardgroup_form.php?w=u&gr_id=$gr_id&$qstr");
 ?>

@@ -120,9 +120,13 @@ for ($i=0; $i<count($_FILES[bf_file][name]); $i++)
         if (!$is_admin && $filesize > $board[bo_upload_size]) 
             continue;
 
-        // 존재하는 파일이 있다면 삭제합니다.
-        $row = sql_fetch(" select bf_file from $g4[board_file_table] where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$i' ");
-        @unlink("$g4[path]/data/file/$bo_table/$row[bf_file]");
+        // 4.00.11 - 글답변에서 파일 업로드시 원글의 파일이 삭제되는 오류를 수정
+        if ($w == 'u')
+        {
+            // 존재하는 파일이 있다면 삭제합니다.
+            $row = sql_fetch(" select bf_file from $g4[board_file_table] where bo_table = '$bo_table' and wr_id = '$wr_id' and bf_no = '$i' ");
+            @unlink("$g4[path]/data/file/$bo_table/$row[bf_file]");
+        }
 
         // 프로그램 원래 파일명
         $upload[$i][source] = $filename;

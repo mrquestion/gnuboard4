@@ -95,8 +95,8 @@ var list_delete_php = "point_list_delete.php";
 <input type=hidden name=stx  value='<?=$stx?>'>
 <input type=hidden name=page value='<?=$page?>'>
 <colgroup width=30>
-<colgroup width=120>
-<colgroup width=150>
+<colgroup width=100>
+<colgroup width=100>
 <colgroup width=140>
 <colgroup width=''>
 <colgroup width=80>

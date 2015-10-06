@@ -149,7 +149,8 @@ with (document.fformmail) {
 function fformmail_submit(f)
 {
     if (f.file1.value || f.file2.value) {
-        if (confirm("첨부파일의 용량이 큰경우 전송시간이 오래 걸립니다.\n\n메일보내기가 완료되기 전에 창을 닫거나 새로고침 하지 마십시오."))
+        // 4.00.11
+        if (!confirm("첨부파일의 용량이 큰경우 전송시간이 오래 걸립니다.\n\n메일보내기가 완료되기 전에 창을 닫거나 새로고침 하지 마십시오."))
             return;
     }
 

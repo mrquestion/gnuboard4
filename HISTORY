@@ -1,3 +1,27 @@
+4.00.11 (05.06.15)
+    :   글답변에서 파일 업로드시 원글의 파일이 삭제되는 오류를 수정
+    :   common.lib.php의 get_sideview() 함수 코드 약간 수정
+    :   common.lib.php의 get_file() 함수에 파일 path 추가
+    :   폼메일에서 파일첨부시 확인클릭하면 메일 발송되지 않던 오류 수정
+    :   테이블 복구 및 최적화 프로그램 추가
+    :   그외 다수
+
+        adm/auth_update.php
+        adm/board_form_update.php
+        adm/boardgroup_form_update.php
+        adm/boardgroupmember_update.php
+        adm/config_form_update.php
+        adm/mail_update.php
+        adm/member_form_update.php
+        adm/point_update.php
+        adm/poll_form_update.php
+        adm/repair.php
+        adm/upgrade.php        
+        adm/menu/m100991_repair.php
+        bbs/formmail.php
+        bbs/write_update.php
+        lib/common.lib.php
+
 4.00.10 (05.06.14)
     :   서명 출력 되도록 수정
     :   첫로그인 부분 코드 수정

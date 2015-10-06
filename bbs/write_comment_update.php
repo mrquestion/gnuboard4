@@ -242,7 +242,7 @@ else if ($w == "cu") // 코멘트 수정
 }
 
 // 사용자 코드 실행
-@include_once("$g4[latest_skin_path]/write_comment_update.skin.php");
+@include_once("$board_skin_path/write_comment_update.skin.php");
 
 goto_url("./board.php?bo_table=$bo_table&wr_id=$wr[wr_parent]&page=$page" . $qstr . "&cwin=$cwin");
 ?>

@@ -1,4 +1,5 @@
 <?
+$sub_menu = "100990";
 include_once("./_common.php");
 
 if ($is_admin != "super")
@@ -102,7 +103,7 @@ $sql = " CREATE TABLE $g4[auth_table] (
 sql_query($sql, FALSE);
 
 
-echo "UPGRADE 완료";
+echo "UPGRADE 완료.";
 
 include_once("./admin.tail.php");
 ?>

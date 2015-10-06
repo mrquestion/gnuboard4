@@ -1,19 +1,6 @@
 <?
-if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
+if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 ?>
-
-<style type="text/css">
-<!--
-.w_title    { font-family:돋움; font-size:9pt; color:#9A9A9A; }
-.w_padding  { PADDING-LEFT: 15px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; }
-.w_padding2 { PADDING-LEFT: 15px; PADDING-TOP: 5px; }
-.w_text     { BORDER: #D3D3D3 1px solid; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; }
-.w_textarea { BORDER: #D3D3D3 1px solid; BACKGROUND-COLOR: #ffffff; WIDTH: 100%; WORD-BREAK: break-all; }
-.w_message  { font-family:돋움; font-size:9pt; color:#4B4B4B; }
-.w_norobot  { font-family:돋움; font-size:9pt; color:#BB4681; }
-.w_hand     { cursor:pointer; }
--->
-</style>
 
 <script language="JavaScript">
 // 글자수 제한
@@ -21,17 +8,17 @@ var char_min = parseInt(<?=$write_min?>); // 최소
 var char_max = parseInt(<?=$write_max?>); // 최대
 </script>
 
-<!-- 김선용 2005.4 - FF(불여우) 에서는 innerHTML 사용시 폼이 <table> 아래에 있으면 인식하지 못합니다. --> 
+<!-- 김선용 2005.4 - FF(불여우) 에서는 innerHTML 사용시 폼이 <table> 아래에 있으면 인식하지 못합니다. -->
 <form name="fwrite" method="post" action="javascript:fwrite_check(document.fwrite);" enctype="multipart/form-data" autocomplete="off">
 <table width="<?=$width?>" align=center cellpadding=0 cellspacing=0><tr><td align=center>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr> 
+<tr>
     <td width="4" height="33" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_01.gif" width="4" height="33"></td>
     <td width="14%" align="center" bgcolor="#7BB2D6">&nbsp;</td>
     <td width="5" align="center" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_02.gif" width="5" height="33"></td>
     <td width="5" align="center" bgcolor="#EEEEEE"><img src="<?=$board_skin_path?>/img/top_03.gif" width="5" height="33"></td>
-    <td width="86%" align="left" bgcolor="#EEEEEE" class=w_padding><font style="font-family:돋움; font-size:9pt; color:#7D7D7D"><strong>[ <?=$title_msg?> ]</strong></span></td>
+    <td width="86%" align="left" bgcolor="#EEEEEE"><font style="font-family:돋움; font-size:9pt; color:#7D7D7D"><strong>[ <?=$title_msg?> ]</strong></span></td>
     <td width="4" bgcolor="#EEEEEE"><img src="<?=$board_skin_path?>/img/top_04.gif" width="4" height="33"></td>
 </tr>
 </table>
@@ -48,131 +35,112 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <input type=hidden name=page     value="<?=$page?>">
 
 <? if ($is_name) { ?>
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>이름</span></td>
+<tr height="30">
+    <td width="15%" align="center">이름</td>
     <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT class=w_text maxLength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></TD>
+    <td width="84%"><INPUT class=ed maxLength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
 
 <? if ($is_password) { ?>
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>패스워드</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT class=w_text type=password maxLength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></TD>
+<tr height="30">
+    <td align="center">패스워드</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><INPUT class=ed type=password maxLength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
 
 <? if ($is_email) { ?>
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>이메일</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT class=w_text maxLength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></TD>
+<tr height="30">
+    <td align="center">이메일</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><INPUT class=ed maxLength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
 
 <? if ($is_homepage) { ?>
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>홈페이지</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT class=w_text size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></TD>
+<tr height="30">
+    <td align="center">홈페이지</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><INPUT class=ed size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
 
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>옵션</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding>
-        <? if ($is_notice) { ?><input type=checkbox name=notice value="1" <?=$notice_checked?>><span class=w_title>공지</span>&nbsp;<? } ?>
+<tr height="30">
+    <td align="center">옵션</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td>
+        <? if ($is_notice) { ?><input type=checkbox name=notice value="1" <?=$notice_checked?>>공지&nbsp;<? } ?>
         <? if ($is_html) { ?><INPUT onclick="html_auto_br(this);" type=checkbox value="<?=$html_value?>" name="html" <?=$html_checked?>><span class=w_title>HTML</span>&nbsp;<? } ?>
         <? if ($is_secret) { ?><INPUT type=checkbox value="secret" name="secret" <?=$secret_checked?>><span class=w_title>비밀글</span>&nbsp;<? } ?>
-        <INPUT type=checkbox value="mail" name="mail" <?=$recv_email_checked?>><span class=w_title>답변메일받기</span>&nbsp;</TD>
+        <INPUT type=checkbox value="mail" name="mail" <?=$recv_email_checked?>>답변메일받기&nbsp;</TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 
 
 <? if ($is_category) { ?>
-<tr> 
-    <td width="15%" align="center"><span class=w_title>분류</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding>
+<tr height="30">
+    <td>분류</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td>
         <select name=ca_name required itemname="분류"><option value="">선택하세요<?=$category_option?></select></TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
-
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>제목</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT class=w_text style="width:100%;" name=wr_subject itemname="제목" required value="<?=$subject?>"></TD>
+<tr height="30">
+    <td align="center">제목</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><INPUT class=ed style="width:100%;" name=wr_subject itemname="제목" required value="<?=$subject?>"></TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <tr>
-    <td width="15%" align="center"><span class=w_title>내용</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td class=w_padding>
+    <td align="center">내용</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td>
         <table width=100% cellpadding=0 cellspacing=0>
         <tr>
             <td width=50% align=left valign=bottom>
-                <SPAN style="CURSOR: pointer;" onclick="textarea_decrease('wr_content', 10);"><img src="<?=$board_skin_path?>/img/up.gif" width="16" height="16"></SPAN> 
-                <SPAN style="CURSOR: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/start.gif" width="16" height="16"></SPAN> 
+                <SPAN style="CURSOR: pointer;" onclick="textarea_decrease('wr_content', 10);"><img src="<?=$board_skin_path?>/img/up.gif" width="16" height="16"></SPAN>
+                <SPAN style="CURSOR: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/start.gif" width="16" height="16"></SPAN>
                 <SPAN style="CURSOR: pointer;" onclick="textarea_increase('wr_content', 10);"><img src="<?=$board_skin_path?>/img/down.gif" width="16" height="16"></SPAN></td>
             <td width=50% align=right><span id=char_count></span>글자</td>
         </tr>
         </table>
-        <TEXTAREA id=wr_content name=wr_content class=w_textarea rows=10 itemname="내용" required ONKEYUP="check_byte('wr_content', 'char_count');"><?=$content?></TEXTAREA>
+        <TEXTAREA id=wr_content name=wr_content class=tx style='width:100%;' rows=10 itemname="내용" required ONKEYUP="check_byte('wr_content', 'char_count');"><?=$content?></TEXTAREA>
         <script language="JavaScript"> check_byte('wr_content', 'char_count'); </script>
     </TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 
 
 <? if ($is_link) { ?>
 <? for ($i=1; $i<=$g4[link_count]; $i++) { ?>
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>링크 #<?=$i?></span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT type='text' class=w_text size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
+<tr height="30">
+    <td align="center">링크 #<?=$i?></td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><INPUT type='text' class=ed size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 <? } ?>
 
 
 <? if ($is_file) { ?>
-<tr> 
-    <td width="15%" height="30" align="center" valign="top"><table cellpadding=0 cellspacing=0><tr><td style=" PADDING-TOP: 10px;"><span class=w_title>파일 <span onclick="add_file();" class=w_hand>+</span> <span onclick="del_file();" class=w_hand>-</span></span></td></tr></table></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><table id="variableFiles" cellpadding=0 cellspacing=0></table><?// print_r2($file); ?>
+<tr height="30">
+    <td align="center" valign="top"><table cellpadding=0 cellspacing=0><tr><td style=" PADDING-TOP: 10px;">파일 <span onclick="add_file();" style='cursor:pointer;'>+</span> <span onclick="del_file();" style='cursor:pointer;'>-</span></td></tr></table></td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><table id="variableFiles" cellpadding=0 cellspacing=0></table><?// print_r2($file); ?>
         <script language="JavaScript">
-        function add_file(delete_code) 
+        function add_file(delete_code)
         {
             var objTbl;
             var objRow;
@@ -185,13 +153,13 @@ var char_max = parseInt(<?=$write_max?>); // 최대
             objRow = objTbl.insertRow(objTbl.rows.length);
             objCell = objRow.insertCell(0);
 
-            objCell.innerHTML = "<input type='file' class=w_text size=32 name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
-            if (delete_code) 
+            objCell.innerHTML = "<input type='file' class=ed size=32 name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
+            if (delete_code)
                 objCell.innerHTML += delete_code;
             else
             {
                 <? if ($is_file_content) { ?>
-                objCell.innerHTML += "<br><input type='text' class=w_text size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
+                objCell.innerHTML += "<br><input type='text' class=ed size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
                 <? } ?>
                 ;
             }
@@ -210,43 +178,37 @@ var char_max = parseInt(<?=$write_max?>); // 최대
         </script>
     </td>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
 
 <? if ($is_trackback) { ?>
-<tr> 
-    <td width="15%" height="30" align="center"><span class=w_title>트랙백주소</span></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT class=w_text size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
-        <? if ($w=="u") { ?><input type=checkbox name="re_trackback" value="1"><span class=w_message>핑 보냄</span><? } ?></TD>
+<tr height="30">
+    <td align="center">트랙백주소</td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><INPUT class=ed size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
+        <? if ($w=="u") { ?><input type=checkbox name="re_trackback" value="1">핑 보냄<? } ?></TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
-    
+
 <? if ($is_norobot) { ?>
-<tr> 
-    <td width="15%" height="30" align="center"><?=$norobot_str?></td>
-    <td width="1" valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
-    <td width="84%" class=w_padding><INPUT class=w_text type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;* 왼쪽의 글자중 <FONT COLOR="red">빨간글자만</FONT> 순서대로 입력하세요.</TD>
+<tr height="30">
+    <td align="center"><?=$norobot_str?></td>
+    <td valign="bottom"><img src="<?=$board_skin_path?>/img/gray_line.gif" width="1" height="10"></td>
+    <td><INPUT class=ed type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;* 왼쪽의 글자중 <FONT COLOR="red">빨간글자만</FONT> 순서대로 입력하세요.</TD>
 </tr>
-<tr> 
-    <td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif" colSpan=10></td></tr>
 <? } ?>
 
 </table>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr> 
+<tr>
     <td width="100%" height="30" background="<?=$board_skin_path?>/img/write_down_bg.gif"></td>
 </tr>
-<tr> 
+<tr>
     <td width="100%" align="center" valign="top">
         <INPUT type=image id="btn_submit" src="<?=$board_skin_path?>/img/ok_btn.gif" border=0 accesskey='s'>&nbsp;&nbsp;&nbsp;&nbsp;
         <a href="./board.php?bo_table=<?=$bo_table?>"><img id="btn_list" src="<?=$board_skin_path?>/img/list_btn.gif" border=0></a></td>
@@ -259,15 +221,15 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 <script language="Javascript">
 with (document.fwrite) {
-    if (typeof(wr_name) != "undefined") 
+    if (typeof(wr_name) != "undefined")
         wr_name.focus();
-    else if (typeof(wr_subject) != "undefined") 
+    else if (typeof(wr_subject) != "undefined")
         wr_subject.focus();
-    else if (typeof(wr_content) != "undefined") 
+    else if (typeof(wr_content) != "undefined")
         wr_content.focus();
 
-    if (typeof(ca_name) != "undefined") 
-        if (w.value == "u") 
+    if (typeof(ca_name) != "undefined")
+        if (w.value == "u")
             ca_name.value = "<?=$write[ca_name]?>";
 }
 
@@ -275,12 +237,12 @@ function html_auto_br(obj)
 {
     if (obj.checked) {
         result = confirm("자동 줄바꿈을 하시겠습니까?\n\n자동 줄바꿈은 게시물 내용중 줄바뀐 곳을<br>태그로 변환하는 기능입니다.");
-        if (result) 
+        if (result)
             obj.value = "html2";
-        else 
+        else
             obj.value = "html1";
-    } 
-    else 
+    }
+    else
         obj.value = "";
 }
 

@@ -32,7 +32,7 @@ else if ($w == "d")
     sql_query($sql);
 }
 
-sql_query(" OPTIMIZE TABLE `$g4[mail_table]` ");
+//sql_query(" OPTIMIZE TABLE `$g4[mail_table]` ");
 
 goto_url("./mail_list.php");
 ?>

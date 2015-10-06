@@ -2,18 +2,7 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 ?>
 
-<style>
-.v_padding1 { PADDING-LEFT: 5px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; }
-.v_padding2 { PADDING-LEFT: 5px; PADDING-right: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; }
-.v_padding3 { PADDING-LEFT: 0px; PADDING-right: 0px; PADDING-BOTTOM: 7px; PADDING-TOP: 10px; }
-.v_padding4 { PADDING-LEFT: 5px; PADDING-right: 0px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; }
-.v_padding5 { PADDING-LEFT: 10px; PADDING-right: 20px; PADDING-BOTTOM: 7px; PADDING-TOP: 10px; }
-.v_padding6 { PADDING-BOTTOM: 20px; PADDING-TOP: 20px; }
-.v_text1 { BORDER-RIGHT: #D3D3D3 1px solid; BORDER-TOP: #D3D3D3 1px solid; BORDER-LEFT: #D3D3D3 1px solid; BORDER-BOTTOM: #D3D3D3 1px solid; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; }
-.v_text2 { }
-.v_content { COLOR:#3E755D; }
-</style>
-
+<!-- 게시글 보기 시작 -->
 <table width="<?=$width?>" align="center" cellpadding="0" cellspcing="0"><tr><td>
 
 <!-- 링크 버튼 -->
@@ -21,8 +10,8 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 ob_start(); 
 ?>
 <table width='100%' cellpadding=0 cellspacing=0>
-<tr>
-    <td width=75% height=35>
+<tr height=35>
+    <td width=75%>
         <? if ($search_href) { echo "<a href=\"$search_href\"><img src='$board_skin_path/img/btn_search_list.gif' border='0' align='absmiddle'></a> "; } ?>
         <? echo "<a href=\"$list_href\"><img src='$board_skin_path/img/btn_list.gif' border='0' align='absmiddle'></a> "; ?>
 
@@ -54,42 +43,37 @@ ob_end_flush();
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr> 
     <td width="4" height="33" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_01.gif" width="4" height="33"></td>
-    <td width="10%" align="center" bgcolor="#7BB2D6"><font style="font-family:돋움; font-size:9pt; color:#ffffff"><strong>제 목</strong></font></td>
+    <td width="10%" align="center" bgcolor="#7BB2D6"><font color='#ffffff'><strong>제 목</strong></font></td>
     <td width="5" align="center" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_02.gif" width="5" height="33"></td>
     <td width="5" align="center" bgcolor="#EEEEEE"><img src="<?=$board_skin_path?>/img/top_03.gif" width="5" height="33"></td>
-    <td width="90%" align="left" bgcolor="#EEEEEE" class=v_padding1 style='word-break:break-all;'><font class="v_text2"><b><? if ($is_category) { echo ($category_name ? "[$view[ca_name]] " : ""); } ?><?=$view[subject]?></b></font></td>
+    <td width="90%" align="left" bgcolor="#EEEEEE" style='word-break:break-all;'>&nbsp;<b><? if ($is_category) { echo ($category_name ? "[$view[ca_name]] " : ""); } ?><?=$view[subject]?></b></td>
     <td width="4" bgcolor="#EEEEEE"><img src="<?=$board_skin_path?>/img/top_04.gif" width="4" height="33"></td>
 </tr>
+<tr><td colspan=6 height="2"></td></tr>
 </table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr>
-    <td width="100%" height="2" bgcolor="#FFFFFF"></td>
-</tr>
-</table>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr> 
-    <td width="4" height="33" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_01.gif" width="4" height="33"></td>
-    <td width="10%" align="center" bgcolor="#7BB2D6"><font style="font-family:돋움; font-size:9pt; color:#ffffff"><strong>글쓴이</strong></font></td>
+<table width="100%" cellspacing="0" cellpadding="0">
+<tr height="33"> 
+    <td width="4" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_01.gif" width="4" height="33"></td>
+    <td width="10%" align="center" bgcolor="#7BB2D6"><font color='#ffffff'><strong>글쓴이</strong></font></td>
     <td width="5" align="center" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_02.gif" width="5" height="33"></td>
     <td width="5" align="center" bgcolor="#EEEEEE"><img src="<?=$board_skin_path?>/img/top_03.gif" width="5" height="33"></td>
-    <td width="33%" align="left" bgcolor="#EEEEEE" class=v_padding1><font class="v_text2"><?=$view[name]?></font><? if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></td>
+    <td width="33%" align="left" bgcolor="#EEEEEE">&nbsp;<?=$view[name]?><? if ($is_ip_view) { echo "&nbsp;($ip)"; } ?></td>
     <td width="27%" align="left" bgcolor="#EEEEEE">
         <table width="100%" border="0" cellspacing="0" cellpadding="0">
             <tr> 
                 <td><table width="70" border="0" cellspacing="0" cellpadding="0">
                         <tr> 
                             <td width="4" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_01.gif" width="4" height="33"></td>
-                            <td width="61" align="center" bgcolor="#7BB2D6"><font style="font-family:돋움; font-size:9pt; color:#ffffff"><strong>날 짜</strong></font></td>
+                            <td width="61" align="center" bgcolor="#7BB2D6"><font color='#ffffff'><strong>날 짜</strong></font></td>
                             <td width="5" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/top_02.gif" width="5" height="33"></td>
                         </tr>
                     </table></td>
-                <td width="140" class=v_padding2><font class="v_text2"><?=substr($view[wr_datetime],2,14)?></font></td>
+                <td width="140" align=center><?=substr($view[wr_datetime],2,14)?></td>
             </tr>
         </table></td>
-    <td width="30%" align="center" bgcolor="#E3E3E3" class=v_padding4>
-        <font style="font-family:돋움; font-size:9pt; color:#727272"><b>조회</b>(<?=$view[wr_hit]?>) 
+    <td width="30%" align="center" bgcolor="#E3E3E3">
+        <font color="#727272"><b>조회</b>(<?=$view[wr_hit]?>) 
         <? if ($is_good) echo "<b>추천</b>($view[wr_good])";?> 
         <? if ($is_nogood) echo "<b>비추천</b>($view[wr_nogood])";?></font></td>
     <td width="4" bgcolor="#E3E3E3"><img src="<?=$board_skin_path?>/img/top_04.gif" width="4" height="33"></td>
@@ -99,8 +83,8 @@ ob_end_flush();
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 
 <? if ($trackback_url) { ?>
-<tr>
-    <td colspan="3" align="right" class=v_padding3>
+<tr height=25>
+    <td align="right">
         트랙백 주소 : <a href="javascript:clipboard_trackback('<?=$trackback_url?>');" style="letter-spacing:0;" title='이 글을 소개할 때는 이 주소를 사용하세요'><?=$trackback_url?></a>&nbsp;
         <script language="JavaScript">
             function clipboard_trackback(str) {
@@ -114,9 +98,7 @@ ob_end_flush();
         </script>
     </td>
 </tr>
-<tr> 
-    <td height="1" colspan="3" align="right" background="<?=$board_skin_path?>/img/dot_bg.gif"></td>
-</tr>
+<tr><td height="1" background="<?=$board_skin_path?>/img/dot_bg.gif"></td></tr>
 <? } ?>
 
 <?
@@ -126,14 +108,11 @@ for ($i=0; $i<count($view[file]); $i++) {
     if ($view[file][$i][source] && !$view[file][$i][view]) {
         $cnt++;
         echo <<<HEREDOC
-        <tr> 
-            <td width="30" class=v_padding3><img src="{$board_skin_path}/img/file_icon.gif" width="13" height="13">&nbsp;</td>
-            <td width="30" class=v_padding3><font class="v_text2">#{$cnt}</font></td>
-            <td width="100%" class=v_padding5><a href='{$view[file][$i][href]}' title='{$view[file][$i][content]}'><font class="v_text2">{$view[file][$i][source]} ({$view[file][$i][size]}), Down:{$view[file][$i][download]}, {$view[file][$i][datetime]}</FONT></a></td>
+        <tr height=25><td>
+            <img src="{$board_skin_path}/img/file_icon.gif" width="13" height="13" align=absmiddle>&nbsp;#{$cnt}
+            <a href='{$view[file][$i][href]}' title='{$view[file][$i][content]}'><b>{$view[file][$i][source]}</b> ({$view[file][$i][size]}), Down:{$view[file][$i][download]}, {$view[file][$i][datetime]}</a></td>
         </tr>
-        <tr> 
-            <td height="1" colspan="3" align="right" background="{$board_skin_path}/img/dot_bg.gif"></td>
-        </tr>
+        <tr><td height="1" background="{$board_skin_path}/img/dot_bg.gif"></td></tr>
 HEREDOC;
     }
 }
@@ -145,21 +124,18 @@ for ($i=1; $i<=$g4[link_count]; $i++) {
         $cnt++;
         $link = cut_str($view[link][$i], 70);
         echo <<<HEREDOC
-        <tr> 
-            <td width="30" class=v_padding3><img src="{$board_skin_path}/img/link_icon.gif" width="13" height="13">&nbsp;</td>
-            <td width="30" class=v_padding3><font class="v_text2">#{$cnt}</font></td>
-            <td width="100%" class=v_padding5><a href="{$view[link_href][$i]}" target="_blank"><font class="v_text2">{$link} ({$view[link_hit][$i]})</FONT></a></td>
+        <tr height=25><td>
+            <img src="{$board_skin_path}/img/link_icon.gif" width="13" height="13" align=absmiddle>&nbsp;#{$cnt}
+            <a href="{$view[link_href][$i]}" target="_blank"><b>{$link}</b></a> ({$view[link_hit][$i]})</td>
         </tr>
-        <tr> 
-            <td height="1" colspan="3" align="right" background="{$board_skin_path}/img/dot_bg.gif"></td>
-        </tr>
+        <tr><td height="1" background="{$board_skin_path}/img/dot_bg.gif"></td></tr>
 HEREDOC;
     }
 }
 ?>
 
 <tr> 
-    <td height="200" colspan="3" valign="top" class=v_padding6 style='word-break:break-all;'>
+    <td height="150" valign="top" style='word-break:break-all; padding:10px;'>
         <? 
         // 파일 출력
         for ($i=0; $i<=count($view[file]); $i++) {
@@ -168,7 +144,7 @@ HEREDOC;
         }
         ?>
 
-        <span class="v_content lh"><?=$view[content];?></span>
+        <span class="ct lh"><?=$view[content];?></span>
         <?//echo $view[rich_content]; // {이미지:0} 과 같은 코드를 사용할 경우?>
         <!-- 테러 태그 방지용 --></xml></xmp><a href=""></a><a href=''></a></td>
 </tr>
@@ -206,3 +182,4 @@ function resize_image()
 
 window.onload = resize_image;
 </script>
+<!-- 게시글 보기 끝 -->

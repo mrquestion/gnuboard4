@@ -310,7 +310,7 @@ if ($_FILES[bo_image_tail][name]) {
     chmod($bo_image_tail_path, 0606);
 }
 
-sql_query(" OPTIMIZE TABLE `$g4[board_table]`, `$g4[board_file_table]`, `$g4[board_new_table]`, `$g4[write_prefix]$bo_table` ");
+//sql_query(" OPTIMIZE TABLE `$g4[board_table]`, `$g4[board_file_table]`, `$g4[board_new_table]`, `$g4[write_prefix]$bo_table` ");
 
 goto_url("./board_form.php?w=u&bo_table=$bo_table&$qstr");
 ?>

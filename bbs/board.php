@@ -2,19 +2,23 @@
 include_once("./_common.php");
 
 if (!$board[bo_table])
+{
     if ($cwin) // 코멘트 보기
        alert_close("존재하지 않는 게시판입니다.", $g4[path]);
     else
        alert("존재하지 않는 게시판입니다.", $g4[path]);
+}
 
-if ($write[wr_comment] < 0) {
+if ($write[wr_comment] < 0) 
+{
     if ($cwin) // 코멘트 보기
         alert_close("코멘트는 상세보기 하실 수 없습니다.");
     else
         alert("코멘트는 상세보기 하실 수 없습니다.");
 }
 
-if (!$bo_table) {
+if (!$bo_table) 
+{
     $msg = "bo_table 값이 넘어오지 않았습니다.\\n\\nboard.php?bo_table=code 와 같은 방식으로 넘겨 주세요.";
     if ($cwin) // 코멘트 보기
         alert_close($msg);

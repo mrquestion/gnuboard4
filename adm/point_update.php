@@ -14,7 +14,7 @@ if (($po_point < 0) && ($po_point * (-1) > $mb[mb_point]))
 
 insert_point($mb_id, $po_point, $po_content);
 
-sql_query(" OPTIMIZE TABLE `$g4[point_table]` ");
+//sql_query(" OPTIMIZE TABLE `$g4[point_table]` ");
 
 goto_url("./point_list.php?$qstr");
 ?>

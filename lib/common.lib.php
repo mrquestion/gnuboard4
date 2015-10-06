@@ -188,7 +188,9 @@ function get_file($bo_table, $wr_id)
         $no = $row[bf_no];
         $file[$no][href] = "./download.php?bo_table=$bo_table&wr_id=$wr_id&no=$no" . $qstr;
         $file[$no][download] = $row[bf_download];
-        $file[$no][size] = get_filesize("$g4[path]/data/file/$bo_table/$row[bf_file]");
+        // 4.00.11 - 파일 path 추가
+        $file[$no][path] = "$g4[path]/data/file/$bo_table";
+        $file[$no][size] = get_filesize("{$file[$no][path]}/$row[bf_file]");
         $file[$no][datetime] = date("Y-m-d H:i:s", @filemtime("$g4[path]/data/file/$bo_table/$row[bf_file]"));
         $file[$no][source] = $row[bf_source];
         $file[$no][bf_content] = $row[bf_content];
@@ -741,12 +743,13 @@ function get_sideview($mb_id, $name="", $email="", $homepage="")
             $mb_dir = substr($mb_id,0,2);
             $icon_file = "$g4[path]/data/member/$mb_dir/$mb_id.gif";
 
-            if (file_exists($icon_file) && is_file($icon_file)) {
-                $size = getimagesize($icon_file);
-                $width = $size[0];
-                $height = $size[1];
-                //if ($width > $config[cf_member_icon_width])   $width = $config[cf_member_icon_width];
-                //if ($height > $config[cf_member_icon_height]) $height = $config[cf_member_icon_height];
+            //if (file_exists($icon_file) && is_file($icon_file)) {
+            if (file_exists($icon_file)) {
+                //$size = getimagesize($icon_file);
+                //$width = $size[0];
+                //$height = $size[1];
+                $width = $config[cf_member_icon_width];
+                $height = $config[cf_member_icon_height];
                 $tmp_name = "<img src='$icon_file' width='$width' height='$height' align='absmiddle' border='0'>";
 
                 if ($config[cf_use_member_icon] == 2) // 회원아이콘+이름

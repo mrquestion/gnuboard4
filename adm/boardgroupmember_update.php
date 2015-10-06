@@ -53,7 +53,7 @@ if ($w == "") {
     sql_query($sql);
 }
 
-sql_query(" OPTIMIZE TABLE `$g4[group_member_table]` ");
+//sql_query(" OPTIMIZE TABLE `$g4[group_member_table]` ");
 
 if ($w == 'listdelete')
     goto_url("./boardgroupmember_list.php?gr_id=$gr_id");

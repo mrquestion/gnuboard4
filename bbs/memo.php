@@ -141,7 +141,7 @@ HEREDOC;
     <td height="2" align="center" valign="top" bgcolor="#E6E6E6"></td>
 </tr>
 <tr>
-    <td height="40" align="center" valign="bottom"><a href="javascript:window.close();"><img src="<?=$g4[bbs_img_path]?>/btn_close.gif" width="48" height="20" border="0"></a></td>
+    <td height="40" align="center" valign="bottom"><a href="javascript:window.close();"><img src="<?=$g4[bbs_img_path]?>/btn_close.gif" width="48" height="20" border="0"></a><br><br></td>
 </tr>
 </table>
 

@@ -12,40 +12,19 @@ if ($is_nogood) $colspan++;
 // <nobr style='display:block; overflow:hidden; width:000px;'>제목</nobr>
 ?>
 
-<style type="text/css">
-<!--
-.w_fixed { table-layout:fixed; }
-.w_font  { font-family:돋움; font-size:9pt; color:#5E5E5E; }
-.w_title { font-family:돋움; font-size:9pt; color:#5E5E5E; }
-.w_num { font-family:돋움; font-size:9pt; color:#7BB2D6; }
-.w_list { font-family:돋움; font-size:9pt; color:#6A6A6A; }
-.w_notice { font-family:돋움; font-size:9pt; color:#2C88B9; }
-.w_comment_cnt { font-family:돋움; font-size:8pt; color:#9A9A9A; }
-.w_padding { PADDING-LEFT: 15px; PADDING-BOTTOM: 5px; PADDING-TOP: 5px; }
-.w_padding2 { PADDING-LEFT: 15px; PADDING-TOP: 5px; }
-.w_text  { BORDER: #D3D3D3 1px solid; HEIGHT: 18px; BACKGROUND-COLOR: #ffffff; }
-.w_textarea  { BORDER: #D3D3D3 1px solid; BACKGROUND-COLOR: #ffffff; WIDTH: 100%; WORD-BREAK: break-all; }
-.w_message  { font-family:돋움; font-size:9pt; color:#4B4B4B; }
-.w_norobot  { font-family:돋움; font-size:9pt; color:#BB4681; }
--->
-</style>
+<!-- 게시판 목록 시작 -->
+<table width="<?=$width?>" align="center" cellpadding="0" cellspacing="0"><tr><td>
 
-<table width="<?=$width?>" align="center" cellpadding="0" cellspcing="0"><tr><td>
-
-<!-- 분류 셀렉트 박스, 게시물 몇건, 관리자화면 링크 시작 -->
+<!-- 분류 셀렉트 박스, 게시물 몇건, 관리자화면 링크 -->
 <table width="100%" cellspacing="0" cellpadding="0">
-<tr>
-    <? if ($is_category) { ?><form name="fcategory" method="get">
-    <td width="50%"><select name=sca onchange="location='<?=$category_location?>'+this.value;"><option value=''>전체</option><?=$category_option?></select></td>
-    </form><? } ?>
-    <td height=25 align="right"><font class=w_font>게시물 <?=number_format($total_count)?>건</font><? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/admin_button.gif" title="관리자" width="63" height="22" border="0"></a><? } ?></td>
+<tr height="25">
+    <? if ($is_category) { ?><form name="fcategory" method="get"><td width="50%"><select name=sca onchange="location='<?=$category_location?>'+this.value;"><option value=''>전체</option><?=$category_option?></select></td></form><? } ?>
+    <td align="right">게시물 <?=number_format($total_count)?>건 <? if ($admin_href) { ?><a href="<?=$admin_href?>"><img src="<?=$board_skin_path?>/img/admin_button.gif" title="관리자" width="63" height="22" border="0" align="absmiddle"></a><? } ?></td>
 </tr>
+<tr><td height=5></td></tr>
 </table>
-<!-- 분류 셀렉트 박스, 게시물 몇건, 관리자화면 링크 끝 -->
 
-<!-- 여백 --><table width="100%" cellspacing="0" cellpadding="0"><tr><td height="5"></td></tr></table>
-
-<!-- 게시판 제목 시작 -->
+<!-- 제목 -->
 <table width="100%" cellspacing="0" cellpadding="0">
 <form name="fboardlist" method="post">
 <input type="hidden" name="bo_table" value="<?=$bo_table?>">
@@ -56,54 +35,51 @@ if ($is_nogood) $colspan++;
 <input type="hidden" name="sw"   value="">
 <tr> 
     <td width="4" height="33" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/list_top_01.gif" width="4" height="33"></td>
-    <td width="40" align="center" bgcolor="#7BB2D6"><font style="font-family:돋움; font-size:9pt; color:#FFFFFF"><strong>번호</strong></font></td>
+    <td width="50" align="center" bgcolor="#7BB2D6"><font color='#FFFFFF'><strong>번호</strong></font></td>
     <td width="5" align="center" bgcolor="#7BB2D6"><img src="<?=$board_skin_path?>/img/list_top_02.gif" width="5" height="33"></td>
     <td width="5" align="center" bgcolor="#EEEEEE"><img src="<?=$board_skin_path?>/img/list_top_03.gif" width="5" height="33"></td>
-    <? if ($is_category) { ?><td width="70" align="center" bgcolor="#EEEEEE"><font class=w_title><strong>분류</strong></font></td><? } ?>
+    <? if ($is_category) { ?><td width="70" align="center" bgcolor="#EEEEEE"><strong>분류</strong></td><? } ?>
     <? if ($is_checkbox) { ?><td width="40" align="center" bgcolor="#EEEEEE"><INPUT onclick="if (this.checked) all_checked(true); else all_checked(false);" type=checkbox></td><? } ?>
-    <td align="center" bgcolor="#EEEEEE"><font class=w_title><strong>제목</strong></font></td>
-    <td width="110" align="center" bgcolor="#EEEEEE"><font class=w_title><strong>글쓴이</strong></font></td>
-    <td width="40" align="center" bgcolor="#EEEEEE"><?=subject_sort_link('wr_datetime', $qstr2, 1)?><font class=w_title><strong>날짜</strong></font></a></td>
-    <td width="40" align="center" bgcolor="#EEEEEE"><?=subject_sort_link('wr_hit', $qstr2, 1)?><font class=w_title><strong>조회</strong></font></a></td>
-    <? if ($is_good) { ?><td width="40" align="center" bgcolor="#EEEEEE"><?=subject_sort_link('wr_good', $qstr2, 1)?><font style="font-family:돋움; font-size:9pt; color:#7993AF"><strong>추천</strong></font></a></td><? } ?>
-    <? if ($is_nogood) { ?><td width="40" align="center" bgcolor="#EEEEEE"><font style="font-family:돋움; font-size:9pt; color:#A07C7C"><strong>비추천</strong></font></td><? } ?>
+    <td align="center" bgcolor="#EEEEEE"><strong>제목</strong></td>
+    <td width="110" align="center" bgcolor="#EEEEEE"><strong>글쓴이</strong></td>
+    <td width="40" align="center" bgcolor="#EEEEEE"><?=subject_sort_link('wr_datetime', $qstr2, 1)?><strong>날짜</strong></a></td>
+    <td width="40" align="center" bgcolor="#EEEEEE"><?=subject_sort_link('wr_hit', $qstr2, 1)?><strong>조회</strong></a></td>
+    <? if ($is_good) { ?><td width="40" align="center" bgcolor="#EEEEEE"><?=subject_sort_link('wr_good', $qstr2, 1)?><strong>추천</strong></a></td><? } ?>
+    <? if ($is_nogood) { ?><td width="40" align="center" bgcolor="#EEEEEE"><strong>비추천</strong></td><? } ?>
     <td width="4" bgcolor="#EEEEEE"><img src="<?=$board_skin_path?>/img/list_top_04.gif" width="4" height="33"></td>
 </tr>
-</table>
-<!-- 게시판 제목 끝 -->
 
-<!-- 게시물 리스트 시작 -->
-<table width="100%" cellspacing="0" cellpadding="0" class="w_fixed">
+<!-- 목록 -->
 <? for ($i=0; $i<count($list); $i++) { ?>
-<tr <? if ($list[$i][is_notice]) { echo "bgcolor='#F9FBFB'"; } else { echo " onmouseover=\"this.style.backgroundColor='#eeeeff';return true;\" onMouseOut=\"this.style.backgroundColor='';return true;\""; }?>> 
-    <td width="4" height="33"><img src="<?=$board_skin_path?>/img/trans4.gif" width="4" height="33"></td>
-    <td width="40" align="center">
+<tr height="33" <? if ($list[$i][is_notice]) { echo "bgcolor='#F9FBFB'"; } else { echo " onmouseover=\"this.style.backgroundColor='#FFFFAA';return true;\" onMouseOut=\"this.style.backgroundColor='';return true;\""; }?>> 
+    <td></td>
+    <td align="center">
         <? 
         if ($list[$i][is_notice]) // 공지사항 
             echo "<img src=\"$board_skin_path/img/notice_icon.gif\" width=30 height=16>";
         else if ($wr_id == $list[$i][wr_id]) // 현재위치
-            echo "<font class=w_num><strong>{$list[$i][num]}</strong></font>";
+            echo "<font color='#2C8CB9'><strong>{$list[$i][num]}</strong>";
         else
-            echo "<font class=w_list>{$list[$i][num]}</font>";
+            echo "{$list[$i][num]}";
         ?></td>
-    <td width="5" align="center"><img src="<?=$board_skin_path?>/img/trans5.gif" width="5" height="33"></td>
-    <td width="5" align="center"><img src="<?=$board_skin_path?>/img/trans5.gif" width="5" height="33"></td>
-    <? if ($is_category) { ?><td width="70" align="center"><font class=w_font><strong><a href="<?=$list[$i][ca_name_href]?>"><?=$list[$i][ca_name]?></a></strong></font></td><? } ?>
+    <td></td>
+    <td></td>
+    <? if ($is_category) { ?><td width="70" align="center"><a href="<?=$list[$i][ca_name_href]?>"><font color=gray><?=$list[$i][ca_name]?></font></a></td><? } ?>
     <? if ($is_checkbox) { ?><td width="40" align="center"><input type=checkbox name=chk_wr_id[] value="<?=$list[$i][wr_id]?>"></td><? } ?>
-    <td align="left" style='word-break:break-all;'>
+    <td style='word-break:break-all;'>
         <? 
         echo $nobr_begin;
         echo $list[$i][reply];
         echo $list[$i][icon_reply];
         echo "<a href='{$list[$i][href]}'>";
         if ($list[$i][is_notice])
-            echo "<font class=w_notice><strong>{$list[$i][subject]}</strong></font>";
+            echo "<font color='#2C8CB9'><strong>{$list[$i][subject]}</strong></font>";
         else
-            echo "<font class=w_list>{$list[$i][subject]}</font>";
+            echo "{$list[$i][subject]}";
         echo "</a>";
 
         if ($list[$i][comment_cnt]) 
-            echo " <a href=\"{$list[$i][comment_href]}\"><span class=w_comment_cnt>{$list[$i][comment_cnt]}</span></a>";
+            echo " <a href=\"{$list[$i][comment_href]}\"><span style='font-size:7pt;'>{$list[$i][comment_cnt]}</span></a>";
 
         // if ($list[$i]['link']['count']) { echo "[{$list[$i]['link']['count']}]"; }
         // if ($list[$i]['file']['count']) { echo "<{$list[$i]['file']['count']}>"; }
@@ -115,23 +91,22 @@ if ($is_nogood) $colspan++;
         echo " " . $list[$i][icon_secret];
         echo $nobr_end;
         ?></td>
-    <td width="110" align="center"><font class=w_font><?=$list[$i][name]?></font></td>
-    <td width="40" align="center"><font class=w_font><?=$list[$i][datetime2]?></font></td>
-    <td width="40" align="center"><font class=w_font><?=$list[$i][wr_hit]?></font></td>
-    <? if ($is_good) { ?><td width="40" align="center"><font class=w_font><?=$list[$i][wr_good]?></font></td><? } ?>
-    <? if ($is_nogood) { ?><td width="40" align="center"><font class=w_font><?=$list[$i][wr_nogood]?></font></td><? } ?>
-    <td width="4"><img src="<?=$board_skin_path?>/img/trans4.gif" width="4" height="33"></td>
+    <td align="center"><?=$list[$i][name]?></td>
+    <td align="center"><?=$list[$i][datetime2]?></td>
+    <td align="center"><?=$list[$i][wr_hit]?></td>
+    <? if ($is_good) { ?><td align="center"><?=$list[$i][wr_good]?></td><? } ?>
+    <? if ($is_nogood) { ?><td align="center"><?=$list[$i][wr_nogood]?></td><? } ?>
+    <td></td>
 </tr>
 <tr>
     <td colspan="<?=$colspan?>" height="1" background="<?=$board_skin_path?>/img/dot_bg.gif"></td>
 </tr>
 <? } ?>
-<? if (count($list) == 0) { echo "<tr><td height=100 align=center>게시물이 없습니다.</td></tr>"; } ?>
+<? if (count($list) == 0) { echo "<tr><td colspan='$colspan' height=100 align=center>게시물이 없습니다.</td></tr>"; } ?>
 </form>
 </table>
-<!-- 게시물 리스트 끝 -->
 
-<!-- 페이지 표시 시작 -->
+<!-- 페이지 -->
 <table width="100%" cellspacing="0" cellpadding="0">
 <tr>
     <td height="37" align="center" background="<?=$board_skin_path?>/img/number_line.gif">
@@ -156,10 +131,10 @@ if ($is_nogood) $colspan++;
         </table></td>
 </tr>
 </table>
-<!-- 페이지 표시 끝 -->
 
+<!-- 버튼 링크 -->
 <table width="100%" cellspacing="0" cellpadding="0">
-<tr align="left"> 
+<tr> 
     <td width="50%" height="40">
         <? if ($list_href) { ?><a href="<?=$list_href?>"><img src="<?=$board_skin_path?>/img/btn_list.gif" border="0"></a><? } ?>
         <? if ($write_href) { ?><a href="<?=$write_href?>"><img src="<?=$board_skin_path?>/img/btn_write.gif" border="0"></a><? } ?>
@@ -267,3 +242,4 @@ function select_copy(sw)
 }
 </script>
 <? } ?>
+<!-- 게시판 목록 끝 -->

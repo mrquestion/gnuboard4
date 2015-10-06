@@ -87,7 +87,7 @@ $sql = " update $g4[config_table]
                 ";
 sql_query($sql);
 
-sql_query(" OPTIMIZE TABLE `$g4[config_table]` ");
+//sql_query(" OPTIMIZE TABLE `$g4[config_table]` ");
 
 goto_url("./config_form.php");
 ?>
