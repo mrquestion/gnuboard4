@@ -1,3 +1,12 @@
+4.36.17 (2013.02.22)
+    :   게시물 링크를 통한 XSS 취약점 해결 (서울 대원고등학교 현성원님께서 한국인터넷진흥원을 통하여 알려 주셨습니다.)
+        링크에는 HTML 태그를 사용하지 못하도록 조치 하였습니다.
+
+        bbs/write_update.php 에 아래와 같이 두줄 수정해 주시면 됩니다.
+
+            $wr_link1 = mysql_real_escape_string(strip_tags($_POST['wr_link1']));
+            $wr_link2 = mysql_real_escape_string(strip_tags($_POST['wr_link2']));
+
 4.36.16 (2013.02.14)
     :   XSS 취약점 해결 (i2sec 황도경님께서 알려 주셨습니다.)
         파일명에 특수문자가 포함되는 경우에 발생할수 있어 파일명을 필터링 하였습니다.
