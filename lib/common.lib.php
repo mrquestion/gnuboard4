@@ -461,6 +461,10 @@ function conv_content($content, $html)
         // 081022 : CSRF 방지
         //$content = preg_replace("/(on)(abort|blur|change|click|dblclick|dragdrop|error|focus|keydown|keypress|keyup|load|mousedown|mousemove|mouseout|mouseover|mouseup|mouseenter|mouseleave|move|reset|resize|select|submit|unload)/i", "$1<!-- XSS Filter -->$2", $content);
         //$content = preg_replace("/(on)([^\=]+)/i", "&#111;&#110;$2", $content);
+        
+        // 이런 경우를 방지함 <IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
+        $content = preg_replace("#\/\*.*\*\/#iU", "", $content);
+
         $content = preg_replace("/(on)([a-z]+)([^a-z]*)(\=)/i", "&#111;&#110;$2$3$4", $content);
         $content = preg_replace("/(dy)(nsrc)/i", "&#100;&#121;$2", $content);
         $content = preg_replace("/(lo)(wsrc)/i", "&#108;&#111;$2", $content);
@@ -475,7 +479,7 @@ function conv_content($content, $html)
         $content = preg_replace("/<(img[^>]+download\.php[^>]+bo_table[^>]+)/i", "*** CSRF 감지 : &lt;$1", $content);
 
         // 이런 경우를 방지함 <IMG STYLE="xss:expr/*XSS*/ession(alert('XSS'))">
-        $content = preg_replace("#\/\*.*\*\/#iU", "", $content);
+        //$content = preg_replace("#\/\*.*\*\/#iU", "", $content); // 이 코드를 위로 올립니다.
 
         $pattern = "";
         $pattern .= "(e|&#(x65|101);?)";
