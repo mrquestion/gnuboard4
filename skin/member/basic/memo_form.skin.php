@@ -37,19 +37,13 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </tr>
 </table>
 
-<form name=fmemoform method=post onsubmit="return fmemoform_submit(this);" style="margin:0px;">
 <table width="600" border="0" cellspacing="0" cellpadding="0">
+<form name=fmemoform method=post onsubmit="return fmemoform_submit(this);" autocomplete="off">
 <tr> 
     <td height="300" align="center" valign="top">
         <table width="540" border="0" cellspacing="0" cellpadding="0">
         <tr> 
-            <td height="30" align="right" style="padding-right:0px;">
-            <?
-            if ($config[cf_memo_send_point]) {
-                echo "쪽지 보낼때 회원당 ".number_format($config[cf_memo_send_point])."점의 포인트를 차감합니다.";
-            }
-            ?>
-            </td>
+            <td height="20"></td>
         </tr>
         <tr> 
             <td height="2" bgcolor="#808080"></td>
@@ -59,7 +53,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
                 <table width=100% cellpadding=1 cellspacing=1 border=0>
                 <tr bgcolor=#E1E1E1 align=center> 
                     <td width="30%" height="24" rowspan="2"><b>받는 회원아이디</b></td>
-                    <td width=70% align="center"><input type=text name="me_recv_mb_id" required itemname="받는 회원아이디" value="<?=$me_recv_mb_id?>" style="width:95%;"></td>
+                    <td width="70%" align="center"><input type=text name="me_recv_mb_id" required itemname="받는 회원아이디" value="<?=$me_recv_mb_id?>" style="width:95%;"></td>
                 </tr>
                 <tr bgcolor=#E1E1E1 align=center> 
                     <td>※ 여러 회원에게 보낼때는 컴마(,)로 구분하세요.</td>
@@ -68,8 +62,20 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             </td>
         </tr>
         <tr>
-            <td height="200" align="center" valign="middle" bgcolor="#F6F6F6">
+            <td height="180" align="center" valign="middle" bgcolor="#F6F6F6">
                 <textarea name=me_memo rows=10 style='width:95%;' required itemname='내용'><?=$content?></textarea></td>
+        </tr>
+        <tr> 
+            <td>
+                <table width=100% cellpadding=1 cellspacing=1 border=0>
+                <tr align=center> 
+                    <td width="30%" height="24" rowspan="2"><img id='kcaptcha_image' /></td>
+                    <td width="70%" align="left">
+                        <input type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.
+                    </td>
+                </tr>
+                </table>
+            </td>
         </tr>
         </table></td>
 </tr>
@@ -84,9 +90,11 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
         <input id=btn_submit type=image src="<?=$member_skin_path?>/img/btn_paper_send.gif" border=0>&nbsp;&nbsp;
         <a href="javascript:window.close();"><img src="<?=$member_skin_path?>/img/btn_close.gif" width="48" height="20" border="0"></a></td>
 </tr>
-</table>
 </form>
+</table>
 
+<script type="text/javascript" src="<?=$g4[path]?>/js/md5.js"></script>
+<script type="text/javascript" src="<?="$g4[path]/js/jquery.kcaptcha.js"?>"></script>
 <script type="text/javascript">
 with (document.fmemoform) {
     if (me_recv_mb_id.value == "")
@@ -97,6 +105,14 @@ with (document.fmemoform) {
 
 function fmemoform_submit(f)
 {
+    if (typeof(f.wr_key) != 'undefined') {
+        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
+            alert('자동등록방지용 코드가 맞지 않습니다.');
+            f.wr_key.select();
+            return false;
+        }
+    }
+
     document.getElementById("btn_submit").disabled = true;
 
     f.action = "./memo_form_update.php";
