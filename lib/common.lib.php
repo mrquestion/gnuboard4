@@ -68,18 +68,6 @@ function print_r2($var)
 // header("location:URL") 을 대체
 function goto_url($url)
 {
-    /*
-    if (preg_match("/MSIE/", $_SERVER[HTTP_USER_AGENT]))
-        echo "<meta http-equiv='Refresh' content='0;url=$url'>";
-    else
-        echo "<script type='text/javascript'> document.location.href = '$url'; </script>";
-    */
-    //header("Location:$url");
-    //flush();
-    //if (!headers_sent())
-    //    header("Location:$url");
-    //else
-    //echo "<script type='text/javascript'> document.location.href = '$url'; </script>";
     echo "<script type='text/javascript'> location.replace('$url'); </script>";
     exit;
 }
@@ -918,9 +906,12 @@ function view_file_link($file, $width, $height, $content="")
         // 이미지에 속성을 주지 않는 이유는 이미지 클릭시 원본 이미지를 보여주기 위한것임
         // 게시판설정 이미지보다 크다면 스킨의 자바스크립트에서 이미지를 줄여준다
         return "<img src='$g4[path]/data/file/$board[bo_table]/".urlencode($file)."' name='target_resize_image[]' onclick='image_window(this);' style='cursor:pointer;' title='$content'>";
+    /*
+    // 110106 : FLASH XSS 공격으로 인하여 코드 자체를 막음
     else if (preg_match("/\.($config[cf_flash_extension])$/i", $file))
         //return "<embed src='$g4[path]/data/file/$board[bo_table]/$file' $attr></embed>";
         return "<script>doc_write(flash_movie('$g4[path]/data/file/$board[bo_table]/$file', '_g4_{$ids}', '$width', '$height', 'transparent'));</script>";
+    */
     //=============================================================================================
     // 동영상 파일에 악성코드를 심는 경우를 방지하기 위해 경로를 노출하지 않음
     //---------------------------------------------------------------------------------------------
@@ -1414,10 +1405,18 @@ function explain($sql)
     }
 }
 
-
 // 악성태그 변환
 function bad_tag_convert($code)
 {
+    global $view;
+    global $member, $is_admin;
+
+    if ($is_admin && $member[mb_id] != $view[mb_id]) {
+        $code = preg_replace_callback("#(\<embed[^\>]*)\>(\<\/embed\>)?#i",
+                    create_function('$matches', 'return "<div class=\"embedx\">보안문제로 인하여 관리자 아이디로는 embed 태그를 볼 수 없습니다. 확인하시려면 관리권한이 없는 다른 아이디로 접속하세요.</div>";'),
+                    $code);
+    }
+
     return preg_replace("/\<([\/]?)(script|iframe)([^\>]*)\>/i", "&lt;$1$2$3&gt;", $code);
 }
 
@@ -1437,15 +1436,5 @@ function check_token()
 {
     set_session('ss_token', '');
     return true;
-
-    /*
-    // 세션에 저장된 토큰과 폼값으로 넘어온 토큰을 비교하여 틀리면 에러
-    if ($_POST['token'] && get_session('ss_token') == $_POST['token']) {
-        // 맞으면 세션을 지운다. 세션을 지우는 이유는 새로운 폼을 통해 다시 들어오도록 하기 위함
-        set_session('ss_token', '');
-    } else {
-        alert_close('토큰 에러');
-    }
-    */
 }
 ?>

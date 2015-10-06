@@ -9,6 +9,10 @@ auth_check($auth[$sub_menu], "w");
 
 check_token();
 
+if ($member[mb_password] != sql_password($_POST['admin_password'])) {
+    alert("패스워드가 다릅니다.");
+}
+
 $mb_id = mysql_real_escape_string(trim($_POST['mb_id']));
 
 $sql_common = " mb_name         = '$_POST[mb_name]',
@@ -120,5 +124,5 @@ else if ($w == "u")
 else
     alert("제대로 된 값이 넘어오지 않았습니다.");
 
-goto_url("./member_form.php?$qstr&w=u&mb_id=$mb_id");
+goto_url("./member_form.php?$qstr&w=u&mb_id=$mb_id", false);
 ?>

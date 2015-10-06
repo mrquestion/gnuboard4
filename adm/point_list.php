@@ -188,7 +188,7 @@ else
 
 <script type='text/javascript'> document.fsearch.stx.focus(); </script>
 
-<?$colspan=4?>
+<?$colspan=5?>
 <p>
 <form name=fpointlist2 method=post onsubmit="return fpointlist2_submit(this);" autocomplete="off">
 <input type=hidden name=sfl   value='<?=$sfl?>'>
@@ -201,12 +201,14 @@ else
 <colgroup width=150>
 <colgroup width=''>
 <colgroup width=100>
+<colgroup width=120>
 <colgroup width=100>
 <tr><td colspan='<?=$colspan?>' class='line1'></td></tr>
 <tr class='bgcol1 bold col1 ht center'>
     <td>회원아이디</td>
     <td>포인트 내용</td>
     <td>포인트</td>
+    <td>관리자패스워드</td>
     <td>입력</td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
@@ -214,6 +216,7 @@ else
     <td><input type=text class=ed name=mb_id required itemname='회원아이디' value='<?=$mb_id?>'></td>
     <td><input type=text class=ed name=po_content required itemname='내용' style='width:99%;'></td>
     <td><input type=text class=ed name=po_point required itemname='포인트' size=10></td>
+    <td><input type=password class=ed name=admin_password required itemname='관리자 패스워드'></td>
     <td><input type=submit class=btn1 value='  확  인  '></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>

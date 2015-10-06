@@ -148,7 +148,7 @@ else
 
 <script type='text/javascript'> document.fsearch.stx.focus(); </script>
 
-<?$colspan=4?>
+<?$colspan=5?>
 <p>
 
 <form name=fauthlist2 method=post onsubmit="return fauthlist2_submit(this);" autocomplete="off">
@@ -159,17 +159,19 @@ else
 <input type=hidden name=page  value='<?=$page?>'>
 <input type=hidden name=token value='<?=$token?>'>
 
-<table cellpadding=0 cellspacing=0>
+<table width='100%' cellpadding=0 cellspacing=0>
 <colgroup width=150>
 <colgroup width=''>
 <colgroup width=150>
+<colgroup width=120>
 <colgroup width=100>
 <tr><td colspan='<?=$colspan?>' class='line1'></td></tr>
 <tr class='bgcol1 bold col1 ht center'>
-    <td>회원아이디</span></td>
-    <td>접근가능메뉴</span></td>
-    <td>권한</span></td>
-    <td>입력</span></td>
+    <td>회원아이디</td>
+    <td>접근가능메뉴</td>
+    <td>권한</td>
+    <td>관리자패스워드</td>
+    <td>입력</td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>
 <tr class='ht center'>
@@ -199,6 +201,7 @@ else
         	<td>d<br>(삭제)</td>
         </tr>
         </table></td>
+    <td><input type=password class=ed name=admin_password required itemname='관리자 패스워드'></td>
     <td><input type=submit class=btn1 value='  확  인  '></td>
 </tr>
 <tr><td colspan='<?=$colspan?>' class='line2'></td></tr>

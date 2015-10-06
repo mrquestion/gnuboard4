@@ -186,6 +186,21 @@ include_once("./admin.head.php");
 </tr>
 <? } ?>
 
+<tr class='ht'>
+    <td colspan=4 align=left>
+        <?=subtitle("XSS / CSRF 방지")?>
+    </td>
+</tr>
+<tr><td colspan=4 class=line1></td></tr>
+<tr class='ht'>
+    <td>
+        관리자 패스워드
+    </td>
+    <td colspan=3>
+        <input class='ed' type='password' name='admin_password' itemname="관리자 패스워드" required>
+        <?=help("관리자 권한을 빼앗길 것에 대비하여 로그인한 관리자의 패스워드를 한번 더 묻는것 입니다.");?>
+    </td>
+</tr>
 <tr><td colspan=4 class=line2></td></tr>
 </table>
 

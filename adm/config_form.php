@@ -397,15 +397,18 @@ include_once ("./admin.head.php");
 
 
 <tr class='ht'>
-    <td colspan=4 align=left><?=subtitle("CSRF 방지")?></td>
+    <td colspan=4 align=left>
+        <?=subtitle("XSS / CSRF 방지")?>
+    </td>
 </tr>
 <tr><td colspan=4 class=line1></td></tr>
 <tr class='ht'>
     <td>
-        <img id='kcaptcha_image'/>
+        관리자 패스워드
     </td>
     <td colspan=3>
-        <input class='ed' type=input size=10 name='kcaptcha_key' itemname="자동등록방지" required>&nbsp;&nbsp;왼쪽의 글자를 입력하세요.
+        <input class='ed' type='password' name='admin_password' itemname="관리자 패스워드" required>
+        <?=help("관리자 권한을 빼앗길 것에 대비하여 로그인한 관리자의 패스워드를 한번 더 묻는것 입니다.");?>
     </td>
 </tr>
 <tr><td colspan=4 class=line2></td></tr>
@@ -416,21 +419,9 @@ include_once ("./admin.head.php");
     <input type=submit class=btn1 accesskey='s' value='  확  인  '>
 </form>
 
-<script type="text/javascript" src="<?="$g4[path]/js/md5.js"?>"></script>
-<script type="text/javascript" src="<?="$g4[path]/js/jquery.kcaptcha.js"?>"></script>
-
 <script type="text/javascript">
 function fconfigform_submit(f)
 {
-    if (typeof(f.kcaptcha_key) != 'undefined') {
-        if (hex_md5(f.kcaptcha_key.value) != md5_norobot_key) {
-            alert('자동등록방지용 글자가 제대로 입력되지 않았습니다.');
-            f.kcaptcha_key.select();
-            f.kcaptcha_key.focus();
-            return false;
-        }
-    }
-
     f.action = "./config_form_update.php";
     return true;
 }

@@ -1,3 +1,38 @@
+4.33.00 (11.01.06)
+    :   [보안패치] XSS / CSRF
+        FLASH 파일의 ACTION SCRIPT로 관리자의 세션값을 알아내고 공유하여 결국에는 관리자권한을 모두 갖게 되는 
+        치명적인 오류가 발견 되었습니다. (간단하게 말해서 플래시를 보는것만으로 세션값이 노출됩니다.)
+        이것은 해커가 관리권한을 공유하는 것으로 관리자의 패스워드가 노출된것은 아닙니다.
+        패치의 주된 내용은 게시판의 다른 회원이 올린 embed 태그는 관리자에게 보여지지 않게 하는 것입니다.
+        또한, 세션키가 공개되더라도 관리자 페이지에서 직접 로그인한 관리자인지를 이중으로 체크합니다.
+        기본환경설정, 관리권한설정, 회원관리, 포인트관리에는 관리자 패스워드를 다시 물어서 관리권한을 완전히 넘겨주지 않도록 하였습니다.
+        이것과 관련된 자세한 내용은 보안뉴스의 내용을 참고하십시오.
+        http://www.boannews.com/media/view.asp?idx=24280&kind=1
+        (i2Sec 교육팀 강성호님께서 알려주신 내용입니다.)
+
+        아래 패치를 모두 적용하기 힘든 사이트는 중요라고 되어 있는 파일만 수정해 주시기 바랍니다.
+
+        === 중요 ===
+        lib/common.lib.php 
+            의 bad_tag_convert(), view_file_link() 함수 코드 수정
+        skin/board/basic/view_comment.skin.php 
+            의 $str = preg_replace("/\[\<a\s.*href\=\"(http|https|ftp)\:\/\/([^[:space:]]+)\.(swf)\".*\<\/a\>\]/i", "<script>doc_write(flash_movie('$1://$2.$3'));</script>", $str);
+            위 코드 제거 또는 주석처리
+        bbs/login_check.php
+            에 ss_mb_key 세션키 추가
+        adm/admin.lib.php
+            에서 ss_mb_key 비교
+        === /중요 ===
+
+        adm/config_form.php
+        adm/config_form_update.php
+        adm/auth_list.php
+        adm/auth_update.php
+        adm/member_form.php
+        adm/member_form_update.php
+        adm/point_list.php
+        adm/point_update.php
+
 4.32.15 (10.12.28)
     :   [보안패치] $write_table 변수값 초기화  (몽구스님)
 

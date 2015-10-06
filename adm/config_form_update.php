@@ -2,16 +2,16 @@
 $sub_menu = "100100";
 include_once("./_common.php");
 
-if (!(get_session('captcha_keystring') && get_session('captcha_keystring') == $_POST['kcaptcha_key'])) {
-    alert('정상적인 접근이 아닌것 같습니다.');
-}
-
 check_demo();
 
 auth_check($auth[$sub_menu], "w");
 
 if ($is_admin != "super")
     alert("최고관리자만 접근 가능합니다.");
+
+if ($member[mb_password] != sql_password($_POST['admin_password'])) {
+    alert("패스워드가 다릅니다.");
+}
 
 $mb = get_member($cf_admin);
 if (!$mb[mb_id])
@@ -119,5 +119,5 @@ sql_query($sql);
 
 //sql_query(" OPTIMIZE TABLE `$g4[config_table]` ");
 
-goto_url("./config_form.php");
+goto_url("./config_form.php", false);
 ?>
