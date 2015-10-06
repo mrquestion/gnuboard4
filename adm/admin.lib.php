@@ -218,7 +218,8 @@ function subtitle($title, $more="")
 // 접근 권한 검사
 if (!$member[mb_id])
 {
-    alert("로그인 하십시오.", "$g4[bbs_path]/login.php?url=" . urlencode("$_SERVER[PHP_SELF]?w=$w&mb_id=$mb_id"));
+    //alert("로그인 하십시오.", "$g4[bbs_path]/login.php?url=" . urlencode("$_SERVER[PHP_SELF]?w=$w&mb_id=$mb_id"));
+    alert("로그인 하십시오.", "$g4[bbs_path]/login.php?url=" . urlencode("$_SERVER[PHP_SELF]?$_SERVER[QUERY_STRING]"));
 }
 else if ($is_admin != "super") 
 {
@@ -243,7 +244,8 @@ unset($menu);
 unset($amenu);
 $tmp = dir("$g4[admin_path]");
 while ($entry = $tmp->read()) {
-    if (!preg_match("/^admin.menu([0-9]{3}).php/", $entry, $m)) 
+    //if (!preg_match("/^admin.menu([0-9]{3}).php/", $entry, $m)) 
+    if (!preg_match("/^admin.menu([0-9]{3}).*\.php/", $entry, $m)) 
         continue;  // 파일명이 menu 으로 시작하지 않으면 무시한다. 
 
     $amenu[$m[1]] = $entry;
