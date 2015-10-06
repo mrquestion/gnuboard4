@@ -6,6 +6,16 @@ auth_check($auth[$sub_menu], "w");
 
 $token = get_token();
 
+// 지번주소 필드추가
+if(!isset($mb['mb_addr_jibeon'])) {
+    sql_query(" ALTER TABLE {$g4['member_table']} ADD `mb_addr_jibeon` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
+}
+
+// 도로명주소 참고항목 필드추가
+if(!isset($mb['mb_addr3'])) {
+    sql_query(" ALTER TABLE {$g4['member_table']} ADD `mb_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
+}
+
 if ($w == "") 
 {
     $required_mb_id = "required minlength=3 alphanumericunderline itemname='회원아이디'";
@@ -60,16 +70,6 @@ else
 if ($mb[mb_mailling]) $mailling_checked = "checked"; // 메일 수신
 if ($mb[mb_sms])      $sms_checked = "checked"; // SMS 수신
 if ($mb[mb_open])     $open_checked = "checked"; // 정보 공개
-
-// 지번주소 필드추가
-if(!isset($mb['mb_addr_jibeon'])) {
-    sql_query(" ALTER TABLE {$g4['member_table']} ADD `mb_addr_jibeon` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
-}
-
-// 도로명주소 참고항목 필드추가
-if(!isset($mb['mb_addr3'])) {
-    sql_query(" ALTER TABLE {$g4['member_table']} ADD `mb_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
-}
 
 $g4[title] = "회원정보 " . $html_title;
 include_once("./admin.head.php");

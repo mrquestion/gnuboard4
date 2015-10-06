@@ -1,3 +1,26 @@
+4.37.03 (2014.01.07)
+    :   도로명주소 보완
+
+        회원테이블에 mb_addr3 필드가 생기지 않은 오류와 주소서버에 보안접속이 가능하게 하였습니다.
+
+        adm/member_form.php 에 지번주소, 도로명주소 참고항목 필드생성 코드를 위로 올려 주십시오.
+
+            $token = get_token();
+
+            // 지번주소 필드추가
+            if(!isset($mb['mb_addr_jibeon'])) {
+                sql_query(" ALTER TABLE {$g4['member_table']} ADD `mb_addr_jibeon` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
+            }
+
+            // 도로명주소 참고항목 필드추가
+            if(!isset($mb['mb_addr3'])) {
+                sql_query(" ALTER TABLE {$g4['member_table']} ADD `mb_addr3` varchar(255) NOT NULL DEFAULT '' AFTER `mb_addr2` ", false);
+            }
+
+        js/zip.js 에 http://juso.sir.co.kr 에서 http: 을 삭제 하십시오.
+
+            $.getJSON("//juso.sir.co.kr/search.php?sido="+sido+"&gugun="+gugun+"&page="+page+"&q="+q+"&charset="+g4_charset+"&callback=?",
+
 4.37.02 (2014.01.03)
     :   XSS 취약점을 해결 (한국인터넷진흥원에서 알려주셨습니다.)
 
