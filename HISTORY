@@ -1,3 +1,10 @@
+4.21.01 (07.06.05)
+    :   비밀글 버그 패치
+        나스카님께서 알려 주셨습니다.
+
+        bbs/view_comment.php
+        skin/board/basic/view_comment.skin.php
+
 4.21.00 (07.05.30)
     :   보안서버와 관련하여 로그인, 회원가입 주소를 https 로 변경하는 코드 추가
     :   외부로그인 비회원시 쿼리 횟수를 줄임
@@ -13,7 +20,7 @@
         bbs/list.php
         bbs/move.php
         bbs/view_comment.php
-        bbs/view_comment_update.php
+        bbs/write_comment_update.php
         bbs/write_update.php
         bbs/register_form_update.php
         lib/outlogin.lib.php
@@ -24,6 +31,7 @@
         skin/member/basic/ajax_mb_nick_check.php
         skin/member/basic/ajax_register_form.js
         skin/member/basic/register_form.skin.php
+        skin/outlogin/basic/outlogin.skin.1.php
 
 4.20.03 (07.05.04)
     :   최신글 속도를 빠르게 하기 위해 SELECT 쿼리를 수정

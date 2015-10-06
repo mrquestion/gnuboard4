@@ -160,6 +160,13 @@ include_once("./admin.head.php");
 </tr>
 <? } ?>
 
+<? if ($config[cf_use_recommend]) { // 추천인 사용 ?>
+<tr class='ht'>
+    <td>추천인</td>
+    <td colspan=3><?=($mb[mb_recommend] ? $mb[mb_recommend] : "없음");?></td>
+</tr>
+<? } ?>
+
 <tr class='ht'>
     <td>탈퇴일자</td>
     <td><input type=text class=ed name=mb_leave_date size=9 maxlength=8 value='<? echo $mb[mb_leave_date] ?>'></td>

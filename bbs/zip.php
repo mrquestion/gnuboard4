@@ -1,6 +1,8 @@
 <?
 include_once("./_common.php");
 
+ini_set('memory_limit', '20M');
+
 $zipfile = file("./zip.db");
 $search_count = 0;
 

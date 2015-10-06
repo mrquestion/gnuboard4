@@ -61,7 +61,7 @@ for ($i=0; $i<count($list); $i++) {
 
         <table width=100% cellpadding=0 cellspacing=0>
         <tr><td colspan=2 height=20></td></tr>
-        </table><textarea id='save_comment_<?=$comment_id?>' style='display:none;'><?=get_text($list[$i][wr_content], 0)?></textarea></td>
+        </table><textarea id='save_comment_<?=$comment_id?>' style='display:none;'><?=get_text($list[$i][content1], 0)?></textarea></td>
 </tr>
 </table>
 <? } ?>
