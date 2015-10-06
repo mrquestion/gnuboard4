@@ -28,6 +28,29 @@ else if ($w == "u")
     $required_mb_id = "readonly style='background-color:#dddddd;'";
     $required_mb_password = "";
     $html_title = "수정";
+
+    $mb[mb_email]       = get_text($mb[mb_email]);
+    $mb[mb_homepage]    = get_text($mb[mb_homepage]);
+    $mb[mb_password_q]  = get_text($mb[mb_password_q]);
+    $mb[mb_password_a]  = get_text($mb[mb_password_a]);
+    $mb[mb_birth]       = get_text($mb[mb_birth]);
+    $mb[mb_tel]         = get_text($mb[mb_tel]);
+    $mb[mb_hp]          = get_text($mb[mb_hp]);
+    $mb[mb_addr1]       = get_text($mb[mb_addr1]);
+    $mb[mb_addr2]       = get_text($mb[mb_addr2]);
+    $mb[mb_signature]   = get_text($mb[mb_signature]);
+    $mb[mb_recommend]   = get_text($mb[mb_recommend]);
+    $mb[mb_profile]     = get_text($mb[mb_profile]);
+    $mb[mb_1]           = get_text($mb[mb_1]);
+    $mb[mb_2]           = get_text($mb[mb_2]);
+    $mb[mb_3]           = get_text($mb[mb_3]);
+    $mb[mb_4]           = get_text($mb[mb_4]);
+    $mb[mb_5]           = get_text($mb[mb_5]);
+    $mb[mb_6]           = get_text($mb[mb_6]);
+    $mb[mb_7]           = get_text($mb[mb_7]);
+    $mb[mb_8]           = get_text($mb[mb_8]);
+    $mb[mb_9]           = get_text($mb[mb_9]);
+    $mb[mb_10]          = get_text($mb[mb_10]);
 } 
 else 
     alert("제대로 된 값이 넘어오지 않았습니다.");

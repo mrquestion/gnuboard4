@@ -1,3 +1,27 @@
+4.34.13 (11.10.01)
+    :   [보안패치] 회원가입 및 수정시 회원테이블 필드에 올바르지 않은 값이 포함될 수 있는 오류가 발견 되었습니다.
+        (팔팔이님께서 알려 주셨습니다.)
+
+        bbs/register_form.php
+
+            $member[mb_email]       = get_text($member[mb_email]);
+            ... 생략 ...
+            $member[mb_10]          = get_text($member[mb_10]);
+
+        adm/member_form.php
+
+            $mb[mb_email]       = get_text($mb[mb_email]);
+            ... 생략 ...
+            $mb[mb_10]          = get_text($mb[mb_10]);
+
+        lib/common.lib.php
+
+            function get_sideview($mb_id, $name="", $email="", $homepage="") 함수에 아래 코드가 추가 되었습니다.
+
+            $name     = get_text($name);
+            $email    = get_text($email);
+            $homepage = get_text($homepage);
+
 4.34.12 (11.09.22)
     :   글 또는 코멘트를 쓴 후 메일 발송을 하는 경우에 전체 회원에게 메일이 발송되지 않던 오류를 수정
         (개미인간님께서 알려 주셨습니다.)

@@ -902,6 +902,10 @@ function get_sideview($mb_id, $name="", $email="", $homepage="")
         $title_mb_id = "[ºñÈ¸¿ø]";
     }
 
+    $name     = get_text($name);
+    $email    = get_text($email);
+    $homepage = get_text($homepage);
+
     return "<a href=\"javascript:;\" onClick=\"showSideView(this, '$mb_id', '$name', '$email', '$homepage');\" title=\"{$title_mb_id}{$title_name}\">$tmp_name</a>";
 }
 
