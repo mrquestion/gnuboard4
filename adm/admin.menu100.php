@@ -10,7 +10,7 @@ $menu["menu100"] = array (
     array("-"),
     array("100600", "업그레이드", "$g4[admin_path]/upgrade.php"),
     array("100700", "복구/최적화", "$g4[admin_path]/repair.php"),
-    //array("100800", "세션 삭제", "$g4[admin_path]/session_delete.php"),
+    array("100800", "세션 삭제", "$g4[admin_path]/session_delete.php"),
     array("-"),
     array("", "phpMyAdmin", "$g4[path]/$g4[phpmyadmin_dir]")
 );

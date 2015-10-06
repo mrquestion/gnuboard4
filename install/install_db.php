@@ -306,21 +306,12 @@ $dir_arr = array ("../extend",
                   "../data/file",
                   "../data/log",
                   "../data/member",
-                  "../data/$g4[cheditor4]",
-                  "../data/$g4[editor]");
+                  "../data/session",
+                  "../data/$g4[cheditor4]");
 for ($i=0; $i<count($dir_arr); $i++) 
 {
     @mkdir($dir_arr[$i], 0707);
     @chmod($dir_arr[$i], 0707);
-
-    /*
-    // 디렉토리에 있는 파일의 목록을 보이지 않게 한다.
-    $file = $dir_arr[$i] . "/index.php";
-    $f = @fopen($file, "w");
-    @fwrite($f, "");
-    @fclose($f);
-    @chmod($file, 0606);
-    */
 }
 
 // data 디렉토리 및 하위 디렉토리에서는 .htaccess .htpasswd .php .phtml .html .htm .inc .cgi .pl 파일을 실행할수 없게함.
@@ -331,6 +322,12 @@ Order allow,deny
 Deny from all
 </FilesMatch>
 EOD;
+fwrite($f, $str);
+fclose($f);
+
+// session 디렉토리는 웹에서 일절 접근하지 못하도록 함 
+$f = fopen("../data/session/.htaccess", "w");
+$str = "Deny from all";
 fwrite($f, $str);
 fclose($f);
 
