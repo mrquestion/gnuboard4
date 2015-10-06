@@ -18,6 +18,15 @@ if (!$is_admin)
 }
 */
 
+// 세션에 저장된 토큰과 폼값으로 넘어온 토큰을 비교하여 틀리면 에러
+if ($_POST["token"] && get_session("ss_token") == $_POST["token"]) {
+    // 맞으면 세션을 지워 다시 입력폼을 통해서 들어오도록 한다.
+    set_session("ss_token", "");
+} else {
+    alert_close("토큰 에러");
+    exit;
+}
+
 // 해당 도메인에서 전송되지 않았다면 오류
 referer_check();
 

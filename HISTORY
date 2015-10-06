@@ -1,3 +1,18 @@
+4.21.03 (07.11.30) [보안관련 필수 패치]
+    :   외부에서 회원정보를 수정할 수 있는 오류를 수정
+    :   폼메일에도 토큰 적용
+    :   기존 회원가입스킨(register_form.skin.php)에 
+        <input type=hidden name=token value="<?=$token?>"> 이 코드를 추가해 주십시오. 
+    :   기존 폼메일스킨(formmail.skin.php)에 
+        <input type=hidden name=token value="<?=$token?>"> 이 코드를 추가해 주십시오. 
+        
+        bbs/register_form.php
+        bbs/register_form_update.php
+        skin/member/basic/register_form.skin.php
+        bbs/formmail.php
+        bbs/formmail_send.php
+        skin/member/basic/formmail.skin.php
+
 4.21.02 (07.08.22)
     :   referer_check() 주석 처리 사용하지 않음
         같은 URL 에서 온 값인지 체크하지 않음
@@ -18,8 +33,8 @@
         lib/common.lib.php
         skin/member/basic/login.skin.php
         skin/outlogin/basic/outlogin.skin.1.php
-	    adm/board_form.php
-	    adm/board_form_update.php
+        adm/board_form.php
+        adm/board_form_update.php
         js/filter.js
 
 4.21.01 (07.06.05)

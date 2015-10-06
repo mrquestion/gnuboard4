@@ -30,6 +30,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 <form name="fformmail" method="post" action="javascript:fformmail_submit(document.fformmail);" enctype="multipart/form-data">
 <input type="hidden" name="to"     value="<?=$email?>">
 <input type="hidden" name="attach" value="2">
+<input type="hidden" name="token"  value="<?=$token?>">
 <tr> 
     <td height="330" align="center" valign="top"><table width="540" border="0" cellspacing="0" cellpadding="0">
         <tr> 

@@ -33,6 +33,7 @@ var member_skin_path = "<?=$member_skin_path?>";
 <input type=hidden name=mb_id_enabled    value="" id="mb_id_enabled">
 <input type=hidden name=mb_nick_enabled  value="" id="mb_nick_enabled">
 <input type=hidden name=mb_email_enabled value="" id="mb_email_enabled">
+<input type=hidden name=token value="<?=$token?>">
 <tr><td>
 
 

@@ -1,6 +1,10 @@
 <?
 include_once("./_common.php");
 
+// 불법접근을 막도록 토큰생성
+$token = md5(uniqid(rand(), true));
+set_session("ss_token", $token);
+
 if ($w == "") {
     // 회원 로그인을 한 경우 회원가입 할 수 없다
     // 경고창이 뜨는것을 막기위해 아래의 코드로 대체
