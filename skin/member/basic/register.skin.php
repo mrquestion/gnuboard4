@@ -39,10 +39,13 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <td height=40>&nbsp; <b>회원가입약관</b></td>
         </tr>
         <tr> 
-            <td align="center" valign="top"><textarea style="width: 98%" rows=5 readonly class=ed><?=get_text($config[cf_stipulation])?></textarea></td>
+            <td align="center" valign="top"><textarea style="width: 98%" rows=10 readonly class=ed><?=get_text($config[cf_stipulation])?></textarea></td>
         </tr>
         <tr> 
-            <td height=40>&nbsp; <input type=checkbox value=1 name=agree id=agree>&nbsp;<label for=agree>회원가입약관을 읽었으며 내용에 동의합니다.</label></td>
+            <td height=40>
+                &nbsp; <input type=radio value=1 name=agree id=agree11>&nbsp;<label for=agree11>동의합니다.</label>
+                &nbsp; <input type=radio value=0 name=agree id=agree10>&nbsp;<label for=agree10>동의하지 않습니다.</label>
+            </td>
         </tr>
     </table>
 
@@ -52,10 +55,13 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
             <td height=40>&nbsp; <b>개인정보취급방침</b></td>
         </tr>
         <tr> 
-            <td align="center" valign="top"><textarea style="width: 98%" rows=5 readonly class=ed><?=get_text($config[cf_privacy])?></textarea></td>
+            <td align="center" valign="top"><textarea style="width: 98%" rows=10 readonly class=ed><?=get_text($config[cf_privacy])?></textarea></td>
         </tr>
         <tr> 
-            <td height=40>&nbsp; <input type=checkbox value=1 name=agree2 id=agree2>&nbsp;<label for=agree2>개인정보취급방침을 읽었으며 내용에 동의합니다.</label></td>
+            <td height=40>
+                &nbsp; <input type=radio value=1 name=agree2 id=agree21>&nbsp;<label for=agree21>동의합니다.</label>
+                &nbsp; <input type=radio value=0 name=agree2 id=agree20>&nbsp;<label for=agree20>동의하지 않습니다.</label>
+            </td>
         </tr>
     </table>
 
@@ -69,17 +75,20 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </form>
 
 
-<script language="javascript">
-function fregister_submit(f) {
-    if (!f.agree.checked) {
-        alert("회원가입약관의 내용에 동의해야 회원가입 하실 수 있습니다.");
-        f.agree.focus();
+<script type="text/javascript">
+function fregister_submit(f) 
+{
+    var agree1 = document.getElementsByName("agree");
+    if (!agree1[0].checked) {
+        alert("회원가입약관의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+        agree1[0].focus();
         return false;
     }
 
-    if (!f.agree2.checked) {
-        alert("개인정보취급방침의 내용에 동의해야 회원가입 하실 수 있습니다.");
-        f.agree2.focus();
+    var agree2 = document.getElementsByName("agree2");
+    if (!agree2[0].checked) {
+        alert("개인정보취급방침의 내용에 동의하셔야 회원가입 하실 수 있습니다.");
+        agree2[0].focus();
         return false;
     }
 

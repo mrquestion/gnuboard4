@@ -229,8 +229,7 @@ function help($help="", $left=0, $top=0)
     $help = preg_replace("/\n/", "<br>", $help);
     
     $str  = "<img src='$g4[admin_path]/img/icon_help.gif' border=0 width=15 height=15 align=absmiddle onclick=\"help('help$idx', $left, $top);\" style='cursor:hand;'>";
-    //$str .= "<div id='help$idx' style='position:absolute; top:0px; left:0px; display:none;'>";
-    $str .= "<div id='help$idx' style='position:absolute; display:none;'>";
+    $str .= "<div id='help$idx' style='position:absolute; display:none; z-index:9999;'>";
     $str .= "<div id='csshelp1'><div id='csshelp2'><div id='csshelp3'>$help</div></div></div>";
     $str .= "</div>";
 

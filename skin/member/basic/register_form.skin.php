@@ -2,6 +2,68 @@
 if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가 
 ?>
 
+<?
+//==============================================================================
+// jquery date picker
+//------------------------------------------------------------------------------
+// 참고) ie 에서는 년, 월 select box 를 두번씩 클릭해야 하는 오류가 있습니다.
+//------------------------------------------------------------------------------
+// jquery-ui.css 의 테마를 변경해서 사용할 수 있습니다.
+// base, black-tie, blitzer, cupertino, dark-hive, dot-luv, eggplant, excite-bike, flick, hot-sneaks, humanity, le-frog, mint-choc, overcast, pepper-grinder, redmond, smoothness, south-street, start, sunny, swanky-purse, trontastic, ui-darkness, ui-lightness, vader
+// 아래 css 는 date picker 의 화면을 맞추는 코드입니다.
+?>
+
+<link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/themes/base/jquery-ui.css" rel="stylesheet" />
+<style type="text/css">
+<!--
+.ui-datepicker { font:12px dotum; }
+.ui-datepicker select.ui-datepicker-month, 
+.ui-datepicker select.ui-datepicker-year { width: 70px;}
+.ui-datepicker-trigger { margin:0 0 -5px 2px; }
+-->
+</style>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.4/jquery-ui.min.js"></script>
+<script type="text/javascript">
+/* Korean initialisation for the jQuery calendar extension. */
+/* Written by DaeKwon Kang (ncrash.dk@gmail.com). */
+jQuery(function($){
+	$.datepicker.regional['ko'] = {
+		closeText: '닫기',
+		prevText: '이전달',
+		nextText: '다음달',
+		currentText: '오늘',
+		monthNames: ['1월(JAN)','2월(FEB)','3월(MAR)','4월(APR)','5월(MAY)','6월(JUN)',
+		'7월(JUL)','8월(AUG)','9월(SEP)','10월(OCT)','11월(NOV)','12월(DEC)'],
+		monthNamesShort: ['1월','2월','3월','4월','5월','6월',
+		'7월','8월','9월','10월','11월','12월'],
+		dayNames: ['일','월','화','수','목','금','토'],
+		dayNamesShort: ['일','월','화','수','목','금','토'],
+		dayNamesMin: ['일','월','화','수','목','금','토'],
+		weekHeader: 'Wk',
+		dateFormat: 'yymmdd',
+		firstDay: 0,
+		isRTL: false,
+		showMonthAfterYear: true,
+		yearSuffix: ''};
+	$.datepicker.setDefaults($.datepicker.regional['ko']);
+
+    $('#mb_birth').datepicker({
+        showOn: 'button',
+		buttonImage: '<?=$g4[path]?>/img/calendar.gif',
+		buttonImageOnly: true,
+        buttonText: "달력",
+        changeMonth: true,
+		changeYear: true,
+        showButtonPanel: true,
+        yearRange: 'c-99:c+99',
+        maxDate: '+0d'
+    }); 
+});
+</script>
+<?
+//==============================================================================
+?>
+
 <style type="text/css">
 <!--
 .m_title    { BACKGROUND-COLOR: #F7F7F7; PADDING-LEFT: 15px; PADDING-top: 5px; PADDING-BOTTOM: 5px; }
@@ -146,8 +208,7 @@ var member_skin_path = "<?=$member_skin_path?>";
         <? if ($w=="") { ?>
             <TR bgcolor="#FFFFFF">
                 <TD class=m_title>생년월일</TD>
-                <TD class=m_padding><input class=ed type=text id=mb_birth name='mb_birth' size=8 maxlength=8 minlength=8 required numeric itemname='생년월일' value='<?=$member[mb_birth]?>' readonly title='옆의 달력 아이콘을 클릭하여 날짜를 입력하세요.'>
-                    <a href="javascript:win_calendar('mb_birth', document.getElementById('mb_birth').value, '');"><img src='<?=$member_skin_path?>/img/calendar.gif' border=0 align=absmiddle title='달력 - 날짜를 선택하세요'></a></TD>
+                <TD class=m_padding><input class=ed type=text id=mb_birth name='mb_birth' size=8 maxlength=8 minlength=8 required numeric itemname='생년월일' value='<?=$member[mb_birth]?>' readonly title='옆의 달력 아이콘을 클릭하여 날짜를 입력하세요.'></TD>
             </TR>
         <? } ?>
 
