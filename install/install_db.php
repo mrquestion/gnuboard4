@@ -314,13 +314,26 @@ for ($i=0; $i<count($dir_arr); $i++)
     @mkdir($dir_arr[$i], 0707);
     @chmod($dir_arr[$i], 0707);
 
+    /*
     // 디렉토리에 있는 파일의 목록을 보이지 않게 한다.
     $file = $dir_arr[$i] . "/index.php";
     $f = @fopen($file, "w");
     @fwrite($f, "");
     @fclose($f);
     @chmod($file, 0606);
+    */
 }
+
+// data 디렉토리 및 하위 디렉토리에서는 .htaccess .htpasswd .php .phtml .html .htm .inc .cgi .pl 파일을 실행할수 없게함.
+$f = fopen("../data/.htaccess", "w");
+$str = <<<EOD
+<FilesMatch "\.(htaccess|htpasswd|[Pp][Hh][Pp]|[Pp]?[Hh][Tt][Mm][Ll]?|[Ii][Nn][Cc]|[Cc][Gg][Ii]|[Pp][Ll])">
+Order allow,deny 
+Deny from all
+</FilesMatch>
+EOD;
+fwrite($f, $str);
+fclose($f);
 
 @rename("../install", "../install.bak");
 //-------------------------------------------------------------------------------------------------

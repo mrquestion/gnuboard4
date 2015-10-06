@@ -1,3 +1,14 @@
+4.34.25 (2012.04.30)
+    :   [보안강화] 설치시 data 디렉토리에 .htaccess 파일을 생성하여 data 디렉토리 및 하위 디렉토리에서는 
+        .htaccess .htpasswd .php .phtml .html .htm .inc .cgi .pl 파일을 실행 할 수 없습니다.
+
+        기존에 운영중인 사이트에서는 data 디렉토리에 .htaccess 파일을 아래와 같은 내용으로 작성하십시오.
+
+        <FilesMatch "\.(htaccess|htpasswd|[Pp][Hh][Pp]|[Pp]?[Hh][Tt][Mm][Ll]?|[Ii][Nn][Cc]|[Cc][Gg][Ii]|[Pp][Ll])">
+        Order allow,deny 
+        Deny from all
+        </FilesMatch>
+
 4.34.24 (2012.04.23)
     :   4.34.23의 conv_content() 함수내에 함수가 선언되어 그누보드외 프로그램에서 오류가 발생했습니다.
         bad120422() 함수를 conv_content() 바깥으로 이동시켜 해결하였습니다. (지니아빠님께서 알려 주셨습니다.)
