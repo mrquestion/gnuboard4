@@ -358,6 +358,7 @@ $dir_arr = array ("../extend",
                   "../data/log",
                   "../data/member",
                   "../data/session",
+                  "../data/$g4[cheditor4]",
                   "../data/$g4[editor]");
 for ($i=0; $i<count($dir_arr); $i++) 
 {

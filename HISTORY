@@ -9,9 +9,11 @@
             if (!file_exists("$poll_skin_path/poll_result.skin.php")) die("skin error");
 
         /bbs/register_form_update.php
-            $mb_id = trim(strip_tags($_POST[mb_id]));
-            ...
-            $mb_email = trim(strip_tags($_POST[mb_email]));
+            $mb_id = trim(strip_tags(mysql_escape_string($_POST[mb_id])));
+            $mb_password = trim(mysql_escape_string($_POST[mb_password]));
+            $mb_name = trim(strip_tags(mysql_escape_string($_POST[mb_name])));
+            $mb_nick = trim(strip_tags(mysql_escape_string($_POST[mb_nick])));
+            $mb_email = trim(strip_tags(mysql_escape_string($_POST[mb_email])));
 
         /bbs/write_update.php
             $chars_array = array_merge(range(0,9), range('a','z'), range('A','Z'));
