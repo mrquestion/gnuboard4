@@ -56,6 +56,7 @@ HEREDOC;
 }
 
 
+/*
 // 루트 디렉토리에 파일, 디렉토리 생성 가능한지 검사.
 $perms = get_perms(fileperms("../"));
 if ($perms["world_read"].$perms["world_write"].$perms["world_execute"] != "rwx") {
@@ -66,6 +67,15 @@ if ($perms["world_read"].$perms["world_write"].$perms["world_execute"] != "rwx")
 HEREDOC;
     exit;
 }
+*/
+
+// 루트 디렉토리에 파일 생성 가능한지 검사.
+if (!is_writeable("..")) 
+{
+    echo "<script language='JavaScript'>alert('루트 디렉토리의 퍼미션을 707로 변경하여 주십시오.\\n\\ncommon.php 파일이 있는곳이 루트 디렉토리 입니다.\\n\\n$> chmod 707 . \\n\\n그 다음 설치하여 주십시오.');</script>"; 
+    exit;
+}
+
 
 /*
 $perms = get_perms(fileperms("../common.php"));

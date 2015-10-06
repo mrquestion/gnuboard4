@@ -254,7 +254,7 @@ include_once ("./admin.head.php");
 <tr class='ht'>
     <td><input type=checkbox name=chk_category_list value=1></td>
     <td>분류 </td>
-    <td><input type=text class=ed name=bo_category_list style='width:80%;' value='<?=$board[bo_category_list]?>'>
+    <td><input type=text class=ed name=bo_category_list style='width:80%;' value='<?=get_text($board[bo_category_list])?>'>
         <input type=checkbox name=bo_use_category value='1' <?=$board[bo_use_category]?'checked':'';?>><b>사용</b>
         <?=help("분류와 분류 사이는 | 로 구분하세요. (예: 질문|답변) 첫자로 #은 입력하지 마세요. (예: #질문|#답변 [X])")?>
     </td>

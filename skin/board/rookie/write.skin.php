@@ -10,7 +10,6 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 
 <!-- 김선용 2005.4 - ff(불여우) 에서는 innerhtml 사용시 폼이 <table> 아래에 있으면 인식하지 못합니다. -->
 <form name="fwrite" method="post" action="javascript:fwrite_check(document.fwrite);" enctype="multipart/form-data" style="margin:0px;">
-<input type=hidden name=null><!-- 삭제하지 마십시오. -->
 <input type=hidden name=w        value="<?=$w?>">
 <input type=hidden name=bo_table value="<?=$bo_table?>">
 <input type=hidden name=wr_id    value="<?=$wr_id?>">
@@ -22,38 +21,31 @@ var char_max = parseInt(<?=$write_max?>); // 최대
 <input type=hidden name=sod      value="<?=$sod?>">
 <input type=hidden name=page     value="<?=$page?>">
 
-<table width="<?=$width?>" align=center cellpadding=0 cellspacing=0><tr><td>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr><td colspan=2 height=2 bgcolor=#b0adf5></td></tr>
-<tr><td style='padding-left:20px' colspan=2 height=38 bgcolor=#f8f8f9><strong><?=$title_msg?></strong></td></tr>
+<table width="<?=$width?>" border="1" cellspacing="0" cellpadding="2" style="border-collapse:collapse;" bordercolor="#0176B4">
+<tr><td colspan=2 style='padding-left:20px; height:30px;'>&nbsp; <b><?=$title_msg?></b></td></tr>
 
 <? if ($is_name) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 이름</td>
-    <td><input class=ed maxlength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></td></tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
+    <td><input maxlength=20 size=15 name=wr_name itemname="이름" required value="<?=$name?>"></td></tr>
 <? } ?>
 
 <? if ($is_password) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 패스워드</td>
-    <td><input class=ed type=password maxlength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></td></tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
+    <td><input type=password maxlength=20 size=15 name=wr_password itemname="패스워드" <?=$password_required?>></td></tr>
 <? } ?>
 
 <? if ($is_email) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 이메일</td>
-    <td><input class=ed maxlength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></td></tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
+    <td><input maxlength=100 size=50 name=wr_email email itemname="이메일" value="<?=$email?>"></td></tr>
 <? } ?>
 
 <? if ($is_homepage) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 홈페이지</td>
-    <td><input class=ed size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></td></tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
+    <td><input size=50 name=wr_homepage itemname="홈페이지" value="<?=$homepage?>"></td></tr>
 <? } ?>
 
 <tr>
@@ -62,51 +54,46 @@ var char_max = parseInt(<?=$write_max?>); // 최대
         <? if ($is_html) { ?><input onclick="html_auto_br(this);" type=checkbox value="<?=$html_value?>" name="html" <?=$html_checked?>><span class=w_title>html</span>&nbsp;<? } ?>
         <? if ($is_secret) { ?><input type=checkbox value="secret" name="secret" <?=$secret_checked?>><span class=w_title>비밀글</span>&nbsp;<? } ?>
         <? if ($is_mail) { ?><input type=checkbox value="mail" name="mail" <?=$recv_email_checked?>>답변메일받기&nbsp;<? } ?></td></tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 
 <? if ($is_category) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 분류</td>
     <td><select name=ca_name required itemname="분류"><option value="">선택하세요<?=$category_option?></select></td></tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <tr>
     <td style='padding-left:20px; height:30px;'>· 제목</td>
-    <td><input class=ed style="width:100%;" name=wr_subject itemname="제목" required value="<?=$subject?>"></td></tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
+    <td><input style="width:100%;" name=wr_subject itemname="제목" required value="<?=$subject?>"></td></tr>
 <tr>
     <td style='padding-left:20px;'>· 내용</td>
-    <td style='padding:5 0 5 0;'>
+    <td>
         <table width=100% cellpadding=0 cellspacing=0>
         <tr>
-            <td width=50% align=left valign=bottom>
-                <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 10);"><img src="<?=$board_skin_path?>/img/up.gif"></span>
-                <span style="cursor: pointer;" onclick="textarea_original('wr_content', 10);"><img src="<?=$board_skin_path?>/img/start.gif"></span>
-                <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 10);"><img src="<?=$board_skin_path?>/img/down.gif"></span></td>
+            <td width=50%>
+                <span style="cursor: pointer;" onclick="textarea_decrease('wr_content', 10);">▲</span>
+                <span style="cursor: pointer;" onclick="textarea_original('wr_content', 10);">■</span>
+                <span style="cursor: pointer;" onclick="textarea_increase('wr_content', 10);">▼</span></td>
             <td width=50% align=right><? if ($write_min || $write_max) { ?><span id=char_count></span>글자<?}?></td>
         </tr>
         </table>
-        <textarea id=wr_content name=wr_content class=tx style='width:100%; word-break:break-all;' rows=10 itemname="내용" required 
+        <textarea id=wr_content name=wr_content style='width:100%; word-break:break-all;' rows=10 itemname="내용" required 
         <? if ($write_min || $write_max) { ?>onkeyup="check_byte('wr_content', 'char_count');"<?}?>><?=$content?></textarea>
         <? if ($write_min || $write_max) { ?><script language="javascript"> check_byte('wr_content', 'char_count'); </script><?}?></td>
 </tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 
 <? if ($is_link) { ?>
-<? for ($i=1; $i<=$g4[link_count]; $i++) { ?>
-<tr>
-    <td style='padding-left:20px; height:30px;'>· 링크 #<?=$i?></td>
-    <td><input type='text' class=ed size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
-</tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
-<? } ?>
+	<? for ($i=1; $i<=$g4[link_count]; $i++) { ?>
+	<tr>
+		<td style='padding-left:20px; height:30px;'>· 링크 #<?=$i?></td>
+		<td><input type='text' size=50 name='wr_link<?=$i?>' itemname='링크 #<?=$i?>' value='<?=$write["wr_link{$i}"]?>'></td>
+	</tr>
+	<? } ?>
 <? } ?>
 
 <? if ($is_file) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'><table cellpadding=0 cellspacing=0><tr><td style=" padding-top: 10px;">· 파일 <span onclick="add_file();" style='cursor:pointer; font-family:tahoma; font-size:12pt;'>+</span> <span onclick="del_file();" style='cursor:pointer; font-family:tahoma; font-size:12pt;'>-</span></td></tr></table></td>
-    <td style='padding:5 0 5 0;'><table id="variableFiles" cellpadding=0 cellspacing=0></table><?// print_r2($file); ?>
+    <td><table id="variableFiles" cellpadding=0 cellspacing=0></table><?// print_r2($file); ?>
         <script language="JavaScript">
         var flen = 0;
         function add_file(delete_code)
@@ -129,13 +116,13 @@ var char_max = parseInt(<?=$write_max?>); // 최대
             objRow = objTbl.insertRow(objTbl.rows.length);
             objCell = objRow.insertCell(0);
 
-            objCell.innerHTML = "<input type='file' class=ed size=32 name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
+            objCell.innerHTML = "<input type='file' size=32 name='bf_file[]' title='파일 용량 <?=$upload_max_filesize?> 이하만 업로드 가능'>";
             if (delete_code)
                 objCell.innerHTML += delete_code;
             else
             {
                 <? if ($is_file_content) { ?>
-                objCell.innerHTML += "<br><input type='text' class=ed size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
+                objCell.innerHTML += "<br><input type='text' size=50 name='bf_content[]' title='업로드 이미지 파일에 해당 되는 내용을 입력하세요.'>";
                 <? } ?>
                 ;
             }
@@ -158,41 +145,29 @@ var char_max = parseInt(<?=$write_max?>); // 최대
         }
         </script></td>
 </tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_trackback) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· 트랙백주소</td>
-    <td><input class=ed size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
+    <td><input size=50 name=wr_trackback itemname="트랙백" value="<?=$trackback?>">
         <? if ($w=="u") { ?><input type=checkbox name="re_trackback" value="1">핑 보냄<? } ?></td>
 </tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
 <? if ($is_norobot) { ?>
 <tr>
     <td style='padding-left:20px; height:30px;'>· <?=$norobot_str?></td>
-    <td><input class=ed type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;* 왼쪽의 글자중 <font color="red">빨간글자만</font> 순서대로 입력하세요.</td>
+    <td><input type=input size=10 name=wr_key itemname="자동등록방지" required>&nbsp;&nbsp;* 왼쪽의 글자중 <font color="red">빨간글자만</font> 순서대로 입력하세요.</td>
 </tr>
-<tr><td colspan=2 height=1 bgcolor=#e7e7e7></td></tr>
 <? } ?>
 
-<tr><td colspan=2 height=1 bgcolor=#000000></td></tr>
-</table>
+</table><br>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-<tr>
-    <td width="100%" height="30" background="<?=$board_skin_path?>/img/write_down_bg.gif"></td>
-</tr>
-<tr>
-    <td width="100%" align="center" valign="top">
-        <input type=image id="btn_submit" src="<?=$board_skin_path?>/img/btn_write.gif" border=0 accesskey='s'>&nbsp;
-        <a href="./board.php?bo_table=<?=$bo_table?>"><img id="btn_list" src="<?=$board_skin_path?>/img/btn_list.gif" border=0></a></td>
-</tr>
-</table>
-
-</td></tr></table>
+<div align=center>
+	<input type=submit id="btn_submit" value="쓰기" border=0 accesskey='s'>&nbsp;
+	<input type=button id="btn_list" onclick="location.href='./board.php?bo_table=<?=$bo_table?>';" value="목록">
+</div>
 </form>
 
 
@@ -211,7 +186,8 @@ if ($is_admin)
 } 
 ?>
 
-with (document.fwrite) {
+with (document.fwrite) 
+{
     if (typeof(wr_name) != "undefined")
         wr_name.focus();
     else if (typeof(wr_subject) != "undefined")
@@ -240,12 +216,14 @@ function html_auto_br(obj)
 function fwrite_check(f)
 {
     var s = "";
-    if (s = word_filter_check(f.wr_subject.value)) {
+    if (s = word_filter_check(f.wr_subject.value)) 
+	{
         alert("제목에 금지단어('"+s+"')가 포함되어있습니다");
         return;
     }
 
-    if (s = word_filter_check(f.wr_content.value)) {
+    if (s = word_filter_check(f.wr_content.value)) 
+	{
         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
         return;
     }
@@ -264,8 +242,10 @@ function fwrite_check(f)
         }
     }
 
-    if (typeof(f.wr_key) != "undefined") {
-        if (hex_md5(f.wr_key.value) != md5_norobot_key) {
+    if (typeof(f.wr_key) != "undefined") 
+	{
+        if (hex_md5(f.wr_key.value) != md5_norobot_key) 
+		{
             alert("자동등록방지용 빨간글자가 순서대로 입력되지 않았습니다.");
             f.wr_key.focus();
             return;

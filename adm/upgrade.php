@@ -10,6 +10,9 @@ if ($is_admin != "super")
 $g4[title] = "업그레이드";
 include_once("./admin.head.php");
 
+// 로그인테이블에서 인덱스 삭제
+sql_query(" ALTER TABLE `$g4[login_table]` DROP INDEX `lo_datetime` ", false);
+
 // 회원테이블의 회원가입일시에 인덱스 추가
 sql_query(" ALTER TABLE `$g4[member_table]` ADD INDEX `mb_datetime` ( `mb_datetime` ) ", false);
 

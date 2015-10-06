@@ -276,8 +276,7 @@ CREATE TABLE $g4[login_table] (
   lo_datetime datetime NOT NULL default '0000-00-00 00:00:00',
   lo_location text NOT NULL,
   lo_url text NOT NULL,
-  PRIMARY KEY  (lo_ip),
-  KEY lo_datetime (lo_datetime,mb_id)
+  PRIMARY KEY  (lo_ip)
 ) TYPE=MyISAM;
 
 ##

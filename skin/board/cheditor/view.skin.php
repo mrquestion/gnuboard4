@@ -3,7 +3,7 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 ?>
 
 <!-- 게시글 보기 시작 -->
-<table width="<?=$width?>" align="center" cellpadding="0" cellspcing="0"><tr><td>
+<table width="<?=$width?>" align="center" cellpadding="0" cellspacing="0"><tr><td>
 
 <!-- 링크 버튼 -->
 <? 

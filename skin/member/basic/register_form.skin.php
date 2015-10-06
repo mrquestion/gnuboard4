@@ -283,13 +283,13 @@ if (!defined("_GNUBOARD_")) exit; // 개별 페이지 접근 불가
 </table>
 
 <? if ($w == "" && $config[cf_use_norobot]) { ?>
-<table width="600" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td height="1" bgcolor="#ffffff"></td>
 </tr>
 </table>
 
-<table width="600" border="0" cellspacing="0" cellpadding="0">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
 <tr>
     <td bgcolor="#CCCCCC">
         <TABLE cellSpacing=1 cellPadding=0 width=100%>
