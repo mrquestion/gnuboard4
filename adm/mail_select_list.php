@@ -53,6 +53,9 @@ if ($gr_id)
         $comma = ",";
     }
 
+    if (!$group_member)
+        alert("선택하신 게시판 그룹회원이 한명도 없습니다.");
+
     $sql_where .= " and mb_id in ($group_member) ";
 }
 

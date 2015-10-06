@@ -27,7 +27,7 @@ var member_skin_path = "<?=$member_skin_path?>";
 <input type=hidden name=mb_email_enabled value="" id="mb_email_enabled">
 <!-- <input type=hidden name=token value="<?=$token?>"> -->
 
-<table width=100% cellspacing=0 cellspacing=0 align=center>
+<table width=100% cellspacing=0 align=center>
 <tr>
     <td><img src="<?=$member_skin_path?>/img/join_form_title.gif" width="624" height="72">
 

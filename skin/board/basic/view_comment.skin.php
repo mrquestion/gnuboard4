@@ -218,6 +218,24 @@ function fviewcomment_submit(f)
     return true;
 }
 
+jQuery.fn.extend({
+    kcaptcha_load: function() {
+        $.ajax({
+            type: 'POST',
+            url: g4_path+'/'+g4_bbs+'/kcaptcha_session.php',
+            cache: false,
+            async: false,
+            success: function(text) {
+                $('#kcaptcha_image')
+                    .attr('src', g4_path+'/'+g4_bbs+'/kcaptcha_image.php?t=' + (new Date).getTime())
+                    .css('cursor', '')
+                    .attr('title', '');
+                md5_norobot_key = text;
+            }
+        });
+    }
+});
+
 function comment_box(comment_id, work)
 {
     var el_id;
@@ -259,6 +277,11 @@ function comment_box(comment_id, work)
 
         save_before = el_id;
     }
+
+    if (typeof(wrestInitialized) != 'undefined')
+        wrestInitialized();
+
+    jQuery(this).kcaptcha_load();
 }
 
 function comment_delete(url)
