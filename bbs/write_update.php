@@ -36,6 +36,8 @@ if (empty($_POST))
 //referer_check();
 
 $w = $_POST["w"];
+$wr_link1 = mysql_real_escape_string($_POST['wr_link1']);
+$wr_link2 = mysql_real_escape_string($_POST['wr_link2']);
 
 $notice_array = explode("\n", trim($board[bo_notice]));
 

@@ -1,3 +1,32 @@
+4.34.14 (11.10.04)
+    :   [보안패치] 회원가입시 홈페이지 필드를 통한 SQL Injection 공격 예방
+    :   [보안패치] 글수정, 답변시 링크 필드를 통한 XSS 공격 예방
+        (팔팔이님께서 알려 주셨습니다.)
+
+        bbs/register_form_update.php 에 추가 되었습니다.
+
+            $mb_homepage = trim(strip_tags(mysql_escape_string($_POST[mb_homepage])));
+
+        bbs/write_update.php 에 추가 되었습니다.
+            
+            $wr_link1 = mysql_real_escape_string($_POST['wr_link1']);
+            $wr_link2 = mysql_real_escape_string($_POST['wr_link2']);
+
+        bbs/write.php 에 추가 되었습니다.
+
+            else if ($w == "u") {
+                ...
+                for ($i=1; $i<=$g4[link_count]; $i++) {
+                    $write["wr_link".$i] = get_text($write["wr_link".$i]);
+                    $link[$i] = $write["wr_link".$i];
+                }
+                ...
+            } else if ($w == "r") {
+                ...
+                for ($i=1; $i<=$g4[link_count]; $i++) {
+                    $write["wr_link".$i] = get_text($write["wr_link".$i]);
+                }
+
 4.34.13 (11.10.01)
     :   [보안패치] 회원가입 및 수정시 회원테이블 필드에 올바르지 않은 값이 포함될 수 있는 오류가 발견 되었습니다.
         (팔팔이님께서 알려 주셨습니다.)

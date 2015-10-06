@@ -286,8 +286,10 @@ else if ($w == "u") {
     $email = $write[wr_email];
     $homepage = get_text($write[wr_homepage]);
 
-    for ($i=1; $i<=$g4[link_count]; $i++)
+    for ($i=1; $i<=$g4[link_count]; $i++) {
+        $write["wr_link".$i] = get_text($write["wr_link".$i]);
         $link[$i] = $write["wr_link".$i];
+    }
 
     $trackback = $write[wr_trackback];
 
@@ -311,6 +313,10 @@ else if ($w == "u") {
     }
 
     $password_required = "required";
+
+    for ($i=1; $i<=$g4[link_count]; $i++) {
+        $write["wr_link".$i] = get_text($write["wr_link".$i]);
+    }
 }
 
 $subject = preg_replace("/\"/", "&#034;", get_text(cut_str($write[wr_subject], 255), 0));
