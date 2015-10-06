@@ -1,3 +1,18 @@
+4.32.05 (10.07.26)
+    :   우편번호 2010년 7월 22일자 반영 (51,031건)
+    :   글쓰기, 코멘트쓰기시 욕 단어 필터링이 외부에서 보이지 않도록 AJAX 처리함
+    :   게시판관리에서 게시판복사시 서브디렉토리도 복사가 가능하도록 수정 (김선용님께서 코드를 알려 주셨습니다.)
+    :   받은쪽지를 타인이 읽은 상태로 변경할 수 있는 오류 수정 (유아원님께서 알려주셨습니다.)
+    
+        adm/board_copy_update.php
+        bbs/memo_view.php
+        bbs/view_comment.php
+        bbs/write.php
+        bbs/zip.db
+        skin/board/basic/ajax.filter.php
+        skin/board/basic/view_comment.skin.php
+        skin/board/basic/write.skin.php
+        
 4.32.04 (10.07.02)
     :   게시판 이전, 다음 검색시 1페이지로 이동하도록 수정 (intel님께서 알려주셨습니다.)
     :   파일명에 특수문자가 들어간 경우 다운로드 되지 않던 오류 수정 (곱슬최씨님께서 알려주셨습니다.)

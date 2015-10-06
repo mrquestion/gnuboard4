@@ -124,10 +124,31 @@ if ($copy_case == "schema_data_both")
     {
         if ($entry == "." || $entry == "..") continue;
 
+        /*
         @copy("$g4[path]/data/file/$bo_table/$entry", "$g4[path]/data/file/$target_table/$entry");
         @chmod("$g4[path]/data/file/$target_table/$entry", 0707);
 
         $copy_file++;
+        */
+
+        // ±è¼±¿ë 201007 :
+        if(is_dir("$g4[path]/data/file/$bo_table/$entry")){
+            $dd = dir("$g4[path]/data/file/$bo_table/$entry");
+            @mkdir("$g4[path]/data/file/$target_table/$entry", 0707);
+            @chmod("$g4[path]/data/file/$target_table/$entry", 0707);
+            while ($entry2 = $dd->read()) {
+                if ($entry2 == "." || $entry2 == "..") continue;
+                @copy("$g4[path]/data/file/$bo_table/$entry/$entry2", "$g4[path]/data/file/$target_table/$entry/$entry2");
+                @chmod("$g4[path]/data/file/$target_table/$entry/$entry2", 0707);
+                $copy_file++;
+            }
+            $dd->close();
+        }
+        else {
+            @copy("$g4[path]/data/file/$bo_table/$entry", "$g4[path]/data/file/$target_table/$entry");
+            @chmod("$g4[path]/data/file/$target_table/$entry", 0707);
+            $copy_file++;
+        }
     }
     $d->close();
 

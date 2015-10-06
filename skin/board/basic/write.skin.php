@@ -301,6 +301,7 @@ function html_auto_br(obj)
 
 function fwrite_submit(f) 
 {
+    /*
     var s = "";
     if (s = word_filter_check(f.wr_subject.value)) {
         alert("제목에 금지단어('"+s+"')가 포함되어있습니다");
@@ -311,6 +312,7 @@ function fwrite_submit(f)
         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
         return false;
     }
+    */
 
     if (document.getElementById('char_count')) {
         if (char_min > 0 || char_max > 0) {
@@ -336,6 +338,39 @@ function fwrite_submit(f)
             ed_wr_content.returnFalse();
             return false;
         }
+    }
+
+    var subject = "";
+    var content = "";
+    $.ajax({
+        url: "<?=$board_skin_path?>/ajax.filter.php",
+        type: "POST",
+        data: {
+            "subject": f.wr_subject.value,
+            "content": f.wr_content.value
+        },
+        dataType: "json",
+        async: false,
+        cache: false,
+        success: function(data, textStatus) {
+            subject = data.subject;
+            content = data.content;
+        }
+    });
+
+    if (subject) {
+        alert("제목에 금지단어('"+subject+"')가 포함되어있습니다");
+        f.wr_subject.focus();
+        return false;
+    }
+
+    if (content) {
+        alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
+        if (typeof(ed_wr_content) != "undefined") 
+            ed_wr_content.returnFalse();
+        else 
+            f.wr_content.focus();
+        return false;
     }
 
     if (typeof(f.wr_key) != 'undefined') {

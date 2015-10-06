@@ -151,11 +151,37 @@ function fviewcomment_submit(f)
 
     f.is_good.value = 0;
 
+    /*
     var s;
     if (s = word_filter_check(document.getElementById('wr_content').value))
     {
         alert("내용에 금지단어('"+s+"')가 포함되어있습니다");
         document.getElementById('wr_content').focus();
+        return false;
+    }
+    */
+
+    var subject = "";
+    var content = "";
+    $.ajax({
+        url: "<?=$board_skin_path?>/ajax.filter.php",
+        type: "POST",
+        data: {
+            "subject": "",
+            "content": f.wr_content.value
+        },
+        dataType: "json",
+        async: false,
+        cache: false,
+        success: function(data, textStatus) {
+            subject = data.subject;
+            content = data.content;
+        }
+    });
+
+    if (content) {
+        alert("내용에 금지단어('"+content+"')가 포함되어있습니다");
+        f.wr_content.focus();
         return false;
     }
 
