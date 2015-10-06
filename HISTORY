@@ -1,3 +1,22 @@
+4.36.20 (2013.03.11)
+    :   중복된 코드 제거와 DTD 선언시 좌표 오류 해결 (kuma 님의 해결책을 처음으로님께서 알려 주셨습니다.)
+
+        js/sideview.js 에서 getAbsoluteTop, getAbsoluteLeft 함수가 중복되어 제거하고 상단과 왼쪽 좌표에 'px' 를 추가 했습니다.
+        (일부 브라우저나 DTD 선언시에 메뉴 좌표를 제대로 인식하지 못하는 오류를 해결)
+
+            if (getAbsoluteTop(this.curObj) + this.curObj.offsetHeight + oSideViewLayer.scrollHeight + 5 > oBody.scrollHeight)
+                oSideViewLayer.style.top = (getAbsoluteTop(this.curObj) - oSideViewLayer.scrollHeight) + 'px';
+            else
+                oSideViewLayer.style.top = (getAbsoluteTop(this.curObj) + this.curObj.offsetHeight) + 'px';
+
+            oSideViewLayer.style.left = (getAbsoluteLeft(this.curObj) - this.curObj.offsetWidth + 14) + 'px';
+
+        adm/admin.head.php 에 'px' 를 추가 했습니다.
+        (일부 브라우저나 DTD 선언시에 메뉴 좌표를 제대로 인식하지 못하는 오류를 해결)
+
+            menu.style.left = get_left_pos(link) + x + 'px';
+            menu.style.top  = get_top_pos(link) + link.offsetHeight + y + 'px';
+
 4.36.19 (2013.02.26)
     :   form 태그의 action 속성을 이용한 XSS 취약점 해결 (i2sec 13기 박성진님께서 직접 알려 주셨습니다.)
         이 취약점은 ie 브라우저에서만 발생하는 것으로 알려져 있습니다.

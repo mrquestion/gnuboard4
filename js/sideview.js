@@ -123,11 +123,11 @@ if (typeof(SIDEVIEW_JS) == 'undefined') // 한번만 실행
         oSideViewLayer.innerHTML = this.makeNameContextMenus();
         
         if (getAbsoluteTop(this.curObj) + this.curObj.offsetHeight + oSideViewLayer.scrollHeight + 5 > oBody.scrollHeight)
-            oSideViewLayer.style.top = getAbsoluteTop(this.curObj) - oSideViewLayer.scrollHeight;
+            oSideViewLayer.style.top = (getAbsoluteTop(this.curObj) - oSideViewLayer.scrollHeight) + 'px';
         else
-            oSideViewLayer.style.top = getAbsoluteTop(this.curObj) + this.curObj.offsetHeight;
+            oSideViewLayer.style.top = (getAbsoluteTop(this.curObj) + this.curObj.offsetHeight) + 'px';
 
-        oSideViewLayer.style.left = getAbsoluteLeft(this.curObj) - this.curObj.offsetWidth + 14;
+        oSideViewLayer.style.left = (getAbsoluteLeft(this.curObj) - this.curObj.offsetWidth + 14) + 'px';
 
         divDisplay(this.targetObj, 'block');
 
@@ -265,31 +265,6 @@ if (typeof(SIDEVIEW_JS) == 'undefined') // 한번만 실행
                     el.style.visibility = 'visible';
             }
         }
-    }
-
-
-    function getAbsoluteTop(oNode)
-    {
-        var oCurrentNode=oNode;
-        var iTop=0;
-        while(oCurrentNode.tagName!="BODY") {
-            iTop+=oCurrentNode.offsetTop - oCurrentNode.scrollTop;
-            oCurrentNode=oCurrentNode.offsetParent;
-        }
-        return iTop;
-    }
-
-
-    function getAbsoluteLeft(oNode)
-    {
-        var oCurrentNode=oNode;
-        var iLeft=0;
-        iLeft+=oCurrentNode.offsetWidth;
-        while(oCurrentNode.tagName!="BODY") {
-            iLeft+=oCurrentNode.offsetLeft;
-            oCurrentNode=oCurrentNode.offsetParent;
-        }
-        return iLeft;
     }
 
     function divDisplay(id, act) 
